@@ -1,0 +1,71 @@
+//
+// Prefix header for all source files of the 'linphone' target in the 'linphone' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
+
+// 在不添加NullSafe的情况下，执行下面这句会造成崩溃，添加后，则不会出现崩溃
+//[(NSString *)[NSNull null] stringByDeletingPathExtension];
+
+// 但是NullSafe不能解决[[NSNull null] performSelector:@selector(somethingCrash)]造成的崩溃调用。
+
+// 因为打开NullSafe功能后，会使得一些问题得不到显现，所以在debug模式下关闭NULLSafe功能，其它情况下则打开.
+#ifdef DEBUG
+#define NULLSAFE_ENABLED 0
+#endif
+
+
+#define kHeqinLinphoneServerAddress @"http://cs.myvmr.cn"
+
+
+/**
+ *  这里放置其它宏
+ */
+
+// 这个channel可以定义在一个plist文件中， 然后通过一个.sh来进行编译，编译的过程中动态取该值。以便一次可以打包出多个渠道的ipa文件
+#define XX_APP_CHANNEL @"91助手"
+
+// 取当前应用的版本号，该版本号可以用来做基础网络参数给服务器，如:5.1.0， 同时该版本号也用于取补丁的版本号
+#define BDN_APP_VERSION ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
+
+// 版本比较
+#define SYSTEM_VERSION                              ([[UIDevice currentDevice] systemVersion])
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([SYSTEM_VERSION compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define IS_IOS8_OR_ABOVE                            (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+
+
+/**
+ *  直接生成具备自存储的属性，直接存储于NSUserDefault中，以com.XX.Special.开头为键名。
+ *  使用时，直接写INIT_DEFAULTS_BOOL(hasRecordingSettings, NO);
+ *  即会在NSUserDefault中生成一个com.XX.Special.所在文件名.hasRecordingSettings的属性值，设置后，会立即存储
+ */
+#define XXStringize_helper(x) #x
+
+#define XXStringize(x) \
+[NSString stringWithFormat:@"com.XX.Special.%@.%@",[[NSString stringWithFormat:@"%s", strrchr(__FILE__, '/') + 1] stringByDeletingPathExtension], @XXStringize_helper(x)]
+
+#define INIT_DEFAULTS_BOOL(PROPERTY, DEFAULT) INIT_DEFAULTS_HELPER(PROPERTY, DEFAULT, bool)
+#define INIT_DEFAULTS_INT(PROPERTY, DEFAULT) INIT_DEFAULTS_HELPER(PROPERTY, DEFAULT, integer)
+#define INIT_DEFAULTS_OBJECT(PROPERTY, DEFAULT) INIT_DEFAULTS_HELPER(PROPERTY, DEFAULT, object)
+
+#define SYNCHRONIZE_WITH_DEFAULTS_OBJECT(PROPERTY) SYNCHRONIZE_WITH_DEFAULTS_HELPER(PROPERTY, Object, id)
+#define SYNCHRONIZE_WITH_DEFAULTS_INT(PROPERTY) SYNCHRONIZE_WITH_DEFAULTS_HELPER(PROPERTY, Integer, NSInteger)
+#define SYNCHRONIZE_WITH_DEFAULTS_BOOL(PROPERTY) SYNCHRONIZE_WITH_DEFAULTS_HELPER(PROPERTY, Bool, BOOL)
+
+#define PROPERTY_DEFAUTLS_HELPER(PROPERTY, TYPE, PROPTYPE) @property(nonatomic, PROPTYPE, setter=set##PROPERTY:) TYPE PROPERTY;
+
+#define INIT_DEFAULTS_HELPER(PROPERTY, DEFAULT, TYPE) \
+self.PROPERTY = ([[NSUserDefaults standardUserDefaults] objectForKey:XXStringize(PROPERTY)])?[[NSUserDefaults standardUserDefaults] TYPE##ForKey:XXStringize(PROPERTY)]:DEFAULT;
+
+#define SYNCHRONIZE_WITH_DEFAULTS_HELPER(PROPERTY, TYPE, SHORT_TYPE) \
+- (void)set##PROPERTY:(SHORT_TYPE)PROPERTY \
+{ \
+_##PROPERTY = PROPERTY; \
+[[NSUserDefaults standardUserDefaults] set##TYPE:PROPERTY forKey:XXStringize(PROPERTY)]; \
+[[NSUserDefaults standardUserDefaults] synchronize]; \
+}
+
+#endif
