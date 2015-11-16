@@ -12,8 +12,12 @@
 #import "LPJoinManageMeetingViewController.h"
 #import "LPSystemUser.h"
 #import "LPLoginViewController.h"
+#import "LPSettingViewController.h"
+#import "LPMyMeetingManageViewController.h"
 
 @interface LPJoinBarViewController ()
+
+@property (nonatomic, assign) BOOL hasEnterManagerMeeting;
 
 @end
 
@@ -39,14 +43,20 @@
     if ([LPSystemUser sharedUser].hasLogin == NO) {
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {
-        [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
+        // 记录这次点击， 下次点击则切换到管理会议室，安排会议室，以及设置界面
+        if (self.hasEnterManagerMeeting == YES) {
+            // 进入到管理界面
+            [[PhoneMainView instance] changeCurrentView:[LPMyMeetingManageViewController compositeViewDescription]];
+        }else {
+            [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
+        }
+        
+        self.hasEnterManagerMeeting = YES;
     }
 }
 
 - (IBAction)settingBtnClicked:(id)sender {
-    NSLog(@"third");
-    
-    
+    [[PhoneMainView instance] changeCurrentView:[LPSettingViewController compositeViewDescription]];
 }
 
 - (void)didReceiveMemoryWarning {

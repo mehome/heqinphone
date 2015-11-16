@@ -8,7 +8,18 @@
 
 #import "LPSettingViewController.h"
 
-@interface LPSettingViewController ()
+@interface LPSettingViewController () <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *accountField;
+@property (weak, nonatomic) IBOutlet UITextField *companyField;
+
+@property (weak, nonatomic) IBOutlet UILabel *serverAddressLabel;
+
+@property (weak, nonatomic) IBOutlet UISwitch *defaultSilentVoiceSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *defaultSilentMovieSwitch;
+
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @end
 
@@ -16,22 +27,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
+    
+    // 初始化各个界面信息
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)bgTap:(UITapGestureRecognizer *)tapGesture {
+    [self.nameField resignFirstResponder];
+    [self.accountField resignFirstResponder];
+    [self.companyField resignFirstResponder];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+// 注销按钮
+- (IBAction)logoutBtnClicked:(id)sender {
+    
 }
-*/
+
+// 确定输入的信息
+- (IBAction)confimPersonalBtnClicked:(id)sender {
+    
+}
+
+// 静音
+- (IBAction)defaultVoiceSwitched:(id)sender {
+}
+
+// 静画
+- (IBAction)defaultMovieSwitched:(id)sender {
+}
+
+#pragma mark - UICompositeViewDelegate Functions
+
+static UICompositeViewDescription *compositeDescription = nil;
+
++ (UICompositeViewDescription *)compositeViewDescription {
+    if(compositeDescription == nil) {
+        compositeDescription = [[UICompositeViewDescription alloc] init:@"Setting"
+                                                                content:@"LPSettingViewController"
+                                                               stateBar:nil
+                                                        stateBarEnabled:false
+                                                                 tabBar:@"LPJoinBarViewController"
+                                                          tabBarEnabled:true
+                                                             fullscreen:false
+                                                          landscapeMode:[LinphoneManager runningOnIpad]
+                                                           portraitMode:true];
+        compositeDescription.darkBackground = true;
+    }
+    return compositeDescription;
+}
 
 @end

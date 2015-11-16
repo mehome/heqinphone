@@ -199,7 +199,8 @@ static UICompositeViewDescription *compositeDescription = nil;
             break;
     }
 
-    NSLog(@"current select model=%@", curMeetingModel);
+    NSLog(@"进入会议室，current select model=%@", curMeetingModel);
+    // 进入会议室
     
     return;
 }

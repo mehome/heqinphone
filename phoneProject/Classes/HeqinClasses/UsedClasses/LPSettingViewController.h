@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UICompositeViewController.h"
 
-@interface LPSettingViewController : UIViewController
+@interface LPSettingViewController : UIViewController <UICompositeViewDelegate>
 
 @end

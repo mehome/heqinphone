@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPInMeetingBarViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mSD-t5-aG9">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.084208743510000003" green="0.76993384620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="音频"/>
+                    <connections>
+                        <action selector="soundBtnClicked:" destination="-1" eventType="touchUpInside" id="PkC-MQ-Lhx"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUb-8F-xCx">
+                    <rect key="frame" x="256" y="0.0" width="64" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.2332493291534633" green="1" blue="0.24262123584428197" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="管理"/>
+                    <connections>
+                        <action selector="manageBtnClicked:" destination="-1" eventType="touchUpInside" id="9dx-Zw-LFw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tj1-QL-H5v">
+                    <rect key="frame" x="64" y="0.0" width="64" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="视频"/>
+                    <connections>
+                        <action selector="videoBtnClicked:" destination="-1" eventType="touchUpInside" id="dkL-4G-4Ys"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YY6-dB-tjm">
+                    <rect key="frame" x="192" y="0.0" width="64" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.49262496630000002" green="1" blue="0.83915001170000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="参与人"/>
+                    <connections>
+                        <action selector="participatorBtnClicked:" destination="-1" eventType="touchUpInside" id="8hT-Kf-xlO"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d39-fx-YLH">
+                    <rect key="frame" x="128" y="0.0" width="64" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="邀请"/>
+                    <connections>
+                        <action selector="inviteBtnClicked:" destination="-1" eventType="touchUpInside" id="wDo-TA-5O4"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="YUb-8F-xCx" firstAttribute="leading" secondItem="YY6-dB-tjm" secondAttribute="trailing" id="163-Im-bu6"/>
+                <constraint firstItem="Tj1-QL-H5v" firstAttribute="leading" secondItem="mSD-t5-aG9" secondAttribute="trailing" id="3Ln-zE-HDt"/>
+                <constraint firstItem="YUb-8F-xCx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="44h-ci-RAt"/>
+                <constraint firstItem="mSD-t5-aG9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7Mn-O4-tzC"/>
+                <constraint firstItem="d39-fx-YLH" firstAttribute="width" secondItem="mSD-t5-aG9" secondAttribute="width" id="97X-Xp-uso"/>
+                <constraint firstItem="YY6-dB-tjm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Bbj-RO-FRl"/>
+                <constraint firstItem="mSD-t5-aG9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Dbw-Vh-ax1"/>
+                <constraint firstAttribute="bottom" secondItem="d39-fx-YLH" secondAttribute="bottom" id="HyU-Ie-Fw1"/>
+                <constraint firstItem="d39-fx-YLH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="JM7-Mb-VSy"/>
+                <constraint firstItem="Tj1-QL-H5v" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OHN-Ot-sbz"/>
+                <constraint firstAttribute="bottom" secondItem="YUb-8F-xCx" secondAttribute="bottom" id="Sj1-yU-TOc"/>
+                <constraint firstItem="mSD-t5-aG9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VSL-xq-zdQ"/>
+                <constraint firstItem="YUb-8F-xCx" firstAttribute="width" secondItem="mSD-t5-aG9" secondAttribute="width" id="XEM-8E-UpQ"/>
+                <constraint firstItem="d39-fx-YLH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZdK-LH-khq"/>
+                <constraint firstItem="YUb-8F-xCx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="cfn-Jt-EJr"/>
+                <constraint firstAttribute="bottom" secondItem="Tj1-QL-H5v" secondAttribute="bottom" id="eL6-eM-ffh"/>
+                <constraint firstItem="d39-fx-YLH" firstAttribute="leading" secondItem="Tj1-QL-H5v" secondAttribute="trailing" id="ewW-Zs-CqI"/>
+                <constraint firstAttribute="bottom" secondItem="YY6-dB-tjm" secondAttribute="bottom" id="hKL-Wa-riX"/>
+                <constraint firstItem="YY6-dB-tjm" firstAttribute="width" secondItem="mSD-t5-aG9" secondAttribute="width" id="iDg-aM-eWO"/>
+                <constraint firstAttribute="bottom" secondItem="mSD-t5-aG9" secondAttribute="bottom" id="j9h-ld-Rd9"/>
+                <constraint firstItem="Tj1-QL-H5v" firstAttribute="width" secondItem="mSD-t5-aG9" secondAttribute="width" id="jLu-qb-J1G"/>
+                <constraint firstAttribute="trailing" secondItem="YUb-8F-xCx" secondAttribute="trailing" id="rzg-y6-t4z"/>
+                <constraint firstItem="Tj1-QL-H5v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="uFc-bE-MUk"/>
+                <constraint firstItem="YY6-dB-tjm" firstAttribute="leading" secondItem="d39-fx-YLH" secondAttribute="trailing" id="voA-bo-1GT"/>
+                <constraint firstItem="YY6-dB-tjm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xeu-MQ-P7W"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="377" y="329.5"/>
+        </view>
+    </objects>
+</document>
