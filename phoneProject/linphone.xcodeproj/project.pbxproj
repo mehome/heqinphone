@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		045B5CB318D72E9A0088350C /* libbzrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045B5CB218D72E9A0088350C /* libbzrtp.a */; };
+		13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */; };
+		13066CE01BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */; };
 		13854EAE1BECA22000727913 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13854EAD1BECA22000727913 /* MapKit.framework */; };
 		138950721BECA38D003DD7A0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 13894FE41BECA38C003DD7A0 /* AFHTTPRequestOperation.m */; };
 		138950731BECA38D003DD7A0 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13894FE61BECA38C003DD7A0 /* AFHTTPRequestOperationManager.m */; };
@@ -822,6 +824,9 @@
 
 /* Begin PBXFileReference section */
 		045B5CB218D72E9A0088350C /* libbzrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbzrtp.a; path = "liblinphone-sdk/apple-darwin/lib/libbzrtp.a"; sourceTree = "<group>"; };
+		13066CDC1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCellJoinManageTableViewCell.h; sourceTree = "<group>"; };
+		13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCellJoinManageTableViewCell.m; sourceTree = "<group>"; };
+		13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPCellJoinManageTableViewCell.xib; sourceTree = "<group>"; };
 		13854EAD1BECA22000727913 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		13894FE11BECA38C003DD7A0 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
 		13894FE31BECA38C003DD7A0 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -2348,6 +2353,9 @@
 				138951611BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.h */,
 				138951621BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.m */,
 				138951631BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.xib */,
+				13066CDC1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.h */,
+				13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */,
+				13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */,
 				1389519A1BEE09CA003DD7A0 /* LPLoginViewController.h */,
 				1389519B1BEE09CA003DD7A0 /* LPLoginViewController.m */,
 				1389519C1BEE09CA003DD7A0 /* LPLoginViewController.xib */,
@@ -3670,6 +3678,7 @@
 				D32D5AA715ADE5D9008593F3 /* button_alert_background_default.png in Resources */,
 				D32D5AA915ADE5D9008593F3 /* button_alert_background_over.png in Resources */,
 				C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */,
+				13066CE01BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib in Resources */,
 				C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */,
 				C9C8254715AE204D00D493FA /* transfer_call_default.png in Resources */,
 				C9C8254915AE204D00D493FA /* transfer_call_over.png in Resources */,
@@ -4047,6 +4056,7 @@
 				340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */,
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
 				13E33E311BF0CC9600AA3E64 /* MBProgressHUD.m in Sources */,
+				13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */,
 				138950821BECA38D003DD7A0 /* UIWebView+AFNetworking.m in Sources */,
 				D3F83EEC1582021700336684 /* InCallViewController.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,

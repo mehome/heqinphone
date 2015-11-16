@@ -10,6 +10,6 @@
 
 @interface RDRMyMeetingResponseModel : RDRBaseResponseModel
 
-@property (nonatomic, strong) NSArray *schedule;
+@property (nonatomic, strong) NSArray *rooms;
 
 @end

@@ -1259,7 +1259,7 @@ static LinphoneCoreVTable linphonec_vtable = {
 
 //scheduling loop
 - (void)iterate {
-    NSLog(@"iterate called");
+//    NSLog(@"iterate called");
 	linphone_core_iterate(theLinphoneCore);
 }
 

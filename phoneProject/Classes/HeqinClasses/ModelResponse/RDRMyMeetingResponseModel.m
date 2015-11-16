@@ -18,7 +18,7 @@
     return mutDic;
 }
 
-+ (NSValueTransformer *)scheduleJSONTransformer{
++ (NSValueTransformer *)roomsJSONTransformer{
     return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
 }
 

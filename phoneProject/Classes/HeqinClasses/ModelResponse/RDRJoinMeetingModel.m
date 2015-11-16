@@ -14,7 +14,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey{
     NSMutableDictionary *mutDic = [[NSDictionary mtl_identityPropertyMapWithModel:[self class]] mutableCopy];
     
-    [mutDic setObject:@"id" forKey:@"idStr"];
+    [mutDic setObject:@"id" forKey:@"idNum"];
     
     return mutDic;
 }
