@@ -49,8 +49,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)searchMyMeetingInfo {
+    // TODO 这里应该直接去取存储的UserId信息
     NSString *userId = [LPSystemUser sharedUser].loginUserId;
-    userId = @"qin.he@zijingcloud.com";
+    userId = @"feng.wang@zijingcloud.com";
     
     [self showLoadingView];
 
@@ -67,15 +68,15 @@ static UICompositeViewDescription *compositeDescription = nil;
                    RDRMyMeetingResponseModel *model = responseObject;
                    
                    if ([model codeCheckSuccess] == YES) {
-                       
+                       NSLog(@"请求Meeting Info, success, model=%@", model);
                    }else {
-                       NSLog(@"请求sipDoamin 服务器请求出错, model=%@", model);
+                       NSLog(@"请求Meeting Info 服务器请求出错, model=%@, msg=%@", model, model.msg);
                    }
                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    [weakSelf hideHudAndIndicatorView];
 
                    //请求出错
-                   NSLog(@"请求sipDoamin出错, %s, error=%@", __FUNCTION__, error);
+                   NSLog(@"请求Meeting Info出错, %s, error=%@", __FUNCTION__, error);
                }];
 }
 
