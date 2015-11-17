@@ -25,4 +25,6 @@
 
 @property (nonatomic, retain) IBOutlet UITextField* addressField;
 
+- (void)touchUp:(id)sender;
+
 @end

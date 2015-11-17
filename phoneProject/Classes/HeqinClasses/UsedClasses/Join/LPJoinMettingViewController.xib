@@ -64,7 +64,7 @@
                         <constraint firstAttribute="height" constant="30" id="4AE-Am-DNe"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="PQX-NJ-xT7"/>
                     </connections>

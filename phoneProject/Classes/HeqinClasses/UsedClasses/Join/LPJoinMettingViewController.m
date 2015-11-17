@@ -12,6 +12,7 @@
 #import "LPLoginViewController.h"
 #import "PhoneMainView.h"
 #import "LPSystemUser.h"
+#import "UIViewController+RDRTipAndAlert.h"
 
 @interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -204,9 +205,27 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)joinBtnClicked:(id)sender {
-    NSLog(@"join btn clicked.");
-    
-    [self resignKeyboard];
+    if (self.joinMeetingNumberField.text.length == 0) {
+        [self showToastWithMessage:@"请输入会议号码"];
+        
+        [self.joinMeetingNumberField becomeFirstResponder];
+    }else {
+        [self resignKeyboard];
+        
+        // 进入到会议中
+        DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+        if (controller != nil) {
+            controller.addressField.text = self.joinMeetingNumberField.text;
+            controller.transferMode = YES;
+            
+            NSLog(@"heqin will dispatch after");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//                [controller call:self.joinMeetingNumberField.text displayName:nil];
+                [controller.callButton touchUp:nil];
+                NSLog(@"heqin touchup");
+            });
+        }
+    }
 }
 
 #pragma mark UITabelView delegate & datasource

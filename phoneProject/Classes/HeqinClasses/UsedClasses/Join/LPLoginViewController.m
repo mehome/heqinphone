@@ -76,7 +76,7 @@
             
             [self hideHudAndIndicatorView];
             NSLog(@"registration ok.");
-            [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+//            [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
             
             [LPSystemUser sharedUser].hasLogin = YES;
             
