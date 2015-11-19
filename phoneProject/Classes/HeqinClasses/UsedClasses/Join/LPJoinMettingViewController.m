@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loginTipLabel;
+@property (weak, nonatomic) IBOutlet UIButton *joinBtn;
 
 @end
 
@@ -97,6 +98,8 @@
                 self.loginBtn.enabled = YES;
                 [self.loginBtn setTitle:@"退出" forState:UIControlStateNormal];
                 
+                self.joinBtn.enabled = YES;
+                
                 [LPSystemUser sharedUser].hasLogin = YES;                
 
                 break;
@@ -107,11 +110,16 @@
                 message =  NSLocalizedString(@"Not registered", nil);
                 
                 [LPSystemUser sharedUser].hasLogin = NO;
+                
+                self.joinBtn.enabled = NO;
+
                 break;
             case LinphoneRegistrationFailed:
                 self.loginBtn.enabled = YES;
                 [self.loginBtn setTitle:@"登录." forState:UIControlStateNormal];
                 message =  NSLocalizedString(@"Registration failed", nil);
+                
+                self.joinBtn.enabled = NO;
                 
                 [LPSystemUser sharedUser].hasLogin = NO;
                 break;
@@ -119,6 +127,9 @@
                 self.loginBtn.enabled = NO;
                 [self.loginBtn setTitle:@"登录中" forState:UIControlStateNormal];
                 message =  NSLocalizedString(@"Registration in progress", nil);
+                
+                self.joinBtn.enabled = NO;
+
                 break;
             default: break;
         }

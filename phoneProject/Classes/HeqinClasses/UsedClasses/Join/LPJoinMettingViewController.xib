@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPJoinMettingViewController">
             <connections>
                 <outlet property="historyTable" destination="WX2-A9-5dx" id="xhk-yJ-EEA"/>
+                <outlet property="joinBtn" destination="vDK-78-bIi" id="u9A-h6-5Uk"/>
                 <outlet property="joinMeetingNumberField" destination="b7s-kW-5KH" id="kr4-mI-2U5"/>
                 <outlet property="joinNameField" destination="Lan-9m-YgH" id="nvZ-LN-llR"/>
                 <outlet property="loginBtn" destination="c1i-ux-xb6" id="EA7-tv-8o2"/>
@@ -57,7 +58,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-kW-5KH">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="111111" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-kW-5KH">
                     <rect key="frame" x="103" y="160" width="115" height="30"/>
                     <animations/>
                     <constraints>
