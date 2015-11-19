@@ -191,7 +191,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // 进行SIP注册功能
     NSString *username  = @"qin.he";   //self.userNameField.text;
     NSString *userId = @"qin.he@zijingcloud.com";
-    NSString *password  = @"wang@2015";  //self.userPasswordField.text;
+    NSString *password  = @"he@2015";  //self.userPasswordField.text;
     NSString *domain    = @"120.132.87.181";
     NSString *transport = @"UDP";
     

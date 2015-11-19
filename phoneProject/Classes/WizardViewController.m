@@ -788,7 +788,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *transport = [self.transportChooser titleForSegmentAtIndex:self.transportChooser.selectedSegmentIndex];
 
     username = @"qin.he@zijingcloud.com";
-    password = @"wang@2015";
+    password = @"he@2015";
     domain = @"120.132.87.181";
     transport = @"UDP";
     
