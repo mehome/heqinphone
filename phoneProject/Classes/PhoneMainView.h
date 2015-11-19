@@ -40,7 +40,6 @@
 #import "SettingsViewController.h"
 #import "FirstLoginViewController.h"
 #import "WizardViewController.h"
-#import "IncomingCallViewController.h"
 #import "ImageViewController.h"
 
 

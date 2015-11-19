@@ -357,11 +357,16 @@ static RootViewManager* rootViewManagerInstance = nil;
         {
             if (canHideInCallView) {
                 // Go to dialer view
-                DialerViewController *controller = DYNAMIC_CAST([self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-                if(controller != nil) {
-                    [controller setAddress:@""];
-                    [controller setTransferMode:FALSE];
-                }
+                // 下面是之前正常的结束通话后的调用
+//                DialerViewController *controller = DYNAMIC_CAST([self changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+//                if(controller != nil) {
+//                    [controller setAddress:@""];
+//                    [controller setTransferMode:FALSE];
+//                }
+                
+                // 切换回首页
+                [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+                
             } else {
                 [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			}
