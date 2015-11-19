@@ -61,7 +61,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)searchMyMeetingInfo {
     // TODO 这里应该直接去取存储的UserId信息
     NSString *userId = [LPSystemUser sharedUser].loginUserId;
-    userId = @"feng.wang@zijingcloud.com";
+    userId = @"qin.he@zijingcloud.com";
     
     [self showLoadingView];
 

@@ -218,12 +218,9 @@ static UICompositeViewDescription *compositeDescription = nil;
             controller.addressField.text = self.joinMeetingNumberField.text;
             controller.transferMode = YES;
             
+            [controller.callButton touchUp:nil];
+
             NSLog(@"heqin will dispatch after");
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//                [controller call:self.joinMeetingNumberField.text displayName:nil];
-                [controller.callButton touchUp:nil];
-                NSLog(@"heqin touchup");
-            });
         }
     }
 }

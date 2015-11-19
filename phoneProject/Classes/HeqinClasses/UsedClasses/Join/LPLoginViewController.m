@@ -189,8 +189,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
     
     // 进行SIP注册功能
-    NSString *username  = @"feng.wang";   //self.userNameField.text;
-    NSString *userId = @"feng.wang@zijingcloud.com";
+    NSString *username  = @"qin.he";   //self.userNameField.text;
+    NSString *userId = @"qin.he@zijingcloud.com";
     NSString *password  = @"wang@2015";  //self.userPasswordField.text;
     NSString *domain    = @"120.132.87.181";
     NSString *transport = @"UDP";

@@ -787,7 +787,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *domain    = [WizardViewController findTextField:ViewElement_Domain  view:contentView].text;
     NSString *transport = [self.transportChooser titleForSegmentAtIndex:self.transportChooser.selectedSegmentIndex];
 
-    username = @"feng.wang@zijingcloud.com";
+    username = @"qin.he@zijingcloud.com";
     password = @"wang@2015";
     domain = @"120.132.87.181";
     transport = @"UDP";
