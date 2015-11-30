@@ -115,7 +115,6 @@
     NSLog(@"login interface status=%d", status);
 }
 
-
 #pragma mark - UITextfield Event Functions
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];

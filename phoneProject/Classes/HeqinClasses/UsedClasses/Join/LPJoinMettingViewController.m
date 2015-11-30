@@ -32,6 +32,11 @@
     [super viewDidLoad];
 
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapRecognizered:)]];
+    
+    self.joinNameField.text = [LPSystemSetting sharedSetting].joinerName;
+    
+    self.historyTable.tableFooterView = [[UIView alloc] init];
+    self.historyTable.tableHeaderView = [[UIView alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,6 +65,9 @@
     [[NSNotificationCenter defaultCenter]	removeObserver:self
                                                     name:kLinphoneGlobalStateUpdate
                                                   object:nil];
+    
+    // 每次回到这个界面进行刷新， 因为历史会议数据可能已经更新
+    [self.historyTable reloadData];
 }
 
 - (void)registrationUpdate: (NSNotification*) notif {
@@ -76,7 +84,6 @@
     LinphoneRegistrationState state = LinphoneRegistrationNone;
     
     NSString* message = nil;
-    UIImage* image = nil;
     
     LinphoneCore* lc = [LinphoneManager getLc];
     LinphoneGlobalState gstate = linphone_core_get_global_state(lc);
@@ -94,7 +101,7 @@
         
         switch (state) {
             case LinphoneRegistrationOk:
-                message = NSLocalizedString(@"Registered", nil);
+                message = @"已注册";
                 self.loginBtn.enabled = YES;
                 [self.loginBtn setTitle:@"退出" forState:UIControlStateNormal];
                 
@@ -107,7 +114,7 @@
             case LinphoneRegistrationCleared:
                 self.loginBtn.enabled = YES;
                 [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-                message =  NSLocalizedString(@"Not registered", nil);
+                message = @"未注册";
                 
                 [LPSystemUser sharedUser].hasLogin = NO;
                 
@@ -117,7 +124,7 @@
             case LinphoneRegistrationFailed:
                 self.loginBtn.enabled = YES;
                 [self.loginBtn setTitle:@"登录." forState:UIControlStateNormal];
-                message =  NSLocalizedString(@"Registration failed", nil);
+                message = @"注册失败";
                 
                 self.joinBtn.enabled = NO;
                 
@@ -126,7 +133,7 @@
             case LinphoneRegistrationProgress:
                 self.loginBtn.enabled = NO;
                 [self.loginBtn setTitle:@"登录中" forState:UIControlStateNormal];
-                message =  NSLocalizedString(@"Registration in progress", nil);
+                message = @"注册中";
                 
                 self.joinBtn.enabled = NO;
 
@@ -213,6 +220,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)changeNameBtnClicked:(id)sender {
     [self resignKeyboard];
+
+    [LPSystemSetting sharedSetting].joinerName = self.joinNameField.text;
 }
 
 - (IBAction)joinBtnClicked:(id)sender {
@@ -222,6 +231,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         [self.joinMeetingNumberField becomeFirstResponder];
     }else {
         [self resignKeyboard];
+        
+        LPMeetingRoom *room = [[LPMeetingRoom alloc] init];
+        room.meetingIdStr = self.joinMeetingNumberField.text;
+        room.meetingName = @"销售1部";
+        room.meetingInLastDateStr = [[LPSystemSetting sharedSetting].unifyDateformatter stringFromDate:[NSDate date]];
+        
+        [[LPSystemSetting sharedSetting].historyMeetings addObject:room];
         
         // 进入到会议中
         DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
@@ -245,21 +261,21 @@ static UICompositeViewDescription *compositeDescription = nil;
     static NSString *kCellId = @"UIJoinHistoryCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:kCellId];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellId];
     }
     
     LPMeetingRoom *curRoom = nil;
     if ([LPSystemSetting sharedSetting].historyMeetings.count <= indexPath.row) {
         curRoom = [[LPMeetingRoom alloc] init];
-        curRoom.meetingName = @"无数据Meeting";
-        curRoom.meetingId = 0;
-        curRoom.meetingCallTime = [NSDate dateWithTimeIntervalSinceNow:(- 60 * 60 * 24)];
+        curRoom.meetingName = @"空";
+        curRoom.meetingIdStr = @"0";
+        curRoom.meetingInLastDateStr = [NSString stringWithFormat:@"%@", [NSDate date]];
     }else {
         curRoom = [[LPSystemSetting sharedSetting].historyMeetings objectAtIndex:indexPath.row];
     }
     
     cell.textLabel.text = curRoom.meetingName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", curRoom.meetingCallTime];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", curRoom.meetingInLastDateStr];
     
     return cell;
 }
@@ -269,7 +285,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"历史会议";
+    return @"历史会议(点击直接进入)";
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([LPSystemSetting sharedSetting].historyMeetings.count > 0) {
+        LPMeetingRoom *selectedRoom = [[LPSystemSetting sharedSetting].historyMeetings objectAtIndex:indexPath.row];
+        NSLog(@"selectedRoom.id=%@", selectedRoom.meetingIdStr);
+    }
 }
 
 @end

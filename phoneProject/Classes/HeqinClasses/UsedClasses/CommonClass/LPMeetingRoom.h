@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LPMeetingRoom : NSObject
+////////////////////单个会议数据/////////////////////
+@interface LPMeetingRoom : NSObject <NSCoding>
 
-@property (nonatomic, copy) NSString *meetingName;
-@property (nonatomic, copy) NSString *meetingId;
-@property (nonatomic, strong) NSDate *meetingCallTime;      // 历史会议的时间
+@property (nonatomic, copy) NSString *meetingIdStr;         // 会议id
+@property (nonatomic, copy) NSString *meetingName;          // 会议名称，销售1部
+@property (nonatomic, copy) NSString *meetingInLastDateStr;       // 上次会议时间
 
 @end
