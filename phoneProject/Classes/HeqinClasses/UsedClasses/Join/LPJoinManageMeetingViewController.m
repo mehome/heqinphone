@@ -61,7 +61,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)searchMyMeetingInfo {
     // TODO 这里应该直接去取存储的UserId信息
     NSString *userId = [LPSystemUser sharedUser].loginUserId;
-    userId = @"qin.he@zijingcloud.com";
+    userId = @"feng.wang@zijingcloud.com";
     
     [self showLoadingView];
 
@@ -96,18 +96,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0) {
-//    if (IS_IOS8_OR_ABOVE) {
-//        return UITableViewAutomaticDimension;
-//    }
-    
     return 130;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (IS_IOS8_OR_ABOVE) {
-//        return UITableViewAutomaticDimension;
-//    }
-
     return 130.0;
 }
 

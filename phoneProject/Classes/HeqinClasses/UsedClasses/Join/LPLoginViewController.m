@@ -11,6 +11,7 @@
 #import "LPJoinMettingViewController.h"
 #import "UIViewController+RDRTipAndAlert.h"
 #import "LPSystemUser.h"
+#import "LPSystemSetting.h"
 
 @interface LPLoginViewController () <UITextFieldDelegate> {
     LinphoneCoreSettingsStore *settingsStore;
@@ -188,13 +189,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
     
     // 进行SIP注册功能
-    NSString *username  = @"qin.he";   //self.userNameField.text;
-    NSString *userId = @"qin.he@zijingcloud.com";
-    NSString *password  = @"he@2015";  //self.userPasswordField.text;
-    NSString *domain    = @"120.132.87.181";
+    NSString *username  = @"feng.wang";
+    NSString *userId = @"feng.wang@zijingcloud.com";
+    NSString *password  = @"wang@2015";
     NSString *transport = @"UDP";
     
-    [self verificationSignInWithUsername:username userId:userId password:password domain:domain withTransport:transport];
+    [self verificationSignInWithUsername:username userId:userId password:password domain:[LPSystemSetting sharedSetting].sipDomainStr withTransport:transport];
 }
 
 - (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {

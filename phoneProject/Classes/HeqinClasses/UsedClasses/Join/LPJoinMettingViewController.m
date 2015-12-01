@@ -57,8 +57,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    
-    // Remove observer
     [[NSNotificationCenter defaultCenter]	removeObserver:self
                                                     name:kLinphoneRegistrationUpdate
                                                   object:nil];
