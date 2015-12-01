@@ -5,7 +5,7 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
-
+    #import "NSObject+RDRCommon.h"
 
 // 在不添加NullSafe的情况下，执行下面这句会造成崩溃，添加后，则不会出现崩溃
 //[(NSString *)[NSNull null] stringByDeletingPathExtension];

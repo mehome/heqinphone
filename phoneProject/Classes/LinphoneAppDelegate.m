@@ -35,6 +35,12 @@
 #import "RDRNetHelper.h"
 #import "LPSystemSetting.h"
 
+@interface LinphoneAppDelegate () {
+    UIAlertView *_updateAlertView;
+}
+
+@end
+
 @implementation LinphoneAppDelegate
 
 @synthesize configURL;
@@ -84,10 +90,13 @@
     if (![[LinphoneManager instance] resignActive]) {
 
     }
-    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    if(_updateAlertView == nil){
+        [self checkLatestVersion];
+    }
+    
     Linphone_log(@"%@", NSStringFromSelector(_cmd));
 
     if( startedInBackground ){
@@ -235,6 +244,55 @@
     if (bgStartId!=UIBackgroundTaskInvalid) [[UIApplication sharedApplication] endBackgroundTask:bgStartId];
 
     return YES;
+}
+
+#define kFirAppID @"563a1591e75e2d4d74000012"
+#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
+
+- (void)checkLatestVersion{
+    
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.fir.im/apps/latest/%@?api_token=%@",kFirAppID, kFirApiToken]]]
+                                       queue:[NSOperationQueue currentQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (data) {
+            @try {
+                NSDictionary *result= [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                
+                //对比版本
+                NSString * version=result[@"version"]; //对应 CFBundleVersion, 对应Xcode项目配置"General"中的 Build
+                NSString * versionShort=result[@"versionShort"]; //对应 CFBundleShortVersionString, 对应Xcode项目配置"General"中的 Version
+                
+                NSString * localVersion=[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+                NSString * localVersionShort=[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+                
+                NSString *url=result[@"update_url"]; //如果有更新 需要用Safari打开的地址
+                NSString *changelog=result[@"changelog"]; //如果有更新 需要用Safari打开的地址
+                
+                //这里放对比版本的逻辑  每个 app 对版本更新的理解都不同
+                //有的对比 version, 有的对比 build
+                NSComparisonResult verResult=[localVersionShort compare:versionShort options:NSNumericSearch];
+                NSComparisonResult buildResult=[localVersion compare:version options:NSNumericSearch];
+                
+                if ( buildResult == NSOrderedAscending || verResult == NSOrderedAscending) {
+                    
+                    NSString *tString=[NSString stringWithFormat:@"发现新版本 %@ ( %@ )",versionShort,version];
+                    
+                    if (_updateAlertView != nil) {
+                        [_updateAlertView dismissWithClickedButtonIndex:_updateAlertView.cancelButtonIndex animated:NO];
+                    }
+                    _updateAlertView=[[UIAlertView alloc] initWithTitle:tString message:changelog delegate:self cancelButtonTitle:@"暂不更新" otherButtonTitles:@"去更新", nil];
+                    _updateAlertView.rd_userInfo = @{@"url":url};
+                    [_updateAlertView show];
+                }
+            }
+            @catch (NSException *exception) {
+                //返回格式错误 忽略掉
+                NSLog(@"version detect exception=%@", exception);
+            }
+        }else {
+            NSLog(@"version detected error, data is nil");
+        }
+    }];
 }
 
 - (void)askForSystemConfig {
@@ -536,12 +594,25 @@
 
 }
 
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ((alertView.tag == 1) && (buttonIndex==1))  {
         [self showWaitingIndicator];
         [self attemptRemoteConfiguration];
+        
+    }else if (alertView.tag == _updateAlertView) {
+        
+        if (buttonIndex!=[alertView cancelButtonIndex]) {
+            NSString *urlString=[alertView.rd_userInfo objectForKey:@"url"];
+            
+            if (urlString) {
+                NSURL *url=[NSURL URLWithString:urlString];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            
+        }
+        
+        _updateAlertView=nil;
     }
 }
 

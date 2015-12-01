@@ -10,6 +10,7 @@
 		045B5CB318D72E9A0088350C /* libbzrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045B5CB218D72E9A0088350C /* libbzrtp.a */; };
 		13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */; };
 		13066CE01BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */; };
+		137DB45A1C0DA03E00BDECD6 /* NSObject+RDRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 137DB4591C0DA03E00BDECD6 /* NSObject+RDRCommon.m */; };
 		13854EAE1BECA22000727913 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13854EAD1BECA22000727913 /* MapKit.framework */; };
 		138950721BECA38D003DD7A0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 13894FE41BECA38C003DD7A0 /* AFHTTPRequestOperation.m */; };
 		138950731BECA38D003DD7A0 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13894FE61BECA38C003DD7A0 /* AFHTTPRequestOperationManager.m */; };
@@ -843,6 +844,8 @@
 		13066CDC1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCellJoinManageTableViewCell.h; sourceTree = "<group>"; };
 		13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCellJoinManageTableViewCell.m; sourceTree = "<group>"; };
 		13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPCellJoinManageTableViewCell.xib; sourceTree = "<group>"; };
+		137DB4581C0DA03E00BDECD6 /* NSObject+RDRCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RDRCommon.h"; sourceTree = "<group>"; };
+		137DB4591C0DA03E00BDECD6 /* NSObject+RDRCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RDRCommon.m"; sourceTree = "<group>"; };
 		13854EAD1BECA22000727913 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		13894FE11BECA38C003DD7A0 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
 		13894FE31BECA38C003DD7A0 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -2078,6 +2081,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		137DB4571C0DA03E00BDECD6 /* NSObjectCommon */ = {
+			isa = PBXGroup;
+			children = (
+				137DB4581C0DA03E00BDECD6 /* NSObject+RDRCommon.h */,
+				137DB4591C0DA03E00BDECD6 /* NSObject+RDRCommon.m */,
+			);
+			path = NSObjectCommon;
+			sourceTree = "<group>";
+		};
 		13854C5E1BEC9E0500727913 /* HeqinClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -2459,6 +2471,7 @@
 		13E33E1C1BF0CC4E00AA3E64 /* LPUtils */ = {
 			isa = PBXGroup;
 			children = (
+				137DB4571C0DA03E00BDECD6 /* NSObjectCommon */,
 				13E33E2B1BF0CC9600AA3E64 /* MBProgressHUD */,
 				13E33E1D1BF0CC4E00AA3E64 /* ErrorView */,
 			);
@@ -4107,6 +4120,7 @@
 				1389507B1BECA38D003DD7A0 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1389515F1BEDDC60003DD7A0 /* LPSystemSetting.m in Sources */,
 				138950721BECA38D003DD7A0 /* AFHTTPRequestOperation.m in Sources */,
+				137DB45A1C0DA03E00BDECD6 /* NSObject+RDRCommon.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* LinphoneAppDelegate.m in Sources */,
 				22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */,
