@@ -293,7 +293,9 @@ static RootViewManager* rootViewManagerInstance = nil;
 											  otherButtonTitles:nil,nil];
 		[error show];
 		[error release];
-	}
+    }else if (state == LinphoneRegistrationOk) {
+        // 注册成功，取值出来
+    }
 }
 
 - (void)onGlobalStateChanged:(NSNotification*)notif {

@@ -60,8 +60,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)searchMyMeetingInfo {
     // TODO 这里应该直接去取存储的UserId信息
+    LinphoneCore* lc = [LinphoneManager getLc];
+
+    
     NSString *userId = [LPSystemUser sharedUser].loginUserId;
-    userId = @"feng.wang@zijingcloud.com";
+    
+    
     
     [self showLoadingView];
 

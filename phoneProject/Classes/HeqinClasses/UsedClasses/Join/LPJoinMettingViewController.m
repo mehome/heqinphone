@@ -14,7 +14,9 @@
 #import "LPSystemUser.h"
 #import "UIViewController+RDRTipAndAlert.h"
 
-@interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
+    LinphoneCoreSettingsStore *settingsStore;
+}
 
 @property (nonatomic, weak) IBOutlet UITableView *historyTable;
 @property (weak, nonatomic) IBOutlet UITextField *joinNameField;
@@ -30,7 +32,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    settingsStore = [[LinphoneCoreSettingsStore alloc] init];
+    
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapRecognizered:)]];
     
     self.joinNameField.text = [LPSystemSetting sharedSetting].joinerName;
@@ -98,7 +102,7 @@
         state = linphone_proxy_config_get_state(config);
         
         switch (state) {
-            case LinphoneRegistrationOk:
+            case LinphoneRegistrationOk: {
                 message = @"已注册";
                 self.loginBtn.enabled = YES;
                 [self.loginBtn setTitle:@"退出" forState:UIControlStateNormal];
@@ -106,8 +110,18 @@
                 self.joinBtn.enabled = YES;
                 
                 [LPSystemUser sharedUser].hasLogin = YES;                
-
+                
+                // 取出其中的值
+                [settingsStore transformLinphoneCoreToKeys];
+                
+                
+                NSString *nameStr = [settingsStore stringForKey:@"username_preference"];
+                NSString *idStr = [settingsStore stringForKey:@"userid_preference"];
+                
+                [LPSystemUser sharedUser].loginUserId = idStr;
+                [LPSystemUser sharedUser].loginUserName = nameStr;
                 break;
+            }
             case LinphoneRegistrationNone:
             case LinphoneRegistrationCleared:
                 self.loginBtn.enabled = YES;

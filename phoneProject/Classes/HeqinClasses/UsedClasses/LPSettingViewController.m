@@ -9,8 +9,10 @@
 #import "LPSettingViewController.h"
 #import "LPSystemUser.h"
 #import "LPSystemSetting.h"
+#import "LPJoinMettingViewController.h"
+#import "PhoneMainView.h"
 
-@interface LPSettingViewController () <UITextFieldDelegate>
+@interface LPSettingViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 
@@ -26,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @end
+
+#define kLogoutAlertTag 90902
 
 @implementation LPSettingViewController
 
@@ -80,7 +84,29 @@
 
 // 注销按钮
 - (IBAction)logoutBtnClicked:(id)sender {
+    LinphoneCore* lc = [LinphoneManager getLc];
+    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+        return;
+    }
     
+    UIAlertView *tipAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确认要注销么？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    tipAlert.tag = kLogoutAlertTag;
+    [tipAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
+    if (alertView.tag == kLogoutAlertTag) {
+        if (buttonIndex != alertView.cancelButtonIndex) {
+            LinphoneCore* lc = [LinphoneManager getLc];
+            linphone_core_clear_proxy_config(lc);
+            linphone_core_clear_all_auth_info(lc);
+            
+            [LPSystemUser sharedUser].hasLogin = NO;
+            
+            // 切回到登录首页
+            [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+        }
+    }
 }
 
 // 静音

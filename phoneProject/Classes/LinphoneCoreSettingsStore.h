@@ -31,4 +31,7 @@
 - (void)synchronizeAccount;
 - (void)transformLinphoneCoreToKeys;
 
+
+- (NSString*)stringForKey:(NSString*)key;       // 为了便于在外部通过这个值来获取用户名和id值。特意打开，实际上可能有更简单的方式
+
 @end

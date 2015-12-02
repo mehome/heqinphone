@@ -12,6 +12,7 @@
 #import "UIViewController+RDRTipAndAlert.h"
 #import "LPSystemUser.h"
 #import "LPSystemSetting.h"
+#import "LPJoinManageMeetingViewController.h"
 
 @interface LPLoginViewController () <UITextFieldDelegate> {
     LinphoneCoreSettingsStore *settingsStore;
@@ -77,10 +78,19 @@
             
             [self hideHudAndIndicatorView];
             NSLog(@"registration ok.");
-//            [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
-            
             [LPSystemUser sharedUser].hasLogin = YES;
             
+            // 取出其中的值
+            [settingsStore transformLinphoneCoreToKeys];
+            
+            NSString *nameStr = [settingsStore stringForKey:@"username_preference"];
+            NSString *idStr = [settingsStore stringForKey:@"userid_preference"];
+            
+            [LPSystemUser sharedUser].loginUserId = idStr;
+            [LPSystemUser sharedUser].loginUserName = nameStr;
+            
+            // 登录成功，切换到LPJoinManageMeetingViewController页
+            [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
             break;
         }
         case LinphoneRegistrationNone:
@@ -189,9 +199,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
     
     // 进行SIP注册功能
-    NSString *username  = @"feng.wang";
+    NSString *username = @"feng.wang";
     NSString *userId = @"feng.wang@zijingcloud.com";
-    NSString *password  = @"wang@2015";
+    NSString *password = @"wang@2015";
     NSString *transport = @"UDP";
     
     [self verificationSignInWithUsername:username userId:userId password:password domain:[LPSystemSetting sharedSetting].sipDomainStr withTransport:transport];
