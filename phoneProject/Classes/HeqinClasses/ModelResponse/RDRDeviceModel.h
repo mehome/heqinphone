@@ -7,7 +7,12 @@
 //
 
 #import "MTLModel.h"
+#import "MTLJSONAdapter.h"
 
-@interface RDRDeviceModel : MTLModel
+@interface RDRDeviceModel : MTLModel <MTLJSONSerializing>
+
+@property (nonatomic, copy) NSString *uid;          // 用户帐号
+@property (nonatomic, copy) NSString *name;         // 显示名称
+@property (nonatomic, copy) NSString *desc;         // 描述
 
 @end

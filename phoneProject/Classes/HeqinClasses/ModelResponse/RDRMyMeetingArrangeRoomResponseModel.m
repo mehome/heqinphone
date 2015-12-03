@@ -7,7 +7,19 @@
 //
 
 #import "RDRMyMeetingArrangeRoomResponseModel.h"
+#import "RDRArrangeRoomModel.h"
 
 @implementation RDRMyMeetingArrangeRoomResponseModel
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    
+    NSMutableDictionary *mutDic = [[NSDictionary mtl_identityPropertyMapWithModel:[self class]] mutableCopy];
+    
+    return mutDic;
+}
+
++ (NSValueTransformer *)contactsJSONTransformer{
+    return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRArrangeRoomModel class]];
+}
 
 @end

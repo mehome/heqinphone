@@ -11,7 +11,7 @@
 
 @interface RDRJoinMeetingModel : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, copy) NSNumber *idNum;
+@property (nonatomic, strong) NSNumber *idNum;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *addr;
 @property (nonatomic, copy) NSString *time;

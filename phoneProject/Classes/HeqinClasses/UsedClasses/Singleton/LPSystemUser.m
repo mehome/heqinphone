@@ -23,9 +23,9 @@
 - (instancetype)init {
     if (self = [super init]) {
         // 用一些初始化的操作
-        _myArrangeMeetings = @[];
+        _myScheduleMeetings = @[];
         _myMeetingsRooms = @[];
-        _myCollectionMeetings = @[];
+        _myFavMeetings = @[];
         _myHistoryMeetings = @[];
         
         _hasGetMeetingData = NO;

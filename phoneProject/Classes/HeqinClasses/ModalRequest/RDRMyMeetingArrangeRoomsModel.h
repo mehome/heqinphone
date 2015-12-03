@@ -10,4 +10,6 @@
 
 @interface RDRMyMeetingArrangeRoomsModel : RDRBaseRequestModel
 
+@property (nonatomic, copy) NSString *uid;
+
 @end

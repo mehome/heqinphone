@@ -761,6 +761,13 @@
 		E10DE7461BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7441BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.xib */; };
 		E10DE74A1BFA3229002D0FBB /* LPMyManageSingleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7481BFA3229002D0FBB /* LPMyManageSingleViewController.m */; };
 		E10DE74B1BFA3229002D0FBB /* LPMyManageSingleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7491BFA3229002D0FBB /* LPMyManageSingleViewController.xib */; };
+		E140A6B61C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */; };
+		E140A6B91C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6B81C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m */; };
+		E140A6BC1C10A0DC000E7DD0 /* RDRContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6BB1C10A0DC000E7DD0 /* RDRContactModel.m */; };
+		E140A6BF1C10A192000E7DD0 /* RDRDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6BE1C10A192000E7DD0 /* RDRDeviceModel.m */; };
+		E140A6C21C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C11C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m */; };
+		E140A6C51C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C41C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m */; };
+		E140A6C81C10A48D000E7DD0 /* RDRArrangeRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C71C10A48D000E7DD0 /* RDRArrangeRoomModel.m */; };
 		E19A0D611BF4E7B500E377DB /* RDRMyMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D601BF4E7B500E377DB /* RDRMyMeetingRequestModel.m */; };
 		E19A0D641BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D631BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m */; };
 		E19A0D681BF4EAEE00E377DB /* RDRJoinMeetingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D671BF4EAEE00E377DB /* RDRJoinMeetingModel.m */; };
@@ -1766,6 +1773,20 @@
 		E10DE7471BFA3229002D0FBB /* LPMyManageSingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMyManageSingleViewController.h; sourceTree = "<group>"; };
 		E10DE7481BFA3229002D0FBB /* LPMyManageSingleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMyManageSingleViewController.m; sourceTree = "<group>"; };
 		E10DE7491BFA3229002D0FBB /* LPMyManageSingleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMyManageSingleViewController.xib; sourceTree = "<group>"; };
+		E140A6B41C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeContactsModel.h; sourceTree = "<group>"; };
+		E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeContactsModel.m; sourceTree = "<group>"; };
+		E140A6B71C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeContactsResponseModel.h; sourceTree = "<group>"; };
+		E140A6B81C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeContactsResponseModel.m; sourceTree = "<group>"; };
+		E140A6BA1C10A0DC000E7DD0 /* RDRContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRContactModel.h; sourceTree = "<group>"; };
+		E140A6BB1C10A0DC000E7DD0 /* RDRContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRContactModel.m; sourceTree = "<group>"; };
+		E140A6BD1C10A192000E7DD0 /* RDRDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRDeviceModel.h; sourceTree = "<group>"; };
+		E140A6BE1C10A192000E7DD0 /* RDRDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRDeviceModel.m; sourceTree = "<group>"; };
+		E140A6C01C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeRoomsModel.h; sourceTree = "<group>"; };
+		E140A6C11C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeRoomsModel.m; sourceTree = "<group>"; };
+		E140A6C31C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeRoomResponseModel.h; sourceTree = "<group>"; };
+		E140A6C41C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeRoomResponseModel.m; sourceTree = "<group>"; };
+		E140A6C61C10A48D000E7DD0 /* RDRArrangeRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRArrangeRoomModel.h; sourceTree = "<group>"; };
+		E140A6C71C10A48D000E7DD0 /* RDRArrangeRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArrangeRoomModel.m; sourceTree = "<group>"; };
 		E19A0D5F1BF4E7B500E377DB /* RDRMyMeetingRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingRequestModel.h; sourceTree = "<group>"; };
 		E19A0D601BF4E7B500E377DB /* RDRMyMeetingRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingRequestModel.m; sourceTree = "<group>"; };
 		E19A0D621BF4E7CF00E377DB /* RDRMyMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingResponseModel.h; sourceTree = "<group>"; };
@@ -2349,6 +2370,10 @@
 				1389511C1BECA5D4003DD7A0 /* RDRRequest.m */,
 				E19A0D5F1BF4E7B500E377DB /* RDRMyMeetingRequestModel.h */,
 				E19A0D601BF4E7B500E377DB /* RDRMyMeetingRequestModel.m */,
+				E140A6B41C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.h */,
+				E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */,
+				E140A6C01C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.h */,
+				E140A6C11C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m */,
 			);
 			path = ModalRequest;
 			sourceTree = "<group>";
@@ -2362,6 +2387,16 @@
 				1389511F1BECA5D4003DD7A0 /* MTLModel+RDRNilForBasedataType.m */,
 				138951201BECA5D4003DD7A0 /* RDRBaseResponseModel.h */,
 				138951211BECA5D4003DD7A0 /* RDRBaseResponseModel.m */,
+				E140A6B71C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.h */,
+				E140A6B81C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m */,
+				E140A6BA1C10A0DC000E7DD0 /* RDRContactModel.h */,
+				E140A6BB1C10A0DC000E7DD0 /* RDRContactModel.m */,
+				E140A6BD1C10A192000E7DD0 /* RDRDeviceModel.h */,
+				E140A6BE1C10A192000E7DD0 /* RDRDeviceModel.m */,
+				E140A6C31C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.h */,
+				E140A6C41C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m */,
+				E140A6C61C10A48D000E7DD0 /* RDRArrangeRoomModel.h */,
+				E140A6C71C10A48D000E7DD0 /* RDRArrangeRoomModel.m */,
 				E19A0D621BF4E7CF00E377DB /* RDRMyMeetingResponseModel.h */,
 				E19A0D631BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m */,
 				E19A0D661BF4EAEE00E377DB /* RDRJoinMeetingModel.h */,
@@ -4129,6 +4164,7 @@
 				E10DE7261BFA1722002D0FBB /* LPMyMeetingBarViewController.m in Sources */,
 				1389512B1BECB206003DD7A0 /* RDRSystemConfigResponseModel.m in Sources */,
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
+				E140A6BF1C10A192000E7DD0 /* RDRDeviceModel.m in Sources */,
 				2214EB7A12F846B1002A5394 /* UICallButton.m in Sources */,
 				138951281BECB200003DD7A0 /* RDRSystemConfigRequestModel.m in Sources */,
 				138950FC1BECA576003DD7A0 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
@@ -4143,8 +4179,10 @@
 				E10DE72C1BFA1945002D0FBB /* LPMyMeetingManageViewController.m in Sources */,
 				340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */,
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
+				E140A6C51C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m in Sources */,
 				13E33E311BF0CC9600AA3E64 /* MBProgressHUD.m in Sources */,
 				13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */,
+				E140A6C21C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m in Sources */,
 				138950821BECA38D003DD7A0 /* UIWebView+AFNetworking.m in Sources */,
 				D3F83EEC1582021700336684 /* InCallViewController.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
@@ -4217,10 +4255,12 @@
 				138950761BECA38D003DD7A0 /* AFURLSessionManager.m in Sources */,
 				D32B6E2915A5BC440033019F /* ChatRoomTableViewController.m in Sources */,
 				138951001BECA576003DD7A0 /* NSObject+MTLComparisonAdditions.m in Sources */,
+				E140A6BC1C10A0DC000E7DD0 /* RDRContactModel.m in Sources */,
 				138950F01BECA576003DD7A0 /* FMDatabasePool.m in Sources */,
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
+				E140A6C81C10A48D000E7DD0 /* RDRArrangeRoomModel.m in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				138951021BECA576003DD7A0 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				636316DE1A1DEF2F0009B839 /* UIButtonShrinkable.m in Sources */,
@@ -4240,6 +4280,7 @@
 				D3F7998115BD32370018C273 /* TPMultiLayoutViewController.m in Sources */,
 				13E33E281BF0CC4E00AA3E64 /* RDRSpinnerView.m in Sources */,
 				138950791BECA38D003DD7A0 /* AFURLRequestSerialization.m in Sources */,
+				E140A6B91C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m in Sources */,
 				138950F81BECA576003DD7A0 /* MTLReflection.m in Sources */,
 				138950F31BECA576003DD7A0 /* EXTRuntimeExtensions.m in Sources */,
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
@@ -4248,6 +4289,7 @@
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
+				E140A6B61C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m in Sources */,
 				E10DE7451BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.m in Sources */,
 				D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */,
 				D3807FEE15C2894A005BE9BC /* IASKSettingsReader.m in Sources */,

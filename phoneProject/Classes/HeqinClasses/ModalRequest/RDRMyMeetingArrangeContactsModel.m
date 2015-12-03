@@ -10,4 +10,8 @@
 
 @implementation RDRMyMeetingArrangeContactsModel
 
+- (NSString *)requestModelURLPath{
+    return @"api/getcontacts";
+}
+
 @end

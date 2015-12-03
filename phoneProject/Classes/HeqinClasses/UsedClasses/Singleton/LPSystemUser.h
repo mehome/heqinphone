@@ -15,11 +15,23 @@
 @property (nonatomic, copy) NSString *loginUserId;              // 登录时使用的用户id
 @property (nonatomic, copy) NSString *loginUserPassword;        // 登录使用的密码
 
+// 会议
 @property (nonatomic, assign) BOOL hasGetMeetingData;               // 是否获取到会议数据
 @property (nonatomic, strong) NSArray *myScheduleMeetings;          // 我的会议-> 会议安排
 @property (nonatomic, strong) NSArray *myMeetingsRooms;             // 我的会议-> 我的会议室
 @property (nonatomic, strong) NSArray *myFavMeetings;               // 我的会议-> 我的收藏会议室
 @property (nonatomic, strong) NSArray *myHistoryMeetings;           // 我的会议-> 我的历史会议室
+
+// 当前用户的通讯录
+@property (nonatomic, assign) BOOL hasGetContacts;                  // 是否获取到通讯录及设备列表
+@property (nonatomic, strong) NSArray *contactsList;                // 通讯录中的联系人
+@property (nonatomic, strong) NSArray *devicesList;                 // 当前用户的设备列表
+
+// 当前用户收藏的会议室列表
+@property (nonatomic, assign) BOOL hasGetFavMeetingRooms;           // 是否获取到收藏的会议室列表
+@property (nonatomic, strong) NSArray *favMeetingRoomsList;         // 收藏的会议室列表
+
+
 
 + (instancetype)sharedUser;
 

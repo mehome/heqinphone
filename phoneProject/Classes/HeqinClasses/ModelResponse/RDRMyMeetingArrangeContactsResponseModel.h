@@ -10,4 +10,7 @@
 
 @interface RDRMyMeetingArrangeContactsResponseModel : RDRBaseResponseModel
 
+@property (nonatomic, strong) NSArray *contacts;        // 我的通讯录
+@property (nonatomic, strong) NSArray *devices;         // 我的终端列表
+
 @end

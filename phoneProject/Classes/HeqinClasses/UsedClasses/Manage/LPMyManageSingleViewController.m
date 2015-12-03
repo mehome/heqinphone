@@ -28,6 +28,7 @@
 }
 
 - (IBAction)settingBtnClicked:(id)sender {
+    
 }
 
 #pragma mark - UICompositeViewDelegate Functions

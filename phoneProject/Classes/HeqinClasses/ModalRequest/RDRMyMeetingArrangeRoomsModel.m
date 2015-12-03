@@ -10,4 +10,8 @@
 
 @implementation RDRMyMeetingArrangeRoomsModel
 
+- (NSString *)requestModelURLPath{
+    return @"api/getfav";
+}
+
 @end
