@@ -23,6 +23,13 @@
 - (instancetype)init {
     if (self = [super init]) {
         // 用一些初始化的操作
+        _myArrangeMeetings = @[];
+        _myMeetingsRooms = @[];
+        _myCollectionMeetings = @[];
+        _myHistoryMeetings = @[];
+        
+        _hasGetMeetingData = NO;
+        
         // 从本地读取属性值
 //        NSString *cachedSipStr = [[NSUserDefaults standardUserDefaults] stringForKey:@"sipDomain"];
 //        if (cachedSipStr.length > 0) {

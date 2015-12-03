@@ -17,4 +17,8 @@
 @property (nonatomic, copy) NSString *time;
 @property (nonatomic, copy) NSString *desc;
 
+@property (nonatomic, copy) NSString *hostPinStr;
+@property (nonatomic, copy) NSString *guestPinStr;
+@property (nonatomic, assign) NSInteger meetingStatus;  // 会议室状态值，锁定，开放，关闭
+
 @end

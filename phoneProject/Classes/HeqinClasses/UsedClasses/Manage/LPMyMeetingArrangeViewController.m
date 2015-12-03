@@ -10,6 +10,12 @@
 
 @interface LPMyMeetingArrangeViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *timeField;
+@property (weak, nonatomic) IBOutlet UITextField *joinerField;
+@property (weak, nonatomic) IBOutlet UITextField *terminalField;
+@property (weak, nonatomic) IBOutlet UITextField *roomsField;
+
+@property (weak, nonatomic) IBOutlet UISwitch *repeatSwitch;
 @end
 
 @implementation LPMyMeetingArrangeViewController
@@ -30,7 +36,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"ManageMeeting"
+        compositeDescription = [[UICompositeViewDescription alloc] init:@"MeetingArrange"
                                                                 content:@"LPMyMeetingArrangeViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
@@ -44,5 +50,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     return compositeDescription;
 }
 
+- (IBAction)phoneBookClicked:(id)sender {
+}
+
+- (IBAction)myTerminalsClicked:(id)sender {
+}
+
+- (IBAction)myRoomsClicked:(id)sender {
+}
+
+- (IBAction)confirmBtnClicked:(id)sender {
+    
+}
 
 @end

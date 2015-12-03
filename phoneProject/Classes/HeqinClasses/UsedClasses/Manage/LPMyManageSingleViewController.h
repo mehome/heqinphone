@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "UICompositeViewController.h"
+#import "RDRJoinMeetingModel.h"
 
 @interface LPMyManageSingleViewController : UIViewController <UICompositeViewDelegate>
+
+@property (nonatomic, strong) RDRJoinMeetingModel *model;
 
 @end

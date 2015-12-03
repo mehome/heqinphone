@@ -36,7 +36,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"ManageMeeting"
+        compositeDescription = [[UICompositeViewDescription alloc] init:@"SingleManage"
                                                                 content:@"LPMyManageSingleViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
@@ -48,6 +48,14 @@ static UICompositeViewDescription *compositeDescription = nil;
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
+}
+
+- (IBAction)lockBtnClicked:(id)sender {
+    NSLog(@"锁定按钮触发");
+}
+
+- (IBAction)setBtnClicked:(id)sender {
+    NSLog(@"设置按钮触发");
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import "LPMyMeetingManageViewController.h"
 #import "LPCellJoinManageTableViewCell.h"
+#import "PhoneMainView.h"
+#import "LPMyManageSingleViewController.h"
 
 @interface LPMyMeetingManageViewController () <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -96,11 +98,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     RDRJoinMeetingModel *curMeetingModel = [self.meetings objectAtIndex:indexPath.row];
-    
     NSLog(@"管理会议室进入current select model=%@", curMeetingModel);
-    //
     
-    return;
+    LPMyManageSingleViewController *curController = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription]], LPMyManageSingleViewController);
+    if (curController != nil) {
+        curController.model = curMeetingModel;
+    }
 }
 
 @end

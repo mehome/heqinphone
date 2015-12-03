@@ -11,4 +11,6 @@
 
 @interface LPSettingViewController : UIViewController <UICompositeViewDelegate>
 
+@property (nonatomic, assign) BOOL fromLoginInterface;      // 从登录界面过来
+
 @end

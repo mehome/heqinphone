@@ -10,6 +10,7 @@
 #import "PhoneMainView.h"
 #import "LPMyMeetingManageViewController.h"
 #import "LPMyMeetingArrangeViewController.h"
+#import "LPSettingViewController.h"
 
 @interface LPMyMeetingBarViewController ()
 
@@ -37,7 +38,7 @@
 
 // 设置
 - (IBAction)settingBtnClicked:(id)sender {
-    NSLog(@"MyMeeting setting.");
+    [[PhoneMainView instance] changeCurrentView:[LPSettingViewController compositeViewDescription]];
 }
 
 @end

@@ -15,6 +15,7 @@
 #import "RDRNetHelper.h"
 #import "RDRJoinMeetingModel.h"
 #import "LPCellJoinManageTableViewCell.h"
+#import "LPSystemUser.h"
 
 @interface LPJoinManageMeetingViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -33,9 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self searchMyMeetingInfo];
-    
-//    [self.meetingTable registerClass:[LPJoinManageCell class] forCellReuseIdentifier:@"joinmeetingcell"];
+    LPSystemUser *user = [LPSystemUser sharedUser];
+    if (user.hasGetMeetingData == NO) {
+        [self searchMyMeetingInfo];
+    }else {
+        [self.meetingTable reloadData];
+    }
 }
 
 #pragma mark - UICompositeViewDelegate Functions
@@ -59,19 +63,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)searchMyMeetingInfo {
-    // TODO 这里应该直接去取存储的UserId信息
-    LinphoneCore* lc = [LinphoneManager getLc];
-
-    
-    NSString *userId = [LPSystemUser sharedUser].loginUserId;
-    
-    
+//    LinphoneCore* lc = [LinphoneManager getLc];
     
     [self showLoadingView];
 
     __weak LPJoinManageMeetingViewController *weakSelf = self;
     RDRMyMeetingRequestModel *reqModel = [RDRMyMeetingRequestModel requestModel];
-    reqModel.uid = userId;
+    reqModel.uid = [LPSystemUser sharedUser].loginUserId;
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
     
@@ -85,7 +83,11 @@ static UICompositeViewDescription *compositeDescription = nil;
                        NSLog(@"请求Meeting Info, success, model=%@", model);
                        
                        // 解析model数据
-                       self.myMeetings = [model.rooms mutableCopy];
+                       [LPSystemUser sharedUser].hasGetMeetingData = YES;
+                       [LPSystemUser sharedUser].myScheduleMeetings = [model.schedule mutableCopy];
+                       [LPSystemUser sharedUser].myMeetingsRooms = [model.rooms mutableCopy];
+                       [LPSystemUser sharedUser].myFavMeetings = [model.fav mutableCopy];
+                       [LPSystemUser sharedUser].myHistoryMeetings = [model.history mutableCopy];
                        
                        [self.meetingTable reloadData];
                    }else {

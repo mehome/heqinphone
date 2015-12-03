@@ -18,7 +18,19 @@
     return mutDic;
 }
 
++ (NSValueTransformer *)scheduleJSONTransformer{
+    return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
+}
+
 + (NSValueTransformer *)roomsJSONTransformer{
+    return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
+}
+
++ (NSValueTransformer *)favJSONTransformer{
+    return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
+}
+
++ (NSValueTransformer *)historyJSONTransformer{
     return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
 }
 
