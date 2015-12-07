@@ -21,6 +21,8 @@
 #import "RDRArrangeRoomModel.h"
 #import "RDRMyMeetingArrangeRoomResponseModel.h"
 
+#import "RDRMyMeetingArrangeModel.h"
+#import "RDRMyMeetingArrangeResponseModel.h"
 
 @interface LPMyMeetingArrangeViewController ()
 
@@ -172,9 +174,33 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)confirmBtnClicked:(id)sender {
     [self showLoadingView];
-    
-    // 安排会议的代码调用
-    // TODO
-}
 
+    RDRMyMeetingArrangeModel *reqModel = [RDRMyMeetingArrangeModel requestModel];
+    reqModel.uid = [LPSystemUser sharedUser].loginUserId;
+    reqModel.pwd = [LPSystemUser sharedUser].loginUserPassword;
+    reqModel.time = self.timeField.text;
+    reqModel.repeat = self.repeatSwitch.on ? @"1":@"0";
+    reqModel.addr = self.roomsField.text;
+    reqModel.participants = @[];     // 添加与会者名单
+    // TODO
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    __weak LPMyMeetingArrangeViewController *weakSelf = self;
+    [RDRNetHelper POST:req responseModelClass:[RDRMyMeetingArrangeResponseModel class] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [weakSelf hideHudAndIndicatorView];
+        RDRMyMeetingArrangeResponseModel *model = responseObject;
+
+        if ([model codeCheckSuccess] == YES) {
+            NSLog(@"安排会议室success, model=%@", model);
+            [self showToastWithMessage:@"安排会议成功"];
+        }else {
+            NSLog(@"安排会议室请求出错, model=%@, msg=%@", model, model.msg);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [weakSelf hideHudAndIndicatorView];
+            
+        //请求出错
+        NSLog(@"安排会议室出错, %s, error=%@", __FUNCTION__, error);
+    }];
+}
 @end
