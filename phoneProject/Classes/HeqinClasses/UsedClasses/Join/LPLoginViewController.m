@@ -15,7 +15,6 @@
 #import "LPJoinManageMeetingViewController.h"
 
 @interface LPLoginViewController () <UITextFieldDelegate> {
-    LinphoneCoreSettingsStore *settingsStore;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
@@ -36,14 +35,11 @@
     
     // 控制返回按钮的显示和隐藏
 //    self.backBtn.hidden = YES;
-    settingsStore = [[LinphoneCoreSettingsStore alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [settingsStore transformLinphoneCoreToKeys]; // Sync settings with linphone core settings
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(registrationUpdateEvent:)
                                                  name:kLinphoneRegistrationUpdate
@@ -81,10 +77,10 @@
             [LPSystemUser sharedUser].hasLogin = YES;
             
             // 取出其中的值
-            [settingsStore transformLinphoneCoreToKeys];
+            [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
             
-            NSString *nameStr = [settingsStore stringForKey:@"username_preference"];
-            NSString *idStr = [settingsStore stringForKey:@"userid_preference"];
+            NSString *nameStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+            NSString *idStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
             
             [LPSystemUser sharedUser].loginUserId = idStr;
             [LPSystemUser sharedUser].loginUserName = nameStr;
@@ -244,16 +240,8 @@ static UICompositeViewDescription *compositeDescription = nil;
             [settingsStore setObject:password forKey:@"password_preference"];
             [settingsStore setObject:domain forKey:@"domain_preference"];
             [settingsStore setObject:transport forKey:@"transport_preference"];
-
-//            [settingsStore setString:username forKey:@"username_preference"];
             
             [settingsStore synchronize];
-
-//            BOOL success = [self addProxyConfig:username password:password domain:domain withTransport:transport];
-//            if( !success ){
-//                [self hideHudAndIndicatorView];
-//            }
-            
         }
     }
 }

@@ -26,7 +26,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+    if ([LPSystemUser sharedUser].hasGetMeetingData == NO) {
+        [self searchMyMeetingInfo];
+    }else {
+        [self.searchTable reloadData];
+    }
 }
 
 - (void)searchMyMeetingInfo {
@@ -46,7 +55,6 @@
         }
     }];
 }
-
 
 #pragma mark - UICompositeViewDelegate Functions
 

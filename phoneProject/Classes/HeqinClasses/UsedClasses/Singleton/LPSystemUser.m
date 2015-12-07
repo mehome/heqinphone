@@ -18,7 +18,7 @@
 
 @interface LPSystemUser ()
 
-@property (nonatomic, assign) BOOL missedFilter;
+@property (nonatomic, assign) BOOL missedFilter;        // 为了保留原始的Linphone代码而兼容，原代码中有选择是显示全部还是显示未接电话
 
 @end
 
@@ -45,6 +45,9 @@
         
         _missedFilter = NO;         // 用来做为是否只显示错过的电话，这里直接设置为ＮＯ， 表示显示全部电话
         _callLogs = [[NSMutableArray alloc] init];
+        
+        _settingsStore = [[LinphoneCoreSettingsStore alloc] init];
+        [_settingsStore transformLinphoneCoreToKeys];
         
         [self loadHistoryData];
         

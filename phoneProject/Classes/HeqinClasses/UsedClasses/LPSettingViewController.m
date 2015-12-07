@@ -105,6 +105,12 @@
             
             // 切回到登录首页
             [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+            
+            
+            linphone_core_clear_proxy_config(lc);
+            linphone_core_clear_all_auth_info(lc);
+            [settingsStore transformLinphoneCoreToKeys];
+
         }
     }
 }
