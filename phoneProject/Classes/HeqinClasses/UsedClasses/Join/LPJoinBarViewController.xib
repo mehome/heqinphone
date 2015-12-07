@@ -16,30 +16,39 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoW-mB-2v0">
-                    <rect key="frame" x="107" y="0.0" width="107" height="55"/>
+                    <rect key="frame" x="80" y="0.0" width="80" height="55"/>
                     <animations/>
                     <color key="backgroundColor" red="0.075298108552631582" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="JoinManage"/>
+                    <state key="normal" title="管理会议"/>
                     <connections>
                         <action selector="joinManageMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="uSf-5d-obb"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y70-Ww-RBd">
-                    <rect key="frame" x="213" y="0.0" width="107" height="55"/>
+                    <rect key="frame" x="240" y="0.0" width="80" height="55"/>
                     <animations/>
                     <color key="backgroundColor" red="1" green="0.10734477796052622" blue="0.013980263157894737" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Setting"/>
+                    <state key="normal" title="设置"/>
                     <connections>
                         <action selector="settingBtnClicked:" destination="-1" eventType="touchUpInside" id="6dt-KW-riP"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTs-VH-hs5">
-                    <rect key="frame" x="0.0" y="0.0" width="107" height="55"/>
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="55"/>
                     <animations/>
                     <color key="backgroundColor" red="0.075298108552631582" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="JoinMetting"/>
+                    <state key="normal" title="参加会议"/>
                     <connections>
                         <action selector="joinMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="cyG-dZ-c9x"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La9-Sr-fdd" userLabel="ArrangeManage">
+                    <rect key="frame" x="160" y="0.0" width="80" height="55"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.83356462450000002" green="0.75043688320000002" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="安排会议"/>
+                    <connections>
+                        <action selector="arrangeBtnClicked:" destination="-1" eventType="touchUpInside" id="f41-DP-gTD"/>
                     </connections>
                 </button>
             </subviews>
@@ -52,14 +61,24 @@
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Sx9-yt-R4V"/>
                 <constraint firstItem="qTs-VH-hs5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VOb-Y4-6TX"/>
                 <constraint firstAttribute="trailing" secondItem="y70-Ww-RBd" secondAttribute="trailing" id="X2e-Ol-HYb"/>
+                <constraint firstItem="La9-Sr-fdd" firstAttribute="width" secondItem="LoW-mB-2v0" secondAttribute="width" id="YiL-iB-VZ7"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="leading" secondItem="LoW-mB-2v0" secondAttribute="trailing" id="aZ9-wB-JiF"/>
                 <constraint firstAttribute="bottom" secondItem="LoW-mB-2v0" secondAttribute="bottom" id="eA7-lE-5Ye"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="width" secondItem="qTs-VH-hs5" secondAttribute="width" id="eMd-0f-jgE"/>
+                <constraint firstItem="La9-Sr-fdd" firstAttribute="centerY" secondItem="LoW-mB-2v0" secondAttribute="centerY" id="jnp-WC-2LX"/>
                 <constraint firstItem="qTs-VH-hs5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mSt-58-6G6"/>
+                <constraint firstItem="y70-Ww-RBd" firstAttribute="leading" secondItem="La9-Sr-fdd" secondAttribute="trailing" id="nWq-lX-A2G"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="leading" secondItem="qTs-VH-hs5" secondAttribute="trailing" id="pMF-vT-zdr"/>
+                <constraint firstItem="La9-Sr-fdd" firstAttribute="leading" secondItem="LoW-mB-2v0" secondAttribute="trailing" id="rRk-0b-oOy"/>
+                <constraint firstItem="La9-Sr-fdd" firstAttribute="height" secondItem="LoW-mB-2v0" secondAttribute="height" id="whL-oN-ezR"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yKh-hp-2yi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="aZ9-wB-JiF"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="361" y="469.5"/>
         </view>
     </objects>

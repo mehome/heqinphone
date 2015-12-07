@@ -10,6 +10,8 @@
 #import "LPCellJoinManageTableViewCell.h"
 #import "PhoneMainView.h"
 #import "LPMyManageSingleViewController.h"
+#import "UIViewController+RDRTipAndAlert.h"
+#import "LPSystemUser.h"
 
 @interface LPMyMeetingManageViewController () <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -17,16 +19,34 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UITableView *searchTable;
 
-@property (nonatomic, strong) NSArray *meetings;
-
 @end
 
 @implementation LPMyMeetingManageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    
 }
+
+- (void)searchMyMeetingInfo {
+    
+    [self showLoadingView];
+    
+    __weak LPMyMeetingManageViewController *weakSelf = self;
+    [LPSystemUser requesteFav:^(BOOL success, NSArray *sheduleMeetings, NSArray *rooms, NSArray *favMeetings, NSString *tipStr) {
+        [weakSelf hideHudAndIndicatorView];
+        
+        if (success == YES) {
+            // 取数据成功
+            [weakSelf.searchTable reloadData];
+        }else {
+            // 显示错误提示信息
+            [weakSelf showToastWithMessage:tipStr];
+        }
+    }];
+}
+
 
 #pragma mark - UICompositeViewDelegate Functions
 
@@ -38,7 +58,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                 content:@"LPMyMeetingManageViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
-                                                                 tabBar:@"LPMyMeetingBarViewController"
+                                                                 tabBar:@"LPJoinBarViewController"
                                                           tabBarEnabled:true
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
@@ -51,18 +71,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark UITableView delegate & datasource
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0) {
-    //    if (IS_IOS8_OR_ABOVE) {
-    //        return UITableViewAutomaticDimension;
-    //    }
-    
     return 130;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    if (IS_IOS8_OR_ABOVE) {
-    //        return UITableViewAutomaticDimension;
-    //    }
-    
     return 130.0;
 }
 
@@ -75,20 +87,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.meetings.count;
+    return [LPSystemUser sharedUser].myMeetingsRooms.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     LPCellJoinManageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"joinmeetingcell"];
     if (cell == nil) {
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"LPCellJoinManageTableViewCell" owner:self options:nil];
         cell = [arr  objectAtIndex:0];
     }
     
-    RDRJoinMeetingModel *curMeetingModel = [self.meetings objectAtIndex:indexPath.row];
-    
-    // 装载数据
+    RDRJoinMeetingModel *curMeetingModel = [[LPSystemUser sharedUser].myMeetingsRooms objectAtIndex:indexPath.row];
     [cell updateWithObject:curMeetingModel];
     
     return cell;
@@ -97,10 +106,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    RDRJoinMeetingModel *curMeetingModel = [self.meetings objectAtIndex:indexPath.row];
+    RDRJoinMeetingModel *curMeetingModel = [[LPSystemUser sharedUser].myMeetingsRooms objectAtIndex:indexPath.row];
     NSLog(@"管理会议室进入current select model=%@", curMeetingModel);
     
-    LPMyManageSingleViewController *curController = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription]], LPMyManageSingleViewController);
+    LPMyManageSingleViewController *curController = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription] push:YES], LPMyManageSingleViewController);
     if (curController != nil) {
         curController.model = curMeetingModel;
     }

@@ -745,8 +745,6 @@
 		D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F83F8D15822ABD00336684 /* PhoneMainView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3F9A9DB15AEEB940045320F /* history_notification.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F9A9DA15AEEB940045320F /* history_notification.png */; };
 		D3F9A9EE15AF277E0045320F /* UACellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F9A9ED15AF277D0045320F /* UACellBackgroundView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		E10DE7261BFA1722002D0FBB /* LPMyMeetingBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7251BFA1722002D0FBB /* LPMyMeetingBarViewController.m */; };
-		E10DE7281BFA174E002D0FBB /* LPMyMeetingBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7271BFA174E002D0FBB /* LPMyMeetingBarViewController.xib */; };
 		E10DE72C1BFA1945002D0FBB /* LPMyMeetingManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE72A1BFA1945002D0FBB /* LPMyMeetingManageViewController.m */; };
 		E10DE72D1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE72B1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib */; };
 		E10DE7311BFA1975002D0FBB /* LPMyMeetingArrangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE72F1BFA1975002D0FBB /* LPMyMeetingArrangeViewController.m */; };
@@ -1749,9 +1747,6 @@
 		D3F9A9DA15AEEB940045320F /* history_notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = history_notification.png; path = Resources/history_notification.png; sourceTree = "<group>"; };
 		D3F9A9EC15AF277D0045320F /* UACellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UACellBackgroundView.h; path = Utils/UACellBackgroundView/UACellBackgroundView.h; sourceTree = "<group>"; };
 		D3F9A9ED15AF277D0045320F /* UACellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UACellBackgroundView.m; path = Utils/UACellBackgroundView/UACellBackgroundView.m; sourceTree = "<group>"; };
-		E10DE7241BFA1722002D0FBB /* LPMyMeetingBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMyMeetingBarViewController.h; sourceTree = "<group>"; };
-		E10DE7251BFA1722002D0FBB /* LPMyMeetingBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMyMeetingBarViewController.m; sourceTree = "<group>"; };
-		E10DE7271BFA174E002D0FBB /* LPMyMeetingBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMyMeetingBarViewController.xib; sourceTree = "<group>"; };
 		E10DE7291BFA1945002D0FBB /* LPMyMeetingManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMyMeetingManageViewController.h; sourceTree = "<group>"; };
 		E10DE72A1BFA1945002D0FBB /* LPMyMeetingManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMyMeetingManageViewController.m; sourceTree = "<group>"; };
 		E10DE72B1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMyMeetingManageViewController.xib; sourceTree = "<group>"; };
@@ -2465,9 +2460,6 @@
 		138951521BEDDC60003DD7A0 /* Manage */ = {
 			isa = PBXGroup;
 			children = (
-				E10DE7241BFA1722002D0FBB /* LPMyMeetingBarViewController.h */,
-				E10DE7251BFA1722002D0FBB /* LPMyMeetingBarViewController.m */,
-				E10DE7271BFA174E002D0FBB /* LPMyMeetingBarViewController.xib */,
 				E10DE7291BFA1945002D0FBB /* LPMyMeetingManageViewController.h */,
 				E10DE72A1BFA1945002D0FBB /* LPMyMeetingManageViewController.m */,
 				E10DE72B1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib */,
@@ -3857,7 +3849,6 @@
 				D3C31A8415BD8DED008ED271 /* video_on_disabled_landscape.png in Resources */,
 				D3C31A8615BD8DED008ED271 /* video_on_over_landscape.png in Resources */,
 				D3A74E5915C68162001500B9 /* toolsbar_background.png in Resources */,
-				E10DE7281BFA174E002D0FBB /* LPMyMeetingBarViewController.xib in Resources */,
 				D38187FC15FE356100C3EDCA /* UIMainBar~ipad.xib in Resources */,
 				D3A74EB215C69392001500B9 /* add_call_default~ipad.png in Resources */,
 				D3A74EB415C69392001500B9 /* add_call_disabled~ipad.png in Resources */,
@@ -4161,7 +4152,6 @@
 				22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */,
 				22E0A822111C44E100B04932 /* AboutViewController.m in Sources */,
 				631C4FB119D2A8F2004BFE77 /* UIDigitButtonLongPlus.m in Sources */,
-				E10DE7261BFA1722002D0FBB /* LPMyMeetingBarViewController.m in Sources */,
 				1389512B1BECB206003DD7A0 /* RDRSystemConfigResponseModel.m in Sources */,
 				2248E90E12F7E4CF00220D9C /* UIDigitButton.m in Sources */,
 				E140A6BF1C10A192000E7DD0 /* RDRDeviceModel.m in Sources */,

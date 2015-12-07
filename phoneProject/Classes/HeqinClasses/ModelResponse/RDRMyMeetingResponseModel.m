@@ -30,8 +30,4 @@
     return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
 }
 
-+ (NSValueTransformer *)historyJSONTransformer{
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRJoinMeetingModel class]];
-}
-
 @end

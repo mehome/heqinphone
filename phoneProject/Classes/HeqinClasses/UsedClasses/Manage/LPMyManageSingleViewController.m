@@ -41,7 +41,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                 content:@"LPMyManageSingleViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
-                                                                 tabBar:@"LPMyMeetingBarViewController"
+                                                                 tabBar:@"LPJoinBarViewController"
                                                           tabBarEnabled:true
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]

@@ -14,10 +14,9 @@
 #import "LPLoginViewController.h"
 #import "LPSettingViewController.h"
 #import "LPMyMeetingManageViewController.h"
+#import "LPMyMeetingArrangeViewController.h"
 
 @interface LPJoinBarViewController ()
-
-@property (nonatomic, assign) BOOL hasEnterManagerMeeting;
 
 @end
 
@@ -32,29 +31,41 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+// 参加会议
 - (IBAction)joinMeetingBtnClicked:(id)sender {
-    // 切换到首页
-    [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+    // 如果未登录，则显示第一个界面
+    if ([LPSystemUser sharedUser].hasLogin == YES) {
+        // 如果已登录，则显示所有会议界面
+        [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
+    }else {
+        // 未登录， 进入首界面
+        [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+    }
 }
 
+// 管理我的会议
 - (IBAction)joinManageMeetingBtnClicked:(id)sender {
     // 切换到首页的会议
     // 判断用户是否登录，未登录，则弹出登录界面
     if ([LPSystemUser sharedUser].hasLogin == NO) {
-        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
     }else {
-        // 记录这次点击， 下次点击则切换到管理会议室，安排会议室，以及设置界面
-        if (self.hasEnterManagerMeeting == YES) {
-            // 进入到管理界面
-            [[PhoneMainView instance] changeCurrentView:[LPMyMeetingManageViewController compositeViewDescription]];
-        }else {
-            [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
-        }
-        
-        self.hasEnterManagerMeeting = YES;
+        // 进入到管理我的会议界面
+        [[PhoneMainView instance] changeCurrentView:[LPMyMeetingManageViewController compositeViewDescription]];
     }
 }
 
+// 安排会议
+- (IBAction)arrangeBtnClicked:(id)sender {
+    if ([LPSystemUser sharedUser].hasLogin == NO) {
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
+    }else {
+        // 进入到会议安排界面
+        [[PhoneMainView instance] changeCurrentView:[LPMyMeetingArrangeViewController compositeViewDescription]];
+    }
+}
+
+// 设置
 - (IBAction)settingBtnClicked:(id)sender {
     [[PhoneMainView instance] changeCurrentView:[LPSettingViewController compositeViewDescription]];
 }

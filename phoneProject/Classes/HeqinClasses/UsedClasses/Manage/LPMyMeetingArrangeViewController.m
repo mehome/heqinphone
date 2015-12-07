@@ -150,7 +150,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                 content:@"LPMyMeetingArrangeViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
-                                                                 tabBar:@"LPMyMeetingBarViewController"
+                                                                 tabBar:@"LPJoinBarViewController"
                                                           tabBarEnabled:true
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
@@ -172,12 +172,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)confirmBtnClicked:(id)sender {
     [self showLoadingView];
-
     
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper POST:<#(RDRRequest *)#> responseModelClass:<#(__unsafe_unretained Class)#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
-
+    // 安排会议的代码调用
+    // TODO
 }
 
 @end

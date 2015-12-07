@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NSArray *rooms, NSArray *favMeetings, NSString *tipStr);
+
 @interface LPSystemUser : NSObject
 
 @property (nonatomic, assign) BOOL hasLogin;
@@ -20,7 +22,6 @@
 @property (nonatomic, strong) NSArray *myScheduleMeetings;          // 我的会议-> 会议安排
 @property (nonatomic, strong) NSArray *myMeetingsRooms;             // 我的会议-> 我的会议室
 @property (nonatomic, strong) NSArray *myFavMeetings;               // 我的会议-> 我的收藏会议室
-@property (nonatomic, strong) NSArray *myHistoryMeetings;           // 我的会议-> 我的历史会议室
 
 // 当前用户的通讯录
 @property (nonatomic, assign) BOOL hasGetContacts;                  // 是否获取到通讯录及设备列表
@@ -31,8 +32,11 @@
 @property (nonatomic, assign) BOOL hasGetFavMeetingRooms;           // 是否获取到收藏的会议室列表
 @property (nonatomic, strong) NSArray *favMeetingRoomsList;         // 收藏的会议室列表
 
-
+@property (nonatomic, strong) NSMutableArray *callLogs;             // 呼号历史，用来做为历史通话
 
 + (instancetype)sharedUser;
+
+
++ (void)requesteFav:(BlockRequestFavMeetings)finishBlock;
 
 @end

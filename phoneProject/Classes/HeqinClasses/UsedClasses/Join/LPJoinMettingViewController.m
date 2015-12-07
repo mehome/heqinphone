@@ -13,9 +13,12 @@
 #import "PhoneMainView.h"
 #import "LPSystemUser.h"
 #import "UIViewController+RDRTipAndAlert.h"
+#import "UIHistoryCell.h"
+#import "UACellBackgroundView.h"
+#import "UILinphone.h"
+#import "DialerViewController.h"
 
 @interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
-    LinphoneCoreSettingsStore *settingsStore;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *historyTable;
@@ -33,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    settingsStore = [[LinphoneCoreSettingsStore alloc] init];
+    [LPSystemUser sharedUser];      // 进行初始化，以防后面没有进行初始化
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapRecognizered:)]];
     
@@ -111,9 +114,9 @@
                 
                 [LPSystemUser sharedUser].hasLogin = YES;                
                 
+                LinphoneCoreSettingsStore *settingsStore = [[LinphoneCoreSettingsStore alloc] init];
                 // 取出其中的值
                 [settingsStore transformLinphoneCoreToKeys];
-                
                 
                 NSString *nameStr = [settingsStore stringForKey:@"username_preference"];
                 NSString *idStr = [settingsStore stringForKey:@"userid_preference"];
@@ -213,20 +216,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else if ([btnTitle isEqualToString:@"退出"]) {
         NSLog(@"ask for login out");
-        // 先置数据为空
-        // 需要把settingsStore中的数据进行清空
-//        [settingsStore setObject:username forKey:@"username_preference"];
-//        [settingsStore setObject:userIdStr forKey:@"userid_preference"];
-//        [settingsStore setObject:password forKey:@"password_preference"];
-//        [settingsStore setObject:domain forKey:@"domain_preference"];
-//        [settingsStore setObject:transport forKey:@"transport_preference"];
-        // 然后再执行
-//        [settingsStore synchronize];
-        
-        // 另外，还应该让其暂时不去进行登录尝试，否则会一直尝试中
-        
-        // 再进行退出
-//        [[LinphoneManager instance] resetLinphoneCore];
     }
 }
 
@@ -234,6 +223,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
 
     [LPSystemSetting sharedSetting].joinerName = self.joinNameField.text;
+    
+    LinphoneCore *lc=[LinphoneManager getLc];
+    LinphoneAddress *parsed = linphone_core_get_primary_contact_parsed(lc);
+    if(parsed != NULL) {
+        linphone_address_set_display_name(parsed,[self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    }
 }
 
 - (IBAction)joinBtnClicked:(id)sender {
@@ -244,52 +239,51 @@ static UICompositeViewDescription *compositeDescription = nil;
     }else {
         [self resignKeyboard];
         
-        LPMeetingRoom *room = [[LPMeetingRoom alloc] init];
-        room.meetingIdStr = self.joinMeetingNumberField.text;
-        room.meetingName = @"销售1部";
-        room.meetingInLastDateStr = [[LPSystemSetting sharedSetting].unifyDateformatter stringFromDate:[NSDate date]];
+        // 取设置的名字
+        NSString *address = self.joinMeetingNumberField.text;
+        NSString *displayName = self.joinNameField.text.length > 0 ? self.joinNameField.text : nil;
         
-        [[LPSystemSetting sharedSetting].historyMeetings addObject:room];
-        
-        // 进入到会议中
-        DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-        if (controller != nil) {
-            controller.addressField.text = self.joinMeetingNumberField.text;
-            controller.transferMode = YES;
-            
-            [controller.callButton touchUp:nil];
+        [self joinMeeting:address withDisplayName:displayName];
+    }
+}
 
-            NSLog(@"heqin will dispatch after");
-        }
+- (void)joinMeeting:(NSString *)address withDisplayName:(NSString *)displayName {
+    if (address.length == 0) {
+        [self showToastWithMessage:@"无效的地址，请重新输入"];
+        return;
+    }
+    
+    // 进入到会议中
+    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+    if (controller != nil) {
+        NSLog(@"进入会议中, addres=%@, displayName=%@", address, displayName);
+        [controller call:address displayName:displayName];
     }
 }
 
 #pragma mark UITabelView delegate & datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectio {
-    return [LPSystemSetting sharedSetting].historyMeetings.count;
+//    return [LPSystemSetting sharedSetting].historyMeetings.count;
+    
+    return [LPSystemUser sharedUser].callLogs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *kCellId = @"UIJoinHistoryCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
+    static NSString *kCellId = @"UIHistoryCell";
+    UIHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellId];
+        cell = [[UIHistoryCell alloc] initWithIdentifier:kCellId];
+        // Background View
+        UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
+        cell.selectedBackgroundView = selectedBackgroundView;
+        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
     }
     
-    LPMeetingRoom *curRoom = nil;
-    if ([LPSystemSetting sharedSetting].historyMeetings.count <= indexPath.row) {
-        curRoom = [[LPMeetingRoom alloc] init];
-        curRoom.meetingName = @"空";
-        curRoom.meetingIdStr = @"0";
-        curRoom.meetingInLastDateStr = [NSString stringWithFormat:@"%@", [NSDate date]];
-    }else {
-        curRoom = [[LPSystemSetting sharedSetting].historyMeetings objectAtIndex:indexPath.row];
-    }
-    
-    cell.textLabel.text = curRoom.meetingName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", curRoom.meetingInLastDateStr];
+    LinphoneCallLog *log = [[ [LPSystemUser sharedUser].callLogs objectAtIndex:[indexPath row]] pointerValue];
+    [cell setCallLog:log];
     
     return cell;
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -301,10 +295,40 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([LPSystemSetting sharedSetting].historyMeetings.count > 0) {
-        LPMeetingRoom *selectedRoom = [[LPSystemSetting sharedSetting].historyMeetings objectAtIndex:indexPath.row];
-        NSLog(@"selectedRoom.id=%@", selectedRoom.meetingIdStr);
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    LinphoneCallLog *callLog = [[ [LPSystemUser sharedUser].callLogs objectAtIndex:[indexPath row]] pointerValue];
+    LinphoneAddress* addr;
+    if (linphone_call_log_get_dir(callLog) == LinphoneCallIncoming) {
+        addr = linphone_call_log_get_from(callLog);
+    } else {
+        addr = linphone_call_log_get_to(callLog);
     }
+    
+    NSString* displayName = nil;
+    NSString* address = nil;
+    if(addr != NULL) {
+        BOOL useLinphoneAddress = true;
+        // contact name
+        char* lAddress = linphone_address_as_string_uri_only(addr);
+        if(lAddress) {
+            address = [NSString stringWithUTF8String:lAddress];
+            NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            if(contact) {
+                displayName = [FastAddressBook getContactDisplayName:contact];
+                useLinphoneAddress = false;
+            }
+            ms_free(lAddress);
+        }
+        if(useLinphoneAddress) {
+            const char* lDisplayName = linphone_address_get_display_name(addr);
+            if (lDisplayName)
+                displayName = [NSString stringWithUTF8String:lDisplayName];
+        }
+    }
+    
+    [self joinMeeting:address withDisplayName:displayName];
 }
 
 @end

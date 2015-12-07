@@ -13,6 +13,5 @@
 @property (nonatomic, strong) NSArray *schedule;        // 我的会议安排
 @property (nonatomic, strong) NSArray *rooms;           // 我的会议室
 @property (nonatomic, strong) NSArray *fav;             // 我的收藏
-@property (nonatomic, strong) NSArray *history;         // 我的历史会议
 
 @end
