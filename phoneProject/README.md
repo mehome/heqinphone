@@ -74,6 +74,27 @@ Linphone for iPhone depends on liblinphone SDK. This SDK is generated from makef
 
         make -f Makefile.xcode4.4
 
+
+
+/******************************************/
+1. linphoneManager.m文件1490行处设置定时器时间， mIterateTimer， 为每个循环周期时间
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************/
+
+
+
 * ZRTP support
 
  You can disable ZRTP support with:

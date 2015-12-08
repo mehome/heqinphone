@@ -46,20 +46,39 @@
     [self initControls];
 }
 
-- (void)initControls {
-    if ([LPSystemUser sharedUser].hasLogin == YES) {
-        self.nameField.text = [LPSystemUser sharedUser].loginUserName;
-        self.accountField.text = @"个人帐号";
-        self.companyField.text = @"企业信息";
-        
-        self.logoutBtn.enabled = YES;
-    }else {
-        self.nameField.text = @"未登录";
-        self.accountField.text = @"";
-        self.companyField.text = @"";
-        
+- (void)initDynamicInfos {
+    self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+    self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    
+    self.companyField.text = @"企业信息";
+    self.logoutBtn.enabled = YES;
+
+    LinphoneCore* lc = [LinphoneManager getLc];
+    if (linphone_core_get_default_proxy_config(lc) == NULL ) {
+        // 当前已经注销
         self.logoutBtn.enabled = NO;
+    }else {
+        // 当前已经登录
+        self.logoutBtn.enabled = YES;
     }
+    
+//    if ([LPSystemUser sharedUser].hasLogin == YES) {
+//        self.nameField.text = [LPSystemUser sharedUser].loginUserName;
+//        self.accountField.text = @"个人帐号";
+//        self.companyField.text = @"企业信息";
+//        
+//        self.logoutBtn.enabled = YES;
+//    }else {
+//        self.nameField.text = @"未登录";
+//        self.accountField.text = @"";
+//        self.companyField.text = @"";
+//        
+//        self.logoutBtn.enabled = NO;
+//    }
+}
+
+- (void)initControls {
+    [self initDynamicInfos];
     
     self.defaultSilentVoiceSwitch.on = [LPSystemSetting sharedSetting].defaultSilence;
     self.defaultSilentMovieSwitch.on = [LPSystemSetting sharedSetting].defaultNoVideo;
@@ -97,22 +116,53 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {
     if (alertView.tag == kLogoutAlertTag) {
         if (buttonIndex != alertView.cancelButtonIndex) {
-            LinphoneCore* lc = [LinphoneManager getLc];
-            linphone_core_clear_proxy_config(lc);
-            linphone_core_clear_all_auth_info(lc);
+            // 执行注销操作
+            [self clearAccountFromSetting];
             
             [LPSystemUser sharedUser].hasLogin = NO;
             
+            // 刷新当前界面顶部的用户信息即可
+            [self initDynamicInfos];
+            
             // 切回到登录首页
-            [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
-            
-            
-            linphone_core_clear_proxy_config(lc);
-            linphone_core_clear_all_auth_info(lc);
-            [settingsStore transformLinphoneCoreToKeys];
-
+//            [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
         }
     }
+}
+
+// 从之前代码中拉出来的，点击Clear Account后的操作
+- (void)clearAccountFromSetting {
+    LinphoneCore* lc = [LinphoneManager getLc];
+    linphone_core_clear_proxy_config(lc);
+    linphone_core_clear_all_auth_info(lc);
+    
+    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+}
+
+// 重置帐号信息，相当于是退出操作
+- (void)resetAccount {
+    [self clearProxyConfig];
+    
+    [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"pushnotification_preference"];
+    
+    LinphoneCore *lc = [LinphoneManager getLc];
+    LCSipTransports transportValue={5060,5060,-1,-1};
+    
+    if (linphone_core_set_sip_transports(lc, &transportValue)) {
+        [LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
+    }
+    
+    [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"sharing_server_preference"];
+    [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"ice_preference"];
+    [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"stun_preference"];
+    
+    linphone_core_set_stun_server(lc, NULL);
+    linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
+}
+
+- (void)clearProxyConfig {
+    linphone_core_clear_proxy_config([LinphoneManager getLc]);
+    linphone_core_clear_all_auth_info([LinphoneManager getLc]);
 }
 
 // 静音

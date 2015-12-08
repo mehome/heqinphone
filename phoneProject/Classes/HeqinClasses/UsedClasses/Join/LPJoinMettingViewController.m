@@ -114,12 +114,9 @@
                 
                 [LPSystemUser sharedUser].hasLogin = YES;                
                 
-                LinphoneCoreSettingsStore *settingsStore = [[LinphoneCoreSettingsStore alloc] init];
-                // 取出其中的值
-                [settingsStore transformLinphoneCoreToKeys];
-                
-                NSString *nameStr = [settingsStore stringForKey:@"username_preference"];
-                NSString *idStr = [settingsStore stringForKey:@"userid_preference"];
+                // 取出存储在settingsStore中的用户名和用户id信息
+                NSString *nameStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+                NSString *idStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
                 
                 [LPSystemUser sharedUser].loginUserId = idStr;
                 [LPSystemUser sharedUser].loginUserName = nameStr;
