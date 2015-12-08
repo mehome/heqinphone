@@ -59,6 +59,12 @@
                                              selector:@selector(globalStateUpdate:)
                                                  name:kLinphoneGlobalStateUpdate
                                                object:nil];
+    
+    // 刷新控件的显示
+    [self updateControls];
+    
+    // 每次回到这个界面进行刷新， 因为历史会议数据可能已经更新
+    [self.historyTable reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -70,9 +76,6 @@
     [[NSNotificationCenter defaultCenter]	removeObserver:self
                                                     name:kLinphoneGlobalStateUpdate
                                                   object:nil];
-    
-    // 每次回到这个界面进行刷新， 因为历史会议数据可能已经更新
-    [self.historyTable reloadData];
 }
 
 - (void)registrationUpdate: (NSNotification*) notif {
@@ -83,6 +86,27 @@
 
 - (void) globalStateUpdate:(NSNotification*) notif {
     [self registrationUpdate:notif];
+}
+
+- (void)updateControls {
+    LinphoneCore* lc = [LinphoneManager getLc];
+    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+        // 当前处于登出状态
+        self.joinNameField.text = @"登出";
+        self.joinMeetingNumberField.text = @"会议号";
+        
+        self.loginTipLabel.text = @"已登出";
+        
+        self.loginBtn.enabled = YES;
+    }else {
+        // 当前已处于登录状态
+        [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+        
+        self.loginTipLabel.text = @"已登录";
+
+        self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+        self.loginBtn.enabled = NO;
+    }
 }
 
 - (void)proxyConfigUpdate: (LinphoneProxyConfig*) config {
@@ -107,10 +131,12 @@
         switch (state) {
             case LinphoneRegistrationOk: {
                 message = @"已注册";
-                self.loginBtn.enabled = YES;
-                [self.loginBtn setTitle:@"退出" forState:UIControlStateNormal];
+                self.loginBtn.enabled = NO;
                 
                 self.joinBtn.enabled = YES;
+                
+                // 把值同步进去
+                [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
                 [LPSystemUser sharedUser].hasLogin = YES;                
                 
@@ -120,22 +146,24 @@
                 
                 [LPSystemUser sharedUser].loginUserId = idStr;
                 [LPSystemUser sharedUser].loginUserName = nameStr;
+                [LPSystemUser sharedUser].loginUserPassword = [[LPSystemUser sharedUser].settingsStore stringForKey:@"password_preference"];
+                
                 break;
             }
             case LinphoneRegistrationNone:
             case LinphoneRegistrationCleared:
                 self.loginBtn.enabled = YES;
-                [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
                 message = @"未注册";
                 
                 [LPSystemUser sharedUser].hasLogin = NO;
                 
                 self.joinBtn.enabled = NO;
 
+                NSLog(@"登出成功");
+                
                 break;
             case LinphoneRegistrationFailed:
                 self.loginBtn.enabled = YES;
-                [self.loginBtn setTitle:@"登录." forState:UIControlStateNormal];
                 message = @"注册失败";
                 
                 self.joinBtn.enabled = NO;
@@ -144,7 +172,6 @@
                 break;
             case LinphoneRegistrationProgress:
                 self.loginBtn.enabled = NO;
-                [self.loginBtn setTitle:@"登录中" forState:UIControlStateNormal];
                 message = @"注册中";
                 
                 self.joinBtn.enabled = NO;

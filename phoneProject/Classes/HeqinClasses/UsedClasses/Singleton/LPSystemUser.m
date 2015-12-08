@@ -89,7 +89,7 @@
     }else {
         // 未取到数据， 进行请求
         RDRMyMeetingRequestModel *reqModel = [RDRMyMeetingRequestModel requestModel];
-        reqModel.uid = [LPSystemUser sharedUser].loginUserId;
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         

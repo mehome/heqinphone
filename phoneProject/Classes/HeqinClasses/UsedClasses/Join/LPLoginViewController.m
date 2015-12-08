@@ -40,6 +40,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    //
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(registrationUpdateEvent:)
                                                  name:kLinphoneRegistrationUpdate
@@ -48,6 +50,18 @@
                                              selector:@selector(configuringUpdate:)
                                                  name:kLinphoneConfiguringStateUpdate
                                                object:nil];
+    
+    LinphoneCore* lc = [LinphoneManager getLc];
+    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+        // 当前处于登出状态
+        self.userNameField.text = @"";
+        self.userPasswordField.text = @"";
+    }else {
+        // 当前已处于登录状态
+        [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+        self.userNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+        self.userPasswordField.text = @"已登录";
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,7 +73,6 @@
                                                     name:kLinphoneConfiguringStateUpdate
                                                   object:nil];
 }
-
 
 #pragma mark - Event Functions
 - (void)registrationUpdateEvent:(NSNotification*)notif {
@@ -184,7 +197,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)jumpToMettingViewController {
     [self resignKeyboard];
     
-    [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+    if ([[PhoneMainView instance] popCurrentView] == nil) {
+        // 则说明当前层为登录层，返回到加入会议层
+        [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+    }
 }
 
 
@@ -253,6 +269,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                 //
                 //            [[LPSystemUser sharedUser].settingsStore synchronize];
 
+                // 把值同步进去
+                [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
                 // 存储下来
                 [LPSystemUser sharedUser].hasLogin = YES;
@@ -267,6 +285,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                 // 登录失败
                 [self showToastWithMessage:@"登录失败"];
             }
+            
+            [self hideHudAndIndicatorView];
         }
     }
 }

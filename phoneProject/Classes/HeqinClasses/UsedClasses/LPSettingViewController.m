@@ -108,7 +108,7 @@
         return;
     }
     
-    UIAlertView *tipAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确认要注销么？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    UIAlertView *tipAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确认要注销么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     tipAlert.tag = kLogoutAlertTag;
     [tipAlert show];
 }
