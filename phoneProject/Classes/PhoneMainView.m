@@ -336,9 +336,10 @@ static RootViewManager* rootViewManagerInstance = nil;
 		case LinphoneCallOutgoingInit: 
         case LinphoneCallPausedByRemote:
 		case LinphoneCallConnected:
-        case LinphoneCallStreamsRunning:
+        case LinphoneCallStreamsRunning:            // 在代码中进行呼号时，会通过通知的方式调起这里，从而打开会议界面
+                                                    // [controller call:address displayName:displayName]
         {
-            [self changeCurrentView:[InCallViewController compositeViewDescription]];
+            [self changeCurrentView:[InCallViewController compositeViewDescription]];            
             break;
         }
         case LinphoneCallUpdatedByRemote:

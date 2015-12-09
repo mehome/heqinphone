@@ -21,24 +21,24 @@
 
 @implementation UITransparentView
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    BOOL pointInside = NO;
-    
-    for(UIView *child in [self subviews]) {
-        if(![child isHidden]) {
-            if(CGRectContainsPoint(child.frame, point)) {
-                CGPoint newPoint = point;
-                newPoint.x -= child.frame.origin.x;
-                newPoint.y -= child.frame.origin.y;
-                if([child pointInside:newPoint withEvent:event]) {
-                    pointInside = YES; 
-                    break;
-                }
-            }
-        }
-    }
-    
-    return pointInside;
-}
+//- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+//    BOOL pointInside = NO;
+//    
+//    for(UIView *child in [self subviews]) {
+//        if(![child isHidden]) {
+//            if(CGRectContainsPoint(child.frame, point)) {
+//                CGPoint newPoint = point;
+//                newPoint.x -= child.frame.origin.x;
+//                newPoint.y -= child.frame.origin.y;
+//                if([child pointInside:newPoint withEvent:event]) {
+//                    pointInside = YES; 
+//                    break;
+//                }
+//            }
+//        }
+//    }
+//    
+//    return pointInside;
+//}
 
 @end

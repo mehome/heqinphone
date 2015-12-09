@@ -42,23 +42,8 @@
 @synthesize optionsTransferButton;
 @synthesize dialerButton;
 
-@synthesize padView;
 @synthesize routesView;
 @synthesize optionsView;
-
-@synthesize oneButton;
-@synthesize twoButton;
-@synthesize threeButton;
-@synthesize fourButton;
-@synthesize fiveButton;
-@synthesize sixButton;
-@synthesize sevenButton;
-@synthesize eightButton;
-@synthesize nineButton;
-@synthesize starButton;
-@synthesize zeroButton;
-@synthesize sharpButton;
-
 
 #pragma mark - Lifecycle Functions
 
@@ -81,20 +66,6 @@
     [optionsTransferButton release];
     [dialerButton release];
     
-    [oneButton release];
-	[twoButton release];
-	[threeButton release];
-	[fourButton release];
-	[fiveButton release];
-	[sixButton release];
-	[sevenButton release];
-	[eightButton release];
-	[nineButton release];
-	[starButton release];
-	[zeroButton release];
-	[sharpButton release];
-    
-    [padView release];
     [routesView release];
     [optionsView release];
     
@@ -109,31 +80,6 @@
 - (void)viewDidLoad {
     [pauseButton setType:UIPauseButtonType_CurrentCall call:nil];
     
-    [zeroButton setDigit:'0'];
-    [zeroButton setDtmf:true];
-	[oneButton    setDigit:'1'];
-    [oneButton setDtmf:true];
-	[twoButton    setDigit:'2'];
-    [twoButton setDtmf:true];
-	[threeButton  setDigit:'3'];
-    [threeButton setDtmf:true];
-	[fourButton   setDigit:'4'];
-    [fourButton setDtmf:true];
-	[fiveButton   setDigit:'5'];
-    [fiveButton setDtmf:true];
-	[sixButton    setDigit:'6'];
-    [sixButton setDtmf:true];
-	[sevenButton  setDigit:'7'];
-    [sevenButton setDtmf:true];
-	[eightButton  setDigit:'8'];
-    [eightButton setDtmf:true];
-	[nineButton   setDigit:'9'];
-    [nineButton setDtmf:true];
-	[starButton   setDigit:'*'];
-    [starButton setDtmf:true];
-	[sharpButton  setDigit:'#'];
-    [sharpButton setDtmf:true];
-
     {
         UIButton *videoButtonLandscape = (UIButton*)[landscapeView viewWithTag:[videoButton tag]];
         // Set selected+disabled background: IB lack !
@@ -411,24 +357,10 @@
 
 - (void)showPad:(BOOL)animated {
     [dialerButton setOn];
-    if([padView isHidden]) {
-        if(animated) {
-            [self showAnimation:@"show" target:padView completion:^(BOOL finished){}];
-        } else {
-            [padView setHidden:FALSE];
-        }
-    }
 }
 
 - (void)hidePad:(BOOL)animated {
     [dialerButton setOff];
-    if(![padView isHidden]) {
-        if(animated) {
-            [self hideAnimation:@"hide" target:padView completion:^(BOOL finished){}];
-        } else {
-            [padView setHidden:TRUE];
-        }
-    }
 }
 
 - (void)showRoutes:(BOOL)animated {
@@ -500,11 +432,7 @@
 #pragma mark - Action Functions
 
 - (IBAction)onPadClick:(id)sender {
-    if([padView isHidden]) {
-        [self showPad:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    } else {
-        [self hidePad:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    }
+    // 点击键盘来弹出数字键盘
 }
 
 - (IBAction)onRoutesBluetoothClick:(id)sender {
@@ -559,6 +487,7 @@
     }
 }
 
+// 暂停会议
 - (IBAction)onConferenceClick:(id)sender {
     linphone_core_add_all_to_conference([LinphoneManager getLc]);
 }

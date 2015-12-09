@@ -30,13 +30,9 @@
 @interface InCallViewController : UIViewController <UIGestureRecognizerDelegate, UICompositeViewDelegate> {
     @private
     UITapGestureRecognizer* singleFingerTap;
-    NSTimer* hideControlsTimer;
     BOOL videoShown;
     VideoZoomHandler* videoZoomHandler;
 }
-
-@property (nonatomic, retain) IBOutlet InCallTableViewController* callTableController;
-@property (nonatomic, retain) IBOutlet UITableView* callTableView;
 
 @property (nonatomic, retain) IBOutlet UIView* videoGroup;
 @property (nonatomic, retain) IBOutlet UIView* videoView;

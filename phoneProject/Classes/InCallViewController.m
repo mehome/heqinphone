@@ -34,14 +34,9 @@
 #include "linphone/linphonecore.h"
 
 
-const NSInteger SECURE_BUTTON_TAG=5;
-
 @implementation InCallViewController {
     BOOL hiddenVolume;
 }
-
-@synthesize callTableController;
-@synthesize callTableView;
 
 @synthesize videoGroup;
 @synthesize videoView;
@@ -58,15 +53,12 @@ const NSInteger SECURE_BUTTON_TAG=5;
 - (id)init {
     self = [super initWithNibName:@"InCallViewController" bundle:[NSBundle mainBundle]];
     if(self != nil) {
-        self->singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showControls:)];
         self->videoZoomHandler = [[VideoZoomHandler alloc] init];
     }
     return self;
 }
 
 - (void)dealloc {
-    [callTableController release];
-    [callTableView release];
     
     [videoGroup release];
     [videoView release];
@@ -79,9 +71,6 @@ const NSInteger SECURE_BUTTON_TAG=5;
     [videoWaitingForFirstImage release];
     
     [videoZoomHandler release];
-    
-    [[PhoneMainView instance].view removeGestureRecognizer:singleFingerTap];
-    [singleFingerTap release];
     
     // Remove all observer
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -105,6 +94,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 //                                                             fullscreen:false
 //                                                          landscapeMode:true
 //                                                           portraitMode:true];
+        
         compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall"
                                                                 content:@"InCallViewController"
                                                                stateBar:nil
@@ -112,8 +102,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                  tabBar:@"UICallBar"
                                                           tabBarEnabled:true
                                                              fullscreen:false
-                                                          landscapeMode:false
-                                                           portraitMode:true];
+                                                          landscapeMode:true
+                                                           portraitMode:true];        
+        compositeDescription.darkBackground = true;
+
 
         compositeDescription.darkBackground = true;
     }
@@ -136,10 +128,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (hideControlsTimer != nil) {
-        [hideControlsTimer invalidate];
-        hideControlsTimer = nil;
-    }
     
     if( hiddenVolume ) {
         [[PhoneMainView instance] setVolumeHidden:FALSE];
@@ -168,9 +156,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     // Set windows (warn memory leaks)
     linphone_core_set_native_video_window_id([LinphoneManager getLc], (unsigned long)videoView);
     linphone_core_set_native_preview_window_id([LinphoneManager getLc], (unsigned long)videoPreview);
-    
-    // Enable tap
-    [singleFingerTap setEnabled:TRUE];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -181,29 +166,19 @@ static UICompositeViewDescription *compositeDescription = nil;
     device.proximityMonitoringEnabled = NO;
 
     [[PhoneMainView instance] fullScreen:false];
-    // Disable tap
-    [singleFingerTap setEnabled:FALSE];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [singleFingerTap setNumberOfTapsRequired:1];
-    [singleFingerTap setCancelsTouchesInView: FALSE];
-    [[PhoneMainView instance].view addGestureRecognizer:singleFingerTap];
-    
     [videoZoomHandler setup:videoGroup];
     videoGroup.alpha = 0;
     
-    [videoCameraSwitch setPreview:videoPreview];
+    [[PhoneMainView instance] showTabBar:true];
+    [[PhoneMainView instance] showStateBar:true];
+    [videoCameraSwitch setAlpha:1.0];
     
-    [callTableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
-    [callTableController.tableView setBackgroundView:nil]; // Can't do it in Xib: issue with ios4
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    [[PhoneMainView instance].view removeGestureRecognizer:singleFingerTap];
+    [videoCameraSwitch setPreview:videoPreview];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -221,9 +196,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         [[PhoneMainView instance] setVolumeHidden:FALSE];
         hiddenVolume = FALSE;
     }
-
-    // Update table
-    [callTableView reloadData];  
     
     // Fake call update
     if(call == NULL) {
@@ -235,7 +207,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 		case LinphoneCallOutgoingInit: 
         {
             if(linphone_core_get_calls_nb(lc) > 1) {
-                [callTableController minimizeAll];
             }
         }
 		case LinphoneCallConnected:
@@ -291,7 +262,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         case LinphoneCallError:
         {
             if(linphone_core_get_calls_nb(lc) <= 2 && !videoShown) {
-                [callTableController maximizeAll];
             }
             break;
         }
@@ -301,49 +271,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     
 }
 
-- (void)showControls:(id)sender {
-    if (hideControlsTimer) {
-        [hideControlsTimer invalidate];
-        hideControlsTimer = nil;
-    }
-    
-    if([[[PhoneMainView instance] currentView] equal:[InCallViewController compositeViewDescription]] && videoShown) {
-        // show controls
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        [[PhoneMainView instance] showTabBar: true];
-        [[PhoneMainView instance] showStateBar: true];
-        [callTableView setAlpha:1.0];
-        [videoCameraSwitch setAlpha:1.0];
-        [UIView commitAnimations];
-        
-        // hide controls in 5 sec
-        hideControlsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                             target:self
-                                                           selector:@selector(hideControls:)
-                                                           userInfo:nil
-                                                            repeats:NO];
-    }
-}
-
-- (void)hideControls:(id)sender {
-    if (hideControlsTimer) {
-        [hideControlsTimer invalidate];
-        hideControlsTimer = nil;
-    }
-    
-    if([[[PhoneMainView instance] currentView] equal:[InCallViewController compositeViewDescription]] && videoShown) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        [videoCameraSwitch setAlpha:0.0];
-        [callTableView setAlpha:0.0];
-        [UIView commitAnimations];
-        
-        
-        [[PhoneMainView instance] showTabBar: false];
-        [[PhoneMainView instance] showStateBar: false];
-    }
-}
 
 #ifdef TEST_VIDEO_VIEW_CHANGE
 // Define TEST_VIDEO_VIEW_CHANGE in IncallViewController.h to enable video view switching testing
@@ -372,12 +299,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     [videoGroup setAlpha:1.0];
-    [callTableView setAlpha:0.0];
-    
-    UIEdgeInsets insets = {33, 0, 25, 0};
-    [callTableView setContentInset:insets];
-    [callTableView setScrollIndicatorInsets:insets];
-    [callTableController minimizeAll];
 
     if(animation) {
         [UIView commitAnimations];
@@ -395,8 +316,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     [videoCameraSwitch setAlpha:0.0];
     
-    [[PhoneMainView instance] fullScreen: true];
-    [[PhoneMainView instance] showTabBar: false];
+    [[PhoneMainView instance] fullScreen: false];
+    [[PhoneMainView instance] showTabBar: true];
     [[PhoneMainView instance] showStateBar: false];
     
 #ifdef TEST_VIDEO_VIEW_CHANGE
@@ -427,24 +348,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     [videoGroup setAlpha:0.0];
     [[PhoneMainView instance] showTabBar: true];
 
-    UIEdgeInsets insets = {10, 0, 25, 0};
-    [callTableView setContentInset:insets];
-    [callTableView setScrollIndicatorInsets:insets];
-    [callTableView setAlpha:1.0];
-    if(linphone_core_get_calls_nb([LinphoneManager getLc]) <= 2) {
-        [callTableController maximizeAll];
-    }
-
-    [callTableView setAlpha:1.0];
     [videoCameraSwitch setHidden:TRUE];
     
     if(animation) {
         [UIView commitAnimations];
-    }
-    
-    if (hideControlsTimer != nil) {
-        [hideControlsTimer invalidate];
-        hideControlsTimer = nil;
     }
     
     [[PhoneMainView instance] fullScreen:false];
