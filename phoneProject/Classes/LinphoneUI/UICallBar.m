@@ -98,14 +98,14 @@
         [LinphoneUtils buttonFixStates:videoButtonLandscape];
     }
 
-    {
-        UIImageView* leftPaddingLandscape = (UIImageView*)[landscapeView viewWithTag:self.leftPadding.tag];
-        leftPaddingLandscape.image =[UIImage imageNamed:@"incall_padding_left_landscape.png"];
-    }
-    {
-        UIImageView* rightPaddingLandscape = (UIImageView*)[landscapeView viewWithTag:self.rightPadding.tag];
-        rightPaddingLandscape.image = [UIImage imageNamed:@"incall_padding_right_landscape.png"];
-    }
+//    {
+//        UIImageView* leftPaddingLandscape = (UIImageView*)[landscapeView viewWithTag:self.leftPadding.tag];
+//        leftPaddingLandscape.image =[UIImage imageNamed:@"incall_padding_left_landscape.png"];
+//    }
+//    {
+//        UIImageView* rightPaddingLandscape = (UIImageView*)[landscapeView viewWithTag:self.rightPadding.tag];
+//        rightPaddingLandscape.image = [UIImage imageNamed:@"incall_padding_right_landscape.png"];
+//    }
 
     {
         UIButton *speakerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[speakerButton tag]];
@@ -167,29 +167,29 @@
         [LinphoneUtils buttonFixStates:optionsButtonLandscape];
     }
     
-    {
-        UIButton *pauseButtonLandscape = (UIButton*) [landscapeView viewWithTag:[pauseButton tag]];
-        // Set selected+over background: IB lack !
-        [pauseButton setBackgroundImage:[UIImage imageNamed:@"pause_on_over.png"]
-                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [pauseButtonLandscape setBackgroundImage:[UIImage imageNamed:@"pause_on_over_landscape.png"]
-                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:pauseButton];
-        [LinphoneUtils buttonFixStates:pauseButtonLandscape];
-    }
+//    {
+//        UIButton *pauseButtonLandscape = (UIButton*) [landscapeView viewWithTag:[pauseButton tag]];
+//        // Set selected+over background: IB lack !
+//        [pauseButton setBackgroundImage:[UIImage imageNamed:@"pause_on_over.png"]
+//                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//        [pauseButtonLandscape setBackgroundImage:[UIImage imageNamed:@"pause_on_over_landscape.png"]
+//                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//        
+//        [LinphoneUtils buttonFixStates:pauseButton];
+//        [LinphoneUtils buttonFixStates:pauseButtonLandscape];
+//    }
     
-    {
-        UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]] ;
-        // Set selected+over background: IB lack !
-        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over.png"]
-                                forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [dialerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over_landscape.png"] 
-                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:dialerButton];
-        [LinphoneUtils buttonFixStates:dialerButtonLandscape];
-    }
+//    {
+//        UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]] ;
+//        // Set selected+over background: IB lack !
+//        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over.png"]
+//                                forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//        [dialerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over_landscape.png"] 
+//                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//        
+//        [LinphoneUtils buttonFixStates:dialerButton];
+//        [LinphoneUtils buttonFixStates:dialerButtonLandscape];
+//    }
     
     [super viewDidLoad];
 }
@@ -504,10 +504,12 @@
         UIButton *button = (UIButton *)view;    
 		[LinphoneUtils buttonMultiViewAddAttributes:attributes button:button];
 	} else if (view.tag ==self.leftPadding.tag || view.tag == self.rightPadding.tag){
-		UIImage* image = [(UIImageView*)view image];
-		if( image ){
-			[attributes setObject:image forKey:@"image"];
-		}
+        if ([view isKindOfClass:[UIImageView class]]) {
+            UIImage* image = [(UIImageView*)view image];
+            if( image ){
+                [attributes setObject:image forKey:@"image"];
+            }
+        }
     }
     [attributes setObject:[NSNumber numberWithInteger:view.autoresizingMask] forKey:@"autoresizingMask"];
 
@@ -521,8 +523,9 @@
         UIButton *button = (UIButton *)view;
         [LinphoneUtils buttonMultiViewApplyAttributes:attributes button:button];
     } else if (view.tag ==self.leftPadding.tag || view.tag == self.rightPadding.tag){
-
-        [(UIImageView*)view setImage:[attributes objectForKey:@"image"]];
+        if ([view isKindOfClass:[UIImageView class]]) {
+            [(UIImageView*)view setImage:[attributes objectForKey:@"image"]];
+        }
     }
     view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
 }

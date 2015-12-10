@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICallBar">
@@ -30,19 +30,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="311"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <subviews>
-                <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" id="5" userLabel="mask">
-                    <rect key="frame" x="0.0" y="247" width="320" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view tag="33" contentMode="scaleToFill" id="167" userLabel="routesView">
-                    <rect key="frame" x="160" y="7" width="80" height="185"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view tag="33" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="167" userLabel="routesView">
                     <subviews>
-                        <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="174" userLabel="routesBluetoothButton">
-                            <rect key="frame" x="0.0" y="0.0" width="80" height="63"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="174" userLabel="routesBluetoothButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="127"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Bluetooth"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -62,9 +53,8 @@
                                 <action selector="onRoutesBluetoothClick:" destination="-1" eventType="touchUpInside" id="208"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="169" userLabel="routesReceiverButton">
-                            <rect key="frame" x="0.0" y="60" width="80" height="63"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="31" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="169" userLabel="routesReceiverButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="127"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Receiver"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -84,9 +74,8 @@
                                 <action selector="onRoutesReceiverClick:" destination="-1" eventType="touchUpInside" id="209"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="168" userLabel="routesSpeakerButton">
-                            <rect key="frame" x="0.0" y="118" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="32" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="168" userLabel="routesSpeakerButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="127"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Speaker"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -110,13 +99,10 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view tag="15" contentMode="scaleToFill" id="87" userLabel="optionsView">
-                    <rect key="frame" x="240" y="59" width="80" height="126"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view tag="15" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87" userLabel="optionsView">
                     <subviews>
-                        <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="90" userLabel="optionsTansferButton">
-                            <rect key="frame" x="3" y="0.0" width="77" height="68"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90" userLabel="optionsTansferButton">
+                            <rect key="frame" x="0.0" y="0.0" width="155" height="137"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Transfer call"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -136,9 +122,8 @@
                                 <action selector="onOptionsTransferClick:" destination="-1" eventType="touchUpInside" id="98"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="88" userLabel="optionsAddButton">
-                            <rect key="frame" x="3" y="58" width="77" height="68"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88" userLabel="optionsAddButton">
+                            <rect key="frame" x="0.0" y="0.0" width="155" height="137"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Add call"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -162,13 +147,81 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view tag="18" contentMode="scaleToFill" id="30" userLabel="buttons">
-                    <rect key="frame" x="0.0" y="250" width="320" height="67"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuO-qp-t9Q" userLabel="voiceBgView">
+                    <rect key="frame" x="0.0" y="179" width="64" height="88"/>
                     <subviews>
-                        <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="12" userLabel="videoButton" customClass="UIVideoButton">
-                            <rect key="frame" x="0.0" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08U-5g-oaz" userLabel="closeVoiceBtn">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="静音"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0x-BW-vu7" userLabel="openVoiceBtn">
+                            <rect key="frame" x="0.0" y="44" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="取消"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="08U-5g-oaz" secondAttribute="trailing" id="9gK-eO-ZVq"/>
+                        <constraint firstAttribute="bottom" secondItem="Z0x-BW-vu7" secondAttribute="bottom" id="BXc-VW-c9M"/>
+                        <constraint firstItem="Z0x-BW-vu7" firstAttribute="height" secondItem="08U-5g-oaz" secondAttribute="height" id="KLa-86-VcF"/>
+                        <constraint firstItem="08U-5g-oaz" firstAttribute="top" secondItem="cuO-qp-t9Q" secondAttribute="top" id="N5W-bC-1vF"/>
+                        <constraint firstItem="Z0x-BW-vu7" firstAttribute="width" secondItem="08U-5g-oaz" secondAttribute="width" id="Rwd-Ax-enl"/>
+                        <constraint firstItem="08U-5g-oaz" firstAttribute="leading" secondItem="cuO-qp-t9Q" secondAttribute="leading" id="cOl-jv-m2v"/>
+                        <constraint firstAttribute="trailing" secondItem="Z0x-BW-vu7" secondAttribute="trailing" id="dnX-AN-hAU"/>
+                        <constraint firstItem="Z0x-BW-vu7" firstAttribute="top" secondItem="08U-5g-oaz" secondAttribute="bottom" id="dqK-Fs-dWu"/>
+                        <constraint firstItem="Z0x-BW-vu7" firstAttribute="leading" secondItem="cuO-qp-t9Q" secondAttribute="leading" id="vEf-G4-5LZ"/>
+                    </constraints>
+                </view>
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-Ru-Ria" userLabel="cameraBgView">
+                    <rect key="frame" x="64" y="135" width="64" height="132"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-ag-SSz" userLabel="frontCameraBtn">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="前摄像头"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfL-uU-Uk1" userLabel="tailCameraBtn">
+                            <rect key="frame" x="0.0" y="44" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="后摄像头"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-s9-9pl" userLabel="closeCameraBtn">
+                            <rect key="frame" x="0.0" y="88" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="关闭"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="RfL-uU-Uk1" firstAttribute="centerX" secondItem="ZZK-ag-SSz" secondAttribute="centerX" id="Bu4-oc-1RW"/>
+                        <constraint firstAttribute="bottom" secondItem="ybr-s9-9pl" secondAttribute="bottom" id="DPl-NQ-i7e"/>
+                        <constraint firstAttribute="trailing" secondItem="ZZK-ag-SSz" secondAttribute="trailing" id="Kbr-vF-ma0"/>
+                        <constraint firstItem="ZZK-ag-SSz" firstAttribute="top" secondItem="iMf-Ru-Ria" secondAttribute="top" id="Ll3-9b-GhZ"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="width" secondItem="RfL-uU-Uk1" secondAttribute="width" id="UQb-5v-eAc"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="top" secondItem="RfL-uU-Uk1" secondAttribute="bottom" id="ajs-Vg-xZl"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="height" secondItem="ZZK-ag-SSz" secondAttribute="height" id="b0i-yC-fAR"/>
+                        <constraint firstAttribute="trailing" secondItem="ybr-s9-9pl" secondAttribute="trailing" id="cx3-Gc-AT3"/>
+                        <constraint firstItem="ZZK-ag-SSz" firstAttribute="leading" secondItem="iMf-Ru-Ria" secondAttribute="leading" id="dcZ-Wy-OnS"/>
+                        <constraint firstItem="RfL-uU-Uk1" firstAttribute="top" secondItem="ZZK-ag-SSz" secondAttribute="bottom" id="kjA-n7-9I7"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="width" secondItem="ZZK-ag-SSz" secondAttribute="width" id="mHv-YT-WSC"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="centerX" secondItem="ZZK-ag-SSz" secondAttribute="centerX" id="mWj-qg-aBr"/>
+                        <constraint firstItem="RfL-uU-Uk1" firstAttribute="width" secondItem="ZZK-ag-SSz" secondAttribute="width" id="otk-WC-Ib1"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="height" secondItem="RfL-uU-Uk1" secondAttribute="height" id="ssD-5E-SJk"/>
+                        <constraint firstItem="RfL-uU-Uk1" firstAttribute="height" secondItem="ZZK-ag-SSz" secondAttribute="height" id="tSa-pB-ciB"/>
+                        <constraint firstItem="ybr-s9-9pl" firstAttribute="leading" secondItem="iMf-Ru-Ria" secondAttribute="leading" id="vjf-XT-th8"/>
+                    </constraints>
+                </view>
+                <view tag="18" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="buttons">
+                    <subviews>
+                        <button opaque="NO" tag="19" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="videoButton" customClass="UIVideoButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Video"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -190,14 +243,8 @@
                                 <outlet property="waitView" destination="59" id="60"/>
                             </connections>
                         </button>
-                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="59" userLabel="videoWaitView">
-                            <rect key="frame" x="20" y="20" width="37" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                        </activityIndicatorView>
-                        <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="11" userLabel="microButton" customClass="UIMicroButton">
-                            <rect key="frame" x="80" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11" userLabel="microButton" customClass="UIMicroButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Micro"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -216,9 +263,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="9" userLabel="speakerButton" customClass="UISpeakerButton">
-                            <rect key="frame" x="160" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="speakerButton" customClass="UISpeakerButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Speaker"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -237,9 +283,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="164" userLabel="routesButton" customClass="UIToggleButton">
-                            <rect key="frame" x="160" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="29" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="164" userLabel="routesButton" customClass="UIToggleButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Route"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -261,9 +306,8 @@
                                 <action selector="onRoutesClick:" destination="-1" eventType="touchUpInside" id="211"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="10" userLabel="optionsButton" customClass="UIToggleButton">
-                            <rect key="frame" x="240" y="0.0" width="80" height="67"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" tag="23" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10" userLabel="optionsButton" customClass="UIToggleButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label="Options"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -285,13 +329,78 @@
                                 <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="20"/>
                             </connections>
                         </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="59" userLabel="videoWaitView">
+                            <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
+                            <animations/>
+                        </activityIndicatorView>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="7" userLabel="hangupButton" customClass="UIHangUpButton">
-                    <rect key="frame" x="19" y="92" width="50" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                <view tag="18" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skh-FZ-hiA" userLabel="btnBgView">
+                    <rect key="frame" x="0.0" y="267" width="320" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="静音"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-1H-otf">
+                            <rect key="frame" x="64" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="视频"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
+                            <rect key="frame" x="128" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="1" blue="0.2181815057" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="邀请"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXY-4Q-XR0">
+                            <rect key="frame" x="192" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="参与人"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-mZ-2Go">
+                            <rect key="frame" x="256" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="更多"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="0.075298108550000006" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="lEk-WA-mPd" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="0aa-IP-cMu"/>
+                        <constraint firstItem="bHl-tm-Qpf" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="1yF-9w-b5V"/>
+                        <constraint firstAttribute="bottom" secondItem="bHl-tm-Qpf" secondAttribute="bottom" id="9A1-ri-ITZ"/>
+                        <constraint firstAttribute="bottom" secondItem="FpB-mZ-2Go" secondAttribute="bottom" id="9b9-Ck-jWQ"/>
+                        <constraint firstItem="FpB-mZ-2Go" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="DhU-eD-zmQ"/>
+                        <constraint firstItem="GNF-1H-otf" firstAttribute="leading" secondItem="bHl-tm-Qpf" secondAttribute="trailing" id="Fbv-mJ-fxq"/>
+                        <constraint firstItem="BXY-4Q-XR0" firstAttribute="leading" secondItem="lEk-WA-mPd" secondAttribute="trailing" id="GRU-U9-oAI"/>
+                        <constraint firstItem="GNF-1H-otf" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="Jsw-yk-Z7W"/>
+                        <constraint firstItem="lEk-WA-mPd" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="K0D-8Y-kP0"/>
+                        <constraint firstAttribute="trailing" secondItem="FpB-mZ-2Go" secondAttribute="trailing" id="VKn-IF-QUk"/>
+                        <constraint firstItem="lEk-WA-mPd" firstAttribute="leading" secondItem="GNF-1H-otf" secondAttribute="trailing" id="ZYk-gN-4ol"/>
+                        <constraint firstItem="BXY-4Q-XR0" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="cOx-ez-V9t"/>
+                        <constraint firstItem="lEk-WA-mPd" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="clS-4G-0f0"/>
+                        <constraint firstItem="GNF-1H-otf" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="cpO-of-6AX"/>
+                        <constraint firstItem="FpB-mZ-2Go" firstAttribute="leading" secondItem="BXY-4Q-XR0" secondAttribute="trailing" id="ezj-1J-bFN"/>
+                        <constraint firstItem="FpB-mZ-2Go" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="hSG-d7-v4V"/>
+                        <constraint firstItem="GNF-1H-otf" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="kQr-hm-LWs"/>
+                        <constraint firstItem="BXY-4Q-XR0" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="mSZ-FG-FA1"/>
+                        <constraint firstAttribute="height" constant="44" id="pOn-nC-TSX"/>
+                        <constraint firstItem="FpB-mZ-2Go" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="pgS-HH-DSq"/>
+                        <constraint firstItem="BXY-4Q-XR0" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="q89-U8-uq2"/>
+                        <constraint firstItem="bHl-tm-Qpf" firstAttribute="leading" secondItem="skh-FZ-hiA" secondAttribute="leading" id="rwO-tk-UHh"/>
+                        <constraint firstItem="FpB-mZ-2Go" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="tap-Ne-OVu"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="26" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="hangupButton" customClass="UIHangUpButton">
+                    <rect key="frame" x="0.0" y="0.0" width="133" height="70"/>
                     <animations/>
                     <accessibility key="accessibilityConfiguration" label="Hangup"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -300,35 +409,101 @@
                     </state>
                     <state key="highlighted" image="hangup_over.png"/>
                 </button>
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj1-3K-9ev" userLabel="inviteBgView">
+                    <rect key="frame" x="128.5" y="91" width="63.5" height="176"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIr-iY-1b4">
+                            <rect key="frame" x="-0.5" y="0.0" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="发邮件"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqg-vk-D8Y">
+                            <rect key="frame" x="-0.5" y="88" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="呼叫"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yk8-hw-sOR">
+                            <rect key="frame" x="0.0" y="132" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="复制地址"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aT8-X6-tru">
+                            <rect key="frame" x="-0.5" y="44" width="64" height="44"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.1928987284" green="0.81417692549999998" blue="0.55604959279999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="发短信"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="top" secondItem="aT8-X6-tru" secondAttribute="bottom" id="8oT-76-ax6"/>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="BWB-If-bL7"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="D9i-AF-KUg"/>
+                        <constraint firstItem="TIr-iY-1b4" firstAttribute="top" secondItem="Aj1-3K-9ev" secondAttribute="top" id="Dh5-7Q-W7J"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="top" secondItem="TIr-iY-1b4" secondAttribute="bottom" id="Fn8-6w-oPX"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="GgW-Ut-wSq"/>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="HGK-hw-JBc"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="top" secondItem="Bqg-vk-D8Y" secondAttribute="bottom" id="NII-Yd-ShB"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="leading" secondItem="Aj1-3K-9ev" secondAttribute="leading" id="W7R-gx-f8X"/>
+                        <constraint firstAttribute="trailing" secondItem="TIr-iY-1b4" secondAttribute="trailing" id="cOm-wr-g9A"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="cwM-Rq-1r0"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="kYX-N4-hXV"/>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="pTc-hM-Yuw"/>
+                        <constraint firstItem="TIr-iY-1b4" firstAttribute="leading" secondItem="Aj1-3K-9ev" secondAttribute="leading" id="r1x-4m-oNj"/>
+                        <constraint firstAttribute="bottom" secondItem="Yk8-hw-sOR" secondAttribute="bottom" id="ren-hN-V6O"/>
+                        <constraint firstAttribute="trailing" secondItem="Yk8-hw-sOR" secondAttribute="trailing" id="twr-9g-fZj"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="ynq-JC-l2g"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="ztj-A3-ypV"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="skh-FZ-hiA" secondAttribute="bottom" id="1lU-bp-fh2"/>
+                <constraint firstItem="cuO-qp-t9Q" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="5j3-GG-wkc"/>
+                <constraint firstItem="08U-5g-oaz" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="E2L-mq-XhC"/>
+                <constraint firstItem="GNF-1H-otf" firstAttribute="top" secondItem="iMf-Ru-Ria" secondAttribute="bottom" id="EcC-SZ-Npd"/>
+                <constraint firstItem="iMf-Ru-Ria" firstAttribute="width" secondItem="GNF-1H-otf" secondAttribute="width" id="IqW-jW-G2P"/>
+                <constraint firstItem="Aj1-3K-9ev" firstAttribute="width" secondItem="lEk-WA-mPd" secondAttribute="width" id="L9q-ea-lnX"/>
+                <constraint firstItem="ybr-s9-9pl" firstAttribute="height" secondItem="GNF-1H-otf" secondAttribute="height" id="Lln-pA-fKT"/>
+                <constraint firstItem="08U-5g-oaz" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="Nt5-cK-vCR"/>
+                <constraint firstAttribute="trailing" secondItem="skh-FZ-hiA" secondAttribute="trailing" id="PIk-7r-oI8"/>
+                <constraint firstItem="cuO-qp-t9Q" firstAttribute="centerX" secondItem="bHl-tm-Qpf" secondAttribute="centerX" id="TmC-34-jYE"/>
+                <constraint firstItem="Yk8-hw-sOR" firstAttribute="width" secondItem="lEk-WA-mPd" secondAttribute="width" id="YB1-1U-aSk"/>
+                <constraint firstItem="skh-FZ-hiA" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="ZUT-OZ-FMz"/>
+                <constraint firstItem="ybr-s9-9pl" firstAttribute="width" secondItem="GNF-1H-otf" secondAttribute="width" id="eKz-r8-nai"/>
+                <constraint firstItem="iMf-Ru-Ria" firstAttribute="centerX" secondItem="GNF-1H-otf" secondAttribute="centerX" id="jeW-VI-hIf"/>
+                <constraint firstItem="lEk-WA-mPd" firstAttribute="top" secondItem="Aj1-3K-9ev" secondAttribute="bottom" id="jrW-5s-BOY"/>
+                <constraint firstItem="bHl-tm-Qpf" firstAttribute="top" secondItem="cuO-qp-t9Q" secondAttribute="bottom" id="l30-zE-9jJ"/>
+                <constraint firstItem="Aj1-3K-9ev" firstAttribute="centerX" secondItem="lEk-WA-mPd" secondAttribute="centerX" id="mvq-8h-m8U"/>
+                <constraint firstItem="Yk8-hw-sOR" firstAttribute="height" secondItem="lEk-WA-mPd" secondAttribute="height" id="qoo-af-tLk"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="514" y="556.5"/>
+            <point key="canvasLocation" x="337" y="454.5"/>
         </view>
         <view contentMode="scaleToFill" id="100" userLabel="Landscape View" customClass="UITransparentView">
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <subviews>
-                <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" id="104" userLabel="mask">
+                <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104" userLabel="mask">
                     <rect key="frame" x="0.0" y="248" width="480" height="72"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <view tag="1" contentMode="scaleToFill" id="102" userLabel="padView">
+                <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="102" userLabel="padView">
                     <rect key="frame" x="91" y="0.0" width="281" height="260"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="dialer_alt_background.png" id="114" userLabel="background">
+                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" image="dialer_alt_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="114" userLabel="background">
                             <rect key="frame" x="0.0" y="0.0" width="281" height="260"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <animations/>
                         </imageView>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="115" userLabel="1" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="115" userLabel="1" customClass="UIDigitButton">
                             <rect key="frame" x="-20" y="10" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <color key="backgroundColor" red="0.40000001000000002" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -337,9 +512,8 @@
                             </state>
                             <state key="highlighted" image="numpad_one_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="116" userLabel="2" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="116" userLabel="2" customClass="UIDigitButton">
                             <rect key="frame" x="87" y="10" width="106" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_two_default.png">
@@ -347,9 +521,8 @@
                             </state>
                             <state key="highlighted" image="numpad_two_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="117" userLabel="3" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="117" userLabel="3" customClass="UIDigitButton">
                             <rect key="frame" x="193" y="10" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_three_default.png">
@@ -357,9 +530,8 @@
                             </state>
                             <state key="highlighted" image="numpad_three_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="118" userLabel="4" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="118" userLabel="4" customClass="UIDigitButton">
                             <rect key="frame" x="-20" y="72" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_four_default.png">
@@ -367,9 +539,8 @@
                             </state>
                             <state key="highlighted" image="numpad_four_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="119" userLabel="5" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="119" userLabel="5" customClass="UIDigitButton">
                             <rect key="frame" x="87" y="72" width="106" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_five_default.png">
@@ -377,9 +548,8 @@
                             </state>
                             <state key="highlighted" image="numpad_five_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="120" userLabel="6" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="120" userLabel="6" customClass="UIDigitButton">
                             <rect key="frame" x="193" y="72" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_six_default.png">
@@ -387,9 +557,8 @@
                             </state>
                             <state key="highlighted" image="numpad_six_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="121" userLabel="7" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="121" userLabel="7" customClass="UIDigitButton">
                             <rect key="frame" x="-20" y="134" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_seven_default.png">
@@ -397,9 +566,8 @@
                             </state>
                             <state key="highlighted" image="numpad_seven_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="122" userLabel="8" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="122" userLabel="8" customClass="UIDigitButton">
                             <rect key="frame" x="87" y="134" width="106" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_eight_default.png">
@@ -407,9 +575,8 @@
                             </state>
                             <state key="highlighted" image="numpad_eight_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="123" userLabel="9" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="123" userLabel="9" customClass="UIDigitButton">
                             <rect key="frame" x="193" y="134" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_nine_default.png">
@@ -417,9 +584,8 @@
                             </state>
                             <state key="highlighted" image="numpad_nine_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="124" userLabel="*" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="124" userLabel="*" customClass="UIDigitButton">
                             <rect key="frame" x="-20" y="196" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_star_default.png">
@@ -427,9 +593,8 @@
                             </state>
                             <state key="highlighted" image="numpad_star_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="125" userLabel="0" customClass="UIDigitButtonLongPlus">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="13" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="125" userLabel="0" customClass="UIDigitButtonLongPlus">
                             <rect key="frame" x="87" y="196" width="106" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_zero_default.png">
@@ -437,9 +602,8 @@
                             </state>
                             <state key="highlighted" image="numpad_zero_over.png"/>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="126" userLabel="#" customClass="UIDigitButton">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="14" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="126" userLabel="#" customClass="UIDigitButton">
                             <rect key="frame" x="193" y="196" width="107" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                             <state key="normal" image="numpad_sharp_default.png">
@@ -451,13 +615,11 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view tag="33" contentMode="scaleToFill" id="186" userLabel="routesView">
+                <view tag="33" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="186" userLabel="routesView">
                     <rect key="frame" x="285" y="85" width="65" height="170"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="193" userLabel="routesBluetoothButton">
+                        <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="193" userLabel="routesBluetoothButton">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="57"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -474,9 +636,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="188" userLabel="routesReceiverButton">
+                        <button opaque="NO" tag="31" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="188" userLabel="routesReceiverButton">
                             <rect key="frame" x="0.0" y="55" width="65" height="57"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -493,9 +654,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="187" userLabel="routesSpeakerButton">
+                        <button opaque="NO" tag="32" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="187" userLabel="routesSpeakerButton">
                             <rect key="frame" x="0.0" y="108" width="65" height="57"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -516,13 +676,11 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view tag="15" contentMode="scaleToFill" id="101" userLabel="optionsView">
+                <view tag="15" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="101" userLabel="optionsView">
                     <rect key="frame" x="415" y="140" width="65" height="105"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="128" userLabel="optionsTansferButton">
+                        <button opaque="NO" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="128" userLabel="optionsTansferButton">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -542,9 +700,8 @@
                                 <action selector="onOptionsTransferClick:" destination="-1" eventType="touchUpInside" id="133"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="127" userLabel="optionsAddButton">
+                        <button opaque="NO" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="127" userLabel="optionsAddButton">
                             <rect key="frame" x="0.0" y="51" width="65" height="55"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -568,23 +725,19 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view tag="18" contentMode="scaleToFill" id="103" userLabel="buttons">
+                <view tag="18" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="103" userLabel="buttons">
                     <rect key="frame" x="0.0" y="238" width="480" height="82"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" tag="60" contentMode="scaleToFill" image="incall_padding_left_landscape.png" id="143" userLabel="leftPadding">
+                        <imageView userInteractionEnabled="NO" tag="60" contentMode="scaleToFill" fixedFrame="YES" image="incall_padding_left_landscape.png" translatesAutoresizingMaskIntoConstraints="NO" id="143" userLabel="leftPadding">
                             <rect key="frame" x="-128" y="-24" width="128" height="106"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <animations/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="61" contentMode="scaleToFill" image="incall_padding_right_landscape.png" id="144" userLabel="rightPadding">
+                        <imageView userInteractionEnabled="NO" tag="61" contentMode="scaleToFill" fixedFrame="YES" image="incall_padding_right_landscape.png" translatesAutoresizingMaskIntoConstraints="NO" id="144" userLabel="rightPadding">
                             <rect key="frame" x="480" y="-24" width="128" height="106"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
                         </imageView>
-                        <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="113" userLabel="videoButton" customClass="UIVideoButton">
+                        <button opaque="NO" tag="19" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="113" userLabel="videoButton" customClass="UIVideoButton">
                             <rect key="frame" x="65" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -606,14 +759,12 @@
                                 <outlet property="waitView" destination="105" id="129"/>
                             </connections>
                         </button>
-                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="105" userLabel="videoWaitView">
+                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="105" userLabel="videoWaitView">
                             <rect key="frame" x="79" y="20" width="37" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                         </activityIndicatorView>
-                        <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="112" userLabel="microButton" customClass="UIMicroButton">
+                        <button opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="112" userLabel="microButton" customClass="UIMicroButton">
                             <rect key="frame" x="130" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -632,9 +783,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="111" userLabel="speakerButton" customClass="UISpeakerButton">
+                        <button opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="111" userLabel="speakerButton" customClass="UISpeakerButton">
                             <rect key="frame" x="285" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -653,9 +803,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="183" userLabel="routesButton" customClass="UIToggleButton">
+                        <button opaque="NO" tag="29" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="183" userLabel="routesButton" customClass="UIToggleButton">
                             <rect key="frame" x="285" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -674,9 +823,8 @@
                                 <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
                             </state>
                         </button>
-                        <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="110" userLabel="optionsButton" customClass="UIToggleButton">
+                        <button opaque="NO" tag="23" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="110" userLabel="optionsButton" customClass="UIToggleButton">
                             <rect key="frame" x="350" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -698,9 +846,8 @@
                                 <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="134"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="109" userLabel="pauseButton" customClass="UIPauseButton">
+                        <button opaque="NO" tag="24" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="109" userLabel="pauseButton" customClass="UIPauseButton">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -710,9 +857,8 @@
                             <state key="selected" image="pause_on_default_landscape.png"/>
                             <state key="highlighted" image="pause_off_over_landscape.png"/>
                         </button>
-                        <button hidden="YES" opaque="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="108" userLabel="conferenceButton">
+                        <button hidden="YES" opaque="NO" tag="25" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="108" userLabel="conferenceButton">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -724,9 +870,8 @@
                                 <action selector="onConferenceClick:" destination="-1" eventType="touchUpInside" id="135"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="107" userLabel="hangupButton" customClass="UIHangUpButton">
+                        <button opaque="NO" tag="26" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="107" userLabel="hangupButton" customClass="UIHangUpButton">
                             <rect key="frame" x="195" y="0.0" width="90" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -735,9 +880,8 @@
                             </state>
                             <state key="highlighted" image="hangup_over_landscape.png"/>
                         </button>
-                        <button opaque="NO" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="106" userLabel="dialerButton" customClass="UIToggleButton">
+                        <button opaque="NO" tag="27" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="106" userLabel="dialerButton" customClass="UIToggleButton">
                             <rect key="frame" x="415" y="0.0" width="65" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <animations/>
                             <accessibility key="accessibilityConfiguration" label=""/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
