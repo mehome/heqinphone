@@ -33,9 +33,10 @@
 @property (nonatomic, retain)  UIPauseButton*   pauseButton;
 @property (nonatomic, retain) UIButton*        conferenceButton;
 @property (nonatomic, retain) UIToggleButton*  dialerButton;
-
 @property (nonatomic, retain) UIImageView*         leftPadding;
 @property (nonatomic, retain) UIImageView*         rightPadding;
+
+
 
 @property (nonatomic, retain) IBOutlet UIVideoButton*   videoButton;
 @property (nonatomic, retain) IBOutlet UIMicroButton*   microButton;

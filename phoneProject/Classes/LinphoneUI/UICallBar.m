@@ -25,6 +25,16 @@
 
 #include "linphone/linphonecore.h"
 
+@interface UICallBar ()
+
+@property (retain, nonatomic) IBOutlet UIButton *bottomSoundBtn;
+@property (retain, nonatomic) IBOutlet UIButton *bottomVedioBtn;
+@property (retain, nonatomic) IBOutlet UIButton *bottomInviteBtn;
+@property (retain, nonatomic) IBOutlet UIButton *bottomJoinerBtn;
+@property (retain, nonatomic) IBOutlet UIButton *bottomMoreBtn;
+
+@end
+
 @implementation UICallBar
 
 @synthesize pauseButton;
@@ -225,6 +235,46 @@
 		//reseting speaker button because no more call
 		speakerButton.selected=FALSE; 
 	}
+}
+
+
+- (IBAction)soundBtnClicked:(id)sender {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"stop here");
+    NSString *test = @"testSOng";
+    NSLog(@"show here:%@", test);
+}
+
+- (IBAction)vedioBtnClicked:(id)sender {
+    LinphoneCore* lc = [LinphoneManager getLc];
+    
+    if (!linphone_core_video_enabled(lc))
+        return;
+    
+//    [self setEnabled: FALSE];
+//    [waitView startAnimating];
+    
+    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
+    if (call) {
+        LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
+        callAppData->videoRequested=TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
+        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
+        linphone_call_params_enable_video(call_params, TRUE);
+        linphone_core_update_call(lc, call, call_params);
+        linphone_call_params_destroy(call_params);
+    } else {
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+    }   
+
+}
+
+- (IBAction)inviteBtnClicked:(id)sender {
+}
+
+- (IBAction)joinerBtnClicked:(id)sender {
+}
+
+- (IBAction)moreBtnClicked:(id)sender {
 }
 
 #pragma mark - Event Functions
