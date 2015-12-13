@@ -22,6 +22,7 @@
 #import "PhoneMainView.h"
 #import "Utils.h"
 #import "CAAnimation+Blocks.h"
+#import "LPInMeetingParticipatorViewController.h"
 
 #include "linphone/linphonecore.h"
 
@@ -130,7 +131,7 @@
     [self hidePad:FALSE];
     [self showSpeaker];
     
-    [self showAllBottomBgView];
+    [self hideAllBottomBgView];
 }
 
 - (void)hideAllBottomBgView {
@@ -206,8 +207,6 @@
     [self hideControlsCameraBgView:YES];
     [self hideControlsInviteBgView:YES];
     [self hideControlsMoreBgView:YES];
-
-    NSLog(@"joiner btn clicked");
 }
 
 // 底部更多按钮
@@ -226,7 +225,6 @@
 // 收藏按钮
 - (IBAction)collectionBtnClicked:(id)sender {
     [self hideAllBottomBgView];
-    // TODO
 }
 
 // 退出按钮
@@ -252,11 +250,15 @@
 // 静音
 - (IBAction)popVoiceOff:(id)sender {
     linphone_core_mute_mic([LinphoneManager getLc], true);
+    
+    [self hideAllBottomBgView];
 }
 
 // 关闭静音
 - (IBAction)popVoiceOn:(id)sender {
     linphone_core_mute_mic([LinphoneManager getLc], false);
+    
+    [self hideAllBottomBgView];
 }
 
 // 打开前摄像头
@@ -328,32 +330,42 @@
     } else {
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
     }
+    
+    [self hideAllBottomBgView];
 }
 
 // 发邮件
 - (IBAction)sendMailBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 // 发短信
 - (IBAction)sendSMSBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 // 呼号
 - (IBAction)callBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 // 复制地址
 - (IBAction)copyAddressBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 
 // 仅共享流
 - (IBAction)shareStreamBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 // 仅共享视频
 - (IBAction)shareVedioBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 // 锁定会议
 - (IBAction)lockMeetingBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 // 结束会议
 - (IBAction)endMeetingBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
 }
 
 + (int)callCount:(LinphoneCore*) lc {

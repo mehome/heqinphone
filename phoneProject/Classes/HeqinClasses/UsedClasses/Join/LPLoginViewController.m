@@ -203,7 +203,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-
 - (IBAction)backBtnClicked:(id)sender {
     [self jumpToMettingViewController];
 }
@@ -216,15 +215,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
     
     // 进行SIP注册功能
-//    NSString *username = self.userNameField.text;
-//    NSString *userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
-//    NSString *password = self.userPasswordField.text;
-//    NSString *transport = @"UDP";
-    
-    NSString *username = @"feng.wang";
-    NSString *userId = @"feng.wang@zijingcloud.com";
-    NSString *password = @"wang@2015";
+    NSString *username = self.userNameField.text;
+    NSString *userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
+    NSString *password = self.userPasswordField.text;
     NSString *transport = @"UDP";
+    
+//    NSString *username = @"feng.wang";
+//    NSString *userId = @"feng.wang@zijingcloud.com";
+//    NSString *password = @"wang@2015";
+//    NSString *transport = @"UDP";
     
     [self verificationSignInWithUsername:username userId:userId password:password domain:[LPSystemSetting sharedSetting].sipDomainStr withTransport:transport];
 }

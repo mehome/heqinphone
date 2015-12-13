@@ -8,6 +8,8 @@
 
 #import "LPInMeetingParticipatorViewController.h"
 #import "LPInMeetingParticipateTableViewCell.h"
+#import "PhoneMainView.h"
+#import "InCallViewController.h"
 
 @interface LPInMeetingParticipatorViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -25,7 +27,9 @@
 
 // 返回按钮
 - (IBAction)cancelBtnClicked:(id)sender {
+    [[PhoneMainView instance] popCurrentView];
     
+//    [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
 }
 
 // 全体静音
@@ -39,11 +43,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"InMeeting"
+        compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall"
                                                                 content:@"LPInMeetingParticipatorViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
-                                                                 tabBar:@"LPInMeetingBarViewController"
+                                                                 tabBar:@"UICallBar"
                                                           tabBarEnabled:true
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]

@@ -102,16 +102,12 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                  tabBar:@"UICallBar"
                                                           tabBarEnabled:true
                                                              fullscreen:false
-                                                          landscapeMode:true
+                                                          landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];        
-        compositeDescription.darkBackground = true;
-
-
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
 }
-
 
 #pragma mark - ViewController Functions
 

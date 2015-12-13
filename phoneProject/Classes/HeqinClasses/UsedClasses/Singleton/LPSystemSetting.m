@@ -68,7 +68,7 @@
     
     self.joinerName = [[NSUserDefaults standardUserDefaults] stringForKey:@"joinerName"];
     if (self.joinerName.length == 0) {
-        self.joinerName = @"张三";
+        self.joinerName = @"noName";
     }
 }
 

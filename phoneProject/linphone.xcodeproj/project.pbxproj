@@ -749,10 +749,6 @@
 		E10DE72D1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE72B1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib */; };
 		E10DE7311BFA1975002D0FBB /* LPMyMeetingArrangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE72F1BFA1975002D0FBB /* LPMyMeetingArrangeViewController.m */; };
 		E10DE7321BFA1975002D0FBB /* LPMyMeetingArrangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7301BFA1975002D0FBB /* LPMyMeetingArrangeViewController.xib */; };
-		E10DE7361BFA29DB002D0FBB /* LPInMeetingBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7341BFA29DB002D0FBB /* LPInMeetingBarViewController.m */; };
-		E10DE7371BFA29DB002D0FBB /* LPInMeetingBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7351BFA29DB002D0FBB /* LPInMeetingBarViewController.xib */; };
-		E10DE73B1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7391BFA2BF5002D0FBB /* LPInMeetingPlayViewController.m */; };
-		E10DE73C1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE73A1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.xib */; };
 		E10DE7401BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE73E1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.m */; };
 		E10DE7411BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE73F1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.xib */; };
 		E10DE7451BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7431BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.m */; };
@@ -1755,12 +1751,6 @@
 		E10DE72E1BFA1975002D0FBB /* LPMyMeetingArrangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMyMeetingArrangeViewController.h; sourceTree = "<group>"; };
 		E10DE72F1BFA1975002D0FBB /* LPMyMeetingArrangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMyMeetingArrangeViewController.m; sourceTree = "<group>"; };
 		E10DE7301BFA1975002D0FBB /* LPMyMeetingArrangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMyMeetingArrangeViewController.xib; sourceTree = "<group>"; };
-		E10DE7331BFA29DB002D0FBB /* LPInMeetingBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInMeetingBarViewController.h; sourceTree = "<group>"; };
-		E10DE7341BFA29DB002D0FBB /* LPInMeetingBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInMeetingBarViewController.m; sourceTree = "<group>"; };
-		E10DE7351BFA29DB002D0FBB /* LPInMeetingBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPInMeetingBarViewController.xib; sourceTree = "<group>"; };
-		E10DE7381BFA2BF5002D0FBB /* LPInMeetingPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInMeetingPlayViewController.h; sourceTree = "<group>"; };
-		E10DE7391BFA2BF5002D0FBB /* LPInMeetingPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInMeetingPlayViewController.m; sourceTree = "<group>"; };
-		E10DE73A1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPInMeetingPlayViewController.xib; sourceTree = "<group>"; };
 		E10DE73D1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInMeetingParticipatorViewController.h; sourceTree = "<group>"; };
 		E10DE73E1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInMeetingParticipatorViewController.m; sourceTree = "<group>"; };
 		E10DE73F1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPInMeetingParticipatorViewController.xib; sourceTree = "<group>"; };
@@ -2429,12 +2419,6 @@
 		1389514A1BEDDC60003DD7A0 /* InMeeting */ = {
 			isa = PBXGroup;
 			children = (
-				E10DE7331BFA29DB002D0FBB /* LPInMeetingBarViewController.h */,
-				E10DE7341BFA29DB002D0FBB /* LPInMeetingBarViewController.m */,
-				E10DE7351BFA29DB002D0FBB /* LPInMeetingBarViewController.xib */,
-				E10DE7381BFA2BF5002D0FBB /* LPInMeetingPlayViewController.h */,
-				E10DE7391BFA2BF5002D0FBB /* LPInMeetingPlayViewController.m */,
-				E10DE73A1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.xib */,
 				E10DE73D1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.h */,
 				E10DE73E1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.m */,
 				E10DE73F1BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.xib */,
@@ -3680,7 +3664,6 @@
 				D36C43D5158F2F370048BA40 /* header_conference.png in Resources */,
 				D36C43D7158F2F370048BA40 /* dialer_alt_default.png in Resources */,
 				D36C43D9158F2F370048BA40 /* dialer_alt_over.png in Resources */,
-				E10DE7371BFA29DB002D0FBB /* LPInMeetingBarViewController.xib in Resources */,
 				D36C43E9158F3F7E0048BA40 /* pause_on_default.png in Resources */,
 				F0C1F9121A28781F009402C9 /* corner-right-bottom.png in Resources */,
 				D36C43EB158F3F7E0048BA40 /* pause_on_over.png in Resources */,
@@ -4005,7 +3988,6 @@
 				D3804E6215D92A57008072A5 /* msg.wav in Resources */,
 				D321FF9915E628CB0098B5F4 /* linphonerc~ipad in Resources */,
 				D38187C115FE345B00C3EDCA /* DialerViewController.xib in Resources */,
-				E10DE73C1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.xib in Resources */,
 				57F005C415EE2CCF00914747 /* linphonerc in Resources */,
 				57F005C815EE2D9200914747 /* linphonerc-factory in Resources */,
 				57F005CA15EE2D9200914747 /* linphonerc-factory~ipad in Resources */,
@@ -4328,13 +4310,11 @@
 				138950F71BECA576003DD7A0 /* MTLModel.m in Sources */,
 				D374D3FD16071762003D25FF /* ImageSharing.m in Sources */,
 				E19A0D681BF4EAEE00E377DB /* RDRJoinMeetingModel.m in Sources */,
-				E10DE73B1BFA2BF5002D0FBB /* LPInMeetingPlayViewController.m in Sources */,
 				D35E91F4160CA10B0023116B /* UILinphoneTextField.m in Sources */,
 				1389507E1BECA38D003DD7A0 /* UIButton+AFNetworking.m in Sources */,
 				138951141BECA597003DD7A0 /* NSString+XXURLEncoding.m in Sources */,
 				D35E91F8160CA4FF0023116B /* UILinphoneButton.m in Sources */,
 				D306459E1611EC2A00BB571E /* UILoadingImageView.m in Sources */,
-				E10DE7361BFA29DB002D0FBB /* LPInMeetingBarViewController.m in Sources */,
 				138951761BEDFBAD003DD7A0 /* LPMeetingRoom.m in Sources */,
 				D37E3ECD1619C27A0087659A /* CAAnimation+Blocks.m in Sources */,
 			);

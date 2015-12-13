@@ -92,10 +92,10 @@
     LinphoneCore* lc = [LinphoneManager getLc];
     if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
         // 当前处于登出状态
-        self.joinNameField.text = @"登出";
-        self.joinMeetingNumberField.text = @"会议号";
+        self.joinNameField.text = @"noName";
+        self.joinMeetingNumberField.text = @"";
         
-        self.loginTipLabel.text = @"已登出";
+        self.loginTipLabel.text = @"未登录";
         
         self.loginBtn.enabled = YES;
     }else {
@@ -229,7 +229,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)loginBtnClicked:(id)sender {
     [self resignKeyboard];
-
+    
     NSString *btnTitle = [((UIButton *)sender) titleForState:UIControlStateNormal];
     if ([btnTitle isEqualToString:@"登录中"]) {
         NSLog(@"current is logining...");
@@ -253,6 +253,23 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(parsed != NULL) {
         linphone_address_set_display_name(parsed,[self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
     }
+    
+    linphone_address_set_display_name(parsed, [self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    linphone_address_set_username(parsed, [self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    
+    char *contact = linphone_address_as_string(parsed);
+    linphone_core_set_primary_contact(lc, contact);
+    ms_free(contact);
+    
+    const char *aftershowName = linphone_address_get_display_name(parsed);
+    NSString *afterNameStr = [NSString stringWithUTF8String:aftershowName];
+    
+    const char *afterShowUser = linphone_address_get_username(parsed);
+    NSString *afterUserStr = [NSString stringWithUTF8String:afterShowUser];
+
+    NSLog(@"after cur afterNameStr=%@, afterUserStr=%@", afterNameStr, afterUserStr);
+    
+    linphone_address_destroy(parsed);
 }
 
 - (IBAction)joinBtnClicked:(id)sender {
@@ -277,11 +294,17 @@ static UICompositeViewDescription *compositeDescription = nil;
         return;
     }
     
+    NSString *callStr = address;
+    NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr;
+    if (![address hasSuffix:domainStr]) {
+        callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
+    }
+    
     // 进入到会议中
     DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
     if (controller != nil) {
-        NSLog(@"进入会议中, addres=%@, displayName=%@", address, displayName);
-        [controller call:address displayName:displayName];
+        NSLog(@"进入会议中, callStr=%@, displayName=%@", callStr, displayName);
+        [controller call:callStr displayName:displayName];
     }
 }
 
