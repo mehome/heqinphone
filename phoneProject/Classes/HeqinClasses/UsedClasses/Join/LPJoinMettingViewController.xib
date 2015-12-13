@@ -115,7 +115,7 @@
                         <outlet property="delegate" destination="-1" id="sYG-Qz-lmi"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fjw-Rz-KN9">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fjw-Rz-KN9">
                     <rect key="frame" x="16" y="40" width="80" height="30"/>
                     <animations/>
                     <color key="backgroundColor" red="1" green="0.89642493680000002" blue="0.47173826740000002" alpha="1" colorSpace="calibratedRGB"/>

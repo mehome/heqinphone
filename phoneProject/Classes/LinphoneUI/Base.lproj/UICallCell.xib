@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICallCell">
@@ -58,13 +58,15 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="avatar_unknown.png" id="29" userLabel="avatarImage">
                                     <rect key="frame" x="80" y="0.0" width="160" height="170"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <accessibility key="accessibilityConfiguration" label="Contact avatar">
-                                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                         <bool key="isElement" value="YES"/>
                                     </accessibility>
                                 </imageView>
                             </subviews>
+                            <animations/>
                         </view>
                         <view contentMode="scaleToFill" id="76" userLabel="audioStatsView">
                             <rect key="frame" x="0.0" y="63" width="331" height="237"/>
@@ -73,6 +75,7 @@
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Audio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="95" userLabel="audioLabel">
                                     <rect key="frame" x="15" y="21" width="300" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="Audio section"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <color key="textColor" red="0.35686275360000003" green="0.3960784376" blue="0.43529412150000002" alpha="1" colorSpace="deviceRGB"/>
@@ -85,6 +88,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Codec:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="85" userLabel="audioCodecHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -94,6 +98,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SILK" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="84" userLabel="audioCodecLabel">
                                             <rect key="frame" x="68" y="0.0" width="242" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Audio codec">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -101,6 +106,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="89" userLabel="audioUploadBandwidthView">
@@ -110,6 +116,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Upload bandwidth:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="91" userLabel="audioUploadBandwidthHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -119,6 +126,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2 KB/s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="90" userLabel="audioUploadBandwidthLabel">
                                             <rect key="frame" x="168" y="0.0" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Audio upload bandwidth">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -126,6 +134,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="92" userLabel="audioDownloadBandwidthView">
@@ -135,6 +144,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Download bandwidth:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="93" userLabel="audioDownloadBandwidthHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="182" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -144,6 +154,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10.0 KB/s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="94" userLabel="audioDownloadBandwidthLabel">
                                             <rect key="frame" x="190" y="0.0" width="120" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Video upload bandwidth">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -151,6 +162,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="96" userLabel="audioIceConnectivityView">
@@ -160,6 +172,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ICE connectivity:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="98" userLabel="audioIceConnectivityHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -169,6 +182,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="not activated" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="97" userLabel="audioIceConnectivityLabel">
                                             <rect key="frame" x="150" y="0.0" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Audio ICE connectivity state">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -176,9 +190,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="99" userLabel="videoStatsView">
@@ -188,6 +204,7 @@
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="101" userLabel="videoLabel">
                                     <rect key="frame" x="15" y="21" width="300" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <animations/>
                                     <accessibility key="accessibilityConfiguration" label="Video section"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <color key="textColor" red="0.35686275360000003" green="0.3960784376" blue="0.43529412150000002" alpha="1" colorSpace="deviceRGB"/>
@@ -200,6 +217,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Codec:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="105" userLabel="videoCodecHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -209,6 +227,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="SILK" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="106" userLabel="videoCodecLabel">
                                             <rect key="frame" x="68" y="0.0" width="242" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Video codec">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -216,6 +235,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="j5j-bZ-C2L" userLabel="videoSentSizeView">
@@ -225,6 +245,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Size sent:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="6PM-O1-cYd" userLabel="videoSentSizeHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -234,6 +255,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="320x240" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="CCZ-g0-5g1" userLabel="videoSentSizeLabel">
                                             <rect key="frame" x="168" y="0.0" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Video upload bandwidth">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -241,6 +263,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="6oX-23-Ivn" userLabel="videoRecvSizeView">
@@ -250,6 +273,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Size received:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="nNJ-4U-pl2" userLabel="videoRecvSizeHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -259,6 +283,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="320x240" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="RxS-YG-dqM" userLabel="videoRecvSizeLabel">
                                             <rect key="frame" x="168" y="0.0" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Video upload bandwidth">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -266,6 +291,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="103" userLabel="videoUploadBandwidthView">
@@ -275,6 +301,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Upload bandwidth:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="107" userLabel="videoUploadBandwidthHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -284,6 +311,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2 KB/s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="108" userLabel="videoUploadBandwidthLabel">
                                             <rect key="frame" x="168" y="0.0" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Video upload bandwidth">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -291,6 +319,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="102" userLabel="videoDownloadBandwidthView">
@@ -300,6 +329,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Download bandwidth:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="110" userLabel="videoDownloadBandwidthHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="182" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -309,6 +339,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10.0 KB/s" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="109" userLabel="videoDownloadBandwidthLabel">
                                             <rect key="frame" x="190" y="0.0" width="120" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Audio download bandwidth">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -316,6 +347,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="100" userLabel="videoIceConnectivityView">
@@ -325,6 +357,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ICE connectivity:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="111" userLabel="videoIceConnectivityHeaderLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration">
                                                 <bool key="isElement" value="NO"/>
                                             </accessibility>
@@ -334,6 +367,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="not activated" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="112" userLabel="videoIceConnectivityLabel">
                                             <rect key="frame" x="150" y="0.0" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <accessibility key="accessibilityConfiguration" label="Video ICE connectivity state">
                                                 <accessibilityTraits key="traits" none="YES"/>
                                             </accessibility>
@@ -341,12 +375,15 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="36" userLabel="headerView">
@@ -356,14 +393,17 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cell_call_first.png" id="52" userLabel="headerBackgroundImage">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" id="56" userLabel="headerBackgroundHighlightImage">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
                         </imageView>
                         <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="0102030405" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="17" userLabel="addressLabel">
                             <rect key="frame" x="95" y="0.0" width="125" height="51"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" label="Contact name">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -374,14 +414,16 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="18" userLabel="stateImage">
                             <rect key="frame" x="224" y="14" width="25" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" label="Call state">
-                                <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                         </imageView>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="49" userLabel="removeButton" customClass="UIPauseButton">
                             <rect key="frame" x="216" y="6" width="41" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" label="Remove"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
@@ -396,6 +438,7 @@
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="47" userLabel="pauseButton" customClass="UIPauseButton">
                             <rect key="frame" x="216" y="6" width="41" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" label="Pause"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
@@ -408,6 +451,7 @@
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="12:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="19" userLabel="stateLabel">
                             <rect key="frame" x="262" y="12" width="50" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" label="Duration">
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
@@ -418,6 +462,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="38" userLabel="toggleButton">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <accessibility key="accessibilityConfiguration" label="Expand"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal">
@@ -432,9 +477,11 @@
                             </connections>
                         </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -449,9 +496,4 @@
         <image name="call_state_play_over.png" width="43" height="46"/>
         <image name="cell_call_first.png" width="640" height="125"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

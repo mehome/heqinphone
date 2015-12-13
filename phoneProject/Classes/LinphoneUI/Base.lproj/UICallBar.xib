@@ -12,160 +12,55 @@
                 <outlet property="bottomMoreBtn" destination="FpB-mZ-2Go" id="uFj-jY-Ood"/>
                 <outlet property="bottomSoundBtn" destination="bHl-tm-Qpf" id="MZJ-K3-iqt"/>
                 <outlet property="bottomVedioBtn" destination="GNF-1H-otf" id="h8m-gS-RcS"/>
-                <outlet property="hangupButton" destination="7" id="29"/>
+                <outlet property="cameraBgView" destination="iMf-Ru-Ria" id="mwr-Hc-Ydp"/>
+                <outlet property="collectionBtn" destination="wYW-zC-DW3" id="mmh-XW-WUf"/>
+                <outlet property="inviteBgView" destination="Aj1-3K-9ev" id="ykE-sh-FQU"/>
                 <outlet property="landscapeView" destination="100" id="137"/>
-                <outlet property="microButton" destination="11" id="14"/>
-                <outlet property="optionsAddButton" destination="88" id="96"/>
-                <outlet property="optionsButton" destination="10" id="19"/>
-                <outlet property="optionsTransferButton" destination="90" id="97"/>
-                <outlet property="optionsView" destination="87" id="92"/>
+                <outlet property="moreBgView" destination="Wse-Ej-3Wy" id="EQm-vi-prn"/>
+                <outlet property="popCameraCloseBtn" destination="ybr-s9-9pl" id="Vfw-l2-Ma9"/>
+                <outlet property="popCameraFrontBtn" destination="ZZK-ag-SSz" id="JBQ-Et-hMH"/>
+                <outlet property="popCameraTailBtn" destination="RfL-uU-Uk1" id="HWK-gu-Dbw"/>
+                <outlet property="popInviteCallBtn" destination="Bqg-vk-D8Y" id="ogy-2y-LHy"/>
+                <outlet property="popInviteCopyAddBtn" destination="Yk8-hw-sOR" id="uyB-Vd-bML"/>
+                <outlet property="popInviteMailBtn" destination="TIr-iY-1b4" id="3CK-Au-Vb3"/>
+                <outlet property="popInviteSMSBtn" destination="aT8-X6-tru" id="aWk-Ge-gTe"/>
+                <outlet property="popMoreCloseMeetingBtn" destination="ZXq-od-yWI" id="Fjx-uU-iqZ"/>
+                <outlet property="popMoreLockMeetingBtn" destination="97f-su-Lz4" id="c8s-Dr-pjf"/>
+                <outlet property="popMoreOnlyShareStreamBtn" destination="PsA-aj-JHX" id="eMV-Lk-4lB"/>
+                <outlet property="popMoreOnlyShareVedioBtn" destination="L7p-42-kSi" id="crz-a0-TY7"/>
+                <outlet property="popVoiceNoSilenceBtn" destination="Z0x-BW-vu7" id="i4c-GI-zeF"/>
+                <outlet property="popVoiceSiclenBtn" destination="08U-5g-oaz" id="9As-lZ-AaF"/>
                 <outlet property="portraitView" destination="4" id="138"/>
-                <outlet property="routesBluetoothButton" destination="174" id="203"/>
-                <outlet property="routesButton" destination="164" id="202"/>
-                <outlet property="routesReceiverButton" destination="169" id="204"/>
-                <outlet property="routesSpeakerButton" destination="168" id="205"/>
-                <outlet property="routesView" destination="167" id="206"/>
-                <outlet property="speakerButton" destination="9" id="16"/>
-                <outlet property="videoButton" destination="12" id="17"/>
+                <outlet property="quitBtn" destination="uje-v5-zRE" id="jR3-5C-1eQ"/>
                 <outlet property="view" destination="4" id="13"/>
+                <outlet property="voiceBgView" destination="cuO-qp-t9Q" id="tGg-py-Jpm"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="4" userLabel="Portrait View" customClass="UITransparentView">
-            <rect key="frame" x="0.0" y="0.0" width="339" height="487"/>
+            <rect key="frame" x="0.0" y="0.0" width="339" height="460"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <subviews>
-                <view tag="33" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="167" userLabel="routesView">
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuO-qp-t9Q" userLabel="voiceBgView">
+                    <rect key="frame" x="0.0" y="328" width="68" height="88"/>
                     <subviews>
-                        <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="174" userLabel="routesBluetoothButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="127"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Bluetooth"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Bluetooth" backgroundImage="route_bluetooth_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="route_bluetooth_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="route_bluetooth_on_default.png"/>
-                            <state key="highlighted" backgroundImage="route_bluetooth_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesBluetoothClick:" destination="-1" eventType="touchUpInside" id="208"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="31" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="169" userLabel="routesReceiverButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="127"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Receiver"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Receiver" backgroundImage="route_phone_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="route_phone_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="route_phone_on_default.png"/>
-                            <state key="highlighted" backgroundImage="route_phone_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesReceiverClick:" destination="-1" eventType="touchUpInside" id="209"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="32" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="168" userLabel="routesSpeakerButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="127"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Speaker" backgroundImage="route_speaker_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="route_speaker_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="route_speaker_on_default.png"/>
-                            <state key="highlighted" backgroundImage="route_speaker_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onRoutesSpeakerClick:" destination="-1" eventType="touchUpInside" id="210"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view tag="15" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87" userLabel="optionsView">
-                    <subviews>
-                        <button opaque="NO" tag="16" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90" userLabel="optionsTansferButton">
-                            <rect key="frame" x="0.0" y="0.0" width="155" height="137"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Transfer call"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Transfer" backgroundImage="options_transfer_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="options_transfer_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="options_transfer_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="91"/>
-                                <action selector="onOptionsTransferClick:" destination="-1" eventType="touchUpInside" id="98"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="17" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88" userLabel="optionsAddButton">
-                            <rect key="frame" x="0.0" y="0.0" width="155" height="137"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Add call"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Add call" backgroundImage="options_add_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="options_add_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="options_add_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onOptionsAddClick:" destination="-1" eventType="touchUpInside" id="93"/>
-                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="89"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view tag="15" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuO-qp-t9Q" userLabel="voiceBgView">
-                    <rect key="frame" x="0.0" y="326" width="64" height="88"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08U-5g-oaz" userLabel="closeVoiceBtn">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08U-5g-oaz" userLabel="closeVoiceBtn">
+                            <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="静音"/>
+                            <connections>
+                                <action selector="popVoiceOff:" destination="-1" eventType="touchUpInside" id="cc8-mv-2zO"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0x-BW-vu7" userLabel="openVoiceBtn">
-                            <rect key="frame" x="0.0" y="44" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0x-BW-vu7" userLabel="openVoiceBtn">
+                            <rect key="frame" x="0.0" y="44" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="取消"/>
+                            <connections>
+                                <action selector="popVoiceOn:" destination="-1" eventType="touchUpInside" id="5Ye-sq-TiJ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
@@ -182,26 +77,35 @@
                         <constraint firstItem="Z0x-BW-vu7" firstAttribute="leading" secondItem="cuO-qp-t9Q" secondAttribute="leading" id="vEf-G4-5LZ"/>
                     </constraints>
                 </view>
-                <view tag="15" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-Ru-Ria" userLabel="cameraBgView">
-                    <rect key="frame" x="64" y="282" width="64" height="132"/>
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-Ru-Ria" userLabel="cameraBgView">
+                    <rect key="frame" x="68" y="284" width="68" height="132"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-ag-SSz" userLabel="frontCameraBtn">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-ag-SSz" userLabel="frontCameraBtn">
+                            <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="前摄像头"/>
+                            <connections>
+                                <action selector="popCameraFront:" destination="-1" eventType="touchUpInside" id="bIY-EV-sXc"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfL-uU-Uk1" userLabel="tailCameraBtn">
-                            <rect key="frame" x="0.0" y="44" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfL-uU-Uk1" userLabel="tailCameraBtn">
+                            <rect key="frame" x="0.0" y="44" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="后摄像头"/>
+                            <connections>
+                                <action selector="popCameraTail:" destination="-1" eventType="touchUpInside" id="Gkw-as-VY6"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-s9-9pl" userLabel="closeCameraBtn">
-                            <rect key="frame" x="0.0" y="88" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-s9-9pl" userLabel="closeCameraBtn">
+                            <rect key="frame" x="0.0" y="88" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="关闭"/>
+                            <connections>
+                                <action selector="popCameraClose:" destination="-1" eventType="touchUpInside" id="zNQ-01-5Zi"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
@@ -225,32 +129,44 @@
                         <constraint firstItem="ybr-s9-9pl" firstAttribute="leading" secondItem="iMf-Ru-Ria" secondAttribute="leading" id="vjf-XT-th8"/>
                     </constraints>
                 </view>
-                <view tag="15" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wse-Ej-3Wy" userLabel="moreBgView">
-                    <rect key="frame" x="255" y="238" width="64" height="176"/>
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wse-Ej-3Wy" userLabel="moreBgView">
+                    <rect key="frame" x="271" y="240" width="68" height="176"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsA-aj-JHX">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsA-aj-JHX">
+                            <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" title="仅共享流"/>
+                            <connections>
+                                <action selector="shareStreamBtnClicked:" destination="-1" eventType="touchUpInside" id="dEM-qj-z14"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7p-42-kSi">
-                            <rect key="frame" x="0.0" y="44" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7p-42-kSi">
+                            <rect key="frame" x="0.0" y="44" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.89642493680000002" blue="0.47173826740000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="仅共享视"/>
+                            <connections>
+                                <action selector="shareVedioBtnClicked:" destination="-1" eventType="touchUpInside" id="HgN-Pq-5z1"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97f-su-Lz4">
-                            <rect key="frame" x="0.0" y="88" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97f-su-Lz4">
+                            <rect key="frame" x="0.0" y="88" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="锁定会议"/>
+                            <connections>
+                                <action selector="lockMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="PGi-M4-rlH"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXq-od-yWI">
-                            <rect key="frame" x="0.0" y="132" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXq-od-yWI">
+                            <rect key="frame" x="0.0" y="132" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="0.91935234489999995" green="0.42483804409999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="结束会议"/>
+                            <connections>
+                                <action selector="endMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="cnP-Xa-BEg"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
@@ -276,130 +192,74 @@
                         <constraint firstItem="L7p-42-kSi" firstAttribute="height" secondItem="PsA-aj-JHX" secondAttribute="height" id="uyo-HO-yCE"/>
                     </constraints>
                 </view>
-                <view tag="18" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="buttons">
+                <view tag="15" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj1-3K-9ev" userLabel="inviteBgView">
+                    <rect key="frame" x="136" y="240" width="67" height="176"/>
                     <subviews>
-                        <button opaque="NO" tag="19" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="videoButton" customClass="UIVideoButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIr-iY-1b4">
+                            <rect key="frame" x="0.0" y="0.0" width="67" height="44"/>
                             <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Video"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Video" backgroundImage="video_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="video_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="video_on_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="video_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
+                            <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="发邮件"/>
                             <connections>
-                                <outlet property="waitView" destination="59" id="60"/>
+                                <action selector="sendMailBtnClicked:" destination="-1" eventType="touchUpInside" id="nBb-L3-vnJ"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="21" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11" userLabel="microButton" customClass="UIMicroButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqg-vk-D8Y">
+                            <rect key="frame" x="0.0" y="88" width="67" height="44"/>
                             <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Micro"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Micro" backgroundImage="micro_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="micro_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="micro_on_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="micro_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" tag="22" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9" userLabel="speakerButton" customClass="UISpeakerButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Speaker" backgroundImage="speaker_off_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="speaker_off_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="speaker_on_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="speaker_off_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" tag="29" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="164" userLabel="routesButton" customClass="UIToggleButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
-                            <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Route"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Route" backgroundImage="routes_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="routes_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="routes_selected.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="routes_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="呼叫"/>
                             <connections>
-                                <action selector="onRoutesClick:" destination="-1" eventType="touchUpInside" id="211"/>
+                                <action selector="callBtnClicked:" destination="-1" eventType="touchUpInside" id="BTu-Tx-Ajv"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="23" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10" userLabel="optionsButton" customClass="UIToggleButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="134"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yk8-hw-sOR">
+                            <rect key="frame" x="0.0" y="132" width="67" height="44"/>
                             <animations/>
-                            <accessibility key="accessibilityConfiguration" label="Options"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Options" backgroundImage="options_default.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="disabled" backgroundImage="options_disabled.png">
-                                <color key="titleColor" red="0.65098039220000004" green="0.70196078429999997" blue="0.74901960779999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="options_selected.png">
-                                <color key="titleColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.30980392159999998" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
-                            <state key="highlighted" backgroundImage="options_over.png">
-                                <color key="titleColor" red="0.81176470590000005" green="0.29803921570000003" blue="0.16078431369999999" alpha="1" colorSpace="deviceRGB"/>
-                            </state>
+                            <color key="backgroundColor" red="0.49262496630000002" green="1" blue="0.83915001170000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="复制地址"/>
                             <connections>
-                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="20"/>
+                                <action selector="copyAddressBtnClicked:" destination="-1" eventType="touchUpInside" id="SVV-w0-Tji"/>
                             </connections>
                         </button>
-                        <activityIndicatorView hidden="YES" opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="59" userLabel="videoWaitView">
-                            <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aT8-X6-tru">
+                            <rect key="frame" x="0.0" y="44" width="67" height="44"/>
                             <animations/>
-                        </activityIndicatorView>
+                            <color key="backgroundColor" red="0.1928987284" green="0.81417692549999998" blue="0.55604959279999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="发短信"/>
+                            <connections>
+                                <action selector="sendSMSBtnClicked:" destination="-1" eventType="touchUpInside" id="B61-8v-SlK"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="top" secondItem="aT8-X6-tru" secondAttribute="bottom" id="8oT-76-ax6"/>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="BWB-If-bL7"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="D9i-AF-KUg"/>
+                        <constraint firstItem="TIr-iY-1b4" firstAttribute="top" secondItem="Aj1-3K-9ev" secondAttribute="top" id="Dh5-7Q-W7J"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="top" secondItem="TIr-iY-1b4" secondAttribute="bottom" id="Fn8-6w-oPX"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="GgW-Ut-wSq"/>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="HGK-hw-JBc"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="top" secondItem="Bqg-vk-D8Y" secondAttribute="bottom" id="NII-Yd-ShB"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="leading" secondItem="Aj1-3K-9ev" secondAttribute="leading" id="W7R-gx-f8X"/>
+                        <constraint firstAttribute="trailing" secondItem="TIr-iY-1b4" secondAttribute="trailing" id="cOm-wr-g9A"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="cwM-Rq-1r0"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="kYX-N4-hXV"/>
+                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="pTc-hM-Yuw"/>
+                        <constraint firstItem="TIr-iY-1b4" firstAttribute="leading" secondItem="Aj1-3K-9ev" secondAttribute="leading" id="r1x-4m-oNj"/>
+                        <constraint firstAttribute="bottom" secondItem="Yk8-hw-sOR" secondAttribute="bottom" id="ren-hN-V6O"/>
+                        <constraint firstAttribute="trailing" secondItem="Yk8-hw-sOR" secondAttribute="trailing" id="twr-9g-fZj"/>
+                        <constraint firstItem="aT8-X6-tru" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="ynq-JC-l2g"/>
+                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="ztj-A3-ypV"/>
+                    </constraints>
                 </view>
-                <view tag="18" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="skh-FZ-hiA" userLabel="btnBgView">
-                    <rect key="frame" x="0.0" y="414" width="319" height="44"/>
+                <view tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skh-FZ-hiA" userLabel="btnBgView">
+                    <rect key="frame" x="0.0" y="416" width="339" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf">
-                            <rect key="frame" x="0.0" y="-1" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf">
+                            <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="声音"/>
@@ -407,8 +267,8 @@
                                 <action selector="soundBtnClicked:" destination="-1" eventType="touchUpInside" id="Lid-eP-NRU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-1H-otf">
-                            <rect key="frame" x="64" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-1H-otf">
+                            <rect key="frame" x="68" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="视频"/>
@@ -416,8 +276,8 @@
                                 <action selector="vedioBtnClicked:" destination="-1" eventType="touchUpInside" id="FdZ-pX-Mcz"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
-                            <rect key="frame" x="128" y="0.0" width="63" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
+                            <rect key="frame" x="136" y="0.0" width="67" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="1" green="1" blue="0.2181815057" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="邀请"/>
@@ -425,8 +285,8 @@
                                 <action selector="inviteBtnClicked:" destination="-1" eventType="touchUpInside" id="oa7-Gj-h1a"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXY-4Q-XR0">
-                            <rect key="frame" x="191" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXY-4Q-XR0">
+                            <rect key="frame" x="203" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="参与人"/>
@@ -434,8 +294,8 @@
                                 <action selector="joinerBtnClicked:" destination="-1" eventType="touchUpInside" id="FYa-MW-Ffe"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-mZ-2Go">
-                            <rect key="frame" x="255" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-mZ-2Go">
+                            <rect key="frame" x="271" y="0.0" width="68" height="44"/>
                             <animations/>
                             <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="更多"/>
@@ -472,69 +332,8 @@
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="tap-Ne-OVu"/>
                     </constraints>
                 </view>
-                <button opaque="NO" tag="26" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7" userLabel="hangupButton" customClass="UIHangUpButton">
-                    <rect key="frame" x="0.0" y="0.0" width="222" height="136"/>
-                    <animations/>
-                    <accessibility key="accessibilityConfiguration" label="Hangup"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="hangup_default.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted" image="hangup_over.png"/>
-                </button>
-                <view tag="15" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aj1-3K-9ev" userLabel="inviteBgView">
-                    <rect key="frame" x="128" y="238" width="63" height="176"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIr-iY-1b4">
-                            <rect key="frame" x="0.0" y="0.0" width="63" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="发邮件"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqg-vk-D8Y">
-                            <rect key="frame" x="0.0" y="88" width="63" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="呼叫"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yk8-hw-sOR">
-                            <rect key="frame" x="0.0" y="132" width="63" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="0.49262496630000002" green="1" blue="0.83915001170000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="复制地址"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aT8-X6-tru">
-                            <rect key="frame" x="0.0" y="44" width="63" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="0.1928987284" green="0.81417692549999998" blue="0.55604959279999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="发短信"/>
-                        </button>
-                    </subviews>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="top" secondItem="aT8-X6-tru" secondAttribute="bottom" id="8oT-76-ax6"/>
-                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="BWB-If-bL7"/>
-                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="D9i-AF-KUg"/>
-                        <constraint firstItem="TIr-iY-1b4" firstAttribute="top" secondItem="Aj1-3K-9ev" secondAttribute="top" id="Dh5-7Q-W7J"/>
-                        <constraint firstItem="aT8-X6-tru" firstAttribute="top" secondItem="TIr-iY-1b4" secondAttribute="bottom" id="Fn8-6w-oPX"/>
-                        <constraint firstItem="aT8-X6-tru" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="GgW-Ut-wSq"/>
-                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="HGK-hw-JBc"/>
-                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="top" secondItem="Bqg-vk-D8Y" secondAttribute="bottom" id="NII-Yd-ShB"/>
-                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="leading" secondItem="Aj1-3K-9ev" secondAttribute="leading" id="W7R-gx-f8X"/>
-                        <constraint firstAttribute="trailing" secondItem="TIr-iY-1b4" secondAttribute="trailing" id="cOm-wr-g9A"/>
-                        <constraint firstItem="aT8-X6-tru" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="cwM-Rq-1r0"/>
-                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="kYX-N4-hXV"/>
-                        <constraint firstItem="Bqg-vk-D8Y" firstAttribute="width" secondItem="TIr-iY-1b4" secondAttribute="width" id="pTc-hM-Yuw"/>
-                        <constraint firstItem="TIr-iY-1b4" firstAttribute="leading" secondItem="Aj1-3K-9ev" secondAttribute="leading" id="r1x-4m-oNj"/>
-                        <constraint firstAttribute="bottom" secondItem="Yk8-hw-sOR" secondAttribute="bottom" id="ren-hN-V6O"/>
-                        <constraint firstAttribute="trailing" secondItem="Yk8-hw-sOR" secondAttribute="trailing" id="twr-9g-fZj"/>
-                        <constraint firstItem="aT8-X6-tru" firstAttribute="height" secondItem="TIr-iY-1b4" secondAttribute="height" id="ynq-JC-l2g"/>
-                        <constraint firstItem="Yk8-hw-sOR" firstAttribute="centerX" secondItem="TIr-iY-1b4" secondAttribute="centerX" id="ztj-A3-ypV"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uje-v5-zRE">
-                    <rect key="frame" x="229" y="10" width="80" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uje-v5-zRE">
+                    <rect key="frame" x="249" y="10" width="80" height="30"/>
                     <animations/>
                     <color key="backgroundColor" red="0.23324932919999999" green="1" blue="0.2426212358" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -542,12 +341,18 @@
                         <constraint firstAttribute="height" constant="30" id="eDH-ue-7wn"/>
                     </constraints>
                     <state key="normal" title="退出"/>
+                    <connections>
+                        <action selector="quitBtnClicked:" destination="-1" eventType="touchUpInside" id="x8j-Pg-PeQ"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-zC-DW3">
-                    <rect key="frame" x="139" y="10" width="80" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-zC-DW3">
+                    <rect key="frame" x="159" y="10" width="80" height="30"/>
                     <animations/>
                     <color key="backgroundColor" red="0.91935234489999995" green="0.42483804409999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="收藏"/>
+                    <connections>
+                        <action selector="collectionBtnClicked:" destination="-1" eventType="touchUpInside" id="CT4-xH-TCS"/>
+                    </connections>
                 </button>
             </subviews>
             <animations/>
@@ -585,7 +390,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="427.5" y="716.5"/>
+            <point key="canvasLocation" x="406.5" y="730"/>
         </view>
         <view contentMode="scaleToFill" id="100" userLabel="Landscape View" customClass="UITransparentView">
             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
@@ -1016,19 +821,13 @@
         <image name="dialer_alt_background.png" width="530" height="526"/>
         <image name="dialer_alt_default_landscape.png" width="130" height="163"/>
         <image name="dialer_alt_over_landscape.png" width="130" height="163"/>
-        <image name="hangup_default.png" width="222" height="136"/>
         <image name="hangup_default_landscape.png" width="180" height="163"/>
-        <image name="hangup_over.png" width="222" height="136"/>
         <image name="hangup_over_landscape.png" width="180" height="163"/>
         <image name="incall_padding_left_landscape.png" width="256" height="210"/>
         <image name="incall_padding_right_landscape.png" width="256" height="210"/>
-        <image name="micro_off_default.png" width="160" height="134"/>
         <image name="micro_off_default_landscape.png" width="130" height="163"/>
-        <image name="micro_off_disabled.png" width="160" height="134"/>
         <image name="micro_off_disabled_landscape.png" width="130" height="163"/>
-        <image name="micro_off_over.png" width="160" height="134"/>
         <image name="micro_off_over_landscape.png" width="130" height="163"/>
-        <image name="micro_on_default.png" width="160" height="134"/>
         <image name="micro_on_default_landscape.png" width="130" height="163"/>
         <image name="numpad_eight_default.png" width="220" height="113"/>
         <image name="numpad_eight_over.png" width="220" height="113"/>
@@ -1054,76 +853,42 @@
         <image name="numpad_two_over.png" width="220" height="113"/>
         <image name="numpad_zero_default.png" width="220" height="113"/>
         <image name="numpad_zero_over.png" width="220" height="113"/>
-        <image name="options_add_default.png" width="155" height="137"/>
         <image name="options_add_default_landscape.png" width="129" height="109"/>
-        <image name="options_add_disabled.png" width="155" height="137"/>
         <image name="options_add_disabled_landscape.png" width="129" height="109"/>
-        <image name="options_add_over.png" width="155" height="137"/>
         <image name="options_add_over_landscape.png" width="129" height="109"/>
-        <image name="options_default.png" width="160" height="134"/>
         <image name="options_default_landscape.png" width="130" height="163"/>
-        <image name="options_disabled.png" width="160" height="134"/>
         <image name="options_disabled_landscape.png" width="130" height="163"/>
-        <image name="options_over.png" width="160" height="134"/>
         <image name="options_over_landscape.png" width="130" height="163"/>
-        <image name="options_selected.png" width="160" height="134"/>
         <image name="options_selected_landscape.png" width="130" height="163"/>
-        <image name="options_transfer_default.png" width="155" height="137"/>
         <image name="options_transfer_default_landscape.png" width="129" height="109"/>
-        <image name="options_transfer_disabled.png" width="155" height="137"/>
         <image name="options_transfer_disabled_landscape.png" width="129" height="109"/>
-        <image name="options_transfer_over.png" width="155" height="137"/>
         <image name="options_transfer_over_landscape.png" width="129" height="109"/>
         <image name="pause_off_default_landscape.png" width="130" height="163"/>
         <image name="pause_off_over_landscape.png" width="130" height="163"/>
         <image name="pause_on_default_landscape.png" width="130" height="163"/>
-        <image name="route_bluetooth_off_default.png" width="160" height="127"/>
         <image name="route_bluetooth_off_default_landscape.png" width="130" height="114"/>
-        <image name="route_bluetooth_off_disabled.png" width="160" height="127"/>
         <image name="route_bluetooth_off_disabled_landscape.png" width="130" height="114"/>
-        <image name="route_bluetooth_off_over.png" width="160" height="127"/>
         <image name="route_bluetooth_off_over_landscape.png" width="130" height="114"/>
-        <image name="route_bluetooth_on_default.png" width="160" height="127"/>
         <image name="route_bluetooth_on_default_landscape.png" width="130" height="114"/>
-        <image name="route_phone_off_default.png" width="160" height="127"/>
         <image name="route_phone_off_default_landscape.png" width="130" height="114"/>
-        <image name="route_phone_off_disabled.png" width="160" height="127"/>
         <image name="route_phone_off_disabled_landscape.png" width="130" height="114"/>
-        <image name="route_phone_off_over.png" width="160" height="127"/>
         <image name="route_phone_off_over_landscape.png" width="130" height="114"/>
-        <image name="route_phone_on_default.png" width="160" height="127"/>
         <image name="route_phone_on_default_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_off_default.png" width="160" height="127"/>
         <image name="route_speaker_off_default_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_off_disabled.png" width="160" height="127"/>
         <image name="route_speaker_off_disabled_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_off_over.png" width="160" height="127"/>
         <image name="route_speaker_off_over_landscape.png" width="130" height="114"/>
-        <image name="route_speaker_on_default.png" width="160" height="127"/>
         <image name="route_speaker_on_default_landscape.png" width="130" height="114"/>
-        <image name="routes_default.png" width="160" height="134"/>
         <image name="routes_default_landscape.png" width="130" height="163"/>
-        <image name="routes_disabled.png" width="160" height="134"/>
         <image name="routes_disabled_landscape.png" width="130" height="163"/>
-        <image name="routes_over.png" width="160" height="134"/>
         <image name="routes_over_landscape.png" width="130" height="163"/>
-        <image name="routes_selected.png" width="160" height="134"/>
         <image name="routes_selected_landscape.png" width="130" height="163"/>
-        <image name="speaker_off_default.png" width="160" height="134"/>
         <image name="speaker_off_default_landscape.png" width="130" height="163"/>
-        <image name="speaker_off_disabled.png" width="160" height="134"/>
         <image name="speaker_off_disabled_landscape.png" width="130" height="163"/>
-        <image name="speaker_off_over.png" width="160" height="134"/>
         <image name="speaker_off_over_landscape.png" width="130" height="163"/>
-        <image name="speaker_on_default.png" width="160" height="134"/>
         <image name="speaker_on_default_landscape.png" width="130" height="163"/>
-        <image name="video_off_default.png" width="160" height="134"/>
         <image name="video_off_default_landscape.png" width="130" height="163"/>
-        <image name="video_off_disabled.png" width="160" height="134"/>
         <image name="video_off_disabled_landscape.png" width="130" height="163"/>
-        <image name="video_off_over.png" width="160" height="134"/>
         <image name="video_off_over_landscape.png" width="130" height="163"/>
-        <image name="video_on_default.png" width="160" height="134"/>
         <image name="video_on_default_landscape.png" width="130" height="163"/>
     </resources>
 </document>

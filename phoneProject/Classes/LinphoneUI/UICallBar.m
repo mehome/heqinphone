@@ -33,6 +33,28 @@
 @property (retain, nonatomic) IBOutlet UIButton *bottomJoinerBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomMoreBtn;
 
+@property (retain, nonatomic) IBOutlet UIView *voiceBgView;
+@property (retain, nonatomic) IBOutlet UIView *cameraBgView;
+@property (retain, nonatomic) IBOutlet UIView *moreBgView;
+@property (retain, nonatomic) IBOutlet UIView *inviteBgView;
+
+@property (retain, nonatomic) IBOutlet UIButton *popVoiceSiclenBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popVoiceNoSilenceBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popCameraFrontBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popCameraTailBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popCameraCloseBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popInviteMailBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popInviteSMSBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popInviteCallBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popInviteCopyAddBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popMoreOnlyShareStreamBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popMoreOnlyShareVedioBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popMoreLockMeetingBtn;
+@property (retain, nonatomic) IBOutlet UIButton *popMoreCloseMeetingBtn;
+
+@property (retain, nonatomic) IBOutlet UIButton *collectionBtn;
+@property (retain, nonatomic) IBOutlet UIButton *quitBtn;
+
 @end
 
 @implementation UICallBar
@@ -84,124 +106,11 @@
     [super dealloc];
 }
 
-
 #pragma mark - ViewController Functions
 
 - (void)viewDidLoad {
-    [pauseButton setType:UIPauseButtonType_CurrentCall call:nil];
-    
-    {
-        UIButton *videoButtonLandscape = (UIButton*)[landscapeView viewWithTag:[videoButton tag]];
-        // Set selected+disabled background: IB lack !
-        [videoButton setBackgroundImage:[UIImage imageNamed:@"video_on_disabled.png"]
-                               forState:(UIControlStateDisabled | UIControlStateSelected)];
-        [videoButtonLandscape setBackgroundImage:[UIImage imageNamed:@"video_on_disabled_landscape.png"]
-                                        forState:(UIControlStateDisabled | UIControlStateSelected)];
-        
-        // Set selected+over background: IB lack !
-        [videoButton setBackgroundImage:[UIImage imageNamed:@"video_on_over.png"]
-                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [videoButtonLandscape setBackgroundImage:[UIImage imageNamed:@"video_on_over_landscape.png"]
-                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:videoButton];
-        [LinphoneUtils buttonFixStates:videoButtonLandscape];
-    }
-
-//    {
-//        UIImageView* leftPaddingLandscape = (UIImageView*)[landscapeView viewWithTag:self.leftPadding.tag];
-//        leftPaddingLandscape.image =[UIImage imageNamed:@"incall_padding_left_landscape.png"];
-//    }
-//    {
-//        UIImageView* rightPaddingLandscape = (UIImageView*)[landscapeView viewWithTag:self.rightPadding.tag];
-//        rightPaddingLandscape.image = [UIImage imageNamed:@"incall_padding_right_landscape.png"];
-//    }
-
-    {
-        UIButton *speakerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[speakerButton tag]];
-        // Set selected+disabled background: IB lack !
-        [speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker_on_disabled.png"]
-                                 forState:(UIControlStateDisabled | UIControlStateSelected)];
-        [speakerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"speaker_on_disabled_landscape.png"]
-                                          forState:(UIControlStateDisabled | UIControlStateSelected)];
-        
-        // Set selected+over background: IB lack !
-        [speakerButton setBackgroundImage:[UIImage imageNamed:@"speaker_on_over.png"]
-                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [speakerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"sspeaker_on_over_landscape.png"]
-                                          forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:speakerButton];
-        [LinphoneUtils buttonFixStates:speakerButtonLandscape];
-    }
-    
-    if (![LinphoneManager runningOnIpad]) {
-        UIButton *routesButtonLandscape = (UIButton*) [landscapeView viewWithTag:[routesButton tag]];
-        // Set selected+over background: IB lack !
-        [routesButton setBackgroundImage:[UIImage imageNamed:@"routes_over.png"]
-                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [routesButtonLandscape setBackgroundImage:[UIImage imageNamed:@"routes_over_landscape.png"]
-                                          forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:routesButton];
-        [LinphoneUtils buttonFixStates:routesButtonLandscape];
-    }
-    
-    {
-        UIButton *microButtonLandscape = (UIButton*) [landscapeView viewWithTag:[microButton tag]];
-        // Set selected+disabled background: IB lack !
-        [microButton setBackgroundImage:[UIImage imageNamed:@"micro_on_disabled.png"]
-                               forState:(UIControlStateDisabled | UIControlStateSelected)];
-        [microButtonLandscape setBackgroundImage:[UIImage imageNamed:@"micro_on_disabled_landscape.png"]
-                                        forState:(UIControlStateDisabled | UIControlStateSelected)];
-        
-        // Set selected+over background: IB lack !
-        [microButton setBackgroundImage:[UIImage imageNamed:@"micro_on_over.png"]
-                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [microButtonLandscape setBackgroundImage:[UIImage imageNamed:@"micro_on_over_landscape.png"]
-                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:microButton];
-        [LinphoneUtils buttonFixStates:microButtonLandscape];
-    }
-    
-    {
-        UIButton *optionsButtonLandscape = (UIButton*) [landscapeView viewWithTag:[optionsButton tag]];
-        // Set selected+over background: IB lack !
-        [optionsButton setBackgroundImage:[UIImage imageNamed:@"options_over.png"]
-                                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        [optionsButtonLandscape setBackgroundImage:[UIImage imageNamed:@"options_over_landscape.png"]
-                                          forState:(UIControlStateHighlighted | UIControlStateSelected)];
-        
-        [LinphoneUtils buttonFixStates:optionsButton];
-        [LinphoneUtils buttonFixStates:optionsButtonLandscape];
-    }
-    
-//    {
-//        UIButton *pauseButtonLandscape = (UIButton*) [landscapeView viewWithTag:[pauseButton tag]];
-//        // Set selected+over background: IB lack !
-//        [pauseButton setBackgroundImage:[UIImage imageNamed:@"pause_on_over.png"]
-//                               forState:(UIControlStateHighlighted | UIControlStateSelected)];
-//        [pauseButtonLandscape setBackgroundImage:[UIImage imageNamed:@"pause_on_over_landscape.png"]
-//                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
-//        
-//        [LinphoneUtils buttonFixStates:pauseButton];
-//        [LinphoneUtils buttonFixStates:pauseButtonLandscape];
-//    }
-    
-//    {
-//        UIButton *dialerButtonLandscape = (UIButton*) [landscapeView viewWithTag:[dialerButton tag]] ;
-//        // Set selected+over background: IB lack !
-//        [dialerButton setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over.png"]
-//                                forState:(UIControlStateHighlighted | UIControlStateSelected)];
-//        [dialerButtonLandscape setBackgroundImage:[UIImage imageNamed:@"dialer_alt_back_over_landscape.png"] 
-//                                        forState:(UIControlStateHighlighted | UIControlStateSelected)];
-//        
-//        [LinphoneUtils buttonFixStates:dialerButton];
-//        [LinphoneUtils buttonFixStates:dialerButtonLandscape];
-//    }
-    
     [super viewDidLoad];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -211,18 +120,31 @@
                                              selector:@selector(callUpdateEvent:) 
                                                  name:kLinphoneCallUpdate
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(bluetoothAvailabilityUpdateEvent:)
-                                                 name:kLinphoneBluetoothAvailabilityUpdate
-                                               object:nil];
     // Update on show
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     LinphoneCallState state = (call != NULL)?linphone_call_get_state(call): 0;
+    
     [self callUpdate:call state:state];
     [self hideRoutes:FALSE];
     [self hideOptions:FALSE];
     [self hidePad:FALSE];
     [self showSpeaker];
+    
+    [self showAllBottomBgView];
+}
+
+- (void)hideAllBottomBgView {
+    [self hideControlsVoiceBgView:YES];
+    [self hideControlsCameraBgView:YES];
+    [self hideControlsInviteBgView:YES];
+    [self hideControlsMoreBgView:YES];
+}
+
+- (void)showAllBottomBgView {
+    [self hideControlsVoiceBgView:NO];
+    [self hideControlsCameraBgView:NO];
+    [self hideControlsInviteBgView:NO];
+    [self hideControlsMoreBgView:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -237,22 +159,112 @@
 	}
 }
 
-
+// 底部声音按钮
 - (IBAction)soundBtnClicked:(id)sender {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"stop here");
-    NSString *test = @"testSOng";
-    NSLog(@"show here:%@", test);
+    [self hideControlsCameraBgView:YES];
+    [self hideControlsInviteBgView:YES];
+    [self hideControlsMoreBgView:YES];
+    
+    if (self.voiceBgView.hidden == YES) {
+        // 显示出来
+        [self hideControlsVoiceBgView:NO];
+    }else {
+        // 隐藏
+        [self hideControlsVoiceBgView:YES];
+    }
 }
 
+// 底部视频按钮
 - (IBAction)vedioBtnClicked:(id)sender {
+    [self hideControlsVoiceBgView:YES];
+    [self hideControlsInviteBgView:YES];
+    [self hideControlsMoreBgView:YES];
+
+    if (self.cameraBgView.hidden == YES) {
+        [self hideControlsCameraBgView:NO];
+    }else {
+        [self hideControlsCameraBgView:YES];
+    }
+}
+
+// 底部邀请按钮
+- (IBAction)inviteBtnClicked:(id)sender {
+    [self hideControlsVoiceBgView:YES];
+    [self hideControlsCameraBgView:YES];
+    [self hideControlsMoreBgView:YES];
+
+    if (self.inviteBgView.hidden == YES) {
+        [self hideControlsInviteBgView:NO];
+    }else {
+        [self hideControlsInviteBgView:YES];
+    }
+}
+
+// 底部参与人按钮
+- (IBAction)joinerBtnClicked:(id)sender {
+    [self hideControlsVoiceBgView:YES];
+    [self hideControlsCameraBgView:YES];
+    [self hideControlsInviteBgView:YES];
+    [self hideControlsMoreBgView:YES];
+
+    NSLog(@"joiner btn clicked");
+}
+
+// 底部更多按钮
+- (IBAction)moreBtnClicked:(id)sender {
+    [self hideControlsVoiceBgView:YES];
+    [self hideControlsCameraBgView:YES];
+    [self hideControlsInviteBgView:YES];
+    
+    if (self.moreBgView.hidden == YES) {
+        [self hideControlsMoreBgView:NO];
+    }else {
+        [self hideControlsMoreBgView:YES];
+    }
+}
+
+// 收藏按钮
+- (IBAction)collectionBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    // TODO
+}
+
+// 退出按钮
+- (IBAction)quitBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+
+    LinphoneCore* lc = [LinphoneManager getLc];
+    LinphoneCall* currentcall = linphone_core_get_current_call(lc);
+    if (linphone_core_is_in_conference(lc) || // In conference
+        (linphone_core_get_conference_size(lc) > 0 && [UICallBar callCount:lc] == 0) // Only one conf
+        ) {
+        linphone_core_terminate_conference(lc);
+    } else if(currentcall != NULL) { // In a call
+        linphone_core_terminate_call(lc, currentcall);
+    } else {
+        const MSList* calls = linphone_core_get_calls(lc);
+        if (ms_list_size(calls) == 1) { // Only one call
+            linphone_core_terminate_call(lc,(LinphoneCall*)(calls->data));
+        }
+    }
+}
+
+// 静音
+- (IBAction)popVoiceOff:(id)sender {
+    linphone_core_mute_mic([LinphoneManager getLc], true);
+}
+
+// 关闭静音
+- (IBAction)popVoiceOn:(id)sender {
+    linphone_core_mute_mic([LinphoneManager getLc], false);
+}
+
+// 打开前摄像头
+- (IBAction)popCameraFront:(id)sender {
     LinphoneCore* lc = [LinphoneManager getLc];
     
     if (!linphone_core_video_enabled(lc))
         return;
-    
-//    [self setEnabled: FALSE];
-//    [waitView startAnimating];
     
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     if (call) {
@@ -264,17 +276,183 @@
         linphone_call_params_destroy(call_params);
     } else {
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-    }   
-
+    }
+    
+    [self hideAllBottomBgView];
 }
 
-- (IBAction)inviteBtnClicked:(id)sender {
+// 打开后摄像头，实际上是一段切换镜头的操作
+// TODO，应该尝试去只选择性地控制前后摄像头
+- (IBAction)popCameraTail:(id)sender {
+    const char *currentCamId = (char*)linphone_core_get_video_device([LinphoneManager getLc]);
+    const char **cameras=linphone_core_get_video_devices([LinphoneManager getLc]);
+    
+    const char *newCamId=NULL;
+    int i;
+    
+    for (i=0;cameras[i]!=NULL;++i){
+        if (strcmp(cameras[i],"StaticImage: Static picture")==0) continue;
+        if (strcmp(cameras[i],currentCamId)!=0){
+            newCamId=cameras[i];
+            break;
+        }
+    }
+    if (newCamId){
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Switching from [%s] to [%s]", currentCamId, newCamId];
+        linphone_core_set_video_device([LinphoneManager getLc], newCamId);
+        LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
+        if(call != NULL) {
+            linphone_core_update_call([LinphoneManager getLc], call, NULL);
+        }
+    }
+    
+    [self hideAllBottomBgView];
 }
 
-- (IBAction)joinerBtnClicked:(id)sender {
+// 关闭摄像头
+- (IBAction)popCameraClose:(id)sender {
+    LinphoneCore* lc = [LinphoneManager getLc];
+    
+    if (!linphone_core_video_enabled(lc))
+        return;
+    
+//    [self setEnabled: FALSE];
+//    [waitView startAnimating];
+    
+    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
+    if (call) {
+        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
+        linphone_call_params_enable_video(call_params, FALSE);
+        linphone_core_update_call(lc, call, call_params);
+        linphone_call_params_destroy(call_params);
+    } else {
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+    }
 }
 
-- (IBAction)moreBtnClicked:(id)sender {
+// 发邮件
+- (IBAction)sendMailBtnClicked:(id)sender {
+}
+// 发短信
+- (IBAction)sendSMSBtnClicked:(id)sender {
+}
+// 呼号
+- (IBAction)callBtnClicked:(id)sender {
+}
+// 复制地址
+- (IBAction)copyAddressBtnClicked:(id)sender {
+}
+
+// 仅共享流
+- (IBAction)shareStreamBtnClicked:(id)sender {
+}
+// 仅共享视频
+- (IBAction)shareVedioBtnClicked:(id)sender {
+}
+// 锁定会议
+- (IBAction)lockMeetingBtnClicked:(id)sender {
+}
+// 结束会议
+- (IBAction)endMeetingBtnClicked:(id)sender {
+}
+
++ (int)callCount:(LinphoneCore*) lc {
+    int count = 0;
+    const MSList* calls = linphone_core_get_calls(lc);
+    
+    while (calls != 0) {
+        if (![UICallBar isInConference:((LinphoneCall*)calls->data)]) {
+            count++;
+        }
+        calls = calls->next;
+    }
+    return count;
+}
+
++ (bool)isInConference:(LinphoneCall*) call {
+    if (!call)
+        return false;
+    return linphone_call_is_in_conference(call);
+}
+
+- (void)hideControlsVoiceBgView:(BOOL)hide {
+    if (hide == YES) {
+        // 隐藏
+        if (self.voiceBgView.hidden == YES) {
+            // 当前已经隐藏
+        }else {
+            // 进行隐藏
+            [self hideAnimation:@"hide" target:self.voiceBgView completion:^(BOOL finished){}];
+        }
+    }else {
+        // 显示
+        if (self.voiceBgView.hidden == NO) {
+            // 当前已经显示
+        }else {
+            // 进行显示
+            [self showAnimation:@"show" target:self.voiceBgView completion:^(BOOL finished){}];
+        }
+    }
+}
+
+- (void)hideControlsCameraBgView:(BOOL)hide {
+    if (hide == YES) {
+        // 隐藏
+        if (self.cameraBgView.hidden == YES) {
+            // 当前已经隐藏
+        }else {
+            // 进行隐藏
+            [self hideAnimation:@"hide" target:self.cameraBgView completion:^(BOOL finished){}];
+        }
+    }else {
+        // 显示
+        if (self.cameraBgView.hidden == NO) {
+            // 当前已经显示
+        }else {
+            // 进行显示
+            [self showAnimation:@"show" target:self.cameraBgView completion:^(BOOL finished){}];
+        }
+    }
+}
+
+- (void)hideControlsInviteBgView:(BOOL)hide {
+    if (hide == YES) {
+        // 隐藏
+        if (self.inviteBgView.hidden == YES) {
+            // 当前已经隐藏
+        }else {
+            // 进行隐藏
+            [self hideAnimation:@"hide" target:self.inviteBgView completion:^(BOOL finished){}];
+        }
+    }else {
+        // 显示
+        if (self.inviteBgView.hidden == NO) {
+            // 当前已经显示
+        }else {
+            // 进行显示
+            [self showAnimation:@"show" target:self.inviteBgView completion:^(BOOL finished){}];
+        }
+    }
+}
+
+- (void)hideControlsMoreBgView:(BOOL)hide {
+    if (hide == YES) {
+        // 隐藏
+        if (self.moreBgView.hidden == YES) {
+            // 当前已经隐藏
+        }else {
+            // 进行隐藏
+            [self hideAnimation:@"hide" target:self.moreBgView completion:^(BOOL finished){}];
+        }
+    }else {
+        // 显示
+        if (self.moreBgView.hidden == NO) {
+            // 当前已经显示
+        }else {
+            // 进行显示
+            [self showAnimation:@"show" target:self.moreBgView completion:^(BOOL finished){}];
+        }
+    }
 }
 
 #pragma mark - Event Functions
@@ -284,12 +462,6 @@
     LinphoneCallState state = [[notif.userInfo objectForKey: @"state"] intValue];
     [self callUpdate:call state:state];
 }
-
-- (void)bluetoothAvailabilityUpdateEvent:(NSNotification*)notif {
-    bool available = [[notif.userInfo objectForKey:@"available"] intValue];
-    [self bluetoothAvailabilityUpdate:available];
-}
-
 
 #pragma mark - 
 
@@ -303,41 +475,41 @@
     [hangupButton update];
     
     
-    // Show Pause/Conference button following call count
-    if(linphone_core_get_calls_nb(lc) > 1) {
-        if(![pauseButton isHidden]) {
-            [pauseButton setHidden:true];
-            [conferenceButton setHidden:false];
-        }
-        bool enabled = true;
-        const MSList *list = linphone_core_get_calls(lc);
-        while(list != NULL) {
-            LinphoneCall *call = (LinphoneCall*) list->data;
-            LinphoneCallState state = linphone_call_get_state(call);
-            if(state == LinphoneCallIncomingReceived ||
-               state == LinphoneCallOutgoingInit ||
-               state == LinphoneCallOutgoingProgress ||
-               state == LinphoneCallOutgoingRinging ||
-               state == LinphoneCallOutgoingEarlyMedia ||
-               state == LinphoneCallConnected) {
-                enabled = false;
-            }
-            list = list->next;
-        }
-        [conferenceButton setEnabled:enabled];
-    } else {
-        if([pauseButton isHidden]) {
-            [pauseButton setHidden:false];
-            [conferenceButton setHidden:true];
-        }
-    }
+//    // Show Pause/Conference button following call count
+//    if(linphone_core_get_calls_nb(lc) > 1) {
+//        if(![pauseButton isHidden]) {
+//            [pauseButton setHidden:true];
+//            [conferenceButton setHidden:false];
+//        }
+//        bool enabled = true;
+//        const MSList *list = linphone_core_get_calls(lc);
+//        while(list != NULL) {
+//            LinphoneCall *call = (LinphoneCall*) list->data;
+//            LinphoneCallState state = linphone_call_get_state(call);
+//            if(state == LinphoneCallIncomingReceived ||
+//               state == LinphoneCallOutgoingInit ||
+//               state == LinphoneCallOutgoingProgress ||
+//               state == LinphoneCallOutgoingRinging ||
+//               state == LinphoneCallOutgoingEarlyMedia ||
+//               state == LinphoneCallConnected) {
+//                enabled = false;
+//            }
+//            list = list->next;
+//        }
+//        [conferenceButton setEnabled:enabled];
+//    } else {
+//        if([pauseButton isHidden]) {
+//            [pauseButton setHidden:false];
+//            [conferenceButton setHidden:true];
+//        }
+//    }
 
-    // Disable transfert in conference
-    if(linphone_core_get_current_call(lc) == NULL) {
-        [optionsTransferButton setEnabled:FALSE];
-    } else {
-        [optionsTransferButton setEnabled:TRUE];
-    }
+//    // Disable transfert in conference
+//    if(linphone_core_get_current_call(lc) == NULL) {
+//        [optionsTransferButton setEnabled:FALSE];
+//    } else {
+//        [optionsTransferButton setEnabled:TRUE];
+//    }
     
     switch(state) {
         case LinphoneCallEnd:
