@@ -22,12 +22,18 @@
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *historyTable;
+@property (weak, nonatomic) IBOutlet UILabel *tableTipLabel;
+
 @property (weak, nonatomic) IBOutlet UITextField *joinNameField;
 @property (weak, nonatomic) IBOutlet UITextField *joinMeetingNumberField;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loginTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
+
+@property (retain, nonatomic) NSDateFormatter *dateFormatter;
+
+
 
 @end
 
@@ -44,6 +50,15 @@
     
     self.historyTable.tableFooterView = [[UIView alloc] init];
     self.historyTable.tableHeaderView = [[UIView alloc] init];
+    
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSLocale *locale = [NSLocale currentLocale];
+    [self.dateFormatter setLocale:locale];
+    
+    self.tableTipLabel.text = @"暂时还没有历史会议";
+    self.tableTipLabel.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,8 +78,21 @@
     // 刷新控件的显示
     [self updateControls];
     
-    // 每次回到这个界面进行刷新， 因为历史会议数据可能已经更新
-    [self.historyTable reloadData];
+    // 判断当前有没有历史数据
+    NSInteger number = 0;
+    const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
+    while(logs != NULL) {
+        logs = ms_list_next(logs);
+        number++;
+    }
+    if (number == 0) {
+        // 说明当前没有历史会议, 添加一个遮盖层
+        self.tableTipLabel.hidden = NO;
+    }else {
+        // 每次回到这个界面进行刷新， 因为历史会议数据可能已经更新
+        self.tableTipLabel.hidden = YES;
+        [self.historyTable reloadData];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -312,25 +340,79 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectio {
 //    return [LPSystemSetting sharedSetting].historyMeetings.count;
     
-    return [LPSystemUser sharedUser].callLogs.count;
+    NSInteger number = 0;
+    const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
+    while(logs != NULL) {
+//        LinphoneCallLog*  log = (LinphoneCallLog *) logs->data;
+        logs = ms_list_next(logs);
+        number++;
+    }
+
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *kCellId = @"UIHistoryCell";
-    UIHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
-    if (cell == nil) {
-        cell = [[UIHistoryCell alloc] initWithIdentifier:kCellId];
-        // Background View
-        UACellBackgroundView *selectedBackgroundView = [[UACellBackgroundView alloc] initWithFrame:CGRectZero];
-        cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+    UITableViewCell *tableCell = [tableView dequeueReusableCellWithIdentifier:@"reusedCell"];
+    if (tableCell == nil) {
+        tableCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusedCell"];
+        
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 160, 40)];
+        [tableCell.contentView addSubview:titleLabel];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.tag = 9000;
+        
+        UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 0, 160, 40)];
+        [tableCell.contentView addSubview:dateLabel];
+        dateLabel.backgroundColor = [UIColor clearColor];
+        dateLabel.tag = 9001;
     }
     
-    LinphoneCallLog *log = [[ [LPSystemUser sharedUser].callLogs objectAtIndex:[indexPath row]] pointerValue];
-    [cell setCallLog:log];
     
-    return cell;
-
+    LinphoneCallLog *log = [[ [LPSystemUser sharedUser].callLogs objectAtIndex:[indexPath row]] pointerValue];
+    
+    // Set up the cell...
+    LinphoneAddress* addr;
+    if (linphone_call_log_get_dir(log) == LinphoneCallIncoming) {
+        addr = linphone_call_log_get_from(log);
+    } else {
+        addr = linphone_call_log_get_to(log);
+    }
+    
+    NSString* address = nil;
+    if(addr != NULL) {
+        BOOL useLinphoneAddress = true;
+        // contact name
+        char* lAddress = linphone_address_as_string_uri_only(addr);
+        if(lAddress) {
+            NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
+            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+            if(contact) {
+                address = [FastAddressBook getContactDisplayName:contact];
+                useLinphoneAddress = false;
+            }
+            ms_free(lAddress);
+        }
+        if(useLinphoneAddress) {
+            const char* lDisplayName = linphone_address_get_display_name(addr);
+            const char* lUserName = linphone_address_get_username(addr);
+            if (lDisplayName)
+                address = [NSString stringWithUTF8String:lDisplayName];
+            else if(lUserName)
+                address = [NSString stringWithUTF8String:lUserName];
+        }
+    }
+    if(address == nil) {
+        address = NSLocalizedString(@"Unknown", nil);
+    }
+    
+    UILabel *mainLabel = [tableCell.contentView viewWithTag:9000];
+    UILabel *dateLabel = [tableCell.contentView viewWithTag:9001];
+    mainLabel.text = address;
+    
+    NSDate *startData = [NSDate dateWithTimeIntervalSince1970:linphone_call_log_get_start_date(log)];
+    dateLabel.text = [self.dateFormatter stringFromDate:startData];
+    
+    return tableCell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -338,7 +420,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"历史会议(点击直接进入)";
+    return @"历史会议";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
