@@ -17,6 +17,7 @@
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
 #import "DialerViewController.h"
+#import "NSObject+RDRCommon.h"
 
 @interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
 }
@@ -33,7 +34,7 @@
 
 @property (retain, nonatomic) NSDateFormatter *dateFormatter;
 
-
+@property (retain, nonatomic) NSMutableArray *callLogs;
 
 @end
 
@@ -54,11 +55,14 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    self.dateFormatter.dateFormat = @"yyyy年MM月dd日";
     NSLocale *locale = [NSLocale currentLocale];
     [self.dateFormatter setLocale:locale];
     
     self.tableTipLabel.text = @"暂时还没有历史会议";
     self.tableTipLabel.backgroundColor = [UIColor whiteColor];
+    
+    self.callLogs = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,14 +82,18 @@
     // 刷新控件的显示
     [self updateControls];
     
-    // 判断当前有没有历史数据
-    NSInteger number = 0;
+    [self.callLogs removeAllObjects];
+    
     const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
     while(logs != NULL) {
+        LinphoneCallLog*  log = (LinphoneCallLog *) logs->data;
+        [self.callLogs addObject:[NSValue valueWithPointer: log]];
+        
         logs = ms_list_next(logs);
-        number++;
     }
-    if (number == 0) {
+    
+    // 判断当前有没有历史数据
+    if (self.callLogs.count == 0) {
         // 说明当前没有历史会议, 添加一个遮盖层
         self.tableTipLabel.hidden = NO;
     }else {
@@ -340,15 +348,17 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectio {
 //    return [LPSystemSetting sharedSetting].historyMeetings.count;
     
-    NSInteger number = 0;
-    const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
-    while(logs != NULL) {
-//        LinphoneCallLog*  log = (LinphoneCallLog *) logs->data;
-        logs = ms_list_next(logs);
-        number++;
-    }
-
-    return number;
+//    NSInteger number = 0;
+//    const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
+//    while(logs != NULL) {
+////        LinphoneCallLog*  log = (LinphoneCallLog *) logs->data;
+//        logs = ms_list_next(logs);
+//        number++;
+//    }
+//
+//    return number;
+    
+    return self.callLogs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -363,12 +373,34 @@ static UICompositeViewDescription *compositeDescription = nil;
         
         UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 0, 160, 40)];
         [tableCell.contentView addSubview:dateLabel];
+        dateLabel.font = [UIFont systemFontOfSize:14.0];
         dateLabel.backgroundColor = [UIColor clearColor];
         dateLabel.tag = 9001;
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = tableCell.contentView.bounds;
+        [tableCell.contentView addSubview:btn];
+        [btn addTarget:self action:@selector(cellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        btn.backgroundColor = [UIColor clearColor];
+        btn.tag = 9002;
     }
     
+    UIButton *btn = [tableCell.contentView viewWithTag:9002];
+    btn.frame = tableCell.contentView.bounds;
+    btn.rd_userInfo = @{@"indexPath":indexPath};
+
     
-    LinphoneCallLog *log = [[ [LPSystemUser sharedUser].callLogs objectAtIndex:[indexPath row]] pointerValue];
+    UILabel *mainLabel = [tableCell.contentView viewWithTag:9000];
+    UILabel *dateLabel = [tableCell.contentView viewWithTag:9001];
+    
+    mainLabel.ott_width = tableCell.contentView.ott_width / 2.0;
+    mainLabel.ott_centerY = tableCell.contentView.ott_height / 2.0;
+    
+    dateLabel.ott_width = tableCell.contentView.ott_width / 2.0;
+    dateLabel.ott_left = mainLabel.ott_right;
+    dateLabel.ott_centerY = tableCell.contentView.ott_height / 2.0;
+    
+    LinphoneCallLog *log = [[self.callLogs objectAtIndex:[indexPath row]] pointerValue];
     
     // Set up the cell...
     LinphoneAddress* addr;
@@ -405,8 +437,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         address = NSLocalizedString(@"Unknown", nil);
     }
     
-    UILabel *mainLabel = [tableCell.contentView viewWithTag:9000];
-    UILabel *dateLabel = [tableCell.contentView viewWithTag:9001];
     mainLabel.text = address;
     
     NSDate *startData = [NSDate dateWithTimeIntervalSince1970:linphone_call_log_get_start_date(log)];
@@ -423,10 +453,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     return @"历史会议";
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44.0;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"didSelectRowAtIndexPath=%@", indexPath);
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    LinphoneCallLog *callLog = [[ [LPSystemUser sharedUser].callLogs objectAtIndex:[indexPath row]] pointerValue];
+}
+
+- (void)goIndexPath:(NSIndexPath *)indexPath {
+    LinphoneCallLog *callLog = [[self.callLogs objectAtIndex:[indexPath row]] pointerValue];
     LinphoneAddress* addr;
     if (linphone_call_log_get_dir(callLog) == LinphoneCallIncoming) {
         addr = linphone_call_log_get_from(callLog);
@@ -458,6 +495,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     [self joinMeeting:address withDisplayName:displayName];
+}
+
+- (void)cellBtnClicked:(id)sender {
+    UIButton *btn = sender;
+    
+    NSIndexPath *btnIndexPath = (NSIndexPath *)[btn.rd_userInfo objectForKey:@"indexPath"];
+    [self goIndexPath:btnIndexPath];
 }
 
 @end
