@@ -44,6 +44,7 @@
     
     __weak LPMyMeetingManageViewController *weakSelf = self;
     [LPSystemUser requesteFav:^(BOOL success, NSArray *sheduleMeetings, NSArray *rooms, NSArray *favMeetings, NSString *tipStr) {
+        
         [weakSelf hideHudAndIndicatorView];
         
         if (success == YES) {
@@ -52,6 +53,8 @@
         }else {
             // 显示错误提示信息
             [weakSelf showToastWithMessage:tipStr];
+            
+            [LPSystemUser sharedUser].hasGetMeetingData = NO;
         }
     }];
 }

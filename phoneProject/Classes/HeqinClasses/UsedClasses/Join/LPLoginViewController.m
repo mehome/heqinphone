@@ -214,11 +214,26 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)loginBtnClicked:(id)sender {
     [self resignKeyboard];
     
+    if (self.userNameField.text.length == 0) {
+        [self showToastWithMessage:@"请输入有效的用户名"];
+        [self.userNameField becomeFirstResponder];
+        return;
+    }
+    
+    if (self.userPasswordField.text.length == 0) {
+        [self showToastWithMessage:@"请输入用户密码"];
+        [self.userPasswordField becomeFirstResponder];
+        return;
+    }
+    
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
     
+    NSString *userId = username;
+    if ([username hasSuffix:@"@zijingcloud.com"] == NO) {
+        userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
+    }
     
-    NSString *userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
     NSString *password = self.userPasswordField.text;
     NSString *transport = @"UDP";
     

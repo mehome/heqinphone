@@ -87,12 +87,11 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJ2-SN-L2e">
                     <rect key="frame" x="268" y="256" width="80" height="30"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Zoo-kP-g4y"/>
                         <constraint firstAttribute="width" constant="80" id="tRq-5Q-1AK"/>
                     </constraints>
-                    <state key="normal" title="忘记密码"/>
+                    <state key="normal" title="忘记密码?"/>
                     <connections>
                         <action selector="forgetBtnClicked:" destination="-1" eventType="touchUpInside" id="Qpg-8t-0Fg"/>
                     </connections>

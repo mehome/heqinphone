@@ -168,7 +168,7 @@ static char const * const kAssociatedRDRHudView = "AssociatedRDRHudView";
 #pragma mark HUD
 
 // 1使用Hud动画，0使用Indicator
-#define kLoadingUseHudOrIndicator 0
+#define kLoadingUseHudOrIndicator 1
 
 /**
  *  下面来决定使用哪种加载动画
