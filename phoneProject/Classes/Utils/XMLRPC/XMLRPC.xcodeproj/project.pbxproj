@@ -84,6 +84,7 @@
 		2DCADED91529E06900B47A4F /* XMLRPCEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMLRPCEncoder.h; sourceTree = "<group>"; };
 		903B0DB612F7574800BD6E09 /* libXMLRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXMLRPC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		E1198EC21C204C8000CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Languages/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +329,7 @@
 				Japanese,
 				French,
 				German,
+				"zh-Hans",
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* XMLRPC */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -363,6 +365,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0759A6F21143495E000DFE98 /* English */,
+				E1198EC21C204C8000CE0F17 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

@@ -1,0 +1,21 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Decline"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Decline";
+
+/* Class = "UIButton"; accessibilityLabel = "Accept"; ObjectID = "7"; */
+"7.accessibilityLabel" = "Accept";
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "9"; */
+"9.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "0102030405"; ObjectID = "9"; */
+"9.text" = "0102030405";
+
+/* Class = "UIImageView"; accessibilityLabel = "Contact avatar"; ObjectID = "19"; */
+"19.accessibilityLabel" = "Contact avatar";
+
+/* Class = "UILabel"; accessibilityLabel = "Incoming call"; ObjectID = "31"; */
+"31.accessibilityLabel" = "Incoming call";
+
+/* Class = "UILabel"; text = "Incoming call"; ObjectID = "31"; */
+"31.text" = "Incoming call";

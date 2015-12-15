@@ -1,0 +1,69 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Back"; ObjectID = "9"; */
+"9.accessibilityLabel" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "9"; */
+"9.normalTitle" = "Back";
+
+/* Class = "UIImageView"; accessibilityLabel = "Contact avatar"; ObjectID = "23"; */
+"23.accessibilityLabel" = "Contact avatar";
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "25"; */
+"25.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "Contact1"; ObjectID = "25"; */
+"25.text" = "Contact1";
+
+/* Class = "UILabel"; text = "Date:"; ObjectID = "27"; */
+"27.text" = "Date:";
+
+/* Class = "UILabel"; accessibilityLabel = "Call date"; ObjectID = "28"; */
+"28.accessibilityLabel" = "Call date";
+
+/* Class = "UILabel"; text = "11/11/2011 at 10:01"; ObjectID = "28"; */
+"28.text" = "11/11/2011 at 10:01";
+
+/* Class = "UILabel"; text = "Duration:"; ObjectID = "31"; */
+"31.text" = "Duration:";
+
+/* Class = "UILabel"; accessibilityLabel = "Call duration"; ObjectID = "32"; */
+"32.accessibilityLabel" = "Call duration";
+
+/* Class = "UILabel"; text = "9:05"; ObjectID = "32"; */
+"32.text" = "9:05";
+
+/* Class = "UILabel"; accessibilityLabel = "Call type"; ObjectID = "35"; */
+"35.accessibilityLabel" = "Call type";
+
+/* Class = "UILabel"; text = "outgoing call"; ObjectID = "35"; */
+"35.text" = "outgoing call";
+
+/* Class = "UILabel"; text = "Type:"; ObjectID = "36"; */
+"36.text" = "Type:";
+
+/* Class = "UIButton"; accessibilityLabel = "Callback"; ObjectID = "37"; */
+"37.accessibilityLabel" = "Callback";
+
+/* Class = "UIButton"; normalTitle = "Call"; ObjectID = "37"; */
+"37.normalTitle" = "Call";
+
+/* Class = "UIButton"; accessibilityLabel = "Add to contact"; ObjectID = "50"; */
+"50.accessibilityLabel" = "Add to contact";
+
+/* Class = "UIButton"; normalTitle = "Add to contacts"; ObjectID = "50"; */
+"50.normalTitle" = "Add to contacts";
+
+/* Class = "UILabel"; text = "Address:"; ObjectID = "55"; */
+"55.text" = "Address:";
+
+/* Class = "UILabel"; accessibilityLabel = "Address"; ObjectID = "56"; */
+"56.accessibilityLabel" = "Address";
+
+/* Class = "UILabel"; text = "0102030405"; ObjectID = "56"; */
+"56.text" = "0102030405";
+
+/* Class = "UIButton"; accessibilityLabel = "Send message"; ObjectID = "59"; */
+"59.accessibilityLabel" = "Send message";
+
+/* Class = "UIButton"; normalTitle = "Send message"; ObjectID = "59"; */
+"59.normalTitle" = "Send message";

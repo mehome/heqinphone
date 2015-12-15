@@ -1,0 +1,21 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Edit"; ObjectID = "9"; */
+"9.accessibilityLabel" = "Edit";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "9"; */
+"9.normalTitle" = "Edit";
+
+/* Class = "UIButton"; selectedTitle = "Ok"; ObjectID = "9"; */
+"9.selectedTitle" = "Ok";
+
+/* Class = "UIButton"; accessibilityLabel = "New Discussion"; ObjectID = "10"; */
+"10.accessibilityLabel" = "New Discussion";
+
+/* Class = "UIButton"; normalTitle = "New discussion"; ObjectID = "10"; */
+"10.normalTitle" = "New discussion";
+
+/* Class = "UITextField"; accessibilityLabel = "Enter a address"; ObjectID = "25"; */
+"25.accessibilityLabel" = "Enter a address";
+
+/* Class = "UITextField"; placeholder = "To:"; ObjectID = "25"; */
+"25.placeholder" = "To:";

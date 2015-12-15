@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "8"; */
+"8.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "Contact1"; ObjectID = "8"; */
+"8.text" = "Contact1";
+
+/* Class = "UIButton"; accessibilityLabel = "Contact avatar"; ObjectID = "22"; */
+"22.accessibilityLabel" = "Contact avatar";

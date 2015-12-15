@@ -1,0 +1,90 @@
+
+/* Class = "UIButton"; normalTitle = "Options"; ObjectID = "110"; */
+"110.normalTitle" = "Options";
+
+/* Class = "UIButton"; normalTitle = "Speaker"; ObjectID = "111"; */
+"111.normalTitle" = "Speaker";
+
+/* Class = "UIButton"; normalTitle = "Micro"; ObjectID = "112"; */
+"112.normalTitle" = "Micro";
+
+/* Class = "UIButton"; normalTitle = "Video"; ObjectID = "113"; */
+"113.normalTitle" = "Video";
+
+/* Class = "UIButton"; normalTitle = "Add call"; ObjectID = "127"; */
+"127.normalTitle" = "Add call";
+
+/* Class = "UIButton"; normalTitle = "Transfer"; ObjectID = "128"; */
+"128.normalTitle" = "Transfer";
+
+/* Class = "UIButton"; normalTitle = "Route"; ObjectID = "183"; */
+"183.normalTitle" = "Route";
+
+/* Class = "UIButton"; normalTitle = "Speaker"; ObjectID = "187"; */
+"187.normalTitle" = "Speaker";
+
+/* Class = "UIButton"; normalTitle = "Receiver"; ObjectID = "188"; */
+"188.normalTitle" = "Receiver";
+
+/* Class = "UIButton"; normalTitle = "Bluetooth"; ObjectID = "193"; */
+"193.normalTitle" = "Bluetooth";
+
+/* Class = "UIButton"; normalTitle = "静音"; ObjectID = "08U-5g-oaz"; */
+"08U-5g-oaz.normalTitle" = "静音";
+
+/* Class = "UIButton"; normalTitle = "锁定会议"; ObjectID = "97f-su-Lz4"; */
+"97f-su-Lz4.normalTitle" = "锁定会议";
+
+/* Class = "UIButton"; normalTitle = "参与人"; ObjectID = "BXY-4Q-XR0"; */
+"BXY-4Q-XR0.normalTitle" = "参与人";
+
+/* Class = "UIButton"; normalTitle = "呼叫"; ObjectID = "Bqg-vk-D8Y"; */
+"Bqg-vk-D8Y.normalTitle" = "呼叫";
+
+/* Class = "UIButton"; normalTitle = "更多"; ObjectID = "FpB-mZ-2Go"; */
+"FpB-mZ-2Go.normalTitle" = "更多";
+
+/* Class = "UIButton"; normalTitle = "视频"; ObjectID = "GNF-1H-otf"; */
+"GNF-1H-otf.normalTitle" = "视频";
+
+/* Class = "UIButton"; normalTitle = "仅共享视"; ObjectID = "L7p-42-kSi"; */
+"L7p-42-kSi.normalTitle" = "仅共享视";
+
+/* Class = "UIButton"; normalTitle = "仅共享流"; ObjectID = "PsA-aj-JHX"; */
+"PsA-aj-JHX.normalTitle" = "仅共享流";
+
+/* Class = "UIButton"; normalTitle = "后摄像头"; ObjectID = "RfL-uU-Uk1"; */
+"RfL-uU-Uk1.normalTitle" = "后摄像头";
+
+/* Class = "UIButton"; normalTitle = "发邮件"; ObjectID = "TIr-iY-1b4"; */
+"TIr-iY-1b4.normalTitle" = "发邮件";
+
+/* Class = "UIButton"; normalTitle = "复制地址"; ObjectID = "Yk8-hw-sOR"; */
+"Yk8-hw-sOR.normalTitle" = "复制地址";
+
+/* Class = "UIButton"; normalTitle = "取消"; ObjectID = "Z0x-BW-vu7"; */
+"Z0x-BW-vu7.normalTitle" = "取消";
+
+/* Class = "UIButton"; normalTitle = "结束会议"; ObjectID = "ZXq-od-yWI"; */
+"ZXq-od-yWI.normalTitle" = "结束会议";
+
+/* Class = "UIButton"; normalTitle = "前摄像头"; ObjectID = "ZZK-ag-SSz"; */
+"ZZK-ag-SSz.normalTitle" = "前摄像头";
+
+/* Class = "UIButton"; normalTitle = "发短信"; ObjectID = "aT8-X6-tru"; */
+"aT8-X6-tru.normalTitle" = "发短信";
+
+/* Class = "UIButton"; normalTitle = "声音"; ObjectID = "bHl-tm-Qpf"; */
+"bHl-tm-Qpf.normalTitle" = "声音";
+
+/* Class = "UIButton"; normalTitle = "邀请"; ObjectID = "lEk-WA-mPd"; */
+"lEk-WA-mPd.normalTitle" = "邀请";
+
+/* Class = "UIButton"; normalTitle = "退出"; ObjectID = "uje-v5-zRE"; */
+"uje-v5-zRE.normalTitle" = "退出";
+
+/* Class = "UIButton"; normalTitle = "收藏"; ObjectID = "wYW-zC-DW3"; */
+"wYW-zC-DW3.normalTitle" = "收藏";
+
+/* Class = "UIButton"; normalTitle = "关闭"; ObjectID = "ybr-s9-9pl"; */
+"ybr-s9-9pl.normalTitle" = "关闭";

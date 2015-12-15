@@ -216,6 +216,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
+    
+    
     NSString *userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
     NSString *password = self.userPasswordField.text;
     NSString *transport = @"UDP";

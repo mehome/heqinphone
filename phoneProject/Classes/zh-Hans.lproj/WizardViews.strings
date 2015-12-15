@@ -1,0 +1,213 @@
+
+/* Class = "UIImageView"; accessibilityLabel = "Linphone setup assistant icon"; ObjectID = "19"; */
+"19.accessibilityLabel" = "Linphone setup assistant icon";
+
+/* Class = "UILabel"; text = "This assistant will help you to use a SIP account for your calls."; ObjectID = "22"; */
+"22.text" = "This assistant will help you to use a SIP account for your calls.";
+
+/* Class = "UIButton"; accessibilityLabel = "Create linphone.org account"; ObjectID = "36"; */
+"36.accessibilityLabel" = "Create linphone.org account";
+
+/* Class = "UIButton"; normalTitle = "Create an account on linphone.org"; ObjectID = "36"; */
+"36.normalTitle" = "Create an account on linphone.org";
+
+/* Class = "UIButton"; accessibilityLabel = "Sign in linphone.org account"; ObjectID = "38"; */
+"38.accessibilityLabel" = "Sign in linphone.org account";
+
+/* Class = "UIButton"; normalTitle = "I have already a linphone.org account"; ObjectID = "38"; */
+"38.normalTitle" = "I have already a linphone.org account";
+
+/* Class = "UIButton"; accessibilityLabel = "Sign in SIP account"; ObjectID = "39"; */
+"39.accessibilityLabel" = "Sign in SIP account";
+
+/* Class = "UIButton"; normalTitle = "I have already a SIP account"; ObjectID = "39"; */
+"39.normalTitle" = "I have already a SIP account";
+
+/* Class = "UILabel"; text = "Enter your username and password with your SIP domain."; ObjectID = "58"; */
+"58.text" = "Enter your username and password with your SIP domain.";
+
+/* Class = "UITextField"; accessibilityLabel = "Username"; ObjectID = "59"; */
+"59.accessibilityLabel" = "Username";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "59"; */
+"59.placeholder" = "Username";
+
+/* Class = "UITextField"; accessibilityLabel = "Password"; ObjectID = "60"; */
+"60.accessibilityLabel" = "Password";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "60"; */
+"60.placeholder" = "Password";
+
+/* Class = "UITextField"; accessibilityLabel = "Domain"; ObjectID = "61"; */
+"61.accessibilityLabel" = "Domain";
+
+/* Class = "UITextField"; placeholder = "Domain"; ObjectID = "61"; */
+"61.placeholder" = "Domain";
+
+/* Class = "UIButton"; accessibilityLabel = "Sign in"; ObjectID = "62"; */
+"62.accessibilityLabel" = "Sign in";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "62"; */
+"62.normalTitle" = "Sign in";
+
+/* Class = "UIButton"; accessibilityLabel = "Sign in"; ObjectID = "64"; */
+"64.accessibilityLabel" = "Sign in";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "64"; */
+"64.normalTitle" = "Sign in";
+
+/* Class = "UITextField"; accessibilityLabel = "Password"; ObjectID = "66"; */
+"66.accessibilityLabel" = "Password";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "66"; */
+"66.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Enter your username and password of your linphone.org account."; ObjectID = "67"; */
+"67.text" = "Enter your username and password of your linphone.org account.";
+
+/* Class = "UITextField"; accessibilityLabel = "Username"; ObjectID = "68"; */
+"68.accessibilityLabel" = "Username";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "68"; */
+"68.placeholder" = "Username";
+
+/* Class = "UILabel"; text = "Enter your username and password with your email address."; ObjectID = "73"; */
+"73.text" = "Enter your username and password with your email address.";
+
+/* Class = "UITextField"; accessibilityLabel = "Username"; ObjectID = "74"; */
+"74.accessibilityLabel" = "Username";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "74"; */
+"74.placeholder" = "Username";
+
+/* Class = "UITextField"; accessibilityLabel = "Password"; ObjectID = "75"; */
+"75.accessibilityLabel" = "Password";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "75"; */
+"75.placeholder" = "Password";
+
+/* Class = "UITextField"; accessibilityLabel = "Password again"; ObjectID = "76"; */
+"76.accessibilityLabel" = "Password again";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "76"; */
+"76.placeholder" = "Password";
+
+/* Class = "UIButton"; accessibilityLabel = "Register"; ObjectID = "77"; */
+"77.accessibilityLabel" = "Register";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "77"; */
+"77.normalTitle" = "Register";
+
+/* Class = "UITextField"; accessibilityLabel = "Email"; ObjectID = "79"; */
+"79.accessibilityLabel" = "Email";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "79"; */
+"79.placeholder" = "Email";
+
+/* Class = "UIButton"; accessibilityLabel = "Check validation"; ObjectID = "103"; */
+"103.accessibilityLabel" = "Check validation";
+
+/* Class = "UIButton"; normalTitle = "Check validation"; ObjectID = "103"; */
+"103.normalTitle" = "Check validation";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "104"; */
+"104.placeholder" = "Username";
+
+/* Class = "UILabel"; text = "Your account is created. Please check your mails in order to validate your account."; ObjectID = "105"; */
+"105.text" = "Your account is created. Please check your mails in order to validate your account.";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "106"; */
+"106.placeholder" = "Password";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "117"; */
+"117.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Account setup assistant"; ObjectID = "117"; */
+"117.text" = "Account setup assistant";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "122"; */
+"122.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Account setup assistant"; ObjectID = "122"; */
+"122.text" = "Account setup assistant";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "123"; */
+"123.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Account setup assistant"; ObjectID = "123"; */
+"123.text" = "Account setup assistant";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "124"; */
+"124.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Account setup assistant"; ObjectID = "124"; */
+"124.text" = "Account setup assistant";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "126"; */
+"126.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Account setup assistant"; ObjectID = "126"; */
+"126.text" = "Account setup assistant";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "127"; */
+"127.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Account setup assistant"; ObjectID = "127"; */
+"127.text" = "Account setup assistant";
+
+/* Class = "UIImageView"; accessibilityLabel = "Linphone setup assistant icon"; ObjectID = "128"; */
+"128.accessibilityLabel" = "Linphone setup assistant icon";
+
+/* Class = "UITextField"; accessibilityLabel = "Password"; ObjectID = "ClH-fT-a8N"; */
+"ClH-fT-a8N.accessibilityLabel" = "Password";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "ClH-fT-a8N"; */
+"ClH-fT-a8N.placeholder" = "Password";
+
+/* Class = "UIButton"; accessibilityLabel = "Remote provisioning"; ObjectID = "Kbn-dL-C5h"; */
+"Kbn-dL-C5h.accessibilityLabel" = "Remote provisioning";
+
+/* Class = "UIButton"; normalTitle = "Remote Provisioning"; ObjectID = "Kbn-dL-C5h"; */
+"Kbn-dL-C5h.normalTitle" = "Remote Provisioning";
+
+/* Class = "UITextField"; accessibilityLabel = "Username"; ObjectID = "MyR-eX-QTa"; */
+"MyR-eX-QTa.accessibilityLabel" = "Username";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "MyR-eX-QTa"; */
+"MyR-eX-QTa.placeholder" = "Username";
+
+/* Class = "UISegmentedControl"; Nrv-SM-lMf.segmentTitles[0] = "UDP"; ObjectID = "Nrv-SM-lMf"; */
+"Nrv-SM-lMf.segmentTitles[0]" = "UDP";
+
+/* Class = "UISegmentedControl"; Nrv-SM-lMf.segmentTitles[1] = "TCP"; ObjectID = "Nrv-SM-lMf"; */
+"Nrv-SM-lMf.segmentTitles[1]" = "TCP";
+
+/* Class = "UISegmentedControl"; Nrv-SM-lMf.segmentTitles[2] = "TLS"; ObjectID = "Nrv-SM-lMf"; */
+"Nrv-SM-lMf.segmentTitles[2]" = "TLS";
+
+/* Class = "UILabel"; text = "These parameters were retrieved from a remote provisioning profile."; ObjectID = "RHE-hi-dfB"; */
+"RHE-hi-dfB.text" = "These parameters were retrieved from a remote provisioning profile.";
+
+/* Class = "UILabel"; accessibilityLabel = "Account setup assistant"; ObjectID = "YKJ-nv-RUT"; */
+"YKJ-nv-RUT.accessibilityLabel" = "Account setup assistant";
+
+/* Class = "UILabel"; text = "Provisioned account"; ObjectID = "YKJ-nv-RUT"; */
+"YKJ-nv-RUT.text" = "Provisioned account";
+
+/* Class = "UIButton"; accessibilityLabel = "Sign in"; ObjectID = "dGS-GB-Sgb"; */
+"dGS-GB-Sgb.accessibilityLabel" = "Sign in";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "dGS-GB-Sgb"; */
+"dGS-GB-Sgb.normalTitle" = "Sign in";
+
+/* Class = "UILabel"; text = "Enter your username and password"; ObjectID = "pU9-SC-9uY"; */
+"pU9-SC-9uY.text" = "Enter your username and password";
+
+/* Class = "UILabel"; text = "Invalid character:"; ObjectID = "uHm-NE-GLV"; */
+"uHm-NE-GLV.text" = "Invalid character:";
+
+/* Class = "UITextField"; accessibilityLabel = "Domain"; ObjectID = "wRB-Sh-K8J"; */
+"wRB-Sh-K8J.accessibilityLabel" = "Domain";
+
+/* Class = "UITextField"; placeholder = "Domain"; ObjectID = "wRB-Sh-K8J"; */
+"wRB-Sh-K8J.placeholder" = "Domain";

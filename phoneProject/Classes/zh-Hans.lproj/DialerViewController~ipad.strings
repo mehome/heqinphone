@@ -1,0 +1,63 @@
+
+/* Class = "UITextField"; accessibilityLabel = "Enter a address"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Enter a address";
+
+/* Class = "UITextField"; placeholder = "Enter SIP address or phone number..."; ObjectID = "6"; */
+"6.placeholder" = "Enter SIP address or phone number...";
+
+/* Class = "UIButton"; accessibilityLabel = "Star"; ObjectID = "8"; */
+"8.accessibilityLabel" = "Star";
+
+/* Class = "UIButton"; accessibilityLabel = "6"; ObjectID = "9"; */
+"9.accessibilityLabel" = "6";
+
+/* Class = "UIButton"; accessibilityLabel = "0"; ObjectID = "10"; */
+"10.accessibilityLabel" = "0";
+
+/* Class = "UIButton"; accessibilityLabel = "Sharp"; ObjectID = "11"; */
+"11.accessibilityLabel" = "Sharp";
+
+/* Class = "UIButton"; accessibilityLabel = "9"; ObjectID = "12"; */
+"12.accessibilityLabel" = "9";
+
+/* Class = "UIButton"; accessibilityLabel = "8"; ObjectID = "13"; */
+"13.accessibilityLabel" = "8";
+
+/* Class = "UIButton"; accessibilityLabel = "7"; ObjectID = "14"; */
+"14.accessibilityLabel" = "7";
+
+/* Class = "UIButton"; accessibilityLabel = "4"; ObjectID = "15"; */
+"15.accessibilityLabel" = "4";
+
+/* Class = "UIButton"; accessibilityLabel = "5"; ObjectID = "16"; */
+"16.accessibilityLabel" = "5";
+
+/* Class = "UIButton"; accessibilityLabel = "3"; ObjectID = "17"; */
+"17.accessibilityLabel" = "3";
+
+/* Class = "UIButton"; accessibilityLabel = "2"; ObjectID = "18"; */
+"18.accessibilityLabel" = "2";
+
+/* Class = "UIButton"; accessibilityLabel = "1"; ObjectID = "19"; */
+"19.accessibilityLabel" = "1";
+
+/* Class = "UIButton"; accessibilityLabel = "Transfer Call"; ObjectID = "20"; */
+"20.accessibilityLabel" = "Transfer Call";
+
+/* Class = "UIButton"; accessibilityLabel = "Call"; ObjectID = "21"; */
+"21.accessibilityLabel" = "Call";
+
+/* Class = "UIButton"; accessibilityLabel = "Back"; ObjectID = "22"; */
+"22.accessibilityLabel" = "Back";
+
+/* Class = "UIButton"; accessibilityLabel = "Add call"; ObjectID = "23"; */
+"23.accessibilityLabel" = "Add call";
+
+/* Class = "UIButton"; accessibilityLabel = "Add to Contact"; ObjectID = "24"; */
+"24.accessibilityLabel" = "Add to Contact";
+
+/* Class = "UIButton"; accessibilityLabel = "Backscape"; ObjectID = "25"; */
+"25.accessibilityLabel" = "Backscape";
+
+/* Class = "UIButton"; accessibilityLabel = "Switch camera"; ObjectID = "71"; */
+"71.accessibilityLabel" = "Switch camera";

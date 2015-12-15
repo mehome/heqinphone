@@ -306,6 +306,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSLog(@"after cur afterNameStr=%@, afterUserStr=%@", afterNameStr, afterUserStr);
     
     linphone_address_destroy(parsed);
+    
+    [self showToastWithMessage:@"更改成功"];
 }
 
 - (IBAction)joinBtnClicked:(id)sender {

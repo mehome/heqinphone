@@ -1,0 +1,42 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Decline"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Decline";
+
+/* Class = "UIButton"; accessibilityLabel = "Accept"; ObjectID = "7"; */
+"7.accessibilityLabel" = "Accept";
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "9"; */
+"9.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "0102030405"; ObjectID = "9"; */
+"9.text" = "0102030405";
+
+/* Class = "UIImageView"; accessibilityLabel = "Contact avatar"; ObjectID = "19"; */
+"19.accessibilityLabel" = "Contact avatar";
+
+/* Class = "UILabel"; accessibilityLabel = "Incoming call"; ObjectID = "31"; */
+"31.accessibilityLabel" = "Incoming call";
+
+/* Class = "UILabel"; text = "Incoming call"; ObjectID = "31"; */
+"31.text" = "Incoming call";
+
+/* Class = "UIButton"; accessibilityLabel = "Accept"; ObjectID = "64"; */
+"64.accessibilityLabel" = "Accept";
+
+/* Class = "UIButton"; accessibilityLabel = "Decline"; ObjectID = "65"; */
+"65.accessibilityLabel" = "Decline";
+
+/* Class = "UILabel"; accessibilityLabel = "Incoming call"; ObjectID = "67"; */
+"67.accessibilityLabel" = "Incoming call";
+
+/* Class = "UILabel"; text = "Incoming call"; ObjectID = "67"; */
+"67.text" = "Incoming call";
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "69"; */
+"69.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "0102030405"; ObjectID = "69"; */
+"69.text" = "0102030405";
+
+/* Class = "UIImageView"; accessibilityLabel = "Contact avatar"; ObjectID = "71"; */
+"71.accessibilityLabel" = "Contact avatar";

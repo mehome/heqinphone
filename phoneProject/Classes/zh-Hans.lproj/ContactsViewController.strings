@@ -1,0 +1,24 @@
+
+/* Class = "UIButton"; accessibilityLabel = "All contacts filter"; ObjectID = "4"; */
+"4.accessibilityLabel" = "All contacts filter";
+
+/* Class = "UIButton"; normalTitle = "All"; ObjectID = "4"; */
+"4.normalTitle" = "All";
+
+/* Class = "UIButton"; accessibilityLabel = "Linphone contacts filter"; ObjectID = "5"; */
+"5.accessibilityLabel" = "Linphone contacts filter";
+
+/* Class = "UIButton"; normalTitle = "Linphone"; ObjectID = "5"; */
+"5.normalTitle" = "Linphone";
+
+/* Class = "UIButton"; accessibilityLabel = "Add contact"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Add contact";
+
+/* Class = "UIButton"; normalTitle = "Add contact"; ObjectID = "6"; */
+"6.normalTitle" = "Add contact";
+
+/* Class = "UIButton"; accessibilityLabel = "Back"; ObjectID = "87"; */
+"87.accessibilityLabel" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "87"; */
+"87.normalTitle" = "Back";

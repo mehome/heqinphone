@@ -1,0 +1,45 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Back"; ObjectID = "9"; */
+"9.accessibilityLabel" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "9"; */
+"9.normalTitle" = "Back";
+
+/* Class = "UIButton"; accessibilityLabel = "Edit"; ObjectID = "10"; */
+"10.accessibilityLabel" = "Edit";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "10"; */
+"10.normalTitle" = "Edit";
+
+/* Class = "UIButton"; selectedTitle = "Ok"; ObjectID = "10"; */
+"10.selectedTitle" = "Ok";
+
+/* Class = "UIButton"; accessibilityLabel = "Send"; ObjectID = "15"; */
+"15.accessibilityLabel" = "Send";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "15"; */
+"15.normalTitle" = "Send";
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "40"; */
+"40.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "Contact1"; ObjectID = "40"; */
+"40.text" = "Contact1";
+
+/* Class = "UIImageView"; accessibilityLabel = "Contact avatar"; ObjectID = "41"; */
+"41.accessibilityLabel" = "Contact avatar";
+
+/* Class = "UIView"; accessibilityLabel = "Message field"; ObjectID = "63"; */
+"63.accessibilityLabel" = "Message field";
+
+/* Class = "UIButton"; accessibilityLabel = "Send picture"; ObjectID = "73"; */
+"73.accessibilityLabel" = "Send picture";
+
+/* Class = "UIProgressView"; accessibilityLabel = "Upload or download progression"; ObjectID = "74"; */
+"74.accessibilityLabel" = "Upload or download progression";
+
+/* Class = "UIButton"; accessibilityLabel = "Cancel"; ObjectID = "75"; */
+"75.accessibilityLabel" = "Cancel";
+
+/* Class = "UILabel"; text = "%@ is composing..."; ObjectID = "fpY-Fv-ht2"; */
+"fpY-Fv-ht2.text" = "%@ is composing...";

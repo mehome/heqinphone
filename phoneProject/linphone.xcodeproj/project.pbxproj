@@ -1761,6 +1761,41 @@
 		E10DE7471BFA3229002D0FBB /* LPMyManageSingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMyManageSingleViewController.h; sourceTree = "<group>"; };
 		E10DE7481BFA3229002D0FBB /* LPMyManageSingleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMyManageSingleViewController.m; sourceTree = "<group>"; };
 		E10DE7491BFA3229002D0FBB /* LPMyManageSingleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMyManageSingleViewController.xib; sourceTree = "<group>"; };
+		E1198EA01C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AboutViewController.strings"; sourceTree = "<group>"; };
+		E1198EA11C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ChatRoomViewController.strings"; sourceTree = "<group>"; };
+		E1198EA21C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ChatViewController.strings"; sourceTree = "<group>"; };
+		E1198EA31C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ContactDetailsLabelViewController.strings"; sourceTree = "<group>"; };
+		E1198EA41C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ContactDetailsViewController.strings"; sourceTree = "<group>"; };
+		E1198EA51C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ContactsViewController.strings"; sourceTree = "<group>"; };
+		E1198EA61C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DialerViewController.strings"; sourceTree = "<group>"; };
+		E1198EA71C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DialerViewController~ipad.strings"; sourceTree = "<group>"; };
+		E1198EA81C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FirstLoginViewController.strings"; sourceTree = "<group>"; };
+		E1198EA91C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HistoryDetailsViewController.strings"; sourceTree = "<group>"; };
+		E1198EAA1C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HistoryViewController.strings"; sourceTree = "<group>"; };
+		E1198EAB1C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ImageViewController.strings"; sourceTree = "<group>"; };
+		E1198EAC1C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InCallViewController.strings"; sourceTree = "<group>"; };
+		E1198EAD1C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/IncomingCallViewController.strings"; sourceTree = "<group>"; };
+		E1198EAE1C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/IncomingCallViewController~ipad.strings"; sourceTree = "<group>"; };
+		E1198EAF1C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UICallBar.strings"; sourceTree = "<group>"; };
+		E1198EB01C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UICallBar~ipad.strings"; sourceTree = "<group>"; };
+		E1198EB11C204C7D00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UICallCell.strings"; sourceTree = "<group>"; };
+		E1198EB21C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIChatCell.strings"; sourceTree = "<group>"; };
+		E1198EB31C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIChatRoomCell.strings"; sourceTree = "<group>"; };
+		E1198EB41C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UICompositeViewController.strings"; sourceTree = "<group>"; };
+		E1198EB51C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIConferenceHeader.strings"; sourceTree = "<group>"; };
+		E1198EB61C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIContactCell.strings"; sourceTree = "<group>"; };
+		E1198EB71C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIContactDetailsFooter.strings"; sourceTree = "<group>"; };
+		E1198EB81C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIContactDetailsHeader.strings"; sourceTree = "<group>"; };
+		E1198EB91C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIHistoryCell.strings"; sourceTree = "<group>"; };
+		E1198EBA1C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIMainBar.strings"; sourceTree = "<group>"; };
+		E1198EBB1C204C7E00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIMainBar~ipad.strings"; sourceTree = "<group>"; };
+		E1198EBC1C204C7F00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UIStateBar.strings"; sourceTree = "<group>"; };
+		E1198EBD1C204C7F00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PhoneMainView.strings"; sourceTree = "<group>"; };
+		E1198EBE1C204C7F00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SettingsViewController.strings"; sourceTree = "<group>"; };
+		E1198EBF1C204C7F00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WizardViewController.strings"; sourceTree = "<group>"; };
+		E1198EC01C204C7F00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WizardViewController~ipad.strings"; sourceTree = "<group>"; };
+		E1198EC11C204C8000CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WizardViews.strings"; sourceTree = "<group>"; };
+		E1198EC31C204C8000CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E140A6B41C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeContactsModel.h; sourceTree = "<group>"; };
 		E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeContactsModel.m; sourceTree = "<group>"; };
 		E140A6B71C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeContactsResponseModel.h; sourceTree = "<group>"; };
@@ -3515,6 +3550,7 @@
 				ru,
 				Base,
 				ar,
+				"zh-Hans",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -4357,6 +4393,7 @@
 				D381885815FE44A700C3EDCA /* fr */,
 				FD979F30169E84670022A8B4 /* ru */,
 				F0ADFCF91A78EB83004F1102 /* ar */,
+				E1198EC31C204C8000CE0F17 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4367,6 +4404,7 @@
 				636316D21A1DEBCB0009B839 /* Base */,
 				63EF7FDC1A24B5810017A416 /* fr */,
 				F0AF06F01A24BA760086C9C1 /* ar */,
+				E1198EA01C204C7C00CE0F17 /* zh-Hans */,
 			);
 			name = AboutViewController.xib;
 			sourceTree = "<group>";
@@ -4376,6 +4414,7 @@
 			children = (
 				636316D51A1DEC650009B839 /* Base */,
 				F0AF070E1A24BA770086C9C1 /* ar */,
+				E1198EBE1C204C7F00CE0F17 /* zh-Hans */,
 			);
 			name = SettingsViewController.xib;
 			sourceTree = "<group>";
@@ -4385,6 +4424,7 @@
 			children = (
 				636316D81A1DECC90009B839 /* Base */,
 				F0AF070D1A24BA770086C9C1 /* ar */,
+				E1198EBD1C204C7F00CE0F17 /* zh-Hans */,
 			);
 			name = PhoneMainView.xib;
 			sourceTree = "<group>";
@@ -4394,6 +4434,7 @@
 			children = (
 				639CEAFE1A1DF4D9004DE38F /* Base */,
 				F0AF070C1A24BA770086C9C1 /* ar */,
+				E1198EBC1C204C7F00CE0F17 /* zh-Hans */,
 			);
 			name = UIStateBar.xib;
 			sourceTree = "<group>";
@@ -4403,6 +4444,7 @@
 			children = (
 				639CEB011A1DF4E4004DE38F /* Base */,
 				F0AF07091A24BA770086C9C1 /* ar */,
+				E1198EB91C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIHistoryCell.xib;
 			sourceTree = "<group>";
@@ -4412,6 +4454,7 @@
 			children = (
 				639CEB041A1DF4EB004DE38F /* Base */,
 				F0AF07041A24BA770086C9C1 /* ar */,
+				E1198EB41C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UICompositeViewController.xib;
 			sourceTree = "<group>";
@@ -4421,6 +4464,7 @@
 			children = (
 				639CEB071A1DF4F1004DE38F /* Base */,
 				F0AF07031A24BA770086C9C1 /* ar */,
+				E1198EB31C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIChatRoomCell.xib;
 			sourceTree = "<group>";
@@ -4430,6 +4474,7 @@
 			children = (
 				639CEB0A1A1DF4FA004DE38F /* Base */,
 				F0AF07021A24BA770086C9C1 /* ar */,
+				E1198EB21C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIChatCell.xib;
 			sourceTree = "<group>";
@@ -4441,6 +4486,7 @@
 				F09548431883F52600E8A69B /* fr */,
 				F09548441883F52900E8A69B /* ru */,
 				F0AF06FB1A24BA770086C9C1 /* ar */,
+				E1198EAB1C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = ImageViewController.xib;
 			sourceTree = "<group>";
@@ -4452,6 +4498,7 @@
 				F09548311883F1EB00E8A69B /* fr */,
 				F09548321883F20A00E8A69B /* ru */,
 				F0AF06F11A24BA760086C9C1 /* ar */,
+				E1198EA11C204C7C00CE0F17 /* zh-Hans */,
 			);
 			name = ChatRoomViewController.xib;
 			sourceTree = "<group>";
@@ -4463,6 +4510,7 @@
 				F09548331883F25C00E8A69B /* fr */,
 				F09548341883F25F00E8A69B /* ru */,
 				F0AF06F21A24BA760086C9C1 /* ar */,
+				E1198EA21C204C7C00CE0F17 /* zh-Hans */,
 			);
 			name = ChatViewController.xib;
 			sourceTree = "<group>";
@@ -4474,6 +4522,7 @@
 				F09548351883F28100E8A69B /* fr */,
 				F09548361883F28400E8A69B /* ru */,
 				F0AF06F31A24BA760086C9C1 /* ar */,
+				E1198EA31C204C7C00CE0F17 /* zh-Hans */,
 			);
 			name = ContactDetailsLabelViewController.xib;
 			sourceTree = "<group>";
@@ -4485,6 +4534,7 @@
 				F09548371883F29500E8A69B /* fr */,
 				F09548381883F29C00E8A69B /* ru */,
 				F0AF06F41A24BA760086C9C1 /* ar */,
+				E1198EA41C204C7C00CE0F17 /* zh-Hans */,
 			);
 			name = ContactDetailsViewController.xib;
 			sourceTree = "<group>";
@@ -4496,6 +4546,7 @@
 				F09548391883F2C500E8A69B /* fr */,
 				F095483A1883F2CA00E8A69B /* ru */,
 				F0AF06F51A24BA760086C9C1 /* ar */,
+				E1198EA51C204C7C00CE0F17 /* zh-Hans */,
 			);
 			name = ContactsViewController.xib;
 			sourceTree = "<group>";
@@ -4507,6 +4558,7 @@
 				F095483B1883F2DE00E8A69B /* fr */,
 				F095483C1883F2E300E8A69B /* ru */,
 				F0AF06F61A24BA760086C9C1 /* ar */,
+				E1198EA61C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = DialerViewController.xib;
 			sourceTree = "<group>";
@@ -4518,6 +4570,7 @@
 				F095483D1883F49E00E8A69B /* fr */,
 				F095483E1883F4A200E8A69B /* ru */,
 				F0AF06F71A24BA760086C9C1 /* ar */,
+				E1198EA71C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = "DialerViewController~ipad.xib";
 			sourceTree = "<group>";
@@ -4529,6 +4582,7 @@
 				F095483F1883F4B700E8A69B /* fr */,
 				F09548401883F4BC00E8A69B /* ru */,
 				F0AF06F81A24BA760086C9C1 /* ar */,
+				E1198EA81C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = FirstLoginViewController.xib;
 			sourceTree = "<group>";
@@ -4540,6 +4594,7 @@
 				636316DA1A1DEDD40009B839 /* fr */,
 				636316DB1A1DEDD80009B839 /* ru */,
 				F0AF06F91A24BA760086C9C1 /* ar */,
+				E1198EA91C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = HistoryDetailsViewController.xib;
 			sourceTree = "<group>";
@@ -4551,6 +4606,7 @@
 				F09548411883F51600E8A69B /* fr */,
 				F09548421883F51B00E8A69B /* ru */,
 				F0AF06FA1A24BA770086C9C1 /* ar */,
+				E1198EAA1C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = HistoryViewController.xib;
 			sourceTree = "<group>";
@@ -4562,6 +4618,7 @@
 				F09548471883F55300E8A69B /* fr */,
 				F09548481883F55800E8A69B /* ru */,
 				F0AF06FD1A24BA770086C9C1 /* ar */,
+				E1198EAD1C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = IncomingCallViewController.xib;
 			sourceTree = "<group>";
@@ -4573,6 +4630,7 @@
 				F09548591883F67800E8A69B /* fr */,
 				F095485A1883F67B00E8A69B /* ru */,
 				F0AF070F1A24BA770086C9C1 /* ar */,
+				E1198EBF1C204C7F00CE0F17 /* zh-Hans */,
 			);
 			name = WizardViewController.xib;
 			sourceTree = "<group>";
@@ -4584,6 +4642,7 @@
 				F095484B1883F58E00E8A69B /* fr */,
 				F095484C1883F59200E8A69B /* ru */,
 				F0AF06FF1A24BA770086C9C1 /* ar */,
+				E1198EAF1C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = UICallBar.xib;
 			sourceTree = "<group>";
@@ -4595,6 +4654,7 @@
 				F095484D1883F5AF00E8A69B /* fr */,
 				F095484E1883F5B300E8A69B /* ru */,
 				F0AF07001A24BA770086C9C1 /* ar */,
+				E1198EB01C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = "UICallBar~ipad.xib";
 			sourceTree = "<group>";
@@ -4606,6 +4666,7 @@
 				F095484F1883F5D500E8A69B /* fr */,
 				F09548501883F5D900E8A69B /* ru */,
 				F0AF07051A24BA770086C9C1 /* ar */,
+				E1198EB51C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIConferenceHeader.xib;
 			sourceTree = "<group>";
@@ -4617,6 +4678,7 @@
 				F09548511883F5E300E8A69B /* fr */,
 				F09548521883F5E600E8A69B /* ru */,
 				F0AF07071A24BA770086C9C1 /* ar */,
+				E1198EB71C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIContactDetailsFooter.xib;
 			sourceTree = "<group>";
@@ -4628,6 +4690,7 @@
 				F09548551883F61300E8A69B /* fr */,
 				F09548561883F61600E8A69B /* ru */,
 				F0AF070A1A24BA770086C9C1 /* ar */,
+				E1198EBA1C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIMainBar.xib;
 			sourceTree = "<group>";
@@ -4639,6 +4702,7 @@
 				F09548571883F66600E8A69B /* fr */,
 				F09548581883F66A00E8A69B /* ru */,
 				F0AF070B1A24BA770086C9C1 /* ar */,
+				E1198EBB1C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = "UIMainBar~ipad.xib";
 			sourceTree = "<group>";
@@ -4650,6 +4714,7 @@
 				639CEB0C1A1DF528004DE38F /* fr */,
 				639CEB0D1A1DF52C004DE38F /* ru */,
 				F0AF07011A24BA770086C9C1 /* ar */,
+				E1198EB11C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = UICallCell.xib;
 			sourceTree = "<group>";
@@ -4661,6 +4726,7 @@
 				F09548531883F5F400E8A69B /* fr */,
 				F09548541883F5F700E8A69B /* ru */,
 				F0AF07081A24BA770086C9C1 /* ar */,
+				E1198EB81C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIContactDetailsHeader.xib;
 			sourceTree = "<group>";
@@ -4672,6 +4738,7 @@
 				F09548451883F53F00E8A69B /* fr */,
 				F09548461883F54200E8A69B /* ru */,
 				F0AF06FC1A24BA770086C9C1 /* ar */,
+				E1198EAC1C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = InCallViewController.xib;
 			sourceTree = "<group>";
@@ -4683,6 +4750,7 @@
 				F095485D1883F6E700E8A69B /* fr */,
 				F095485E1883F6EA00E8A69B /* ru */,
 				F0AF07111A24BA770086C9C1 /* ar */,
+				E1198EC11C204C8000CE0F17 /* zh-Hans */,
 			);
 			name = WizardViews.xib;
 			sourceTree = "<group>";
@@ -4694,6 +4762,7 @@
 				F095485B1883F68500E8A69B /* fr */,
 				F095485C1883F68800E8A69B /* ru */,
 				F0AF07101A24BA770086C9C1 /* ar */,
+				E1198EC01C204C7F00CE0F17 /* zh-Hans */,
 			);
 			name = "WizardViewController~ipad.xib";
 			sourceTree = "<group>";
@@ -4705,6 +4774,7 @@
 				F09548491883F56A00E8A69B /* fr */,
 				F095484A1883F56E00E8A69B /* ru */,
 				F0AF06FE1A24BA770086C9C1 /* ar */,
+				E1198EAE1C204C7D00CE0F17 /* zh-Hans */,
 			);
 			name = "IncomingCallViewController~ipad.xib";
 			sourceTree = "<group>";
@@ -4715,6 +4785,7 @@
 				F088488C19FF8C41007FFCF3 /* Base */,
 				F088488F19FF8C44007FFCF3 /* fr */,
 				F0AF07061A24BA770086C9C1 /* ar */,
+				E1198EB61C204C7E00CE0F17 /* zh-Hans */,
 			);
 			name = UIContactCell.xib;
 			sourceTree = "<group>";

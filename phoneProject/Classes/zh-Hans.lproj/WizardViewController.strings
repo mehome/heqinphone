@@ -1,0 +1,18 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Start"; ObjectID = "16"; */
+"16.accessibilityLabel" = "Start";
+
+/* Class = "UIButton"; normalTitle = "Start"; ObjectID = "16"; */
+"16.normalTitle" = "Start";
+
+/* Class = "UIButton"; accessibilityLabel = "Back"; ObjectID = "17"; */
+"17.accessibilityLabel" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "17"; */
+"17.normalTitle" = "Back";
+
+/* Class = "UIButton"; accessibilityLabel = "Cancel"; ObjectID = "18"; */
+"18.accessibilityLabel" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "18"; */
+"18.normalTitle" = "Cancel";

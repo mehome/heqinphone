@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "20"; */
+"20.accessibilityLabel" = "Contact name";
+
+/* Class = "UILabel"; text = "John"; ObjectID = "20"; */
+"20.text" = "John";
+
+/* Class = "UILabel"; accessibilityLabel = "Message"; ObjectID = "21"; */
+"21.accessibilityLabel" = "Message";
+
+/* Class = "UILabel"; text = "This is a message"; ObjectID = "21"; */
+"21.text" = "This is a message";
+
+/* Class = "UIButton"; accessibilityLabel = "Delete"; ObjectID = "32"; */
+"32.accessibilityLabel" = "Delete";
+
+/* Class = "UILabel"; accessibilityLabel = "Unread message number"; ObjectID = "41"; */
+"41.accessibilityLabel" = "Unread message number";
+
+/* Class = "UILabel"; text = "3"; ObjectID = "41"; */
+"41.text" = "3";

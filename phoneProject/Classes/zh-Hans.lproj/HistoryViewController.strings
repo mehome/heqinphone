@@ -1,0 +1,27 @@
+
+/* Class = "UIButton"; accessibilityLabel = "All contacts filter"; ObjectID = "4"; */
+"4.accessibilityLabel" = "All contacts filter";
+
+/* Class = "UIButton"; normalTitle = "All"; ObjectID = "4"; */
+"4.normalTitle" = "All";
+
+/* Class = "UIButton"; accessibilityLabel = "Missed contacts filter"; ObjectID = "5"; */
+"5.accessibilityLabel" = "Missed contacts filter";
+
+/* Class = "UIButton"; normalTitle = "Missed"; ObjectID = "5"; */
+"5.normalTitle" = "Missed";
+
+/* Class = "UIButton"; accessibilityLabel = "Edit"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Edit";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "6"; */
+"6.normalTitle" = "Edit";
+
+/* Class = "UIButton"; selectedTitle = "Ok"; ObjectID = "6"; */
+"6.selectedTitle" = "Ok";
+
+/* Class = "UIButton"; accessibilityLabel = "Delete all"; ObjectID = "35"; */
+"35.accessibilityLabel" = "Delete all";
+
+/* Class = "UIButton"; normalTitle = "Delete all"; ObjectID = "35"; */
+"35.normalTitle" = "Delete all";

@@ -1,0 +1,18 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Delete message"; ObjectID = "18"; */
+"18.accessibilityLabel" = "Delete message";
+
+/* Class = "UILabel"; text = "09/09/2009 at 09:09"; ObjectID = "22"; */
+"22.text" = "09/09/2009 at 09:09";
+
+/* Class = "UIImageView"; accessibilityLabel = "Message status"; ObjectID = "26"; */
+"26.accessibilityLabel" = "Message status";
+
+/* Class = "UIButton"; normalTitle = "Download image"; ObjectID = "33"; */
+"33.normalTitle" = "Download image";
+
+/* Class = "UITextView"; accessibilityLabel = "Chat Message"; ObjectID = "43"; */
+"43.accessibilityLabel" = "Chat Message";
+
+/* Class = "UITextView"; text = "They who can give up essential liberty to obtain a little temporary safety, deserve neither liberty nor safety."; ObjectID = "43"; */
+"43.text" = "They who can give up essential liberty to obtain a little temporary safety, deserve neither liberty nor safety.";

@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; accessibilityLabel = "Firstname"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Firstname";
+
+/* Class = "UILabel"; text = "John"; ObjectID = "6"; */
+"6.text" = "John";
+
+/* Class = "UILabel"; accessibilityLabel = "Lastname"; ObjectID = "10"; */
+"10.accessibilityLabel" = "Lastname";
+
+/* Class = "UILabel"; text = "Doe"; ObjectID = "10"; */
+"10.text" = "Doe";

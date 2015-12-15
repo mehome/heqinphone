@@ -1,0 +1,18 @@
+
+/* Class = "UITextField"; accessibilityLabel = "Username"; ObjectID = "6"; */
+"6.accessibilityLabel" = "Username";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "6"; */
+"6.placeholder" = "Username";
+
+/* Class = "UITextField"; accessibilityLabel = "Password"; ObjectID = "8"; */
+"8.accessibilityLabel" = "Password";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "8"; */
+"8.placeholder" = "Password";
+
+/* Class = "UIButton"; accessibilityLabel = "Login"; ObjectID = "64"; */
+"64.accessibilityLabel" = "Login";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "64"; */
+"64.normalTitle" = "Login";

@@ -1,0 +1,39 @@
+
+/* Class = "UIButton"; accessibilityLabel = "Chat"; ObjectID = "5"; */
+"5.accessibilityLabel" = "Chat";
+
+/* Class = "UIButton"; normalTitle = "Chat"; ObjectID = "5"; */
+"5.normalTitle" = "Chat";
+
+/* Class = "UIButton"; accessibilityLabel = "History"; ObjectID = "6"; */
+"6.accessibilityLabel" = "History";
+
+/* Class = "UIButton"; normalTitle = "History"; ObjectID = "6"; */
+"6.normalTitle" = "History";
+
+/* Class = "UIButton"; accessibilityLabel = "Dialer"; ObjectID = "7"; */
+"7.accessibilityLabel" = "Dialer";
+
+/* Class = "UIButton"; accessibilityLabel = "Contacts"; ObjectID = "8"; */
+"8.accessibilityLabel" = "Contacts";
+
+/* Class = "UIButton"; normalTitle = "Contacts"; ObjectID = "8"; */
+"8.normalTitle" = "Contacts";
+
+/* Class = "UIButton"; accessibilityLabel = "Settings"; ObjectID = "9"; */
+"9.accessibilityLabel" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "9"; */
+"9.normalTitle" = "Settings";
+
+/* Class = "UILabel"; accessibilityLabel = "Missed call(s)"; ObjectID = "34"; */
+"34.accessibilityLabel" = "Missed call(s)";
+
+/* Class = "UILabel"; text = "99"; ObjectID = "34"; */
+"34.text" = "99";
+
+/* Class = "UILabel"; accessibilityLabel = "Missed message(s)"; ObjectID = "38"; */
+"38.accessibilityLabel" = "Missed message(s)";
+
+/* Class = "UILabel"; text = "99"; ObjectID = "38"; */
+"38.text" = "99";
