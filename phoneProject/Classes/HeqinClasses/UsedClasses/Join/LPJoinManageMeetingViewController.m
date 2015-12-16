@@ -78,6 +78,10 @@
     self.dateFormatter.dateFormat = @"yyyy年MM月dd日";
     NSLocale *locale = [NSLocale currentLocale];
     [self.dateFormatter setLocale:locale];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     if ([LPSystemUser sharedUser].hasGetMeetingData == NO) {
         [self searchMyMeetingInfo];
@@ -90,6 +94,9 @@
 - (IBAction)searchBtnClicked:(id)sender {
     self.floatView.hidden = YES;
     [self.meetingField resignFirstResponder];
+    
+    NSString *searchStr = [self.meetingField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [self filterWithStr:searchStr];
 }
 
 - (void)bgTap:(UITapGestureRecognizer *)tapGesture {
@@ -275,19 +282,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.meetingTable reloadSections:[NSIndexSet indexSetWithIndex:(btn.tag - 1000)] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return @"会议安排";
-//    }else if (section == 1) {
-//        return @"我的会议室";
-//    }else if (section == 2) {
-//        return @"我的收藏";
-//    }else if (section == 3) {
-//        return @"历史会议";
-//    }
-//    return @"";
-//}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (section) {
         case 0:
@@ -341,7 +335,18 @@ static UICompositeViewDescription *compositeDescription = nil;
         dateLabel.font = [UIFont systemFontOfSize:14.0];
         dateLabel.backgroundColor = [UIColor clearColor];
         dateLabel.tag = 9001;
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = tableCell.contentView.bounds;
+        [tableCell.contentView addSubview:btn];
+        [btn addTarget:self action:@selector(cellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        btn.backgroundColor = [UIColor clearColor];
+        btn.tag = 9002;
     }
+    
+    UIButton *btn = [tableCell.contentView viewWithTag:9002];
+    btn.frame = tableCell.contentView.bounds;
+    btn.rd_userInfo = @{@"indexPath":indexPath};
     
     NSString *firstStr = nil;
     NSString *secondStr = nil;
@@ -349,17 +354,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     switch (indexPath.section) {
         case 0:
             curMeetingModel = [self.filterAllMeetings objectAtIndex:indexPath.row];
-            firstStr = curMeetingModel.name;
+            firstStr = curMeetingModel.name.length>0 ? curMeetingModel.name : curMeetingModel.addr;
             secondStr = curMeetingModel.time;
             break;
         case 1:
             curMeetingModel = [self.filterMyMeetings objectAtIndex:indexPath.row];
-            firstStr = curMeetingModel.name;
+            firstStr = curMeetingModel.name.length>0 ? curMeetingModel.name : curMeetingModel.addr;
             secondStr = curMeetingModel.time;
             break;
         case 2:
             curMeetingModel = [self.filterMyCollections objectAtIndex:indexPath.row];
-            firstStr = curMeetingModel.name;
+            firstStr = curMeetingModel.name.length>0 ? curMeetingModel.name : curMeetingModel.addr;
             secondStr = curMeetingModel.time;
             break;
         case 3: {
@@ -427,9 +432,16 @@ static UICompositeViewDescription *compositeDescription = nil;
     return tableCell;
 }
 
+- (void)cellBtnClicked:(UIButton *)sender {
+    NSIndexPath *btnIndexPath = (NSIndexPath *)[sender.rd_userInfo objectForKey:@"indexPath"];
+    [self goIndexPath:btnIndexPath];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+}
+
+- (void)goIndexPath:(NSIndexPath *)indexPath {
     RDRJoinMeetingModel *curMeetingModel = nil;
     
     switch (indexPath.section) {
@@ -518,10 +530,102 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    // 进行过滤操作
-    NSLog(@"string=%@", string);
-    
     return YES;
+}
+
+- (void)filterWithStr:(NSString *)curStr {
+    if (curStr.length > 0) {
+        self.floatView.hidden = YES;
+    }else {
+        self.floatView.hidden = NO;
+    }
+    
+    // 先重置好所有的数据
+    [self resetAllData];
+    if (curStr.length == 0) {
+        [self.meetingTable reloadData];
+        return;
+    }
+    
+    NSMutableArray *tmpArr = [NSMutableArray array];
+    
+    // 进行过滤操作0
+    for (NSInteger i=0; i<self.filterAllMeetings.count; i++) {
+        RDRJoinMeetingModel *curModel = [self.filterAllMeetings objectAtIndex:i];
+        if ([curModel.name rangeOfString:curStr].location != NSNotFound ||
+            [curModel.addr rangeOfString:curStr].location != NSNotFound||
+            [[curModel.idNum stringValue] rangeOfString:curStr].location != NSNotFound) {
+            
+        }else {
+            [tmpArr addObject:curModel];
+        }
+    }
+    if (tmpArr.count > 0) {
+        [self.filterAllMeetings removeObjectsInArray:tmpArr];
+    }
+    [tmpArr removeAllObjects];
+    
+    // 进行过滤操作1
+    for (NSInteger i=0; i<self.filterMyMeetings.count; i++) {
+        RDRJoinMeetingModel *curModel = [self.filterMyMeetings objectAtIndex:i];
+        if ([curModel.name rangeOfString:curStr].location != NSNotFound ||
+            [curModel.addr rangeOfString:curStr].location != NSNotFound||
+            [[curModel.idNum stringValue] rangeOfString:curStr].location != NSNotFound) {
+            
+        }else {
+            [tmpArr addObject:curModel];
+        }
+    }
+    if (tmpArr.count > 0) {
+        [self.filterMyMeetings removeObjectsInArray:tmpArr];
+    }
+    [tmpArr removeAllObjects];
+    
+    // 进行过滤操作2
+    for (NSInteger i=0; i<self.filterMyCollections.count; i++) {
+        RDRJoinMeetingModel *curModel = [self.filterMyCollections objectAtIndex:i];
+        if ([curModel.name rangeOfString:curStr].location != NSNotFound ||
+            [curModel.addr rangeOfString:curStr].location != NSNotFound||
+            [[curModel.idNum stringValue] rangeOfString:curStr].location != NSNotFound) {
+            
+        }else {
+            [tmpArr addObject:curModel];
+        }
+    }
+    if (tmpArr.count > 0) {
+        [self.filterMyCollections removeObjectsInArray:tmpArr];
+    }
+    [tmpArr removeAllObjects];
+
+    NSMutableIndexSet *set=[NSMutableIndexSet indexSet];
+    // 进行过滤操作3
+    for (NSInteger i=0; i<self.filterHistoryMeetings.count; i++) {
+        LinphoneCallLog *callLog = [[self.filterHistoryMeetings objectAtIndex:i] pointerValue];
+        LinphoneAddress* addr;
+        if (linphone_call_log_get_dir(callLog) == LinphoneCallIncoming) {
+            addr = linphone_call_log_get_from(callLog);
+        } else {
+            addr = linphone_call_log_get_to(callLog);
+        }
+        
+        NSString* address = @"";
+        if(addr != NULL) {
+            char* lAddress = linphone_address_as_string_uri_only(addr);
+            if(lAddress) {
+                address = [NSString stringWithUTF8String:lAddress];
+            }
+        }
+        
+        if ([address rangeOfString:curStr].location != NSNotFound) {
+            
+        }else {
+            [set addIndex:i];
+        }
+    }
+    
+    [self.filterHistoryMeetings removeObjectsAtIndexes:set];
+    
+    [self.meetingTable reloadData];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -538,6 +642,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self.meetingField resignFirstResponder];
     self.floatView.hidden = YES;
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSString *searchStr = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [self filterWithStr:searchStr];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

@@ -10,6 +10,7 @@
 		045B5CB318D72E9A0088350C /* libbzrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045B5CB218D72E9A0088350C /* libbzrtp.a */; };
 		13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */; };
 		13066CE01BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */; };
+		134D9C5E1C2188F900ADA720 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22744043106F33FC006EC466 /* Security.framework */; };
 		137DB45A1C0DA03E00BDECD6 /* NSObject+RDRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 137DB4591C0DA03E00BDECD6 /* NSObject+RDRCommon.m */; };
 		13854EAE1BECA22000727913 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13854EAD1BECA22000727913 /* MapKit.framework */; };
 		138950721BECA38D003DD7A0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 13894FE41BECA38C003DD7A0 /* AFHTTPRequestOperation.m */; };
@@ -1982,6 +1983,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				134D9C5E1C2188F900ADA720 /* Security.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */,
 				13854EAE1BECA22000727913 /* MapKit.framework in Frameworks */,

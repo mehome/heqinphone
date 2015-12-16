@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPMyManageSingleViewController">
@@ -22,7 +22,6 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="by8-iB-u4r">
                     <rect key="frame" x="20" y="183" width="82" height="30"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.23324932919999999" green="1" blue="0.2426212358" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="锁定"/>
                     <connections>
@@ -31,7 +30,6 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K91-nS-zke">
                     <rect key="frame" x="139" y="263" width="85" height="30"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.23324932919999999" green="1" blue="0.2426212358" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="9bb-a4-3jt"/>
@@ -45,7 +43,6 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会议室名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3J-VG-L03">
                     <rect key="frame" x="20" y="30" width="102" height="21"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Dlg-9r-BKq"/>
                         <constraint firstAttribute="width" constant="102" id="dC8-uy-qc8"/>
@@ -56,7 +53,6 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host PIN:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwN-fF-lSw">
                     <rect key="frame" x="20" y="91" width="82" height="21"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="YPe-LS-WGS"/>
                         <constraint firstAttribute="width" constant="72" id="gMD-zR-wUJ"/>
@@ -72,7 +68,6 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest PIN:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnx-wf-iQi">
                     <rect key="frame" x="20" y="142" width="82" height="21"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="ETL-QJ-Y2x"/>
                         <constraint firstAttribute="width" constant="82" id="heS-bO-3Ka"/>
@@ -83,7 +78,6 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销售1部第1会议室" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib3-ce-wit">
                     <rect key="frame" x="124" y="30" width="219" height="21"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="4Tl-gv-y6y"/>
                     </constraints>
@@ -93,7 +87,6 @@
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="12345678" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XD-PT-rd0">
                     <rect key="frame" x="121" y="87" width="202" height="30"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="1cX-yh-8JI"/>
                     </constraints>
@@ -105,7 +98,6 @@
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Nu-vs-kRF">
                     <rect key="frame" x="121" y="138" width="202" height="30"/>
-                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
@@ -114,7 +106,6 @@
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="当前会议室开放" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hLG-R9-hoz">
                     <rect key="frame" x="121" y="183" width="202" height="30"/>
-                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
@@ -122,7 +113,6 @@
                     </connections>
                 </textField>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="hLG-R9-hoz" firstAttribute="height" secondItem="8Nu-vs-kRF" secondAttribute="height" id="32B-DI-uYf"/>

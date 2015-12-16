@@ -12,6 +12,6 @@
 
 @interface LPMyManageSingleViewController : UIViewController <UICompositeViewDelegate>
 
-@property (nonatomic, strong) RDRJoinMeetingModel *model;
+- (void)updateWithModel:(RDRJoinMeetingModel *)model;
 
 @end
