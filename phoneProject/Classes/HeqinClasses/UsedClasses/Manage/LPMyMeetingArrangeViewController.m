@@ -24,7 +24,7 @@
 #import "RDRMyMeetingArrangeModel.h"
 #import "RDRMyMeetingArrangeResponseModel.h"
 
-@interface LPMyMeetingArrangeViewController ()
+@interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
 @property (weak, nonatomic) IBOutlet UITextField *joinerField;
@@ -48,12 +48,25 @@
     [self getDatas];
 }
 
+- (void)collapseAllTextField {
+    [self.timeField resignFirstResponder];
+    [self.joinerField resignFirstResponder];
+    [self.terminalField resignFirstResponder];
+    [self.roomsField resignFirstResponder];
+}
+
 // 初始化控件
 - (void)initControls {
     self.datePicker = [[UIDatePicker alloc] init];
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     self.timeField.inputView = self.datePicker;
     self.datePicker.date = [NSDate date];
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
+}
+
+- (void)bgTapped:(UITapGestureRecognizer *)tapGesture {
+    [self collapseAllTextField];
 }
 
 // 获取数据
@@ -137,13 +150,7 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - UICompositeViewDelegate Functions
-
 static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
@@ -203,4 +210,20 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSLog(@"安排会议室出错, %s, error=%@", __FUNCTION__, error);
     }];
 }
+
+#pragma mark UITextField delegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 @end

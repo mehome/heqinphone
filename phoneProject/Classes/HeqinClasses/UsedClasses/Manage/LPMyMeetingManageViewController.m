@@ -140,13 +140,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     btn.backgroundColor = [UIColor clearColor];
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
-    [btn addTarget:self action:@selector(sectionBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    if (self.showMyMeeting == YES) {
-        [btn setTitle:@"我的会议室 收起" forState:UIControlStateNormal];
-    }else {
-        [btn setTitle:@"我的会议室 展开" forState:UIControlStateNormal];
-    }
-    
+//    [btn addTarget:self action:@selector(sectionBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    if (self.showMyMeeting == YES) {
+//        [btn setTitle:@"我的会议室 收起" forState:UIControlStateNormal];
+//    }else {
+//        [btn setTitle:@"我的会议室 展开" forState:UIControlStateNormal];
+//    }
+
+    [btn setTitle:@"我的会议室" forState:UIControlStateNormal];
+
     [pareView addSubview:btn];
     btn.ott_centerY = pareView.ott_centerY;
     
@@ -233,7 +235,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     RDRJoinMeetingModel *curMeetingModel = [self.filterMyMeetings objectAtIndex:indexPath.row];
     
     // 进入到管理界面，可设置PIN码和GUEST码
-    LPMyManageSingleViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription]], DialerViewController);
+    LPMyManageSingleViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription]], LPMyManageSingleViewController);
     if (controller != nil) {
         NSLog(@"进入会议管理中, idNum=%@, name=%@, addr=%@", curMeetingModel.idNum, curMeetingModel.name, curMeetingModel.addr);
         [controller updateWithModel:curMeetingModel];

@@ -765,6 +765,12 @@
 		E140A6C81C10A48D000E7DD0 /* RDRArrangeRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C71C10A48D000E7DD0 /* RDRArrangeRoomModel.m */; };
 		E14F50BB1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F50BA1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m */; };
 		E14F50BE1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */; };
+		E18241E71C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */; };
+		E18241EA1C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241E91C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m */; };
+		E18241ED1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */; };
+		E18241F01C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241EF1C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.m */; };
+		E18241F31C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241F21C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.m */; };
+		E18241F61C21C037000EC54A /* RDRManageCloseMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241F51C21C037000EC54A /* RDRManageCloseMeetingResponseModel.m */; };
 		E19A0D611BF4E7B500E377DB /* RDRMyMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D601BF4E7B500E377DB /* RDRMyMeetingRequestModel.m */; };
 		E19A0D641BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D631BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m */; };
 		E19A0D681BF4EAEE00E377DB /* RDRJoinMeetingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D671BF4EAEE00E377DB /* RDRJoinMeetingModel.m */; };
@@ -1815,6 +1821,18 @@
 		E14F50BA1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeModel.m; sourceTree = "<group>"; };
 		E14F50BC1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeResponseModel.h; sourceTree = "<group>"; };
 		E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeResponseModel.m; sourceTree = "<group>"; };
+		E18241E51C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageLockMeetingRequestModel.h; sourceTree = "<group>"; };
+		E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageLockMeetingRequestModel.m; sourceTree = "<group>"; };
+		E18241E81C21B70C000EC54A /* RDRManageLockMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageLockMeetingResponseModel.h; sourceTree = "<group>"; };
+		E18241E91C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageLockMeetingResponseModel.m; sourceTree = "<group>"; };
+		E18241EB1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageSettingMeetingRequestModel.h; sourceTree = "<group>"; };
+		E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageSettingMeetingRequestModel.m; sourceTree = "<group>"; };
+		E18241EE1C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageSeetingMeetingResponseModel.h; sourceTree = "<group>"; };
+		E18241EF1C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageSeetingMeetingResponseModel.m; sourceTree = "<group>"; };
+		E18241F11C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageCloseMeetingRequsetModel.h; sourceTree = "<group>"; };
+		E18241F21C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageCloseMeetingRequsetModel.m; sourceTree = "<group>"; };
+		E18241F41C21C037000EC54A /* RDRManageCloseMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageCloseMeetingResponseModel.h; sourceTree = "<group>"; };
+		E18241F51C21C037000EC54A /* RDRManageCloseMeetingResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageCloseMeetingResponseModel.m; sourceTree = "<group>"; };
 		E19A0D5F1BF4E7B500E377DB /* RDRMyMeetingRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingRequestModel.h; sourceTree = "<group>"; };
 		E19A0D601BF4E7B500E377DB /* RDRMyMeetingRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingRequestModel.m; sourceTree = "<group>"; };
 		E19A0D621BF4E7CF00E377DB /* RDRMyMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingResponseModel.h; sourceTree = "<group>"; };
@@ -2407,6 +2425,12 @@
 				E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */,
 				E140A6C01C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.h */,
 				E140A6C11C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m */,
+				E18241E51C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.h */,
+				E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */,
+				E18241F11C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.h */,
+				E18241F21C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.m */,
+				E18241EB1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.h */,
+				E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */,
 			);
 			path = ModalRequest;
 			sourceTree = "<group>";
@@ -2418,6 +2442,12 @@
 				E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */,
 				138951291BECB206003DD7A0 /* RDRSystemConfigResponseModel.h */,
 				1389512A1BECB206003DD7A0 /* RDRSystemConfigResponseModel.m */,
+				E18241E81C21B70C000EC54A /* RDRManageLockMeetingResponseModel.h */,
+				E18241E91C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m */,
+				E18241F41C21C037000EC54A /* RDRManageCloseMeetingResponseModel.h */,
+				E18241F51C21C037000EC54A /* RDRManageCloseMeetingResponseModel.m */,
+				E18241EE1C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.h */,
+				E18241EF1C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.m */,
 				1389511E1BECA5D4003DD7A0 /* MTLModel+RDRNilForBasedataType.h */,
 				1389511F1BECA5D4003DD7A0 /* MTLModel+RDRNilForBasedataType.m */,
 				138951201BECA5D4003DD7A0 /* RDRBaseResponseModel.h */,
@@ -4186,6 +4216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18241F31C21BFCE000EC54A /* RDRManageCloseMeetingRequsetModel.m in Sources */,
 				1389507B1BECA38D003DD7A0 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1389515F1BEDDC60003DD7A0 /* LPSystemSetting.m in Sources */,
 				138950721BECA38D003DD7A0 /* AFHTTPRequestOperation.m in Sources */,
@@ -4204,6 +4235,7 @@
 				E1FCC3F31C1F14B3009A51CC /* UIView+Frame.m in Sources */,
 				138950FC1BECA576003DD7A0 /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				2214EB8912F84EBB002A5394 /* UIHangUpButton.m in Sources */,
+				E18241ED1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m in Sources */,
 				2214EBF312F86360002A5394 /* UIMicroButton.m in Sources */,
 				22968A5F12F875C600588287 /* UISpeakerButton.m in Sources */,
 				2218A92512FBE1340088A667 /* FirstLoginViewController.m in Sources */,
@@ -4236,6 +4268,7 @@
 				E10DE74A1BFA3229002D0FBB /* LPMyManageSingleViewController.m in Sources */,
 				138950771BECA38D003DD7A0 /* AFNetworkReachabilityManager.m in Sources */,
 				138950FA1BECA576003DD7A0 /* MTLValueTransformer.m in Sources */,
+				E18241E71C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m in Sources */,
 				138951151BECA597003DD7A0 /* RDRNetHelper.m in Sources */,
 				138951161BECA597003DD7A0 /* RDRNetworkAPICache.m in Sources */,
 				138951011BECA576003DD7A0 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
@@ -4274,6 +4307,7 @@
 				138950811BECA38D003DD7A0 /* UIRefreshControl+AFNetworking.m in Sources */,
 				D31AAF5E159B3919002C6B02 /* InCallTableViewController.m in Sources */,
 				138950ED1BECA576003DD7A0 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				E18241F01C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.m in Sources */,
 				D3211BB0159C4EF10098460B /* UIConferenceHeader.m in Sources */,
 				138950731BECA38D003DD7A0 /* AFHTTPRequestOperationManager.m in Sources */,
 				138950F51BECA576003DD7A0 /* MTLJSONAdapter.m in Sources */,
@@ -4290,11 +4324,13 @@
 				138950761BECA38D003DD7A0 /* AFURLSessionManager.m in Sources */,
 				D32B6E2915A5BC440033019F /* ChatRoomTableViewController.m in Sources */,
 				138951001BECA576003DD7A0 /* NSObject+MTLComparisonAdditions.m in Sources */,
+				E18241EA1C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m in Sources */,
 				E140A6BC1C10A0DC000E7DD0 /* RDRContactModel.m in Sources */,
 				138950F01BECA576003DD7A0 /* FMDatabasePool.m in Sources */,
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
+				E18241F61C21C037000EC54A /* RDRManageCloseMeetingResponseModel.m in Sources */,
 				E140A6C81C10A48D000E7DD0 /* RDRArrangeRoomModel.m in Sources */,
 				D37C639B15AADEF6009D0BAC /* ContactDetailsTableViewController.m in Sources */,
 				138951021BECA576003DD7A0 /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
