@@ -756,6 +756,7 @@
 		E10DE7461BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7441BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.xib */; };
 		E10DE74A1BFA3229002D0FBB /* LPMyManageSingleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7481BFA3229002D0FBB /* LPMyManageSingleViewController.m */; };
 		E10DE74B1BFA3229002D0FBB /* LPMyManageSingleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7491BFA3229002D0FBB /* LPMyManageSingleViewController.xib */; };
+		E135F8471C243EA3003BE802 /* RDRCellsSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E135F8461C243EA3003BE802 /* RDRCellsSelectView.m */; };
 		E140A6B61C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */; };
 		E140A6B91C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6B81C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.m */; };
 		E140A6BC1C10A0DC000E7DD0 /* RDRContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6BB1C10A0DC000E7DD0 /* RDRContactModel.m */; };
@@ -1803,6 +1804,8 @@
 		E1198EC01C204C7F00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WizardViewController~ipad.strings"; sourceTree = "<group>"; };
 		E1198EC11C204C8000CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WizardViews.strings"; sourceTree = "<group>"; };
 		E1198EC31C204C8000CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		E135F8451C243EA3003BE802 /* RDRCellsSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRCellsSelectView.h; sourceTree = "<group>"; };
+		E135F8461C243EA3003BE802 /* RDRCellsSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRCellsSelectView.m; sourceTree = "<group>"; };
 		E140A6B41C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeContactsModel.h; sourceTree = "<group>"; };
 		E140A6B51C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeContactsModel.m; sourceTree = "<group>"; };
 		E140A6B71C10A05D000E7DD0 /* RDRMyMeetingArrangeContactsResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeContactsResponseModel.h; sourceTree = "<group>"; };
@@ -2481,6 +2484,8 @@
 				138951661BEDDCDD003DD7A0 /* LPSettingViewController.h */,
 				138951671BEDDCDD003DD7A0 /* LPSettingViewController.m */,
 				138951681BEDDCDD003DD7A0 /* LPSettingViewController.xib */,
+				E135F8451C243EA3003BE802 /* RDRCellsSelectView.h */,
+				E135F8461C243EA3003BE802 /* RDRCellsSelectView.m */,
 				13E33E1C1BF0CC4E00AA3E64 /* LPUtils */,
 			);
 			path = UsedClasses;
@@ -4357,6 +4362,7 @@
 				D3807FBF15C28940005BE9BC /* DCRoundSwitch.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
+				E135F8471C243EA3003BE802 /* RDRCellsSelectView.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,

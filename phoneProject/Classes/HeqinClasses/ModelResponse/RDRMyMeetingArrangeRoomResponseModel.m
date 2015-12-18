@@ -18,7 +18,7 @@
     return mutDic;
 }
 
-+ (NSValueTransformer *)contactsJSONTransformer{
++ (NSValueTransformer *)favJSONTransformer{
     return [MTLJSONAdapter arrayTransformerWithModelClass:[RDRArrangeRoomModel class]];
 }
 

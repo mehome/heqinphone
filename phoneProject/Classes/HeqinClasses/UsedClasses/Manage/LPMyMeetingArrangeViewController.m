@@ -24,6 +24,8 @@
 #import "RDRMyMeetingArrangeModel.h"
 #import "RDRMyMeetingArrangeResponseModel.h"
 
+#import "RDRCellsSelectView.h"
+
 @interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
@@ -33,8 +35,13 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *repeatSwitch;
 
+@property (nonatomic, strong) NSArray *selectedJoiners;
+@property (nonatomic, strong) NSArray *selectedDevices;
+@property (nonatomic, strong) NSArray *selectedRooms;
 
 @property (nonatomic, strong) UIDatePicker *datePicker;
+
+@property (nonatomic, strong) NSDateFormatter *dateForm;
 
 @end
 
@@ -55,14 +62,45 @@
     [self.roomsField resignFirstResponder];
 }
 
+- (NSDateFormatter *)dateForm {
+    if (_dateForm == nil) {
+        _dateForm = [[NSDateFormatter alloc] init];
+        [_dateForm setTimeStyle:NSDateFormatterMediumStyle];
+        [_dateForm setDateStyle:NSDateFormatterMediumStyle];
+        _dateForm.dateFormat = @"yyyy-MM-dd HH:mm";
+        [_dateForm setLocale:[NSLocale currentLocale]];
+    }
+    
+    return _dateForm;
+}
+
 // 初始化控件
 - (void)initControls {
     self.datePicker = [[UIDatePicker alloc] init];
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     self.timeField.inputView = self.datePicker;
+    [self.datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
     self.datePicker.date = [NSDate date];
     
+    // 初始化时间设置为明天同一时刻
+    NSString *curStr = [self.dateForm stringFromDate:[[NSDate date] dateByAddingTimeInterval:24 * 60 * 60]];
+    self.timeField.text = curStr;
+    
+    self.joinerField.enabled = NO;
+    self.terminalField.enabled = NO;
+    self.roomsField.enabled = NO;
+    
+    self.selectedJoiners = [NSArray array];
+    self.selectedDevices = [NSArray array];
+    self.selectedRooms = [NSArray array];
+    
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
+}
+
+- (void)dateChange:(UIDatePicker *)dp {
+    NSDate *changeDate = dp.date;
+    NSString *changeStr = [self.dateForm stringFromDate:changeDate];
+    self.timeField.text = changeStr;
 }
 
 - (void)bgTapped:(UITapGestureRecognizer *)tapGesture {
@@ -170,13 +208,108 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)phoneBookClicked:(id)sender {
+    // 显示通讯录
+    if ([LPSystemUser sharedUser].contactsList.count == 0) {
+        [self showToastWithMessage:@"当前用户通讯录为空"];
+        return;
+    }
     
+    [RDRCellsSelectView showSelectViewWith:@"请选择与会者"
+                                   withArr:[LPSystemUser sharedUser].contactsList
+                            hasSelectedArr:self.selectedJoiners
+                          withConfirmBlock:^(NSArray *selectedDatas) {
+                              NSLog(@"selected datas=%@", selectedDatas);
+                              self.selectedJoiners = [NSArray arrayWithArray:selectedDatas];
+                              // 更新与会者输入框
+                              [self updateJoinerField];
+                          }
+                           withCancelBlcok:^{
+                               NSLog(@"取消选择");
+                           }
+                              singleChoose:NO];
+}
+
+- (void)updateJoinerField {
+    NSMutableString *str = [NSMutableString stringWithString:@""];
+    for (NSInteger i=0; i<self.selectedJoiners.count; i++) {
+        RDRContactModel *contactModel = [self.selectedJoiners objectAtIndex:i];
+        [str appendString:contactModel.name];
+        [str appendString:@","];
+    }
+    
+    if (str.length > 0) {
+        [str deleteCharactersInRange:NSMakeRange(str.length-1, 1)];
+    }
+    
+    self.joinerField.text = str;
 }
 
 - (IBAction)myTerminalsClicked:(id)sender {
+    // 显示的我的收藏的终端
+    if ([LPSystemUser sharedUser].devicesList.count == 0) {
+        [self showToastWithMessage:@"收藏的终端列表为空"];
+        return;
+    }
+    
+    [RDRCellsSelectView showSelectViewWith:@"请选择终端列表" withArr:[LPSystemUser sharedUser].devicesList
+                            hasSelectedArr:self.selectedDevices
+                          withConfirmBlock:^(NSArray *selectedDatas) {
+        NSLog(@"selected devie=%@", selectedDatas);
+                              self.selectedDevices = [NSArray arrayWithArray:selectedDatas];
+                              // 更新终端输入框
+                              [self updateDeviceField];
+    } withCancelBlcok:^{
+        NSLog(@"取消终端选择");
+    } singleChoose:NO];
+}
+
+- (void)updateDeviceField {
+    NSMutableString *str = [NSMutableString stringWithString:@""];
+    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
+        RDRDeviceModel *deviceModel = [self.selectedDevices objectAtIndex:i];
+        [str appendString:deviceModel.name];
+        [str appendString:@","];
+    }
+    
+    if (str.length > 0) {
+        [str deleteCharactersInRange:NSMakeRange(str.length-1, 1)];
+    }
+    
+    self.terminalField.text = str;
 }
 
 - (IBAction)myRoomsClicked:(id)sender {
+    // 显示我的收藏的会议室
+    if ([LPSystemUser sharedUser].favMeetingRoomsList.count == 0) {
+        [self showToastWithMessage:@"收藏的会议室为空，快去收藏一些吧"];
+        return;
+    }
+    
+    [RDRCellsSelectView showSelectViewWith:@"请选择收藏的会议室" withArr:[LPSystemUser sharedUser].favMeetingRoomsList
+                            hasSelectedArr:self.selectedRooms
+                          withConfirmBlock:^(NSArray *selectedDatas) {
+        NSLog(@"selected room=%@", selectedDatas);
+                              self.selectedRooms = [NSArray arrayWithArray:selectedDatas];
+                              // 更新会议室输入框
+                              [self updateRoomField];
+    } withCancelBlcok:^{
+        NSLog(@"取消会议室选择");
+    } singleChoose:YES];
+}
+
+- (void)updateRoomField {
+    NSMutableString *str = [NSMutableString stringWithString:@""];
+    for (NSInteger i=0; i<self.selectedRooms.count; i++) {
+        RDRArrangeRoomModel *roomModel = [self.selectedRooms objectAtIndex:i];
+        [str appendString:roomModel.name];
+        [str appendString:@","];
+    }
+    
+    if (str.length > 0) {
+        [str deleteCharactersInRange:NSMakeRange(str.length-1, 1)];
+    }
+    
+    self.roomsField.text = str;
 }
 
 - (IBAction)confirmBtnClicked:(id)sender {
@@ -188,7 +321,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     reqModel.time = self.timeField.text;
     reqModel.repeat = self.repeatSwitch.on ? @"1":@"0";
     reqModel.addr = self.roomsField.text;
-    reqModel.participants = @[];     // 添加与会者名单
+    reqModel.participants = self.selectedJoiners;     // 添加与会者名单
+    // 终端
     // TODO
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -199,9 +333,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
         if ([model codeCheckSuccess] == YES) {
             NSLog(@"安排会议室success, model=%@", model);
-            [self showToastWithMessage:@"安排会议成功"];
+            [weakSelf showToastWithMessage:@"安排会议成功"];
         }else {
-            NSLog(@"安排会议室请求出错, model=%@, msg=%@", model, model.msg);
+            NSString *tipStr = [NSString stringWithFormat:@"安排会议室请求出错, model=%@, msg=%@", model, model.msg];
+            [weakSelf showToastWithMessage:tipStr];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [weakSelf hideHudAndIndicatorView];
