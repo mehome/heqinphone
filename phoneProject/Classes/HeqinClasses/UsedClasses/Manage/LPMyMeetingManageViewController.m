@@ -82,6 +82,7 @@
         
         if (success == YES) {
             // 取数据成功
+            [self resetAllData];
             [weakSelf.searchTable reloadData];
         }else {
             // 显示错误提示信息

@@ -154,7 +154,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         if (success == YES) {
             // 取数据成功
             [self resetAllData];
-            
             [weakSelf.meetingTable reloadData];
         }else {
             // 显示错误提示信息
@@ -368,7 +367,6 @@ static UICompositeViewDescription *compositeDescription = nil;
             secondStr = curMeetingModel.time;
             break;
         case 3: {
-            NSLog(@"program can't come here");
             curMeetingModel = nil;
             LinphoneCallLog *callLog = [[self.filterHistoryMeetings objectAtIndex:[indexPath row]] pointerValue];
             
