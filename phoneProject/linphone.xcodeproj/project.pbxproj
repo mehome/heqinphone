@@ -794,6 +794,7 @@
 		E19A0D611BF4E7B500E377DB /* RDRMyMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D601BF4E7B500E377DB /* RDRMyMeetingRequestModel.m */; };
 		E19A0D641BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D631BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m */; };
 		E19A0D681BF4EAEE00E377DB /* RDRJoinMeetingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D671BF4EAEE00E377DB /* RDRJoinMeetingModel.m */; };
+		E1A8245C1C25BD2B004A6879 /* RDRLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A8245B1C25BD2B004A6879 /* RDRLoadingView.m */; };
 		E1FCC3F31C1F14B3009A51CC /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */; };
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
 		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1893,6 +1894,8 @@
 		E19A0D631BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingResponseModel.m; sourceTree = "<group>"; };
 		E19A0D661BF4EAEE00E377DB /* RDRJoinMeetingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRJoinMeetingModel.h; sourceTree = "<group>"; };
 		E19A0D671BF4EAEE00E377DB /* RDRJoinMeetingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRJoinMeetingModel.m; sourceTree = "<group>"; };
+		E1A8245A1C25BD2B004A6879 /* RDRLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRLoadingView.h; sourceTree = "<group>"; };
+		E1A8245B1C25BD2B004A6879 /* RDRLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRLoadingView.m; sourceTree = "<group>"; };
 		E1FCC3F11C1F14B3009A51CC /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -2563,6 +2566,8 @@
 				E1128AF71C257955009DC298 /* ShowPinView.m */,
 				E1128B071C25B721009DC298 /* RDRAllJoinersView.h */,
 				E1128B081C25B721009DC298 /* RDRAllJoinersView.m */,
+				E1A8245A1C25BD2B004A6879 /* RDRLoadingView.h */,
+				E1A8245B1C25BD2B004A6879 /* RDRLoadingView.m */,
 				13E33E1C1BF0CC4E00AA3E64 /* LPUtils */,
 			);
 			path = UsedClasses;
@@ -4478,6 +4483,7 @@
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
 				138950EE1BECA576003DD7A0 /* FMDatabase.m in Sources */,
 				D3807FF415C2894A005BE9BC /* IASKSettingsStoreUserDefaults.m in Sources */,
+				E1A8245C1C25BD2B004A6879 /* RDRLoadingView.m in Sources */,
 				138951251BECA5D4003DD7A0 /* RDRBaseResponseModel.m in Sources */,
 				138950F91BECA576003DD7A0 /* MTLTransformerErrorHandling.m in Sources */,
 				D3807FF615C2894A005BE9BC /* IASKSpecifier.m in Sources */,
