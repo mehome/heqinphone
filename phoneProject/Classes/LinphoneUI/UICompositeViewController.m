@@ -559,7 +559,11 @@
         // points that the content should overlap.
         for (UIView *view in self.tabBarViewController.view.subviews) {
             if(view.tag == -1) {
-                contentFrame.size.height += view.frame.origin.y;
+                tabFrame.origin.y = contentFrame.origin.y;
+                tabFrame.size.height = self.view.frame.size.height - contentFrame.origin.y;
+
+//                contentFrame.size.height += view.frame.origin.y;
+                contentFrame.size.height = self.view.frame.size.height - view.frame.size.height;
                 break;
             }
         }
@@ -576,14 +580,20 @@
     // Set frames
     [contentView setFrame: contentFrame];
     [self.contentViewController.view setFrame: [contentView bounds]];
+    
     [tabBarView setFrame: tabFrame];
-    CGRect frame = [self.tabBarViewController.view frame];
-    frame.size.width = [tabBarView bounds].size.width;
-    [self.tabBarViewController.view setFrame:frame];
+    
+    CGRect forTabBarframe = [self.tabBarViewController.view frame];
+    forTabBarframe.size.width = [tabBarView bounds].size.width;
+    forTabBarframe.size.height = [tabBarView bounds].size.height;
+    
+    [self.tabBarViewController.view setFrame:forTabBarframe];
+    
     [stateBarView setFrame: stateBarFrame];
-    frame = [self.stateBarViewController.view frame];
-    frame.size.width = [stateBarView bounds].size.width;
-    [self.stateBarViewController.view setFrame:frame];
+    
+    CGRect forStateBarframe = [self.stateBarViewController.view frame];
+    forStateBarframe.size.width = [stateBarView bounds].size.width;
+    [self.stateBarViewController.view setFrame:forStateBarframe];
     
     // Commit animation
     if(tabBar != nil || stateBar != nil || fullscreen != nil) {
@@ -592,10 +602,15 @@
     
     // Change view
     if(description != nil) {
+        // 添加主内容
         [UICompositeViewController addSubView: self.contentViewController view:contentView];
+        
+        // 添加Tab Bar
         if(oldTabBarViewController == nil || oldTabBarViewController != self.tabBarViewController) {
             [UICompositeViewController addSubView: self.tabBarViewController view:tabBarView];
         }
+        
+        // 添加状态栏
         if(oldStateBarViewController == nil || oldStateBarViewController != self.stateBarViewController) {
             [UICompositeViewController addSubView: self.stateBarViewController view:stateBarView];
         }
