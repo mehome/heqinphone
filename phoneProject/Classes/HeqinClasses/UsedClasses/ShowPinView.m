@@ -1,22 +1,20 @@
 //
-//  ShowInviteView.m
+//  ShowPinView.m
 //  linphone
 //
 //  Created by baidu on 15/12/19.
 //
 //
 
-#import "ShowInviteView.h"
+#import "ShowPinView.h"
 
-@interface ShowInviteView () <UITextFieldDelegate>
+@interface ShowPinView () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UITextField *inputField;
 
-@property (nonatomic, assign) NSInteger inviteType;
-
-@property (readwrite, nonatomic, copy) inviteConfirmBlock confirmDone;
-@property (readwrite, nonatomic, copy) inviteCancelBlock cancelDone;
+@property (readwrite, nonatomic, copy) pinConfirmBlock confirmDone;
+@property (readwrite, nonatomic, copy) pinCancelBlock cancelDone;
 @property (readwrite, nonatomic, copy) noContentInput noInput;
 
 @property (nonatomic, strong) UIButton *doneBtn;
@@ -24,40 +22,31 @@
 
 @end
 
-@implementation ShowInviteView
+@implementation ShowPinView
 
-+ (void)showWithType:(NSInteger)typeInt withDoneBlock:(inviteConfirmBlock)doneBlock withCancelBlock:(inviteCancelBlock)cancelBlock withNoInput:(noContentInput)noContent {
-    
++ (void)showTitle:(NSString *)title withDoneBlock:(pinConfirmBlock)doneBlock withCancelBlock:(pinCancelBlock)cancelBlock withNoInput:(noContentInput)noContent {
+
     UIView *bgView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     bgView.backgroundColor = [UIColor grayColor];
     bgView.alpha = 0.5;
     
     [[UIApplication sharedApplication].keyWindow addSubview:bgView];
     
-    ShowInviteView *inviteView = [[ShowInviteView alloc] initWithFrame:CGRectMake(20, 60, bgView.ott_width-20*2, 130)];
-    [[UIApplication sharedApplication].keyWindow addSubview:inviteView];
-    inviteView.backgroundColor = [UIColor whiteColor];
-    inviteView.layer.cornerRadius = 5.0;
-    inviteView.rd_userInfo = @{@"bgView":bgView};
+    ShowPinView *pinView = [[ShowPinView alloc] initWithFrame:CGRectMake(20, 60, bgView.ott_width-20*2, 130)];
+    [[UIApplication sharedApplication].keyWindow addSubview:pinView];
+    pinView.backgroundColor = [UIColor whiteColor];
+    pinView.layer.cornerRadius = 5.0;
+    pinView.rd_userInfo = @{@"bgView":bgView};
     
-    inviteView.confirmDone = doneBlock;
-    inviteView.cancelDone = cancelBlock;
-    inviteView.noInput = noContent;
+    pinView.confirmDone = doneBlock;
+    pinView.cancelDone = cancelBlock;
+    pinView.noInput = noContent;
     
-    inviteView.inviteType = typeInt;
-    if (typeInt == 0) {     // sms
-        inviteView.inputField.keyboardType = UIKeyboardTypeNumberPad;
-        inviteView.tipLabel.text = @"请输入对方手机号";
-    }else if (typeInt == 1) {       // email
-        inviteView.inputField.keyboardType = UIKeyboardTypeEmailAddress;
-        inviteView.tipLabel.text = @"请输入对方邮件地址";
-    }else {         // call
-        inviteView.inputField.keyboardType = UIKeyboardTypeDefault;
-        inviteView.tipLabel.text = @"请输入对方帐号";
-    }
+    pinView.inputField.keyboardType = UIKeyboardTypeNumberPad;
+    pinView.tipLabel.text = title;
     
-    [inviteView updateFrameAndReset];
-    [inviteView.inputField becomeFirstResponder];
+    [pinView updateFrameAndReset];
+    [pinView.inputField becomeFirstResponder];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {

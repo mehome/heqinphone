@@ -756,6 +756,13 @@
 		E10DE7461BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7441BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.xib */; };
 		E10DE74A1BFA3229002D0FBB /* LPMyManageSingleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10DE7481BFA3229002D0FBB /* LPMyManageSingleViewController.m */; };
 		E10DE74B1BFA3229002D0FBB /* LPMyManageSingleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10DE7491BFA3229002D0FBB /* LPMyManageSingleViewController.xib */; };
+		E1128AE61C255C9F009DC298 /* RDRInviteRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AE51C255C9F009DC298 /* RDRInviteRequestModel.m */; };
+		E1128AE91C255D00009DC298 /* RDRInviteResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AE81C255D00009DC298 /* RDRInviteResponseModel.m */; };
+		E1128AEC1C2563F7009DC298 /* RDRLockReqeustModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AEB1C2563F7009DC298 /* RDRLockReqeustModel.m */; };
+		E1128AEF1C25643A009DC298 /* RDRLockResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AEE1C25643A009DC298 /* RDRLockResponseModel.m */; };
+		E1128AF21C25648E009DC298 /* RDRTerminalRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AF11C25648E009DC298 /* RDRTerminalRequestModel.m */; };
+		E1128AF51C2564CB009DC298 /* RDRTerminalResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AF41C2564CB009DC298 /* RDRTerminalResponseModel.m */; };
+		E1128AF81C257955009DC298 /* ShowPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1128AF71C257955009DC298 /* ShowPinView.m */; };
 		E12D8BD91C24F3500011BFCA /* RDRParticipant.m in Sources */ = {isa = PBXBuildFile; fileRef = E12D8BD81C24F3500011BFCA /* RDRParticipant.m */; };
 		E12D8BDC1C2521BD0011BFCA /* ShowInviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12D8BDB1C2521BD0011BFCA /* ShowInviteView.m */; };
 		E135F8471C243EA3003BE802 /* RDRCellsSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E135F8461C243EA3003BE802 /* RDRCellsSelectView.m */; };
@@ -1774,6 +1781,20 @@
 		E10DE7471BFA3229002D0FBB /* LPMyManageSingleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMyManageSingleViewController.h; sourceTree = "<group>"; };
 		E10DE7481BFA3229002D0FBB /* LPMyManageSingleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMyManageSingleViewController.m; sourceTree = "<group>"; };
 		E10DE7491BFA3229002D0FBB /* LPMyManageSingleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMyManageSingleViewController.xib; sourceTree = "<group>"; };
+		E1128AE41C255C9F009DC298 /* RDRInviteRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRInviteRequestModel.h; sourceTree = "<group>"; };
+		E1128AE51C255C9F009DC298 /* RDRInviteRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRInviteRequestModel.m; sourceTree = "<group>"; };
+		E1128AE71C255D00009DC298 /* RDRInviteResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRInviteResponseModel.h; sourceTree = "<group>"; };
+		E1128AE81C255D00009DC298 /* RDRInviteResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRInviteResponseModel.m; sourceTree = "<group>"; };
+		E1128AEA1C2563F7009DC298 /* RDRLockReqeustModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRLockReqeustModel.h; sourceTree = "<group>"; };
+		E1128AEB1C2563F7009DC298 /* RDRLockReqeustModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRLockReqeustModel.m; sourceTree = "<group>"; };
+		E1128AED1C25643A009DC298 /* RDRLockResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRLockResponseModel.h; sourceTree = "<group>"; };
+		E1128AEE1C25643A009DC298 /* RDRLockResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRLockResponseModel.m; sourceTree = "<group>"; };
+		E1128AF01C25648E009DC298 /* RDRTerminalRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRTerminalRequestModel.h; sourceTree = "<group>"; };
+		E1128AF11C25648E009DC298 /* RDRTerminalRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRTerminalRequestModel.m; sourceTree = "<group>"; };
+		E1128AF31C2564CB009DC298 /* RDRTerminalResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRTerminalResponseModel.h; sourceTree = "<group>"; };
+		E1128AF41C2564CB009DC298 /* RDRTerminalResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRTerminalResponseModel.m; sourceTree = "<group>"; };
+		E1128AF61C257955009DC298 /* ShowPinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPinView.h; sourceTree = "<group>"; };
+		E1128AF71C257955009DC298 /* ShowPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPinView.m; sourceTree = "<group>"; };
 		E1198EA01C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AboutViewController.strings"; sourceTree = "<group>"; };
 		E1198EA11C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ChatRoomViewController.strings"; sourceTree = "<group>"; };
 		E1198EA21C204C7C00CE0F17 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ChatViewController.strings"; sourceTree = "<group>"; };
@@ -2451,6 +2472,12 @@
 				E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */,
 				E135F84B1C246EB9003BE802 /* RDRAddFavRequestModel.h */,
 				E135F84C1C246EB9003BE802 /* RDRAddFavRequestModel.m */,
+				E1128AE41C255C9F009DC298 /* RDRInviteRequestModel.h */,
+				E1128AE51C255C9F009DC298 /* RDRInviteRequestModel.m */,
+				E1128AEA1C2563F7009DC298 /* RDRLockReqeustModel.h */,
+				E1128AEB1C2563F7009DC298 /* RDRLockReqeustModel.m */,
+				E1128AF01C25648E009DC298 /* RDRTerminalRequestModel.h */,
+				E1128AF11C25648E009DC298 /* RDRTerminalRequestModel.m */,
 			);
 			path = ModalRequest;
 			sourceTree = "<group>";
@@ -2460,6 +2487,12 @@
 			children = (
 				E14F50BC1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.h */,
 				E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */,
+				E1128AE71C255D00009DC298 /* RDRInviteResponseModel.h */,
+				E1128AE81C255D00009DC298 /* RDRInviteResponseModel.m */,
+				E1128AED1C25643A009DC298 /* RDRLockResponseModel.h */,
+				E1128AEE1C25643A009DC298 /* RDRLockResponseModel.m */,
+				E1128AF31C2564CB009DC298 /* RDRTerminalResponseModel.h */,
+				E1128AF41C2564CB009DC298 /* RDRTerminalResponseModel.m */,
 				138951291BECB206003DD7A0 /* RDRSystemConfigResponseModel.h */,
 				1389512A1BECB206003DD7A0 /* RDRSystemConfigResponseModel.m */,
 				E18241E81C21B70C000EC54A /* RDRManageLockMeetingResponseModel.h */,
@@ -2511,6 +2544,8 @@
 				E135F8491C2469BD003BE802 /* ShowLoginView.m */,
 				E12D8BDA1C2521BD0011BFCA /* ShowInviteView.h */,
 				E12D8BDB1C2521BD0011BFCA /* ShowInviteView.m */,
+				E1128AF61C257955009DC298 /* ShowPinView.h */,
+				E1128AF71C257955009DC298 /* ShowPinView.m */,
 				13E33E1C1BF0CC4E00AA3E64 /* LPUtils */,
 			);
 			path = UsedClasses;
@@ -4290,17 +4325,20 @@
 				D3ED3EA71587334E006C0DE4 /* HistoryTableViewController.m in Sources */,
 				13E33E2A1BF0CC4E00AA3E64 /* UIViewController+RDRTipAndAlert.m in Sources */,
 				D3ED3EB81587392C006C0DE4 /* HistoryViewController.m in Sources */,
+				E1128AEF1C25643A009DC298 /* RDRLockResponseModel.m in Sources */,
 				138950741BECA38D003DD7A0 /* AFURLConnectionOperation.m in Sources */,
 				D35497FE15875372000081D8 /* ContactsViewController.m in Sources */,
 				D3549816158761D0000081D8 /* ContactsTableViewController.m in Sources */,
 				E19A0D641BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m in Sources */,
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
+				E1128AF21C25648E009DC298 /* RDRTerminalRequestModel.m in Sources */,
 				D3A55FBC15877E5E003FD403 /* UIContactCell.m in Sources */,
 				D326483815887D5200930C67 /* OrderedDictionary.m in Sources */,
 				E10DE74A1BFA3229002D0FBB /* LPMyManageSingleViewController.m in Sources */,
 				138950771BECA38D003DD7A0 /* AFNetworkReachabilityManager.m in Sources */,
 				138950FA1BECA576003DD7A0 /* MTLValueTransformer.m in Sources */,
 				E18241E71C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m in Sources */,
+				E1128AF51C2564CB009DC298 /* RDRTerminalResponseModel.m in Sources */,
 				138951151BECA597003DD7A0 /* RDRNetHelper.m in Sources */,
 				138951161BECA597003DD7A0 /* RDRNetworkAPICache.m in Sources */,
 				138951011BECA576003DD7A0 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
@@ -4313,6 +4351,7 @@
 				D32409C3158B49A600C8C119 /* UILongTouchButton.m in Sources */,
 				D36C43C6158F2E5A0048BA40 /* UICallCell.m in Sources */,
 				138950EC1BECA576003DD7A0 /* FMTokenizers.m in Sources */,
+				E1128AE61C255C9F009DC298 /* RDRInviteRequestModel.m in Sources */,
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				D35E7597159460580066B1C1 /* ChatViewController.m in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
@@ -4329,6 +4368,7 @@
 				D3EA5411159853750037DC6B /* UIChatCell.m in Sources */,
 				D3F26BF115986B73005F9CAB /* IncomingCallViewController.m in Sources */,
 				138950EF1BECA576003DD7A0 /* FMDatabaseAdditions.m in Sources */,
+				E1128AF81C257955009DC298 /* ShowPinView.m in Sources */,
 				138950F61BECA576003DD7A0 /* MTLModel+NSCoding.m in Sources */,
 				1389515E1BEDDC60003DD7A0 /* LPSystemRoom.m in Sources */,
 				D31B4B21159876C0002E6C72 /* UICompositeViewController.m in Sources */,
@@ -4348,6 +4388,7 @@
 				138950781BECA38D003DD7A0 /* AFSecurityPolicy.m in Sources */,
 				D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */,
 				D3196D3E15A32BD8007FEEBA /* UITransferButton.m in Sources */,
+				E1128AEC1C2563F7009DC298 /* RDRLockReqeustModel.m in Sources */,
 				D350F20E15A43BB100149E54 /* WizardViewController.m in Sources */,
 				D3F795D615A582810077328B /* ChatRoomViewController.m in Sources */,
 				138950F11BECA576003DD7A0 /* FMDatabaseQueue.m in Sources */,
@@ -4395,6 +4436,7 @@
 				E135F8471C243EA3003BE802 /* RDRCellsSelectView.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
+				E1128AE91C255D00009DC298 /* RDRInviteResponseModel.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
 				E140A6B61C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m in Sources */,
 				E10DE7451BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.m in Sources */,
