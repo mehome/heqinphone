@@ -26,6 +26,8 @@
 
 #import "RDRCellsSelectView.h"
 
+#import "RDRParticipant.h"
+
 @interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
@@ -313,17 +315,48 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)confirmBtnClicked:(id)sender {
-    [self showLoadingView];
+    
+    NSMutableArray *parts = [NSMutableArray array];
+    for (NSInteger i=0; i<self.selectedJoiners.count; i++) {
+        RDRContactModel *model = [self.selectedJoiners objectAtIndex:i];
+        
+        RDRParticipant *cipant = [[RDRParticipant alloc] init];
+        cipant.uid = model.uid;
+        cipant.name = model.name;
+        [parts addObject:cipant];
+    }
+    
+    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
+        RDRDeviceModel *model = [self.selectedDevices objectAtIndex:i];
+        
+        RDRParticipant *cipant = [[RDRParticipant alloc] init];
+        cipant.uid = model.uid;
+        cipant.name = model.name;
+        [parts addObject:cipant];
+    }
 
+    if (parts.count == 0) {
+        [self showToastWithMessage:@"请选择参会人员"];
+        return;
+    }
+    
+    if (self.selectedRooms.count == 0) {
+        [self showToastWithMessage:@"请选择开会的地点"];
+        return;
+    }
+    
+    [self showLoadingView];
+    
+    // 判断有没有安排会议室，无会议室，是没法安排的
     RDRMyMeetingArrangeModel *reqModel = [RDRMyMeetingArrangeModel requestModel];
     reqModel.uid = [LPSystemUser sharedUser].loginUserId;
     reqModel.pwd = [LPSystemUser sharedUser].loginUserPassword;
     reqModel.time = self.timeField.text;
     reqModel.repeat = self.repeatSwitch.on ? @"1":@"0";
-    reqModel.addr = self.roomsField.text;
-    reqModel.participants = self.selectedJoiners;     // 添加与会者名单
-    // 终端
-    // TODO
+    reqModel.participants = [NSArray arrayWithArray:parts];     // 添加与会者名单
+    
+    RDRArrangeRoomModel *roomModel = self.selectedRooms.firstObject;
+    reqModel.addr = roomModel.addr;
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
     __weak LPMyMeetingArrangeViewController *weakSelf = self;
@@ -335,7 +368,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             NSLog(@"安排会议室success, model=%@", model);
             [weakSelf showToastWithMessage:@"安排会议成功"];
         }else {
-            NSString *tipStr = [NSString stringWithFormat:@"安排会议室请求出错, model=%@, msg=%@", model, model.msg];
+            NSString *tipStr = [NSString stringWithFormat:@"安排会议室请求出错, msg=%@", model.msg];
             [weakSelf showToastWithMessage:tipStr];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

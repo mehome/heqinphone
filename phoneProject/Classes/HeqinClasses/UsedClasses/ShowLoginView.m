@@ -23,7 +23,7 @@
 
 @implementation ShowLoginView
 
-+ (void)showLogin:
+//+ (void)showLogin:
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

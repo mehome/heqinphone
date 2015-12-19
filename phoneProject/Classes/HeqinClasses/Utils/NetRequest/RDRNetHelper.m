@@ -329,6 +329,9 @@
         return nil;
     }
     
+    NSLog(@"DEBUG post url=%@", aURL);
+    NSLog(@"DEBUG post parameters=%@", parameters);
+    
     AFHTTPRequestOperation *requestOperation = nil;
     if ([httpMethod isEqualToString:@"GET"]) {
         
@@ -361,7 +364,6 @@
                         failure(operation, error);
                     }
                 }
-                
             }
             else
             {
@@ -375,7 +377,6 @@
         }];
         
     }else if ([httpMethod isEqualToString:@"POST"]) {
-        
         
         if (bodyBlock) {
             

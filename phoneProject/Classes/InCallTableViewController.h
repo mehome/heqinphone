@@ -23,6 +23,8 @@
 
 #include "linphone/linphonecore.h"
 
+static NSString *const kLinphoneInCallCellData = @"LinphoneInCallCellData";
+
 @interface InCallTableViewController : UITableViewController {
     @private
     NSTimer *updateTime;

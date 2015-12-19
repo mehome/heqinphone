@@ -21,6 +21,10 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
+#include "linphone/linphonecore.h"
+#import <AVFoundation/AVAudioSession.h>
+#import <AudioToolbox/AudioToolbox.h>
+
 #import "CAAnimation+Blocks.h"
 #import "LPInMeetingParticipatorViewController.h"
 #import "LPSystemUser.h"
@@ -33,6 +37,14 @@
 
 #import "RDRRequest.h"
 #import "RDRNetHelper.h"
+
+#import "LPSystemSetting.h"
+
+typedef NS_ENUM(NSInteger, InvityType) {
+    InvityTypeSMS,
+    InvityTypeEmail,
+    InvityTypePhoneCall
+};
 
 extern NSString *const kLinphoneInCallCellData;
 
@@ -232,34 +244,31 @@ extern NSString *const kLinphoneInCallCellData;
     }
 }
 
-- (UICallCellData*)getCallData:(LinphoneCall*) call {
-    // Handle data associated with the call
-    UICallCellData * data = nil;
-    if(call != NULL) {
-        LinphoneCallAppData* appData = (LinphoneCallAppData*) linphone_call_get_user_pointer(call);
-        if(appData != NULL) {
-            data = [appData->userInfos objectForKey:kLinphoneInCallCellData];
-        }
-    }
-    return data;
-}
-
-
 // 收藏按钮
 - (IBAction)collectionBtnClicked:(id)sender {
     if ([LPSystemUser sharedUser].hasLogin == YES) {
         // 已登录
         [self showToastWithMessage:@"已经登录， 准备收藏"];
         
-        LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
-        UICallCellData *data = [self getCallData:call];
-        if(data == nil || data->call == NULL) {
-            [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update call cell: null call or data"];
-            [self showToastWithMessage:@"不能更新通话情况，没有通话或数据"];
-            return;
+        NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
+        
+        NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
+        NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
+        
+        // 移掉后部
+        if ([addr replaceOccurrencesOfString:serverTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+            NSLog(@"remove server address done");
+        }else {
+            NSLog(@"remove server address failed");
         }
         
-        NSString *addr = data.address;
+        // 移掉前面的sip:
+        if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+            NSLog(@"remove sip done");
+        }else {
+            NSLog(@"remove sip failed");
+        }
+        
         if (addr.length == 0) {
             [self showToastWithMessage:@"会议室号码错误，请检查"];
             return;
@@ -270,7 +279,7 @@ extern NSString *const kLinphoneInCallCellData;
 
         RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
         reqModel.uid = [LPSystemUser sharedUser].loginUserId;
-        reqModel.addr = data.address;
+        reqModel.addr = addr;
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -283,8 +292,8 @@ extern NSString *const kLinphoneInCallCellData;
                           NSLog(@"收藏会议室success, model=%@", model);
                           [weakSelf showToastWithMessage:@"收藏会议室成功"];
                       }else {
-                          NSLog(@"请求收藏的会议室列表服务器请求出错, model=%@, msg=%@", model, model.msg);
-                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，model=%@", model];
+                          NSLog(@"请求收藏的会议室列表服务器请求出错, msg=%@", model.msg);
+                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，msg=%@", model.msg];
                           [weakSelf showToastWithMessage:tipStr];
                       }
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -412,16 +421,25 @@ extern NSString *const kLinphoneInCallCellData;
 
 // 发邮件
 - (IBAction)sendMailBtnClicked:(id)sender {
+    [self inviteMenBy:InvityTypeEmail];
     [self hideAllBottomBgView];
 }
 // 发短信
 - (IBAction)sendSMSBtnClicked:(id)sender {
+    [self inviteMenBy:InvityTypeSMS];
     [self hideAllBottomBgView];
 }
 // 呼号
 - (IBAction)callBtnClicked:(id)sender {
+    [self inviteMenBy:InvityTypePhoneCall];
     [self hideAllBottomBgView];
 }
+
+- (void)inviteMenBy:(InvityType)type {
+    // 弹出一个输入框
+    
+}
+
 // 复制地址
 - (IBAction)copyAddressBtnClicked:(id)sender {
     [self hideAllBottomBgView];
