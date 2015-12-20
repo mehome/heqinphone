@@ -24,7 +24,7 @@
 
 @implementation ShowPinView
 
-+ (void)showTitle:(NSString *)title withDoneBlock:(pinConfirmBlock)doneBlock withCancelBlock:(pinCancelBlock)cancelBlock withNoInput:(noContentInput)noContent {
++ (ShowPinView *)showTitle:(NSString *)title withDoneBlock:(pinConfirmBlock)doneBlock withCancelBlock:(pinCancelBlock)cancelBlock withNoInput:(noContentInput)noContent {
 
     UIView *bgView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     bgView.backgroundColor = [UIColor grayColor];
@@ -47,6 +47,8 @@
     
     [pinView updateFrameAndReset];
     [pinView.inputField becomeFirstResponder];
+    
+    return pinView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {

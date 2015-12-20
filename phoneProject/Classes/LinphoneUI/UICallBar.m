@@ -177,6 +177,17 @@ extern NSString *const kLinphoneInCallCellData;
 
 - (void)bgTapped:(UITapGestureRecognizer *)tapped {
     [self hideAllBottomBgView];
+    
+    // 这里可以考虑把那些东西进行一显示动画或者隐藏动画
+    if (self.bottomBgView.hidden == YES) {
+        self.bottomBgView.hidden = NO;
+        self.collectionBtn.hidden = NO;
+        self.quitBtn.hidden = NO;
+    }else {
+        self.bottomBgView.hidden = YES;
+        self.collectionBtn.hidden = YES;
+        self.quitBtn.hidden = YES;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -201,6 +212,10 @@ extern NSString *const kLinphoneInCallCellData;
     [self showSpeaker];
     
     [self hideAllBottomBgView];
+    
+    self.bottomBgView.hidden = NO;
+    self.collectionBtn.hidden = NO;
+    self.quitBtn.hidden = NO;
 }
 
 static BOOL onlyOnce = NO;
@@ -210,6 +225,7 @@ static BOOL onlyOnce = NO;
     
     if (onlyOnce == NO) {
 //        [self.bmVideoButton toggle];
+        [self.bmVideoButton startVideoAfterBeActive];
         onlyOnce = YES;
         NSLog(@"only run one time.");
     }
@@ -290,10 +306,12 @@ static BOOL onlyOnce = NO;
 // 底部视频按钮
 - (IBAction)vedioBtnClicked:(id)sender {
     UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    frontTailBtn.showsTouchWhenHighlighted = YES;
     [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
     [frontTailBtn setTitle:@"前置/后置摄像头" forState:UIControlStateNormal];
     
     UIButton *closeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeCameraBtn.showsTouchWhenHighlighted = YES;
     [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
     [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
     
@@ -349,18 +367,22 @@ static BOOL onlyOnce = NO;
 // 底部邀请按钮
 - (IBAction)inviteBtnClicked:(id)sender {
     UIButton *mailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    mailBtn.showsTouchWhenHighlighted = YES;
     [mailBtn addTarget:self action:@selector(sendMailBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mailBtn setTitle:@"发邮件" forState:UIControlStateNormal];
     
     UIButton *smsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    smsBtn.showsTouchWhenHighlighted = YES;
     [smsBtn addTarget:self action:@selector(sendSMSBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [smsBtn setTitle:@"发短信" forState:UIControlStateNormal];
 
     UIButton *callPhoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    callPhoneBtn.showsTouchWhenHighlighted = YES;
     [callPhoneBtn addTarget:self action:@selector(callBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [callPhoneBtn setTitle:@"呼号" forState:UIControlStateNormal];
 
     UIButton *copyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    copyBtn.showsTouchWhenHighlighted = YES;
     [copyBtn addTarget:self action:@selector(copyAddressBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [copyBtn setTitle:@"复制地址" forState:UIControlStateNormal];
     
@@ -371,16 +393,20 @@ static BOOL onlyOnce = NO;
 - (IBAction)joinerBtnClicked:(id)sender {
     [self hideAllBottomBgView];
     
-//    [RDRAllJoinersView show]
+    [RDRAllJoinersView showTableTitle:@"全部参与人员" withPostBlock:^(NSString *text) {
+        [self showToastWithMessage:text];
+    }];
 }
 
 // 底部更多按钮
 - (IBAction)moreBtnClicked:(id)sender {
     UIButton *lockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    lockBtn.showsTouchWhenHighlighted = YES;
     [lockBtn addTarget:self action:@selector(lockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [lockBtn setTitle:@"锁定会议室" forState:UIControlStateNormal];
     
     UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    endBtn.showsTouchWhenHighlighted = YES;
     [endBtn addTarget:self action:@selector(endMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [endBtn setTitle:@"结束会议" forState:UIControlStateNormal];
     
@@ -665,66 +691,6 @@ static BOOL onlyOnce = NO;
     if (!call)
         return false;
     return linphone_call_is_in_conference(call);
-}
-
-- (void)hideControlsCameraBgView:(BOOL)hide {
-    if (hide == YES) {
-        // 隐藏
-        if (self.cameraBgView.hidden == YES) {
-            // 当前已经隐藏
-        }else {
-            // 进行隐藏
-            [self hideAnimation:@"hide" target:self.cameraBgView completion:^(BOOL finished){}];
-        }
-    }else {
-        // 显示
-        if (self.cameraBgView.hidden == NO) {
-            // 当前已经显示
-        }else {
-            // 进行显示
-            [self showAnimation:@"show" target:self.cameraBgView completion:^(BOOL finished){}];
-        }
-    }
-}
-
-- (void)hideControlsInviteBgView:(BOOL)hide {
-    if (hide == YES) {
-        // 隐藏
-        if (self.inviteBgView.hidden == YES) {
-            // 当前已经隐藏
-        }else {
-            // 进行隐藏
-            [self hideAnimation:@"hide" target:self.inviteBgView completion:^(BOOL finished){}];
-        }
-    }else {
-        // 显示
-        if (self.inviteBgView.hidden == NO) {
-            // 当前已经显示
-        }else {
-            // 进行显示
-            [self showAnimation:@"show" target:self.inviteBgView completion:^(BOOL finished){}];
-        }
-    }
-}
-
-- (void)hideControlsMoreBgView:(BOOL)hide {
-    if (hide == YES) {
-        // 隐藏
-        if (self.moreBgView.hidden == YES) {
-            // 当前已经隐藏
-        }else {
-            // 进行隐藏
-            [self hideAnimation:@"hide" target:self.moreBgView completion:^(BOOL finished){}];
-        }
-    }else {
-        // 显示
-        if (self.moreBgView.hidden == NO) {
-            // 当前已经显示
-        }else {
-            // 进行显示
-            [self showAnimation:@"show" target:self.moreBgView completion:^(BOOL finished){}];
-        }
-    }
 }
 
 #pragma mark - Event Functions

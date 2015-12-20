@@ -24,19 +24,19 @@
                     <rect key="frame" x="0.0" y="23" width="320" height="397"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.0078489874130000005" green="1" blue="0.2181815057" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view autoresizesSubviews="NO" tag="2" contentMode="scaleToFill" id="14" userLabel="stateBar" customClass="UITransparentView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="23"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <animations/>
-                    <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view autoresizesSubviews="NO" tag="3" contentMode="scaleToFill" id="16" userLabel="tabBar" customClass="UITransparentView">
                     <rect key="frame" x="0.0" y="420" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <animations/>

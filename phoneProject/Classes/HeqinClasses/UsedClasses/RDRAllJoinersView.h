@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^postInfoBlock)(NSString *text);
+
 @interface RDRAllJoinersView : UIView
+
++ (void)showTableTitle:(NSString *)title withPostBlock:(postInfoBlock)postBlock;
 
 @end

@@ -174,8 +174,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                 content:@"LPLoginViewController"
                                                                stateBar:nil
                                                         stateBarEnabled:false
-                                                                 tabBar:nil
-                                                          tabBarEnabled:false
+                                                                 tabBar:@"LPJoinBarViewController"
+                                                          tabBarEnabled:true
                                                              fullscreen:false
                                                           landscapeMode:[LinphoneManager runningOnIpad]
                                                            portraitMode:true];

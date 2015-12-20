@@ -54,15 +54,15 @@
     return self;
 }
 
-- (void)onOn {
+- (void)startVideoAfterBeActive {
 	LinphoneCore* lc = [LinphoneManager getLc];
-    
+
     if (!linphone_core_video_enabled(lc))
         return;
-    
+
     [self setEnabled: FALSE];
     [waitView startAnimating];
-    
+
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
 	if (call) {
 		LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
@@ -73,27 +73,49 @@
 		linphone_call_params_destroy(call_params);
     } else {
 		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-	}   
+	}
+}
+
+- (void)onOn {
+//	LinphoneCore* lc = [LinphoneManager getLc];
+//    
+//    if (!linphone_core_video_enabled(lc))
+//        return;
+//    
+//    [self setEnabled: FALSE];
+//    [waitView startAnimating];
+//    
+//    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
+//	if (call) {
+//		LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
+//		callAppData->videoRequested=TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
+//        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
+//        linphone_call_params_enable_video(call_params, TRUE);
+//        linphone_core_update_call(lc, call, call_params);
+//		linphone_call_params_destroy(call_params);
+//    } else {
+//		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+//	}   
 }
 
 - (void)onOff {
-	LinphoneCore* lc = [LinphoneManager getLc];
-    
-    if (!linphone_core_video_enabled(lc))
-        return;
-    
-    [self setEnabled: FALSE];
-    [waitView startAnimating];
-    
-    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
-	if (call) { 
-        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
-        linphone_call_params_enable_video(call_params, FALSE);
-        linphone_core_update_call(lc, call, call_params);
-		linphone_call_params_destroy(call_params);
-    } else {
-		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-	}
+//	LinphoneCore* lc = [LinphoneManager getLc];
+//    
+//    if (!linphone_core_video_enabled(lc))
+//        return;
+//    
+//    [self setEnabled: FALSE];
+//    [waitView startAnimating];
+//    
+//    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
+//	if (call) { 
+//        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
+//        linphone_call_params_enable_video(call_params, FALSE);
+//        linphone_core_update_call(lc, call, call_params);
+//		linphone_call_params_destroy(call_params);
+//    } else {
+//		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+//	}
 }
 
 - (bool)onUpdate {

@@ -14,6 +14,6 @@ typedef void(^noContentInput)();
 
 @interface ShowPinView : UIView
 
-+ (void)showTitle:(NSString *)title withDoneBlock:(pinConfirmBlock)doneBlock withCancelBlock:(pinCancelBlock)cancelBlock withNoInput:(noContentInput)noContent;
++ (ShowPinView *)showTitle:(NSString *)title withDoneBlock:(pinConfirmBlock)doneBlock withCancelBlock:(pinCancelBlock)cancelBlock withNoInput:(noContentInput)noContent;
 
 @end

@@ -26,4 +26,6 @@
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView*  waitView;
 
+- (void)startVideoAfterBeActive;
+
 @end
