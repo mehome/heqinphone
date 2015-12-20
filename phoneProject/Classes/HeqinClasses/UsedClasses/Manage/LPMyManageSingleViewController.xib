@@ -97,7 +97,7 @@
                         <constraint firstAttribute="height" constant="30" id="1cX-yh-8JI"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="rTJ-6L-d9Z"/>
                     </connections>
@@ -106,7 +106,7 @@
                     <rect key="frame" x="121" y="138" width="202" height="30"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="1Zi-LH-eBC"/>
                     </connections>

@@ -35,7 +35,10 @@ typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NS
 
 @property (nonatomic, strong) NSMutableArray *callLogs;             // 呼号历史，用来做为历史通话
 
+@property (nonatomic, strong) NSString *curMeetingAddr;         // 存储当前会议的地址，用来在会议中执行收藏操作
+
 @property (nonatomic, strong) LinphoneCoreSettingsStore *settingsStore;     // 用来存取帐号信息
+
 
 + (instancetype)sharedUser;
 

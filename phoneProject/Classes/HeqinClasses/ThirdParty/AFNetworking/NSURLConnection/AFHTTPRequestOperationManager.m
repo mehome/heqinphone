@@ -99,7 +99,8 @@
 {
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
-    NSLog(@"DEBUG request=%@", request);
+    NSLog(@"DEBUG request=%@, parameter=%@", request, parameters);
+    
     if (serializationError) {
         if (failure) {
 #pragma clang diagnostic push

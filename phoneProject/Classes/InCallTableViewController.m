@@ -25,7 +25,6 @@
 
 @implementation InCallTableViewController
 
-static NSString *const kLinphoneInCallCellData = @"LinphoneInCallCellData";
 
 enum TableSection {
     ConferenceSection = 0,

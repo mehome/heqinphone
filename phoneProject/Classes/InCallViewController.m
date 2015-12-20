@@ -78,7 +78,6 @@
     [super dealloc];
 }
 
-
 #pragma mark - UICompositeViewDelegate Functions
 
 static UICompositeViewDescription *compositeDescription = nil;
