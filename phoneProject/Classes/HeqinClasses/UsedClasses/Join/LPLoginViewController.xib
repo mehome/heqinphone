@@ -32,7 +32,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zj-nE-f3o">
-                    <rect key="frame" x="104" y="145" width="68" height="21"/>
+                    <rect key="frame" x="104" y="135" width="68" height="21"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="g5L-ZQ-RHE"/>
@@ -43,14 +43,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGy-bF-htC">
-                    <rect key="frame" x="104" y="190" width="68" height="21"/>
+                    <rect key="frame" x="104" y="180" width="68" height="21"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cj6-SX-PIu">
-                    <rect key="frame" x="168" y="140" width="180" height="30"/>
+                    <rect key="frame" x="168" y="130" width="180" height="30"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="KR9-fH-HnT"/>
@@ -63,7 +63,7 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JaM-p8-39w">
-                    <rect key="frame" x="168" y="186" width="180" height="30"/>
+                    <rect key="frame" x="168" y="176" width="180" height="30"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -72,7 +72,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAl-pF-Rht">
-                    <rect key="frame" x="178" y="336" width="80" height="30"/>
+                    <rect key="frame" x="178" y="326" width="80" height="30"/>
                     <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -85,7 +85,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJ2-SN-L2e">
-                    <rect key="frame" x="268" y="256" width="80" height="30"/>
+                    <rect key="frame" x="268" y="246" width="80" height="30"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Zoo-kP-g4y"/>
@@ -105,7 +105,7 @@
                 <constraint firstItem="JaM-p8-39w" firstAttribute="leading" secondItem="cj6-SX-PIu" secondAttribute="leading" id="8mP-5F-mHu"/>
                 <constraint firstItem="mAl-pF-Rht" firstAttribute="top" secondItem="HJ2-SN-L2e" secondAttribute="bottom" constant="50" id="G72-vp-sxl"/>
                 <constraint firstItem="bGy-bF-htC" firstAttribute="centerY" secondItem="JaM-p8-39w" secondAttribute="centerY" id="Jqh-t7-CKM"/>
-                <constraint firstItem="cj6-SX-PIu" firstAttribute="top" secondItem="yKn-DL-mwS" secondAttribute="bottom" constant="70" id="PPS-uC-a2K"/>
+                <constraint firstItem="cj6-SX-PIu" firstAttribute="top" secondItem="yKn-DL-mwS" secondAttribute="bottom" constant="60" id="PPS-uC-a2K"/>
                 <constraint firstItem="0Zj-nE-f3o" firstAttribute="centerY" secondItem="cj6-SX-PIu" secondAttribute="centerY" id="QKD-O6-X1S"/>
                 <constraint firstItem="0Zj-nE-f3o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-80" id="Qzz-MO-ia9"/>
                 <constraint firstItem="JaM-p8-39w" firstAttribute="top" secondItem="cj6-SX-PIu" secondAttribute="bottom" constant="16" id="T4J-R3-ebo"/>

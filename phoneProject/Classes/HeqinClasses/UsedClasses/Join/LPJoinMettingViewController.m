@@ -18,6 +18,7 @@
 #import "UILinphone.h"
 #import "DialerViewController.h"
 #import "NSObject+RDRCommon.h"
+#import "LPJoinManageMeetingViewController.h"
 
 @interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
 }
@@ -28,7 +29,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *joinNameField;
 @property (weak, nonatomic) IBOutlet UITextField *joinMeetingNumberField;
 
-@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loginTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
 
@@ -132,8 +132,6 @@
         self.joinMeetingNumberField.text = @"";
         
         self.loginTipLabel.text = @"未登录";
-        
-        self.loginBtn.enabled = YES;
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
@@ -141,7 +139,6 @@
         self.loginTipLabel.text = @"已登录";
 
         self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
-        self.loginBtn.enabled = NO;
     }
 }
 
@@ -167,7 +164,6 @@
         switch (state) {
             case LinphoneRegistrationOk: {
                 message = @"已注册";
-                self.loginBtn.enabled = NO;
                 
                 self.joinBtn.enabled = YES;
                 
@@ -188,7 +184,6 @@
             }
             case LinphoneRegistrationNone:
             case LinphoneRegistrationCleared:
-                self.loginBtn.enabled = YES;
                 message = @"未注册";
                 
                 [LPSystemUser sharedUser].hasLogin = NO;
@@ -199,7 +194,6 @@
                 
                 break;
             case LinphoneRegistrationFailed:
-                self.loginBtn.enabled = YES;
                 message = @"注册失败";
                 
                 self.joinBtn.enabled = NO;
@@ -207,7 +201,6 @@
                 [LPSystemUser sharedUser].hasLogin = NO;
                 break;
             case LinphoneRegistrationProgress:
-                self.loginBtn.enabled = NO;
                 message = @"注册中";
                 
                 self.joinBtn.enabled = NO;
@@ -266,16 +259,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)loginBtnClicked:(id)sender {
     [self resignKeyboard];
     
-    NSString *btnTitle = [((UIButton *)sender) titleForState:UIControlStateNormal];
-    if ([btnTitle isEqualToString:@"登录中"]) {
-        NSLog(@"current is logining...");
-        return;
-    }else if ([btnTitle isEqualToString:@"登录."] || [btnTitle isEqualToString:@"登录"]) {
-        // 进入正常的登录界面
-        NSLog(@"ask for login");
+    // 判断当前是否登录过
+    LinphoneCore* lc = [LinphoneManager getLc];
+    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+        // 未登录
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
-    }else if ([btnTitle isEqualToString:@"退出"]) {
-        NSLog(@"ask for login out");
+    }else {
+        // 已登录
+        [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
     }
 }
 

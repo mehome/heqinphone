@@ -796,6 +796,7 @@
 		E17461921C265952009AD174 /* RDROperationKickoutResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E17461911C265952009AD174 /* RDROperationKickoutResponseModel.m */; };
 		E17461951C267A5C009AD174 /* mKickoutOff.png in Resources */ = {isa = PBXBuildFile; fileRef = E17461931C267A5C009AD174 /* mKickoutOff.png */; };
 		E17461961C267A5C009AD174 /* mKickoutOn.png in Resources */ = {isa = PBXBuildFile; fileRef = E17461941C267A5C009AD174 /* mKickoutOn.png */; };
+		E17461981C268A46009AD174 /* logbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E17461971C268A46009AD174 /* logbg@2x.png */; };
 		E18241E71C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */; };
 		E18241EA1C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241E91C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m */; };
 		E18241ED1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */; };
@@ -1907,6 +1908,7 @@
 		E17461911C265952009AD174 /* RDROperationKickoutResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDROperationKickoutResponseModel.m; sourceTree = "<group>"; };
 		E17461931C267A5C009AD174 /* mKickoutOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mKickoutOff.png; path = Resources/mKickoutOff.png; sourceTree = "<group>"; };
 		E17461941C267A5C009AD174 /* mKickoutOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mKickoutOn.png; path = Resources/mKickoutOn.png; sourceTree = "<group>"; };
+		E17461971C268A46009AD174 /* logbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logbg@2x.png"; path = "Resources/logbg@2x.png"; sourceTree = "<group>"; };
 		E18241E51C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageLockMeetingRequestModel.h; sourceTree = "<group>"; };
 		E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageLockMeetingRequestModel.m; sourceTree = "<group>"; };
 		E18241E81C21B70C000EC54A /* RDRManageLockMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageLockMeetingResponseModel.h; sourceTree = "<group>"; };
@@ -3166,6 +3168,7 @@
 			isa = PBXGroup;
 			children = (
 				E1128AFB1C259946009DC298 /* mAudioOff.png */,
+				E17461971C268A46009AD174 /* logbg@2x.png */,
 				E1128AFC1C259946009DC298 /* mAudioOn.png */,
 				E1128AFD1C259946009DC298 /* mMicOff.png */,
 				E1128AFE1C259946009DC298 /* mMicOn.png */,
@@ -4013,6 +4016,7 @@
 				C9C8254915AE204D00D493FA /* transfer_call_over.png in Resources */,
 				C9C8254C15AE207B00D493FA /* options_selected.png in Resources */,
 				C9C8254F15AE256100D493FA /* transfer_call_disabled.png in Resources */,
+				E17461981C268A46009AD174 /* logbg@2x.png in Resources */,
 				D38187CD15FE346700C3EDCA /* HistoryDetailsViewController.xib in Resources */,
 				D3F9A9DB15AEEB940045320F /* history_notification.png in Resources */,
 				D3E84F1E15B00F4100420DAC /* cancel_default.png in Resources */,

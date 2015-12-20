@@ -33,14 +33,7 @@
 
 // 参加会议
 - (IBAction)joinMeetingBtnClicked:(id)sender {
-    // 如果未登录，则显示第一个界面
-    if ([LPSystemUser sharedUser].hasLogin == YES) {
-        // 如果已登录，则显示所有会议界面
-        [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
-    }else {
-        // 未登录， 进入首界面
-        [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
-    }
+    [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
 }
 
 // 管理我的会议

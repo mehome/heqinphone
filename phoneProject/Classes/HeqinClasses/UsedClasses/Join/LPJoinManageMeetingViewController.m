@@ -63,9 +63,12 @@
     self.floatView.hidden = YES;
     [self.meetingTable addSubview:self.floatView];
     self.floatView.userInteractionEnabled = NO;
-    [self.floatView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
     
+    [self.floatView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
     [self.meetingTable addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableTap:)]];
+    
+    self.meetingTable.tableFooterView = [[UIView alloc] init];
+    self.meetingTable.tableHeaderView = [[UIView alloc] init];
     
     self.filterAllMeetings = [NSMutableArray array];
     self.filterMyMeetings = [NSMutableArray array];
