@@ -121,8 +121,6 @@
 - (bool)onUpdate {
     bool video_enabled = false;
 
-    bool willPostNotification = false;
-
 #ifdef VIDEO_ENABLED
     LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
     if( linphone_core_video_enabled([LinphoneManager getLc])
@@ -130,23 +128,24 @@
        && !linphone_call_media_in_progress(currentCall)
        && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
         video_enabled = TRUE;
-        
-        willPostNotification = YES;
     }
 #endif //VIDEO_ENABLED
 
     [self setEnabled:video_enabled];
-    if( last_update_state != video_enabled )
+    if( last_update_state != video_enabled ) {
         [waitView stopAnimating];
+        
+        if (video_enabled == YES) {
+            // 说明发生了从未成功，变成了成功
+            NSLog(@"Post enable video notification");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kVedioEnableNotification" object:nil];
+        }
+    }
+    
     if( video_enabled ){
         video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
     }
     last_update_state = video_enabled;
-
-    if (willPostNotification == YES) {
-        NSLog(@"Post enable video notification");
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"kVedioEnableNotification" object:nil];
-    }
 
     return video_enabled;
 }

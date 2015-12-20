@@ -71,29 +71,9 @@ extern NSString *const kLinphoneInCallCellData;
 @property (nonatomic, retain) IBOutlet UIMicroButton*   bmMicroButton;
 @property (retain, nonatomic) IBOutlet UIVideoButton *bmVideoButton;
 
-
-
 @property (retain, nonatomic) IBOutlet UIButton *bottomInviteBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomJoinerBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomMoreBtn;
-
-@property (retain, nonatomic) IBOutlet UIView *cameraBgView;
-@property (retain, nonatomic) IBOutlet UIView *moreBgView;
-@property (retain, nonatomic) IBOutlet UIView *inviteBgView;
-
-@property (retain, nonatomic) IBOutlet UIButton *popVoiceSiclenBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popVoiceNoSilenceBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popCameraFrontBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popCameraTailBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popCameraCloseBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popInviteMailBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popInviteSMSBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popInviteCallBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popInviteCopyAddBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popMoreOnlyShareStreamBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popMoreOnlyShareVedioBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popMoreLockMeetingBtn;
-@property (retain, nonatomic) IBOutlet UIButton *popMoreCloseMeetingBtn;
 
 @property (retain, nonatomic) IBOutlet UIButton *collectionBtn;
 @property (retain, nonatomic) IBOutlet UIButton *quitBtn;
@@ -104,23 +84,6 @@ extern NSString *const kLinphoneInCallCellData;
 
 @implementation UICallBar
 
-@synthesize pauseButton;
-@synthesize conferenceButton;
-@synthesize videoButton;
-@synthesize speakerButton;
-@synthesize routesButton;
-@synthesize optionsButton;
-@synthesize hangupButton;
-@synthesize routesBluetoothButton;
-@synthesize routesReceiverButton;
-@synthesize routesSpeakerButton;
-@synthesize optionsAddButton;
-@synthesize optionsTransferButton;
-@synthesize dialerButton;
-
-@synthesize routesView;
-@synthesize optionsView;
-
 #pragma mark - Lifecycle Functions
 
 - (id)init {
@@ -128,22 +91,6 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)dealloc {
-    [pauseButton release];
-    [conferenceButton release];
-    [videoButton release];
-    [speakerButton release];
-    [routesButton release];
-    [optionsButton release];
-    [routesBluetoothButton release];
-    [routesReceiverButton release];
-    [routesSpeakerButton release];
-    [optionsAddButton release];
-    [optionsTransferButton release];
-    [dialerButton release];
-    
-    [routesView release];
-    [optionsView release];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super dealloc];
@@ -206,10 +153,10 @@ extern NSString *const kLinphoneInCallCellData;
     
     [self callUpdate:call state:state];
     
-    [self hideRoutes:FALSE];
-    [self hideOptions:FALSE];
-    [self hidePad:FALSE];
-    [self showSpeaker];
+//    [self hideRoutes:FALSE];
+//    [self hideOptions:FALSE];
+//    [self hidePad:FALSE];
+//    [self showSpeaker];
     
     [self hideAllBottomBgView];
     
@@ -263,11 +210,6 @@ static BOOL onlyOnce = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"kVedioEnableNotification"
                                                   object:nil];
-
-	if (linphone_core_get_calls_nb([LinphoneManager getLc]) == 0) {
-		//reseting speaker button because no more call
-		speakerButton.selected=FALSE; 
-	}
 }
 
 #pragma mark popWithButtons
@@ -578,15 +520,6 @@ static BOOL onlyOnce = NO;
     [self showToastWithMessage:@"复制地址成功"];
 }
 
-// 仅共享流
-- (IBAction)shareStreamBtnClicked:(id)sender {
-    [self hideAllBottomBgView];
-}
-// 仅共享视频
-- (IBAction)shareVedioBtnClicked:(id)sender {
-    [self hideAllBottomBgView];
-}
-
 // 锁定会议，或者解锁
 - (IBAction)lockMeetingBtnClicked:(id)sender {
     [self hideAllBottomBgView];
@@ -704,10 +637,8 @@ static BOOL onlyOnce = NO;
 #pragma mark - 
 
 - (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
+    
     [self.bmMicroButton update];
-    
-    
-    [videoButton update];
     [self.bmVideoButton update];
     
     switch(state) {
@@ -715,22 +646,13 @@ static BOOL onlyOnce = NO;
         case LinphoneCallError:
         case LinphoneCallIncoming:
         case LinphoneCallOutgoing:
-            [self hidePad:TRUE];
-            [self hideOptions:TRUE];
-            [self hideRoutes:TRUE];
+//            [self hidePad:TRUE];
+//            [self hideOptions:TRUE];
+//            [self hideRoutes:TRUE];
         default:
             break;
     }
 }
-
-- (void)bluetoothAvailabilityUpdate:(bool)available {
-    if (available) {
-        [self hideSpeaker];
-    } else {
-        [self showSpeaker];
-    }
-}
-
 
 #pragma mark -
 
@@ -776,144 +698,7 @@ static BOOL onlyOnce = NO;
                      }];
 }
 
-- (void)showPad:(BOOL)animated {
-    [dialerButton setOn];
-}
-
-- (void)hidePad:(BOOL)animated {
-    [dialerButton setOff];
-}
-
-- (void)showRoutes:(BOOL)animated {
-    if (![LinphoneManager runningOnIpad]) {
-        [routesButton setOn];
-        [routesBluetoothButton setSelected:[[LinphoneManager instance] bluetoothEnabled]];
-        [routesSpeakerButton setSelected:[[LinphoneManager instance] speakerEnabled]];
-        [routesReceiverButton setSelected:!([[LinphoneManager instance] bluetoothEnabled] || [[LinphoneManager instance] speakerEnabled])];
-        if([routesView isHidden]) {
-            if(animated) {
-                [self showAnimation:@"show" target:routesView completion:^(BOOL finished){}];
-            } else {
-                [routesView setHidden:FALSE];
-            }
-        }
-    }
-}
-
-- (void)hideRoutes:(BOOL)animated {
-    if (![LinphoneManager runningOnIpad]) {
-        [routesButton setOff];
-        if(![routesView isHidden]) {
-            if(animated) {
-                [self hideAnimation:@"hide" target:routesView completion:^(BOOL finished){}];
-            } else {
-                [routesView setHidden:TRUE];
-            }
-        }
-    }
-}
-
-- (void)showOptions:(BOOL)animated {
-    [optionsButton setOn];
-    if([optionsView isHidden]) {
-        if(animated) {
-            [self showAnimation:@"show" target:optionsView completion:^(BOOL finished){}];
-        } else {
-            [optionsView setHidden:FALSE];
-        }
-    }
-}
-
-- (void)hideOptions:(BOOL)animated {
-    [optionsButton setOff];
-    if(![optionsView isHidden]) {
-        if(animated) {
-            [self hideAnimation:@"hide" target:optionsView completion:^(BOOL finished){}];
-        } else {
-            [optionsView setHidden:TRUE];
-        }
-    }
-}
-
-- (void)showSpeaker {
-    if (![LinphoneManager runningOnIpad]) {
-        [speakerButton setHidden:FALSE];
-        [routesButton setHidden:TRUE];
-    }
-}
-
-- (void)hideSpeaker {
-    if (![LinphoneManager runningOnIpad]) {
-        [speakerButton setHidden:TRUE];
-        [routesButton setHidden:FALSE];
-    }
-}
-
-
 #pragma mark - Action Functions
-
-- (IBAction)onPadClick:(id)sender {
-    // 点击键盘来弹出数字键盘
-}
-
-- (IBAction)onRoutesBluetoothClick:(id)sender {
-    [self hideRoutes:TRUE];
-    [[LinphoneManager instance] setBluetoothEnabled:TRUE];
-}
-
-- (IBAction)onRoutesReceiverClick:(id)sender {
-    [self hideRoutes:TRUE];
-    [[LinphoneManager instance] setSpeakerEnabled:FALSE];
-    [[LinphoneManager instance] setBluetoothEnabled:FALSE];
-}
-
-- (IBAction)onRoutesSpeakerClick:(id)sender {
-    [self hideRoutes:TRUE];
-    [[LinphoneManager instance] setSpeakerEnabled:TRUE];
-}
-
-- (IBAction)onRoutesClick:(id)sender {
-    if([routesView isHidden]) {
-        [self showRoutes:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    } else {
-        [self hideRoutes:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    }
-}
-
-- (IBAction)onOptionsTransferClick:(id)sender {
-    [self hideOptions:TRUE];
-    // Go to dialer view   
-    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-    if(controller != nil) {
-        [controller setAddress:@""];
-        [controller setTransferMode:TRUE];
-    }
-}
-
-- (IBAction)onOptionsAddClick:(id)sender {
-    [self hideOptions:TRUE];
-    // Go to dialer view   
-    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-    if(controller != nil) {
-        [controller setAddress:@""];
-        [controller setTransferMode:FALSE];
-    }
-}
-
-- (IBAction)onOptionsClick:(id)sender {
-    if([optionsView isHidden]) {
-        [self showOptions:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    } else {
-        [self hideOptions:[[LinphoneManager instance] lpConfigBoolForKey:@"animations_preference"]];
-    }
-}
-
-// 暂停会议
-- (IBAction)onConferenceClick:(id)sender {
-    linphone_core_add_all_to_conference([LinphoneManager getLc]);
-}
-
-
 #pragma mark - TPMultiLayoutViewController Functions
 
 - (NSDictionary*)attributesForView:(UIView*)view {
@@ -921,17 +706,18 @@ static BOOL onlyOnce = NO;
 
     [attributes setObject:[NSValue valueWithCGRect:view.frame] forKey:@"frame"];
     [attributes setObject:[NSValue valueWithCGRect:view.bounds] forKey:@"bounds"];
-    if([view isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)view;    
-		[LinphoneUtils buttonMultiViewAddAttributes:attributes button:button];
-	} else if (view.tag ==self.leftPadding.tag || view.tag == self.rightPadding.tag){
-        if ([view isKindOfClass:[UIImageView class]]) {
-            UIImage* image = [(UIImageView*)view image];
-            if( image ){
-                [attributes setObject:image forKey:@"image"];
-            }
-        }
-    }
+//    if([view isKindOfClass:[UIButton class]]) {
+//        UIButton *button = (UIButton *)view;    
+//		[LinphoneUtils buttonMultiViewAddAttributes:attributes button:button];
+//	} else if (view.tag ==self.leftPadding.tag ||
+//               view.tag == self.rightPadding.tag) {
+//        if ([view isKindOfClass:[UIImageView class]]) {
+//            UIImage* image = [(UIImageView*)view image];
+//            if( image ){
+//                [attributes setObject:image forKey:@"image"];
+//            }
+//        }
+//    }
     [attributes setObject:[NSNumber numberWithInteger:view.autoresizingMask] forKey:@"autoresizingMask"];
 
     return attributes;
@@ -940,14 +726,15 @@ static BOOL onlyOnce = NO;
 - (void)applyAttributes:(NSDictionary*)attributes toView:(UIView*)view {
     view.frame = [[attributes objectForKey:@"frame"] CGRectValue];
     view.bounds = [[attributes objectForKey:@"bounds"] CGRectValue];
-    if([view isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)view;
-        [LinphoneUtils buttonMultiViewApplyAttributes:attributes button:button];
-    } else if (view.tag ==self.leftPadding.tag || view.tag == self.rightPadding.tag){
-        if ([view isKindOfClass:[UIImageView class]]) {
-            [(UIImageView*)view setImage:[attributes objectForKey:@"image"]];
-        }
-    }
+//    if([view isKindOfClass:[UIButton class]]) {
+//        UIButton *button = (UIButton *)view;
+//        [LinphoneUtils buttonMultiViewApplyAttributes:attributes button:button];
+//    } else if (view.tag ==self.leftPadding.tag ||
+//               view.tag == self.rightPadding.tag){
+//        if ([view isKindOfClass:[UIImageView class]]) {
+//            [(UIImageView*)view setImage:[attributes objectForKey:@"image"]];
+//        }
+//    }
     view.autoresizingMask = [[attributes objectForKey:@"autoresizingMask"] integerValue];
 }
 

@@ -563,7 +563,7 @@
                 tabFrame.size.height = self.view.frame.size.height - contentFrame.origin.y;
 
 //                contentFrame.size.height += view.frame.origin.y;
-                contentFrame.size.height = self.view.frame.size.height - view.frame.size.height;
+                contentFrame.size.height = tabFrame.size.height - view.frame.size.height;
                 break;
             }
         }

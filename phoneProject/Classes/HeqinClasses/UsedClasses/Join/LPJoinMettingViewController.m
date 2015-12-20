@@ -165,8 +165,6 @@
             case LinphoneRegistrationOk: {
                 message = @"已注册";
                 
-                self.joinBtn.enabled = YES;
-                
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
@@ -187,8 +185,6 @@
                 message = @"未注册";
                 
                 [LPSystemUser sharedUser].hasLogin = NO;
-                
-                self.joinBtn.enabled = NO;
 
                 NSLog(@"登出成功");
                 
@@ -196,14 +192,10 @@
             case LinphoneRegistrationFailed:
                 message = @"注册失败";
                 
-                self.joinBtn.enabled = NO;
-                
                 [LPSystemUser sharedUser].hasLogin = NO;
                 break;
             case LinphoneRegistrationProgress:
                 message = @"注册中";
-                
-                self.joinBtn.enabled = NO;
 
                 break;
             default: break;
@@ -420,10 +412,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         if(useLinphoneAddress) {
             const char* lDisplayName = linphone_address_get_display_name(addr);
             const char* lUserName = linphone_address_get_username(addr);
-            if (lDisplayName)
-                address = [NSString stringWithUTF8String:lDisplayName];
-            else if(lUserName)
+            if(lUserName)
                 address = [NSString stringWithUTF8String:lUserName];
+            else if (lDisplayName)
+                address = [NSString stringWithUTF8String:lDisplayName];
         }
     }
     if(address == nil) {

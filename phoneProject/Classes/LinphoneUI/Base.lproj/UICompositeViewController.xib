@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="23" width="320" height="397"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view autoresizesSubviews="NO" tag="2" contentMode="scaleToFill" id="14" userLabel="stateBar" customClass="UITransparentView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="23"/>
@@ -36,7 +36,7 @@
                     <rect key="frame" x="0.0" y="420" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <animations/>

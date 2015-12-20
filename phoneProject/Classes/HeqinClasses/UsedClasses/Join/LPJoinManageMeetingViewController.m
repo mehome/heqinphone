@@ -397,10 +397,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                 if(useLinphoneAddress) {
                     const char* lDisplayName = linphone_address_get_display_name(addr);
                     const char* lUserName = linphone_address_get_username(addr);
-                    if (lDisplayName)
-                        address = [NSString stringWithUTF8String:lDisplayName];
-                    else if(lUserName) 
+                    if(lUserName)
                         address = [NSString stringWithUTF8String:lUserName];
+                    else if (lDisplayName)
+                        address = [NSString stringWithUTF8String:lDisplayName];                    
                 }
             }
             if(address == nil) {

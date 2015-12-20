@@ -797,6 +797,9 @@
 		E17461951C267A5C009AD174 /* mKickoutOff.png in Resources */ = {isa = PBXBuildFile; fileRef = E17461931C267A5C009AD174 /* mKickoutOff.png */; };
 		E17461961C267A5C009AD174 /* mKickoutOn.png in Resources */ = {isa = PBXBuildFile; fileRef = E17461941C267A5C009AD174 /* mKickoutOn.png */; };
 		E17461981C268A46009AD174 /* logbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E17461971C268A46009AD174 /* logbg@2x.png */; };
+		E174619F1C26C6CA009AD174 /* splashscreen-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E174619C1C26C6CA009AD174 /* splashscreen-568h@2x.png */; };
+		E17461A01C26C6CA009AD174 /* splashscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E174619D1C26C6CA009AD174 /* splashscreen@2x.png */; };
+		E17461A11C26C6CA009AD174 /* splashscreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E174619E1C26C6CA009AD174 /* splashscreen@3x.png */; };
 		E18241E71C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */; };
 		E18241EA1C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241E91C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m */; };
 		E18241ED1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */; };
@@ -1909,6 +1912,9 @@
 		E17461931C267A5C009AD174 /* mKickoutOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mKickoutOff.png; path = Resources/mKickoutOff.png; sourceTree = "<group>"; };
 		E17461941C267A5C009AD174 /* mKickoutOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mKickoutOn.png; path = Resources/mKickoutOn.png; sourceTree = "<group>"; };
 		E17461971C268A46009AD174 /* logbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logbg@2x.png"; path = "Resources/logbg@2x.png"; sourceTree = "<group>"; };
+		E174619C1C26C6CA009AD174 /* splashscreen-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen-568h@2x.png"; path = "Resources/splashscreen-568h@2x.png"; sourceTree = "<group>"; };
+		E174619D1C26C6CA009AD174 /* splashscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen@2x.png"; path = "Resources/splashscreen@2x.png"; sourceTree = "<group>"; };
+		E174619E1C26C6CA009AD174 /* splashscreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen@3x.png"; path = "Resources/splashscreen@3x.png"; sourceTree = "<group>"; };
 		E18241E51C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageLockMeetingRequestModel.h; sourceTree = "<group>"; };
 		E18241E61C21B6ED000EC54A /* RDRManageLockMeetingRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRManageLockMeetingRequestModel.m; sourceTree = "<group>"; };
 		E18241E81C21B70C000EC54A /* RDRManageLockMeetingResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRManageLockMeetingResponseModel.h; sourceTree = "<group>"; };
@@ -3167,6 +3173,9 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E174619C1C26C6CA009AD174 /* splashscreen-568h@2x.png */,
+				E174619D1C26C6CA009AD174 /* splashscreen@2x.png */,
+				E174619E1C26C6CA009AD174 /* splashscreen@3x.png */,
 				E1128AFB1C259946009DC298 /* mAudioOff.png */,
 				E17461971C268A46009AD174 /* logbg@2x.png */,
 				E1128AFC1C259946009DC298 /* mAudioOn.png */,
@@ -3711,7 +3720,7 @@
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 9U5ZW6T67V;
+						DevelopmentTeam = 358B5J757A;
 					};
 				};
 			};
@@ -3968,6 +3977,7 @@
 				D350F21C15A43D3400149E54 /* setup_back_default.png in Resources */,
 				E10DE7411BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.xib in Resources */,
 				D350F21E15A43D3400149E54 /* setup_back_over.png in Resources */,
+				E174619F1C26C6CA009AD174 /* splashscreen-568h@2x.png in Resources */,
 				D350F22015A43D3400149E54 /* setup_cancel_default.png in Resources */,
 				D350F22215A43D3400149E54 /* setup_cancel_over.png in Resources */,
 				D350F22415A43D3400149E54 /* field_background.png in Resources */,
@@ -4055,6 +4065,7 @@
 				D3C31A5615BD8DED008ED271 /* options_disabled_landscape.png in Resources */,
 				D3C31A5815BD8DED008ED271 /* options_over_landscape.png in Resources */,
 				D3C31A5A15BD8DED008ED271 /* options_selected_landscape.png in Resources */,
+				E17461A11C26C6CA009AD174 /* splashscreen@3x.png in Resources */,
 				D3C31A5C15BD8DED008ED271 /* options_transfer_default_landscape.png in Resources */,
 				D3C31A5E15BD8DED008ED271 /* options_transfer_disabled_landscape.png in Resources */,
 				D3C31A6015BD8DED008ED271 /* options_transfer_over_landscape.png in Resources */,
@@ -4168,6 +4179,7 @@
 				D3A74F5015C69392001500B9 /* video_off_disabled~ipad.png in Resources */,
 				D3A74F5215C69392001500B9 /* video_off_over~ipad.png in Resources */,
 				F0B89C2818DC973E0050B60E /* wizard_external_sip.rc in Resources */,
+				E17461A01C26C6CA009AD174 /* splashscreen@2x.png in Resources */,
 				D3A74F5415C69392001500B9 /* video_on_default~ipad.png in Resources */,
 				D3A74F5615C69392001500B9 /* video_on_disabled~ipad.png in Resources */,
 				D3A74F5815C69392001500B9 /* video_on_over~ipad.png in Resources */,
