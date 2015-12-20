@@ -57,24 +57,15 @@
     if (linphone_core_get_default_proxy_config(lc) == NULL ) {
         // 当前已经注销
         self.logoutBtn.enabled = NO;
+        
+        self.nameField.text = @"";
+        self.accountField.text = @"";
+        self.companyField.text = @"";
+
     }else {
         // 当前已经登录
         self.logoutBtn.enabled = YES;
     }
-    
-//    if ([LPSystemUser sharedUser].hasLogin == YES) {
-//        self.nameField.text = [LPSystemUser sharedUser].loginUserName;
-//        self.accountField.text = @"个人帐号";
-//        self.companyField.text = @"企业信息";
-//        
-//        self.logoutBtn.enabled = YES;
-//    }else {
-//        self.nameField.text = @"未登录";
-//        self.accountField.text = @"";
-//        self.companyField.text = @"";
-//        
-//        self.logoutBtn.enabled = NO;
-//    }
 }
 
 - (void)initControls {
@@ -123,9 +114,6 @@
             
             // 刷新当前界面顶部的用户信息即可
             [self initDynamicInfos];
-            
-            // 切回到登录首页
-//            [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
         }
     }
 }

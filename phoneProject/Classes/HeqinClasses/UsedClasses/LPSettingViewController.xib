@@ -280,7 +280,7 @@
                     <exclude reference="qWl-Gb-oOe"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="470.5" y="449"/>
+            <point key="canvasLocation" x="349" y="449"/>
         </view>
     </objects>
 </document>
