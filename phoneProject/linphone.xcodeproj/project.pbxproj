@@ -810,6 +810,11 @@
 		E19A0D641BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D631BF4E7CF00E377DB /* RDRMyMeetingResponseModel.m */; };
 		E19A0D681BF4EAEE00E377DB /* RDRJoinMeetingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E19A0D671BF4EAEE00E377DB /* RDRJoinMeetingModel.m */; };
 		E1A8245C1C25BD2B004A6879 /* RDRLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A8245B1C25BD2B004A6879 /* RDRLoadingView.m */; };
+		E1D0AC081C3ABF4D0019DE87 /* b_joinMetting.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC051C3ABF4D0019DE87 /* b_joinMetting.png */; };
+		E1D0AC091C3ABF4D0019DE87 /* b_meetingSetting.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC061C3ABF4D0019DE87 /* b_meetingSetting.png */; };
+		E1D0AC0A1C3ABF4D0019DE87 /* b_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC071C3ABF4D0019DE87 /* b_settings.png */; };
+		E1D0AC0D1C3AC1840019DE87 /* LPBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D0AC0C1C3AC1840019DE87 /* LPBottomButton.m */; };
+		E1D0AC101C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D0AC0F1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m */; };
 		E1FCC3F31C1F14B3009A51CC /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */; };
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
 		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1935,6 +1940,13 @@
 		E19A0D671BF4EAEE00E377DB /* RDRJoinMeetingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRJoinMeetingModel.m; sourceTree = "<group>"; };
 		E1A8245A1C25BD2B004A6879 /* RDRLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRLoadingView.h; sourceTree = "<group>"; };
 		E1A8245B1C25BD2B004A6879 /* RDRLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRLoadingView.m; sourceTree = "<group>"; };
+		E1D0AC051C3ABF4D0019DE87 /* b_joinMetting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = b_joinMetting.png; path = Resources/b_joinMetting.png; sourceTree = "<group>"; };
+		E1D0AC061C3ABF4D0019DE87 /* b_meetingSetting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = b_meetingSetting.png; path = Resources/b_meetingSetting.png; sourceTree = "<group>"; };
+		E1D0AC071C3ABF4D0019DE87 /* b_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = b_settings.png; path = Resources/b_settings.png; sourceTree = "<group>"; };
+		E1D0AC0B1C3AC1840019DE87 /* LPBottomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBottomButton.h; sourceTree = "<group>"; };
+		E1D0AC0C1C3AC1840019DE87 /* LPBottomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBottomButton.m; sourceTree = "<group>"; };
+		E1D0AC0E1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LPUIButtonImageWithLable.h"; sourceTree = "<group>"; };
+		E1D0AC0F1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LPUIButtonImageWithLable.m"; sourceTree = "<group>"; };
 		E1FCC3F11C1F14B3009A51CC /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -2649,6 +2661,10 @@
 				1389514C1BEDDC60003DD7A0 /* LPJoinBarViewController.h */,
 				1389514D1BEDDC60003DD7A0 /* LPJoinBarViewController.m */,
 				1389514E1BEDDC60003DD7A0 /* LPJoinBarViewController.xib */,
+				E1D0AC0B1C3AC1840019DE87 /* LPBottomButton.h */,
+				E1D0AC0C1C3AC1840019DE87 /* LPBottomButton.m */,
+				E1D0AC0E1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.h */,
+				E1D0AC0F1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m */,
 				1389514F1BEDDC60003DD7A0 /* LPJoinMettingViewController.h */,
 				138951501BEDDC60003DD7A0 /* LPJoinMettingViewController.m */,
 				138951511BEDDC60003DD7A0 /* LPJoinMettingViewController.xib */,
@@ -3173,6 +3189,9 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E1D0AC051C3ABF4D0019DE87 /* b_joinMetting.png */,
+				E1D0AC061C3ABF4D0019DE87 /* b_meetingSetting.png */,
+				E1D0AC071C3ABF4D0019DE87 /* b_settings.png */,
 				E174619C1C26C6CA009AD174 /* splashscreen-568h@2x.png */,
 				E174619D1C26C6CA009AD174 /* splashscreen@2x.png */,
 				E174619E1C26C6CA009AD174 /* splashscreen@3x.png */,
@@ -3970,6 +3989,7 @@
 				D38D14AF15A30B3D008497E8 /* cell_call_first_highlight.png in Resources */,
 				D38D14B115A30B3D008497E8 /* cell_call_highlight.png in Resources */,
 				D3196D3415A321E3007FEEBA /* options_add_default.png in Resources */,
+				E1D0AC0A1C3ABF4D0019DE87 /* b_settings.png in Resources */,
 				D3196D3615A321E3007FEEBA /* options_add_over.png in Resources */,
 				D3196D3815A321E3007FEEBA /* options_transfer_default.png in Resources */,
 				D3196D3A15A321E3007FEEBA /* options_transfer_over.png in Resources */,
@@ -4022,6 +4042,7 @@
 				C9C8254315AE204D00D493FA /* options_add_disabled.png in Resources */,
 				13066CE01BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib in Resources */,
 				C9C8254515AE204D00D493FA /* options_transfer_disabled.png in Resources */,
+				E1D0AC081C3ABF4D0019DE87 /* b_joinMetting.png in Resources */,
 				C9C8254715AE204D00D493FA /* transfer_call_default.png in Resources */,
 				C9C8254915AE204D00D493FA /* transfer_call_over.png in Resources */,
 				C9C8254C15AE207B00D493FA /* options_selected.png in Resources */,
@@ -4235,6 +4256,7 @@
 				D3804E6015D92A57008072A5 /* msg.caf in Resources */,
 				D3804E6215D92A57008072A5 /* msg.wav in Resources */,
 				D321FF9915E628CB0098B5F4 /* linphonerc~ipad in Resources */,
+				E1D0AC091C3ABF4D0019DE87 /* b_meetingSetting.png in Resources */,
 				D38187C115FE345B00C3EDCA /* DialerViewController.xib in Resources */,
 				57F005C415EE2CCF00914747 /* linphonerc in Resources */,
 				57F005C815EE2D9200914747 /* linphonerc-factory in Resources */,
@@ -4512,6 +4534,7 @@
 				E18241EA1C21B70C000EC54A /* RDRManageLockMeetingResponseModel.m in Sources */,
 				E140A6BC1C10A0DC000E7DD0 /* RDRContactModel.m in Sources */,
 				138950F01BECA576003DD7A0 /* FMDatabasePool.m in Sources */,
+				E1D0AC0D1C3AC1840019DE87 /* LPBottomButton.m in Sources */,
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,
@@ -4527,6 +4550,7 @@
 				138950801BECA38D003DD7A0 /* UIProgressView+AFNetworking.m in Sources */,
 				D378906515AC373B00BD776C /* ContactDetailsLabelViewController.m in Sources */,
 				138950FB1BECA576003DD7A0 /* NSArray+MTLManipulationAdditions.m in Sources */,
+				E1D0AC101C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m in Sources */,
 				E174618F1C265936009AD174 /* RDROperationMuteVideoResponseModel.m in Sources */,
 				D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */,
 				C90FAA7915AF54E6002091CB /* HistoryDetailsViewController.m in Sources */,
