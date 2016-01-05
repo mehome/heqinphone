@@ -104,6 +104,13 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 				case LinphoneTransportTls: tname = "tls"; break;
 				default:                                  break;
 			}
+            
+            /**
+             * 强制把UDP改成TCP， 王锋那边主要是担心被某些公司的防火墙所封掉
+             ***/
+            UseTheTCP80Port
+//            tname = "tcp";
+            
 			[self setString:tname forKey:@"transport_preference"];
 
 			linphone_address_destroy(addr);
@@ -121,7 +128,12 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		[self setObject:@""   forKey:@"proxy_preference"];
 		[self setObject:@""   forKey:@"password_preference"];
 		[self setBool:FALSE   forKey:@"outbound_proxy_preference"];
+        
 		[self setString:"udp" forKey:@"transport_preference"];
+        UseTheTCP80Port
+//        [self setString:"tcp" forKey:@"transport_preference"];
+        
+        
 		[self setBool:FALSE   forKey:@"avpf_preference"];
 
 	}
@@ -163,6 +175,11 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	}
 	{
 		int port = lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "port_preference", 5060);
+        // 还有Network.plist中有一个5060被改成80了
+        
+        UseTheTCP80Port
+//        int port = lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "port_preference", 80);
+        
 		[self setInteger:port forKey:@"port_preference"];
 		int random_port_preference = lp_config_get_int(conf,LINPHONERC_APPLICATION_KEY,"random_port_preference", 1);
 		[self setInteger:random_port_preference forKey:@"random_port_preference"];
@@ -370,7 +387,10 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			LinphoneTransportType type = LinphoneTransportUdp;
 			if      ( [transport isEqualToString:@"tcp"] ) type = LinphoneTransportTcp;
 			else if ( [transport isEqualToString:@"tls"] ) type = LinphoneTransportTls;
-
+            
+            UseTheTCP80Port
+//			LinphoneTransportType type = LinphoneTransportTcp;
+            
 			linphone_address_set_transport(proxy_addr, type);
 			ms_free(proxy);
 			proxy = linphone_address_as_string_uri_only(proxy_addr);
