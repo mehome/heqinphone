@@ -69,4 +69,8 @@ _##PROPERTY = PROPERTY; \
 [[NSUserDefaults standardUserDefaults] synchronize]; \
 }
 
+#define yellowSubjectColor ([UIColor colorWithRed:255/255.0 green:175.0/255.0 blue:37/255.0 alpha:1.0])
+
+#define blueSubjectColor ([UIColor colorWithRed:194/255.0 green:239.0/255.0 blue:251/255.0 alpha:1.0])
+
 #endif

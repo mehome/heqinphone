@@ -45,6 +45,8 @@
 
 @property (nonatomic, strong) NSDateFormatter *dateForm;
 
+@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+
 @end
 
 @implementation LPMyMeetingArrangeViewController
@@ -97,6 +99,10 @@
     self.selectedRooms = [NSArray array];
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
+    
+    self.confirmBtn.backgroundColor = yellowSubjectColor;
+    self.confirmBtn.layer.cornerRadius = 5.0;
+    self.confirmBtn.clipsToBounds = YES;
 }
 
 - (void)dateChange:(UIDatePicker *)dp {

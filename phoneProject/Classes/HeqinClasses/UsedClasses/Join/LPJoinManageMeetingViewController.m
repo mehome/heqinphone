@@ -57,7 +57,7 @@
     self.showMyCollection = YES;
     self.showHistoryMeeing = YES;
     
-    self.floatView = [[UIView alloc] initWithFrame:self.meetingTable.bounds];
+    self.floatView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.floatView.backgroundColor = [UIColor grayColor];
     self.floatView.alpha = 0.3;
     self.floatView.hidden = YES;
@@ -535,11 +535,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)filterWithStr:(NSString *)curStr {
-    if (curStr.length > 0) {
-        self.floatView.hidden = YES;
-    }else {
-        self.floatView.hidden = NO;
-    }
+//    if (curStr.length > 0) {
+//        self.floatView.hidden = YES;
+//    }else {
+//        self.floatView.hidden = YES;
+//    }
     
     // 先重置好所有的数据
     [self resetAllData];

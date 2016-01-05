@@ -36,6 +36,10 @@
     self.floatView.alpha = 0.3;
     self.floatView.hidden = YES;
     [self.searchTable addSubview:self.floatView];
+    
+    self.searchTable.tableFooterView = [[UIView alloc] init];
+    self.searchTable.tableHeaderView = [[UIView alloc] init];
+    
     self.floatView.userInteractionEnabled = NO;
     [self.floatView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
     
@@ -254,11 +258,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)filterWithStr:(NSString *)curStr {
-    if (curStr.length > 0) {
-        self.floatView.hidden = YES;
-    }else {
-        self.floatView.hidden = NO;
-    }
+//    if (curStr.length > 0) {
+//        self.floatView.hidden = YES;
+//    }else {
+//        self.floatView.hidden = NO;
+//    }
     
     // 先重置好所有的数据
     [self resetAllData];

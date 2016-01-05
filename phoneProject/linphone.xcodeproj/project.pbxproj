@@ -815,6 +815,20 @@
 		E1D0AC0A1C3ABF4D0019DE87 /* b_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC071C3ABF4D0019DE87 /* b_settings.png */; };
 		E1D0AC0D1C3AC1840019DE87 /* LPBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D0AC0C1C3AC1840019DE87 /* LPBottomButton.m */; };
 		E1D0AC101C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D0AC0F1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m */; };
+		E1D0AC121C3BF3060019DE87 /* b_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC111C3BF3060019DE87 /* b_bg@2x.png */; };
+		E1D0AC151C3BF8C40019DE87 /* meeting_heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC131C3BF8C40019DE87 /* meeting_heart@2x.png */; };
+		E1D0AC161C3BF8C40019DE87 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC141C3BF8C40019DE87 /* search@2x.png */; };
+		E1D0AC211C3C03FC0019DE87 /* m_invite_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC171C3C03FB0019DE87 /* m_invite_highlight@2x.png */; };
+		E1D0AC221C3C03FC0019DE87 /* m_invite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC181C3C03FB0019DE87 /* m_invite@2x.png */; };
+		E1D0AC231C3C03FC0019DE87 /* m_man_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC191C3C03FB0019DE87 /* m_man_highlight@2x.png */; };
+		E1D0AC241C3C03FC0019DE87 /* m_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC1A1C3C03FC0019DE87 /* m_man@2x.png */; };
+		E1D0AC251C3C03FC0019DE87 /* m_mic_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC1B1C3C03FC0019DE87 /* m_mic_disable@2x.png */; };
+		E1D0AC261C3C03FC0019DE87 /* m_mic_enable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC1C1C3C03FC0019DE87 /* m_mic_enable@2x.png */; };
+		E1D0AC271C3C03FC0019DE87 /* m_options_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC1D1C3C03FC0019DE87 /* m_options_highlight@2x.png */; };
+		E1D0AC281C3C03FC0019DE87 /* m_options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC1E1C3C03FC0019DE87 /* m_options@2x.png */; };
+		E1D0AC291C3C03FC0019DE87 /* m_video_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC1F1C3C03FC0019DE87 /* m_video_disable@2x.png */; };
+		E1D0AC2A1C3C03FC0019DE87 /* m_video_enabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC201C3C03FC0019DE87 /* m_video_enabled@2x.png */; };
+		E1D0AC2C1C3C04AD0019DE87 /* m_barBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D0AC2B1C3C04AD0019DE87 /* m_barBg@2x.png */; };
 		E1FCC3F31C1F14B3009A51CC /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */; };
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
 		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1947,6 +1961,20 @@
 		E1D0AC0C1C3AC1840019DE87 /* LPBottomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBottomButton.m; sourceTree = "<group>"; };
 		E1D0AC0E1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LPUIButtonImageWithLable.h"; sourceTree = "<group>"; };
 		E1D0AC0F1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LPUIButtonImageWithLable.m"; sourceTree = "<group>"; };
+		E1D0AC111C3BF3060019DE87 /* b_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "b_bg@2x.png"; path = "Resources/b_bg@2x.png"; sourceTree = "<group>"; };
+		E1D0AC131C3BF8C40019DE87 /* meeting_heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "meeting_heart@2x.png"; path = "Resources/meeting_heart@2x.png"; sourceTree = "<group>"; };
+		E1D0AC141C3BF8C40019DE87 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "search@2x.png"; path = "Resources/search@2x.png"; sourceTree = "<group>"; };
+		E1D0AC171C3C03FB0019DE87 /* m_invite_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_invite_highlight@2x.png"; path = "Resources/m_invite_highlight@2x.png"; sourceTree = "<group>"; };
+		E1D0AC181C3C03FB0019DE87 /* m_invite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_invite@2x.png"; path = "Resources/m_invite@2x.png"; sourceTree = "<group>"; };
+		E1D0AC191C3C03FB0019DE87 /* m_man_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_man_highlight@2x.png"; path = "Resources/m_man_highlight@2x.png"; sourceTree = "<group>"; };
+		E1D0AC1A1C3C03FC0019DE87 /* m_man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_man@2x.png"; path = "Resources/m_man@2x.png"; sourceTree = "<group>"; };
+		E1D0AC1B1C3C03FC0019DE87 /* m_mic_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_mic_disable@2x.png"; path = "Resources/m_mic_disable@2x.png"; sourceTree = "<group>"; };
+		E1D0AC1C1C3C03FC0019DE87 /* m_mic_enable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_mic_enable@2x.png"; path = "Resources/m_mic_enable@2x.png"; sourceTree = "<group>"; };
+		E1D0AC1D1C3C03FC0019DE87 /* m_options_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_options_highlight@2x.png"; path = "Resources/m_options_highlight@2x.png"; sourceTree = "<group>"; };
+		E1D0AC1E1C3C03FC0019DE87 /* m_options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_options@2x.png"; path = "Resources/m_options@2x.png"; sourceTree = "<group>"; };
+		E1D0AC1F1C3C03FC0019DE87 /* m_video_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_video_disable@2x.png"; path = "Resources/m_video_disable@2x.png"; sourceTree = "<group>"; };
+		E1D0AC201C3C03FC0019DE87 /* m_video_enabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_video_enabled@2x.png"; path = "Resources/m_video_enabled@2x.png"; sourceTree = "<group>"; };
+		E1D0AC2B1C3C04AD0019DE87 /* m_barBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_barBg@2x.png"; path = "Resources/m_barBg@2x.png"; sourceTree = "<group>"; };
 		E1FCC3F11C1F14B3009A51CC /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -3189,6 +3217,20 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E1D0AC2B1C3C04AD0019DE87 /* m_barBg@2x.png */,
+				E1D0AC171C3C03FB0019DE87 /* m_invite_highlight@2x.png */,
+				E1D0AC181C3C03FB0019DE87 /* m_invite@2x.png */,
+				E1D0AC191C3C03FB0019DE87 /* m_man_highlight@2x.png */,
+				E1D0AC1A1C3C03FC0019DE87 /* m_man@2x.png */,
+				E1D0AC1B1C3C03FC0019DE87 /* m_mic_disable@2x.png */,
+				E1D0AC1C1C3C03FC0019DE87 /* m_mic_enable@2x.png */,
+				E1D0AC1D1C3C03FC0019DE87 /* m_options_highlight@2x.png */,
+				E1D0AC1E1C3C03FC0019DE87 /* m_options@2x.png */,
+				E1D0AC1F1C3C03FC0019DE87 /* m_video_disable@2x.png */,
+				E1D0AC201C3C03FC0019DE87 /* m_video_enabled@2x.png */,
+				E1D0AC131C3BF8C40019DE87 /* meeting_heart@2x.png */,
+				E1D0AC141C3BF8C40019DE87 /* search@2x.png */,
+				E1D0AC111C3BF3060019DE87 /* b_bg@2x.png */,
 				E1D0AC051C3ABF4D0019DE87 /* b_joinMetting.png */,
 				E1D0AC061C3ABF4D0019DE87 /* b_meetingSetting.png */,
 				E1D0AC071C3ABF4D0019DE87 /* b_settings.png */,
@@ -3911,7 +3953,9 @@
 				D3432A62158A4446001C6B0B /* led_connected.png in Resources */,
 				D3432A64158A4446001C6B0B /* led_error.png in Resources */,
 				D3432A66158A4446001C6B0B /* call_quality_indicator_0.png in Resources */,
+				E1D0AC261C3C03FC0019DE87 /* m_mic_enable@2x.png in Resources */,
 				D3432A68158A4446001C6B0B /* call_quality_indicator_1.png in Resources */,
+				E1D0AC291C3C03FC0019DE87 /* m_video_disable@2x.png in Resources */,
 				D3432A6A158A4446001C6B0B /* call_quality_indicator_2.png in Resources */,
 				D3432A6C158A4446001C6B0B /* call_quality_indicator_3.png in Resources */,
 				D3432A71158A45AF001C6B0B /* led_inprogress.png in Resources */,
@@ -3935,6 +3979,7 @@
 				D35E758915932DE60066B1C1 /* backspace_disabled.png in Resources */,
 				D35E758D15934F360066B1C1 /* call_disabled.png in Resources */,
 				D38187B115FE340500C3EDCA /* ChatViewController.xib in Resources */,
+				E1D0AC121C3BF3060019DE87 /* b_bg@2x.png in Resources */,
 				636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */,
 				D34F6F9E1594D3FB0095705B /* InAppSettings.bundle in Resources */,
 				D3EA5403159852080037DC6B /* chat_edit_default.png in Resources */,
@@ -3945,12 +3990,14 @@
 				639CEB091A1DF4FA004DE38F /* UIChatCell.xib in Resources */,
 				D3EA5418159858A80037DC6B /* list_delete_default.png in Resources */,
 				F070E6351A2622EC00E17AFD /* incall_padding_left_landscape.png in Resources */,
+				E1D0AC231C3C03FC0019DE87 /* m_man_highlight@2x.png in Resources */,
 				D3EA541A159858A80037DC6B /* list_delete_over.png in Resources */,
 				D38187D915FE347700C3EDCA /* IncomingCallViewController.xib in Resources */,
 				1389519E1BEE09CA003DD7A0 /* LPLoginViewController.xib in Resources */,
 				F0C1F90E1A28781F009402C9 /* background-launch.png in Resources */,
 				D3F26BF715986DAD005F9CAB /* history_ok_default.png in Resources */,
 				D3F26BF915986DAD005F9CAB /* history_ok_over.png in Resources */,
+				E1D0AC161C3BF8C40019DE87 /* search@2x.png in Resources */,
 				D3F26BFC15987083005F9CAB /* header_incoming.png in Resources */,
 				639CEB031A1DF4EB004DE38F /* UICompositeViewController.xib in Resources */,
 				D31B4B281598A390002E6C72 /* avatar_unknown.png in Resources */,
@@ -3960,8 +4007,10 @@
 				D3D6A3A0159B0EEF005F692C /* add_call_disabled.png in Resources */,
 				D3D6A3A2159B0EEF005F692C /* add_call_over.png in Resources */,
 				D3D6A3AB159B0EFE005F692C /* security_ko.png in Resources */,
+				E1D0AC2C1C3C04AD0019DE87 /* m_barBg@2x.png in Resources */,
 				D3D6A3AD159B0EFE005F692C /* security_pending.png in Resources */,
 				D3D6A3AF159B0EFE005F692C /* security_ok.png in Resources */,
+				E1D0AC221C3C03FC0019DE87 /* m_invite@2x.png in Resources */,
 				D3D6A3B1159B0EFE005F692C /* options_default.png in Resources */,
 				D3D6A3B3159B0EFE005F692C /* options_disabled.png in Resources */,
 				D3D6A3B5159B0EFE005F692C /* options_over.png in Resources */,
@@ -4062,6 +4111,7 @@
 				138951651BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.xib in Resources */,
 				E10DE7321BFA1975002D0FBB /* LPMyMeetingArrangeViewController.xib in Resources */,
 				D3157A9015B446CB00DD8C4C /* history_details_back_default.png in Resources */,
+				E1D0AC211C3C03FC0019DE87 /* m_invite_highlight@2x.png in Resources */,
 				D3157A9215B446CB00DD8C4C /* history_details_back_over.png in Resources */,
 				D3119E7215B6A4710005D4A4 /* contacts_back_default.png in Resources */,
 				D3119E7415B6A4710005D4A4 /* contacts_back_over.png in Resources */,
@@ -4076,6 +4126,7 @@
 				D3C31A4215BD8DED008ED271 /* micro_off_default_landscape.png in Resources */,
 				D3C31A4415BD8DED008ED271 /* micro_off_disabled_landscape.png in Resources */,
 				D3C31A4615BD8DED008ED271 /* micro_off_over_landscape.png in Resources */,
+				E1D0AC151C3BF8C40019DE87 /* meeting_heart@2x.png in Resources */,
 				D3C31A4815BD8DED008ED271 /* micro_on_default_landscape.png in Resources */,
 				D3C31A4A15BD8DED008ED271 /* micro_on_disabled_landscape.png in Resources */,
 				D3C31A4C15BD8DED008ED271 /* micro_on_over_landscape.png in Resources */,
@@ -4151,6 +4202,7 @@
 				D3A74EFE15C69392001500B9 /* history_over_landscape~ipad.png in Resources */,
 				D3A74F0015C69392001500B9 /* history_over~ipad.png in Resources */,
 				D3A74F0215C69392001500B9 /* history_selected_landscape~ipad.png in Resources */,
+				E1D0AC271C3C03FC0019DE87 /* m_options_highlight@2x.png in Resources */,
 				D3A74F0415C69392001500B9 /* history_selected~ipad.png in Resources */,
 				1389515B1BEDDC60003DD7A0 /* LPJoinBarViewController.xib in Resources */,
 				D3A74F0615C69392001500B9 /* micro_off_default~ipad.png in Resources */,
@@ -4219,6 +4271,7 @@
 				D33988BE15C6DD1600CAF1E4 /* hangup_over_landscape~ipad.png in Resources */,
 				D33988C015C6DD1600CAF1E4 /* micro_off_default_landscape~ipad.png in Resources */,
 				D33988C215C6DD1600CAF1E4 /* micro_off_disabled_landscape~ipad.png in Resources */,
+				E1D0AC251C3C03FC0019DE87 /* m_mic_disable@2x.png in Resources */,
 				D33988C415C6DD1600CAF1E4 /* micro_off_over_landscape~ipad.png in Resources */,
 				D33988C615C6DD1600CAF1E4 /* micro_on_default_landscape~ipad.png in Resources */,
 				D33988C815C6DD1600CAF1E4 /* micro_on_disabled_landscape~ipad.png in Resources */,
@@ -4245,6 +4298,7 @@
 				D33988F015C6DD1600CAF1E4 /* speaker_on_disabled_landscape~ipad.png in Resources */,
 				D33988F215C6DD1600CAF1E4 /* speaker_on_over_landscape~ipad.png in Resources */,
 				D33988F815C6DD1600CAF1E4 /* video_off_default_landscape~ipad.png in Resources */,
+				E1D0AC2A1C3C03FC0019DE87 /* m_video_enabled@2x.png in Resources */,
 				D33988FA15C6DD1600CAF1E4 /* video_off_disabled_landscape~ipad.png in Resources */,
 				D33988FC15C6DD1600CAF1E4 /* video_off_over_landscape~ipad.png in Resources */,
 				D33988FE15C6DD1600CAF1E4 /* video_on_default_landscape~ipad.png in Resources */,
@@ -4308,6 +4362,7 @@
 				D3328646160B5BC300E6435D /* dialer_alt_disabled_landscape.png in Resources */,
 				D3328648160B5BC300E6435D /* dialer_alt_disabled_landscape~ipad.png in Resources */,
 				D332864A160B5BC300E6435D /* dialer_alt_disabled.png in Resources */,
+				E1D0AC281C3C03FC0019DE87 /* m_options@2x.png in Resources */,
 				D332864C160B5BC300E6435D /* dialer_alt_disabled~ipad.png in Resources */,
 				F070E6331A2622EC00E17AFD /* dialer_padding_left.png in Resources */,
 				F0C1F8EB1A277ADA009402C9 /* LaunchScreen.xib in Resources */,
@@ -4337,6 +4392,7 @@
 				15AF3C5616F37A3E00FC52EC /* route_bluetooth_off_disabled.png in Resources */,
 				15AF3C5816F37A3E00FC52EC /* route_bluetooth_off_over.png in Resources */,
 				15AF3C5C16F37A3E00FC52EC /* route_bluetooth_on_default.png in Resources */,
+				E1D0AC241C3C03FC0019DE87 /* m_man@2x.png in Resources */,
 				F0938159188E629800A55DFA /* iTunesArtwork in Resources */,
 				15AF3C6C16F37A4A00FC52EC /* route_phone_off_default.png in Resources */,
 				15AF3C6E16F37A4A00FC52EC /* route_phone_off_disabled.png in Resources */,

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPJoinBarViewController">
             <connections>
+                <outlet property="firstBtn" destination="qTs-VH-hs5" id="9ce-3X-v9B"/>
+                <outlet property="forthBtn" destination="y70-Ww-RBd" id="qIM-VK-cHX"/>
+                <outlet property="secondBtn" destination="LoW-mB-2v0" id="HVb-Yx-PCf"/>
+                <outlet property="thirdBtn" destination="La9-Sr-fdd" id="q0c-eG-GVb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,57 +19,59 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoW-mB-2v0">
-                    <rect key="frame" x="80" y="0.0" width="80" height="55"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.075298108552631582" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="管理会议"/>
-                    <connections>
-                        <action selector="joinManageMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="uSf-5d-obb"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y70-Ww-RBd">
-                    <rect key="frame" x="240" y="0.0" width="80" height="55"/>
-                    <animations/>
-                    <color key="backgroundColor" red="1" green="0.10734477796052622" blue="0.013980263157894737" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="设置"/>
-                    <connections>
-                        <action selector="settingBtnClicked:" destination="-1" eventType="touchUpInside" id="6dt-KW-riP"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTs-VH-hs5">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="diU-za-N3X">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTs-VH-hs5">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="55"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.075298108552631582" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="参加会议"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <connections>
                         <action selector="joinMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="cyG-dZ-c9x"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La9-Sr-fdd" userLabel="ArrangeManage">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoW-mB-2v0">
+                    <rect key="frame" x="80" y="0.0" width="80" height="55"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <connections>
+                        <action selector="joinManageMeetingBtnClicked:" destination="-1" eventType="touchUpInside" id="uSf-5d-obb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La9-Sr-fdd" userLabel="ArrangeManage">
                     <rect key="frame" x="160" y="0.0" width="80" height="55"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.83356462450000002" green="0.75043688320000002" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="安排会议"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <connections>
                         <action selector="arrangeBtnClicked:" destination="-1" eventType="touchUpInside" id="f41-DP-gTD"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y70-Ww-RBd">
+                    <rect key="frame" x="240" y="0.0" width="80" height="55"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <connections>
+                        <action selector="settingBtnClicked:" destination="-1" eventType="touchUpInside" id="6dt-KW-riP"/>
+                    </connections>
+                </button>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" red="1" green="1" blue="0.2181815057" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="y70-Ww-RBd" secondAttribute="bottom" id="3RT-Uz-i0L"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="width" secondItem="qTs-VH-hs5" secondAttribute="width" id="6vd-Pe-v4Q"/>
                 <constraint firstAttribute="bottom" secondItem="qTs-VH-hs5" secondAttribute="bottom" id="EdY-Ym-9nI"/>
+                <constraint firstAttribute="bottom" secondItem="diU-za-N3X" secondAttribute="bottom" id="S7X-Vg-L8X"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Sx9-yt-R4V"/>
+                <constraint firstItem="diU-za-N3X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tmn-sD-GiD"/>
                 <constraint firstItem="qTs-VH-hs5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VOb-Y4-6TX"/>
                 <constraint firstAttribute="trailing" secondItem="y70-Ww-RBd" secondAttribute="trailing" id="X2e-Ol-HYb"/>
                 <constraint firstItem="La9-Sr-fdd" firstAttribute="width" secondItem="LoW-mB-2v0" secondAttribute="width" id="YiL-iB-VZ7"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="leading" secondItem="LoW-mB-2v0" secondAttribute="trailing" id="aZ9-wB-JiF"/>
                 <constraint firstAttribute="bottom" secondItem="LoW-mB-2v0" secondAttribute="bottom" id="eA7-lE-5Ye"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="width" secondItem="qTs-VH-hs5" secondAttribute="width" id="eMd-0f-jgE"/>
+                <constraint firstItem="diU-za-N3X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ghs-QN-Sp0"/>
                 <constraint firstItem="La9-Sr-fdd" firstAttribute="centerY" secondItem="LoW-mB-2v0" secondAttribute="centerY" id="jnp-WC-2LX"/>
+                <constraint firstAttribute="trailing" secondItem="diU-za-N3X" secondAttribute="trailing" id="km1-Bf-Yxl"/>
                 <constraint firstItem="qTs-VH-hs5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mSt-58-6G6"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="leading" secondItem="La9-Sr-fdd" secondAttribute="trailing" id="nWq-lX-A2G"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="leading" secondItem="qTs-VH-hs5" secondAttribute="trailing" id="pMF-vT-zdr"/>
@@ -79,7 +85,10 @@
                     <exclude reference="aZ9-wB-JiF"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="361" y="469.5"/>
+            <point key="canvasLocation" x="114" y="469.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="b_bg.png" width="1" height="1"/>
+    </resources>
 </document>

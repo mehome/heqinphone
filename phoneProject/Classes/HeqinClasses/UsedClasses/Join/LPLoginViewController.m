@@ -23,6 +23,7 @@
 @property (weak, nonatomic) UITextField *activeTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
 @end
 
@@ -33,6 +34,14 @@
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapGestured:)]];
     
+    self.backBtn.backgroundColor = yellowSubjectColor;
+    self.backBtn.layer.cornerRadius = 5.0;
+    self.backBtn.clipsToBounds = YES;
+
+    self.loginBtn.backgroundColor = yellowSubjectColor;
+    self.loginBtn.layer.cornerRadius = 5.0;
+    self.loginBtn.clipsToBounds = YES;
+
     // 控制返回按钮的显示和隐藏
 //    self.backBtn.hidden = YES;
 }
@@ -54,13 +63,13 @@
     LinphoneCore* lc = [LinphoneManager getLc];
     if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
         // 当前处于登出状态
-        self.userNameField.text = @"";
-        self.userPasswordField.text = @"";
+        self.userNameField.text = @"feng.wang@zijingcloud.com";
+        self.userPasswordField.text = @"wang@2015";
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
         self.userNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
-        self.userPasswordField.text = @"已登录";
+        self.userPasswordField.text = @"xxxxxx";
     }
 }
 
@@ -148,19 +157,19 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     // only validate the username when creating a new account
-    if( textField == self.userNameField ){
-        NSRegularExpression *regex = [NSRegularExpression
-                                      regularExpressionWithPattern:@"^[a-z0-9-_\\.]*$"
-                                      options:NSRegularExpressionCaseInsensitive
-                                      error:nil];
-        NSArray* matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
-        if ([matches count] == 0) {
-            
-            [self showToastWithMessage:NSLocalizedString(@"Illegal character in username: %@", nil)];
-            
-            return NO;
-        }
-    }
+//    if( textField == self.userNameField ){
+//        NSRegularExpression *regex = [NSRegularExpression
+//                                      regularExpressionWithPattern:@"^[a-z0-9-_\\.]*$"
+//                                      options:NSRegularExpressionCaseInsensitive
+//                                      error:nil];
+//        NSArray* matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+//        if ([matches count] == 0) {
+//            
+//            [self showToastWithMessage:NSLocalizedString(@"Illegal character in username: %@", nil)];
+//            
+//            return NO;
+//        }
+//    }
     return YES;
 }
 
@@ -230,9 +239,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *username = self.userNameField.text;
     
     NSString *userId = username;
-    if ([username hasSuffix:@"@zijingcloud.com"] == NO) {
-        userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
-    }
+//    if ([username hasSuffix:@"@zijingcloud.com"] == NO) {
+//        userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
+//    }
     
     NSString *password = self.userPasswordField.text;
     NSString *transport = @"UDP";

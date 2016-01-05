@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@interface LPSButton : UIButton
+
+@end
+
 @interface LPJoinBarViewController : UIViewController
 
 @end

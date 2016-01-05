@@ -53,6 +53,11 @@
     self.companyField.text = @"企业信息";
     self.logoutBtn.enabled = YES;
 
+    self.logoutBtn.backgroundColor = yellowSubjectColor;
+    self.logoutBtn.layer.cornerRadius = 5.0;
+    self.logoutBtn.clipsToBounds = YES;
+
+    
     LinphoneCore* lc = [LinphoneManager getLc];
     if (linphone_core_get_default_proxy_config(lc) == NULL ) {
         // 当前已经注销

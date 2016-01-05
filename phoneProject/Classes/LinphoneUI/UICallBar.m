@@ -68,7 +68,7 @@ extern NSString *const kLinphoneInCallCellData;
 @interface UICallBar ()
 @property (retain, nonatomic) IBOutlet UIView *bottomBgView;        // 底部的背景图，用来控制TabBar与Content的位置,Tag=-1
 
-@property (nonatomic, retain) IBOutlet UIMicroButton*   bmMicroButton;
+@property (nonatomic, retain) IBOutlet UIMicroButton *bmMicroButton;
 @property (retain, nonatomic) IBOutlet UIVideoButton *bmVideoButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *bottomInviteBtn;
@@ -85,6 +85,60 @@ extern NSString *const kLinphoneInCallCellData;
 @implementation UICallBar
 
 #pragma mark - Lifecycle Functions
+
+- (void)changeBtn:(UIButton *)btn {
+    btn.titleLabel.font = [UIFont systemFontOfSize:11.0];
+    
+    [btn.titleLabel sizeToFit];
+    CGSize titleSize = btn.titleLabel.frame.size;// [btn.titleLabel.text sizeWithFont:btn.titleLabel.font];
+    [btn.imageView setContentMode:UIViewContentModeCenter];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(-12.0,
+                                             0.0,
+                                             0.0,
+                                             -titleSize.width)];
+    
+    [btn.titleLabel setContentMode:UIViewContentModeCenter];
+    [btn.titleLabel setBackgroundColor:[UIColor clearColor]];
+    [btn.imageView sizeToFit];
+    CGSize imgSize = btn.imageView.frame.size;
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(34.0,
+                                             -imgSize.width,
+                                             0.0,
+                                             0.0)];
+}
+
+- (void)setAllBtns {
+    [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+    [self.bmVideoButton setImage:[UIImage imageNamed:@"m_video_enabled"] forState:UIControlStateNormal];
+    [self.bottomInviteBtn setImage:[UIImage imageNamed:@"m_invite"] forState:UIControlStateNormal];
+    [self.bottomJoinerBtn setImage:[UIImage imageNamed:@"m_man"] forState:UIControlStateNormal];
+    [self.bottomMoreBtn setImage:[UIImage imageNamed:@"m_options"] forState:UIControlStateNormal];
+    
+    [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+    [self.bmVideoButton setImage:[UIImage imageNamed:@"m_video_disable"] forState:UIControlStateDisabled];
+    [self.bottomInviteBtn setImage:[UIImage imageNamed:@"m_invite_highlight"] forState:UIControlStateHighlighted];
+    [self.bottomJoinerBtn setImage:[UIImage imageNamed:@"m_man_highlight"] forState:UIControlStateHighlighted];
+    [self.bottomMoreBtn setImage:[UIImage imageNamed:@"m_options_highlight"] forState:UIControlStateHighlighted];
+    
+    [self.bmMicroButton setTitle:@"声音" forState:UIControlStateNormal];
+    [self.bmVideoButton setTitle:@"视频" forState:UIControlStateNormal];
+    [self.bottomInviteBtn setTitle:@"邀请" forState:UIControlStateNormal];
+    [self.bottomJoinerBtn setTitle:@"与会者" forState:UIControlStateNormal];
+    [self.bottomMoreBtn setTitle:@"管理" forState:UIControlStateNormal];
+    
+    [self.bmMicroButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.bmVideoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.bottomInviteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.bottomJoinerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.bottomMoreBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    // 调整布局
+    [self changeBtn:self.bmMicroButton];
+    [self changeBtn:self.bmVideoButton];
+    [self changeBtn:self.bottomInviteBtn];
+    [self changeBtn:self.bottomJoinerBtn];
+    [self changeBtn:self.bottomMoreBtn];
+}
 
 - (id)init {
     return [super initWithNibName:@"UICallBar" bundle:[NSBundle mainBundle]];
@@ -120,6 +174,8 @@ extern NSString *const kLinphoneInCallCellData;
     [super viewDidLoad];
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
+    
+    [self setAllBtns];
 }
 
 - (void)bgTapped:(UITapGestureRecognizer *)tapped {

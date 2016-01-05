@@ -30,7 +30,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *joinMeetingNumberField;
 
 @property (weak, nonatomic) IBOutlet UILabel *loginTipLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
+@property (weak, nonatomic) IBOutlet UIButton *changeNameBtn;
 
 @property (retain, nonatomic) NSDateFormatter *dateFormatter;
 
@@ -63,6 +65,14 @@
     self.tableTipLabel.backgroundColor = [UIColor whiteColor];
     
     self.callLogs = [[NSMutableArray alloc] init];
+    
+    self.changeNameBtn.backgroundColor = yellowSubjectColor;
+    self.changeNameBtn.layer.cornerRadius = 5.0;
+    self.changeNameBtn.clipsToBounds = YES;
+    
+    self.joinBtn.backgroundColor = yellowSubjectColor;
+    self.joinBtn.layer.cornerRadius = 5.0;
+    self.joinBtn.clipsToBounds = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

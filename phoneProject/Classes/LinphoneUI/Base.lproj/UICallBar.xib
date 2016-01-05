@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UICallBar">
@@ -28,28 +28,21 @@
                 <view tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skh-FZ-hiA" userLabel="btnBgView">
                     <rect key="frame" x="0.0" y="240" width="339" height="44"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="m_barBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-v2-6yn">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="44"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf" customClass="UIMicroButton">
                             <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="1" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <state key="normal" title="声音" backgroundImage="mMicOff.png"/>
-                            <state key="disabled" backgroundImage="mMicOff.png"/>
-                            <state key="selected" backgroundImage="mMicOn.png"/>
-                            <state key="highlighted" backgroundImage="mMicOn.png"/>
                             <connections>
                                 <action selector="bmSoundClicked:" destination="-1" eventType="touchUpInside" id="glT-7Z-rEC"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-1H-otf" customClass="UIVideoButton">
                             <rect key="frame" x="68" y="0.0" width="68" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="1" green="0.24368123310000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <state key="normal" title="视频" backgroundImage="mVideoOff.png"/>
-                            <state key="disabled" backgroundImage="mVideoOff.png"/>
-                            <state key="selected" title="视频" backgroundImage="mVideoOn.png"/>
-                            <state key="highlighted" backgroundImage="mVideoOn.png"/>
                             <connections>
                                 <action selector="vedioBtnClicked:" destination="-1" eventType="touchUpInside" id="aJ0-ZW-hL0"/>
                                 <outlet property="waitView" destination="07c-9g-xJi" id="X4H-fb-j3C"/>
@@ -57,41 +50,34 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
                             <rect key="frame" x="136" y="0.0" width="67" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="1" green="1" blue="0.2181815057" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="邀请"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="inviteBtnClicked:" destination="-1" eventType="touchUpInside" id="oa7-Gj-h1a"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXY-4Q-XR0">
                             <rect key="frame" x="203" y="0.0" width="68" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="参与人"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="joinerBtnClicked:" destination="-1" eventType="touchUpInside" id="FYa-MW-Ffe"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-mZ-2Go">
                             <rect key="frame" x="271" y="0.0" width="68" height="44"/>
-                            <animations/>
-                            <color key="backgroundColor" red="0.075298108550000006" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="更多"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="moreBtnClicked:" destination="-1" eventType="touchUpInside" id="6YH-yO-gge"/>
                             </connections>
                         </button>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="07c-9g-xJi">
                             <rect key="frame" x="84" y="3" width="37" height="37"/>
-                            <animations/>
                         </activityIndicatorView>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="lEk-WA-mPd" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="0aa-IP-cMu"/>
                         <constraint firstItem="bHl-tm-Qpf" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="1yF-9w-b5V"/>
+                        <constraint firstItem="jGw-v2-6yn" firstAttribute="leading" secondItem="skh-FZ-hiA" secondAttribute="leading" id="4cQ-y4-dLZ"/>
                         <constraint firstAttribute="bottom" secondItem="bHl-tm-Qpf" secondAttribute="bottom" id="9A1-ri-ITZ"/>
                         <constraint firstAttribute="bottom" secondItem="FpB-mZ-2Go" secondAttribute="bottom" id="9b9-Ck-jWQ"/>
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="DhU-eD-zmQ"/>
@@ -99,7 +85,9 @@
                         <constraint firstItem="BXY-4Q-XR0" firstAttribute="leading" secondItem="lEk-WA-mPd" secondAttribute="trailing" id="GRU-U9-oAI"/>
                         <constraint firstItem="GNF-1H-otf" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="Jsw-yk-Z7W"/>
                         <constraint firstItem="lEk-WA-mPd" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="K0D-8Y-kP0"/>
+                        <constraint firstAttribute="bottom" secondItem="jGw-v2-6yn" secondAttribute="bottom" id="Nit-3h-Ua8"/>
                         <constraint firstAttribute="trailing" secondItem="FpB-mZ-2Go" secondAttribute="trailing" id="VKn-IF-QUk"/>
+                        <constraint firstItem="jGw-v2-6yn" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="YVO-ht-tfj"/>
                         <constraint firstItem="07c-9g-xJi" firstAttribute="centerX" secondItem="GNF-1H-otf" secondAttribute="centerX" id="Ykf-Ie-Lih"/>
                         <constraint firstItem="lEk-WA-mPd" firstAttribute="leading" secondItem="GNF-1H-otf" secondAttribute="trailing" id="ZYk-gN-4ol"/>
                         <constraint firstItem="BXY-4Q-XR0" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="cOx-ez-V9t"/>
@@ -107,6 +95,7 @@
                         <constraint firstItem="GNF-1H-otf" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="cpO-of-6AX"/>
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="leading" secondItem="BXY-4Q-XR0" secondAttribute="trailing" id="ezj-1J-bFN"/>
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="hSG-d7-v4V"/>
+                        <constraint firstAttribute="trailing" secondItem="jGw-v2-6yn" secondAttribute="trailing" id="igE-9G-BPU"/>
                         <constraint firstItem="GNF-1H-otf" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="kQr-hm-LWs"/>
                         <constraint firstItem="07c-9g-xJi" firstAttribute="centerY" secondItem="GNF-1H-otf" secondAttribute="centerY" id="mAy-FG-QV5"/>
                         <constraint firstItem="BXY-4Q-XR0" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="mSZ-FG-FA1"/>
@@ -117,12 +106,11 @@
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="tap-Ne-OVu"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uje-v5-zRE">
-                    <rect key="frame" x="249" y="10" width="80" height="30"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.23324932919999999" green="1" blue="0.2426212358" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uje-v5-zRE">
+                    <rect key="frame" x="269" y="10" width="60" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="80" id="Vpz-aw-aST"/>
+                        <constraint firstAttribute="width" constant="60" id="Vpz-aw-aST"/>
                         <constraint firstAttribute="height" constant="30" id="eDH-ue-7wn"/>
                     </constraints>
                     <state key="normal" title="退出"/>
@@ -130,17 +118,15 @@
                         <action selector="quitBtnClicked:" destination="-1" eventType="touchUpInside" id="x8j-Pg-PeQ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-zC-DW3">
-                    <rect key="frame" x="159" y="10" width="80" height="30"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.91935234489999995" green="0.42483804409999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="收藏"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-zC-DW3">
+                    <rect key="frame" x="199" y="10" width="60" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="meeting_heart.png"/>
                     <connections>
                         <action selector="collectionBtnClicked:" destination="-1" eventType="touchUpInside" id="CT4-xH-TCS"/>
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="skh-FZ-hiA" secondAttribute="bottom" id="1lU-bp-fh2"/>
@@ -163,11 +149,9 @@
             <subviews>
                 <view hidden="YES" autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" tag="-1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104" userLabel="mask">
                     <rect key="frame" x="0.0" y="248" width="480" height="72"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.19194547549999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -176,9 +160,7 @@
         </view>
     </objects>
     <resources>
-        <image name="mMicOff.png" width="38" height="38"/>
-        <image name="mMicOn.png" width="38" height="38"/>
-        <image name="mVideoOff.png" width="38" height="38"/>
-        <image name="mVideoOn.png" width="38" height="38"/>
+        <image name="m_barBg.png" width="1" height="1"/>
+        <image name="meeting_heart.png" width="27" height="22"/>
     </resources>
 </document>
