@@ -18,11 +18,31 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjy-MI-00g" userLabel="btnBgView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hf4-zO-IYh">
+                            <rect key="frame" x="4" y="4" width="312" height="40"/>
+                            <state key="normal" title="通讯录" backgroundImage="navbarBg.png"/>
+                            <connections>
+                                <action selector="anotherPhoneListBtnClicked:" destination="-1" eventType="touchUpInside" id="dh7-PJ-ioc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="REE-hI-44g"/>
+                        <constraint firstAttribute="trailing" secondItem="Hf4-zO-IYh" secondAttribute="trailing" constant="4" id="YKK-wm-Vzr"/>
+                        <constraint firstItem="Hf4-zO-IYh" firstAttribute="leading" secondItem="Wjy-MI-00g" secondAttribute="leading" constant="4" id="c64-IT-Tnv"/>
+                        <constraint firstAttribute="bottom" secondItem="Hf4-zO-IYh" secondAttribute="bottom" constant="4" id="kbd-T0-QLC"/>
+                        <constraint firstItem="Hf4-zO-IYh" firstAttribute="top" secondItem="Wjy-MI-00g" secondAttribute="top" constant="4" id="lMf-JH-T4t"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ElQ-yx-cCg" userLabel="TopBgView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="48" width="320" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会议室名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pr-t6-uUA">
-                            <rect key="frame" x="10" y="11" width="85" height="21"/>
+                            <rect key="frame" x="10" y="12" width="85" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="HrU-cq-gYH"/>
                                 <constraint firstAttribute="width" constant="85" id="n9Y-xd-1yz"/>
@@ -42,8 +62,8 @@
                                 <outlet property="delegate" destination="-1" id="Odx-pJ-AsO"/>
                             </connections>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TH3-UZ-1RA">
-                            <rect key="frame" x="263" y="8" width="28" height="28"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TH3-UZ-1RA">
+                            <rect key="frame" x="264" y="7" width="40" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="B3Y-pO-gZu"/>
@@ -76,7 +96,7 @@
                     </variation>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-fd-dVz">
-                    <rect key="frame" x="0.0" y="44" width="320" height="556"/>
+                    <rect key="frame" x="0.0" y="92" width="320" height="508"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="9QF-0D-76C"/>
@@ -86,11 +106,16 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Wjy-MI-00g" secondAttribute="trailing" id="2Cr-oJ-G4O"/>
+                <constraint firstItem="Wjy-MI-00g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="O78-fs-Nvn"/>
                 <constraint firstItem="ElQ-yx-cCg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Uhc-U9-mB8"/>
                 <constraint firstItem="pNG-fd-dVz" firstAttribute="top" secondItem="ElQ-yx-cCg" secondAttribute="bottom" id="VGN-hG-hX7"/>
+                <constraint firstItem="Wjy-MI-00g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aa2-p7-s61"/>
                 <constraint firstItem="ElQ-yx-cCg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="as2-Bj-QWe"/>
                 <constraint firstAttribute="trailing" secondItem="pNG-fd-dVz" secondAttribute="trailing" id="dDF-pG-dY6"/>
+                <constraint firstItem="ElQ-yx-cCg" firstAttribute="top" secondItem="Wjy-MI-00g" secondAttribute="bottom" id="fHq-eu-POh"/>
                 <constraint firstAttribute="trailing" secondItem="ElQ-yx-cCg" secondAttribute="trailing" id="hKm-CQ-KBx"/>
+                <constraint firstItem="Wjy-MI-00g" firstAttribute="top" secondItem="ElQ-yx-cCg" secondAttribute="bottom" constant="192" id="ill-kc-UYp"/>
                 <constraint firstAttribute="bottom" secondItem="pNG-fd-dVz" secondAttribute="bottom" id="jEw-wg-ggI"/>
                 <constraint firstItem="pNG-fd-dVz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tVl-mU-XIr"/>
                 <constraint firstItem="pNG-fd-dVz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="vPo-Hh-tfE"/>
@@ -99,6 +124,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="Uhc-U9-mB8"/>
+                    <exclude reference="ill-kc-UYp"/>
                     <exclude reference="vPo-Hh-tfE"/>
                 </mask>
             </variation>
@@ -106,6 +133,7 @@
         </view>
     </objects>
     <resources>
+        <image name="navbarBg.png" width="1" height="1"/>
         <image name="search.png" width="28" height="28"/>
     </resources>
 </document>

@@ -39,7 +39,6 @@ typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NS
 
 @property (nonatomic, strong) LinphoneCoreSettingsStore *settingsStore;     // 用来存取帐号信息
 
-
 + (instancetype)sharedUser;
 
 + (void)requesteFav:(BlockRequestFavMeetings)finishBlock;

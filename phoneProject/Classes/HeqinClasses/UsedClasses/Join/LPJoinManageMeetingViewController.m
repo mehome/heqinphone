@@ -656,4 +656,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     return YES;
 }
 
+// 添加通讯录视图页面
+- (IBAction)anotherPhoneListBtnClicked:(id)sender {
+    
+}
+
 @end

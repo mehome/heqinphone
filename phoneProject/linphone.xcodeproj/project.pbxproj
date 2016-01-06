@@ -783,6 +783,9 @@
 		E140A6C21C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C11C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m */; };
 		E140A6C51C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C41C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m */; };
 		E140A6C81C10A48D000E7DD0 /* RDRArrangeRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E140A6C71C10A48D000E7DD0 /* RDRArrangeRoomModel.m */; };
+		E14B63CB1C3D5D530056414B /* navbarBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E14B63CA1C3D5D530056414B /* navbarBg@2x.png */; };
+		E14B63CD1C3D66200056414B /* phoneList.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14B63CC1C3D661F0056414B /* phoneList.xib */; };
+		E14B63D01C3D66760056414B /* LPPhoneListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B63CF1C3D66760056414B /* LPPhoneListView.m */; };
 		E14F50BB1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F50BA1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m */; };
 		E14F50BE1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */; };
 		E174617A1C265595009AD174 /* RDROperationGetJoinersRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E17461791C265595009AD174 /* RDROperationGetJoinersRequestModel.m */; };
@@ -1906,6 +1909,10 @@
 		E140A6C41C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeRoomResponseModel.m; sourceTree = "<group>"; };
 		E140A6C61C10A48D000E7DD0 /* RDRArrangeRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRArrangeRoomModel.h; sourceTree = "<group>"; };
 		E140A6C71C10A48D000E7DD0 /* RDRArrangeRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArrangeRoomModel.m; sourceTree = "<group>"; };
+		E14B63CA1C3D5D530056414B /* navbarBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbarBg@2x.png"; path = "Resources/navbarBg@2x.png"; sourceTree = "<group>"; };
+		E14B63CC1C3D661F0056414B /* phoneList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = phoneList.xib; sourceTree = "<group>"; };
+		E14B63CE1C3D66760056414B /* LPPhoneListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPhoneListView.h; sourceTree = "<group>"; };
+		E14B63CF1C3D66760056414B /* LPPhoneListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPhoneListView.m; sourceTree = "<group>"; };
 		E14F50B91C15CE36005A9D73 /* RDRMyMeetingArrangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeModel.h; sourceTree = "<group>"; };
 		E14F50BA1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeModel.m; sourceTree = "<group>"; };
 		E14F50BC1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeResponseModel.h; sourceTree = "<group>"; };
@@ -2699,6 +2706,9 @@
 				138951611BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.h */,
 				138951621BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.m */,
 				138951631BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.xib */,
+				E14B63CC1C3D661F0056414B /* phoneList.xib */,
+				E14B63CE1C3D66760056414B /* LPPhoneListView.h */,
+				E14B63CF1C3D66760056414B /* LPPhoneListView.m */,
 				13066CDC1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.h */,
 				13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */,
 				13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */,
@@ -3217,6 +3227,7 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E14B63CA1C3D5D530056414B /* navbarBg@2x.png */,
 				E1D0AC2B1C3C04AD0019DE87 /* m_barBg@2x.png */,
 				E1D0AC171C3C03FB0019DE87 /* m_invite_highlight@2x.png */,
 				E1D0AC181C3C03FB0019DE87 /* m_invite@2x.png */,
@@ -3781,7 +3792,7 @@
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 358B5J757A;
+						DevelopmentTeam = 9U5ZW6T67V;
 					};
 				};
 			};
@@ -4032,6 +4043,7 @@
 				D3C2814B15A2D38D0098AA42 /* dialer_selected.png in Resources */,
 				D3C2815215A2D64A0098AA42 /* numpad_star_over.png in Resources */,
 				D365AA7B15A2DE7500CAFE3F /* speaker_off_disabled.png in Resources */,
+				E14B63CD1C3D66200056414B /* phoneList.xib in Resources */,
 				D365AA7D15A2DE7500CAFE3F /* speaker_on_disabled.png in Resources */,
 				D35EA76315A2DF8D003E025D /* micro_off_disabled.png in Resources */,
 				D35EA76515A2DF8D003E025D /* micro_on_disabled.png in Resources */,
@@ -4267,6 +4279,7 @@
 				D33988B815C6DD1600CAF1E4 /* dialer_alt_default_landscape~ipad.png in Resources */,
 				D33988BA15C6DD1600CAF1E4 /* dialer_alt_over_landscape~ipad.png in Resources */,
 				E10DE72D1BFA1945002D0FBB /* LPMyMeetingManageViewController.xib in Resources */,
+				E14B63CB1C3D5D530056414B /* navbarBg@2x.png in Resources */,
 				D33988BC15C6DD1600CAF1E4 /* hangup_default_landscape~ipad.png in Resources */,
 				D33988BE15C6DD1600CAF1E4 /* hangup_over_landscape~ipad.png in Resources */,
 				D33988C015C6DD1600CAF1E4 /* micro_off_default_landscape~ipad.png in Resources */,
@@ -4631,6 +4644,7 @@
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				E1128AE91C255D00009DC298 /* RDRInviteResponseModel.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
+				E14B63D01C3D66760056414B /* LPPhoneListView.m in Sources */,
 				E140A6B61C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m in Sources */,
 				E10DE7451BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.m in Sources */,
 				D3807FEC15C2894A005BE9BC /* IASKSpecifierValuesViewController.m in Sources */,
@@ -5147,7 +5161,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlinphone.heqin;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -5235,7 +5249,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlinphone.heqin;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -5321,7 +5335,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlinphone.heqin;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -5408,7 +5422,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlinphone.heqin;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
