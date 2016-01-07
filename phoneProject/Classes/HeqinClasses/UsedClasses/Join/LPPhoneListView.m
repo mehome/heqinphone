@@ -8,6 +8,8 @@
 
 #import "LPPhoneListView.h"
 #import "UIView+Frame.h"
+#import "MJRefresh.h"
+// https://github.com/CoderMJLee/MJRefresh
 
 typedef void(^joinMeetingBlock)(NSString *sipAddr);
 
@@ -24,6 +26,8 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
 @property (nonatomic, strong) NSMutableArray *companyPhoneList;
 @property (nonatomic, strong) NSMutableArray *privatePhoneList;
 @property (nonatomic, strong) NSMutableArray *searchPhoneList;
+
+
 
 @property (nonatomic, strong) UIButton *confirmBtn;
 @property (nonatomic, strong) UIButton *cancelBtn;
@@ -177,6 +181,46 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
         self.privateTableView.ott_height = self.confirmBtn.ott_top - self.privateTableView.ott_height;
         self.searchTableView.ott_height = self.confirmBtn.ott_top - self.searchTableView.ott_height;
     }
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.examples.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    MJExample *exam = self.examples[section];
+    return exam.titles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *ID = @"example";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
+    MJExample *exam = self.examples[indexPath.section];
+    cell.textLabel.text = exam.titles[indexPath.row];
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", exam.vcClass, exam.methods[indexPath.row]];
+    
+    return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    MJExample *exam = self.examples[section];
+    return exam.header;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MJExample *exam = self.examples[indexPath.section];
+    UIViewController *vc = [[exam.vcClass alloc] init];
+    vc.title = exam.titles[indexPath.row];
+    [vc setValue:exam.methods[indexPath.row] forKeyPath:@"method"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
