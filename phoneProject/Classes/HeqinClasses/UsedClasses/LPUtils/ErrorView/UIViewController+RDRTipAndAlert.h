@@ -78,6 +78,8 @@
  */
 - (void)showToastWithMessage:(NSString *)message;
 
++ (void)showToastWithmessage:(NSString *)msg;
+
 /**
  *  弹出Toast提示 默认2s后消失 延时.6秒弹出
  *

@@ -28,6 +28,8 @@
 
 #import "RDRParticipant.h"
 
+#import "LPPhoneListView.h"
+
 @interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
@@ -57,6 +59,14 @@
     [self initControls];
     
     [self getDatas];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchMan:) name:@"kSearchNumbersDatas" object:nil];
+}
+
+// 选择了对应的通讯录人员和终端
+- (void)searchMan:(NSNotification *)notif {
+    NSLog(@"notifi.user=%@", notif.userInfo);
+    NSLog(@"notifi.object=%@", notif.object);
 }
 
 - (void)collapseAllTextField {
@@ -216,6 +226,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)phoneBookClicked:(id)sender {
+    LPPhoneListView *listView = [[LPPhoneListView alloc] initWithFrame:self.view.bounds];
+    [listView setForJoinMeeting:0];
+    [self.view addSubview:listView];
+}
+
+- (IBAction)testphoneBookClicked:(id)sender {
     // 显示通讯录
     if ([LPSystemUser sharedUser].contactsList.count == 0) {
         [self showToastWithMessage:@"当前用户通讯录为空"];

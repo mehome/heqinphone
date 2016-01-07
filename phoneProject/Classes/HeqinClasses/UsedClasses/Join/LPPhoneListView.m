@@ -11,7 +11,23 @@
 #import "MJRefresh.h"
 // https://github.com/CoderMJLee/MJRefresh
 
+#import "LPSystemUser.h"
+#import "RDRRequest.h"
+#import "RDRNetHelper.h"
+
+#import "RDRPhoneListCompanyRequestModel.h"
+#import "RDRPhoneListPrivateRequestModel.h"
+#import "RDRPhoneListSearchRequestModel.h"
+
+#import "RDRPhoneCompanyResponseModel.h"
+#import "RDRPhoneModel.h"
+
+#import "UIViewController+RDRTipAndAlert.h"
+
 typedef void(^joinMeetingBlock)(NSString *sipAddr);
+
+typedef void(^requestSucceBlock)();
+typedef void(^requestFailBlock)();
 
 @interface LPPhoneListView () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -27,12 +43,17 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
 @property (nonatomic, strong) NSMutableArray *privatePhoneList;
 @property (nonatomic, strong) NSMutableArray *searchPhoneList;
 
+@property (nonatomic, strong) NSMutableArray *searchSelectedNumbers;
 
+@property (nonatomic, assign) NSInteger companyCurPage;
+@property (nonatomic, assign) NSInteger companyTotalPage;
+
+@property (nonatomic, assign) NSInteger privateCurPage;
+@property (nonatomic, assign) NSInteger privateTotalPage;
 
 @property (nonatomic, strong) UIButton *confirmBtn;
 @property (nonatomic, strong) UIButton *cancelBtn;
 
-@property (nonatomic, assign) NSInteger forJoinMeeting;     // 1:用于加入会议界面, 0:用于安排会议界面
 
 @end
 
@@ -108,6 +129,11 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
         _cancelBtn.layer.cornerRadius = 5;
         _cancelBtn.clipsToBounds = YES;
         _cancelBtn.hidden = YES;
+        
+        _companyCurPage = 1;
+        _privateCurPage = 1;
+        
+        _searchSelectedNumbers = [NSMutableArray array];
     }
     
     return self;
@@ -117,23 +143,66 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
     _forJoinMeeting = type;
     
     [self setNeedsLayout];  // 重新布局
+    
+    [self resetAllDatas];
 }
 
 - (void)companyBtnClicked:(id)sender {
     [self moveRedBarToLeft:YES];
     
+    [self.searchTextField resignFirstResponder];
+    
+    self.searchSelectedNumbers = [NSMutableArray array];
+    
     self.companyTableView.hidden = NO;
     self.privateTableView.hidden = YES;
     self.searchTableView.hidden = YES;
+    
+    // 准备数据
+    __unsafe_unretained LPPhoneListView *weakListView = self;
+    if (self.companyPhoneList.count == 0) {
+        // 请求数据
+        [weakListView requestCompanyPage:weakListView.companyCurPage withSuccessBlock:^{
+            // 请求结束后，
+            [weakListView.companyTableView reloadData];
+            [weakListView.companyTableView.mj_header endRefreshing];
+        } withFailBlock:^{
+            // 请求结束后，
+            [weakListView.companyTableView.mj_header endRefreshing];
+        }];
+    }else {
+        // 直接显示即可
+        [weakListView.companyTableView reloadData];
+    }
 }
 
 - (void)privateBtnClicked:(id)sender {
     [self moveRedBarToLeft:NO];
     
+    [self.searchTextField resignFirstResponder];
+
+    self.searchSelectedNumbers = [NSMutableArray array];
+
     self.companyTableView.hidden = YES;
     self.privateTableView.hidden = NO;
     self.searchTableView.hidden = YES;
 
+    // 准备数据
+    __unsafe_unretained LPPhoneListView *weakListView = self;
+    if (self.privatePhoneList.count == 0) {
+        // 请求数据
+        [weakListView requestPrivatePage:weakListView.privateCurPage withSuccessBlock:^{
+            // 请求结束后，
+            [weakListView.privateTableView reloadData];
+            [weakListView.privateTableView.mj_header endRefreshing];
+        } withFailBlock:^{
+            // 请求结束后，
+            [weakListView.privateTableView.mj_header endRefreshing];
+        }];
+    }else {
+        // 直接显示即可
+        [weakListView.privateTableView reloadData];
+    }
 }
 
 - (void)moveRedBarToLeft:(BOOL)toLeft {
@@ -154,12 +223,20 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
 
 - (void)confirmBtnClicked:(id)sender {
     // 确定按钮
-    
+    if (self.searchSelectedNumbers.count == 0) {
+        [UIViewController showToastWithmessage:@"没有选择联系人或者设备"];
+        return;
+    }else {
+        // 取当前的数据，然后返回
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kSearchNumbersDatas" object:self.searchSelectedNumbers];
+        [self removeFromSuperview];
+    }
 }
 
 - (void)cancelBtnClicked:(id)sender {
     // 取消按钮
-    
+    // 直接返回，什么都不做
+    [self removeFromSuperview];
 }
 
 - (void)layoutSubviews {
@@ -183,35 +260,260 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
     }
 }
 
+- (void)requestCompanyPage:(NSInteger)page withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
+    RDRPhoneListCompanyRequestModel *reqModel = [RDRPhoneListCompanyRequestModel requestModel];
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    reqModel.page = page;
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    __unsafe_unretained LPPhoneListView *weakListView = self;
+    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  RDRPhoneCompanyResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      NSLog(@"请求公司通讯录, success, model=%@", model);
+                      // 解析model数据
+                      weakListView.companyCurPage = model.page;
+                      weakListView.companyTotalPage = model.total;
+                      
+                      [weakListView.companyPhoneList addObjectsFromArray:model.contacts];
+                      
+                      if (weakListView.companyTotalPage <= weakListView.companyCurPage) {
+                          // 没有数据了
+                          weakListView.companyTableView.mj_footer = nil;
+                      }
+                      
+                      if (sucBlock) {
+                          sucBlock();
+                      }
+                  }else {
+                      NSLog(@"请求公司通讯录出错, model=%@, msg=%@", model, model.msg);
+                      if (failBlock) {
+                          failBlock();
+                      }
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  //请求出错
+                  NSLog(@"请求公司通讯录出错, %s, error=%@", __FUNCTION__, error);
+                  if (failBlock) {
+                      failBlock();
+                  }
+              }];
+}
 
+- (void)requestPrivatePage:(NSInteger)page withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
+    RDRPhoneListPrivateRequestModel *reqModel = [RDRPhoneListPrivateRequestModel requestModel];
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    reqModel.page = page;
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    __unsafe_unretained LPPhoneListView *weakListView = self;
+    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  RDRPhoneCompanyResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      NSLog(@"请求私人通讯录, success, model=%@", model);
+                      // 解析model数据
+                      weakListView.privateCurPage = model.page;
+                      weakListView.privateTotalPage = model.total;
+                      
+                      [weakListView.privatePhoneList addObjectsFromArray:model.contacts];
+                      
+                      if (weakListView.privateTotalPage <= weakListView.privateCurPage) {
+                          // 没有数据了
+                          weakListView.privateTableView.mj_footer = nil;
+                      }
+                      
+                      if (sucBlock) {
+                          sucBlock();
+                      }
+                  }else {
+                      NSLog(@"请求公司通讯录出错, model=%@, msg=%@", model, model.msg);
+                      if (failBlock) {
+                          failBlock();
+                      }
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  //请求出错
+                  NSLog(@"请求公司通讯录出错, %s, error=%@", __FUNCTION__, error);
+                  if (failBlock) {
+                      failBlock();
+                  }
+              }];
+}
+
+- (void)requestSearchText:(NSString *)searchText withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
+    [self.searchPhoneList removeAllObjects];
+    
+    RDRPhoneListSearchRequestModel *reqModel = [RDRPhoneListSearchRequestModel requestModel];
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    reqModel.name = searchText;
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    __unsafe_unretained LPPhoneListView *weakListView = self;
+    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  RDRPhoneCompanyResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      NSLog(@"搜索关键字通讯录, success, model=%@", model);
+                      // 解析model数据
+                      [weakListView.searchPhoneList addObjectsFromArray:model.contacts];
+                      if (sucBlock) {
+                          sucBlock();
+                      }
+                  }else {
+                      NSLog(@"搜索关键字出错, model=%@, msg=%@", model, model.msg);
+                      if (failBlock) {
+                          failBlock();
+                      }
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  //请求出错
+                  NSLog(@"搜索关键字通讯录出错, %s, error=%@", __FUNCTION__, error);
+                  if (failBlock) {
+                      failBlock();
+                  }
+              }];
+}
+
+- (void)resetAllDatas {
+    [self.companyPhoneList removeAllObjects];
+    [self.privatePhoneList removeAllObjects];
+    [self.searchPhoneList removeAllObjects];
+    
+    __unsafe_unretained UITableView *theCompanytableView = self.companyTableView;
+    __unsafe_unretained UITableView *thePrivatetableView = self.companyTableView;
+    __unsafe_unretained UITableView *theSearchtableView = self.companyTableView;
+    __unsafe_unretained LPPhoneListView *weakListView = self;
+    
+    // 公司通讯录
+    self.companyTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 请求
+        [weakListView requestCompanyPage:weakListView.companyCurPage withSuccessBlock:^{
+            // 请求结束后，
+            [theCompanytableView reloadData];
+            [theCompanytableView.mj_header endRefreshing];
+        } withFailBlock:^{
+            // 请求结束后，
+            [theCompanytableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    self.companyTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 请求
+        [weakListView requestCompanyPage:weakListView.companyCurPage+1 withSuccessBlock:^{
+            // 请求结束后，
+            [theCompanytableView reloadData];
+            [theCompanytableView.mj_header endRefreshing];
+        } withFailBlock:^{
+            // 请求结束后，
+            [theCompanytableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    // 私人通讯录
+    self.privateTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 请求
+        [weakListView requestPrivatePage:weakListView.privateCurPage withSuccessBlock:^{
+            // 请求结束后，
+            [thePrivatetableView reloadData];
+            [thePrivatetableView.mj_header endRefreshing];
+        } withFailBlock:^{
+            // 请求结束后，
+            [thePrivatetableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    self.privateTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        // 请求
+        [weakListView requestPrivatePage:weakListView.privateCurPage+1 withSuccessBlock:^{
+            // 请求结束后，
+            [thePrivatetableView reloadData];
+            [thePrivatetableView.mj_header endRefreshing];
+        } withFailBlock:^{
+            // 请求结束后，
+            [thePrivatetableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    theSearchtableView.tableFooterView = [[UIView alloc] init];
+    theSearchtableView.tableHeaderView = [[UIView alloc] init];
+    
+    // 请求数据
+    [self companyBtnClicked:nil];
+}
+
+#pragma mark UITextField delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.companyTableView.hidden = YES;
+    self.privateTableView.hidden = YES;
+    self.searchTableView.hidden = NO;
+    
+    [self.searchSelectedNumbers removeAllObjects];
+    [self.searchPhoneList removeAllObjects];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.text.length == 0) {
+        [self.searchSelectedNumbers removeAllObjects];
+        [self.searchPhoneList removeAllObjects];
+        [self.searchTableView reloadData];
+    }else {
+        // 准备发起请求
+        [self requestSearchText:textField.text withSuccessBlock:^{
+            
+        } withFailBlock:^{
+            
+        }];
+    }
+}
+
+#pragma mark TableView delegate & datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.examples.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    MJExample *exam = self.examples[section];
-    return exam.titles.count;
+    if (tableView == self.companyTableView) {
+        return self.companyPhoneList.count;
+    }else if (tableView == self.privateTableView) {
+        return self.privatePhoneList.count;
+    }else if (tableView == self.searchTableView) {
+        return self.searchPhoneList.count;
+    }else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.forJoinMeeting == 1) {
+        // 只有一行title数据
+    }else {
+        // 左边是title数据，右边是对勾
+    }
+    
+    
     static NSString *ID = @"example";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
+    UITableViewCell *cellS = [[UITableViewCell alloc] initWithStyle:<#(UITableViewCellStyle)#> reuseIdentifier:<#(nullable NSString *)#>];
     MJExample *exam = self.examples[indexPath.section];
     cell.textLabel.text = exam.titles[indexPath.row];
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", exam.vcClass, exam.methods[indexPath.row]];
     
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    MJExample *exam = self.examples[section];
-    return exam.header;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -222,6 +524,5 @@ typedef void(^joinMeetingBlock)(NSString *sipAddr);
     [vc setValue:exam.methods[indexPath.row] forKeyPath:@"method"];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 @end

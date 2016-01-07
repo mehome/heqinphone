@@ -23,6 +23,9 @@
 #import "PhoneMainView.h"
 #import "LPSystemSetting.h"
 
+#import "LPLoginViewController.h"
+#import "LPPhoneListViewController.h"
+
 @interface LPJoinManageMeetingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *meetingField;
@@ -658,7 +661,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 // 添加通讯录视图页面
 - (IBAction)anotherPhoneListBtnClicked:(id)sender {
-    
+    LinphoneCore* lc = [LinphoneManager getLc];
+    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+        // 未登录
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
+    }else {
+        // 已登录
+        [[PhoneMainView instance] changeCurrentView:[LPPhoneListViewController compositeViewDescription]];
+    }
 }
 
 @end

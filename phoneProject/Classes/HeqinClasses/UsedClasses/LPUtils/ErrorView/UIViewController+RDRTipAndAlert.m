@@ -230,6 +230,10 @@ static char const * const kAssociatedRDRHudView = "AssociatedRDRHudView";
 #pragma mark -
 #pragma mark Toast、弹框提示
 
++ (void)showToastWithmessage:(NSString *)msg {
+    [[BTMToast sharedInstance] showToast:msg];
+}
+
 //
 - (void)showToastWithMessage:(NSString *)message {
     [[BTMToast sharedInstance] showToast:message];

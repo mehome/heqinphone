@@ -124,8 +124,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="Uhc-U9-mB8"/>
                     <exclude reference="ill-kc-UYp"/>
+                    <exclude reference="Uhc-U9-mB8"/>
                     <exclude reference="vPo-Hh-tfE"/>
                 </mask>
             </variation>
