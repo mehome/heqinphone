@@ -44,6 +44,7 @@ typedef void(^requestFailBlock)();
 @property (nonatomic, strong) NSMutableArray *searchPhoneList;
 
 @property (nonatomic, strong) NSMutableArray *searchSelectedNumbers;
+@property (nonatomic, strong) NSMutableArray *selectedCompanyNumbers;
 
 @property (nonatomic, assign) NSInteger companyCurPage;
 @property (nonatomic, assign) NSInteger companyTotalPage;
@@ -109,6 +110,10 @@ typedef void(^requestFailBlock)();
         _searchTableView.delegate = self;
         _searchTableView.hidden = YES;
         [self addSubview:_searchTableView];
+        
+        [_companyTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
+        [_privateTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
+        [_searchTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
         
         _companyPhoneList = [NSMutableArray array];
         _privatePhoneList = [NSMutableArray array];
@@ -469,12 +474,15 @@ typedef void(^requestFailBlock)();
         [self.searchTableView reloadData];
     }else {
         // 准备发起请求
+        // 遮照
         [self requestSearchText:textField.text withSuccessBlock:^{
-            
+            // 移除遮照
         } withFailBlock:^{
-            
+            // 移除遮照，并提示原因
         }];
     }
+    
+    return YES;
 }
 
 #pragma mark TableView delegate & datasource
@@ -498,20 +506,24 @@ typedef void(^requestFailBlock)();
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
+    
     if (self.forJoinMeeting == 1) {
-        // 只有一行title数据
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }else {
-        // 左边是title数据，右边是对勾
+        // 判断当前是否被选中
+        if (tableView == self.companyTableView) {
+            if ([self.searchSelectedNumbers containsObject:@(indexPath.row)]) {
+                
+            }
+        }else if (tableView == self.privateTableView) {
+            
+        }else {     // searchTableView
+        
+        }
+        
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    
-    
-    static NSString *ID = @"example";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    UITableViewCell *cellS = [[UITableViewCell alloc] initWithStyle:<#(UITableViewCellStyle)#> reuseIdentifier:<#(nullable NSString *)#>];
-    MJExample *exam = self.examples[indexPath.section];
-    cell.textLabel.text = exam.titles[indexPath.row];
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", exam.vcClass, exam.methods[indexPath.row]];
     
     return cell;
 }
