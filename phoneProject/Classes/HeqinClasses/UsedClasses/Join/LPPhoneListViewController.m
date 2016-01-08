@@ -8,6 +8,8 @@
 
 #import "LPPhoneListViewController.h"
 #import "LPPhoneListView.h"
+#import "PhoneMainView.h"
+#import "LPJoinMettingViewController.h"
 
 @interface LPPhoneListViewController ()
 
@@ -37,11 +39,24 @@ static UICompositeViewDescription *compositeDescription = nil;
     return compositeDescription;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)phoneNotification:(NSNotification *)notifi {
+    NSLog(@"phonelist notifi =%@", notifi);
+    
+    [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.phoneView = [[LPPhoneListView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.phoneView];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(phoneNotification:) name:kSearchNumbersDatasForJoineMeeting object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

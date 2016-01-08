@@ -29,18 +29,18 @@
 #import "RDRParticipant.h"
 
 #import "LPPhoneListView.h"
+#import "RDRPhoneModel.h"
 
 @interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
 @property (weak, nonatomic) IBOutlet UITextField *joinerField;
-@property (weak, nonatomic) IBOutlet UITextField *terminalField;
+//@property (weak, nonatomic) IBOutlet UITextField *terminalField;
 @property (weak, nonatomic) IBOutlet UITextField *roomsField;
 
 @property (weak, nonatomic) IBOutlet UISwitch *repeatSwitch;
 
 @property (nonatomic, strong) NSArray *selectedJoiners;
-@property (nonatomic, strong) NSArray *selectedDevices;
 @property (nonatomic, strong) NSArray *selectedRooms;
 
 @property (nonatomic, strong) UIDatePicker *datePicker;
@@ -60,19 +60,12 @@
     
     [self getDatas];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchMan:) name:@"kSearchNumbersDatas" object:nil];
-}
-
-// 选择了对应的通讯录人员和终端
-- (void)searchMan:(NSNotification *)notif {
-    NSLog(@"notifi.user=%@", notif.userInfo);
-    NSLog(@"notifi.object=%@", notif.object);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchMan:) name:kSearchNumbersDatasForArrangeMeeting object:nil];
 }
 
 - (void)collapseAllTextField {
     [self.timeField resignFirstResponder];
     [self.joinerField resignFirstResponder];
-    [self.terminalField resignFirstResponder];
     [self.roomsField resignFirstResponder];
 }
 
@@ -101,11 +94,9 @@
     self.timeField.text = curStr;
     
     self.joinerField.enabled = NO;
-    self.terminalField.enabled = NO;
     self.roomsField.enabled = NO;
     
     self.selectedJoiners = [NSArray array];
-    self.selectedDevices = [NSArray array];
     self.selectedRooms = [NSArray array];
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
@@ -226,10 +217,61 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)phoneBookClicked:(id)sender {
-    LPPhoneListView *listView = [[LPPhoneListView alloc] initWithFrame:self.view.bounds];
+    UIWindow *superView = [[UIApplication sharedApplication] keyWindow];
+
+    UIView *bgView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    bgView.tag = 1000201;
+    bgView.backgroundColor = [UIColor clearColor];
+    [superView addSubview:bgView];
+    
+    UIView *grayBgView = [[UIView alloc] initWithFrame:bgView.bounds];
+    grayBgView.backgroundColor = [UIColor grayColor];
+    grayBgView.alpha = 0.5;
+    [bgView addSubview:grayBgView];
+    
+    LPPhoneListView *listView = [[LPPhoneListView alloc] initWithFrame:CGRectInset(bgView.frame, 10, 40)];
     [listView setForJoinMeeting:0];
-    [self.view addSubview:listView];
+    [bgView addSubview:listView];
+    
+    [grayBgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(listViewbgTapped:)]];
 }
+
+- (void)listViewbgTapped:(UITapGestureRecognizer *)tapGesture {
+    UIWindow *superView = [[UIApplication sharedApplication] keyWindow];
+
+    if ([superView viewWithTag:1000201] != nil) {
+        [[superView viewWithTag:1000201] removeFromSuperview];
+    }
+}
+
+// 选择了对应的通讯录人员和终端
+- (void)searchMan:(NSNotification *)notif {
+    NSLog(@"notifi.user=%@", notif.userInfo);
+    NSLog(@"notifi.object=%@", notif.object);
+    
+    NSArray *models = notif.object;
+    if (models == nil) {
+        
+    }else {
+        NSMutableArray *parts = [NSMutableArray array];
+        for (NSInteger i=0; i<models.count; i++) {
+            RDRPhoneModel *model = [models objectAtIndex:i];
+            
+            RDRContactModel *usedModel = [[RDRContactModel alloc] init];
+            usedModel.uid = model.uid;
+            usedModel.name = model.name;
+            
+            [parts addObject:usedModel];
+        }
+
+        self.selectedJoiners = [NSArray arrayWithArray:parts];
+        // 更新与会者输入框
+        [self updateJoinerField];
+    }
+    
+    [self listViewbgTapped:nil];
+}
+
 
 - (IBAction)testphoneBookClicked:(id)sender {
     // 显示通讯录
@@ -268,39 +310,39 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.joinerField.text = str;
 }
 
-- (IBAction)myTerminalsClicked:(id)sender {
-    // 显示的我的收藏的终端
-    if ([LPSystemUser sharedUser].devicesList.count == 0) {
-        [self showToastWithMessage:@"收藏的终端列表为空"];
-        return;
-    }
-    
-    [RDRCellsSelectView showSelectViewWith:@"请选择终端列表" withArr:[LPSystemUser sharedUser].devicesList
-                            hasSelectedArr:self.selectedDevices
-                          withConfirmBlock:^(NSArray *selectedDatas) {
-        NSLog(@"selected devie=%@", selectedDatas);
-                              self.selectedDevices = [NSArray arrayWithArray:selectedDatas];
-                              // 更新终端输入框
-                              [self updateDeviceField];
-    } withCancelBlcok:^{
-        NSLog(@"取消终端选择");
-    } singleChoose:NO];
-}
+//- (IBAction)myTerminalsClicked:(id)sender {
+//    // 显示的我的收藏的终端
+//    if ([LPSystemUser sharedUser].devicesList.count == 0) {
+//        [self showToastWithMessage:@"收藏的终端列表为空"];
+//        return;
+//    }
+//    
+//    [RDRCellsSelectView showSelectViewWith:@"请选择终端列表" withArr:[LPSystemUser sharedUser].devicesList
+//                            hasSelectedArr:self.selectedDevices
+//                          withConfirmBlock:^(NSArray *selectedDatas) {
+//        NSLog(@"selected devie=%@", selectedDatas);
+//                              self.selectedDevices = [NSArray arrayWithArray:selectedDatas];
+//                              // 更新终端输入框
+//                              [self updateDeviceField];
+//    } withCancelBlcok:^{
+//        NSLog(@"取消终端选择");
+//    } singleChoose:NO];
+//}
 
-- (void)updateDeviceField {
-    NSMutableString *str = [NSMutableString stringWithString:@""];
-    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
-        RDRDeviceModel *deviceModel = [self.selectedDevices objectAtIndex:i];
-        [str appendString:deviceModel.name];
-        [str appendString:@","];
-    }
-    
-    if (str.length > 0) {
-        [str deleteCharactersInRange:NSMakeRange(str.length-1, 1)];
-    }
-    
-    self.terminalField.text = str;
-}
+//- (void)updateDeviceField {
+//    NSMutableString *str = [NSMutableString stringWithString:@""];
+//    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
+//        RDRDeviceModel *deviceModel = [self.selectedDevices objectAtIndex:i];
+//        [str appendString:deviceModel.name];
+//        [str appendString:@","];
+//    }
+//    
+//    if (str.length > 0) {
+//        [str deleteCharactersInRange:NSMakeRange(str.length-1, 1)];
+//    }
+//    
+//    self.terminalField.text = str;
+//}
 
 - (IBAction)myRoomsClicked:(id)sender {
     // 显示我的收藏的会议室
@@ -348,14 +390,14 @@ static UICompositeViewDescription *compositeDescription = nil;
         [parts addObject:cipant];
     }
     
-    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
-        RDRDeviceModel *model = [self.selectedDevices objectAtIndex:i];
-        
-        RDRParticipant *cipant = [[RDRParticipant alloc] init];
-        cipant.uid = model.uid;
-        cipant.name = model.name;
-        [parts addObject:cipant];
-    }
+//    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
+//        RDRDeviceModel *model = [self.selectedDevices objectAtIndex:i];
+//        
+//        RDRParticipant *cipant = [[RDRParticipant alloc] init];
+//        cipant.uid = model.uid;
+//        cipant.name = model.name;
+//        [parts addObject:cipant];
+//    }
 
     if (parts.count == 0) {
         [self showToastWithMessage:@"请选择参会人员"];

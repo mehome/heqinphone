@@ -33,6 +33,9 @@ typedef void(^requestFailBlock)();
 
 @property (nonatomic, strong) UITextField *searchTextField;
 
+@property (nonatomic, strong) UIImageView *topBtnsBgImgView;
+@property (nonatomic, strong) UIButton *companyBtn;
+@property (nonatomic, strong) UIButton *privateBtn;
 @property (nonatomic, strong) UIView *redBarView;       // 红色条而已， 用来显示当前处于企业通讯录还是私人通讯录
 
 @property (nonatomic, strong) UITableView *companyTableView;
@@ -43,8 +46,9 @@ typedef void(^requestFailBlock)();
 @property (nonatomic, strong) NSMutableArray *privatePhoneList;
 @property (nonatomic, strong) NSMutableArray *searchPhoneList;
 
-@property (nonatomic, strong) NSMutableArray *searchSelectedNumbers;
 @property (nonatomic, strong) NSMutableArray *selectedCompanyNumbers;
+@property (nonatomic, strong) NSMutableArray *selectedPrivateNumbers;
+@property (nonatomic, strong) NSMutableArray *selectedSearchNumbers;
 
 @property (nonatomic, assign) NSInteger companyCurPage;
 @property (nonatomic, assign) NSInteger companyTotalPage;
@@ -69,28 +73,31 @@ typedef void(^requestFailBlock)();
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
+        _searchTextField.borderStyle = UITextBorderStyleRoundedRect;
+        _searchTextField.clearButtonMode = UITextFieldViewModeAlways;
+        _searchTextField.backgroundColor = [UIColor whiteColor];
+        _searchTextField.placeholder = @"请输入名称";
         _searchTextField.delegate = self;
-        [self addSubview:_searchTableView];
+        [self addSubview:_searchTextField];
         
-        UIImageView *topBtnsBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _searchTextField.ott_bottom, _searchTextField.ott_width, 44)];
-        topBtnsBgImgView.image = [UIImage imageNamed:@"navbarBg"];
-        topBtnsBgImgView.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:topBtnsBgImgView];
+        _topBtnsBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _searchTextField.ott_bottom, _searchTextField.ott_width, 44)];
+        _topBtnsBgImgView.image = [UIImage imageNamed:@"navbarBg"];
+        _topBtnsBgImgView.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:_topBtnsBgImgView];
         
-        UIButton *companyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        companyBtn.frame = CGRectMake(0, topBtnsBgImgView.ott_bottom, topBtnsBgImgView.ott_width/2.0, topBtnsBgImgView.ott_height);
-        [companyBtn setTitle:@"企业通讯录" forState:UIControlStateNormal];
-        [companyBtn addTarget:self action:@selector(companyBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:companyBtn];
+        _companyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _companyBtn.frame = CGRectMake(0, _topBtnsBgImgView.ott_bottom, _topBtnsBgImgView.ott_width/2.0, _topBtnsBgImgView.ott_height);
+        [_companyBtn setTitle:@"企业通讯录" forState:UIControlStateNormal];
+        [_companyBtn addTarget:self action:@selector(companyBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_companyBtn];
         
-        UIButton *privateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        privateBtn.frame = CGRectMake(topBtnsBgImgView.ott_width/2.0, topBtnsBgImgView.ott_bottom, topBtnsBgImgView.ott_width/2.0, topBtnsBgImgView.ott_height);
-        [privateBtn setTitle:@"私人通讯录" forState:UIControlStateNormal];
-        [privateBtn addTarget:self action:@selector(privateBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:privateBtn];
+        _privateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _privateBtn.frame = CGRectMake(_topBtnsBgImgView.ott_width/2.0, _topBtnsBgImgView.ott_bottom, _topBtnsBgImgView.ott_width/2.0, _topBtnsBgImgView.ott_height);
+        [_privateBtn setTitle:@"私人通讯录" forState:UIControlStateNormal];
+        [_privateBtn addTarget:self action:@selector(privateBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_privateBtn];
 
-        _redBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, companyBtn.ott_width, 4)];
-        _redBarView.ott_bottom = companyBtn.ott_bottom;
+        _redBarView = [[UIView alloc] initWithFrame:CGRectMake(0, _companyBtn.ott_bottom-4, _companyBtn.ott_width, 4)];
         _redBarView.backgroundColor = [UIColor redColor];
         [self addSubview:_redBarView];
         
@@ -119,26 +126,32 @@ typedef void(^requestFailBlock)();
         _privatePhoneList = [NSMutableArray array];
         _searchPhoneList = [NSMutableArray array];
         
+        _selectedCompanyNumbers = [NSMutableArray array];
+        _selectedPrivateNumbers = [NSMutableArray array];
+        _selectedSearchNumbers = [NSMutableArray array];
+        
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _confirmBtn.frame = CGRectMake(10, frame.size.height-44, frame.size.width/2.0-5, 40);
+        _confirmBtn.frame = CGRectMake(0, frame.size.height-44, frame.size.width/2.0-5, 40);
         _confirmBtn.backgroundColor = yellowSubjectColor;
+        [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.layer.cornerRadius = 5;
         _confirmBtn.clipsToBounds = YES;
         _confirmBtn.hidden = YES;
+        [self addSubview:_confirmBtn];
         
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _cancelBtn.frame = CGRectMake(frame.size.width/2.0+5, frame.size.height-44, frame.size.width/2.0-5, 40);
         _cancelBtn.backgroundColor = yellowSubjectColor;
+        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         _cancelBtn.layer.cornerRadius = 5;
         _cancelBtn.clipsToBounds = YES;
         _cancelBtn.hidden = YES;
+        [self addSubview:_cancelBtn];
         
         _companyCurPage = 1;
         _privateCurPage = 1;
-        
-        _searchSelectedNumbers = [NSMutableArray array];
     }
     
     return self;
@@ -157,7 +170,9 @@ typedef void(^requestFailBlock)();
     
     [self.searchTextField resignFirstResponder];
     
-    self.searchSelectedNumbers = [NSMutableArray array];
+    [self.selectedCompanyNumbers removeAllObjects];
+    [self.selectedPrivateNumbers removeAllObjects];
+    [self.selectedSearchNumbers removeAllObjects];
     
     self.companyTableView.hidden = NO;
     self.privateTableView.hidden = YES;
@@ -186,7 +201,9 @@ typedef void(^requestFailBlock)();
     
     [self.searchTextField resignFirstResponder];
 
-    self.searchSelectedNumbers = [NSMutableArray array];
+    [self.selectedCompanyNumbers removeAllObjects];
+    [self.selectedPrivateNumbers removeAllObjects];
+    [self.selectedSearchNumbers removeAllObjects];
 
     self.companyTableView.hidden = YES;
     self.privateTableView.hidden = NO;
@@ -227,41 +244,65 @@ typedef void(^requestFailBlock)();
 }
 
 - (void)confirmBtnClicked:(id)sender {
-    // 确定按钮
-    if (self.searchSelectedNumbers.count == 0) {
-        [UIViewController showToastWithmessage:@"没有选择联系人或者设备"];
+    if (self.forJoinMeeting == 1) {
+        [UIViewController showToastWithmessage:@"当前模式不对"];
+        return;
+    }
+    
+    if (self.companyTableView.hidden == NO) {
+        if (self.selectedCompanyNumbers.count == 0) {
+            [UIViewController showToastWithmessage:@"没有选择企业通讯录中的联系人或者设备"];
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSearchNumbersDatasForArrangeMeeting object:self.selectedCompanyNumbers];
+        }
+        return;
+    }else if (self.privateTableView.hidden == NO) {
+        if (self.selectedPrivateNumbers.count == 0) {
+            [UIViewController showToastWithmessage:@"没有选择私人通讯录中的联系人或者设备"];
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSearchNumbersDatasForArrangeMeeting object:self.selectedPrivateNumbers];
+        }
         return;
     }else {
-        // 取当前的数据，然后返回
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"kSearchNumbersDatas" object:self.searchSelectedNumbers];
-        [self removeFromSuperview];
+        if (self.selectedSearchNumbers.count == 0) {
+            [UIViewController showToastWithmessage:@"没有选择联系人或者设备"];
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSearchNumbersDatasForArrangeMeeting object:self.selectedSearchNumbers];
+        }
+        return;
     }
 }
 
 - (void)cancelBtnClicked:(id)sender {
     // 取消按钮
-    // 直接返回，什么都不做
-    [self removeFromSuperview];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSearchNumbersDatasForArrangeMeeting object:nil];
 }
 
 - (void)layoutSubviews {
-    // 隐藏底部的确定和取消按钮
-    // 同时控制TableView的高度
+    _searchTextField.frame = CGRectMake(0, 0, self.ott_width, 44);
+    _topBtnsBgImgView.frame = CGRectMake(0, _searchTextField.ott_bottom, _searchTextField.ott_width, 44);
+    _companyBtn.frame = CGRectMake(0, _searchTextField.ott_bottom, _searchTextField.ott_width/2.0, _topBtnsBgImgView.ott_height);
+    _privateBtn.frame = CGRectMake(_searchTextField.ott_width/2.0, _searchTextField.ott_bottom, _topBtnsBgImgView.ott_width/2.0, _topBtnsBgImgView.ott_height);
+
+    _redBarView.frame = CGRectMake(0, _companyBtn.ott_bottom-4, _companyBtn.ott_width, 4);
+
+    _confirmBtn.frame = CGRectMake(0, self.ott_height-44, self.ott_width/2.0-5, 40);
+    _cancelBtn.frame = CGRectMake(self.ott_width/2.0+5, self.ott_height-44, self.ott_width/2.0-5, 40);
+    
     if (self.forJoinMeeting == 1) {
-        self.confirmBtn.hidden = YES;
-        self.cancelBtn.hidden = YES;
+        _confirmBtn.hidden = YES;
+        _cancelBtn.hidden = YES;
         
-        self.companyTableView.ott_height = self.ott_height - self.companyTableView.ott_top;
-        self.privateTableView.ott_height = self.ott_height - self.privateTableView.ott_height;
-        self.searchTableView.ott_height = self.ott_height - self.searchTableView.ott_height;
+        _companyTableView.frame = CGRectMake(0, _redBarView.ott_bottom, self.ott_width, self.ott_height -_redBarView.ott_bottom);
+        _privateTableView.frame = CGRectMake(0, _redBarView.ott_bottom, self.ott_width, self.ott_height -_redBarView.ott_bottom);
+        _searchTableView.frame = CGRectMake(0, _redBarView.ott_bottom, self.ott_width, self.ott_height -_redBarView.ott_bottom);
     }else {
-        // 显示底部的确定和取消按钮
-        self.confirmBtn.hidden = NO;
-        self.cancelBtn.hidden = NO;
+        _confirmBtn.hidden = NO;
+        _cancelBtn.hidden = NO;
         
-        self.companyTableView.ott_height = self.confirmBtn.ott_top - self.companyTableView.ott_top;
-        self.privateTableView.ott_height = self.confirmBtn.ott_top - self.privateTableView.ott_height;
-        self.searchTableView.ott_height = self.confirmBtn.ott_top - self.searchTableView.ott_height;
+        _companyTableView.frame = CGRectMake(0, _redBarView.ott_bottom, self.ott_width, self.confirmBtn.ott_top -_redBarView.ott_bottom);
+        _privateTableView.frame = CGRectMake(0, _redBarView.ott_bottom, self.ott_width, self.confirmBtn.ott_top -_redBarView.ott_bottom);
+        _searchTableView.frame = CGRectMake(0, _redBarView.ott_bottom, self.ott_width, self.confirmBtn.ott_top -_redBarView.ott_bottom);
     }
 }
 
@@ -395,9 +436,14 @@ typedef void(^requestFailBlock)();
     [self.privatePhoneList removeAllObjects];
     [self.searchPhoneList removeAllObjects];
     
+    [self.selectedCompanyNumbers removeAllObjects];
+    [self.selectedPrivateNumbers removeAllObjects];
+    [self.selectedSearchNumbers removeAllObjects];
+    
     __unsafe_unretained UITableView *theCompanytableView = self.companyTableView;
     __unsafe_unretained UITableView *thePrivatetableView = self.companyTableView;
     __unsafe_unretained UITableView *theSearchtableView = self.companyTableView;
+    
     __unsafe_unretained LPPhoneListView *weakListView = self;
     
     // 公司通讯录
@@ -463,16 +509,21 @@ typedef void(^requestFailBlock)();
     self.privateTableView.hidden = YES;
     self.searchTableView.hidden = NO;
     
-    [self.searchSelectedNumbers removeAllObjects];
+    [self.selectedCompanyNumbers removeAllObjects];
+    [self.selectedPrivateNumbers removeAllObjects];
+    [self.selectedSearchNumbers removeAllObjects];
+
     [self.searchPhoneList removeAllObjects];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.text.length == 0) {
-        [self.searchSelectedNumbers removeAllObjects];
+        [self.selectedSearchNumbers removeAllObjects];
         [self.searchPhoneList removeAllObjects];
         [self.searchTableView reloadData];
     }else {
+        [textField resignFirstResponder];
+        
         // 准备发起请求
         // 遮照
         [self requestSearchText:textField.text withSuccessBlock:^{
@@ -510,19 +561,31 @@ typedef void(^requestFailBlock)();
     
     if (self.forJoinMeeting == 1) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-    }else {
-        // 判断当前是否被选中
-        if (tableView == self.companyTableView) {
-            if ([self.searchSelectedNumbers containsObject:@(indexPath.row)]) {
-                
-            }
-        }else if (tableView == self.privateTableView) {
-            
-        }else {     // searchTableView
         
+        RDRPhoneModel *curModel = nil;
+        if (tableView == self.companyTableView) {
+            curModel = [self.companyPhoneList objectAtIndex:indexPath.row];
+        }else if (tableView == self.privateTableView) {
+            curModel = [self.privatePhoneList objectAtIndex:indexPath.row];
+        }else {
+            curModel = [self.searchPhoneList objectAtIndex:indexPath.row];
         }
         
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.textLabel.text = curModel.name;
+    }else {
+        // 判断当前是否被选中
+        RDRPhoneModel *curModel = nil;
+        if (tableView == self.companyTableView) {
+            curModel = [self.companyPhoneList objectAtIndex:indexPath.row];
+            cell.accessoryType = [self.selectedCompanyNumbers containsObject:curModel] ? UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+        }else if (tableView == self.privateTableView) {
+            curModel = [self.privatePhoneList objectAtIndex:indexPath.row];
+            cell.accessoryType = [self.selectedPrivateNumbers containsObject:curModel] ? UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+        }else {     // searchTableView
+            curModel = [self.searchPhoneList objectAtIndex:indexPath.row];
+            cell.accessoryType = [self.selectedSearchNumbers containsObject:curModel] ? UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+        }
+        cell.textLabel.text = curModel.name;
     }
     
     return cell;
@@ -530,11 +593,51 @@ typedef void(^requestFailBlock)();
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MJExample *exam = self.examples[indexPath.section];
-    UIViewController *vc = [[exam.vcClass alloc] init];
-    vc.title = exam.titles[indexPath.row];
-    [vc setValue:exam.methods[indexPath.row] forKeyPath:@"method"];
-    [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (self.forJoinMeeting == 1) {
+        // 点击后直接发起通知
+        RDRPhoneModel *curModel = nil;
+        if (tableView == self.companyTableView) {
+            curModel = [self.companyPhoneList objectAtIndex:indexPath.row];
+        }else if (tableView == self.privateTableView) {
+            curModel = [self.privatePhoneList objectAtIndex:indexPath.row];
+        }else {
+            curModel = [self.searchPhoneList objectAtIndex:indexPath.row];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSearchNumbersDatasForJoineMeeting object:curModel];
+    }else {
+        // 点击后只是加入到当前select中
+        
+        RDRPhoneModel *curModel = nil;
+        if (tableView == self.companyTableView) {
+            curModel = [self.companyPhoneList objectAtIndex:indexPath.row];
+            if ([self.selectedCompanyNumbers containsObject:curModel]) {
+                [self.selectedCompanyNumbers removeObject:curModel];
+            }else {
+                [self.selectedCompanyNumbers addObject:curModel];
+            }
+        }else if (tableView == self.privateTableView) {
+            curModel = [self.privatePhoneList objectAtIndex:indexPath.row];
+            if ([self.selectedPrivateNumbers containsObject:curModel]) {
+                [self.selectedPrivateNumbers removeObject:curModel];
+            }else {
+                [self.selectedPrivateNumbers addObject:curModel];
+            }
+        }else {     // searchTableView
+            curModel = [self.searchPhoneList objectAtIndex:indexPath.row];
+            if ([self.selectedSearchNumbers containsObject:curModel]) {
+                [self.selectedSearchNumbers removeObject:curModel];
+            }else {
+                [self.selectedSearchNumbers addObject:curModel];
+            }
+        }
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.searchTextField resignFirstResponder];
 }
 
 @end

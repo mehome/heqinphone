@@ -18,6 +18,9 @@
 #define NULLSAFE_ENABLED 0
 #endif
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 
 #define kHeqinLinphoneServerAddress @"http://cs.myvmr.cn"
 

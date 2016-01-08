@@ -19,6 +19,8 @@
 #import "DialerViewController.h"
 #import "NSObject+RDRCommon.h"
 #import "LPJoinManageMeetingViewController.h"
+#import "LPPhoneListView.h"
+#import "RDRPhoneModel.h"
 
 @interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
 }
@@ -73,6 +75,8 @@
     self.joinBtn.backgroundColor = yellowSubjectColor;
     self.joinBtn.layer.cornerRadius = 5.0;
     self.joinBtn.clipsToBounds = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getphoneNotification:) name:kSearchNumbersDatasForJoineMeeting object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,6 +93,7 @@
                                                  name:kLinphoneGlobalStateUpdate
                                                object:nil];
     
+
     // 刷新控件的显示
     [self updateControls];
     
@@ -111,6 +116,20 @@
         self.tableTipLabel.hidden = YES;
         [self.historyTable reloadData];
     }
+}
+
+- (void)getphoneNotification:(NSNotification *)notification {
+    NSLog(@"notification=%@", notification);
+    RDRPhoneModel *model = notification.object;
+    if (model == nil) {
+        [self showToastWithMessage:@"获取的信息为空"];
+    }else {
+        self.joinMeetingNumberField.text = model.uid;
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

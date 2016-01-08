@@ -26,6 +26,8 @@
 #import "LPLoginViewController.h"
 #import "LPPhoneListViewController.h"
 
+#import "LPPhoneListView.h"
+
 @interface LPJoinManageMeetingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *meetingField;

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define kSearchNumbersDatasForJoineMeeting @"kSearchNumbersJoinMeetingDatas"
+#define kSearchNumbersDatasForArrangeMeeting @"kSearchNumbersArrangeMeetingDatas"
+
+
+
 @interface LPPhoneListView : UIView
 
 @property (nonatomic, assign) NSInteger forJoinMeeting;
