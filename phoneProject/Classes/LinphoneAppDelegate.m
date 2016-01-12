@@ -600,7 +600,7 @@
         [self showWaitingIndicator];
         [self attemptRemoteConfiguration];
         
-    }else if (alertView.tag == _updateAlertView) {
+    }else if (alertView == _updateAlertView) {
         
         if (buttonIndex!=[alertView cancelButtonIndex]) {
             NSString *urlString=[alertView.rd_userInfo objectForKey:@"url"];
