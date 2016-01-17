@@ -31,7 +31,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="m_barBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-v2-6yn">
                             <rect key="frame" x="0.0" y="0.0" width="339" height="44"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf" customClass="UIMicroButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf">
                             <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
                             <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -39,13 +39,12 @@
                                 <action selector="bmSoundClicked:" destination="-1" eventType="touchUpInside" id="glT-7Z-rEC"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-1H-otf" customClass="UIVideoButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-1H-otf">
                             <rect key="frame" x="68" y="0.0" width="68" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <connections>
                                 <action selector="vedioBtnClicked:" destination="-1" eventType="touchUpInside" id="aJ0-ZW-hL0"/>
-                                <outlet property="waitView" destination="07c-9g-xJi" id="X4H-fb-j3C"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
@@ -69,9 +68,6 @@
                                 <action selector="moreBtnClicked:" destination="-1" eventType="touchUpInside" id="6YH-yO-gge"/>
                             </connections>
                         </button>
-                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="07c-9g-xJi">
-                            <rect key="frame" x="84" y="3" width="37" height="37"/>
-                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -88,7 +84,6 @@
                         <constraint firstAttribute="bottom" secondItem="jGw-v2-6yn" secondAttribute="bottom" id="Nit-3h-Ua8"/>
                         <constraint firstAttribute="trailing" secondItem="FpB-mZ-2Go" secondAttribute="trailing" id="VKn-IF-QUk"/>
                         <constraint firstItem="jGw-v2-6yn" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="YVO-ht-tfj"/>
-                        <constraint firstItem="07c-9g-xJi" firstAttribute="centerX" secondItem="GNF-1H-otf" secondAttribute="centerX" id="Ykf-Ie-Lih"/>
                         <constraint firstItem="lEk-WA-mPd" firstAttribute="leading" secondItem="GNF-1H-otf" secondAttribute="trailing" id="ZYk-gN-4ol"/>
                         <constraint firstItem="BXY-4Q-XR0" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="cOx-ez-V9t"/>
                         <constraint firstItem="lEk-WA-mPd" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="clS-4G-0f0"/>
@@ -97,7 +92,6 @@
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="hSG-d7-v4V"/>
                         <constraint firstAttribute="trailing" secondItem="jGw-v2-6yn" secondAttribute="trailing" id="igE-9G-BPU"/>
                         <constraint firstItem="GNF-1H-otf" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="kQr-hm-LWs"/>
-                        <constraint firstItem="07c-9g-xJi" firstAttribute="centerY" secondItem="GNF-1H-otf" secondAttribute="centerY" id="mAy-FG-QV5"/>
                         <constraint firstItem="BXY-4Q-XR0" firstAttribute="centerY" secondItem="bHl-tm-Qpf" secondAttribute="centerY" id="mSZ-FG-FA1"/>
                         <constraint firstAttribute="height" constant="44" id="pOn-nC-TSX"/>
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="height" secondItem="bHl-tm-Qpf" secondAttribute="height" id="pgS-HH-DSq"/>

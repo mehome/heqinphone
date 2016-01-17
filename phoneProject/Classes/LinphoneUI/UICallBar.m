@@ -68,8 +68,8 @@ extern NSString *const kLinphoneInCallCellData;
 @interface UICallBar ()
 @property (retain, nonatomic) IBOutlet UIView *bottomBgView;        // 底部的背景图，用来控制TabBar与Content的位置,Tag=-1
 
-@property (nonatomic, retain) IBOutlet UIMicroButton *bmMicroButton;
-@property (retain, nonatomic) IBOutlet UIVideoButton *bmVideoButton;
+@property (nonatomic, retain) IBOutlet UIButton *bmMicroButton;
+@property (retain, nonatomic) IBOutlet UIButton *bmVideoButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *bottomInviteBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomJoinerBtn;
@@ -201,13 +201,17 @@ extern NSString *const kLinphoneInCallCellData;
                                                  name:kLinphoneCallUpdate
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoStartVideo:) name:@"kVedioEnableNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoStartVideo:) name:@"kVedioEnableNotification" object:nil];
     
     // Update on show
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     LinphoneCallState state = (call != NULL)?linphone_call_get_state(call): 0;
     
+    
     [self callUpdate:call state:state];
+    
+    // 打开视频
+    [self openCamera:nil];
     
 //    [self hideRoutes:FALSE];
 //    [self hideOptions:FALSE];
@@ -221,18 +225,18 @@ extern NSString *const kLinphoneInCallCellData;
     self.quitBtn.hidden = NO;
 }
 
-static BOOL onlyOnce = NO;
-
-- (void)autoStartVideo:(NSNotification *)notif {
-    NSLog(@"autoStartVideo called");
-    
-    if (onlyOnce == NO) {
-//        [self.bmVideoButton toggle];
-        [self.bmVideoButton startVideoAfterBeActive];
-        onlyOnce = YES;
-        NSLog(@"only run one time.");
-    }
-}
+//static BOOL onlyOnce = NO;
+//
+//- (void)autoStartVideo:(NSNotification *)notif {
+//    NSLog(@"autoStartVideo called");
+//    
+//    if (onlyOnce == NO) {
+////        [self.bmVideoButton toggle];
+//        [self.bmVideoButton startVideoAfterBeActive];
+//        onlyOnce = YES;
+//        NSLog(@"only run one time.");
+//    }
+//}
 
 - (void)hideAllBottomBgView {
     if (self.popControlView.hidden == NO) {
@@ -263,12 +267,12 @@ static BOOL onlyOnce = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:kLinphoneCallUpdate
                                                   object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:@"kVedioEnableNotification"
-                                                  object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:@"kVedioEnableNotification"
+//                                                  object:nil];
 }
 
-#pragma mark popWithButtons
+#pragma mark popWithButtonMark
 - (void)popWithButtons:(NSArray *)btns {
     // 先重置位置
     self.popControlView.frame = self.bottomBgView.frame;
@@ -422,7 +426,6 @@ static BOOL onlyOnce = NO;
 
 // 退出按钮
 - (IBAction)quitBtnClicked:(id)sender {
-    onlyOnce = NO;
     
     [self hideAllBottomBgView];
 
@@ -628,21 +631,22 @@ static BOOL onlyOnce = NO;
         // 当前静音，点击后，则取消静音
         linphone_core_mute_mic([LinphoneManager getLc], false);
         
-        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
-        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
-        
-        linphone_core_mute_mic([LinphoneManager getLc], true);
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
     }else {
         // 当前没有静音， 点击后，则进行静音
         linphone_core_mute_mic([LinphoneManager getLc], true);
         
-        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
-        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
     }
 }
 
 // 底部视频按钮
 - (IBAction)vedioBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+
+    // 点击都弹出选择界面
     UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     frontTailBtn.showsTouchWhenHighlighted = YES;
     [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
@@ -652,8 +656,29 @@ static BOOL onlyOnce = NO;
     closeCameraBtn.showsTouchWhenHighlighted = YES;
     [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
     [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
+
+    UIButton *openCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    openCameraBtn.showsTouchWhenHighlighted = YES;
+    [openCameraBtn addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [openCameraBtn setTitle:@"打开摄像头" forState:UIControlStateNormal];
     
-    [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
+    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
+    bool video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
+    
+//    if( linphone_core_video_enabled([LinphoneManager getLc])
+//       && currentCall
+//       && !linphone_call_media_in_progress(currentCall)
+//       && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
+//        video_enabled = TRUE;
+//    }
+
+    if (video_enabled == YES) {
+        // 当前在会议中
+        [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
+    }else {
+        // 当前不在会议中
+        [self popWithButtons:@[frontTailBtn, openCameraBtn]];
+    }
 }
 
 // 点击切换前后摄像头
@@ -698,10 +723,28 @@ static BOOL onlyOnce = NO;
         linphone_core_update_call(lc, call, call_params);
         linphone_call_params_destroy(call_params);
     } else {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot close video button, because no current call"];
     }
 }
 
+// 打开
+- (void)openCamera:(UIButton *)sender {
+    [self hideAllBottomBgView];
+    LinphoneCore* lc = [LinphoneManager getLc];
+    
+    if (!linphone_core_video_enabled(lc))
+        return;
+    
+    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
+    if (call) {
+        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
+        linphone_call_params_enable_video(call_params, TRUE);
+        linphone_core_update_call(lc, call, call_params);
+        linphone_call_params_destroy(call_params);
+    } else {
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot open video button, because no current call"];
+    }
+}
 
 #pragma mark - Event Functions
 
@@ -717,6 +760,7 @@ static BOOL onlyOnce = NO;
     
 //    [self.bmMicroButton update];
 //    [self.bmVideoButton update];
+    
     
     switch(state) {
         case LinphoneCallEnd:
