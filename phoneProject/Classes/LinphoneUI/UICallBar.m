@@ -296,71 +296,6 @@ static BOOL onlyOnce = NO;
     }
 }
 
-// 声音按钮点击
-- (IBAction)bmSoundClicked:(id)sender {
-    [self hideAllBottomBgView];
-}
-
-// 底部视频按钮
-- (IBAction)vedioBtnClicked:(id)sender {
-    UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    frontTailBtn.showsTouchWhenHighlighted = YES;
-    [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
-    [frontTailBtn setTitle:@"前置/后置摄像头" forState:UIControlStateNormal];
-    
-    UIButton *closeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    closeCameraBtn.showsTouchWhenHighlighted = YES;
-    [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
-    [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
-    
-    [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
-}
-
-// 点击切换前后摄像头
-- (void)bmChangeFrontAndTail:(UIButton *)sender {
-    [self hideAllBottomBgView];
-    
-    const char *currentCamId = (char*)linphone_core_get_video_device([LinphoneManager getLc]);
-    const char **cameras=linphone_core_get_video_devices([LinphoneManager getLc]);
-    const char *newCamId=NULL;
-    int i;
-    
-    for (i=0;cameras[i]!=NULL;++i){
-        if (strcmp(cameras[i],"StaticImage: Static picture")==0) continue;
-        if (strcmp(cameras[i],currentCamId)!=0){
-            newCamId=cameras[i];
-            break;
-        }
-    }
-    if (newCamId){
-        [LinphoneLogger logc:LinphoneLoggerLog format:"Switching from [%s] to [%s]", currentCamId, newCamId];
-        linphone_core_set_video_device([LinphoneManager getLc], newCamId);
-        LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
-        if(call != NULL) {
-            linphone_core_update_call([LinphoneManager getLc], call, NULL);
-        }
-    }
-}
-
-// 关闭摄像头
-- (void)closeCamera:(UIButton *)sender {
-    [self hideAllBottomBgView];
-
-    LinphoneCore* lc = [LinphoneManager getLc];
-    
-    if (!linphone_core_video_enabled(lc))
-        return;
-    
-    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
-    if (call) {
-        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
-        linphone_call_params_enable_video(call_params, FALSE);
-        linphone_core_update_call(lc, call, call_params);
-        linphone_call_params_destroy(call_params);
-    } else {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-    }
-}
 
 // 底部邀请按钮
 - (IBAction)inviteBtnClicked:(id)sender {
@@ -442,7 +377,8 @@ static BOOL onlyOnce = NO;
 
 // 收藏按钮
 - (IBAction)collectionBtnClicked:(id)sender {
-    if ([LPSystemUser sharedUser].hasLogin == YES) {
+    
+    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) != NULL ) {
         // 已登录
         [self showToastWithMessage:@"已经登录， 准备收藏"];
         
@@ -450,7 +386,7 @@ static BOOL onlyOnce = NO;
         [weakSelf showToastWithMessage:@"收藏会议室中..."];
 
         RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
-        reqModel.uid = [LPSystemUser sharedUser].loginUserId;
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
         reqModel.addr = [self curMeetingAddr];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -539,7 +475,7 @@ static BOOL onlyOnce = NO;
     [weakSelf showToastWithMessage:@"邀请中..."];
     
     RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
-    reqModel.uid = [LPSystemUser sharedUser].loginUserId;
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
     reqModel.addr = [self curMeetingAddr];
     reqModel.type = @(type);
     reqModel.to = content;
@@ -682,6 +618,91 @@ static BOOL onlyOnce = NO;
     return linphone_call_is_in_conference(call);
 }
 
+
+// 声音按钮点击
+- (IBAction)bmSoundClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+    // 然后执行不同的操作
+    if (linphone_core_is_mic_muted([LinphoneManager getLc]) == YES) {
+        // 当前静音，点击后，则取消静音
+        linphone_core_mute_mic([LinphoneManager getLc], false);
+        
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
+        
+        linphone_core_mute_mic([LinphoneManager getLc], true);
+    }else {
+        // 当前没有静音， 点击后，则进行静音
+        linphone_core_mute_mic([LinphoneManager getLc], true);
+        
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+    }
+}
+
+// 底部视频按钮
+- (IBAction)vedioBtnClicked:(id)sender {
+    UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    frontTailBtn.showsTouchWhenHighlighted = YES;
+    [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
+    [frontTailBtn setTitle:@"前置/后置摄像头" forState:UIControlStateNormal];
+    
+    UIButton *closeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeCameraBtn.showsTouchWhenHighlighted = YES;
+    [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
+    
+    [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
+}
+
+// 点击切换前后摄像头
+- (void)bmChangeFrontAndTail:(UIButton *)sender {
+    [self hideAllBottomBgView];
+    
+    const char *currentCamId = (char*)linphone_core_get_video_device([LinphoneManager getLc]);
+    const char **cameras=linphone_core_get_video_devices([LinphoneManager getLc]);
+    const char *newCamId=NULL;
+    int i;
+    
+    for (i=0;cameras[i]!=NULL;++i){
+        if (strcmp(cameras[i],"StaticImage: Static picture")==0) continue;
+        if (strcmp(cameras[i],currentCamId)!=0){
+            newCamId=cameras[i];
+            break;
+        }
+    }
+    if (newCamId){
+        [LinphoneLogger logc:LinphoneLoggerLog format:"Switching from [%s] to [%s]", currentCamId, newCamId];
+        linphone_core_set_video_device([LinphoneManager getLc], newCamId);
+        LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
+        if(call != NULL) {
+            linphone_core_update_call([LinphoneManager getLc], call, NULL);
+        }
+    }
+}
+
+// 关闭摄像头
+- (void)closeCamera:(UIButton *)sender {
+    [self hideAllBottomBgView];
+    
+    LinphoneCore* lc = [LinphoneManager getLc];
+    
+    if (!linphone_core_video_enabled(lc))
+        return;
+    
+    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
+    if (call) {
+        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
+        linphone_call_params_enable_video(call_params, FALSE);
+        linphone_core_update_call(lc, call, call_params);
+        linphone_call_params_destroy(call_params);
+    } else {
+        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+    }
+}
+
+
 #pragma mark - Event Functions
 
 - (void)callUpdateEvent:(NSNotification*)notif {
@@ -694,8 +715,8 @@ static BOOL onlyOnce = NO;
 
 - (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
     
-    [self.bmMicroButton update];
-    [self.bmVideoButton update];
+//    [self.bmMicroButton update];
+//    [self.bmVideoButton update];
     
     switch(state) {
         case LinphoneCallEnd:

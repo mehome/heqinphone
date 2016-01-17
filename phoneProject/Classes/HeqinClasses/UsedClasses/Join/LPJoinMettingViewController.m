@@ -196,32 +196,16 @@
                 
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-                
-                [LPSystemUser sharedUser].hasLogin = YES;                
-                
-                // 取出存储在settingsStore中的用户名和用户id信息
-                NSString *nameStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
-                NSString *idStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-                
-                [LPSystemUser sharedUser].loginUserId = idStr;
-                [LPSystemUser sharedUser].loginUserName = nameStr;
-                [LPSystemUser sharedUser].loginUserPassword = [[LPSystemUser sharedUser].settingsStore stringForKey:@"password_preference"];
-                
                 break;
             }
             case LinphoneRegistrationNone:
             case LinphoneRegistrationCleared:
                 message = @"未注册";
-                
-                [LPSystemUser sharedUser].hasLogin = NO;
-
                 NSLog(@"登出成功");
                 
                 break;
             case LinphoneRegistrationFailed:
                 message = @"注册失败";
-                
-                [LPSystemUser sharedUser].hasLogin = NO;
                 break;
             case LinphoneRegistrationProgress:
                 message = @"注册中";
@@ -281,8 +265,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
     
     // 判断当前是否登录过
-    LinphoneCore* lc = [LinphoneManager getLc];
-    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ) {
         // 未登录
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {

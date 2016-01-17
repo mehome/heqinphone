@@ -33,7 +33,7 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf" customClass="UIMicroButton">
                             <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.83356462450000002" green="0.77559621710000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <connections>
                                 <action selector="bmSoundClicked:" destination="-1" eventType="touchUpInside" id="glT-7Z-rEC"/>
@@ -48,7 +48,7 @@
                                 <outlet property="waitView" destination="07c-9g-xJi" id="X4H-fb-j3C"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
                             <rect key="frame" x="136" y="0.0" width="67" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>

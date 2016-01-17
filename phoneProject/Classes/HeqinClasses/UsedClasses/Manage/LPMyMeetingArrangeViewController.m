@@ -127,7 +127,7 @@
         __weak LPMyMeetingArrangeViewController *weakSelf = self;
         
         RDRMyMeetingArrangeContactsModel *reqModel = [RDRMyMeetingArrangeContactsModel requestModel];
-        reqModel.uid = [LPSystemUser sharedUser].loginUserId;
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -166,7 +166,7 @@
         __weak LPMyMeetingArrangeViewController *weakSelf = self;
         
         RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
-        reqModel.uid = [LPSystemUser sharedUser].loginUserId;
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -413,8 +413,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // 判断有没有安排会议室，无会议室，是没法安排的
     RDRMyMeetingArrangeModel *reqModel = [RDRMyMeetingArrangeModel requestModel];
-    reqModel.uid = [LPSystemUser sharedUser].loginUserId;
-    reqModel.pwd = [LPSystemUser sharedUser].loginUserPassword;
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"password_preference"];
     reqModel.time = self.timeField.text;
     reqModel.repeat = self.repeatSwitch.on ? @"1":@"0";
     reqModel.participants = [NSArray arrayWithArray:parts];     // 添加与会者名单

@@ -13,11 +13,6 @@ typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NS
 
 @interface LPSystemUser : NSObject
 
-@property (nonatomic, assign) BOOL hasLogin;
-@property (nonatomic, copy) NSString *loginUserName;            // 登录后服务器返回的名字
-@property (nonatomic, copy) NSString *loginUserId;              // 登录时使用的用户id
-@property (nonatomic, copy) NSString *loginUserPassword;        // 登录使用的密码
-
 // 会议
 @property (nonatomic, assign) BOOL hasGetMeetingData;               // 是否获取到会议数据
 @property (nonatomic, strong) NSArray *myScheduleMeetings;          // 我的会议-> 会议安排

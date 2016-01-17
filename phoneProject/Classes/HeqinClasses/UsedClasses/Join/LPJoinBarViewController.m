@@ -180,7 +180,7 @@
     
     // 切换到首页的会议
     // 判断用户是否登录，未登录，则弹出登录界面
-    if ([LPSystemUser sharedUser].hasLogin == NO) {
+    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ) {
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
     }else {
         // 进入到管理我的会议界面
@@ -192,7 +192,7 @@
 - (IBAction)arrangeBtnClicked:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeStateNotification object:sender];
 
-    if ([LPSystemUser sharedUser].hasLogin == NO) {
+    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ) {
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
     }else {
         // 进入到会议安排界面

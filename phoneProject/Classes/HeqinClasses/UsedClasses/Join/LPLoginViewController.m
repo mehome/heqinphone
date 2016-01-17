@@ -96,16 +96,9 @@
             
             [self hideHudAndIndicatorView];
             NSLog(@"registration ok.");
-            [LPSystemUser sharedUser].hasLogin = YES;
             
-            // 取出其中的值
+            // 存储其中的值
             [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-            
-            NSString *nameStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
-            NSString *idStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-            
-            [LPSystemUser sharedUser].loginUserId = idStr;
-            [LPSystemUser sharedUser].loginUserName = nameStr;
             
             // 登录成功，切换到LPJoinManageMeetingViewController页
             [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
@@ -113,14 +106,10 @@
         }
         case LinphoneRegistrationNone:
         case LinphoneRegistrationCleared: {
-            [LPSystemUser sharedUser].hasLogin = NO;
-
             [self hideHudAndIndicatorView];
             break;
         }
         case LinphoneRegistrationFailed: {
-            [LPSystemUser sharedUser].hasLogin = NO;
-
             [self hideHudAndIndicatorView];
             
             //erase uername passwd
@@ -296,12 +285,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-                
-                // 存储下来
-                [LPSystemUser sharedUser].hasLogin = YES;
-                [LPSystemUser sharedUser].loginUserName = username;
-                [LPSystemUser sharedUser].loginUserPassword = password;
-                [LPSystemUser sharedUser].loginUserId = userIdStr;
                 
                 // 返回到首页
                 [self jumpToMettingViewController];
