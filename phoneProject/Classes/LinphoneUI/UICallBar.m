@@ -145,6 +145,8 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)dealloc {
+    [self closeCamera:nil];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super dealloc];
@@ -209,9 +211,6 @@ extern NSString *const kLinphoneInCallCellData;
     
     
     [self callUpdate:call state:state];
-    
-    // 打开视频
-    [self openCamera:nil];
     
 //    [self hideRoutes:FALSE];
 //    [self hideOptions:FALSE];
@@ -737,6 +736,9 @@ extern NSString *const kLinphoneInCallCellData;
     
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     if (call) {
+        LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
+        callAppData->videoRequested=TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
+
         LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
         linphone_call_params_enable_video(call_params, TRUE);
         linphone_core_update_call(lc, call, call_params);
@@ -756,11 +758,28 @@ extern NSString *const kLinphoneInCallCellData;
 
 #pragma mark - 
 
-- (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
+- (void)updateVideoBtn {
+    bool video_enabled = false;
     
+    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
+    if( linphone_core_video_enabled([LinphoneManager getLc])
+       && currentCall
+       && !linphone_call_media_in_progress(currentCall)
+       && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
+        video_enabled = TRUE;
+        
+        // 打开摄像头
+        NSLog(@"____________________start camera");
+        [self openCamera:nil];
+    }
+}
+
+- (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
+    NSLog(@"callUpdate state =%d", state);
+    
+    [self updateVideoBtn];
 //    [self.bmMicroButton update];
 //    [self.bmVideoButton update];
-    
     
     switch(state) {
         case LinphoneCallEnd:
