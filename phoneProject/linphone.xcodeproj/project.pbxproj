@@ -10,6 +10,8 @@
 		045B5CB318D72E9A0088350C /* libbzrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 045B5CB218D72E9A0088350C /* libbzrtp.a */; };
 		13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */; };
 		13066CE01BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */; };
+		1343441F1C4E8E99006A6C9B /* joiner_guest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1343441D1C4E8E99006A6C9B /* joiner_guest@2x.png */; };
+		134344201C4E8E99006A6C9B /* joiner_host@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1343441E1C4E8E99006A6C9B /* joiner_host@2x.png */; };
 		134D2D2D1C3E774800D6FB99 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D031C3E774800D6FB99 /* MJRefreshAutoFooter.m */; };
 		134D2D2E1C3E774800D6FB99 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D051C3E774800D6FB99 /* MJRefreshBackFooter.m */; };
 		134D2D2F1C3E774800D6FB99 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D071C3E774800D6FB99 /* MJRefreshComponent.m */; };
@@ -939,6 +941,8 @@
 		13066CDC1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCellJoinManageTableViewCell.h; sourceTree = "<group>"; };
 		13066CDD1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCellJoinManageTableViewCell.m; sourceTree = "<group>"; };
 		13066CDE1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPCellJoinManageTableViewCell.xib; sourceTree = "<group>"; };
+		1343441D1C4E8E99006A6C9B /* joiner_guest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joiner_guest@2x.png"; path = "Resources/joiner_guest@2x.png"; sourceTree = "<group>"; };
+		1343441E1C4E8E99006A6C9B /* joiner_host@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joiner_host@2x.png"; path = "Resources/joiner_host@2x.png"; sourceTree = "<group>"; };
 		134D2D021C3E774800D6FB99 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		134D2D031C3E774800D6FB99 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		134D2D041C3E774800D6FB99 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -3411,6 +3415,8 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				1343441D1C4E8E99006A6C9B /* joiner_guest@2x.png */,
+				1343441E1C4E8E99006A6C9B /* joiner_host@2x.png */,
 				E14B63CA1C3D5D530056414B /* navbarBg@2x.png */,
 				E1D0AC2B1C3C04AD0019DE87 /* m_barBg@2x.png */,
 				E1D0AC171C3C03FB0019DE87 /* m_invite_highlight@2x.png */,
@@ -4048,6 +4054,7 @@
 				D347347E1580E5F8003C7B8C /* history_default.png in Resources */,
 				D347347F1580E5F8003C7B8C /* history_selected.png in Resources */,
 				D38327F31580FE3A00FA0D23 /* contacts_default.png in Resources */,
+				1343441F1C4E8E99006A6C9B /* joiner_guest@2x.png in Resources */,
 				D38327F41580FE3A00FA0D23 /* contacts_selected.png in Resources */,
 				E1128B021C259946009DC298 /* mAudioOn.png in Resources */,
 				D38327F51580FE3A00FA0D23 /* dialer_default.png in Resources */,
@@ -4237,6 +4244,7 @@
 				E1D0AC0A1C3ABF4D0019DE87 /* b_settings.png in Resources */,
 				D3196D3615A321E3007FEEBA /* options_add_over.png in Resources */,
 				D3196D3815A321E3007FEEBA /* options_transfer_default.png in Resources */,
+				134344201C4E8E99006A6C9B /* joiner_host@2x.png in Resources */,
 				D3196D3A15A321E3007FEEBA /* options_transfer_over.png in Resources */,
 				D38187DD15FE348A00C3EDCA /* WizardViewController.xib in Resources */,
 				D350F21C15A43D3400149E54 /* setup_back_default.png in Resources */,

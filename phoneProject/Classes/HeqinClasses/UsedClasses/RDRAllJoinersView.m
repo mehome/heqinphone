@@ -375,7 +375,13 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     if (tableCell == nil) {
         tableCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusedCell"];
         
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 160, 40)];
+        UIImageView *manImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 4, 36, 36)];
+        [tableCell.contentView addSubview:manImgView];
+        manImgView.ott_centerY = tableCell.contentView.ott_centerY;
+        manImgView.backgroundColor = [UIColor clearColor];
+        manImgView.tag = 8999;
+        
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(manImgView.ott_right+10, 0, 120, 40)];
         [tableCell.contentView addSubview:nameLabel];
         nameLabel.ott_centerY = tableCell.contentView.ott_centerY;
         nameLabel.backgroundColor = [UIColor clearColor];
@@ -412,6 +418,9 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     
     // 取出当前的model
     RDROperationJoinerModel *curJoiner = [self.joiners objectAtIndex:indexPath.row];
+    
+    UIImageView *manImgView = [tableCell.contentView viewWithTag:8999];
+    manImgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", (curJoiner.role.integerValue == 1) ? @"joiner_host":@"joiner_guest"]];
     
     UILabel *nameLabel = [tableCell.contentView viewWithTag:9000];
     nameLabel.text = curJoiner.name;
