@@ -407,7 +407,7 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
         kickBtn.backgroundColor = [UIColor clearColor];
         kickBtn.tag = 9003;
         
-        kickBtn.frame = CGRectMake(tableCell.contentView.ott_width - kCellBtnWidth - kBtnInterval, 0, kCellBtnWidth, kCellBtnWidth);
+        kickBtn.frame = CGRectMake(tableCell.contentView.ott_width - kCellBtnWidth - 10, 0, kCellBtnWidth, kCellBtnWidth);
         muteVideobtn.frame = CGRectMake(kickBtn.ott_left - kCellBtnWidth - kBtnInterval, 0, kCellBtnWidth, kCellBtnWidth);
         muteVoicebtn.frame = CGRectMake(muteVideobtn.ott_left - kCellBtnWidth - kBtnInterval, 0, kCellBtnWidth, kCellBtnWidth);
         

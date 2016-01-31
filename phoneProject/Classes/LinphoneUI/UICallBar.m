@@ -101,6 +101,7 @@ extern NSString *const kLinphoneInCallCellData;
 @property (strong, nonatomic) IBOutlet UILabel *callTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *callSubtitleLabel;
 
+@property (nonatomic, assign) BOOL meetingLockedStatus;     // 会议被锁定?，默认为No
 
 @end
 
@@ -439,12 +440,22 @@ extern NSString *const kLinphoneInCallCellData;
     [lockBtn addTarget:self action:@selector(lockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [lockBtn setTitle:@"锁定会议室" forState:UIControlStateNormal];
     
+    UIButton *unlockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    unlockBtn.showsTouchWhenHighlighted = YES;
+    [unlockBtn addTarget:self action:@selector(unlockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [unlockBtn setTitle:@"解锁会议室" forState:UIControlStateNormal];
+    
     UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     endBtn.showsTouchWhenHighlighted = YES;
     [endBtn addTarget:self action:@selector(endMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [endBtn setTitle:@"结束会议" forState:UIControlStateNormal];
     
-    [self popWithButtons:@[lockBtn, endBtn]];
+    // 判断当前会议的状态， 是被锁定还是怎么的
+    if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
+        [self popWithButtons:@[unlockBtn, endBtn]];
+    }else {
+        [self popWithButtons:@[lockBtn, endBtn]];
+    }
 }
 
 // 纯111111, 不是sip:111111@120.138.....
@@ -530,6 +541,7 @@ extern NSString *const kLinphoneInCallCellData;
     [self hideAllBottomBgView];
     
     self.callTipView.hidden = NO;
+    self.meetingLockedStatus = NO;
     
     systemOpenCamera = NO;
     
@@ -620,6 +632,51 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 // 锁定会议，或者解锁
+- (IBAction)unlockMeetingBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+    [ShowPinView showTitle:@"请输入PIN码以解锁会议" withDoneBlock:^(NSString *text) {
+        [self doUnlockMeetingWithPin:text];
+    } withCancelBlock:^{
+        
+    } withNoInput:^{
+        [self showToastWithMessage:@"请输入PIN码"];
+    }];
+}
+
+- (void)doUnlockMeetingWithPin:(NSString *)pinStr {
+    __weak UICallBar *weakSelf = self;
+    
+    [weakSelf showToastWithMessage:@"解锁中..."];
+    
+    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
+    reqModel.addr = [self curMeetingAddr];
+    reqModel.lock = @(0);
+    reqModel.pin = pinStr;
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  RDRLockResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      [weakSelf showToastWithMessage:@"解锁成功"];
+                      weakSelf.meetingLockedStatus = NO;
+                  }else {
+                      NSString *tipStr = [NSString stringWithFormat:@"解锁失败，msg=%@", model.msg];
+                      [weakSelf showToastWithMessage:tipStr];
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  //请求出错
+                  NSLog(@"解锁失败, %s, error=%@", __FUNCTION__, error);
+                  NSString *tipStr = [NSString stringWithFormat:@"解锁失败，服务器错误"];
+                  [weakSelf showToastWithMessage:tipStr];
+              }];
+}
+
+// 锁定会议，或者解锁
 - (IBAction)lockMeetingBtnClicked:(id)sender {
     [self hideAllBottomBgView];
     
@@ -651,6 +708,7 @@ extern NSString *const kLinphoneInCallCellData;
                   
                   if ([model codeCheckSuccess] == YES) {
                       [weakSelf showToastWithMessage:@"锁定成功"];
+                      weakSelf.meetingLockedStatus = YES;
                   }else {
                       NSString *tipStr = [NSString stringWithFormat:@"锁定失败，msg=%@", model.msg];
                       [weakSelf showToastWithMessage:tipStr];
