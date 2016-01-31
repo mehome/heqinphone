@@ -368,6 +368,7 @@ forHTTPHeaderField:(NSString *)field
 
     mutableRequest = [[self requestBySerializingRequest:mutableRequest withParameters:parameters error:error] mutableCopy];
 
+    NSLog(@"heqin test request=%@", mutableRequest);
 	return mutableRequest;
 }
 

@@ -40,6 +40,7 @@
 
 #import "LPSystemSetting.h"
 #import "ShowInviteView.h"
+#import "UIDigitButtonLongPlus.h"
 
 // 邀请
 #import "RDRInviteRequestModel.h"
@@ -78,13 +79,65 @@ extern NSString *const kLinphoneInCallCellData;
 @property (retain, nonatomic) IBOutlet UIButton *collectionBtn;
 @property (retain, nonatomic) IBOutlet UIButton *quitBtn;
 
+@property (retain, nonatomic) IBOutlet UIButton *keyboardBtn;
+
 @property (nonatomic, strong) UIView *popControlView;       // 弹出的按钮控件的背景
+
+@property (strong, nonatomic) IBOutlet UIView *keyBgView;
+@property (strong, nonatomic) IBOutlet UIDigitButton *oneButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *twoButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *threeButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *fourButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *fiveButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *sixButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *sevenButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *eightButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *nineButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *starButton;
+@property (strong, nonatomic) IBOutlet UIDigitButtonLongPlus *zeroButton;
+@property (strong, nonatomic) IBOutlet UIDigitButton *sharpButton;
+
+@property (strong, nonatomic) IBOutlet UIView *callTipView;
+@property (strong, nonatomic) IBOutlet UILabel *callTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *callSubtitleLabel;
+
 
 @end
 
 @implementation UICallBar
 
 #pragma mark - Lifecycle Functions
+
+// 在呼叫界面中挂掉电话
+- (IBAction)callTipEndCallBtnClicked:(id)sender {
+    [self quitMeeting];
+}
+
+- (void)dataFillToPreview {
+    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
+    self.callSubtitleLabel.text = [[NSString stringWithString:addr] copy];
+
+    NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
+    NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
+    
+    // 移掉后部
+    if ([addr replaceOccurrencesOfString:serverTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"remove server address done");
+    }else {
+        NSLog(@"remove server address failed");
+    }
+    
+    // 移掉前面的sip:
+    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"remove sip done");
+    }else {
+        NSLog(@"remove sip failed");
+    }
+    
+    self.callTitleLabel.text = [NSString stringWithString:addr];
+    
+    NSLog(@"test instance :%@", self.callTipView);
+}
 
 - (void)changeBtn:(UIButton *)btn {
     btn.titleLabel.font = [UIFont systemFontOfSize:11.0];
@@ -176,22 +229,56 @@ extern NSString *const kLinphoneInCallCellData;
     [super viewDidLoad];
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
+    // 在放大的情况下，该bottomBgView将占据整个屏幕
+    [self.bottomBgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)]];
     
     [self setAllBtns];
+    
+    self.keyBgView.hidden = YES;
+    
+    [self.zeroButton setDigit:'0'];
+    [self.zeroButton setDtmf:true];
+    [self.oneButton    setDigit:'1'];
+    [self.oneButton setDtmf:true];
+    [self.twoButton    setDigit:'2'];
+    [self.twoButton setDtmf:true];
+    [self.threeButton  setDigit:'3'];
+    [self.threeButton setDtmf:true];
+    [self.fourButton   setDigit:'4'];
+    [self.fourButton setDtmf:true];
+    [self.fiveButton   setDigit:'5'];
+    [self.fiveButton setDtmf:true];
+    [self.sixButton    setDigit:'6'];
+    [self.sixButton setDtmf:true];
+    [self.sevenButton  setDigit:'7'];
+    [self.sevenButton setDtmf:true];
+    [self.eightButton  setDigit:'8'];
+    [self.eightButton setDtmf:true];
+    [self.nineButton   setDigit:'9'];
+    [self.nineButton setDtmf:true];
+    [self.starButton   setDigit:'*'];
+    [self.starButton setDtmf:true];
+    [self.sharpButton  setDigit:'#'];
+    [self.sharpButton setDtmf:true];
+    
+    [self dataFillToPreview];
 }
 
 - (void)bgTapped:(UITapGestureRecognizer *)tapped {
     [self hideAllBottomBgView];
+    self.keyBgView.hidden = YES;
     
     // 这里可以考虑把那些东西进行一显示动画或者隐藏动画
     if (self.bottomBgView.hidden == YES) {
         self.bottomBgView.hidden = NO;
         self.collectionBtn.hidden = NO;
         self.quitBtn.hidden = NO;
+        self.keyboardBtn.hidden = NO;
     }else {
         self.bottomBgView.hidden = YES;
         self.collectionBtn.hidden = YES;
         self.quitBtn.hidden = YES;
+        self.keyboardBtn.hidden = YES;
     }
 }
 
@@ -273,6 +360,10 @@ extern NSString *const kLinphoneInCallCellData;
 
 #pragma mark popWithButtonMark
 - (void)popWithButtons:(NSArray *)btns {
+    if (self.keyBgView.hidden == NO) {
+        self.keyBgView.hidden = YES;
+    }
+    
     // 先重置位置
     self.popControlView.frame = self.bottomBgView.frame;
     UIView *theBgView = [self.popControlView viewWithTag:1000];
@@ -299,6 +390,13 @@ extern NSString *const kLinphoneInCallCellData;
     }
 }
 
+- (IBAction)keyBtnClicked:(id)sender {
+    if (self.popControlView.hidden == NO) {
+        self.popControlView.hidden = YES;
+    }
+    
+    self.keyBgView.hidden = !(self.keyBgView.hidden);
+}
 
 // 底部邀请按钮
 - (IBAction)inviteBtnClicked:(id)sender {
@@ -425,9 +523,16 @@ extern NSString *const kLinphoneInCallCellData;
 
 // 退出按钮
 - (IBAction)quitBtnClicked:(id)sender {
-    
-    [self hideAllBottomBgView];
+    [self quitMeeting];
+}
 
+- (void)quitMeeting {
+    [self hideAllBottomBgView];
+    
+    self.callTipView.hidden = NO;
+    
+    systemOpenCamera = NO;
+    
     LinphoneCore* lc = [LinphoneManager getLc];
     LinphoneCall* currentcall = linphone_core_get_current_call(lc);
     if (linphone_core_is_in_conference(lc) || // In conference
@@ -758,26 +863,34 @@ extern NSString *const kLinphoneInCallCellData;
 
 #pragma mark - 
 
+static BOOL systemOpenCamera = NO;
+
 - (void)updateVideoBtn {
-    bool video_enabled = false;
-    
-    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
-    if( linphone_core_video_enabled([LinphoneManager getLc])
-       && currentCall
-       && !linphone_call_media_in_progress(currentCall)
-       && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
-        video_enabled = TRUE;
-        
-        // 打开摄像头
-        NSLog(@"____________________start camera");
-        [self openCamera:nil];
+    if (systemOpenCamera == NO) {
+        LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
+        if( linphone_core_video_enabled([LinphoneManager getLc])
+           && currentCall
+           && !linphone_call_media_in_progress(currentCall)
+           && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
+            
+            systemOpenCamera = YES;
+            // 打开摄像头
+            NSLog(@"____________________start camera");
+            [self openCamera:nil];
+        }
     }
 }
 
 - (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
     NSLog(@"callUpdate state =%d", state);
     
+    if (state == LinphoneCallOutgoingRinging) {
+        // 连接建立好了，可以进入
+        self.callTipView.hidden = YES;
+    }
+    
     [self updateVideoBtn];
+    
 //    [self.bmMicroButton update];
 //    [self.bmVideoButton update];
     

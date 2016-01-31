@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -13,11 +13,27 @@
                 <outlet property="bottomInviteBtn" destination="lEk-WA-mPd" id="JhI-gR-F9t"/>
                 <outlet property="bottomJoinerBtn" destination="BXY-4Q-XR0" id="TjW-2v-iHP"/>
                 <outlet property="bottomMoreBtn" destination="FpB-mZ-2Go" id="uFj-jY-Ood"/>
-                <outlet property="collectionBtn" destination="wYW-zC-DW3" id="mmh-XW-WUf"/>
+                <outlet property="callSubtitleLabel" destination="jPY-eD-gCd" id="U1A-XS-Q2V"/>
+                <outlet property="callTipView" destination="Ile-NU-uiv" id="7nO-uq-LAK"/>
+                <outlet property="callTitleLabel" destination="uc4-Hp-bXT" id="MP7-TH-bvm"/>
+                <outlet property="eightButton" destination="8Pb-qm-Tqj" id="1Hf-Hw-MNz"/>
+                <outlet property="fiveButton" destination="QJi-Pi-knx" id="fCH-OC-T9O"/>
+                <outlet property="fourButton" destination="ZFo-Gt-Tyn" id="1Oc-cD-Yob"/>
+                <outlet property="keyBgView" destination="ig8-lb-KmP" id="DJW-2Z-fR4"/>
+                <outlet property="keyboardBtn" destination="aJb-eg-BnZ" id="wN0-1x-y5W"/>
                 <outlet property="landscapeView" destination="100" id="137"/>
+                <outlet property="nineButton" destination="6yc-7o-N4X" id="dq5-R8-h9u"/>
+                <outlet property="oneButton" destination="bmg-MO-Lsk" id="Nku-Ww-dDP"/>
                 <outlet property="portraitView" destination="4" id="138"/>
                 <outlet property="quitBtn" destination="uje-v5-zRE" id="jR3-5C-1eQ"/>
+                <outlet property="sevenButton" destination="gaj-aw-IpM" id="LTu-7O-LZw"/>
+                <outlet property="sharpButton" destination="1O5-Ub-jm0" id="dBr-WN-9w1"/>
+                <outlet property="sixButton" destination="5nB-nd-Cbw" id="oAc-eo-MgX"/>
+                <outlet property="starButton" destination="eLl-05-gzJ" id="djc-Hh-qiu"/>
+                <outlet property="threeButton" destination="suG-Rs-3jJ" id="guE-cX-rzx"/>
+                <outlet property="twoButton" destination="FC8-9S-OC3" id="pem-Rh-oXS"/>
                 <outlet property="view" destination="4" id="13"/>
+                <outlet property="zeroButton" destination="dG9-8k-t9b" id="rQz-Hq-wRb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,6 +46,7 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="m_barBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jGw-v2-6yn">
                             <rect key="frame" x="0.0" y="0.0" width="339" height="44"/>
+                            <color key="backgroundColor" red="1" green="0.52156862749999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHl-tm-Qpf">
                             <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
@@ -46,15 +63,15 @@
                                 <action selector="vedioBtnClicked:" destination="-1" eventType="touchUpInside" id="aJ0-ZW-hL0"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
-                            <rect key="frame" x="136" y="0.0" width="67" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEk-WA-mPd">
+                            <rect key="frame" x="136" y="0.0" width="68" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="inviteBtnClicked:" destination="-1" eventType="touchUpInside" id="oa7-Gj-h1a"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXY-4Q-XR0">
-                            <rect key="frame" x="203" y="0.0" width="68" height="44"/>
+                            <rect key="frame" x="204" y="0.0" width="67" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="joinerBtnClicked:" destination="-1" eventType="touchUpInside" id="FYa-MW-Ffe"/>
@@ -68,7 +85,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.83356462450000002" green="0.75043688320000002" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="lEk-WA-mPd" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="0aa-IP-cMu"/>
                         <constraint firstItem="bHl-tm-Qpf" firstAttribute="top" secondItem="skh-FZ-hiA" secondAttribute="top" id="1yF-9w-b5V"/>
@@ -111,26 +128,307 @@
                         <action selector="quitBtnClicked:" destination="-1" eventType="touchUpInside" id="x8j-Pg-PeQ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-zC-DW3">
-                    <rect key="frame" x="199" y="10" width="60" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJb-eg-BnZ">
+                    <rect key="frame" x="10" y="152" width="44" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="meeting_heart.png"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="2mM-RF-NvZ"/>
+                        <constraint firstAttribute="width" constant="44" id="cRg-Vz-xuK"/>
+                    </constraints>
+                    <state key="normal" image="phoneNum.png"/>
                     <connections>
-                        <action selector="collectionBtnClicked:" destination="-1" eventType="touchUpInside" id="CT4-xH-TCS"/>
+                        <action selector="keyBtnClicked:" destination="-1" eventType="touchUpInside" id="Shi-T4-Fn0"/>
                     </connections>
                 </button>
+                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ig8-lb-KmP" userLabel="padView">
+                    <rect key="frame" x="35" y="34" width="270" height="216"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" image="dialer_alt_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="egc-VC-QeD" userLabel="background">
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="216"/>
+                        </imageView>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmg-MO-Lsk" userLabel="1" customClass="UIDigitButton">
+                            <rect key="frame" x="0.0" y="0.0" width="90" height="54"/>
+                            <color key="backgroundColor" red="0.40000001000000002" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="1"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="ZG3-5q-rW7"/>
+                                <constraint firstAttribute="height" constant="54" id="syC-qk-F8X"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_one_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_one_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-9S-OC3" userLabel="2" customClass="UIDigitButton">
+                            <rect key="frame" x="90" y="0.0" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="2"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="IdU-Vr-5Vg"/>
+                                <constraint firstAttribute="height" constant="54" id="cJP-zR-AlM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_two_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_two_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suG-Rs-3jJ" userLabel="3" customClass="UIDigitButton">
+                            <rect key="frame" x="180" y="0.0" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="fYo-7S-Nyt"/>
+                                <constraint firstAttribute="width" constant="90" id="llu-V9-LbY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_three_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_three_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFo-Gt-Tyn" userLabel="4" customClass="UIDigitButton">
+                            <rect key="frame" x="0.0" y="54" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="4"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="Ffk-dz-NMG"/>
+                                <constraint firstAttribute="width" constant="90" id="W1q-aE-cev"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_four_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_four_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nB-nd-Cbw" userLabel="6" customClass="UIDigitButton">
+                            <rect key="frame" x="180" y="54" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="6"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="DMe-g5-Haw"/>
+                                <constraint firstAttribute="height" constant="54" id="ysc-eC-Wgm"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_six_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_six_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaj-aw-IpM" userLabel="7" customClass="UIDigitButton">
+                            <rect key="frame" x="0.0" y="108" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="7"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="AsZ-hy-qIC"/>
+                                <constraint firstAttribute="width" constant="90" id="owB-wS-Zjp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_seven_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_seven_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pb-qm-Tqj" userLabel="8" customClass="UIDigitButton">
+                            <rect key="frame" x="90" y="108" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="8"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="TFN-JX-NBE"/>
+                                <constraint firstAttribute="width" constant="90" id="ilv-2T-clm"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_eight_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_eight_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yc-7o-N4X" userLabel="9" customClass="UIDigitButton">
+                            <rect key="frame" x="180" y="108" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="9"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="1kb-FT-rTf"/>
+                                <constraint firstAttribute="height" constant="54" id="dSQ-yx-3e5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_nine_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_nine_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLl-05-gzJ" userLabel="*" customClass="UIDigitButton">
+                            <rect key="frame" x="0.0" y="162" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="Star"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="fcJ-Ul-wnb"/>
+                                <constraint firstAttribute="width" constant="90" id="pbx-Xv-b2E"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_star_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_star_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dG9-8k-t9b" userLabel="0" customClass="UIDigitButtonLongPlus">
+                            <rect key="frame" x="90" y="162" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="0"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="9GW-HF-63x"/>
+                                <constraint firstAttribute="width" constant="90" id="pIi-vJ-ZJK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_zero_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_zero_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O5-Ub-jm0" userLabel="#" customClass="UIDigitButton">
+                            <rect key="frame" x="180" y="162" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="Sharp"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="dLE-aY-P9w"/>
+                                <constraint firstAttribute="width" constant="90" id="f0s-jf-FTm"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_sharp_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_sharp_over.png"/>
+                        </button>
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJi-Pi-knx" userLabel="5" customClass="UIDigitButton">
+                            <rect key="frame" x="90" y="54" width="90" height="54"/>
+                            <accessibility key="accessibilityConfiguration" label="5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="Cd3-w2-Cdv"/>
+                                <constraint firstAttribute="height" constant="54" id="bkz-iE-GPB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                            <state key="normal" image="numpad_five_default.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" image="numpad_five_over.png"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="1O5-Ub-jm0" secondAttribute="trailing" id="10j-rk-dW4"/>
+                        <constraint firstItem="gaj-aw-IpM" firstAttribute="leading" secondItem="ig8-lb-KmP" secondAttribute="leading" id="5rP-ZB-kZy"/>
+                        <constraint firstItem="suG-Rs-3jJ" firstAttribute="top" secondItem="ig8-lb-KmP" secondAttribute="top" id="6Tm-g5-cXR"/>
+                        <constraint firstItem="6yc-7o-N4X" firstAttribute="leading" secondItem="8Pb-qm-Tqj" secondAttribute="trailing" id="6o0-jp-Lc6"/>
+                        <constraint firstItem="8Pb-qm-Tqj" firstAttribute="top" secondItem="QJi-Pi-knx" secondAttribute="bottom" id="7Eh-mM-gGd"/>
+                        <constraint firstItem="bmg-MO-Lsk" firstAttribute="leading" secondItem="ig8-lb-KmP" secondAttribute="leading" id="8PY-jZ-vYZ"/>
+                        <constraint firstItem="bmg-MO-Lsk" firstAttribute="top" secondItem="ig8-lb-KmP" secondAttribute="top" id="8ie-et-Jmk"/>
+                        <constraint firstItem="8Pb-qm-Tqj" firstAttribute="leading" secondItem="gaj-aw-IpM" secondAttribute="trailing" id="9RC-rd-Fmt"/>
+                        <constraint firstItem="gaj-aw-IpM" firstAttribute="top" secondItem="ZFo-Gt-Tyn" secondAttribute="bottom" id="9dn-Qb-noE"/>
+                        <constraint firstAttribute="bottom" secondItem="eLl-05-gzJ" secondAttribute="bottom" id="Bb6-6z-U4M"/>
+                        <constraint firstAttribute="width" constant="270" id="C89-bE-ICb"/>
+                        <constraint firstAttribute="bottom" secondItem="1O5-Ub-jm0" secondAttribute="bottom" id="CfS-qP-0bf"/>
+                        <constraint firstItem="5nB-nd-Cbw" firstAttribute="leading" secondItem="QJi-Pi-knx" secondAttribute="trailing" id="G8C-8O-Fzs"/>
+                        <constraint firstItem="FC8-9S-OC3" firstAttribute="leading" secondItem="bmg-MO-Lsk" secondAttribute="trailing" id="Jnd-ft-ujI"/>
+                        <constraint firstItem="1O5-Ub-jm0" firstAttribute="leading" secondItem="dG9-8k-t9b" secondAttribute="trailing" id="Lh1-Uk-qrX"/>
+                        <constraint firstItem="FC8-9S-OC3" firstAttribute="top" secondItem="ig8-lb-KmP" secondAttribute="top" id="Li5-0y-4EW"/>
+                        <constraint firstItem="QJi-Pi-knx" firstAttribute="top" secondItem="FC8-9S-OC3" secondAttribute="bottom" id="O3e-6h-bVk"/>
+                        <constraint firstAttribute="bottom" secondItem="dG9-8k-t9b" secondAttribute="bottom" id="Opv-SN-5ay"/>
+                        <constraint firstItem="eLl-05-gzJ" firstAttribute="top" secondItem="gaj-aw-IpM" secondAttribute="bottom" id="QxI-nP-25G"/>
+                        <constraint firstAttribute="trailing" secondItem="5nB-nd-Cbw" secondAttribute="trailing" id="Rc2-28-RaE"/>
+                        <constraint firstItem="5nB-nd-Cbw" firstAttribute="top" secondItem="suG-Rs-3jJ" secondAttribute="bottom" id="Rhq-nQ-wv8"/>
+                        <constraint firstAttribute="bottom" secondItem="egc-VC-QeD" secondAttribute="bottom" id="S4U-3N-kXZ"/>
+                        <constraint firstAttribute="height" constant="216" id="Y5Z-AE-2r0"/>
+                        <constraint firstItem="eLl-05-gzJ" firstAttribute="leading" secondItem="ig8-lb-KmP" secondAttribute="leading" id="ZFR-Gi-OaY"/>
+                        <constraint firstItem="ZFo-Gt-Tyn" firstAttribute="top" secondItem="bmg-MO-Lsk" secondAttribute="bottom" id="bCC-E9-55j"/>
+                        <constraint firstAttribute="trailing" secondItem="6yc-7o-N4X" secondAttribute="trailing" id="d0T-V9-Oit"/>
+                        <constraint firstItem="suG-Rs-3jJ" firstAttribute="leading" secondItem="FC8-9S-OC3" secondAttribute="trailing" id="fGf-tA-E2y"/>
+                        <constraint firstItem="dG9-8k-t9b" firstAttribute="leading" secondItem="eLl-05-gzJ" secondAttribute="trailing" id="hti-bs-7zN"/>
+                        <constraint firstItem="egc-VC-QeD" firstAttribute="top" secondItem="ig8-lb-KmP" secondAttribute="top" id="jB2-3A-aIm"/>
+                        <constraint firstItem="dG9-8k-t9b" firstAttribute="top" secondItem="8Pb-qm-Tqj" secondAttribute="bottom" id="ls9-aH-J1X"/>
+                        <constraint firstItem="dG9-8k-t9b" firstAttribute="leading" secondItem="gaj-aw-IpM" secondAttribute="trailing" id="sex-gi-9pz"/>
+                        <constraint firstItem="egc-VC-QeD" firstAttribute="leading" secondItem="ig8-lb-KmP" secondAttribute="leading" id="w9w-8u-MK1"/>
+                        <constraint firstItem="QJi-Pi-knx" firstAttribute="leading" secondItem="ZFo-Gt-Tyn" secondAttribute="trailing" id="wua-TM-dbY"/>
+                        <constraint firstItem="ZFo-Gt-Tyn" firstAttribute="leading" secondItem="ig8-lb-KmP" secondAttribute="leading" id="xXH-He-7lO"/>
+                        <constraint firstItem="6yc-7o-N4X" firstAttribute="top" secondItem="5nB-nd-Cbw" secondAttribute="bottom" id="xhS-hs-hqn"/>
+                        <constraint firstItem="1O5-Ub-jm0" firstAttribute="top" secondItem="6yc-7o-N4X" secondAttribute="bottom" id="yT5-b7-nuT"/>
+                        <constraint firstAttribute="trailing" secondItem="egc-VC-QeD" secondAttribute="trailing" id="zpb-mu-zEg"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ile-NU-uiv" userLabel="tipView">
+                    <rect key="frame" x="0.0" y="0.0" width="339" height="284"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc4-Hp-bXT" userLabel="mainTitle">
+                            <rect key="frame" x="0.0" y="68" width="339" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="7U2-E7-Ozv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-eD-gCd" userLabel="subTitle">
+                            <rect key="frame" x="0.0" y="101" width="339" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="rTG-Rp-0CN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="0.52156862749999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxS-ap-ZyG" userLabel="endCallBtn">
+                            <rect key="frame" x="94" y="236" width="151" height="51"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="3Ny-Sd-BbG"/>
+                            </constraints>
+                            <state key="normal" image="phoneHang"/>
+                            <connections>
+                                <action selector="callTipEndCallBtnClicked:" destination="-1" eventType="touchUpInside" id="qBN-t6-2lN"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logbg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Eal-Cl-5cO" userLabel="manImg">
+                            <rect key="frame" x="89" y="150" width="160" height="160"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="160" id="9Hw-vz-HJR"/>
+                                <constraint firstAttribute="height" constant="160" id="PPZ-0V-r83"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在呼叫" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etf-iO-Qce" userLabel="tipLabel">
+                            <rect key="frame" x="0.0" y="0.0" width="339" height="50"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="nJF-Uu-DH7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <color key="textColor" red="1" green="0.52156862749999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="uc4-Hp-bXT" secondAttribute="trailing" id="1Tt-9G-63j"/>
+                        <constraint firstItem="Eal-Cl-5cO" firstAttribute="top" secondItem="jPY-eD-gCd" secondAttribute="bottom" constant="28" id="3Gk-d1-ShE"/>
+                        <constraint firstItem="Eal-Cl-5cO" firstAttribute="centerX" secondItem="Ile-NU-uiv" secondAttribute="centerX" id="40g-5g-0Zt"/>
+                        <constraint firstAttribute="trailing" secondItem="etf-iO-Qce" secondAttribute="trailing" id="7OT-wK-St2"/>
+                        <constraint firstItem="FxS-ap-ZyG" firstAttribute="leading" secondItem="Ile-NU-uiv" secondAttribute="leading" id="8vY-Th-Oi1"/>
+                        <constraint firstItem="jPY-eD-gCd" firstAttribute="top" secondItem="uc4-Hp-bXT" secondAttribute="bottom" constant="12" id="RH0-Xz-FcS"/>
+                        <constraint firstAttribute="trailing" secondItem="FxS-ap-ZyG" secondAttribute="trailing" id="Swx-Aj-YVc"/>
+                        <constraint firstItem="uc4-Hp-bXT" firstAttribute="leading" secondItem="Ile-NU-uiv" secondAttribute="leading" id="dst-F9-3ep"/>
+                        <constraint firstItem="jPY-eD-gCd" firstAttribute="leading" secondItem="Ile-NU-uiv" secondAttribute="leading" id="j6c-58-d9H"/>
+                        <constraint firstItem="etf-iO-Qce" firstAttribute="top" secondItem="Ile-NU-uiv" secondAttribute="top" id="nyN-W8-7hi"/>
+                        <constraint firstAttribute="trailing" secondItem="jPY-eD-gCd" secondAttribute="trailing" id="sEE-gf-kcM"/>
+                        <constraint firstAttribute="bottom" secondItem="FxS-ap-ZyG" secondAttribute="bottom" id="sZW-It-tQN"/>
+                        <constraint firstItem="etf-iO-Qce" firstAttribute="leading" secondItem="Ile-NU-uiv" secondAttribute="leading" id="sxh-62-cqH"/>
+                        <constraint firstItem="uc4-Hp-bXT" firstAttribute="top" secondItem="etf-iO-Qce" secondAttribute="bottom" constant="18" id="xe9-0j-dRi"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="skh-FZ-hiA" secondAttribute="bottom" id="1lU-bp-fh2"/>
-                <constraint firstItem="wYW-zC-DW3" firstAttribute="centerY" secondItem="uje-v5-zRE" secondAttribute="centerY" id="5WT-Bv-xc8"/>
-                <constraint firstItem="wYW-zC-DW3" firstAttribute="height" secondItem="uje-v5-zRE" secondAttribute="height" id="JV7-wK-Egg"/>
+                <constraint firstAttribute="bottom" secondItem="Ile-NU-uiv" secondAttribute="bottom" id="21j-Qn-rvD"/>
+                <constraint firstItem="ig8-lb-KmP" firstAttribute="centerY" secondItem="4" secondAttribute="centerY" id="4bv-QP-5PO"/>
+                <constraint firstItem="Ile-NU-uiv" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="FOI-Lw-dFC"/>
                 <constraint firstItem="uje-v5-zRE" firstAttribute="top" secondItem="4" secondAttribute="top" constant="10" id="PFq-1n-r2x"/>
                 <constraint firstAttribute="trailing" secondItem="skh-FZ-hiA" secondAttribute="trailing" id="PIk-7r-oI8"/>
+                <constraint firstItem="Ile-NU-uiv" firstAttribute="top" secondItem="4" secondAttribute="top" id="UTn-68-Mu6"/>
                 <constraint firstItem="skh-FZ-hiA" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="ZUT-OZ-FMz"/>
-                <constraint firstItem="uje-v5-zRE" firstAttribute="leading" secondItem="wYW-zC-DW3" secondAttribute="trailing" constant="10" id="de3-D3-cUg"/>
+                <constraint firstItem="aJb-eg-BnZ" firstAttribute="leading" secondItem="4" secondAttribute="leading" constant="10" id="j40-ri-zqz"/>
                 <constraint firstAttribute="trailing" secondItem="uje-v5-zRE" secondAttribute="trailing" constant="10" id="jTe-b0-REg"/>
-                <constraint firstItem="wYW-zC-DW3" firstAttribute="width" secondItem="uje-v5-zRE" secondAttribute="width" id="pCa-H7-9aS"/>
+                <constraint firstAttribute="trailing" secondItem="Ile-NU-uiv" secondAttribute="trailing" id="n1h-kJ-jv3"/>
+                <constraint firstItem="ig8-lb-KmP" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="u7O-vP-XSN"/>
+                <constraint firstItem="skh-FZ-hiA" firstAttribute="top" secondItem="aJb-eg-BnZ" secondAttribute="bottom" constant="44" id="xzz-Ga-rnO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -153,7 +451,34 @@
         </view>
     </objects>
     <resources>
+        <image name="dialer_alt_background.png" width="530" height="526"/>
+        <image name="logbg.png" width="139" height="139"/>
         <image name="m_barBg.png" width="1" height="1"/>
-        <image name="meeting_heart.png" width="27" height="22"/>
+        <image name="numpad_eight_default.png" width="220" height="113"/>
+        <image name="numpad_eight_over.png" width="220" height="113"/>
+        <image name="numpad_five_default.png" width="220" height="113"/>
+        <image name="numpad_five_over.png" width="220" height="113"/>
+        <image name="numpad_four_default.png" width="210" height="113"/>
+        <image name="numpad_four_over.png" width="210" height="113"/>
+        <image name="numpad_nine_default.png" width="210" height="113"/>
+        <image name="numpad_nine_over.png" width="210" height="113"/>
+        <image name="numpad_one_default.png" width="210" height="113"/>
+        <image name="numpad_one_over.png" width="210" height="113"/>
+        <image name="numpad_seven_default.png" width="210" height="113"/>
+        <image name="numpad_seven_over.png" width="210" height="113"/>
+        <image name="numpad_sharp_default.png" width="210" height="113"/>
+        <image name="numpad_sharp_over.png" width="210" height="113"/>
+        <image name="numpad_six_default.png" width="210" height="113"/>
+        <image name="numpad_six_over.png" width="210" height="113"/>
+        <image name="numpad_star_default.png" width="210" height="113"/>
+        <image name="numpad_star_over.png" width="210" height="113"/>
+        <image name="numpad_three_default.png" width="210" height="113"/>
+        <image name="numpad_three_over.png" width="210" height="113"/>
+        <image name="numpad_two_default.png" width="220" height="113"/>
+        <image name="numpad_two_over.png" width="220" height="113"/>
+        <image name="numpad_zero_default.png" width="220" height="113"/>
+        <image name="numpad_zero_over.png" width="220" height="113"/>
+        <image name="phoneHang" width="1" height="1"/>
+        <image name="phoneNum.png" width="40" height="40"/>
     </resources>
 </document>

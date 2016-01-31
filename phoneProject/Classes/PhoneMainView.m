@@ -295,6 +295,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 		[error release];
     }else if (state == LinphoneRegistrationOk) {
         // 注册成功，取值出来
+        NSLog(@"登录成功 in mainView");
     }
 }
 

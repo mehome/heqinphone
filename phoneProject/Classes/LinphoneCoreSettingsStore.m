@@ -46,11 +46,19 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 
 }
 
+- (void)setTheBool:(BOOL)value forKey:(NSString*)key {
+    [self setBool:value forKey:key];
+}
+
 - (void)setString:(const char*)value forKey:(NSString*)key {
 	id obj=Nil;
 	if (value) obj=[[NSString alloc] initWithCString:value encoding:[NSString defaultCStringEncoding] ];
 	[self setObject:obj forKey:key];
 	[obj release];
+}
+
+- (void)setTheStr:(NSString *)str forKey:(NSString *)key {
+    [self setObject:str forKey:key];
 }
 
 - (NSString*)stringForKey:(NSString*) key {
@@ -109,7 +117,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
              * 强制把UDP改成TCP， 王锋那边主要是担心被某些公司的防火墙所封掉
              ***/
             UseTheTCP80Port
-//            tname = "tcp";
+            tname = "tcp";
             
 			[self setString:tname forKey:@"transport_preference"];
 
@@ -129,9 +137,9 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		[self setObject:@""   forKey:@"password_preference"];
 		[self setBool:FALSE   forKey:@"outbound_proxy_preference"];
         
-		[self setString:"udp" forKey:@"transport_preference"];
+//		[self setString:"udp" forKey:@"transport_preference"];
         UseTheTCP80Port
-//        [self setString:"tcp" forKey:@"transport_preference"];
+        [self setString:"tcp" forKey:@"transport_preference"];
         
         
 		[self setBool:FALSE   forKey:@"avpf_preference"];
@@ -142,8 +150,26 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	{
 		LinphoneAddress *parsed = linphone_core_get_primary_contact_parsed(lc);
 		if(parsed != NULL) {
-			[self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
-			[self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
+            
+            [self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+            [self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
+
+            
+            if (cfg){
+                const char *identity=linphone_proxy_config_get_identity(cfg);
+                LinphoneAddress *addr=linphone_address_new(identity);
+                if (addr){
+                    [self setString: linphone_address_get_display_name((addr)) forKey:@"username_preference"];
+                    [self setString: linphone_address_get_username((addr)) forKey:@"primary_username_preference"];
+                }else {
+                    [self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+                    [self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
+                }
+            }else {
+                [self setString: linphone_address_get_display_name(parsed) forKey:@"primary_displayname_preference"];
+                [self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
+            }
+            
 		}
 		linphone_address_destroy(parsed);
 	}
@@ -174,11 +200,11 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		[self setFloat:linphone_core_get_mic_gain_db(lc)      forKey:@"microphone_gain_preference"];
 	}
 	{
-		int port = lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "port_preference", 5060);
+//		int port = lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "port_preference", 5060);
         // 还有Network.plist中有一个5060被改成80了
         
         UseTheTCP80Port
-//        int port = lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "port_preference", 80);
+        int port = lp_config_get_int(conf, LINPHONERC_APPLICATION_KEY, "port_preference", 80);
         
 		[self setInteger:port forKey:@"port_preference"];
 		int random_port_preference = lp_config_get_int(conf,LINPHONERC_APPLICATION_KEY,"random_port_preference", 1);
@@ -384,12 +410,12 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		LinphoneAddress* proxy_addr = linphone_address_new(proxy);
 
 		if( proxy_addr ){
-			LinphoneTransportType type = LinphoneTransportUdp;
-			if      ( [transport isEqualToString:@"tcp"] ) type = LinphoneTransportTcp;
-			else if ( [transport isEqualToString:@"tls"] ) type = LinphoneTransportTls;
+//			LinphoneTransportType type = LinphoneTransportUdp;
+//			if      ( [transport isEqualToString:@"tcp"] ) type = LinphoneTransportTcp;
+//			else if ( [transport isEqualToString:@"tls"] ) type = LinphoneTransportTls;
             
             UseTheTCP80Port
-//			LinphoneTransportType type = LinphoneTransportTcp;
+			LinphoneTransportType type = LinphoneTransportTcp;
             
 			linphone_address_set_transport(proxy_addr, type);
 			ms_free(proxy);

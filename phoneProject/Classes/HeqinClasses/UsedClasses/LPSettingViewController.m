@@ -47,7 +47,7 @@
 }
 
 - (void)initDynamicInfos {
-    self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+    self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
     self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
     
     self.companyField.text = @"企业信息";
@@ -137,10 +137,10 @@
     [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"pushnotification_preference"];
     
     LinphoneCore *lc = [LinphoneManager getLc];
-    LCSipTransports transportValue={5060,5060,-1,-1};
+//    LCSipTransports transportValue={5060,5060,-1,-1};
     
     UseTheTCP80Port
-//    LCSipTransports transportValue={80,80,-1,-1};
+    LCSipTransports transportValue={80,80,-1,-1};
     
     if (linphone_core_set_sip_transports(lc, &transportValue)) {
         [LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];

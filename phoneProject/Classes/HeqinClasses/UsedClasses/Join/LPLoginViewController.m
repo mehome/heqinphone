@@ -55,16 +55,15 @@
                                              selector:@selector(registrationUpdateEvent:)
                                                  name:kLinphoneRegistrationUpdate
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(configuringUpdate:)
-                                                 name:kLinphoneConfiguringStateUpdate
-                                               object:nil];
     
     LinphoneCore* lc = [LinphoneManager getLc];
     if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
         // 当前处于登出状态
         self.userNameField.text = @"feng.wang@zijingcloud.com";
         self.userPasswordField.text = @"wang@2015";
+        
+//        self.userNameField.text = @"qin.he@zijingcloud.com";
+//        self.userPasswordField.text = @"he@2015";
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
@@ -78,9 +77,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:kLinphoneRegistrationUpdate
                                                   object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kLinphoneConfiguringStateUpdate
-                                                  object:nil];
 }
 
 #pragma mark - Event Functions
@@ -92,14 +88,18 @@
     NSLog(@"registrationUpdate state=%d", state);
     switch (state) {
         case LinphoneRegistrationOk: {
+            
+            // 把值同步进去
+//            [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+
             [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"enable_first_login_view_preference"];
             
             [self hideHudAndIndicatorView];
+            [self showToastWithMessage:@"登录成功"];
+            
             NSLog(@"registration ok.");
             
             // 存储其中的值
-            [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-            
             // 登录成功，切换到LPJoinManageMeetingViewController页
             [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
             break;
@@ -115,6 +115,9 @@
             //erase uername passwd
             [[LinphoneManager instance] lpConfigSetString:nil forKey:@"wizard_username"];
             [[LinphoneManager instance] lpConfigSetString:nil forKey:@"wizard_password"];
+            
+            [self showToastWithMessage:@"登录失败"];
+            
             break;
         }
         case LinphoneRegistrationProgress: {
@@ -124,13 +127,6 @@
         }
         default: break;
     }
-}
-
-- (void)configuringUpdate:(NSNotification *)notif {
-    [self hideHudAndIndicatorView];
-
-    LinphoneConfiguringState status = (LinphoneConfiguringState)[[notif.userInfo valueForKey:@"state"] integerValue];
-    NSLog(@"login interface status=%d", status);
 }
 
 #pragma mark - UITextfield Event Functions
@@ -227,16 +223,27 @@ static UICompositeViewDescription *compositeDescription = nil;
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
     
-    NSString *userId = username;
-//    if ([username hasSuffix:@"@zijingcloud.com"] == NO) {
-//        userId = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
-//    }
+    NSString *userId = [username copy];
+    if ([username containsString:@"@"] == YES) {
+        username = [username componentsSeparatedByString:@"@"].firstObject;
+        if (username.length == 0) {
+            [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
+            return;
+        }
+    }else {
+        [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
+        return;
+    }
     
     NSString *password = self.userPasswordField.text;
     NSString *transport = @"UDP";
     
-//    NSString *username = @"feng.wang";
-//    NSString *userId = @"feng.wang@zijingcloud.com";
+    UseTheTCP80Port
+    transport = @"TCP";
+
+    
+//    username = @"feng.wang";
+//    userId = @"feng.wang@zijingcloud.com";
 //    NSString *password = @"wang@2015";
 //    NSString *transport = @"UDP";
     
@@ -269,25 +276,27 @@ static UICompositeViewDescription *compositeDescription = nil;
         if ([LinphoneManager instance].connectivity == none) {
             [self showAlertWithTitle:@"提示" andMessage:NSLocalizedString(@"No connectivity", nil)];
         } else {
+            [[LPSystemUser sharedUser].settingsStore setTheStr:username forKey:@"username_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:userIdStr forKey:@"userid_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"password_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"domain_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"transport_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:[domain stringByAppendingString:@":80"]   forKey:@"proxy_preference"];
+            [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"outbound_proxy_preference"];
+
+            // 这里进行LinphoneCoreSettingsStore的存储以触发登录linphone的回调
+            [[LPSystemUser sharedUser].settingsStore synchronize];
+            
+            // 然后就等待登录成功或者失败的回调.
+            return;
             
             BOOL success = [self addProxyConfig:username password:password userIdStr:userIdStr domain:domain withTransport:transport];
             if (success == YES) {
                 // 登录成功
                 [self showToastWithMessage:@"登录成功"];
                 
-                //            [[LPSystemUser sharedUser].settingsStore setObject:username forKey:@"username_preference"];
-                //            [[LPSystemUser sharedUser].settingsStore setObject:userIdStr forKey:@"userid_preference"];
-                //            [[LPSystemUser sharedUser].settingsStore setObject:password forKey:@"password_preference"];
-                //            [[LPSystemUser sharedUser].settingsStore setObject:domain forKey:@"domain_preference"];
-                //            [[LPSystemUser sharedUser].settingsStore setObject:transport forKey:@"transport_preference"];
-                //
-                //            [[LPSystemUser sharedUser].settingsStore synchronize];
-
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-                
-                // 返回到首页
-                [self jumpToMettingViewController];
                 
             }else {
                 // 登录失败
@@ -349,10 +358,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     linphone_address_destroy(parsedAddress);
     ms_free(c_parsedAddress);
     
-    // 把没有添加的userId给添加上。
-    if ([userIdStr hasSuffix:@"zijingcloud.com"] == NO) {
-        userIdStr = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
-    }
+//    // 把没有添加的userId给添加上。
+//    if ([userIdStr hasSuffix:@"zijingcloud.com"] == NO) {
+//        userIdStr = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
+//    }
     
     LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String],
                                                     [userIdStr UTF8String],

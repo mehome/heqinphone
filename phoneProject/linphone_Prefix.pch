@@ -78,5 +78,7 @@ _##PROPERTY = PROPERTY; \
 
 #define UseTheTCP80Port NSLog(@"use the tpc 80 port");
 
+// 用于调试时使用，可以用来调试颜色背景值，也可以用来调试逻辑。打包时该值为0
+#define inDebugTest (0)
 
 #endif

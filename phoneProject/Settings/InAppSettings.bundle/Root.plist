@@ -118,7 +118,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>udp</string>
+			<string>tcp</string>
 			<key>Key</key>
 			<string>transport_preference</string>
 			<key>Title</key>

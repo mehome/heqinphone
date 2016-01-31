@@ -35,5 +35,6 @@
 
 @interface IASKAbstractSettingsStore : NSObject <IASKSettingsStore> {
 }
+- (void)setBool:(BOOL)value forKey:(NSString*)key;
 
 @end

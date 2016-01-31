@@ -21,6 +21,11 @@
 #import "LPJoinManageMeetingViewController.h"
 #import "LPPhoneListView.h"
 #import "RDRPhoneModel.h"
+#import "LPJoinMeetingCell.h"
+#import "RDRAddFavRequestModel.h"
+#import "RDRRequest.h"
+#import "RDRNetHelper.h"
+#import "RDRAddFavResponseModel.h"
 
 @interface LPJoinMettingViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
 }
@@ -55,6 +60,8 @@
     
     self.historyTable.tableFooterView = [[UIView alloc] init];
     self.historyTable.tableHeaderView = [[UIView alloc] init];
+    
+    [self.historyTable registerClass:[LPJoinMeetingCell class] forCellReuseIdentifier:@"reusedCell"];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
@@ -138,9 +145,6 @@
     [[NSNotificationCenter defaultCenter]	removeObserver:self
                                                     name:kLinphoneRegistrationUpdate
                                                   object:nil];
-    [[NSNotificationCenter defaultCenter]	removeObserver:self
-                                                    name:kLinphoneGlobalStateUpdate
-                                                  object:nil];
 }
 
 - (void)registrationUpdate: (NSNotification*) notif {
@@ -167,7 +171,8 @@
         
         self.loginTipLabel.text = @"已登录";
 
-        self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+        self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+        NSLog(@"userName=%@", [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"]);
     }
 }
 
@@ -359,43 +364,18 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *tableCell = [tableView dequeueReusableCellWithIdentifier:@"reusedCell"];
-    if (tableCell == nil) {
-        tableCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusedCell"];
-        
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 160, 40)];
-        [tableCell.contentView addSubview:titleLabel];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.tag = 9000;
-        
-        UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 0, 160, 40)];
-        [tableCell.contentView addSubview:dateLabel];
-        dateLabel.font = [UIFont systemFontOfSize:14.0];
-        dateLabel.backgroundColor = [UIColor clearColor];
-        dateLabel.tag = 9001;
-        
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = tableCell.contentView.bounds;
-        [tableCell.contentView addSubview:btn];
-        [btn addTarget:self action:@selector(cellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        btn.backgroundColor = [UIColor clearColor];
-        btn.tag = 9002;
-    }
     
-    UIButton *btn = [tableCell.contentView viewWithTag:9002];
-    btn.frame = tableCell.contentView.bounds;
-    btn.rd_userInfo = @{@"indexPath":indexPath};
-
+    LPJoinMeetingCell *tableCell = (LPJoinMeetingCell *)[tableView dequeueReusableCellWithIdentifier:@"reusedCell" forIndexPath:indexPath];
     
-    UILabel *mainLabel = [tableCell.contentView viewWithTag:9000];
-    UILabel *dateLabel = [tableCell.contentView viewWithTag:9001];
+    UILabel *mainLabel = tableCell.leftLabel;
+    UILabel *dateLabel = tableCell.rightLabel;
+    UIButton *callBtn = tableCell.topBtn;
+    UIButton *addFavBtn = tableCell.favBtn;
+    [addFavBtn addTarget:self action:@selector(addFavMeeting:) forControlEvents:UIControlEventTouchUpInside];
     
-    mainLabel.ott_width = tableCell.contentView.ott_width / 2.0;
-    mainLabel.ott_centerY = tableCell.contentView.ott_height / 2.0;
+    [callBtn addTarget:self action:@selector(cellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    dateLabel.ott_width = tableCell.contentView.ott_width / 2.0;
-    dateLabel.ott_left = mainLabel.ott_right;
-    dateLabel.ott_centerY = tableCell.contentView.ott_height / 2.0;
+    callBtn.rd_userInfo = @{@"indexPath":indexPath};
     
     LinphoneCallLog *log = [[self.callLogs objectAtIndex:[indexPath row]] pointerValue];
     
@@ -495,10 +475,87 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)cellBtnClicked:(id)sender {
-    UIButton *btn = sender;
+    UIButton *callBtn = sender;
     
-    NSIndexPath *btnIndexPath = (NSIndexPath *)[btn.rd_userInfo objectForKey:@"indexPath"];
+    NSIndexPath *btnIndexPath = (NSIndexPath *)[callBtn.rd_userInfo objectForKey:@"indexPath"];
     [self goIndexPath:btnIndexPath];
+}
+
+- (void)addFavMeeting:(id)sender {
+    UIButton *favBtn = sender;
+    
+    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) != NULL ) {
+        // 已登录
+//        [self showToastWithMessage:@"收藏"];
+        
+        __weak LPJoinMettingViewController *weakSelf = self;
+        [weakSelf showToastWithMessage:@"收藏会议室中..."];
+        
+        RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
+        
+        NSIndexPath *btnIndexPath = (NSIndexPath *)[favBtn.rd_userInfo objectForKey:@"indexPath"];
+        LinphoneCallLog *callLog = [[self.callLogs objectAtIndex:[btnIndexPath row]] pointerValue];
+        LinphoneAddress* addr;
+        if (linphone_call_log_get_dir(callLog) == LinphoneCallIncoming) {
+            addr = linphone_call_log_get_from(callLog);
+        } else {
+            addr = linphone_call_log_get_to(callLog);
+        }
+        NSString* address = nil;
+        if(addr != NULL) {
+            BOOL useLinphoneAddress = true;
+            // contact name
+            char* lAddress = linphone_address_as_string_uri_only(addr);
+            if(lAddress) {
+                NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
+                ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+                if(contact) {
+                    address = [FastAddressBook getContactDisplayName:contact];
+                    useLinphoneAddress = false;
+                }
+                ms_free(lAddress);
+            }
+            if(useLinphoneAddress) {
+                const char* lDisplayName = linphone_address_get_display_name(addr);
+                const char* lUserName = linphone_address_get_username(addr);
+                if(lUserName)
+                    address = [NSString stringWithUTF8String:lUserName];
+                else if (lDisplayName)
+                    address = [NSString stringWithUTF8String:lDisplayName];
+            }
+        }
+        if(address == nil) {
+            address = NSLocalizedString(@"Unknown", nil);
+        }
+        
+        reqModel.addr = address;
+        
+        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      RDRAddFavResponseModel *model = responseObject;
+                      if ([model codeCheckSuccess] == YES) {
+                          NSLog(@"收藏会议室成功, model=%@", model);
+                          [weakSelf showToastWithMessage:@"收藏会议室成功"];
+                      }else {
+                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，%@(%ld)", model.msg, (long)model.code];
+                          NSLog(@"%@", tipStr);
+
+                          [weakSelf showToastWithMessage:tipStr];
+                      }
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      [weakSelf hideHudAndIndicatorView];
+                      
+                      //请求出错
+                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
+                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
+                      [weakSelf showToastWithMessage:tipStr];
+                  }];
+    }else {
+        // 未登录
+        [self showToastWithMessage:@"未登录，请先登录"];
+    }    
 }
 
 @end

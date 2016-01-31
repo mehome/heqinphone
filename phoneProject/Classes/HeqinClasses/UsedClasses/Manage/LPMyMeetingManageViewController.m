@@ -13,6 +13,7 @@
 #import "UIViewController+RDRTipAndAlert.h"
 #import "LPSystemUser.h"
 #import "LPMyManageSingleViewController.h"
+#import "LPCommonCell.h"
 
 @interface LPMyMeetingManageViewController () <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -39,6 +40,7 @@
     
     self.searchTable.tableFooterView = [[UIView alloc] init];
     self.searchTable.tableHeaderView = [[UIView alloc] init];
+    [self.searchTable registerClass:[LPCommonCell class] forCellReuseIdentifier:@"reusedCell"];
     
     self.floatView.userInteractionEnabled = NO;
     [self.floatView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
@@ -177,32 +179,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *tableCell = [tableView dequeueReusableCellWithIdentifier:@"reusedCell"];
+    LPCommonCell *tableCell = (LPCommonCell *)[tableView dequeueReusableCellWithIdentifier:@"reusedCell" forIndexPath:indexPath];
     
-    if (tableCell == nil) {
-        tableCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusedCell"];
-        
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 160, 40)];
-        [tableCell.contentView addSubview:titleLabel];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.tag = 9000;
-        
-        UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 0, 160, 40)];
-        [tableCell.contentView addSubview:dateLabel];
-        dateLabel.font = [UIFont systemFontOfSize:14.0];
-        dateLabel.backgroundColor = [UIColor clearColor];
-        dateLabel.tag = 9001;
-        
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = tableCell.contentView.bounds;
-        [tableCell.contentView addSubview:btn];
-        [btn addTarget:self action:@selector(cellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        btn.backgroundColor = [UIColor clearColor];
-        btn.tag = 9002;
-    }
-    
-    UIButton *btn = [tableCell.contentView viewWithTag:9002];
-    btn.frame = tableCell.contentView.bounds;
+    UIButton *btn = tableCell.topBtn;
+    [btn addTarget:self action:@selector(cellBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     btn.rd_userInfo = @{@"indexPath":indexPath};
     
     NSString *firstStr = nil;
@@ -211,15 +191,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     firstStr = curMeetingModel.name.length>0 ? curMeetingModel.name : curMeetingModel.addr;
     secondStr = curMeetingModel.time;
     
-    UILabel *firstLabel = (UILabel *)[tableCell.contentView viewWithTag:9000];
-    UILabel *secondLabel = (UILabel *)[tableCell.contentView viewWithTag:9001];
-    
-    firstLabel.ott_width = tableCell.contentView.ott_width / 2.0;
-    firstLabel.ott_centerY = tableCell.contentView.ott_height / 2.0;
-    
-    secondLabel.ott_width = tableCell.contentView.ott_width / 2.0;
-    secondLabel.ott_left = firstLabel.ott_right;
-    secondLabel.ott_centerY = tableCell.contentView.ott_height / 2.0;
+    UILabel *firstLabel = tableCell.leftLabel;
+    UILabel *secondLabel = tableCell.rightLabel;
     
     firstLabel.text = firstStr;
     secondLabel.text = secondStr;

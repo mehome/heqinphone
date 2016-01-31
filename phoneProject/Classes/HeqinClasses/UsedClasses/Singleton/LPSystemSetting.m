@@ -62,8 +62,7 @@
     if (cachedSipStr.length > 0) {
         self.sipDomainStr = cachedSipStr;
     }else {
-//        self.sipDomainStr = @"120.132.87.181";
-        self.sipDomainStr = @"120.132.87.180";
+        self.sipDomainStr = @"sip.myvmr.cn";//@"120.132.87.180";
     }
     
     self.joinerName = [[NSUserDefaults standardUserDefaults] stringForKey:@"joinerName"];

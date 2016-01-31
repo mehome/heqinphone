@@ -407,12 +407,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
-    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
-    
     // 存储下当前会议的address地址，以便后期进行收藏操作
     [LPSystemUser sharedUser].curMeetingAddr = address;
-}
 
+    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
+}
 
 #pragma mark - UITextFieldDelegate Functions
 
