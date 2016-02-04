@@ -103,6 +103,8 @@ extern NSString *const kLinphoneInCallCellData;
 
 @property (nonatomic, assign) BOOL meetingLockedStatus;     // 会议被锁定?，默认为No
 
+@property (nonatomic, strong) IBOutlet UIImageView *loadingTipImgView;      // 当前关闭摄像头时使用。打开摄像头后，则不显示
+
 @end
 
 @implementation UICallBar
@@ -544,6 +546,7 @@ extern NSString *const kLinphoneInCallCellData;
     self.meetingLockedStatus = NO;
     
     systemOpenCamera = NO;
+    self.loadingTipImgView.hidden = YES;
     
     LinphoneCore* lc = [LinphoneManager getLc];
     LinphoneCall* currentcall = linphone_core_get_current_call(lc);
@@ -884,6 +887,11 @@ extern NSString *const kLinphoneInCallCellData;
         linphone_call_params_enable_video(call_params, FALSE);
         linphone_core_update_call(lc, call, call_params);
         linphone_call_params_destroy(call_params);
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.loadingTipImgView.hidden = NO;
+        }];
+
     } else {
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot close video button, because no current call"];
     }
@@ -906,6 +914,10 @@ extern NSString *const kLinphoneInCallCellData;
         linphone_call_params_enable_video(call_params, TRUE);
         linphone_core_update_call(lc, call, call_params);
         linphone_call_params_destroy(call_params);
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.loadingTipImgView.hidden = YES;
+        }];
     } else {
         [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot open video button, because no current call"];
     }

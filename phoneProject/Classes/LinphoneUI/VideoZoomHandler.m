@@ -82,7 +82,6 @@
         return;
     }
     
-    
     linphone_call_zoom_video(linphone_core_get_current_call([LinphoneManager getLc]), s, &cx, &cy);
 }
 

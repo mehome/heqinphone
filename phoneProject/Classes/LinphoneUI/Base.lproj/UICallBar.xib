@@ -22,6 +22,7 @@
                 <outlet property="keyBgView" destination="ig8-lb-KmP" id="DJW-2Z-fR4"/>
                 <outlet property="keyboardBtn" destination="aJb-eg-BnZ" id="wN0-1x-y5W"/>
                 <outlet property="landscapeView" destination="100" id="137"/>
+                <outlet property="loadingTipImgView" destination="WB0-t1-wDZ" id="Vg7-qP-w6x"/>
                 <outlet property="nineButton" destination="6yc-7o-N4X" id="dq5-R8-h9u"/>
                 <outlet property="oneButton" destination="bmg-MO-Lsk" id="Nku-Ww-dDP"/>
                 <outlet property="portraitView" destination="4" id="138"/>
@@ -116,6 +117,13 @@
                         <constraint firstItem="FpB-mZ-2Go" firstAttribute="width" secondItem="bHl-tm-Qpf" secondAttribute="width" id="tap-Ne-OVu"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mz_callBg.png" translatesAutoresizingMaskIntoConstraints="NO" id="WB0-t1-wDZ">
+                    <rect key="frame" x="49" y="78" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="128" id="0VP-6G-lGR"/>
+                        <constraint firstAttribute="height" constant="128" id="i98-F4-4q7"/>
+                    </constraints>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uje-v5-zRE">
                     <rect key="frame" x="269" y="10" width="60" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -354,7 +362,7 @@
                                 <constraint firstAttribute="height" constant="21" id="7U2-E7-Ozv"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-eD-gCd" userLabel="subTitle">
@@ -420,9 +428,11 @@
                 <constraint firstAttribute="bottom" secondItem="Ile-NU-uiv" secondAttribute="bottom" id="21j-Qn-rvD"/>
                 <constraint firstItem="ig8-lb-KmP" firstAttribute="centerY" secondItem="4" secondAttribute="centerY" id="4bv-QP-5PO"/>
                 <constraint firstItem="Ile-NU-uiv" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="FOI-Lw-dFC"/>
+                <constraint firstItem="WB0-t1-wDZ" firstAttribute="centerY" secondItem="4" secondAttribute="centerY" id="Oyx-P7-PEB"/>
                 <constraint firstItem="uje-v5-zRE" firstAttribute="top" secondItem="4" secondAttribute="top" constant="10" id="PFq-1n-r2x"/>
                 <constraint firstAttribute="trailing" secondItem="skh-FZ-hiA" secondAttribute="trailing" id="PIk-7r-oI8"/>
                 <constraint firstItem="Ile-NU-uiv" firstAttribute="top" secondItem="4" secondAttribute="top" id="UTn-68-Mu6"/>
+                <constraint firstItem="WB0-t1-wDZ" firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="XUP-bk-zar"/>
                 <constraint firstItem="skh-FZ-hiA" firstAttribute="leading" secondItem="4" secondAttribute="leading" id="ZUT-OZ-FMz"/>
                 <constraint firstItem="aJb-eg-BnZ" firstAttribute="leading" secondItem="4" secondAttribute="leading" constant="10" id="j40-ri-zqz"/>
                 <constraint firstAttribute="trailing" secondItem="uje-v5-zRE" secondAttribute="trailing" constant="10" id="jTe-b0-REg"/>
@@ -454,6 +464,7 @@
         <image name="dialer_alt_background.png" width="530" height="526"/>
         <image name="logbg.png" width="139" height="139"/>
         <image name="m_barBg.png" width="1" height="1"/>
+        <image name="mz_callBg.png" width="128" height="128"/>
         <image name="numpad_eight_default.png" width="220" height="113"/>
         <image name="numpad_eight_over.png" width="220" height="113"/>
         <image name="numpad_five_default.png" width="220" height="113"/>

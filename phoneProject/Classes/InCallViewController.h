@@ -42,5 +42,6 @@
 @property (nonatomic, retain) IBOutlet UIView* videoPreview;
 @property (nonatomic, retain) IBOutlet UICamSwitch* videoCameraSwitch;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView* videoWaitingForFirstImage;
+@property (nonatomic, retain) IBOutlet UIImageView *loadingImgView;
 
 @end

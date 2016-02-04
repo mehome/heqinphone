@@ -43,6 +43,7 @@
 @synthesize videoPreview;
 @synthesize videoCameraSwitch;
 @synthesize videoWaitingForFirstImage;
+@synthesize loadingImgView;
 #ifdef TEST_VIDEO_VIEW_CHANGE
 @synthesize testVideoView;
 #endif
@@ -69,6 +70,7 @@
     [videoCameraSwitch release];
     
     [videoWaitingForFirstImage release];
+    [loadingImgView release];
     
     [videoZoomHandler release];
     
@@ -174,6 +176,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     [videoCameraSwitch setAlpha:1.0];
     
     [videoCameraSwitch setPreview:videoPreview];
+    
+    
+    [videoWaitingForFirstImage setHidden: NO];
+    [videoWaitingForFirstImage startAnimating];
+    [loadingImgView setHidden:NO];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -322,6 +329,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     [videoWaitingForFirstImage setHidden: NO];
     [videoWaitingForFirstImage startAnimating];
+    [loadingImgView setHidden:NO];
     
     LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
     //linphone_call_params_get_used_video_codec return 0 if no video stream enabled
@@ -365,6 +373,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)hideSpinnerIndicator: (LinphoneCall*)call {
     videoWaitingForFirstImage.hidden = TRUE;
+    loadingImgView.hidden = TRUE;
 }
 
 static void hideSpinner(LinphoneCall* call, void* user_data) {

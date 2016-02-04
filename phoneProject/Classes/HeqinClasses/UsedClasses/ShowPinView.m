@@ -110,19 +110,19 @@
 
 - (void)doneClicked:(UIButton *)sender {
     NSString *str = [self.inputField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (str.length == 0) {
-        // do nothing.
-        if (self.noInput) {
-            self.noInput();
-            [self.inputField becomeFirstResponder];
-        }
-        return;
-    }else {
+//    if (str.length == 0) {        // 由于他们支持无输入要求，所以这里把无输入的情况也认为是正常的输入.
+//        // do nothing.
+//        if (self.noInput) {
+//            self.noInput();
+//            [self.inputField becomeFirstResponder];
+//        }
+//        return;
+//    }else {
         if (self.confirmDone) {
-            NSString *contentStr = str;
+            NSString *contentStr = (str.length == 0) ? @"":str;
             self.confirmDone(contentStr);
         }
-    }
+//    }
     
     UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
     if ([bgView isKindOfClass:[UIView class]] && bgView != nil) {

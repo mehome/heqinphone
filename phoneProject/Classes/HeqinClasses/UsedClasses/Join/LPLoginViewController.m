@@ -222,11 +222,21 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
+    NSString *domainName = @"";
     
     NSString *userId = [username copy];
+    
     if ([username containsString:@"@"] == YES) {
-        username = [username componentsSeparatedByString:@"@"].firstObject;
-        if (username.length == 0) {
+        NSArray *arr = [username componentsSeparatedByString:@"@"];
+        if (arr.count != 2) {
+            [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
+            return;
+        }else {
+            username = arr[0];
+            domainName = arr[1];
+        }
+        
+        if (username.length == 0 || domainName.length == 0) {
             [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
             return;
         }
@@ -240,14 +250,15 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     UseTheTCP80Port
     transport = @"TCP";
-
+    
+    [LPSystemSetting sharedSetting].sipDomainStr = domainName;
     
 //    username = @"feng.wang";
 //    userId = @"feng.wang@zijingcloud.com";
 //    NSString *password = @"wang@2015";
 //    NSString *transport = @"UDP";
     
-    [self verificationSignInWithUsername:username userId:userId password:password domain:[LPSystemSetting sharedSetting].sipDomainStr withTransport:transport];
+    [self verificationSignInWithUsername:username userId:userId password:password domain:domainName withTransport:transport];
 }
 
 - (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {

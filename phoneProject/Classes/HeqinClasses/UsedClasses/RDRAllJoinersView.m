@@ -27,6 +27,7 @@
 #import "RDROperationMuteResponseModel.h"
 #import "RDROperationMuteVideoResponseModel.h"
 #import "RDROperationKickoutResponseModel.h"
+#import "RDRAllJoinerCell.h"
 
 typedef void(^doneAfterPinBlock)(NSString *pinStr);
 
@@ -87,6 +88,7 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
         [self addSubview:_closeBtn];
 
         _theTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        [_theTable registerClass:[RDRAllJoinerCell class] forCellReuseIdentifier:@"reusedCell"];
         _theTable.dataSource = self;
         _theTable.tableFooterView = [[UIView alloc] init];
         _theTable.tableHeaderView = [[UIView alloc] init];
@@ -371,72 +373,36 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
 #define kBtnInterval 30
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *tableCell = [tableView dequeueReusableCellWithIdentifier:@"reusedCell"];
-    if (tableCell == nil) {
-        tableCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusedCell"];
-        
-        UIImageView *manImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 4, 36, 36)];
-        [tableCell.contentView addSubview:manImgView];
-        manImgView.ott_centerY = tableCell.contentView.ott_centerY;
-        manImgView.backgroundColor = [UIColor clearColor];
-        manImgView.tag = 8999;
-        
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(manImgView.ott_right+10, 0, 120, 40)];
-        [tableCell.contentView addSubview:nameLabel];
-        nameLabel.ott_centerY = tableCell.contentView.ott_centerY;
-        nameLabel.backgroundColor = [UIColor clearColor];
-        nameLabel.tag = 9000;
-        
-        UIButton *muteVoicebtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        muteVoicebtn.frame = tableCell.contentView.bounds;
-        [tableCell.contentView addSubview:muteVoicebtn];
-        [muteVoicebtn addTarget:self action:@selector(muteVoiceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        muteVoicebtn.backgroundColor = [UIColor clearColor];
-        muteVoicebtn.tag = 9001;
-        
-        UIButton *muteVideobtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        muteVideobtn.frame = tableCell.contentView.bounds;
-        [tableCell.contentView addSubview:muteVideobtn];
-        [muteVideobtn addTarget:self action:@selector(muteVideoBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        muteVideobtn.backgroundColor = [UIColor clearColor];
-        muteVideobtn.tag = 9002;
+    RDRAllJoinerCell *tableCell = (RDRAllJoinerCell *)[tableView dequeueReusableCellWithIdentifier:@"reusedCell" forIndexPath:indexPath];
+    
+    UIImageView *manImgView = tableCell.manTypeImgView;
+    UILabel *nameLabel = tableCell.manNameLabel;
+    UIButton *cellMuteVoiceBtn = tableCell.voiceBtn;
+    [cellMuteVoiceBtn addTarget:self action:@selector(muteVoiceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 
-        UIButton *kickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [tableCell.contentView addSubview:kickBtn];
-        [kickBtn addTarget:self action:@selector(kickBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        kickBtn.backgroundColor = [UIColor clearColor];
-        kickBtn.tag = 9003;
-        
-        kickBtn.frame = CGRectMake(tableCell.contentView.ott_width - kCellBtnWidth - 10, 0, kCellBtnWidth, kCellBtnWidth);
-        muteVideobtn.frame = CGRectMake(kickBtn.ott_left - kCellBtnWidth - kBtnInterval, 0, kCellBtnWidth, kCellBtnWidth);
-        muteVoicebtn.frame = CGRectMake(muteVideobtn.ott_left - kCellBtnWidth - kBtnInterval, 0, kCellBtnWidth, kCellBtnWidth);
-        
-        kickBtn.ott_centerY = tableCell.contentView.ott_centerY;
-        muteVideobtn.ott_centerY = tableCell.contentView.ott_centerY;
-        muteVoicebtn.ott_centerY = tableCell.contentView.ott_centerY;
-    }
+    UIButton *cellMuteVedioBtn = tableCell.videoBtn;
+    [cellMuteVedioBtn addTarget:self action:@selector(muteVideoBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *cellKickBtn = tableCell.kickBtn;
+    [cellKickBtn addTarget:self action:@selector(kickBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     // 取出当前的model
     RDROperationJoinerModel *curJoiner = [self.joiners objectAtIndex:indexPath.row];
     
-    UIImageView *manImgView = [tableCell.contentView viewWithTag:8999];
     manImgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", (curJoiner.role.integerValue == 1) ? @"joiner_host":@"joiner_guest"]];
-    
-    UILabel *nameLabel = [tableCell.contentView viewWithTag:9000];
     nameLabel.text = curJoiner.name;
     
-    UIButton *cellMuteVoiceBtn = [tableCell.contentView viewWithTag:9001];
     cellMuteVoiceBtn.rd_userInfo = @{@"joinerModel":curJoiner};
-    [cellMuteVoiceBtn setImage:[UIImage imageNamed:(curJoiner.audio.integerValue == 1 ? @"mMicOff" : @"mMicOn")] forState:UIControlStateNormal];
+    [cellMuteVoiceBtn setImage:[UIImage imageNamed:(curJoiner.audio.integerValue == 1 ? @"mz_muteaudio_default" : @"mz_muteaudio_on_default")] forState:UIControlStateNormal];
+    [cellMuteVoiceBtn setImage:[UIImage imageNamed:(curJoiner.audio.integerValue == 1 ? @"mz_muteaudio_over" : @"mz_muteaudio_on_over")] forState:UIControlStateHighlighted];
     
-    UIButton *cellMuteVedioBtn = [tableCell.contentView viewWithTag:9002];
     cellMuteVedioBtn.rd_userInfo = @{@"joinerModel":curJoiner};
-    [cellMuteVedioBtn setImage:[UIImage imageNamed:(curJoiner.video.integerValue == 1 ? @"mVideoOff" : @"mVideoOn")] forState:UIControlStateNormal];
+    [cellMuteVedioBtn setImage:[UIImage imageNamed:(curJoiner.video.integerValue == 1 ? @"mz_mutevideo_default" : @"mz_mutevideo_on_default")] forState:UIControlStateNormal];
+    [cellMuteVedioBtn setImage:[UIImage imageNamed:(curJoiner.video.integerValue == 1 ? @"mz_mutevideo_over" : @"mz_mutevideo_on_over")] forState:UIControlStateHighlighted];
 
-    UIButton *cellKickBtn = [tableCell.contentView viewWithTag:9003];
     cellKickBtn.rd_userInfo = @{@"joinerModel":curJoiner};
-    [cellKickBtn setImage:[UIImage imageNamed:@"mKickoutOn"] forState:UIControlStateNormal];
-    [cellKickBtn setImage:[UIImage imageNamed:@"mKickoutOff"] forState:UIControlStateHighlighted];
+    [cellKickBtn setImage:[UIImage imageNamed:@"mz_kickout_default"] forState:UIControlStateNormal];
+    [cellKickBtn setImage:[UIImage imageNamed:@"mz_kickout_over"] forState:UIControlStateHighlighted];
 
     return tableCell;
 }
