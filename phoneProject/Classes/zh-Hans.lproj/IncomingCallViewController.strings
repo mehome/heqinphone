@@ -1,21 +1,21 @@
 
 /* Class = "UIButton"; accessibilityLabel = "Decline"; ObjectID = "6"; */
-"6.accessibilityLabel" = "Decline";
+"6.accessibilityLabel" = "拒接";
 
 /* Class = "UIButton"; accessibilityLabel = "Accept"; ObjectID = "7"; */
-"7.accessibilityLabel" = "Accept";
+"7.accessibilityLabel" = "接听";
 
 /* Class = "UILabel"; accessibilityLabel = "Contact name"; ObjectID = "9"; */
-"9.accessibilityLabel" = "Contact name";
+"9.accessibilityLabel" = "联系人姓名";
 
 /* Class = "UILabel"; text = "0102030405"; ObjectID = "9"; */
 "9.text" = "0102030405";
 
 /* Class = "UIImageView"; accessibilityLabel = "Contact avatar"; ObjectID = "19"; */
-"19.accessibilityLabel" = "Contact avatar";
+"19.accessibilityLabel" = "联系人";
 
 /* Class = "UILabel"; accessibilityLabel = "Incoming call"; ObjectID = "31"; */
-"31.accessibilityLabel" = "Incoming call";
+"31.accessibilityLabel" = "来电";
 
 /* Class = "UILabel"; text = "Incoming call"; ObjectID = "31"; */
-"31.text" = "Incoming call";
+"31.text" = "来电";

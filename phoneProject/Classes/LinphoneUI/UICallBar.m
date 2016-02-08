@@ -117,10 +117,10 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)dataFillToPreview {
-    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
+    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr ?:@""];
     self.callSubtitleLabel.text = [[NSString stringWithString:addr] copy];
 
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
+    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
     NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
     
     // 移掉后部
@@ -464,7 +464,7 @@ extern NSString *const kLinphoneInCallCellData;
 - (NSString *)curMeetingAddr {
     NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
     
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
+    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
     NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
     
     // 移掉后部
@@ -954,7 +954,7 @@ static BOOL systemOpenCamera = NO;
 - (void)callUpdate:(LinphoneCall*)call state:(LinphoneCallState)state {
     NSLog(@"callUpdate state =%d", state);
     
-    if (state == LinphoneCallOutgoingRinging) {
+    if (state == LinphoneCallOutgoingRinging || state == LinphoneCallStreamsRunning) {
         // 连接建立好了，可以进入
         self.callTipView.hidden = YES;
     }

@@ -12,7 +12,9 @@
 
 @interface LPSystemSetting : NSObject
 
-@property (nonatomic, copy) NSString *sipDomainStr;                 // 记录上次使用的domain值，该值目前直接强制设定成固定值
+@property (nonatomic, copy) NSString *sipDomainStr; // 记录上次使用的domain值，将会是sip.myvmr.com
+
+@property (nonatomic, copy) NSString *sipTmpProxy;// 取自于用户的qin.he@zijing.com中的zijing.com
 
 @property (nonatomic, copy) NSString *joinerName;               // 参会者名称，是用户可以直接进行设置的
 

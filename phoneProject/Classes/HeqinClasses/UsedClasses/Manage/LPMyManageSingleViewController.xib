@@ -10,6 +10,7 @@
                 <outlet property="guestPinTextField" destination="8Nu-vs-kRF" id="wKh-pt-unc"/>
                 <outlet property="hostPinTextField" destination="4XD-PT-rd0" id="dYP-vS-5R3"/>
                 <outlet property="meetingNameLabel" destination="ib3-ce-wit" id="6ct-JT-oJd"/>
+                <outlet property="settingBtn" destination="K91-nS-zke" id="KiF-7Y-1jy"/>
                 <outlet property="statusBtn" destination="by8-iB-u4r" id="Dbj-ba-XU2"/>
                 <outlet property="statusTextField" destination="hLG-R9-hoz" id="O6B-I6-Pqg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

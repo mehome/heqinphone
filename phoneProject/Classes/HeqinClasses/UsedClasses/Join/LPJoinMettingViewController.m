@@ -333,7 +333,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     NSString *callStr = address;
-    NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr;
+    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy ?: @"";
     if (![address hasSuffix:domainStr] && domainStr.length>0) {
         callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
     }

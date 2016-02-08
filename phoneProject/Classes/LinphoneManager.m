@@ -1844,6 +1844,8 @@ static void audioRouteChangeListenerCallback (
 		linphone_call_params_enable_low_bandwidth(lcallParams, low_bandwidth);
 	}
 
+    
+    
 	linphone_core_accept_call_with_params(theLinphoneCore,call, lcallParams);
 }
 

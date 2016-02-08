@@ -2,289 +2,289 @@
 " (Aborted)" = " 退出";
 
 /* No comment provided by engineer. */
-" (Declined)" = " (Declined)";
+" (Declined)" = " 拒接";
 
 /* No comment provided by engineer. */
-" (Missed)" = " (Missed)";
+" (Missed)" = " 错过";
 
 /* No comment provided by engineer. */
-"%@ is composing..." = "%@ is composing...";
+"%@ is composing..." = "%@ 组成...";
 
 /* No comment provided by engineer. */
-"%@\nReason was: %@" = "%1$@\nReason was: %2$@";
+"%@\nReason was: %@" = "%1$@\n原因是: %2$@";
 
 /* %d */
-"%d unread messages" = "%d unread messages";
+"%d unread messages" = "%d 未读信息";
 
 /* No comment provided by engineer. */
-"'%@' not registered" = "'%@' not registered";
+"'%@' not registered" = "'%@' 未注册";
 
 /* No comment provided by engineer. */
-"'%@' would like to enable video" = "'%@' would like to enable video";
+"'%@' would like to enable video" = "'%@' 想要打开视频";
 
 /* No comment provided by engineer. */
-"About" = "About";
+"About" = "关于";
 
 /* No comment provided by engineer. */
-"Accept" = "Accept";
+"Accept" = "接受";
 
 /* No comment provided by engineer. */
-"Account creation issue" = "Account creation issue";
+"Account creation issue" = "帐号创建";
 
 /* No comment provided by engineer. */
-"Account validation issue" = "Account validation issue";
+"Account validation issue" = "帐号确认";
 
 /* No comment provided by engineer. */
-"Address book" = "Address book";
+"Address book" = "通讯录";
 
 /* No comment provided by engineer. */
-"Alert" = "Alert";
+"Alert" = "提示";
 
 /* No comment provided by engineer. */
-"Answer" = "Answer";
+"Answer" = "回应";
 
 /* No comment provided by engineer. */
-"Are you sure to want to clear your proxy setup?" = "Are you sure to want to clear your proxy setup?";
+"Are you sure to want to clear your proxy setup?" = "你确认想要清除掉代码设置?";
 
 /* No comment provided by engineer. */
 "Average" = "Average";
 
 /* No comment provided by engineer. */
-"Bad credentials, check your account settings" = "Bad credentials, check your account settings";
+"Bad credentials, check your account settings" = "证书错误，检查你的帐号设置";
 
 /* No comment provided by engineer. */
-"Battery is running low. Stop video ?" = "Battery is running low. Stop video ?";
+"Battery is running low. Stop video ?" = "电量低，停止视频？";
 
 /* No comment provided by engineer. */
-"Call failed" = "Call failed";
+"Call failed" = "呼号失败";
 
 /* No comment provided by engineer. */
-"Camera" = "Camera";
+"Camera" = "摄像头";
 
 /* No comment provided by engineer. */
-"Can't create the account. Please try again." = "Can't create the account. Please try again.";
+"Can't create the account. Please try again." = "不能创建帐号，请再试一试.";
 
 /* No comment provided by engineer. */
-"Cancel" = "Cancel";
+"Cancel" = "取消";
 
 /* No comment provided by engineer. */
-"Cannot call %@" = "Cannot call %@";
+"Cannot call %@" = "不能拨打 %@";
 
 /* No comment provided by engineer. */
-"Cannot make call" = "Cannot make call";
+"Cannot make call" = "不能拨打";
 
 /* No comment provided by engineer. */
-"Cannot send email" = "Cannot send email";
+"Cannot send email" = "不能发邮件";
 
 /* No comment provided by engineer. */
-"Cannot transfer file from remote contact" = "Cannot transfer file from remote contact";
+"Cannot transfer file from remote contact" = "从联系人那不能传输文件";
 
 /* No comment provided by engineer. */
-"Cannot transfer file to remote contact" = "Cannot transfer file to remote contact";
+"Cannot transfer file to remote contact" = "不能传输文件给联系人";
 
 /* No comment provided by engineer. */
-"Cannot write image to photo library" = "Cannot write image to photo library";
+"Cannot write image to photo library" = "不能存储图片";
 
 /* No comment provided by engineer. */
 "Check error(s)" = "检查到错误";
 
 /* No comment provided by engineer. */
-"Check issue" = "Check issue";
+"Check issue" = "检查文件";
 
 /* No comment provided by engineer. */
-"Choose the image size" = "Choose the image size";
+"Choose the image size" = "选择图片大小";
 
 /* No comment provided by engineer. */
-"Communication issue" = "Communication issue";
+"Communication issue" = "通讯文件";
 
 /* No comment provided by engineer. */
-"Communication issue (%@)" = "Communication issue (%@)";
+"Communication issue (%@)" = "通讯文件 (%@)";
 
 /* No comment provided by engineer. */
-"Company name" = "Company name";
+"Company name" = "公司名称";
 
 /* No comment provided by engineer. */
-"Confirm the following SAS with the peer:\n%s" = "Confirm the following SAS with the peer:\n%s";
+"Confirm the following SAS with the peer:\n%s" = "配对确认SAS:\n%s";
 
 /* No comment provided by engineer. */
 "Continue" = "继续";
 
 /* No comment provided by engineer. */
-"Continue video" = "Continue video";
+"Continue video" = "继续视频";
 
 /* No comment provided by engineer. */
-"Decline" = "Decline";
+"Decline" = "拒接";
 
 /* ICE has established a direct connection to the remote host */
-"Direct connection" = "Direct connection";
+"Direct connection" = "直接连接";
 
 /* No comment provided by engineer. */
-"Disabled, build from sources to enable" = "Disabled, build from sources to enable";
+"Disabled, build from sources to enable" = "关闭，编译代码来打开";
 
 /* No comment provided by engineer. */
-"Dismiss" = "Dismiss";
+"Dismiss" = "消失";
 
 /* No comment provided by engineer. */
-"Either configure a SIP proxy server from settings prior to place a call or use a valid SIP address (I.E sip:john@example.net)" = "Either configure a SIP proxy server from settings prior to place a call or use a valid SIP address (I.E sip:john@example.net)";
+"Either configure a SIP proxy server from settings prior to place a call or use a valid SIP address (I.E sip:john@example.net)" = "在设置中配置一个SIP代理服务器或者输入一个有效的SIP地址 (如sip:john@zijingcloud.com)";
 
 /* No comment provided by engineer. */
-"Either configure a SIP proxy server from settings prior to send a message or use a valid SIP address (I.E sip:john@example.net)" = "Either configure a SIP proxy server from settings prior to send a message or use a valid SIP address (I.E sip:john@example.net)";
+"Either configure a SIP proxy server from settings prior to send a message or use a valid SIP address (I.E sip:john@example.net)" = "在设置中配置一个SIP代理服务器，或者输入一个有效的SIP地址以发送消息(如sip:john@example.net)";
 
 /* No comment provided by engineer. */
-"Email address" = "Email address";
+"Email address" = "邮件地址";
 
 /* No comment provided by engineer. */
-"Email addresses" = "Email addresses";
+"Email addresses" = "邮件地址";
 
 /* Enter an address */
-"Enter an address" = "Enter an address";
+"Enter an address" = "输入一个邮件地址";
 
 /* No comment provided by engineer. */
-"Enter provisioning URL" = "Enter provisioning URL";
+"Enter provisioning URL" = "输入一个配置URL";
 
 /* No comment provided by engineer. */
-"Enter your password" = "Enter your password";
+"Enter your password" = "输入你的密码";
 
 /* No comment provided by engineer. */
-"Enter your username" = "Enter your username";
+"Enter your username" = "输入你的用户名";
 
 /* No comment provided by engineer. */
-"Error" = "Error";
+"Error" = "错误";
 
 /* ICE processing has failed */
-"Failed" = "Failed";
+"Failed" = "失败";
 
 /* No comment provided by engineer. */
-"Failed configuring from the specified URL." = "Failed configuring from the specified URL.";
+"Failed configuring from the specified URL." = "配置URL失败";
 
 /* No comment provided by engineer. */
-"Failure" = "Failure";
+"Failure" = "失败";
 
 /* No comment provided by engineer. */
-"Fetch" = "Fetch";
+"Fetch" = "获取";
 
 /* No comment provided by engineer. */
-"Fetching remote configuration" = "Fetching remote configuration";
+"Fetching remote configuration" = "远程获取配置";
 
 /* No comment provided by engineer. */
-"Fetching remote configuration..." = "Fetching remote configuration...";
+"Fetching remote configuration..." = "远程获取配置中...";
 
 /* No comment provided by engineer. */
-"First name" = "First name";
+"First name" = "名字";
 
 /* No comment provided by engineer. */
-"GNU General Public License V2 " = "GNU General Public License V2 ";
+"GNU General Public License V2 " = "GNU统一公开许可证";
 
 /* No comment provided by engineer. */
-"http://www.linphone.org" = "http://www.linphone.org";
+"http://www.linphone.org" = "http://www.zijingcloud.com";
 
 /* No comment provided by engineer. */
-"IC_MSG" = "Incoming call from %@";
+"IC_MSG" = "电话来自%@";
 
 /* No comment provided by engineer. */
-"Illegal character in username: %@" = "Illegal character in username: %@";
+"Illegal character in username: %@" = "用户名中有无效字符: %@";
 
 /* No comment provided by engineer. */
-"IM_MSG" = "Incoming message from %@";
+"IM_MSG" = "信息来自 %@";
 
 /* ICE process is in progress */
-"In progress" = "In progress";
+"In progress" = "进行中";
 
 /* No comment provided by engineer. */
-"Incoming call" = "Incoming call";
+"Incoming call" = "来电";
 
 /* No comment provided by engineer. */
-"Invalid address" = "Invalid address";
+"Invalid address" = "地址无效";
 
 /* No comment provided by engineer. */
-"Invalid proxy address" = "Invalid proxy address";
+"Invalid proxy address" = "无效代理地址";
 
 /* No comment provided by engineer. */
-"Invalid route" = "Invalid route";
+"Invalid route" = "无效路由";
 
 /* No comment provided by engineer. */
-"Invalid SIP address" = "Invalid SIP address";
+"Invalid SIP address" = "无效SIP地址";
 
 /* No comment provided by engineer. */
-"Invalid username or domain" = "Invalid username or domain";
+"Invalid username or domain" = "无效用户名或域名";
 
 /* No comment provided by engineer. */
-"Last name" = "Last name";
+"Last name" = "姓";
 
 /* No comment provided by engineer. */
-"Launch Wizard" = "Launch Wizard";
+"Launch Wizard" = "启动向导";
 
 /* No comment provided by engineer. */
-"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?";
+"Launching the Wizard will delete any existing proxy config.\nAre you sure to want it?" = "启动向导将会删除掉已有的配置.\n你确认要进行么?";
 
 /* No comment provided by engineer. */
-"Linphone Logs" = "Linphone Logs";
+"Linphone Logs" = "日志";
 
 /* No comment provided by engineer. */
-"Linphone logs" = "Linphone logs";
+"Linphone logs" = "日志";
 
 /* No comment provided by engineer. */
-"Low bandwidth" = "Low bandwidth";
+"Low bandwidth" = "低带宽";
 
 /* InAppSettingsKit */
-"Mail not configured" = "Mail not configured";
+"Mail not configured" = "未配置邮件";
 
 /* No comment provided by engineer. */
-"Mark Read" = "Mark Read";
+"Mark Read" = "标识为已读";
 
 /* No comment provided by engineer. */
-"Maximum" = "Maximum";
+"Maximum" = "最大化";
 
 /* No comment provided by engineer. */
-"Minimum" = "Minimum";
+"Minimum" = "最小化";
 
 /* ICE has established a connection to the remote host through one or several NATs */
-"NAT(s) connection" = "NAT(s) connection";
+"NAT(s) connection" = "NAT(s) 连接";
 
 /* No comment provided by engineer. */
-"Network down" = "Network down";
+"Network down" = "网络丢失";
 
 /* No comment provided by engineer. */
-"Network Error" = "Network Error";
+"Network Error" = "网络错误";
 
 /* No comment provided by engineer. */
-"No" = "No";
+"No" = "不";
 
 /* No comment provided by engineer. */
-"No codec" = "No codec";
+"No codec" = "未编码";
 
 /* No comment provided by engineer. */
-"No connectivity" = "No connectivity";
+"No connectivity" = "无连接";
 
 /* No comment provided by engineer. */
-"No microphone" = "No microphone";
+"No microphone" = "无麦克风";
 
 /* No comment provided by engineer. */
-"No SIP account configured" = "No SIP account configured";
+"No SIP account configured" = "未配置SIP帐号";
 
 /* ICE has not been activated for this call */
-"Not activated" = "Not activated";
+"Not activated" = "未激活";
 
 /* No comment provided by engineer. */
-"Not registered" = "Not registered";
+"Not registered" = "未注册";
 
 /* No comment provided by engineer. */
-"Ok" = "Ok";
+"Ok" = "好";
 
 /* InAppSettingsKit */
-"OK" = "OK";
+"OK" = "好";
 
 /* No comment provided by engineer. */
-"Outgoing call" = "Outgoing call";
+"Outgoing call" = "拨了的电话";
 
 /* No comment provided by engineer. */
-"Phone number" = "Phone number";
+"Phone number" = "电话号码";
 
 /* No comment provided by engineer. */
-"Phone numbers" = "Phone numbers";
+"Phone numbers" = "电话号码";
 
 /* No comment provided by engineer. */
-"Photo library" = "Photo library";
+"Photo library" = "号码薄";
 
 /* No comment provided by engineer. */
 "Please enter a valid domain.\n" = "请输入有效的域名\n";
@@ -296,136 +296,136 @@
 "Please enter a valid username.\n" = "请输入有效的用户名\n";
 
 /* No comment provided by engineer. */
-"Please make sure your device is connected to the internet and double check your SIP account configuration in the settings." = "Please make sure your device is connected to the internet and double check your SIP account configuration in the settings.";
+"Please make sure your device is connected to the internet and double check your SIP account configuration in the settings." = "请确认设置连接网络以及你的SIP帐号配置完成";
 
 /* No comment provided by engineer. */
 "Please terminate GSM call" = "请关闭手机信号";
 
 /* No comment provided by engineer. */
-"Provisioning Load error" = "Provisioning Load error";
+"Provisioning Load error" = "配置加载出错";
 
 /* No comment provided by engineer. */
-"Registered" = "Registered";
+"Registered" = "已注册";
 
 /* No comment provided by engineer. */
-"Registration failed" = "Registration failed";
+"Registration failed" = "注册失败";
 
 /* No comment provided by engineer. */
-"Registration failure" = "Registration failure";
+"Registration failure" = "注册失败";
 
 /* No comment provided by engineer. */
-"Registration in progress" = "Registration in progress";
+"Registration in progress" = "注册中";
 
 /* ICE has established a connection through a relay */
-"Relay connection" = "Relay connection";
+"Relay connection" = "转接器连接";
 
 /* No comment provided by engineer. */
-"Remote configuration" = "Remote configuration";
+"Remote configuration" = "远程配置";
 
 /* No comment provided by engineer. */
-"Remote configuration successfully fetched and applied." = "Remote configuration successfully fetched and applied.";
+"Remote configuration successfully fetched and applied." = "获取并应用远程配置.";
 
 /* No comment provided by engineer. */
-"Remove" = "Remove";
+"Remove" = "移除";
 
 /* No comment provided by engineer. */
-"Remove trust in the peer?" = "Remove trust in the peer?";
+"Remove trust in the peer?" = "移除配对信息?";
 
 /* No comment provided by engineer. */
-"Reply" = "Reply";
+"Reply" = "回复";
 
 /* Resend */
-"Resend" = "Resend";
+"Resend" = "重发";
 
 /* No comment provided by engineer. */
-"Select picture source" = "Select picture source";
+"Select picture source" = "选择图片源";
 
 /* No comment provided by engineer. */
-"Settings" = "Settings";
+"Settings" = "设置";
 
 /* No comment provided by engineer. */
-"Show" = "Show";
+"Show" = "显示";
 
 /* No comment provided by engineer. */
-"Simulator cannot send emails. To test this feature, please use a real device." = "Simulator cannot send emails. To test this feature, please use a real device.";
+"Simulator cannot send emails. To test this feature, please use a real device." = "模拟器不能发送邮件，请使用真机.";
 
 /* No comment provided by engineer. */
-"SIP address" = "SIP address";
+"SIP address" = "SIP地址";
 
 /* No comment provided by engineer. */
-"SIP addresses" = "SIP addresses";
+"SIP addresses" = "SIP地址";
 
 /* No comment provided by engineer. */
-"Stay here" = "Stay here";
+"Stay here" = "保留";
 
 /* No comment provided by engineer. */
-"Stop video" = "Stop video";
+"Stop video" = "停止视频";
 
 /* No comment provided by engineer. */
 "Success" = "成功";
 
 /* No comment provided by engineer. */
-"The address should only contain ASCII data" = "The address should only contain ASCII data";
+"The address should only contain ASCII data" = "地址只包含标准字符";
 
 /* No comment provided by engineer. */
-"The email is invalid.\n" = "The email is invalid.\n";
+"The email is invalid.\n" = "邮件地址无效.\n";
 
 /* No comment provided by engineer. */
-"The password is too short (minimum %d characters).\n" = "The password is too short (minimum %d characters).\n";
+"The password is too short (minimum %d characters).\n" = "密码太短 (最少 %d 个字符).\n";
 
 /* No comment provided by engineer. */
-"The passwords are different.\n" = "The passwords are different.\n";
+"The passwords are different.\n" = "密码输入不一致.\n";
 
 /* No comment provided by engineer. */
-"The username is too short (minimum %d characters).\n" = "The username is too short (minimum %d characters).\n";
+"The username is too short (minimum %d characters).\n" = "用户名太短 (最少 %d 个字符).\n";
 
 /* No comment provided by engineer. */
-"There is no network connection available, enable WIFI or WWAN prior to place a call" = "There is no network connection available, enable WIFI or WWAN prior to place a call";
+"There is no network connection available, enable WIFI or WWAN prior to place a call" = "无网络连接, 请打开网络";
 
 /* InAppSettingsKit */
-"This device is not configured for sending Email. Please configure the Mail settings in the Settings app." = "This device is not configured for sending Email. Please configure the Mail settings in the Settings app.";
+"This device is not configured for sending Email. Please configure the Mail settings in the Settings app." = "该设备未设置邮箱，请先设置邮箱.";
 
 /* No comment provided by engineer. */
-"This operation will load a remote configuration. Continue ?" = "This operation will load a remote configuration. Continue ?";
+"This operation will load a remote configuration. Continue ?" = "将加载无程配置.是否继续?";
 
 /* No comment provided by engineer. */
-"Transfer error" = "Transfer error";
+"Transfer error" = "传输错误";
 
 /* No comment provided by engineer. */
-"Unknown" = "Unknown";
+"Unknown" = "未知";
 
 /* No comment provided by engineer. */
-"Username already exists" = "Username already exists";
+"Username already exists" = "用户名已存在";
 
 /* No comment provided by engineer. */
-"Video cannot be activated because of low bandwidth condition, only audio is available" = "Video cannot be activated because of low bandwidth condition, only audio is available";
+"Video cannot be activated because of low bandwidth condition, only audio is available" = "网络不好导致视频不能激活, 仅声音可用";
 
 /* No comment provided by engineer. */
-"Voice mail" = "Voice mail";
+"Voice mail" = "声音邮件";
 
 /* No comment provided by engineer. */
-"Warning" = "Warning";
+"Warning" = "警告";
 
 /* No comment provided by engineer. */
-"Yes" = "Yes";
+"Yes" = "是";
 
 /* No comment provided by engineer. */
-"You can either skip verification or connect to the Internet first." = "You can either skip verification or connect to the Internet first.";
+"You can either skip verification or connect to the Internet first." = "你可跳过验证或者先连接网络";
 
 /* No comment provided by engineer. */
-"You missed a call from %@" = "You missed a call from %@";
+"You missed a call from %@" = "你的电话错过了来自 %@";
 
 /* No comment provided by engineer. */
-"You must authorize the application to have access to address book.\nToggle the application in Settings > Privacy > Contacts" = "You must authorize the application to have access to address book.\nToggle the application in Settings > Privacy > Contacts";
+"You must authorize the application to have access to address book.\nToggle the application in Settings > Privacy > Contacts" = "你必须授权访问通讯录.\在设置 > 隐私 > 联系人";
 
 /* No comment provided by engineer. */
-"You need to plug a microphone to your device to use this application." = "You need to plug a microphone to your device to use this application.";
+"You need to plug a microphone to your device to use this application." = "你需要连接一个麦克风才能使用.";
 
 /* No comment provided by engineer. */
-"Your account is not validate yet." = "Your account is not validate yet.";
+"Your account is not validate yet." = "你的帐号还没有激活.";
 
 /* No comment provided by engineer. */
-"Your device is not configured to send emails. Please configure mail application prior to send logs." = "Your device is not configured to send emails. Please configure mail application prior to send logs.";
+"Your device is not configured to send emails. Please configure mail application prior to send logs." = "该设置尚配置邮箱. 请配置邮箱以发送日志信息";
 
 /* No comment provided by engineer. */
 "© 2010-2012 Belledonne Communications " = "© 2010-2012 Belledonne Communications ";

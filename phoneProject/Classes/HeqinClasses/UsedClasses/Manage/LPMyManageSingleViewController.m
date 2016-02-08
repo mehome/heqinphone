@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *statusTextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn;
+@property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 
 @end
 
@@ -42,6 +43,14 @@
     // Do any additional setup after loading the view from its nib.
     
     self.statusTextField.userInteractionEnabled = NO;
+    
+    self.statusBtn.backgroundColor = yellowSubjectColor;
+    self.statusBtn.layer.cornerRadius = 5.0;
+    self.statusBtn.clipsToBounds = YES;
+    
+    self.settingBtn.backgroundColor = yellowSubjectColor;
+    self.settingBtn.layer.cornerRadius = 5.0;
+    self.settingBtn.clipsToBounds = YES;
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
 }

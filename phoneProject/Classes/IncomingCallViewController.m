@@ -115,7 +115,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)update {
     [self view]; //Force view load
     
-    [avatarImage setImage:[UIImage imageNamed:@"avatar_unknown.png"]];
+    [avatarImage setImage:[UIImage imageNamed:@"logbg"]];
     
     NSString* address = nil;
     const LinphoneAddress* addr = linphone_call_get_remote_address(call);

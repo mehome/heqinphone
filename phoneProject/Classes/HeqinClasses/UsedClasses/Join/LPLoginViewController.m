@@ -59,9 +59,12 @@
     LinphoneCore* lc = [LinphoneManager getLc];
     if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
         // 当前处于登出状态
-        self.userNameField.text = @"feng.wang@zijingcloud.com";
-        self.userPasswordField.text = @"wang@2015";
-        
+//        self.userNameField.text = @"feng.wang@zijingcloud.com";
+//        self.userPasswordField.text = @"wang@2015";
+
+        self.userNameField.text = @"client@zijingcloud.com";
+        self.userPasswordField.text = @"test&temp";
+
 //        self.userNameField.text = @"qin.he@zijingcloud.com";
 //        self.userPasswordField.text = @"he@2015";
     }else {
@@ -251,14 +254,14 @@ static UICompositeViewDescription *compositeDescription = nil;
     UseTheTCP80Port
     transport = @"TCP";
     
-    [LPSystemSetting sharedSetting].sipDomainStr = domainName;
+    [LPSystemSetting sharedSetting].sipTmpProxy = domainName;
     
 //    username = @"feng.wang";
 //    userId = @"feng.wang@zijingcloud.com";
 //    NSString *password = @"wang@2015";
 //    NSString *transport = @"UDP";
     
-    [self verificationSignInWithUsername:username userId:userId password:password domain:domainName withTransport:transport];
+    [self verificationSignInWithUsername:username userId:userId password:password domain:[LPSystemSetting sharedSetting].sipTmpProxy withTransport:transport];
 }
 
 - (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {
@@ -292,7 +295,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"password_preference"];
             [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"domain_preference"];
             [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"transport_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:[domain stringByAppendingString:@":80"]   forKey:@"proxy_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]   forKey:@"proxy_preference"];
             [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"outbound_proxy_preference"];
 
             // 这里进行LinphoneCoreSettingsStore的存储以触发登录linphone的回调
@@ -301,20 +304,20 @@ static UICompositeViewDescription *compositeDescription = nil;
             // 然后就等待登录成功或者失败的回调.
             return;
             
-            BOOL success = [self addProxyConfig:username password:password userIdStr:userIdStr domain:domain withTransport:transport];
-            if (success == YES) {
-                // 登录成功
-                [self showToastWithMessage:@"登录成功"];
-                
-                // 把值同步进去
-                [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-                
-            }else {
-                // 登录失败
-                [self showToastWithMessage:@"登录失败"];
-            }
-            
-            [self hideHudAndIndicatorView];
+//            BOOL success = [self addProxyConfig:username password:password userIdStr:userIdStr domain:domain withTransport:transport];
+//            if (success == YES) {
+//                // 登录成功
+//                [self showToastWithMessage:@"登录成功"];
+//                
+//                // 把值同步进去
+//                [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+//                
+//            }else {
+//                // 登录失败
+//                [self showToastWithMessage:@"登录失败"];
+//            }
+//            
+//            [self hideHudAndIndicatorView];
         }
     }
 }
