@@ -34,6 +34,7 @@
 #import "RDRSystemConfigResponseModel.h"
 #import "RDRNetHelper.h"
 #import "LPSystemSetting.h"
+#import "LPSystemUser.h"
 
 @interface LinphoneAppDelegate () {
     UIAlertView *_updateAlertView;

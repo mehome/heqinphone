@@ -9,7 +9,9 @@
 #import "LPSystemSetting.h"
 
 ////////////////////////系统设置//////////////////////////
-@interface LPSystemSetting ()
+@interface LPSystemSetting () {
+    NSString *innerTmpProxy;
+}
 
 @property (nonatomic, strong, readwrite) NSDateFormatter *unifyDateformatter;
 
@@ -25,6 +27,24 @@
     });
     
     return instance;
+}
+
+- (void)setSipTmpProxy:(NSString *)sipTmpProxyParam {
+    innerTmpProxy = sipTmpProxyParam;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:innerTmpProxy forKey:@"keyTmpProxy"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)sipTmpProxy {
+    if (innerTmpProxy == nil) {
+        
+        innerTmpProxy = [[NSUserDefaults standardUserDefaults] objectForKey:@"keyTmpProxy"];
+        if (![innerTmpProxy isKindOfClass:[NSString class]] || innerTmpProxy.length == 0) {
+            innerTmpProxy = @"zijingcloud.com";
+        }
+    }
+    return innerTmpProxy;
 }
 
 - (NSDateFormatter *)unifyDateformatter {
@@ -59,7 +79,7 @@
 - (void)readCacheSetting {
     // 从本地读取属性值
     NSString *cachedSipStr = [[NSUserDefaults standardUserDefaults] stringForKey:@"sipDomain"];
-    if (cachedSipStr.length > 0) {
+    if ([cachedSipStr isKindOfClass:[NSString class]] && cachedSipStr.length > 0) {
         self.sipDomainStr = cachedSipStr;
     }else {
         self.sipDomainStr = @"sip.myvmr.cn";//@"120.132.87.180";        如果本地没有读取到，则使用这个

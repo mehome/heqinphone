@@ -638,8 +638,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 // 添加通讯录视图页面
 - (IBAction)anotherPhoneListBtnClicked:(id)sender {
-    LinphoneCore* lc = [LinphoneManager getLc];
-    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+    if ( kNotLoginCheck) {
         // 未登录
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {

@@ -56,10 +56,8 @@
     self.logoutBtn.backgroundColor = yellowSubjectColor;
     self.logoutBtn.layer.cornerRadius = 5.0;
     self.logoutBtn.clipsToBounds = YES;
-
     
-    LinphoneCore* lc = [LinphoneManager getLc];
-    if (linphone_core_get_default_proxy_config(lc) == NULL ) {
+    if (kNotLoginCheck ) {
         // 当前已经注销
         self.logoutBtn.enabled = NO;
         
@@ -99,8 +97,7 @@
 
 // 注销按钮
 - (IBAction)logoutBtnClicked:(id)sender {
-    LinphoneCore* lc = [LinphoneManager getLc];
-    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+    if ( kNotLoginCheck) {
         return;
     }
     
@@ -128,6 +125,8 @@
     linphone_core_clear_all_auth_info(lc);
     
     [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+    
+    [LPSystemUser sharedUser].hasLoginSuccess = NO;
 }
 
 // 重置帐号信息，相当于是退出操作

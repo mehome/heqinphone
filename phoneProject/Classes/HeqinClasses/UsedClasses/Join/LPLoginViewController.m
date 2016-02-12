@@ -56,14 +56,13 @@
                                                  name:kLinphoneRegistrationUpdate
                                                object:nil];
     
-    LinphoneCore* lc = [LinphoneManager getLc];
-    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+    if ( kNotLoginCheck ) {
         // 当前处于登出状态
-//        self.userNameField.text = @"feng.wang@zijingcloud.com";
-//        self.userPasswordField.text = @"wang@2015";
+        self.userNameField.text = @"feng.wang@zijingcloud.com";
+        self.userPasswordField.text = @"wang@2015";
 
-        self.userNameField.text = @"client@zijingcloud.com";
-        self.userPasswordField.text = @"test&temp";
+//        self.userNameField.text = @"client@zijingcloud.com";
+//        self.userPasswordField.text = @"test&temp";
 
 //        self.userNameField.text = @"qin.he@zijingcloud.com";
 //        self.userPasswordField.text = @"he@2015";
@@ -100,6 +99,8 @@
             [self hideHudAndIndicatorView];
             [self showToastWithMessage:@"登录成功"];
             
+            [LPSystemUser sharedUser].hasLoginSuccess = YES;
+            
             NSLog(@"registration ok.");
             
             // 存储其中的值
@@ -115,17 +116,15 @@
         case LinphoneRegistrationFailed: {
             [self hideHudAndIndicatorView];
             
+            [LPSystemUser sharedUser].hasLoginSuccess = NO;
+
             //erase uername passwd
             [[LinphoneManager instance] lpConfigSetString:nil forKey:@"wizard_username"];
             [[LinphoneManager instance] lpConfigSetString:nil forKey:@"wizard_password"];
             
-            [self showToastWithMessage:@"登录失败"];
-            
             break;
         }
         case LinphoneRegistrationProgress: {
-            [self showLoadingView];
-
             break;
         }
         default: break;

@@ -20,6 +20,8 @@
 #import "LinphoneCoreSettingsStore.h"
 
 #include "linphone/lpconfig.h"
+#import "LPSystemUser.h"
+#import "LPSystemSetting.h"
 
 extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 
@@ -130,12 +132,21 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 
 		}
 	} else {
-		[self setInteger: lp_config_get_int(conf,"default_values","reg_expires", 600) forKey:@"expire_preference"];
-		[self setObject:@""   forKey:@"username_preference"];
-		[self setObject:@""   forKey:@"domain_preference"];
-		[self setObject:@""   forKey:@"proxy_preference"];
-		[self setObject:@""   forKey:@"password_preference"];
-		[self setBool:FALSE   forKey:@"outbound_proxy_preference"];
+        // 现在的代码，强制指定默认值
+        [self setInteger: lp_config_get_int(conf,"default_values","reg_expires", 600) forKey:@"expire_preference"];
+        [self setObject:@"yunphone.iphone@unknown-host"   forKey:@"username_preference"];
+        [self setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"domain_preference"];
+        [self setObject:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"proxy_preference"];
+        [self setObject:@""   forKey:@"password_preference"];
+        [self setBool:TRUE   forKey:@"outbound_proxy_preference"];
+
+// 原来的代码
+//		[self setInteger: lp_config_get_int(conf,"default_values","reg_expires", 600) forKey:@"expire_preference"];
+//		[self setObject:@""   forKey:@"username_preference"];
+//		[self setObject:@""   forKey:@"domain_preference"];
+//		[self setObject:@""   forKey:@"proxy_preference"];
+//		[self setObject:@""   forKey:@"password_preference"];
+//		[self setBool:FALSE   forKey:@"outbound_proxy_preference"];
         
 //		[self setString:"udp" forKey:@"transport_preference"];
         UseTheTCP80Port

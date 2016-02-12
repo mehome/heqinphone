@@ -30,7 +30,7 @@
 #import "LPSystemUser.h"
 
 #include "linphone/linphonecore.h"
-
+#import "LPSystemSetting.h"
 
 @implementation DialerViewController
 
@@ -409,7 +409,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)call:(NSString*)address displayName:(NSString *)displayName {
     // 存储下当前会议的address地址，以便后期进行收藏操作
     [LPSystemUser sharedUser].curMeetingAddr = address;
-
+    
     [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
 }
 

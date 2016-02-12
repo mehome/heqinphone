@@ -25,6 +25,8 @@
 #define kHeqinLinphoneServerAddress @"http://cs.myvmr.cn"
 
 
+#define kNotLoginCheck (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ||[LPSystemUser sharedUser].hasLoginSuccess == NO)
+
 /**
  *  这里放置其它宏
  */

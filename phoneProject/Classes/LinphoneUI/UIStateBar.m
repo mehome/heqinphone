@@ -20,6 +20,7 @@
 #import "UIStateBar.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
+#import "LPSystemUser.h"
 
 @implementation UIStateBar
 
@@ -218,12 +219,18 @@ int messagesUnreadCount;
 
 		switch (state) {
 			case LinphoneRegistrationOk:
-				message = NSLocalizedString(@"Registered", nil); break;
+				message = NSLocalizedString(@"Registered", nil);
+                [LPSystemUser sharedUser].hasLoginSuccess = YES;
+                break;
+
 			case LinphoneRegistrationNone:
 			case LinphoneRegistrationCleared:
 				message =  NSLocalizedString(@"Not registered", nil); break;
 			case LinphoneRegistrationFailed:
-				message =  NSLocalizedString(@"Registration failed", nil); break;
+                message =  NSLocalizedString(@"Registration failed", nil);
+                [LPSystemUser sharedUser].hasLoginSuccess = NO;
+                break;
+
 			case LinphoneRegistrationProgress:
 				message =  NSLocalizedString(@"Registration in progress", nil); break;
 			default: break;

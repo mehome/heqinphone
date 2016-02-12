@@ -264,7 +264,6 @@ extern NSString *const kLinphoneInCallCellData;
     [self.sharpButton  setDigit:'#'];
     [self.sharpButton setDtmf:true];
     
-    [self dataFillToPreview];
 }
 
 - (void)bgTapped:(UITapGestureRecognizer *)tapped {
@@ -298,8 +297,9 @@ extern NSString *const kLinphoneInCallCellData;
     // Update on show
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     LinphoneCallState state = (call != NULL)?linphone_call_get_state(call): 0;
-    
-    
+        
+    [self dataFillToPreview];
+
     [self callUpdate:call state:state];
     
 //    [self hideRoutes:FALSE];

@@ -26,6 +26,7 @@
 #import "DTActionSheet.h"
 
 #import "LPJoinMettingViewController.h"
+#import "LPSystemUser.h"
 
 static RootViewManager* rootViewManagerInstance = nil;
 
@@ -296,6 +297,7 @@ static RootViewManager* rootViewManagerInstance = nil;
     }else if (state == LinphoneRegistrationOk) {
         // 注册成功，取值出来
         NSLog(@"登录成功 in mainView");
+        [LPSystemUser sharedUser].hasLoginSuccess = YES;
     }
 }
 

@@ -712,7 +712,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 #endif
     if([key isEqual:@"wizard_button"]) {
-		if (linphone_core_get_default_proxy_config(lc) == NULL ) {
+		if (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ) {
 			[self goToWizard];
 			return;
 		}

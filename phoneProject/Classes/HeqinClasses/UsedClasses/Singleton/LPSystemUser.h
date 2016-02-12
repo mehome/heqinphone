@@ -34,8 +34,12 @@ typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NS
 
 @property (nonatomic, strong) LinphoneCoreSettingsStore *settingsStore;     // 用来存取帐号信息
 
+@property (nonatomic, assign) BOOL hasLoginSuccess;         // 用来记录登录状态，默认为NO
+
 + (instancetype)sharedUser;
 
 + (void)requesteFav:(BlockRequestFavMeetings)finishBlock;
+
++ (void)resetToAnonimousLogin;      // 置成匿名登录
 
 @end

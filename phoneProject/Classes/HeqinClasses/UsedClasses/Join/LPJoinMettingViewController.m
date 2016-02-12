@@ -158,13 +158,15 @@
 }
 
 - (void)updateControls {
-    LinphoneCore* lc = [LinphoneManager getLc];
-    if ( linphone_core_get_default_proxy_config(lc) == NULL ) {
+    if ( kNotLoginCheck ) {
         // 当前处于登出状态
         self.joinNameField.text = @"noName";
         self.joinMeetingNumberField.text = @"";
         
         self.loginTipLabel.text = @"未登录";
+        
+        // 在用户未登录时， 强制置成未登录状态
+        [LPSystemUser resetToAnonimousLogin];        
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
@@ -199,6 +201,9 @@
             case LinphoneRegistrationOk: {
                 message = @"已注册";
                 
+                [LPSystemUser sharedUser].hasLoginSuccess = YES;
+
+                
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 break;
@@ -211,6 +216,8 @@
                 break;
             case LinphoneRegistrationFailed:
                 message = @"注册失败";
+                [LPSystemUser sharedUser].hasLoginSuccess = NO;
+
                 break;
             case LinphoneRegistrationProgress:
                 message = @"注册中";
@@ -270,7 +277,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resignKeyboard];
     
     // 判断当前是否登录过
-    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ) {
+    if ( kNotLoginCheck ) {
         // 未登录
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {
@@ -333,7 +340,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     NSString *callStr = address;
-    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy ?: @"";
+    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy;
     if (![address hasSuffix:domainStr] && domainStr.length>0) {
         callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
     }
@@ -484,7 +491,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)addFavMeeting:(id)sender {
     UIButton *favBtn = sender;
     
-    if ( linphone_core_get_default_proxy_config([LinphoneManager getLc]) != NULL ) {
+    if ( kNotLoginCheck ) {
+        // 未登录
+        [self showToastWithMessage:@"未登录，请先登录"];
+    }else {
         // 已登录
 //        [self showToastWithMessage:@"收藏"];
         
@@ -552,10 +562,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                       NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
                       [weakSelf showToastWithMessage:tipStr];
                   }];
-    }else {
-        // 未登录
-        [self showToastWithMessage:@"未登录，请先登录"];
-    }    
+    }
 }
 
 @end

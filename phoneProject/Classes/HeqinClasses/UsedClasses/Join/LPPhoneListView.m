@@ -517,13 +517,13 @@ typedef void(^requestFailBlock)();
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
     if (textField.text.length == 0) {
         [self.selectedSearchNumbers removeAllObjects];
         [self.searchPhoneList removeAllObjects];
         [self.searchTableView reloadData];
     }else {
-        [textField resignFirstResponder];
-        
         // 准备发起请求
         // 遮照
         [self requestSearchText:textField.text withSuccessBlock:^{

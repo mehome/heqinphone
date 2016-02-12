@@ -15,6 +15,7 @@
 #import "RDRRequest.h"
 #import "RDRMyMeetingResponseModel.h"
 #import "RDRNetHelper.h"
+#import "LPSystemSetting.h"
 
 @interface LPSystemUser ()
 
@@ -23,6 +24,17 @@
 @end
 
 @implementation LPSystemUser
+
++ (void)resetToAnonimousLogin {
+    // 在用户未登录时， 强制进行添加
+    [[LPSystemUser sharedUser].settingsStore setObject:@"yunphone.iphone@unknown-host"   forKey:@"username_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"domain_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"password_preference"];
+    [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"outbound_proxy_preference"];
+
+    [[LPSystemUser sharedUser].settingsStore synchronize];
+}
 
 + (instancetype)sharedUser {
     static LPSystemUser *instance;
