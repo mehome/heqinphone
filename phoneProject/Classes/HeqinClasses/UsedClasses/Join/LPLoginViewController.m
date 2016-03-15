@@ -222,6 +222,12 @@ static UICompositeViewDescription *compositeDescription = nil;
         return;
     }
     
+    // 清除操作
+    [LPSystemUser sharedUser].hasGetMeetingData = NO;
+    [LPSystemUser sharedUser].myScheduleMeetings = @[];
+    [LPSystemUser sharedUser].myMeetingsRooms = @[];
+    [LPSystemUser sharedUser].myFavMeetings = @[];
+    
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
     NSString *domainName = @"";

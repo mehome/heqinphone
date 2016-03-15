@@ -11,6 +11,8 @@
 ////////////////////////系统设置//////////////////////////
 @interface LPSystemSetting () {
     NSString *innerTmpProxy;
+    BOOL _defaultSilence;
+    BOOL _defaultNoVideo;
 }
 
 @property (nonatomic, strong, readwrite) NSDateFormatter *unifyDateformatter;
@@ -18,6 +20,7 @@
 @end
 
 @implementation LPSystemSetting
+
 
 + (instancetype)sharedSetting {
     static LPSystemSetting *instance;
@@ -64,9 +67,26 @@
         [self readHistoryMeetingData];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+        
+        _defaultSilence = [[NSUserDefaults standardUserDefaults] boolForKey:@"meetingDefaultSilent"];
+        _defaultNoVideo = [[NSUserDefaults standardUserDefaults] boolForKey:@"meetingDefaultNoVide"];
     }
     
     return self;
+}
+
+- (void)setDefaultSilence:(BOOL)defaultSilence {
+    _defaultSilence = defaultSilence;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:defaultSilence forKey:@"meetingDefaultSilent"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setDefaultNoVideo:(BOOL)defaultNoVideo {
+    _defaultNoVideo = defaultNoVideo;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:defaultNoVideo forKey:@"meetingDefaultNoVide"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (NSString *)getHistoryMeetingFilePath {

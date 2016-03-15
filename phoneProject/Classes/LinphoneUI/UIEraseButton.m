@@ -56,8 +56,9 @@
 }	
 
 - (void)dealloc {
-    [super dealloc];
 	[addressField release];
+    
+    [super dealloc];
 }
 
 

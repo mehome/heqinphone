@@ -957,6 +957,21 @@ static BOOL systemOpenCamera = NO;
     if (state == LinphoneCallOutgoingRinging || state == LinphoneCallStreamsRunning) {
         // 连接建立好了，可以进入
         self.callTipView.hidden = YES;
+        
+        // 设置当前的静音操作
+        if ([LPSystemSetting sharedSetting].defaultSilence == YES) {
+            // 要求静音
+            linphone_core_mute_mic([LinphoneManager getLc], true);
+            
+            [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
+            [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
+        }else {
+            // 要求不静音
+            linphone_core_mute_mic([LinphoneManager getLc], false);
+            
+            [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+            [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+        }
     }
     
     [self updateVideoBtn];

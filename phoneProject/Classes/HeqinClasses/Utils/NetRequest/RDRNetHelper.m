@@ -186,8 +186,6 @@
 - (NSDictionary *)finalParametersFromRequestModel:(RDRRequest *)request {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     
-   
-    
     if (request.requestModel) {
         
         NSDictionary *modelDictionary=[MTLJSONAdapter JSONDictionaryFromModel:request.requestModel error:nil];
@@ -197,10 +195,9 @@
         
     }
     
-    if (request.isAddCommonParameters == NO && self.commonParametersCache) {
+    if (request.isAddCommonParameters == YES && self.commonParametersCache) {
         
         [dictionary addEntriesFromDictionary:self.commonParametersCache];
-        
     }
     
     // heqin:屏掉下面这行代码是为了避免多个线程回来时，执行下面这个方法可能会同时执行这个方法，而这个方法会同时向同一个属性做写操作，从而会导致偶然的崩溃问题
@@ -312,9 +309,8 @@
     [operation start];
     
     return operation;
-    
-    
 }
+
 - (AFHTTPRequestOperation *)requestWithURLStr:(NSString *)aURL
                                    httpMethod:(NSString *)httpMethod
                                withParameters:(NSDictionary *)parameters

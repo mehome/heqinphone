@@ -59,6 +59,9 @@
         _callLogs = [[NSMutableArray alloc] init];
         
         _settingsStore = [[LinphoneCoreSettingsStore alloc] init];
+        
+        [_settingsStore setBool:!([LPSystemSetting sharedSetting].defaultNoVideo) forKey:@"enable_video_preference"];
+        
         [_settingsStore transformLinphoneCoreToKeys];
         
         [self loadHistoryData];

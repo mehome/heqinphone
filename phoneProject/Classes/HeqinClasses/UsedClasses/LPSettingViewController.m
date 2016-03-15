@@ -127,6 +127,11 @@
     [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
     
     [LPSystemUser sharedUser].hasLoginSuccess = NO;
+    
+    [LPSystemUser sharedUser].hasGetMeetingData = NO;
+    [LPSystemUser sharedUser].myScheduleMeetings = @[];
+    [LPSystemUser sharedUser].myMeetingsRooms = @[];
+    [LPSystemUser sharedUser].myFavMeetings = @[];
 }
 
 // 重置帐号信息，相当于是退出操作
@@ -166,6 +171,8 @@
 // 静画
 - (IBAction)defaultMovieSwitched:(id)sender {
     [LPSystemSetting sharedSetting].defaultNoVideo = ((UISwitch *)sender).on;
+    
+    [[LPSystemUser sharedUser].settingsStore setBool:!([LPSystemSetting sharedSetting].defaultNoVideo) forKey:@"enable_video_preference"];
 }
 
 #pragma mark - UICompositeViewDelegate Functions
