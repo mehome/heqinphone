@@ -4045,7 +4045,7 @@
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 358B5J757A;
+						DevelopmentTeam = 9U5ZW6T67V;
 					};
 				};
 			};
@@ -5461,9 +5461,9 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linphone.heqin;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "39368697-29e5-4d08-8e4f-a3ccf5e535bc";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
@@ -5550,9 +5550,9 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linphone.heqin;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "39368697-29e5-4d08-8e4f-a3ccf5e535bc";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5637,9 +5637,9 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linphone.heqin;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "39368697-29e5-4d08-8e4f-a3ccf5e535bc";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5725,9 +5725,9 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linphone.heqin;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "39368697-29e5-4d08-8e4f-a3ccf5e535bc";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (

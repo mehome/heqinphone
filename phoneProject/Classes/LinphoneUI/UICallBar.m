@@ -902,8 +902,9 @@ extern NSString *const kLinphoneInCallCellData;
     [self hideAllBottomBgView];
     LinphoneCore* lc = [LinphoneManager getLc];
     
-    if (!linphone_core_video_enabled(lc))
-        return;
+    if (!linphone_core_video_enabled(lc)) {
+        linphone_core_enable_video(lc, true, true);
+    }
     
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     if (call) {

@@ -173,6 +173,13 @@
     [LPSystemSetting sharedSetting].defaultNoVideo = ((UISwitch *)sender).on;
     
     [[LPSystemUser sharedUser].settingsStore setBool:!([LPSystemSetting sharedSetting].defaultNoVideo) forKey:@"enable_video_preference"];
+
+    
+    LinphoneCore *lc=[LinphoneManager getLc];
+    
+    bool enableVideo = [LPSystemSetting sharedSetting].defaultNoVideo;
+    linphone_core_enable_video(lc, enableVideo, enableVideo);
+
 }
 
 #pragma mark - UICompositeViewDelegate Functions
