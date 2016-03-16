@@ -98,8 +98,8 @@
 
 - (void)updateFrameOfAll {
     self.selectedTableView.frame = CGRectMake(0, 0, self.ott_width, self.ott_height - 40);
-    self.confirmBtn.frame = CGRectMake(self.ott_width/2.0+5, self.selectedTableView.ott_bottom, self.ott_width/2.0-15, 40);
-    self.cancelBtn.frame = CGRectMake(10, self.selectedTableView.ott_bottom, self.ott_width/2.0-15, 40);
+    self.confirmBtn.frame = CGRectMake(10, self.selectedTableView.ott_bottom, self.ott_width/2.0-15, 40);
+    self.cancelBtn.frame = CGRectMake(self.ott_width/2.0+5, self.selectedTableView.ott_bottom, self.ott_width/2.0-15, 40);
 }
 
 - (void)cancelBtnClicked:(UIButton *)btn {

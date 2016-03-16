@@ -99,7 +99,8 @@
 {
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
-    NSLog(@"DEBUG request=%@, parameter=%@", request, parameters);
+    NSLog(@"DEBUG request=%@, parameter=%@, request.allHttpHeader=%@, request.HttpBody=%@, request.bodyInStr=%@",
+          request, parameters, request.allHTTPHeaderFields, request.HTTPBody, [[NSString alloc] initWithData:request.HTTPBody encoding:4]);
     
     if (serializationError) {
         if (failure) {
