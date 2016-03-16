@@ -73,21 +73,22 @@
         _selectedTableView.dataSource = self;
         [self addSubview:_selectedTableView];
         
-        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelBtn.backgroundColor = [UIColor redColor];
-        _cancelBtn.frame = CGRectMake(0, 0, frame.size.width/2.0, 40);
-        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        _cancelBtn.layer.cornerRadius = 10.0;
-        [self addSubview:_cancelBtn];
-        
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _confirmBtn.backgroundColor = [UIColor brownColor];
-        _confirmBtn.frame = CGRectMake(frame.size.width/2.0, 0, frame.size.width/2.0, 40);
+        _confirmBtn.backgroundColor = yellowSubjectColor;
+        _confirmBtn.frame = CGRectMake(10, 0, frame.size.width/2.0-15, 40);
         [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.layer.cornerRadius = 10.0;
         [self addSubview:_confirmBtn];
+        
+        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cancelBtn.backgroundColor = yellowSubjectColor;
+        _cancelBtn.frame = CGRectMake(frame.size.width/2.0+5, 0, frame.size.width/2.0-15, 40);
+        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        _cancelBtn.layer.cornerRadius = 10.0;
+        [self addSubview:_cancelBtn];
+
         
         _selectedDatasArr = [NSMutableArray array];
     }
@@ -97,8 +98,8 @@
 
 - (void)updateFrameOfAll {
     self.selectedTableView.frame = CGRectMake(0, 0, self.ott_width, self.ott_height - 40);
-    self.cancelBtn.frame = CGRectMake(0, self.selectedTableView.ott_bottom, self.ott_width/2.0, 40);
-    self.confirmBtn.frame = CGRectMake(self.ott_width/2.0, self.selectedTableView.ott_bottom, self.ott_width/2.0, 40);
+    self.confirmBtn.frame = CGRectMake(self.ott_width/2.0+5, self.selectedTableView.ott_bottom, self.ott_width/2.0-15, 40);
+    self.cancelBtn.frame = CGRectMake(10, self.selectedTableView.ott_bottom, self.ott_width/2.0-15, 40);
 }
 
 - (void)cancelBtnClicked:(UIButton *)btn {

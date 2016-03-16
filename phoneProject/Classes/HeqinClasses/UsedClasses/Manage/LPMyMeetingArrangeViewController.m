@@ -400,7 +400,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)askForSelectMeetingRoom {
-    [RDRCellsSelectView showSelectViewWith:@"请选择收藏的会议室" withArr:[LPSystemUser sharedUser].favMeetingRoomsList
+    [RDRCellsSelectView showSelectViewWith:@"请选择收藏的会议室"
+                                   withArr:[LPSystemUser sharedUser].favMeetingRoomsList
                             hasSelectedArr:self.selectedRooms
                           withConfirmBlock:^(NSArray *selectedDatas) {
                               NSLog(@"selected room=%@", selectedDatas);
