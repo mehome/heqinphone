@@ -74,7 +74,7 @@
         [self addSubview:_selectedTableView];
         
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelBtn.backgroundColor = [UIColor yellowColor];
+        _cancelBtn.backgroundColor = [UIColor redColor];
         _cancelBtn.frame = CGRectMake(0, 0, frame.size.width/2.0, 40);
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -82,7 +82,7 @@
         [self addSubview:_cancelBtn];
         
         _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _confirmBtn.backgroundColor = [UIColor yellowColor];
+        _confirmBtn.backgroundColor = [UIColor brownColor];
         _confirmBtn.frame = CGRectMake(frame.size.width/2.0, 0, frame.size.width/2.0, 40);
         [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];

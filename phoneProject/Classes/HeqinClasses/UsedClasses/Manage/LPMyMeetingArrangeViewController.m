@@ -61,6 +61,16 @@
     [self getDatas];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchMan:) name:kSearchNumbersDatasForArrangeMeeting object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut:) name:@"kCurUserLoginOutNotification" object:nil];
+}
+
+- (void)loginOut:(NSNotification *)notifi {
+    self.selectedJoiners = @[];
+    self.selectedRooms = @[];
+    
+    self.timeField.text = @"";
+    self.joinerField.text = @"";
+    self.roomsField.text = @"";
 }
 
 - (void)collapseAllTextField {
@@ -345,22 +355,61 @@ static UICompositeViewDescription *compositeDescription = nil;
 //}
 
 - (IBAction)myRoomsClicked:(id)sender {
-    // 显示我的收藏的会议室
-    if ([LPSystemUser sharedUser].favMeetingRoomsList.count == 0) {
-        [self showToastWithMessage:@"收藏的会议室为空，快去收藏一些吧"];
-        return;
-    }
+    // 判断有无获取到收藏的会议室列表
+    // 调用接口进行获取
+    [self showLoadingView];
     
+    __weak LPMyMeetingArrangeViewController *weakSelf = self;
+    
+    RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeRoomResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [weakSelf hideHudAndIndicatorView];
+                  
+                  RDRMyMeetingArrangeRoomResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      NSLog(@"请求收藏的会议室列表success, model=%@", model);
+                      
+                      // 解析model数据
+                      [LPSystemUser sharedUser].hasGetFavMeetingRooms = YES;
+                      [LPSystemUser sharedUser].favMeetingRoomsList = [model.fav mutableCopy];
+                      
+                      // 显示我的收藏的会议室
+                      if ([LPSystemUser sharedUser].favMeetingRoomsList.count == 0) {
+                          [self showToastWithMessage:@"收藏的会议室为空，快去收藏一些吧"];
+                          return;
+                      }else {
+                          [self askForSelectMeetingRoom];
+                      }
+                      
+                  }else {
+                      NSLog(@"请求收藏的会议室列表服务器请求出错, model=%@, msg=%@", model, model.msg);
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  [weakSelf hideHudAndIndicatorView];
+                  
+                  //请求出错
+                  NSLog(@"请求收藏的会议室列表, %s, error=%@", __FUNCTION__, error);
+              }];
+    
+}
+
+- (void)askForSelectMeetingRoom {
     [RDRCellsSelectView showSelectViewWith:@"请选择收藏的会议室" withArr:[LPSystemUser sharedUser].favMeetingRoomsList
                             hasSelectedArr:self.selectedRooms
                           withConfirmBlock:^(NSArray *selectedDatas) {
-        NSLog(@"selected room=%@", selectedDatas);
+                              NSLog(@"selected room=%@", selectedDatas);
                               self.selectedRooms = [NSArray arrayWithArray:selectedDatas];
                               // 更新会议室输入框
                               [self updateRoomField];
-    } withCancelBlcok:^{
-        NSLog(@"取消会议室选择");
-    } singleChoose:YES];
+                          } withCancelBlcok:^{
+                              NSLog(@"取消会议室选择");
+                          } singleChoose:YES];
 }
 
 - (void)updateRoomField {

@@ -114,6 +114,8 @@
             
             // 刷新当前界面顶部的用户信息即可
             [self initDynamicInfos];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"kCurUserLoginOutNotification" object:nil];
         }
     }
 }
