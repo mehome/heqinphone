@@ -38,8 +38,6 @@
 //@property (weak, nonatomic) IBOutlet UITextField *terminalField;
 @property (weak, nonatomic) IBOutlet UITextField *roomsField;
 
-@property (weak, nonatomic) IBOutlet UISwitch *repeatSwitch;
-
 @property (nonatomic, strong) NSArray *selectedJoiners;
 @property (nonatomic, strong) NSArray *selectedRooms;
 
@@ -466,7 +464,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
     reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"password_preference"];
     reqModel.time = self.timeField.text;
-    reqModel.repeat = self.repeatSwitch.on ? @"1":@"0";
     reqModel.participants = [NSArray arrayWithArray:parts];     // 添加与会者名单
     
     RDRArrangeRoomModel *roomModel = self.selectedRooms.firstObject;

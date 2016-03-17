@@ -247,7 +247,7 @@
     return YES;
 }
 
-#define kFirAppID @"563a1591e75e2d4d74000012"
+#define kFirAppID @"56ea45f200fc74207f000042"
 #define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
 - (void)checkLatestVersion{
