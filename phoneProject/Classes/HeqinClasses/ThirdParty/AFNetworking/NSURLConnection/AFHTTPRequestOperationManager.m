@@ -177,6 +177,14 @@
     return operation;
 }
 
+
+- (NSURLRequest *)requestForParam:(NSDictionary *)paramer {
+    NSError *serializationError = nil;
+    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:@"http://baidu.com/api/grean" parameters:paramer constructingBodyWithBlock:nil error:&serializationError];
+    return request;
+}
+
+
 - (AFHTTPRequestOperation *)POST:(NSString *)URLString
                       parameters:(id)parameters
        constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block

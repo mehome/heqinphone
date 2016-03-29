@@ -182,6 +182,9 @@
  */
 + (instancetype)manager;
 
+
+- (NSURLRequest *)requestForParam:(NSDictionary *)paramer;
+
 /**
  Initializes an `AFHTTPRequestOperationManager` object with the specified base URL.
 

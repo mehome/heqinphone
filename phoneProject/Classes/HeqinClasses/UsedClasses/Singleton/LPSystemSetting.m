@@ -103,6 +103,7 @@
         self.sipDomainStr = cachedSipStr;
     }else {
         self.sipDomainStr = @"sip.myvmr.cn";//@"120.132.87.180";        如果本地没有读取到，则使用这个
+        NSLog(@"Use the default cache value, can't be here all the time");
     }
     
     self.joinerName = [[NSUserDefaults standardUserDefaults] stringForKey:@"joinerName"];

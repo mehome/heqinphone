@@ -185,9 +185,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    // 先取当前系统的sip地址
-    [self askForSystemConfig];
     
     UIApplication* app= [UIApplication sharedApplication];
     UIApplicationState state = app.applicationState;
@@ -243,6 +240,9 @@
 		[self processRemoteNotification:remoteNotif];
 	}
     if (bgStartId!=UIBackgroundTaskInvalid) [[UIApplication sharedApplication] endBackgroundTask:bgStartId];
+    
+    // 先取当前系统的sip地址
+    [self askForSystemConfig];
 
     return YES;
 }
@@ -299,8 +299,9 @@
 - (void)askForSystemConfig {
     // 判断本地是否有存储
     LPSystemSetting *systemSetting = [LPSystemSetting sharedSetting];
-    if (systemSetting.sipDomainStr.length == 0) {
+//    if (systemSetting.sipDomainStr.length == 0) {
         // 从网络请求
+    NSLog(@"start ask for system config");
         RDRSystemConfigRequestModel *reqModel = [RDRSystemConfigRequestModel requestModel];
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -309,9 +310,11 @@
                        
                        RDRSystemConfigResponseModel *model = responseObject;
                        
+//                       [self showWithDomainValue:model];
+
                        if ([model codeCheckSuccess] == YES) {
                            NSString *domainStr = model.domainStr;
-                           NSLog(@"returned system setting domainStr=%@", domainStr);
+                           NSLog(@"请求sipDoamin returned system setting domainStr=%@", domainStr);
                            
                            // 进行存储
                            systemSetting.sipDomainStr = domainStr;
@@ -323,10 +326,20 @@
                        //请求出错
                        NSLog(@"请求sipDoamin出错, %s, error=%@", __FUNCTION__, error);
                    }];
-    }else {
-        // 本地已经有了，不需重新请求
-        NSLog(@"local sip str = %@", systemSetting.sipDomainStr);
-    }
+//    }else {
+//        // 本地已经有了，不需重新请求
+//        NSLog(@"local sip str = %@", systemSetting.sipDomainStr);
+//    }
+}
+
+- (void)showWithDomainValue:(RDRSystemConfigResponseModel *)model {
+    UIWindow *curWindow = [UIApplication sharedApplication].keyWindow;
+    
+    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 300, 100)];
+    tipLabel.numberOfLines = 0;
+    tipLabel.text = model.description;
+    [curWindow addSubview:tipLabel];
+    tipLabel.backgroundColor = [UIColor redColor];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -69,7 +69,4 @@ typedef void(^BlockRDRHTTPRequestConstructingBody)(id <AFMultipartFormData> form
 
 + (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress;
 
-
-
-
 @end

@@ -31,6 +31,8 @@
 #import "LPPhoneListView.h"
 #import "RDRPhoneModel.h"
 
+#import "AFHTTPRequestOperationManager.h"
+
 @interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
@@ -428,6 +430,10 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)confirmBtnClicked:(id)sender {
     
+    [self.timeField resignFirstResponder];
+    [self.joinerField resignFirstResponder];
+    [self.roomsField resignFirstResponder];
+    
     NSMutableArray *parts = [NSMutableArray array];
     for (NSInteger i=0; i<self.selectedJoiners.count; i++) {
         RDRContactModel *model = [self.selectedJoiners objectAtIndex:i];
@@ -469,26 +475,188 @@ static UICompositeViewDescription *compositeDescription = nil;
     RDRArrangeRoomModel *roomModel = self.selectedRooms.firstObject;
     reqModel.addr = roomModel.addr;
     
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    NSDictionary *dicData = [MTLJSONAdapter JSONDictionaryFromModel:reqModel error:nil];
+    NSLog(@"dicData=%@", dicData);
+//    NSDictionary *postDic = @{@"data":dicData};
+    
+//        __weak LPMyMeetingArrangeViewController *weakSelf = self;
+//    NSString *urlStr = [kHeqinLinphoneServerAddress stringByAppendingString:@"/api/arrange"];
+//    [[AFHTTPRequestOperationManager manager] POST:urlStr parameters:postDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"post done, operation=%@, respon=%@", operation, responseObject);
+//        [weakSelf hideHudAndIndicatorView];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"post fail, operation=%@, error=%@", operation, error);
+//        [weakSelf hideHudAndIndicatorView];
+//    }];
+    
+    
+    
+    
+    
+    
+    
+    // 第二种
+    NSString *dicDataStr = [self DataTOjsonString:dicData];
+    
+    
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    dicDataStr = [dicDataStr stringByTrimmingCharactersInSet:whitespace];
+    
     __weak LPMyMeetingArrangeViewController *weakSelf = self;
-    [RDRNetHelper POST:req responseModelClass:[RDRMyMeetingArrangeResponseModel class] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *urlStr = [kHeqinLinphoneServerAddress stringByAppendingString:@"/api/arrange"];
+    [self postWithCommandStr:urlStr withDataDic:dicDataStr completion:^(NSDictionary *result, NSString *msg, int errorCode) {
         [weakSelf hideHudAndIndicatorView];
-        RDRMyMeetingArrangeResponseModel *model = responseObject;
 
-        if ([model codeCheckSuccess] == YES) {
-            NSLog(@"安排会议室success, model=%@", model);
-            [weakSelf showToastWithMessage:@"安排会议成功"];
+        NSLog(@"finsihed with result=%@, msg=%@, errCode=%d", result, msg, errorCode);
+        
+        NSNumber *resultNum = [result objectForKey:@"code"];
+        if (resultNum != nil && resultNum.integerValue == 200) {
+            // 成功
+            [self showToastWithMessage:@"会议安排成功"];
         }else {
-            NSString *tipStr = [NSString stringWithFormat:@"安排会议室请求出错, msg=%@", model.msg];
-            [weakSelf showToastWithMessage:tipStr];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf hideHudAndIndicatorView];
+            // 失败
+            NSString *errStr = [result objectForKey:@"msg"];
+            if (errStr != nil && errStr.length > 0) {
+                
+            }else {
+                errStr = @"服务器出错，请稍候再试";
+            }
             
-        //请求出错
-        NSLog(@"安排会议室出错, %s, error=%@", __FUNCTION__, error);
+            [self showToastWithMessage:errStr];
+        }
     }];
+    return;
+    
+    
+    
+    
+    // 第一种
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    __weak LPMyMeetingArrangeViewController *weakSelf = self;
+//    [RDRNetHelper POST:req responseModelClass:[RDRMyMeetingArrangeResponseModel class] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [weakSelf hideHudAndIndicatorView];
+//        RDRMyMeetingArrangeResponseModel *model = responseObject;
+//
+//        if ([model codeCheckSuccess] == YES) {
+//            NSLog(@"安排会议室success, model=%@", model);
+//            [weakSelf showToastWithMessage:@"安排会议成功"];
+//        }else {
+//            NSString *tipStr = [NSString stringWithFormat:@"安排会议室请求出错, msg=%@", model.msg];
+//            [weakSelf showToastWithMessage:tipStr];
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [weakSelf hideHudAndIndicatorView];
+//            
+//        //请求出错
+//        NSLog(@"安排会议室出错, %s, error=%@", __FUNCTION__, error);
+//    }];
 }
+
+
+-(NSString*)DataTOjsonString:(id)object
+{
+    NSString *jsonString = nil;
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
+}
+
+
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
+
+#define POST_BOUNDS @"fsdfe324234dlfk"
+- (void)postWithCommandStr:(NSString *)cmdStr withDataDic:(id)dicData completion:(void (^)(NSDictionary *result,NSString *msg,int errorCode))finish
+{
+    dispatch_async(kBgQueue, ^{
+        NSString *msg;
+        
+        NSMutableString *bodyContent = [NSMutableString string];
+//        for(NSString *key in dicData.allKeys){
+//            id value = [dicData objectForKey:key];
+//            [bodyContent appendFormat:@"--%@\r\n",POST_BOUNDS];
+//            [bodyContent appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key];
+//            [bodyContent appendFormat:@"%@\r\n",value];
+//        }
+        
+//        for(NSString *key in dicData.allKeys){
+//            id value = [dicData objectForKey:key];
+//            [bodyContent appendFormat:@"--%@\r\n",POST_BOUNDS];
+//            [bodyContent appendFormat:@"Content-Disposition: form-data; nxxxame=\"%@\"\r\n\r\n",@"data"];
+//            [bodyContent appendFormat:@"%@\r\n",dicData];
+
+            [bodyContent appendFormat:@"data=%@",dicData];
+
+//        [bodyContent appendFormat:@"data=%@",@"{\"uid\":\"feng.wang@zijingcloud.com\",\"addr\":\"1066\",\"time\":\"2016-03-30 10:00\",\"pwd\":\"wang@2015\",\"participants\":[{\"uid\":\"t1@taijihuabao.com\"}]}"];
+//        }
+        
+//        [bodyContent appendFormat:@"--%@--\r\n",POST_BOUNDS];
+        NSData *bodyData = [bodyContent dataUsingEncoding:NSUTF8StringEncoding];
+        NSMutableURLRequest *request  = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:cmdStr] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
+        
+        [request addValue:[NSString stringWithFormat:@"application/x-www-form-urlencoded"] forHTTPHeaderField:@"Content-Type"];
+//        [request addValue:[NSString stringWithFormat:@"text/plain"] forHTTPHeaderField:@"Accept"];
+
+        [request addValue: [NSString stringWithFormat:@"%zd",bodyData.length] forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:bodyData];
+        
+        NSLog(@"请求的长度%@",[NSString stringWithFormat:@"%zd",bodyData.length]);
+        __autoreleasing NSError *error=nil;
+        __autoreleasing NSURLResponse *response=nil;
+        NSLog(@"输出Bdoy中的内容>>\n%@",[[NSString alloc]initWithData:bodyData encoding:NSUTF8StringEncoding]);
+        
+        NSData *reciveData= [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if(error){
+            NSLog(@"server got no response %@", error.description);
+            msg = @"服务器没有响应";
+        }else{
+            NSHTTPURLResponse *httpResponse=(NSHTTPURLResponse *)response;
+            if(httpResponse.statusCode==200){
+                NSLog(@"服务器成功响应!>>%@",[[NSString alloc]initWithData:reciveData encoding:NSUTF8StringEncoding]);
+                NSError *err;
+                NSDictionary *result = [NSJSONSerialization JSONObjectWithData:reciveData options:kNilOptions error:&err];
+                NSLog(@"result=%@", result);
+                
+                if(err == nil){
+                    NSNumber *code = [result objectForKey:@"code"];
+                    NSString *msg = [result objectForKey:@"msg"];
+                    if(code.integerValue == 200){
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            finish(result, msg,[code intValue]);
+                        });
+                    } else {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            finish(nil, msg,[code intValue]);
+                        });
+                    }
+                    
+                }else{
+                    NSLog(@"Error:%@", err);
+                    msg = @"服务器返回数据错误";
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        finish(result, msg, 550);
+                    });
+                }
+            }else{
+                NSLog(@"服务器返回失败>>%@",[[NSString alloc]initWithData:reciveData encoding:NSUTF8StringEncoding]);
+                
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    finish(nil, @"服务器返回数据失败", 550);
+                });
+            }
+        }
+    });
+}
+
+
 
 #pragma mark UITextField delegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {

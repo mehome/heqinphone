@@ -188,7 +188,7 @@
     
     if (request.requestModel) {
         
-        NSDictionary *modelDictionary=[MTLJSONAdapter JSONDictionaryFromModel:request.requestModel error:nil];
+        NSDictionary *modelDictionary = [MTLJSONAdapter JSONDictionaryFromModel:request.requestModel error:nil];
         if (modelDictionary) {
             [dictionary addEntriesFromDictionary:modelDictionary];
         }

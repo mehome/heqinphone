@@ -22,8 +22,11 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 
-#define kHeqinLinphoneServerAddress @"http://cs.myvmr.cn"
+//#define kHeqinLinphoneServerAddress @"http://cs.myvmr.cn"
 
+//#define kHeqinLinphoneServerAddress @"http://cs.zijingcloud.com"
+
+#define kHeqinLinphoneServerAddress @"http://api.myvmr.cn"
 
 #define kNotLoginCheck (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ||[LPSystemUser sharedUser].hasLoginSuccess == NO)
 
