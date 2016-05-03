@@ -33,6 +33,8 @@
 
 #import "AFHTTPRequestOperationManager.h"
 
+#import "NSString+XXURLEncoding.h"
+
 @interface LPMyMeetingArrangeViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
@@ -552,18 +554,56 @@ static UICompositeViewDescription *compositeDescription = nil;
 //    }];
 }
 
+//- (NSString*)encodeURL:(NSString *)string
+//{
+//    NSString *newString = NSMakeCollectable([(NSString *)CFURLCreateStringByAddingPercentEscapes(
+//                                                                                                 kCFAllocatorDefault,
+//                                                                                                 (CFStringRef)string, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"),
+//                                                                                                 CFStringConvertNSStringEncodingToEncoding([self stringEncoding])) autorelease]);
+//    if (newString) {
+//        return newString;
+//    }
+//    return @"";
+//}
+
+
+//- (NSString *)hyb_URLEncode {
+//    
+//    NSString *newString =
+//    
+//    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                              
+//                                                              (CFStringRef)self,
+//                                                              
+//                                                              NULL,
+//                                                              
+//                                                              CFSTR(":/?#[]@!$ &'()*+,;="<>%{}|^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+//                                                                    
+//                                                                    if (newString) {
+//                                                                        
+//                                                                        return newString;
+//                                                                        
+//                                                                    }
+//                                                                    
+//                                                                    return self;
+//                                                                    
+//                                                                    }
+
 
 -(NSString*)DataTOjsonString:(id)object
 {
     NSString *jsonString = nil;
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
                                                          error:&error];
     if (! jsonData) {
         NSLog(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+//        jsonString = [jsonString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        jsonString = [jsonString URLEncodedString];
     }
     return jsonString;
 }
@@ -603,7 +643,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [request addValue:[NSString stringWithFormat:@"application/x-www-form-urlencoded"] forHTTPHeaderField:@"Content-Type"];
 //        [request addValue:[NSString stringWithFormat:@"text/plain"] forHTTPHeaderField:@"Accept"];
 
-        [request addValue: [NSString stringWithFormat:@"%zd",bodyData.length] forHTTPHeaderField:@"Content-Length"];
+        [request addValue:[NSString stringWithFormat:@"%zd",bodyData.length] forHTTPHeaderField:@"Content-Length"];
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:bodyData];
         

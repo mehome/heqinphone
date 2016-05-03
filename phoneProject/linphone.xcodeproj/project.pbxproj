@@ -4045,7 +4045,7 @@
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 9U5ZW6T67V;
+						DevelopmentTeam = 358B5J757A;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -5466,7 +5466,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zijingcloud.phone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "f2912a88-f48d-4455-8b9c-eb9d9c231793";
 				SKIP_INSTALL = NO;
@@ -5556,7 +5556,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zijingcloud.phone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "bdfb7929-58b2-4e2d-91c9-d4cd988e1354";
 				SKIP_INSTALL = NO;
@@ -5592,7 +5592,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "";
-				PROVISIONING_PROFILE = "bdfb7929-58b2-4e2d-91c9-d4cd988e1354";
+				PROVISIONING_PROFILE = "0caa76c7-bbdb-40c6-a1af-f74936b341b2";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5644,9 +5644,9 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zijingcloud.phone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "bdfb7929-58b2-4e2d-91c9-d4cd988e1354";
+				PROVISIONING_PROFILE = "0caa76c7-bbdb-40c6-a1af-f74936b341b2";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
@@ -5733,7 +5733,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ORDER_FILE = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zijingcloud.phone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyoutimes.enterprise.autostore;
 				PRODUCT_NAME = linphone;
 				PROVISIONING_PROFILE = "bdfb7929-58b2-4e2d-91c9-d4cd988e1354";
 				SKIP_INSTALL = NO;
