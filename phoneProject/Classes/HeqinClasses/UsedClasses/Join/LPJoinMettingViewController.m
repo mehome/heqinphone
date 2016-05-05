@@ -100,10 +100,6 @@
                                                  name:kLinphoneGlobalStateUpdate
                                                object:nil];
     
-
-    // 刷新控件的显示
-    [self updateControls];
-    
     [self.callLogs removeAllObjects];
     
     const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
@@ -157,27 +153,6 @@
     [self registrationUpdate:notif];
 }
 
-- (void)updateControls {
-    if ( kNotLoginCheck ) {
-        // 当前处于登出状态
-        self.joinNameField.text = @"noName";
-        self.joinMeetingNumberField.text = @"";
-        
-        self.loginTipLabel.text = @"未登录";
-        
-        // 在用户未登录时， 强制置成未登录状态
-        [LPSystemUser resetToAnonimousLogin];        
-    }else {
-        // 当前已处于登录状态
-        [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-        
-        self.loginTipLabel.text = @"已登录";
-
-        self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-        NSLog(@"userName=%@", [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"]);
-    }
-}
-
 - (void)proxyConfigUpdate: (LinphoneProxyConfig*) config {
     LinphoneRegistrationState state = LinphoneRegistrationNone;
     
@@ -203,9 +178,10 @@
                 
                 [LPSystemUser sharedUser].hasLoginSuccess = YES;
 
-                
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+                
+                self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
                 break;
             }
             case LinphoneRegistrationNone:

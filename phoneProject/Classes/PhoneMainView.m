@@ -28,6 +28,8 @@
 #import "LPJoinMettingViewController.h"
 #import "LPSystemUser.h"
 
+#import "BTMToast.h"
+
 static RootViewManager* rootViewManagerInstance = nil;
 
 @implementation RootViewManager {
@@ -298,6 +300,8 @@ static RootViewManager* rootViewManagerInstance = nil;
         // 注册成功，取值出来
         NSLog(@"登录成功 in mainView");
         [LPSystemUser sharedUser].hasLoginSuccess = YES;
+        
+        [[BTMToast sharedInstance] showToast:@"登录成功"];
     }
 }
 

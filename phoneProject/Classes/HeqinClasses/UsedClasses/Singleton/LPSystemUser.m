@@ -61,9 +61,7 @@
         _settingsStore = [[LinphoneCoreSettingsStore alloc] init];
         
         [_settingsStore setBool:!([LPSystemSetting sharedSetting].defaultNoVideo) forKey:@"enable_video_preference"];
-        
-        [_settingsStore transformLinphoneCoreToKeys];
-        
+                
         [self loadHistoryData];
         
         // 从本地读取属性值

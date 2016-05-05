@@ -64,8 +64,8 @@
 //        self.userNameField.text = @"client@zijingcloud.com";
 //        self.userPasswordField.text = @"test&temp";
 
-//        self.userNameField.text = @"qin.he@zijingcloud.com";
-//        self.userPasswordField.text = @"he@2015";
+        self.userNameField.text = @"qin.he@zijingcloud.com";
+        self.userPasswordField.text = @"he@2015";
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
@@ -97,7 +97,6 @@
             [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"enable_first_login_view_preference"];
             
             [self hideHudAndIndicatorView];
-            [self showToastWithMessage:@"登录成功"];
             
             [LPSystemUser sharedUser].hasLoginSuccess = YES;
             

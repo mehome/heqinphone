@@ -867,6 +867,46 @@ static void linphone_iphone_configuring_status_changed(LinphoneCore *lc, Linphon
 - (void)onRegister:(LinphoneCore *)lc cfg:(LinphoneProxyConfig*) cfg state:(LinphoneRegistrationState) state message:(const char*) message {
 	[LinphoneLogger logc:LinphoneLoggerLog format:"NEW REGISTRATION STATE: '%s' (message: '%s')", linphone_registration_state_to_string(state), message];
 
+//    LinphoneProxyConfig *cfg=NULL;
+//    LpConfig* conf = linphone_core_get_config(lc);
+//    linphone_core_get_default_proxy(lc,&cfg);
+    if (cfg){
+        const char *identity=linphone_proxy_config_get_identity(cfg);
+        LinphoneAddress *addr=linphone_address_new(identity);
+        if (addr){
+            const char *proxy=linphone_proxy_config_get_addr(cfg);
+            LinphoneAddress *proxy_addr=linphone_address_new(proxy);
+            int port=linphone_address_get_port(proxy_addr);
+            
+            NSLog(@"onRegister, port=%d, userName=%s, password=%s, domain=%s, proxy_addr=%s, expire=%d, prefix=%s, transport=%d",
+                  port, linphone_address_get_username(addr), linphone_address_get_password(addr), linphone_address_get_domain(addr), linphone_address_get_domain(proxy_addr),
+                  linphone_proxy_config_get_expires(cfg), linphone_proxy_config_get_dial_prefix(cfg), linphone_address_get_transport(proxy_addr));
+            
+//            [self setString: linphone_address_get_username(addr) forKey:@"username_preference"];
+//            [self setString: linphone_address_get_domain(addr) forKey:@"domain_preference"];
+//            [self setInteger:  forKey:@"expire_preference"];
+//            [self setString:  forKey:@"prefix_preference"];
+//            if (strcmp(linphone_address_get_domain(addr),)!=0 || port>0){
+//                char tmp[256]={0};
+//                if (port>0) {
+//                    snprintf(tmp,sizeof(tmp)-1,"%s:%i",linphone_address_get_domain(proxy_addr),port);
+//                }else snprintf(tmp,sizeof(tmp)-1,"%s",linphone_address_get_domain(proxy_addr));
+//                [self setString:tmp forKey:@"proxy_preference"];
+//            }
+//            
+//            const char* tname = "udp";
+//            switch () {
+//                case LinphoneTransportTcp: tname = "tcp"; break;
+//                case LinphoneTransportTls: tname = "tls"; break;
+//                default:                                  break;
+//            }
+        }else {
+            NSLog(@"onRegister, no address");
+        }
+    }else {
+        NSLog(@"onRegister, cfg is nil");
+    }
+    
 	// Post event
 	NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
 						  [NSNumber numberWithInt:state], @"state",
