@@ -122,6 +122,8 @@
 		13E33E291BF0CC4E00AA3E64 /* BTMToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E241BF0CC4E00AA3E64 /* BTMToast.m */; };
 		13E33E2A1BF0CC4E00AA3E64 /* UIViewController+RDRTipAndAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E261BF0CC4E00AA3E64 /* UIViewController+RDRTipAndAlert.m */; };
 		13E33E311BF0CC9600AA3E64 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E2E1BF0CC9600AA3E64 /* MBProgressHUD.m */; };
+		13E648AE1CDDED3500C1940D /* RDRReocrdRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E648AD1CDDED3500C1940D /* RDRReocrdRequestModel.m */; };
+		13E648B11CDDEDA900C1940D /* RDRRecordResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E648B01CDDEDA900C1940D /* RDRRecordResponseModel.m */; };
 		13E695E71C5C721A004E0F9A /* LPJoinMeetingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E695E61C5C721A004E0F9A /* LPJoinMeetingCell.m */; };
 		13E6960D1C5C7E2C004E0F9A /* fav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E6960C1C5C7E2C004E0F9A /* fav@2x.png */; };
 		13E696101C5C8674004E0F9A /* LPCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E6960F1C5C8674004E0F9A /* LPCommonCell.m */; };
@@ -1166,6 +1168,10 @@
 		13E33E261BF0CC4E00AA3E64 /* UIViewController+RDRTipAndAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RDRTipAndAlert.m"; sourceTree = "<group>"; };
 		13E33E2D1BF0CC9600AA3E64 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		13E33E2E1BF0CC9600AA3E64 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		13E648AC1CDDED3500C1940D /* RDRReocrdRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRReocrdRequestModel.h; sourceTree = "<group>"; };
+		13E648AD1CDDED3500C1940D /* RDRReocrdRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRReocrdRequestModel.m; sourceTree = "<group>"; };
+		13E648AF1CDDEDA900C1940D /* RDRRecordResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRRecordResponseModel.h; sourceTree = "<group>"; };
+		13E648B01CDDEDA900C1940D /* RDRRecordResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRRecordResponseModel.m; sourceTree = "<group>"; };
 		13E695E51C5C721A004E0F9A /* LPJoinMeetingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPJoinMeetingCell.h; sourceTree = "<group>"; };
 		13E695E61C5C721A004E0F9A /* LPJoinMeetingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPJoinMeetingCell.m; sourceTree = "<group>"; };
 		13E6960C1C5C7E2C004E0F9A /* fav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fav@2x.png"; path = "Resources/fav@2x.png"; sourceTree = "<group>"; };
@@ -2796,6 +2802,8 @@
 				E1128AE51C255C9F009DC298 /* RDRInviteRequestModel.m */,
 				E1128AEA1C2563F7009DC298 /* RDRLockReqeustModel.h */,
 				E1128AEB1C2563F7009DC298 /* RDRLockReqeustModel.m */,
+				13E648AC1CDDED3500C1940D /* RDRReocrdRequestModel.h */,
+				13E648AD1CDDED3500C1940D /* RDRReocrdRequestModel.m */,
 				E1128AF01C25648E009DC298 /* RDRTerminalRequestModel.h */,
 				E1128AF11C25648E009DC298 /* RDRTerminalRequestModel.m */,
 				E17461781C265595009AD174 /* RDROperationGetJoinersRequestModel.h */,
@@ -2833,6 +2841,8 @@
 				E1128AE81C255D00009DC298 /* RDRInviteResponseModel.m */,
 				E1128AED1C25643A009DC298 /* RDRLockResponseModel.h */,
 				E1128AEE1C25643A009DC298 /* RDRLockResponseModel.m */,
+				13E648AF1CDDEDA900C1940D /* RDRRecordResponseModel.h */,
+				13E648B01CDDEDA900C1940D /* RDRRecordResponseModel.m */,
 				E1128AF31C2564CB009DC298 /* RDRTerminalResponseModel.h */,
 				E1128AF41C2564CB009DC298 /* RDRTerminalResponseModel.m */,
 				138951291BECB206003DD7A0 /* RDRSystemConfigResponseModel.h */,
@@ -4800,6 +4810,7 @@
 				D3F83EEC1582021700336684 /* InCallViewController.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
 				1389507A1BECA38D003DD7A0 /* AFURLResponseSerialization.m in Sources */,
+				13E648AE1CDDED3500C1940D /* RDRReocrdRequestModel.m in Sources */,
 				D3ED3E871586291E006C0DE4 /* UIMainBar.m in Sources */,
 				D3ED3EA71587334E006C0DE4 /* HistoryTableViewController.m in Sources */,
 				13E33E2A1BF0CC4E00AA3E64 /* UIViewController+RDRTipAndAlert.m in Sources */,
@@ -4899,6 +4910,7 @@
 				138950F01BECA576003DD7A0 /* FMDatabasePool.m in Sources */,
 				134D2D3F1C3E774800D6FB99 /* UIView+MJExtension.m in Sources */,
 				E1D0AC0D1C3AC1840019DE87 /* LPBottomButton.m in Sources */,
+				13E648B11CDDEDA900C1940D /* RDRRecordResponseModel.m in Sources */,
 				D3A8BB7015A6C7D500F96BE5 /* UIChatRoomCell.m in Sources */,
 				D3128FE115AABC7E00A2147A /* ContactDetailsViewController.m in Sources */,
 				D37C639515AADDAF009D0BAC /* UIContactDetailsHeader.m in Sources */,

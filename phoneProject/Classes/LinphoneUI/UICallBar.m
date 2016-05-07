@@ -50,6 +50,10 @@
 #import "RDRLockReqeustModel.h"
 #import "RDRLockResponseModel.h"
 
+// 录制相关
+#import "RDRReocrdRequestModel.h"
+#import "RDRRecordResponseModel.h"
+
 #import "ShowPinView.h"
 
 // 结束
@@ -102,6 +106,7 @@ extern NSString *const kLinphoneInCallCellData;
 @property (strong, nonatomic) IBOutlet UILabel *callSubtitleLabel;
 
 @property (nonatomic, assign) BOOL meetingLockedStatus;     // 会议被锁定?，默认为No
+@property (nonatomic, assign) BOOL meetingIsRecording;      // 会议是否正在录制，默认NO
 
 @property (nonatomic, strong) IBOutlet UIImageView *loadingTipImgView;      // 当前关闭摄像头时使用。打开摄像头后，则不显示
 
@@ -447,6 +452,16 @@ extern NSString *const kLinphoneInCallCellData;
     [unlockBtn addTarget:self action:@selector(unlockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [unlockBtn setTitle:@"解锁会议室" forState:UIControlStateNormal];
     
+    UIButton *startRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    startRecordBtn.showsTouchWhenHighlighted = YES;
+    [startRecordBtn addTarget:self action:@selector(startRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [startRecordBtn setTitle:@"开始录制" forState:UIControlStateNormal];
+    
+    UIButton *stopRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    stopRecordBtn.showsTouchWhenHighlighted = YES;
+    [stopRecordBtn addTarget:self action:@selector(stopRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [stopRecordBtn setTitle:@"停止录制" forState:UIControlStateNormal];
+    
     UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     endBtn.showsTouchWhenHighlighted = YES;
     [endBtn addTarget:self action:@selector(endMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -454,9 +469,17 @@ extern NSString *const kLinphoneInCallCellData;
     
     // 判断当前会议的状态， 是被锁定还是怎么的
     if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
-        [self popWithButtons:@[unlockBtn, endBtn]];
+        if (self.meetingIsRecording == YES) {       // 正在录制
+            [self popWithButtons:@[unlockBtn, stopRecordBtn, endBtn]];
+        }else {                                     // 没有录制
+            [self popWithButtons:@[unlockBtn, startRecordBtn, endBtn]];
+        }
     }else {
-        [self popWithButtons:@[lockBtn, endBtn]];
+        if (self.meetingIsRecording == YES) {       // 正在录制
+            [self popWithButtons:@[lockBtn, stopRecordBtn, endBtn]];
+        }else {                                     // 没有录制
+            [self popWithButtons:@[lockBtn, startRecordBtn, endBtn]];
+        }
     }
 }
 
@@ -544,6 +567,7 @@ extern NSString *const kLinphoneInCallCellData;
     
     self.callTipView.hidden = NO;
     self.meetingLockedStatus = NO;
+    self.meetingIsRecording = NO;
     
     systemOpenCamera = NO;
     self.loadingTipImgView.hidden = YES;
@@ -578,6 +602,116 @@ extern NSString *const kLinphoneInCallCellData;
 - (IBAction)callBtnClicked:(id)sender {
     [self inviteMenBy:InvityTypePhoneCall];
     [self hideAllBottomBgView];
+}
+
+- (void)startRecordClicked:(id)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"录制" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self doRecordOperation:0];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"直播" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self doRecordOperation:1];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"录制+直播" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self doRecordOperation:2];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+    [self hideAllBottomBgView];
+}
+
+- (void)doRecordOperation:(NSInteger)type {
+    [ShowPinView showTitle:@"请输入PIN码" withDoneBlock:^(NSString *text) {
+        NSString *commandStr = nil;
+        NSString *tipStr = nil;
+        switch (type) {
+            case 0:
+                commandStr = @"record";
+                tipStr = @"启动录制";
+                break;
+            case 1:
+                commandStr = @"live";
+                tipStr = @"启动直播";
+                break;
+            case 2:
+                commandStr = @"both";
+                tipStr = @"启动录制和直播";
+                break;
+            case 3:
+                commandStr = @"stop";
+                tipStr = @"停止录制或直播";
+                break;
+            default:
+                break;
+        }
+        
+        [self doRecordCommandWithPin:text withCommandStr:commandStr withTipStr:tipStr commandType:type];
+    } withCancelBlock:^{
+        
+    } withNoInput:^{
+        [self showToastWithMessage:@"请输入PIN码"];
+    }];
+
+}
+
+- (void)stopRecordClicked:(id)sender {
+    [self doRecordOperation:3];
+}
+
+- (void)doRecordCommandWithPin:(NSString *)pinStr withCommandStr:(NSString *)commandStr withTipStr:(NSString *)tipStr commandType:(NSInteger)type {
+    __block UICallBar *weakSelf = self;
+    
+    [self showToastWithMessage:@"请稍等..."];
+    
+    RDRReocrdRequestModel *reqModel = [RDRReocrdRequestModel requestModel];
+    reqModel.addr = [self curMeetingAddr];
+    reqModel.action = commandStr;
+    reqModel.pin = pinStr;
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    [RDRNetHelper GET:req responseModelClass:[RDRRecordResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  [weakSelf retain];
+                  
+                  RDRRecordResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      [weakSelf showToastWithMessage:[NSString stringWithFormat:@"%@成功", tipStr]];
+                      
+                      switch (type) {
+                          case 0:
+                              weakSelf.meetingIsRecording = YES;
+                              break;
+                          case 1:
+                              weakSelf.meetingIsRecording = YES;
+                              break;
+                          case 2:
+                              weakSelf.meetingIsRecording = YES;
+                              break;
+                          case 3:
+                              weakSelf.meetingIsRecording = NO;
+                              break;
+                          default:
+                              break;
+                      }
+                  }else {
+                      NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，msg=%@", tipStr, model.msg];
+                      [weakSelf showToastWithMessage:tempTipStr];
+                  }
+                  [weakSelf release];
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  [weakSelf retain];
+                  
+                  //请求出错
+                  NSLog(@"失败, %s, error=%@", __FUNCTION__, error);
+                  NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，服务器错误", tipStr];
+                  [weakSelf showToastWithMessage:tempTipStr];
+                  [weakSelf release];
+              }];
 }
 
 - (void)inviteMenBy:(InvityType)type {
