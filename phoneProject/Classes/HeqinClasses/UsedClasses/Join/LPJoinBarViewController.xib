@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPJoinBarViewController">
             <connections>
                 <outlet property="firstBtn" destination="qTs-VH-hs5" id="9ce-3X-v9B"/>
                 <outlet property="forthBtn" destination="y70-Ww-RBd" id="qIM-VK-cHX"/>
+                <outlet property="recordBtn" destination="VWu-zJ-1bU" id="42W-cT-wlb"/>
                 <outlet property="secondBtn" destination="LoW-mB-2v0" id="HVb-Yx-PCf"/>
                 <outlet property="thirdBtn" destination="La9-Sr-fdd" id="q0c-eG-GVb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTs-VH-hs5">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="55"/>
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <connections>
@@ -31,7 +32,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoW-mB-2v0">
-                    <rect key="frame" x="80" y="0.0" width="80" height="55"/>
+                    <rect key="frame" x="64" y="0.0" width="64" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <connections>
@@ -39,15 +40,22 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La9-Sr-fdd" userLabel="ArrangeManage">
-                    <rect key="frame" x="160" y="0.0" width="80" height="55"/>
+                    <rect key="frame" x="128" y="0.0" width="64" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <connections>
                         <action selector="arrangeBtnClicked:" destination="-1" eventType="touchUpInside" id="f41-DP-gTD"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-zJ-1bU" userLabel="Record">
+                    <rect key="frame" x="192" y="0.0" width="64" height="55"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <connections>
+                        <action selector="recordBtnClicked:" destination="-1" eventType="touchUpInside" id="5fa-qt-UMC"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y70-Ww-RBd">
-                    <rect key="frame" x="240" y="0.0" width="80" height="55"/>
+                    <rect key="frame" x="256" y="0.0" width="64" height="55"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <connections>
@@ -57,9 +65,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="VWu-zJ-1bU" firstAttribute="width" secondItem="y70-Ww-RBd" secondAttribute="width" id="0Ru-d7-MwF"/>
                 <constraint firstAttribute="bottom" secondItem="y70-Ww-RBd" secondAttribute="bottom" id="3RT-Uz-i0L"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="width" secondItem="qTs-VH-hs5" secondAttribute="width" id="6vd-Pe-v4Q"/>
                 <constraint firstAttribute="bottom" secondItem="qTs-VH-hs5" secondAttribute="bottom" id="EdY-Ym-9nI"/>
+                <constraint firstItem="VWu-zJ-1bU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HCS-XC-s42"/>
                 <constraint firstAttribute="bottom" secondItem="diU-za-N3X" secondAttribute="bottom" id="S7X-Vg-L8X"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Sx9-yt-R4V"/>
                 <constraint firstItem="diU-za-N3X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tmn-sD-GiD"/>
@@ -67,6 +77,9 @@
                 <constraint firstAttribute="trailing" secondItem="y70-Ww-RBd" secondAttribute="trailing" id="X2e-Ol-HYb"/>
                 <constraint firstItem="La9-Sr-fdd" firstAttribute="width" secondItem="LoW-mB-2v0" secondAttribute="width" id="YiL-iB-VZ7"/>
                 <constraint firstItem="y70-Ww-RBd" firstAttribute="leading" secondItem="LoW-mB-2v0" secondAttribute="trailing" id="aZ9-wB-JiF"/>
+                <constraint firstItem="VWu-zJ-1bU" firstAttribute="leading" secondItem="La9-Sr-fdd" secondAttribute="trailing" id="ba3-ec-PWh"/>
+                <constraint firstItem="VWu-zJ-1bU" firstAttribute="leading" secondItem="La9-Sr-fdd" secondAttribute="trailing" id="c0p-4G-qcu"/>
+                <constraint firstItem="y70-Ww-RBd" firstAttribute="leading" secondItem="VWu-zJ-1bU" secondAttribute="trailing" id="dSv-cN-0o8"/>
                 <constraint firstAttribute="bottom" secondItem="LoW-mB-2v0" secondAttribute="bottom" id="eA7-lE-5Ye"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="width" secondItem="qTs-VH-hs5" secondAttribute="width" id="eMd-0f-jgE"/>
                 <constraint firstItem="diU-za-N3X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ghs-QN-Sp0"/>
@@ -77,12 +90,14 @@
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="leading" secondItem="qTs-VH-hs5" secondAttribute="trailing" id="pMF-vT-zdr"/>
                 <constraint firstItem="La9-Sr-fdd" firstAttribute="leading" secondItem="LoW-mB-2v0" secondAttribute="trailing" id="rRk-0b-oOy"/>
                 <constraint firstItem="La9-Sr-fdd" firstAttribute="height" secondItem="LoW-mB-2v0" secondAttribute="height" id="whL-oN-ezR"/>
+                <constraint firstAttribute="bottom" secondItem="VWu-zJ-1bU" secondAttribute="bottom" id="xzg-vo-6jo"/>
                 <constraint firstItem="LoW-mB-2v0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yKh-hp-2yi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="aZ9-wB-JiF"/>
+                    <exclude reference="nWq-lX-A2G"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="114" y="469.5"/>

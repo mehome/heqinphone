@@ -15,6 +15,7 @@
 #import "LPSettingViewController.h"
 #import "LPMyMeetingManageViewController.h"
 #import "LPMyMeetingArrangeViewController.h"
+#import "LPRecordAndPlayViewController.h"
 #import "LPBottomButton.h"
 #import "UIButton+LPUIButtonImageWithLable.h"
 
@@ -68,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondBtn;
 @property (weak, nonatomic) IBOutlet UIButton *thirdBtn;
+@property (strong, nonatomic) IBOutlet UIButton *recordBtn;
 @property (weak, nonatomic) IBOutlet UIButton *forthBtn;
 
 @end
@@ -100,33 +102,38 @@
     [self.firstBtn setImage:[UIImage imageNamed:@"b_joinMetting.png"] forState:UIControlStateNormal];
     [self.secondBtn setImage:[UIImage imageNamed:@"b_meetingSetting.png"] forState:UIControlStateNormal];
     [self.thirdBtn setImage:[UIImage imageNamed:@"b_meetingSetting.png"] forState:UIControlStateNormal];
+    [self.recordBtn setImage:[UIImage imageNamed:@"b_record.png"] forState:UIControlStateNormal];
     [self.forthBtn setImage:[UIImage imageNamed:@"b_settings.png"] forState:UIControlStateNormal];
     
     [self.firstBtn setImage:[UIImage imageNamed:@"b_joinMetting.png"] forState:UIControlStateHighlighted];
     [self.secondBtn setImage:[UIImage imageNamed:@"b_meetingSetting.png"] forState:UIControlStateHighlighted];
     [self.thirdBtn setImage:[UIImage imageNamed:@"b_meetingSetting.png"] forState:UIControlStateHighlighted];
+    [self.recordBtn setImage:[UIImage imageNamed:@"b_record.png"] forState:UIControlStateHighlighted];
     [self.forthBtn setImage:[UIImage imageNamed:@"b_settings.png"] forState:UIControlStateHighlighted];
-
     
     [self.firstBtn setTitle:@"加入会议" forState:UIControlStateNormal];
     [self.secondBtn setTitle:@"会议管理" forState:UIControlStateNormal];
     [self.thirdBtn setTitle:@"安排会议" forState:UIControlStateNormal];
+    [self.recordBtn setTitle:@"录像" forState:UIControlStateNormal];
     [self.forthBtn setTitle:@"设置" forState:UIControlStateNormal];
     
     [self.firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.secondBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.thirdBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.recordBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.forthBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [self.firstBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [self.secondBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [self.thirdBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [self.recordBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [self.forthBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     
     // 调整布局
     [self changeBtn:self.firstBtn];
     [self changeBtn:self.secondBtn];
     [self changeBtn:self.thirdBtn];
+    [self changeBtn:self.recordBtn];
     [self changeBtn:self.forthBtn];
 
     [self.firstBtn setSelected:YES];
@@ -140,6 +147,7 @@
     [self.firstBtn setSelected:(self.firstBtn==noti.object)];
     [self.secondBtn setSelected:(self.secondBtn==noti.object)];
     [self.thirdBtn setSelected:(self.thirdBtn==noti.object)];
+    [self.recordBtn setSelected:(self.recordBtn==noti.object)];
     [self.forthBtn setSelected:(self.forthBtn==noti.object)];
 }
 
@@ -197,6 +205,18 @@
     }else {
         // 进入到会议安排界面
         [[PhoneMainView instance] changeCurrentView:[LPMyMeetingArrangeViewController compositeViewDescription]];
+    }
+}
+
+// 录像
+- (IBAction)recordBtnClicked:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kChangeStateNotification object:sender];
+    
+    if ( kNotLoginCheck) {
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
+    }else {
+        // 进入到会议安排界面
+        [[PhoneMainView instance] changeCurrentView:[LPRecordAndPlayViewController compositeViewDescription]];
     }
 }
 
