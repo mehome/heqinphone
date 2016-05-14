@@ -58,8 +58,12 @@
     
     if ( kNotLoginCheck ) {
         // 当前处于登出状态
-        self.userNameField.text = @"feng.wang@zijingcloud.com";
-        self.userPasswordField.text = @"wang@2015";
+//        self.userNameField.text = @"feng.wang@zijingcloud.com";
+//        self.userPasswordField.text = @"wang@2015";
+        
+        self.userNameField.text = @"hbuc3@meeting123.net";
+        self.userPasswordField.text = @"1234";
+
 
 //        self.userNameField.text = @"client@zijingcloud.com";
 //        self.userPasswordField.text = @"test&temp";

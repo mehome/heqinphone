@@ -41,6 +41,8 @@
 
 #import <AVFoundation/AVAudioPlayer.h>
 
+#import "LPSystemUser.h"
+
 #define LINPHONE_LOGS_MAX_ENTRY 5000
 
 static void audioRouteChangeListenerCallback (
@@ -1887,6 +1889,22 @@ static void audioRouteChangeListenerCallback (
     
     
 	linphone_core_accept_call_with_params(theLinphoneCore,call, lcallParams);
+}
+
++ (void)customCall:(NSString *)address {
+    NSString *displayName = nil;
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
+    if(contact) {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    
+    [self customCall:address displayName:displayName];
+}
+
++ (void)customCall:(NSString *)address displayName:(NSString *)displayName {
+    [LPSystemUser sharedUser].curMeetingAddr = address;
+    
+    [[LinphoneManager instance] call:address displayName:displayName transfer:false];
 }
 
 - (void)call:(NSString *)address displayName:(NSString*)displayName transfer:(BOOL)transfer {

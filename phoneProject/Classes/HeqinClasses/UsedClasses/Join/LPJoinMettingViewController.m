@@ -16,7 +16,7 @@
 #import "UIHistoryCell.h"
 #import "UACellBackgroundView.h"
 #import "UILinphone.h"
-#import "DialerViewController.h"
+//#import "DialerViewController.h"
 #import "NSObject+RDRCommon.h"
 #import "LPJoinManageMeetingViewController.h"
 #import "LPPhoneListView.h"
@@ -322,11 +322,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     // 进入到会议中
-    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-    if (controller != nil) {
-        NSLog(@"进入会议中, callStr=%@, displayName=%@", callStr, displayName);
-        [controller call:callStr displayName:displayName];
-    }
+//    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
+//    if (controller != nil) {
+//        NSLog(@"进入会议中, callStr=%@, displayName=%@", callStr, displayName);
+//        [controller call:callStr displayName:displayName];
+//    }
+    
+    [LinphoneManager customCall:callStr displayName:displayName];
 }
 
 #pragma mark UITabelView delegate & datasource
