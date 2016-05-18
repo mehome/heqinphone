@@ -103,7 +103,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                                  tabBar:@"UICallBar"
                                                           tabBarEnabled:true
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
+                                                          landscapeMode:true
                                                            portraitMode:true];        
         compositeDescription.darkBackground = true;
     }
