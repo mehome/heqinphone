@@ -31,6 +31,8 @@
 
 #import "RDRRecordVideoModel.h"
 
+#import "LPVideoClickToPlayCell.h"
+
 typedef void(^requestSuccessBlock)(RDRRecordAndPlayResponseModel *responseModel);
 typedef void(^requestKeywordsSuccessBlock)(RDRRecordSearchResponseModel *responseModel);
 typedef void(^requestFailedBlock)(NSError *theError);
@@ -80,7 +82,9 @@ typedef void(^requestFailedBlock)(NSError *theError);
 
     [self initAllConstrols];
     
-    [self initRequest];
+    [self decideWhichTableShow];
+    
+    [self initSevenRequest];
 }
 
 - (void)initAllConstrols {
@@ -100,7 +104,7 @@ typedef void(^requestFailedBlock)(NSError *theError);
     // 添加各个表
     self.sevenTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 49) style:UITableViewStylePlain];
     self.sevenTable.delegate = self;
-    self.sevenTable.delegate = self;
+    self.sevenTable.dataSource = self;
     self.sevenTable.hidden = NO;
     [self.view addSubview:self.sevenTable];
     self.sevenTable.tableFooterView = nil;
@@ -108,7 +112,7 @@ typedef void(^requestFailedBlock)(NSError *theError);
     
     self.thirtyTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 49) style:UITableViewStylePlain];
     self.thirtyTable.delegate = self;
-    self.thirtyTable.delegate = self;
+    self.thirtyTable.dataSource = self;
     self.thirtyTable.hidden = YES;
     [self.view addSubview:self.thirtyTable];
     self.thirtyTable.tableHeaderView = nil;
@@ -116,15 +120,15 @@ typedef void(^requestFailedBlock)(NSError *theError);
     
     self.searchTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 49) style:UITableViewStylePlain];
     self.searchTable.delegate = self;
-    self.searchTable.delegate = self;
+    self.searchTable.dataSource = self;
     self.searchTable.hidden = YES;
     [self.view addSubview:self.searchTable];
     self.searchTable.tableFooterView = nil;
     self.searchTable.tableHeaderView = self.searchTopView;
     
-    [self.sevenTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
-    [self.thirtyTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
-    [self.thirtyTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
+    [self.sevenTable registerClass:[LPVideoClickToPlayCell class] forCellReuseIdentifier:@"customCell"];
+    [self.thirtyTable registerClass:[LPVideoClickToPlayCell class] forCellReuseIdentifier:@"customCell"];
+    [self.thirtyTable registerClass:[LPVideoClickToPlayCell class] forCellReuseIdentifier:@"customCell"];
 }
 
 - (void)decideWhichTableShow {
@@ -189,7 +193,7 @@ static UICompositeViewDescription *compositeDescription = nil;
             // 不进行请求
         }else {
             // 进行请求
-            [self initRequest];
+            [self initSevenRequest];
         }
     }
 }
@@ -280,7 +284,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 }
 
-- (void)initRequest {
+- (void)initSevenRequest {
     if (self.sevenTable.mj_header == nil) {
         __unsafe_unretained LPRecordAndPlayViewController *weakSelf = self;
         
@@ -418,7 +422,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
+    LPVideoClickToPlayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customCell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     RDRRecordVideoModel *curModel = nil;
@@ -431,7 +435,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     // cell进行加载
-    cell.textLabel.text = curModel.name;
+    cell.isLiveVideo = (curModel.live == 1);
+    cell.videoNameLabel.text = curModel.name;
+    cell.videoDescLabel.text = curModel.desc;
+    cell.videoDateLabel.text = curModel.date;
+    cell.isSec = (curModel.sec == 1);
     
     return cell;
 }
@@ -451,11 +459,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     if (curModel.sec == 0) {
         // 未加密， 直接取url
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:kPlayVideoNotification object:curModel.url];
     }else {
         // 加密过的，需要弹出界面问取密码
-        
         [self askToDesec:curModel.id];
     }
 }
@@ -530,6 +536,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     if (model.url.length == 0) {
         [self showToastWithMessage:@"获取视频地址失败"];
     }else {
+        [self showToastWithMessage:@"解密成功"];
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kPlayVideoNotification object:model.url];
     }
 }
@@ -537,11 +545,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark -- textField delegate
 #pragma mark UITextField delegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField != self.searchTextField) {
+        return;
+    }
+    
     [self.searchList removeAllObjects];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+
+    if (textField != self.searchTextField) {
+        return YES;
+    }
     
     if (textField.text.length == 0) {
         [self.searchList removeAllObjects];

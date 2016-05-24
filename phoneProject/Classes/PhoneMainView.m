@@ -27,6 +27,7 @@
 
 #import "LPJoinMettingViewController.h"
 #import "LPSystemUser.h"
+#import "LPRecordAndPlayViewController.h"
 
 #import "BTMToast.h"
 
@@ -166,6 +167,8 @@ static RootViewManager* rootViewManagerInstance = nil;
     volumeView.userInteractionEnabled = false;
 
     [self.view addSubview:mainViewController.view];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tryPlayMovie:) name:kPlayVideoNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -223,6 +226,19 @@ static RootViewManager* rootViewManagerInstance = nil;
 	[super viewDidAppear:animated];
 }
 
+- (void)tryPlayMovie:(NSNotification *)notif {
+    NSLog(@"try to play link:=%@", notif.object);
+
+    NSString *urlStr = (NSString *)(notif.object);
+    if (![urlStr isKindOfClass:[NSString class]] || urlStr.length == 0) {
+        return;
+    }
+
+    // 目前获取到一个点播url为：http://file.myvmr.cn:8090/2016-05-16/1088_103028.mp4
+    // 直播url暂无。
+    [self presentViewController:[UIViewController alloc] animated:YES completion:nil];
+}
+
 - (void)setVolumeHidden:(BOOL)hidden {
     // sometimes when placing a call, the volume view will appear. Inserting a
     // carefully hidden MPVolumeView into the view hierarchy will hide it
@@ -236,7 +252,6 @@ static RootViewManager* rootViewManagerInstance = nil;
         }
     }
 }
-
 
 - (NSUInteger)supportedInterfaceOrientations {
     if( [LinphoneManager runningOnIpad ] || [mainViewController currentViewSupportsLandscape] )

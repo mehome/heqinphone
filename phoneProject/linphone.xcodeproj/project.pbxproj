@@ -115,6 +115,10 @@
 		138951761BEDFBAD003DD7A0 /* LPMeetingRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 138951751BEDFBAD003DD7A0 /* LPMeetingRoom.m */; };
 		1389519D1BEE09CA003DD7A0 /* LPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1389519B1BEE09CA003DD7A0 /* LPLoginViewController.m */; };
 		1389519E1BEE09CA003DD7A0 /* LPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1389519C1BEE09CA003DD7A0 /* LPLoginViewController.xib */; };
+		13A39FF51CEE0C0E009F665B /* LPVideoClickToPlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A39FF41CEE0C0E009F665B /* LPVideoClickToPlayCell.m */; };
+		13A39FF91CEE1214009F665B /* live@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A39FF61CEE1214009F665B /* live@2x.png */; };
+		13A39FFA1CEE1214009F665B /* movie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A39FF71CEE1214009F665B /* movie@2x.png */; };
+		13A39FFB1CEE1214009F665B /* videoLock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A39FF81CEE1214009F665B /* videoLock@2x.png */; };
 		13B9AC551C64674800A982B0 /* mz_accept@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B9AC531C64674800A982B0 /* mz_accept@2x.png */; };
 		13B9AC561C64674800A982B0 /* mz_accept2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B9AC541C64674800A982B0 /* mz_accept2@2x.png */; };
 		13E33E271BF0CC4E00AA3E64 /* RDRErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E1F1BF0CC4E00AA3E64 /* RDRErrorView.m */; };
@@ -1166,6 +1170,11 @@
 		1389519A1BEE09CA003DD7A0 /* LPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLoginViewController.h; sourceTree = "<group>"; };
 		1389519B1BEE09CA003DD7A0 /* LPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLoginViewController.m; sourceTree = "<group>"; };
 		1389519C1BEE09CA003DD7A0 /* LPLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPLoginViewController.xib; sourceTree = "<group>"; };
+		13A39FF31CEE0C0E009F665B /* LPVideoClickToPlayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVideoClickToPlayCell.h; sourceTree = "<group>"; };
+		13A39FF41CEE0C0E009F665B /* LPVideoClickToPlayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVideoClickToPlayCell.m; sourceTree = "<group>"; };
+		13A39FF61CEE1214009F665B /* live@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "live@2x.png"; path = "Resources/live@2x.png"; sourceTree = "<group>"; };
+		13A39FF71CEE1214009F665B /* movie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "movie@2x.png"; path = "Resources/movie@2x.png"; sourceTree = "<group>"; };
+		13A39FF81CEE1214009F665B /* videoLock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "videoLock@2x.png"; path = "Resources/videoLock@2x.png"; sourceTree = "<group>"; };
 		13B9AC531C64674800A982B0 /* mz_accept@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mz_accept@2x.png"; path = "Resources/mz_accept@2x.png"; sourceTree = "<group>"; };
 		13B9AC541C64674800A982B0 /* mz_accept2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mz_accept2@2x.png"; path = "Resources/mz_accept2@2x.png"; sourceTree = "<group>"; };
 		13E33E1E1BF0CC4E00AA3E64 /* RDRErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRErrorView.h; sourceTree = "<group>"; };
@@ -2438,6 +2447,7 @@
 				D35E759C159460B50066B1C1 /* SettingsViewController.h */,
 				D35E759D159460B50066B1C1 /* SettingsViewController.m */,
 				636316D61A1DEC650009B839 /* SettingsViewController.xib */,
+				13A39FFC1CEE198A009F665B /* MoviePlay */,
 				D326483415887D4400930C67 /* Utils */,
 				34216F3E1547EBCD00EA9777 /* VideoZoomHandler.h */,
 				34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */,
@@ -3045,6 +3055,13 @@
 			path = CommonClass;
 			sourceTree = "<group>";
 		};
+		13A39FFC1CEE198A009F665B /* MoviePlay */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MoviePlay;
+			sourceTree = "<group>";
+		};
 		13E33E1C1BF0CC4E00AA3E64 /* LPUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -3094,6 +3111,8 @@
 				13E648B31CDDF6D200C1940D /* LPRecordAndPlayViewController.h */,
 				13E648B41CDDF6D200C1940D /* LPRecordAndPlayViewController.m */,
 				13E648B51CDDF6D200C1940D /* LPRecordAndPlayViewController.xib */,
+				13A39FF31CEE0C0E009F665B /* LPVideoClickToPlayCell.h */,
+				13A39FF41CEE0C0E009F665B /* LPVideoClickToPlayCell.m */,
 			);
 			path = RecordAndPlay;
 			sourceTree = "<group>";
@@ -3525,6 +3544,9 @@
 		F0B89C2318DC90850050B60E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				13A39FF61CEE1214009F665B /* live@2x.png */,
+				13A39FF71CEE1214009F665B /* movie@2x.png */,
+				13A39FF81CEE1214009F665B /* videoLock@2x.png */,
 				13E648CD1CDE413100C1940D /* b_record.png */,
 				13B9AC531C64674800A982B0 /* mz_accept@2x.png */,
 				13B9AC541C64674800A982B0 /* mz_accept2@2x.png */,
@@ -4225,6 +4247,7 @@
 				D3F83F4C1582223B00336684 /* numpad_two_default.png in Resources */,
 				D3F83F4E1582223B00336684 /* numpad_two_over.png in Resources */,
 				D3F83F501582223B00336684 /* numpad_three_default.png in Resources */,
+				13A39FF91CEE1214009F665B /* live@2x.png in Resources */,
 				D3F83F521582223B00336684 /* numpad_three_over.png in Resources */,
 				D3F83F541582223B00336684 /* numpad_four_default.png in Resources */,
 				D3F83F561582223B00336684 /* numpad_four_over.png in Resources */,
@@ -4319,6 +4342,7 @@
 				636316D41A1DEC650009B839 /* SettingsViewController.xib in Resources */,
 				D34F6F9E1594D3FB0095705B /* InAppSettings.bundle in Resources */,
 				D3EA5403159852080037DC6B /* chat_edit_default.png in Resources */,
+				13A39FFA1CEE1214009F665B /* movie@2x.png in Resources */,
 				F0C1F9161A28781F009402C9 /* strech-top.png in Resources */,
 				D3EA5405159852080037DC6B /* chat_edit_over.png in Resources */,
 				D3EA5407159852080037DC6B /* chat_add_default.png in Resources */,
@@ -4360,6 +4384,7 @@
 				D38187F015FE354000C3EDCA /* UIConferenceHeader.xib in Resources */,
 				D3211BB9159C8A820098460B /* cell_call_first.png in Resources */,
 				1389515D1BEDDC60003DD7A0 /* LPJoinMettingViewController.xib in Resources */,
+				13A39FFB1CEE1214009F665B /* videoLock@2x.png in Resources */,
 				D3211BBE159CBFD60098460B /* back_default.png in Resources */,
 				D3211BC0159CBFD70098460B /* back_disabled.png in Resources */,
 				D3211BC2159CBFD70098460B /* back_over.png in Resources */,
@@ -4890,6 +4915,7 @@
 				E1128AF51C2564CB009DC298 /* RDRTerminalResponseModel.m in Sources */,
 				138951151BECA597003DD7A0 /* RDRNetHelper.m in Sources */,
 				138951161BECA597003DD7A0 /* RDRNetworkAPICache.m in Sources */,
+				13A39FF51CEE0C0E009F665B /* LPVideoClickToPlayCell.m in Sources */,
 				13E695E71C5C721A004E0F9A /* LPJoinMeetingCell.m in Sources */,
 				138951011BECA576003DD7A0 /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				1389507F1BECA38D003DD7A0 /* UIImageView+AFNetworking.m in Sources */,

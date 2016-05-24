@@ -15,7 +15,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *desc;
 
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, copy) NSString *date;
 
 @property (nonatomic, assign) NSInteger live;       // 0点播，1直播
 @property (nonatomic, assign) NSInteger sec;   // 是否加密，0没有，1加密

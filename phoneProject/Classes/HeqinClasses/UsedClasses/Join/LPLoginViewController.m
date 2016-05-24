@@ -61,15 +61,15 @@
 //        self.userNameField.text = @"feng.wang@zijingcloud.com";
 //        self.userPasswordField.text = @"wang@2015";
         
-        self.userNameField.text = @"hbuc3@meeting123.net";
-        self.userPasswordField.text = @"1234";
+//        self.userNameField.text = @"hbuc3@meeting123.net";
+//        self.userPasswordField.text = @"1234";
 
 
 //        self.userNameField.text = @"client@zijingcloud.com";
 //        self.userPasswordField.text = @"test&temp";
 
-//        self.userNameField.text = @"qin.he@zijingcloud.com";
-//        self.userPasswordField.text = @"he@2015";
+        self.userNameField.text = @"qin.he@zijingcloud.com";
+        self.userPasswordField.text = @"he@2015";
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];

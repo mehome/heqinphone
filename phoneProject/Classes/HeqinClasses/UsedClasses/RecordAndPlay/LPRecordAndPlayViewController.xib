@@ -28,7 +28,7 @@
                                 <constraint firstAttribute="height" constant="44" id="cnI-Xl-2F9"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -43,7 +43,7 @@
                                 <constraint firstAttribute="height" constant="44" id="wob-ly-Y4I"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜索" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IN7-Xc-0T4">
@@ -53,11 +53,11 @@
                                 <constraint firstAttribute="height" constant="44" id="404-7N-0lS"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yda-By-lHh" userLabel="lineView">
-                            <rect key="frame" x="19" y="40" width="200" height="4"/>
+                            <rect key="frame" x="-8" y="40" width="200" height="4"/>
                             <color key="backgroundColor" red="0.94901960780000005" green="0.062745098040000002" blue="0.047058823530000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="4" id="2eP-GZ-fRx"/>
@@ -81,8 +81,8 @@
                                 <action selector="thirtyDayBtnClicked:" destination="-1" eventType="touchUpInside" id="qEt-lR-OZ9"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4I-iG-dxL" userLabel="thirdBtn">
-                            <rect key="frame" x="200" y="0.0" width="200" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4I-iG-dxL" userLabel="thirdBtn">
+                            <rect key="frame" x="400" y="0.0" width="200" height="44"/>
                             <connections>
                                 <action selector="searchBtnClicked:" destination="-1" eventType="touchUpInside" id="hmt-Aa-dhE"/>
                             </connections>
@@ -148,24 +148,12 @@
                         </mask>
                     </variation>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H4E-Iw-Woy" userLabel="sevenTable">
-                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="xcP-Ti-zKc"/>
-                        <outlet property="delegate" destination="-1" id="inM-Nj-ipN"/>
-                    </connections>
-                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="VWv-z9-YlZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8Hj-EQ-qb7"/>
                 <constraint firstItem="VWv-z9-YlZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BEB-Vu-OUv"/>
                 <constraint firstAttribute="trailing" secondItem="VWv-z9-YlZ" secondAttribute="trailing" id="J6F-J0-tqW"/>
-                <constraint firstAttribute="trailing" secondItem="H4E-Iw-Woy" secondAttribute="trailing" id="N4e-pQ-xSL"/>
-                <constraint firstItem="H4E-Iw-Woy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zk2-rx-gJS"/>
-                <constraint firstAttribute="bottom" secondItem="H4E-Iw-Woy" secondAttribute="bottom" id="qUq-LS-cdm"/>
-                <constraint firstItem="H4E-Iw-Woy" firstAttribute="top" secondItem="VWv-z9-YlZ" secondAttribute="bottom" id="yuZ-Mw-MQV"/>
             </constraints>
             <point key="canvasLocation" x="381" y="449"/>
         </view>
