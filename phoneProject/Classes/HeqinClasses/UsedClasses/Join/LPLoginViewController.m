@@ -44,17 +44,26 @@
 
     // 控制返回按钮的显示和隐藏
 //    self.backBtn.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(allLifetimeRegistrationUpdateEvent:)
+                                                 name:kLinphoneRegistrationUpdate
+                                               object:nil];
 }
+
+static BOOL loginIsTheTopVC = NO;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    loginIsTheTopVC = YES;
+    
     //
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(registrationUpdateEvent:)
-                                                 name:kLinphoneRegistrationUpdate
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(registrationUpdateEvent:)
+//                                                 name:kLinphoneRegistrationUpdate
+//                                               object:nil];
     
     if ( kNotLoginCheck ) {
         // 当前处于登出状态
@@ -70,6 +79,7 @@
 
         self.userNameField.text = @"qin.he@zijingcloud.com";
         self.userPasswordField.text = @"he@2015";
+        
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
@@ -80,9 +90,16 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kLinphoneRegistrationUpdate
-                                                  object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:kLinphoneRegistrationUpdate
+//                                                  object:nil];
+    loginIsTheTopVC = NO;
+}
+
+// 解决有时出现的界面隐藏功能一直没有去掉的问题.
+- (void)allLifetimeRegistrationUpdateEvent:(NSNotification *)notif {
+    [self registrationUpdate:[[notif.userInfo objectForKey: @"state"] intValue]];
+    return;
 }
 
 #pragma mark - Event Functions
@@ -100,25 +117,29 @@
 
             [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"enable_first_login_view_preference"];
             
-            [self hideHudAndIndicatorView];
-            
             [LPSystemUser sharedUser].hasLoginSuccess = YES;
             
             NSLog(@"registration ok.");
-            
+            [self hideHudAndIndicatorView];
+
             // 存储其中的值
             // 登录成功，切换到LPJoinManageMeetingViewController页
-            [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
+            
+            if (loginIsTheTopVC == YES) {
+                [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
+            }else {
+                NSLog(@"在后台， 什么都不做");
+            }
             break;
         }
         case LinphoneRegistrationNone:
-        case LinphoneRegistrationCleared: {
+        case LinphoneRegistrationCleared:
             [self hideHudAndIndicatorView];
+
             break;
-        }
         case LinphoneRegistrationFailed: {
             [self hideHudAndIndicatorView];
-            
+
             [LPSystemUser sharedUser].hasLoginSuccess = NO;
 
             //erase uername passwd
