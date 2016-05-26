@@ -11,6 +11,7 @@
 #import "LPSystemSetting.h"
 #import "LPJoinMettingViewController.h"
 #import "PhoneMainView.h"
+#import "LPLoginViewController.h"
 
 @interface LPSettingViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -37,43 +38,25 @@
     [super viewDidLoad];
 
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap:)]];
+    
+    self.logoutBtn.backgroundColor = yellowSubjectColor;
+    self.logoutBtn.layer.cornerRadius = 5.0;
+    self.logoutBtn.clipsToBounds = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(allLifetimeSettingRegistrationUpdateEvent:)
+                                                 name:kLinphoneRegistrationUpdate
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // 初始化各个界面信息
-    [self initControls];
+    [self initDynamicInfos];
 }
 
 - (void)initDynamicInfos {
-    self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-    self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-    
-    self.companyField.text = @"企业信息";
-    self.logoutBtn.enabled = YES;
-
-    self.logoutBtn.backgroundColor = yellowSubjectColor;
-    self.logoutBtn.layer.cornerRadius = 5.0;
-    self.logoutBtn.clipsToBounds = YES;
-    
-    if (kNotLoginCheck ) {
-        // 当前已经注销
-        self.logoutBtn.enabled = NO;
-        
-        self.nameField.text = @"";
-        self.accountField.text = @"";
-        self.companyField.text = @"";
-
-    }else {
-        // 当前已经登录
-        self.logoutBtn.enabled = YES;
-    }
-}
-
-- (void)initControls {
-    [self initDynamicInfos];
-    
     self.defaultSilentVoiceSwitch.on = [LPSystemSetting sharedSetting].defaultSilence;
     self.defaultSilentMovieSwitch.on = [LPSystemSetting sharedSetting].defaultNoVideo;
     
@@ -87,6 +70,21 @@
     self.versionLabel.text = [NSString stringWithFormat:@"%@ (%@)",
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+    
+    if (kNotLoginCheck ) {
+        // 当前已经注销
+        [self.logoutBtn setTitle:@"登录" forState:UIControlStateNormal];
+        self.nameField.text = @"";
+        self.accountField.text = @"";
+        self.companyField.text = @"";
+
+    }else {
+        // 当前已经登录
+        [self.logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
+        self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+        self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+        self.companyField.text = @"企业信息";
+    }
 }
 
 - (void)bgTap:(UITapGestureRecognizer *)tapGesture {
@@ -95,15 +93,32 @@
     [self.companyField resignFirstResponder];
 }
 
+- (void)allLifetimeSettingRegistrationUpdateEvent:(NSNotification *)notif {
+    LinphoneRegistrationState stateInt = [(NSNumber *)[notif.userInfo objectForKey: @"state"] intValue];
+    switch (stateInt) {
+        case LinphoneRegistrationOk:
+        case LinphoneRegistrationNone:
+        case LinphoneRegistrationCleared:
+        case LinphoneRegistrationFailed:
+            [self initDynamicInfos];
+            // 注册失败
+            break;
+        case LinphoneRegistrationProgress:
+            // 注册中
+            break;
+        default: break;
+    }
+}
+
 // 注销按钮
 - (IBAction)logoutBtnClicked:(id)sender {
-    if ( kNotLoginCheck) {
-        return;
+    if ( kNotLoginCheck) {      // 执行登录操作
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
+    }else {         // 执行注销提示
+        UIAlertView *tipAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确认要注销么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        tipAlert.tag = kLogoutAlertTag;
+        [tipAlert show];
     }
-    
-    UIAlertView *tipAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确认要注销么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    tipAlert.tag = kLogoutAlertTag;
-    [tipAlert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0) {

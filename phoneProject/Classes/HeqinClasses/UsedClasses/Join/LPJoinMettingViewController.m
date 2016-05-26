@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *loginTipLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *joinBtn;
+@property (weak, nonatomic) IBOutlet UILabel *btnTipLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *changeNameBtn;
 
 @property (retain, nonatomic) NSDateFormatter *dateFormatter;
@@ -119,6 +121,14 @@
         self.tableTipLabel.hidden = YES;
         [self.historyTable reloadData];
     }
+    
+    if ( kNotLoginCheck ) {
+        // 未登录
+        self.btnTipLabel.hidden = NO;
+    }else {
+        // 已登录
+        self.btnTipLabel.hidden = YES;
+    }
 }
 
 - (void)getphoneNotification:(NSNotification *)notification {
@@ -182,16 +192,20 @@
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
                 self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+                self.btnTipLabel.hidden = YES;
+
                 break;
             }
             case LinphoneRegistrationNone:
             case LinphoneRegistrationCleared:
                 message = @"未注册";
+                self.btnTipLabel.hidden = NO;
+                [LPSystemUser sharedUser].hasLoginSuccess = NO;
                 NSLog(@"登出成功");
-                
                 break;
             case LinphoneRegistrationFailed:
                 message = @"注册失败";
+                self.btnTipLabel.hidden = NO;
                 [LPSystemUser sharedUser].hasLoginSuccess = NO;
 
                 break;

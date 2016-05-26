@@ -2993,11 +2993,11 @@
 				E1D0AC0F1C3AC5B10019DE87 /* UIButton+LPUIButtonImageWithLable.m */,
 				1389514F1BEDDC60003DD7A0 /* LPJoinMettingViewController.h */,
 				138951501BEDDC60003DD7A0 /* LPJoinMettingViewController.m */,
+				138951511BEDDC60003DD7A0 /* LPJoinMettingViewController.xib */,
 				13E695E51C5C721A004E0F9A /* LPJoinMeetingCell.h */,
 				13E695E61C5C721A004E0F9A /* LPJoinMeetingCell.m */,
 				13E6960E1C5C8674004E0F9A /* LPCommonCell.h */,
 				13E6960F1C5C8674004E0F9A /* LPCommonCell.m */,
-				138951511BEDDC60003DD7A0 /* LPJoinMettingViewController.xib */,
 				138951611BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.h */,
 				138951621BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.m */,
 				138951631BEDDCBD003DD7A0 /* LPJoinManageMeetingViewController.xib */,
@@ -5531,8 +5531,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Heqin Shen (RHMZ543ANZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Heqin Shen (RHMZ543ANZ)";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
@@ -5570,7 +5570,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heqin.phone;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "47032dcb-46ed-4c6d-9623-de16df6f2b76";
+				PROVISIONING_PROFILE = "6a252cbc-7e82-4054-9e0b-d2a66479d218";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
@@ -5873,7 +5873,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f2912a88-f48d-4455-8b9c-eb9d9c231793";
+				PROVISIONING_PROFILE = "6a252cbc-7e82-4054-9e0b-d2a66479d218";
 				SDKROOT = iphoneos;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				TARGETED_DEVICE_FAMILY = "1,2";
