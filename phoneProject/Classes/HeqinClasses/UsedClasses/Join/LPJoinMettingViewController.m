@@ -279,28 +279,27 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)changeNameBtnClicked:(id)sender {
     [self resignKeyboard];
 
-    [LPSystemSetting sharedSetting].joinerName = self.joinNameField.text;
+    NSString *tempStr = self.joinNameField.text;
+    [LPSystemSetting sharedSetting].joinerName = tempStr;
     
     LinphoneCore *lc=[LinphoneManager getLc];
     LinphoneAddress *parsed = linphone_core_get_primary_contact_parsed(lc);
     if(parsed != NULL) {
-        linphone_address_set_display_name(parsed,[self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+        linphone_address_set_display_name(parsed,[tempStr UTF8String]);
+        linphone_address_set_username(parsed, [tempStr UTF8String]);
+        
+        const char *aftershowName = linphone_address_get_display_name(parsed);
+        NSString *afterNameStr = [NSString stringWithCString:aftershowName encoding:NSUTF8StringEncoding];
+        
+        const char *afterShowUser = linphone_address_get_username(parsed);
+        NSString *afterUserStr = [NSString stringWithCString:afterShowUser encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"after change displayNameStr=%@, showUserStr=%@", afterNameStr, afterUserStr);
     }
-    
-    linphone_address_set_display_name(parsed, [self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-    linphone_address_set_username(parsed, [self.joinNameField.text cStringUsingEncoding:[NSString defaultCStringEncoding]]);
     
     char *contact = linphone_address_as_string(parsed);
     linphone_core_set_primary_contact(lc, contact);
     ms_free(contact);
-    
-    const char *aftershowName = linphone_address_get_display_name(parsed);
-    NSString *afterNameStr = [NSString stringWithUTF8String:aftershowName];
-    
-    const char *afterShowUser = linphone_address_get_username(parsed);
-    NSString *afterUserStr = [NSString stringWithUTF8String:afterShowUser];
-
-    NSLog(@"after cur afterNameStr=%@, afterUserStr=%@", afterNameStr, afterUserStr);
     
     linphone_address_destroy(parsed);
     
