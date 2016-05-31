@@ -29,8 +29,6 @@
 #import "LPSystemUser.h"
 #import "LPRecordAndPlayViewController.h"
 
-#import "GAVideoPlayVC.h"
-
 #import "BTMToast.h"
 
 static RootViewManager* rootViewManagerInstance = nil;
@@ -231,24 +229,14 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)tryPlayMovie:(NSNotification *)notif {
     NSLog(@"try to play link:=%@", notif.object);
 
-    NSDictionary *dic = (NSDictionary *)(notif.object);
-    if (dic == nil || ([dic isKindOfClass:[NSDictionary class]] == NO)) {
-        NSLog(@"play notifi error, notif=%@", notif);
-        return;
-    }
-    
-    NSString *nameStr = dic[@"name"];
-    NSString *urlStr = dic[@"url"];
+    NSString *urlStr = (NSString *)(notif.object);
     if (![urlStr isKindOfClass:[NSString class]] || urlStr.length == 0) {
-        NSLog(@"play notifi error, url=%@", urlStr);
         return;
     }
 
     // 目前获取到一个点播url为：http://file.myvmr.cn:8090/2016-05-16/1088_103028.mp4
     // 直播url暂无。
-    GAVideoPlayVC *playVC = [[GAVideoPlayVC alloc] init];
-    [playVC showTitle:nameStr andUrlStr:urlStr];
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:playVC] animated:YES completion:nil];
+    [self presentViewController:[UIViewController alloc] animated:YES completion:nil];
 }
 
 - (void)setVolumeHidden:(BOOL)hidden {

@@ -459,7 +459,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     if (curModel.sec == 0) {
         // 未加密， 直接取url
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayVideoNotification object:@{@"name":curModel.name, @"url":curModel.url}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayVideoNotification object:curModel.url];
     }else {
         // 加密过的，需要弹出界面问取密码
         [self askToDesec:curModel.id];
@@ -538,7 +538,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }else {
         [self showToastWithMessage:@"解密成功"];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayVideoNotification object:@{@"name":@"保密", @"url":model.url}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kPlayVideoNotification object:model.url];
     }
 }
 

@@ -851,14 +851,6 @@
 		E14B63D01C3D66760056414B /* LPPhoneListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B63CF1C3D66760056414B /* LPPhoneListView.m */; };
 		E14F50BB1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F50BA1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m */; };
 		E14F50BE1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */; };
-		E171C6F21CFB48CC001B28CA /* GAColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6DE1CFB48CC001B28CA /* GAColorManager.m */; };
-		E171C6F31CFB48CC001B28CA /* GAImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6E01CFB48CC001B28CA /* GAImageManager.m */; };
-		E171C6F41CFB48CC001B28CA /* ControlsBelowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6E71CFB48CC001B28CA /* ControlsBelowView.m */; };
-		E171C6F51CFB48CC001B28CA /* ControlsTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6E91CFB48CC001B28CA /* ControlsTopView.m */; };
-		E171C6F61CFB48CC001B28CA /* GAVideoPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6EB1CFB48CC001B28CA /* GAVideoPlayVC.m */; };
-		E171C6F71CFB48CC001B28CA /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6ED1CFB48CC001B28CA /* PlayerView.m */; };
-		E171C6F81CFB48CC001B28CA /* PlayerVolumeRegulationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6EF1CFB48CC001B28CA /* PlayerVolumeRegulationView.m */; };
-		E171C6F91CFB48CC001B28CA /* YUSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E171C6F11CFB48CC001B28CA /* YUSlider.m */; };
 		E174617A1C265595009AD174 /* RDROperationGetJoinersRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E17461791C265595009AD174 /* RDROperationGetJoinersRequestModel.m */; };
 		E174617D1C2655EA009AD174 /* RDROperationMuteRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E174617C1C2655EA009AD174 /* RDROperationMuteRequestModel.m */; };
 		E17461801C26566F009AD174 /* RDROperationMuteVideoRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E174617F1C26566F009AD174 /* RDROperationMuteVideoRequestModel.m */; };
@@ -2090,27 +2082,6 @@
 		E14F50BA1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeModel.m; sourceTree = "<group>"; };
 		E14F50BC1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMyMeetingArrangeResponseModel.h; sourceTree = "<group>"; };
 		E14F50BD1C15CE3E005A9D73 /* RDRMyMeetingArrangeResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMyMeetingArrangeResponseModel.m; sourceTree = "<group>"; };
-		E171C6DC1CFB48CC001B28CA /* Configmanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configmanager.h; sourceTree = "<group>"; };
-		E171C6DD1CFB48CC001B28CA /* GAColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAColorManager.h; sourceTree = "<group>"; };
-		E171C6DE1CFB48CC001B28CA /* GAColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAColorManager.m; sourceTree = "<group>"; };
-		E171C6DF1CFB48CC001B28CA /* GAImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAImageManager.h; sourceTree = "<group>"; };
-		E171C6E01CFB48CC001B28CA /* GAImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAImageManager.m; sourceTree = "<group>"; };
-		E171C6E11CFB48CC001B28CA /* Resource_Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource_Color.h; sourceTree = "<group>"; };
-		E171C6E21CFB48CC001B28CA /* Resource_Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource_Date.h; sourceTree = "<group>"; };
-		E171C6E31CFB48CC001B28CA /* Resource_Enum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource_Enum.h; sourceTree = "<group>"; };
-		E171C6E41CFB48CC001B28CA /* Resource_Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource_Size.h; sourceTree = "<group>"; };
-		E171C6E61CFB48CC001B28CA /* ControlsBelowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsBelowView.h; sourceTree = "<group>"; };
-		E171C6E71CFB48CC001B28CA /* ControlsBelowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsBelowView.m; sourceTree = "<group>"; };
-		E171C6E81CFB48CC001B28CA /* ControlsTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsTopView.h; sourceTree = "<group>"; };
-		E171C6E91CFB48CC001B28CA /* ControlsTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsTopView.m; sourceTree = "<group>"; };
-		E171C6EA1CFB48CC001B28CA /* GAVideoPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAVideoPlayVC.h; sourceTree = "<group>"; };
-		E171C6EB1CFB48CC001B28CA /* GAVideoPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAVideoPlayVC.m; sourceTree = "<group>"; };
-		E171C6EC1CFB48CC001B28CA /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
-		E171C6ED1CFB48CC001B28CA /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
-		E171C6EE1CFB48CC001B28CA /* PlayerVolumeRegulationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerVolumeRegulationView.h; sourceTree = "<group>"; };
-		E171C6EF1CFB48CC001B28CA /* PlayerVolumeRegulationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerVolumeRegulationView.m; sourceTree = "<group>"; };
-		E171C6F01CFB48CC001B28CA /* YUSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUSlider.h; sourceTree = "<group>"; };
-		E171C6F11CFB48CC001B28CA /* YUSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUSlider.m; sourceTree = "<group>"; };
 		E17461781C265595009AD174 /* RDROperationGetJoinersRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDROperationGetJoinersRequestModel.h; sourceTree = "<group>"; };
 		E17461791C265595009AD174 /* RDROperationGetJoinersRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDROperationGetJoinersRequestModel.m; sourceTree = "<group>"; };
 		E174617B1C2655EA009AD174 /* RDROperationMuteRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDROperationMuteRequestModel.h; sourceTree = "<group>"; };
@@ -2969,7 +2940,6 @@
 		1389512D1BEDAA06003DD7A0 /* UsedClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E171C6DA1CFB48CC001B28CA /* MoviePlayControls */,
 				13E648B21CDDF63E00C1940D /* RecordAndPlay */,
 				1389514B1BEDDC60003DD7A0 /* Join */,
 				138951521BEDDC60003DD7A0 /* Manage */,
@@ -3560,51 +3530,6 @@
 				D3F9A9ED15AF277D0045320F /* UACellBackgroundView.m */,
 			);
 			name = UACellBackgroundView;
-			sourceTree = "<group>";
-		};
-		E171C6DA1CFB48CC001B28CA /* MoviePlayControls */ = {
-			isa = PBXGroup;
-			children = (
-				E171C6DB1CFB48CC001B28CA /* MoviePlayCommon */,
-				E171C6E51CFB48CC001B28CA /* MoviePlayCustom */,
-			);
-			name = MoviePlayControls;
-			path = Classes/MoviePlayControls;
-			sourceTree = SOURCE_ROOT;
-		};
-		E171C6DB1CFB48CC001B28CA /* MoviePlayCommon */ = {
-			isa = PBXGroup;
-			children = (
-				E171C6DC1CFB48CC001B28CA /* Configmanager.h */,
-				E171C6DD1CFB48CC001B28CA /* GAColorManager.h */,
-				E171C6DE1CFB48CC001B28CA /* GAColorManager.m */,
-				E171C6DF1CFB48CC001B28CA /* GAImageManager.h */,
-				E171C6E01CFB48CC001B28CA /* GAImageManager.m */,
-				E171C6E11CFB48CC001B28CA /* Resource_Color.h */,
-				E171C6E21CFB48CC001B28CA /* Resource_Date.h */,
-				E171C6E31CFB48CC001B28CA /* Resource_Enum.h */,
-				E171C6E41CFB48CC001B28CA /* Resource_Size.h */,
-			);
-			path = MoviePlayCommon;
-			sourceTree = "<group>";
-		};
-		E171C6E51CFB48CC001B28CA /* MoviePlayCustom */ = {
-			isa = PBXGroup;
-			children = (
-				E171C6E61CFB48CC001B28CA /* ControlsBelowView.h */,
-				E171C6E71CFB48CC001B28CA /* ControlsBelowView.m */,
-				E171C6E81CFB48CC001B28CA /* ControlsTopView.h */,
-				E171C6E91CFB48CC001B28CA /* ControlsTopView.m */,
-				E171C6EA1CFB48CC001B28CA /* GAVideoPlayVC.h */,
-				E171C6EB1CFB48CC001B28CA /* GAVideoPlayVC.m */,
-				E171C6EC1CFB48CC001B28CA /* PlayerView.h */,
-				E171C6ED1CFB48CC001B28CA /* PlayerView.m */,
-				E171C6EE1CFB48CC001B28CA /* PlayerVolumeRegulationView.h */,
-				E171C6EF1CFB48CC001B28CA /* PlayerVolumeRegulationView.m */,
-				E171C6F01CFB48CC001B28CA /* YUSlider.h */,
-				E171C6F11CFB48CC001B28CA /* YUSlider.m */,
-			);
-			path = MoviePlayCustom;
 			sourceTree = "<group>";
 		};
 		E1FCC3F01C1F14B3009A51CC /* UIViewFrame */ = {
@@ -4949,7 +4874,6 @@
 				E17461801C26566F009AD174 /* RDROperationMuteVideoRequestModel.m in Sources */,
 				E135F84A1C2469BD003BE802 /* ShowLoginView.m in Sources */,
 				2214EBF312F86360002A5394 /* UIMicroButton.m in Sources */,
-				E171C6F41CFB48CC001B28CA /* ControlsBelowView.m in Sources */,
 				22968A5F12F875C600588287 /* UISpeakerButton.m in Sources */,
 				134D2D3D1C3E774800D6FB99 /* UIScrollView+MJExtension.m in Sources */,
 				2218A92512FBE1340088A667 /* FirstLoginViewController.m in Sources */,
@@ -4966,7 +4890,6 @@
 				E140A6C21C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m in Sources */,
 				138950821BECA38D003DD7A0 /* UIWebView+AFNetworking.m in Sources */,
 				E17461891C265815009AD174 /* RDROperationJoinerModel.m in Sources */,
-				E171C6F21CFB48CC001B28CA /* GAColorManager.m in Sources */,
 				D3F83EEC1582021700336684 /* InCallViewController.m in Sources */,
 				D3F83F8E15822ABE00336684 /* PhoneMainView.m in Sources */,
 				1389507A1BECA38D003DD7A0 /* AFURLResponseSerialization.m in Sources */,
@@ -5051,9 +4974,6 @@
 				E174618C1C26590D009AD174 /* RDROperationMuteResponseModel.m in Sources */,
 				E123FC111C3EA99500F3A02E /* RDRPhoneListPrivateRequestModel.m in Sources */,
 				138950F51BECA576003DD7A0 /* MTLJSONAdapter.m in Sources */,
-				E171C6F61CFB48CC001B28CA /* GAVideoPlayVC.m in Sources */,
-				E171C6F51CFB48CC001B28CA /* ControlsTopView.m in Sources */,
-				E171C6F91CFB48CC001B28CA /* YUSlider.m in Sources */,
 				D32460E6159D9AAD00BA7F3A /* UITransparentView.m in Sources */,
 				13E696101C5C8674004E0F9A /* LPCommonCell.m in Sources */,
 				138950781BECA38D003DD7A0 /* AFSecurityPolicy.m in Sources */,
@@ -5119,13 +5039,11 @@
 				E12D8BD91C24F3500011BFCA /* RDRParticipant.m in Sources */,
 				D3807FC115C28940005BE9BC /* DCRoundSwitchKnobLayer.m in Sources */,
 				D3807FC315C28940005BE9BC /* DCRoundSwitchOutlineLayer.m in Sources */,
-				E171C6F71CFB48CC001B28CA /* PlayerView.m in Sources */,
 				E135F8471C243EA3003BE802 /* RDRCellsSelectView.m in Sources */,
 				D3807FC515C28940005BE9BC /* DCRoundSwitchToggleLayer.m in Sources */,
 				D3807FE815C2894A005BE9BC /* IASKAppSettingsViewController.m in Sources */,
 				E1128AE91C255D00009DC298 /* RDRInviteResponseModel.m in Sources */,
 				D3807FEA15C2894A005BE9BC /* IASKAppSettingsWebViewController.m in Sources */,
-				E171C6F81CFB48CC001B28CA /* PlayerVolumeRegulationView.m in Sources */,
 				E14B63D01C3D66760056414B /* LPPhoneListView.m in Sources */,
 				E140A6B61C109F64000E7DD0 /* RDRMyMeetingArrangeContactsModel.m in Sources */,
 				E10DE7451BFA2D6E002D0FBB /* LPInMeetingParticipateTableViewCell.m in Sources */,
@@ -5134,7 +5052,6 @@
 				D3807FF015C2894A005BE9BC /* IASKSettingsStore.m in Sources */,
 				E123FC171C3EAA1C00F3A02E /* RDRPhoneListSearchRequestModel.m in Sources */,
 				E14F50BB1C15CE36005A9D73 /* RDRMyMeetingArrangeModel.m in Sources */,
-				E171C6F31CFB48CC001B28CA /* GAImageManager.m in Sources */,
 				1389507C1BECA38D003DD7A0 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				D3807FF215C2894A005BE9BC /* IASKSettingsStoreFile.m in Sources */,
 				138950EE1BECA576003DD7A0 /* FMDatabase.m in Sources */,
