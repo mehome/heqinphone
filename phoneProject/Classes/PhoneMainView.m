@@ -29,6 +29,8 @@
 #import "LPSystemUser.h"
 #import "LPRecordAndPlayViewController.h"
 
+#import "HQPlayerViewController.h"
+
 #import "BTMToast.h"
 
 static RootViewManager* rootViewManagerInstance = nil;
@@ -229,14 +231,22 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)tryPlayMovie:(NSNotification *)notif {
     NSLog(@"try to play link:=%@", notif.object);
 
-    NSString *urlStr = (NSString *)(notif.object);
-    if (![urlStr isKindOfClass:[NSString class]] || urlStr.length == 0) {
+    NSDictionary *dic = (NSDictionary *)(notif.object);
+    if (dic == nil || ([dic isKindOfClass:[NSDictionary class]] == NO)) {
+        NSLog(@"play notifi error, notif=%@", notif);
         return;
     }
-
-    // 目前获取到一个点播url为：http://file.myvmr.cn:8090/2016-05-16/1088_103028.mp4
-    // 直播url暂无。
-    [self presentViewController:[UIViewController alloc] animated:YES completion:nil];
+    
+    NSString *nameStr = safeString(dic[@"name"]);
+    NSString *urlStr = safeString(dic[@"url"]);
+    // 测试使用视频url
+    urlStr = @"http://video.getarts.cn/20160201/yufang2.mp4.mp4";
+    
+    [HQPlayerViewController playMovieWithTitle:nameStr mediaUrlStr:urlStr];
+    
+//    GAVideoPlayVC *playVC = [[GAVideoPlayVC alloc] init];
+//    [playVC showTitle:nameStr andUrlStr:urlStr];
+//    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:playVC] animated:YES completion:nil];
 }
 
 - (void)setVolumeHidden:(BOOL)hidden {

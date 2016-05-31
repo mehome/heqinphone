@@ -32,6 +32,9 @@
 
 #define kNotLoginCheck (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ||[LPSystemUser sharedUser].hasLoginSuccess == NO)
 
+// 取安全串，非nil或其它类型
+#define safeString(s) ([s isKindOfClass:[NSString class]] ? ([s length]>0 ? s : @"") : (@""))
+
 /**
  *  这里放置其它宏
  */
