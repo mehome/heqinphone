@@ -34,6 +34,8 @@
 		134D2D3E1C3E774800D6FB99 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D2A1C3E774800D6FB99 /* UIScrollView+MJRefresh.m */; };
 		134D2D3F1C3E774800D6FB99 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D2C1C3E774800D6FB99 /* UIView+MJExtension.m */; };
 		134D9C5E1C2188F900ADA720 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22744043106F33FC006EC466 /* Security.framework */; };
+		136F24221CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136F24211CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.m */; };
+		136F24251CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136F24241CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.m */; };
 		1375C4761C5FAC4800FEFA97 /* mz_callBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1375C46B1C5FAC4800FEFA97 /* mz_callBg@2x.png */; };
 		1375C4831C5FBC8400FEFA97 /* RDRAllJoinerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1375C4821C5FBC8400FEFA97 /* RDRAllJoinerCell.m */; };
 		1375C48E1C5FC31100FEFA97 /* mz_kickout_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1375C4841C5FC31000FEFA97 /* mz_kickout_default@2x.png */; };
@@ -1036,6 +1038,10 @@
 		134D2D2A1C3E774800D6FB99 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		134D2D2B1C3E774800D6FB99 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		134D2D2C1C3E774800D6FB99 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		136F24201CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMeetingTypeRequestModel.h; sourceTree = "<group>"; };
+		136F24211CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMeetingTypeRequestModel.m; sourceTree = "<group>"; };
+		136F24231CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRMeetingTypeResponseModel.h; sourceTree = "<group>"; };
+		136F24241CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRMeetingTypeResponseModel.m; sourceTree = "<group>"; };
 		1375C46B1C5FAC4800FEFA97 /* mz_callBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mz_callBg@2x.png"; path = "Resources/mz_callBg@2x.png"; sourceTree = "<group>"; };
 		1375C4811C5FBC8400FEFA97 /* RDRAllJoinerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRAllJoinerCell.h; sourceTree = "<group>"; };
 		1375C4821C5FBC8400FEFA97 /* RDRAllJoinerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRAllJoinerCell.m; sourceTree = "<group>"; };
@@ -2876,6 +2882,8 @@
 				E18241EC1C21BC1D000EC54A /* RDRManageSettingMeetingRequestModel.m */,
 				E135F84B1C246EB9003BE802 /* RDRAddFavRequestModel.h */,
 				E135F84C1C246EB9003BE802 /* RDRAddFavRequestModel.m */,
+				136F24201CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.h */,
+				136F24211CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.m */,
 				E1128AE41C255C9F009DC298 /* RDRInviteRequestModel.h */,
 				E1128AE51C255C9F009DC298 /* RDRInviteRequestModel.m */,
 				E1128AEA1C2563F7009DC298 /* RDRLockReqeustModel.h */,
@@ -2939,6 +2947,8 @@
 				E18241EF1C21BCA6000EC54A /* RDRManageSeetingMeetingResponseModel.m */,
 				E135F84E1C246F1D003BE802 /* RDRAddFavResponseModel.h */,
 				E135F84F1C246F1D003BE802 /* RDRAddFavResponseModel.m */,
+				136F24231CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.h */,
+				136F24241CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.m */,
 				1389511E1BECA5D4003DD7A0 /* MTLModel+RDRNilForBasedataType.h */,
 				1389511F1BECA5D4003DD7A0 /* MTLModel+RDRNilForBasedataType.m */,
 				138951201BECA5D4003DD7A0 /* RDRBaseResponseModel.h */,
@@ -5035,6 +5045,7 @@
 				D35E7581159328EB0066B1C1 /* UIAddressTextField.m in Sources */,
 				D35E7597159460580066B1C1 /* ChatViewController.m in Sources */,
 				D35E759F159460B70066B1C1 /* SettingsViewController.m in Sources */,
+				136F24251CFEB06A00A71D1D /* RDRMeetingTypeResponseModel.m in Sources */,
 				134D2D331C3E774800D6FB99 /* MJRefreshAutoNormalFooter.m in Sources */,
 				F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */,
 				138951171BECA597003DD7A0 /* XXCache.m in Sources */,
@@ -5088,6 +5099,7 @@
 				E12D8BDC1C2521BD0011BFCA /* ShowInviteView.m in Sources */,
 				138951241BECA5D4003DD7A0 /* MTLModel+RDRNilForBasedataType.m in Sources */,
 				138950761BECA38D003DD7A0 /* AFURLSessionManager.m in Sources */,
+				136F24221CFEAFAF00A71D1D /* RDRMeetingTypeRequestModel.m in Sources */,
 				D32B6E2915A5BC440033019F /* ChatRoomTableViewController.m in Sources */,
 				13E648C01CDE365E00C1940D /* RDRRecordVideoModel.m in Sources */,
 				E1128B091C25B721009DC298 /* RDRAllJoinersView.m in Sources */,
@@ -5674,7 +5686,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heqin.phone;
 				PRODUCT_NAME = linphone;
-				PROVISIONING_PROFILE = "6a252cbc-7e82-4054-9e0b-d2a66479d218";
+				PROVISIONING_PROFILE = "47032dcb-46ed-4c6d-9623-de16df6f2b76";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";

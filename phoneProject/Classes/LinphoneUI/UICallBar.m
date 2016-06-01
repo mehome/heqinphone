@@ -60,12 +60,22 @@
 #import "RDRTerminalRequestModel.h"
 #import "RDRTerminalResponseModel.h"
 
+// 会议类型请求
+#import "RDRMeetingTypeRequestModel.h"
+#import "RDRMeetingTypeResponseModel.h"
+
 #import "RDRAllJoinersView.h"
 
 typedef NS_ENUM(NSInteger, InvityType) {
     InvityTypeSMS,
     InvityTypeEmail,
     InvityTypePhoneCall
+};
+
+// 会议类类型，讲堂/会议
+typedef NS_ENUM(NSInteger, MeetingType) {
+    MeetingTypeLesson,
+    MeetingTypeMeeting
 };
 
 extern NSString *const kLinphoneInCallCellData;
@@ -110,6 +120,8 @@ extern NSString *const kLinphoneInCallCellData;
 
 @property (nonatomic, strong) IBOutlet UIImageView *loadingTipImgView;      // 当前关闭摄像头时使用。打开摄像头后，则不显示
 
+@property (nonatomic, assign) MeetingType curMeetingType;
+
 @end
 
 @implementation UICallBar
@@ -145,6 +157,44 @@ extern NSString *const kLinphoneInCallCellData;
     self.callTitleLabel.text = [NSString stringWithString:addr];
     
     NSLog(@"test instance :%@", self.callTipView);
+    
+    // 执行请求会议室类型的请求
+    [self requestMeetingType];
+}
+
+- (void)requestMeetingType {
+    
+    RDRMeetingTypeRequestModel *reqModel = [RDRMeetingTypeRequestModel requestModel];
+    reqModel.addr = [LPSystemUser sharedUser].curMeetingAddr;
+    
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  RDRMeetingTypeResponseModel *model = responseObject;
+                  
+                  if ([model codeCheckSuccess] == YES) {
+                      NSLog(@"会议室类型查询success, model=%@", model);
+//                      [self showToastWithMessage:@"收藏会议室成功"];
+                      
+                      if ([model.type isEqualToString:@"0"]) {
+                          self.curMeetingType = MeetingTypeLesson;
+                      }else {
+                          self.curMeetingType = MeetingTypeMeeting;
+                      }
+                  }else {
+                      NSLog(@"会议室类型查询失败, msg=%@", model.msg);
+                      NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，msg=%@", model.msg];
+                      [self showToastWithMessage:tipStr];
+                  }
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  
+                  //请求出错
+                  NSLog(@"会议室类型查询失败, %s, error=%@", __FUNCTION__, error);
+                  NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，服务器错误"];
+                  [self showToastWithMessage:tipStr];
+              }];
 }
 
 - (void)changeBtn:(UIButton *)btn {
@@ -462,6 +512,11 @@ extern NSString *const kLinphoneInCallCellData;
     [stopRecordBtn addTarget:self action:@selector(stopRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
     [stopRecordBtn setTitle:@"停止录制" forState:UIControlStateNormal];
     
+    UIButton *layoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    layoutBtn.showsTouchWhenHighlighted = YES;
+    [layoutBtn addTarget:self action:@selector(meetingLayoutBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [layoutBtn setTitle:@"布局设置" forState:UIControlStateNormal];
+    
     UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     endBtn.showsTouchWhenHighlighted = YES;
     [endBtn addTarget:self action:@selector(endMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -470,15 +525,15 @@ extern NSString *const kLinphoneInCallCellData;
     // 判断当前会议的状态， 是被锁定还是怎么的
     if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
         if (self.meetingIsRecording == YES) {       // 正在录制
-            [self popWithButtons:@[unlockBtn, stopRecordBtn, endBtn]];
+            [self popWithButtons:@[unlockBtn, stopRecordBtn, layoutBtn, endBtn]];
         }else {                                     // 没有录制
-            [self popWithButtons:@[unlockBtn, startRecordBtn, endBtn]];
+            [self popWithButtons:@[unlockBtn, startRecordBtn, layoutBtn, endBtn]];
         }
     }else {
         if (self.meetingIsRecording == YES) {       // 正在录制
-            [self popWithButtons:@[lockBtn, stopRecordBtn, endBtn]];
+            [self popWithButtons:@[lockBtn, stopRecordBtn, layoutBtn, endBtn]];
         }else {                                     // 没有录制
-            [self popWithButtons:@[lockBtn, startRecordBtn, endBtn]];
+            [self popWithButtons:@[lockBtn, startRecordBtn, layoutBtn, endBtn]];
         }
     }
 }
@@ -876,6 +931,18 @@ extern NSString *const kLinphoneInCallCellData;
                   
                   [weakSelf release];
               }];
+}
+
+// 会议布局
+- (IBAction)meetingLayoutBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+
+    // 弹出布局界面
+    if (self.curMeetingType == MeetingTypeLesson) {     // 讲堂
+        
+    }else {         // 会议
+    
+    }
 }
 
 // 结束会议
