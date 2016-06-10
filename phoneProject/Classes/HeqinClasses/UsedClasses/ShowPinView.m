@@ -94,12 +94,28 @@
     self.cancelBtn.frame = CGRectMake(offsetX, self.inputField.ott_bottom + offsetX, (self.tipLabel.ott_width - offsetX)/2.0, 40);
     self.doneBtn.frame = CGRectMake(self.cancelBtn.ott_right + offsetX, self.cancelBtn.ott_top, self.cancelBtn.ott_width, self.cancelBtn.ott_height);
     self.ott_height = self.doneBtn.ott_bottom + offsetX;
+    
+    NSLog(@"frame of keyWindow=%@", NSStringFromCGRect([UIApplication sharedApplication].keyWindow.bounds));
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
+    bgView.frame = [UIApplication sharedApplication].keyWindow.bounds;
+    
+    self.frame = CGRectMake(20, 60, MIN(bgView.ott_width, bgView.ott_height)-20*2, 130);
+    self.ott_left = (bgView.ott_width-self.ott_width) /2.0;
+    
+    [self updateFrameAndReset];
 }
 
 - (void)cancelClicked:(UIButton *)sender {
     if (self.cancelDone != nil) {
         self.cancelDone();
     }
+    
+    [self.inputField resignFirstResponder];
     
     UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
     if ([bgView isKindOfClass:[UIView class]] && bgView != nil) {
@@ -123,6 +139,8 @@
             self.confirmDone(contentStr);
         }
 //    }
+    
+    [self.inputField resignFirstResponder];
     
     UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
     if ([bgView isKindOfClass:[UIView class]] && bgView != nil) {

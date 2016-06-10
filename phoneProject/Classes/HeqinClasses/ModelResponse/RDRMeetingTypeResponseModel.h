@@ -10,6 +10,6 @@
 
 @interface RDRMeetingTypeResponseModel : RDRBaseResponseModel
 
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic, assign) NSInteger type;
 
 @end

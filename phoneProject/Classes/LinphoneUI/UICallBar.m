@@ -64,7 +64,14 @@
 #import "RDRMeetingTypeRequestModel.h"
 #import "RDRMeetingTypeResponseModel.h"
 
+// 设置布局
+#import "RDRMeetingLayoutRequestModel.h"
+#import "RDRMeetingLayoutSubRequestModel.h"
+#import "RDRMeetingLayoutResponseModel.h"
+
 #import "RDRAllJoinersView.h"
+
+#import "ShowMeetingLayoutView.h"
 
 typedef NS_ENUM(NSInteger, InvityType) {
     InvityTypeSMS,
@@ -72,11 +79,6 @@ typedef NS_ENUM(NSInteger, InvityType) {
     InvityTypePhoneCall
 };
 
-// 会议类类型，讲堂/会议
-typedef NS_ENUM(NSInteger, MeetingType) {
-    MeetingTypeLesson,
-    MeetingTypeMeeting
-};
 
 extern NSString *const kLinphoneInCallCellData;
 
@@ -165,7 +167,7 @@ extern NSString *const kLinphoneInCallCellData;
 - (void)requestMeetingType {
     
     RDRMeetingTypeRequestModel *reqModel = [RDRMeetingTypeRequestModel requestModel];
-    reqModel.addr = [LPSystemUser sharedUser].curMeetingAddr;
+    reqModel.addr = [self curMeetingAddr];
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
     
@@ -178,7 +180,7 @@ extern NSString *const kLinphoneInCallCellData;
                       NSLog(@"会议室类型查询success, model=%@", model);
 //                      [self showToastWithMessage:@"收藏会议室成功"];
                       
-                      if ([model.type isEqualToString:@"0"]) {
+                      if (model.type == 0) {
                           self.curMeetingType = MeetingTypeLesson;
                       }else {
                           self.curMeetingType = MeetingTypeMeeting;
@@ -525,15 +527,15 @@ extern NSString *const kLinphoneInCallCellData;
     // 判断当前会议的状态， 是被锁定还是怎么的
     if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
         if (self.meetingIsRecording == YES) {       // 正在录制
-            [self popWithButtons:@[unlockBtn, stopRecordBtn, layoutBtn, endBtn]];
+            [self popWithButtons:@[layoutBtn, unlockBtn, stopRecordBtn, endBtn]];
         }else {                                     // 没有录制
-            [self popWithButtons:@[unlockBtn, startRecordBtn, layoutBtn, endBtn]];
+            [self popWithButtons:@[layoutBtn, unlockBtn, startRecordBtn, endBtn]];
         }
     }else {
         if (self.meetingIsRecording == YES) {       // 正在录制
-            [self popWithButtons:@[lockBtn, stopRecordBtn, layoutBtn, endBtn]];
+            [self popWithButtons:@[layoutBtn, lockBtn, stopRecordBtn, endBtn]];
         }else {                                     // 没有录制
-            [self popWithButtons:@[lockBtn, startRecordBtn, layoutBtn, endBtn]];
+            [self popWithButtons:@[layoutBtn, lockBtn, startRecordBtn, endBtn]];
         }
     }
 }
@@ -934,19 +936,83 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 // 会议布局
-- (IBAction)meetingLayoutBtnClicked:(id)sender {
+- (void)meetingLayoutBtnClicked:(id)sender {
     [self hideAllBottomBgView];
 
-    // 弹出布局界面
-    if (self.curMeetingType == MeetingTypeLesson) {     // 讲堂
+    [ShowMeetingLayoutView showLayoutType:0 withDoneBlock:^(NSDictionary *settingDic) {
         
-    }else {         // 会议
-    
-    }
+        NSDictionary *usedDic = [NSDictionary dictionaryWithDictionary:settingDic];
+        NSLog(@"mutDic=%@ ,usedDic=%@", settingDic, usedDic);
+        
+        MeetingType usedType = self.curMeetingType;
+        
+        // 准备弹出pin界面进行输入密码
+        [ShowPinView showTitle:@"请输入PIN码修改布局" withDoneBlock:^(NSString *text) {
+            // 根据这里的设置进行操作。
+            NSLog(@"ping is %@, usedDIc=%@", text, usedDic);
+            
+            __block UICallBar *weakSelf = self;
+            [weakSelf showToastWithMessage:@"设置布局中"];
+            
+            RDRRequest *req = nil;
+            if (usedType == MeetingTypeLesson) {
+                RDRMeetingLayoutRequestModel *reqModel = [RDRMeetingLayoutRequestModel requestModel];
+                reqModel.addr = [self curMeetingAddr];
+                reqModel.pin = text;
+                reqModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
+                reqModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
+                reqModel.layout2 = ((NSNumber *)(usedDic[@"jkGround"])).integerValue;
+                
+                req = [RDRRequest requestWithURLPath:nil model:reqModel];
+
+            }else {
+                RDRMeetingLayoutSubRequestModel *subModel = [RDRMeetingLayoutSubRequestModel requestModel];
+                subModel.addr = [self curMeetingAddr];
+                subModel.pin = text;
+                subModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
+                subModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
+                
+                req = [RDRRequest requestWithURLPath:nil model:subModel];
+            }
+            
+            [RDRNetHelper GET:req responseModelClass:[RDRMeetingLayoutResponseModel class]
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          [weakSelf retain];
+                          
+                          RDRMeetingLayoutResponseModel *model = responseObject;
+                          
+                          if ([model codeCheckSuccess] == YES) {
+                              [weakSelf showToastWithMessage:@"布局设置成功"];
+                          }else {
+                              NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，msg=%@", model.msg];
+                              [weakSelf showToastWithMessage:tipStr];
+                          }
+                          [weakSelf release];
+                          
+                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                          [weakSelf retain];
+                          
+                          //请求出错
+                          NSLog(@"布局设置失败, %s, error=%@", __FUNCTION__, error);
+                          NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，服务器错误"];
+                          [weakSelf showToastWithMessage:tipStr];
+                          [weakSelf release];
+                          
+                      }];
+            
+        } withCancelBlock:^{
+            // do nothing
+        } withNoInput:^{
+            [self showToastWithMessage:@"请输入PIN码"];
+        }];
+        
+    } withCancelBlock:^{
+        NSLog(@"界面被取消");
+    }];
 }
 
 // 结束会议
-- (IBAction)endMeetingBtnClicked:(id)sender {
+- (void)endMeetingBtnClicked:(id)sender {
     [self hideAllBottomBgView];
     
     [ShowPinView showTitle:@"请输入PIN码以结束会议" withDoneBlock:^(NSString *text) {

@@ -27,6 +27,12 @@
 #import "UIDigitButton.h"
 #import "TPMultiLayoutViewController.h"
 
+// 会议类类型，讲堂/会议
+typedef NS_ENUM(NSInteger, MeetingType) {
+    MeetingTypeLesson,
+    MeetingTypeMeeting
+};
+
 @interface UICallBar: TPMultiLayoutViewController {
 }
 
