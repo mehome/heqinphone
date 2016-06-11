@@ -102,7 +102,7 @@ typedef void(^requestFailedBlock)(NSError *theError);
     [self.searchTopView addSubview:self.searchTextField];
 
     // 添加各个表
-    self.sevenTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 49) style:UITableViewStylePlain];
+    self.sevenTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 55 -20) style:UITableViewStylePlain];
     self.sevenTable.delegate = self;
     self.sevenTable.dataSource = self;
     self.sevenTable.hidden = NO;
@@ -110,7 +110,7 @@ typedef void(^requestFailedBlock)(NSError *theError);
     self.sevenTable.tableFooterView = nil;
     self.sevenTable.tableHeaderView = nil;
     
-    self.thirtyTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 49) style:UITableViewStylePlain];
+    self.thirtyTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 55 -20) style:UITableViewStylePlain];
     self.thirtyTable.delegate = self;
     self.thirtyTable.dataSource = self;
     self.thirtyTable.hidden = YES;
@@ -118,7 +118,7 @@ typedef void(^requestFailedBlock)(NSError *theError);
     self.thirtyTable.tableHeaderView = nil;
     self.thirtyTable.tableFooterView = nil;
     
-    self.searchTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 49) style:UITableViewStylePlain];
+    self.searchTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topBgView.ott_bottom, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topBgView.ott_bottom - 55 -20) style:UITableViewStylePlain];
     self.searchTable.delegate = self;
     self.searchTable.dataSource = self;
     self.searchTable.hidden = YES;
@@ -410,10 +410,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.sevenTable) {
+
         return self.sevenList.count;
     }else if (tableView == self.thirtyTable) {
+
         return self.thirtyList.count;
     }else if (tableView == self.searchTable) {
+        
         return self.searchList.count;
     }else {
         return 0;
@@ -426,6 +429,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     RDRRecordVideoModel *curModel = nil;
+    
     if (tableView == self.sevenTable) {
         curModel = [self.sevenList objectAtIndex:indexPath.row];
     }else if (tableView == self.thirtyTable) {
@@ -442,6 +446,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     cell.isSec = (curModel.sec == 1);
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 54.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -104,7 +104,9 @@
     UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
     bgView.frame = [UIApplication sharedApplication].keyWindow.bounds;
     
-    self.frame = CGRectMake(20, 60, MIN(bgView.ott_width, bgView.ott_height)-20*2, 130);
+//    self.frame = CGRectMake(20, 60, MIN(bgView.ott_width, bgView.ott_height)-20*2, 130);
+    self.frame = CGRectMake((MIN(bgView.ott_width, bgView.ott_height)-280)/2.0, 60, 280, 130);
+
     self.ott_left = (bgView.ott_width-self.ott_width) /2.0;
     
     [self updateFrameAndReset];

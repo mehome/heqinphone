@@ -939,7 +939,8 @@ extern NSString *const kLinphoneInCallCellData;
 - (void)meetingLayoutBtnClicked:(id)sender {
     [self hideAllBottomBgView];
 
-    [ShowMeetingLayoutView showLayoutType:0 withDoneBlock:^(NSDictionary *settingDic) {
+    [ShowMeetingLayoutView showLayoutType:0//self.curMeetingType
+                            withDoneBlock:^(NSDictionary *settingDic) {
         
         NSDictionary *usedDic = [NSDictionary dictionaryWithDictionary:settingDic];
         NSLog(@"mutDic=%@ ,usedDic=%@", settingDic, usedDic);

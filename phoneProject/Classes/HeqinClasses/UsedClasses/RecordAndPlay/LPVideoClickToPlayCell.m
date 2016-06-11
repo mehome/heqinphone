@@ -17,25 +17,34 @@
 
 @implementation LPVideoClickToPlayCell
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.typeMrkImgView.ott_centerY = self.ott_height/2.0;
+    
+    self.videoDateLabel.ott_right = self.ott_width - 10;
+    self.secMarkImgView.ott_right = self.ott_width - 10;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.typeMrkImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 24, 24)];
         
-        self.videoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 5, 150, 17)];
+        self.videoNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 10, 150, 17)];
         self.videoNameLabel.backgroundColor = [UIColor clearColor];
         self.videoNameLabel.font = [UIFont systemFontOfSize:15.0];
         
-        self.videoDescLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 25, 150, 13)];
+        self.videoDescLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, self.videoNameLabel.ott_bottom + 3, 150, 13)];
         self.videoDescLabel.backgroundColor = [UIColor clearColor];
         self.videoDescLabel.font = [UIFont systemFontOfSize:13.0];
         self.videoDescLabel.textColor = [UIColor grayColor];
         
-        self.videoDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 5, 200, 13)];
+        self.videoDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, self.videoNameLabel.ott_top, 200, 13)];
         self.videoDateLabel.textAlignment = NSTextAlignmentRight;
         self.videoDateLabel.backgroundColor = [UIColor clearColor];
         self.videoDateLabel.font = [UIFont systemFontOfSize:13.0];
         
-        self.secMarkImgView = [[UIImageView alloc] initWithFrame:CGRectMake(290, 17, 20, 20)];
+        self.secMarkImgView = [[UIImageView alloc] initWithFrame:CGRectMake(290, self.videoDateLabel.ott_bottom+3, 20, 20)];
         self.secMarkImgView.image = [UIImage imageNamed:@"videoLock"];
         
         [self.contentView addSubview:self.typeMrkImgView];
@@ -69,24 +78,17 @@
 - (void)setIsSec:(BOOL)isSec {
     _isSec = isSec;
     
-    if (_isSec == YES) {
-        self.secMarkImgView.hidden = NO;
-    }else {
-        self.secMarkImgView.hidden = YES;
-    }
+//    if (_isSec == YES) {
+//        self.secMarkImgView.hidden = NO;
+//    }else {
+//        self.secMarkImgView.hidden = YES;
+//    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    self.videoDateLabel.ott_right = self.ott_width - 10;
-    self.secMarkImgView.ott_right = self.ott_width - 10;
 }
 
 @end

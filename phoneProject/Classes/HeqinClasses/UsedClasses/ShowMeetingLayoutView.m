@@ -67,7 +67,7 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         zimuContainerView = [[UIView alloc] initWithFrame:CGRectMake(10, curYlocation, 200, 50)];
         zimuContainerView.userInteractionEnabled = YES;
         
-        UILabel *zimuLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kFengxie, zimuContainerView.ott_width-2*kFengxie, 22)];
+        UILabel *zimuLabel = [[UILabel alloc] initWithFrame:CGRectMake(kFengxie, offsetX, zimuContainerView.ott_width-2*kFengxie, 22)];
         zimuLabel.textAlignment = NSTextAlignmentCenter;
         zimuLabel.backgroundColor = [UIColor grayColor];
         zimuLabel.textAlignment = NSTextAlignmentCenter;
@@ -76,8 +76,8 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
 
         RadioButton *rb0 = [[RadioButton alloc] initWithGroupId:@"zimuGround" index:1];
         RadioButton *rb1 = [[RadioButton alloc] initWithGroupId:@"zimuGround" index:0];
-        rb0.frame = CGRectMake(0, zimuLabel.ott_bottom, 22, 22);
-        rb1.frame = CGRectMake(60, zimuLabel.ott_bottom, 22, 22);
+        rb0.frame = CGRectMake(40, zimuLabel.ott_bottom, 22, 22);
+        rb1.frame = CGRectMake(100, zimuLabel.ott_bottom, 22, 22);
         [zimuContainerView addSubview:rb0];
         [zimuContainerView addSubview:rb1];
         
@@ -95,12 +95,12 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         
         [self addSubview:zimuContainerView];
         
-        curYlocation += zimuContainerView.ott_height + 10;
+        curYlocation += zimuContainerView.ott_bottom + 10;
         
         // 添加主持人布局
         zcrContainerView = [[UIView alloc] initWithFrame:CGRectMake(10, curYlocation, 125, 100)];
         
-        UILabel *zcrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kFengxie, zcrContainerView.ott_width-2*kFengxie, 22)];
+        UILabel *zcrLabel = [[UILabel alloc] initWithFrame:CGRectMake(kFengxie, 0, zcrContainerView.ott_width-2*kFengxie, 22)];
         zcrLabel.textAlignment = NSTextAlignmentCenter;
         zcrLabel.backgroundColor = [UIColor grayColor];
         zcrLabel.text = @"主持人布局";
@@ -154,13 +154,13 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         
         [self addSubview:zcrContainerView];
     }
-        curYlocation += zcrContainerView.ott_height + 10;
+        curYlocation += zcrContainerView.ott_bottom + 10;
 
         // 添加访客布局
         if (type == MeetingTypeLesson) {
             fkContainerView = [[UIView alloc] initWithFrame:CGRectMake(10, curYlocation, zcrContainerView.ott_width, zcrContainerView.ott_height)];
             
-            UILabel *fkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kFengxie, fkContainerView.ott_width, 22)];
+            UILabel *fkLabel = [[UILabel alloc] initWithFrame:CGRectMake(kFengxie, 0, fkContainerView.ott_width-2*kFengxie, 22)];
             fkLabel.textAlignment = NSTextAlignmentCenter;
             fkLabel.backgroundColor = [UIColor grayColor];
             fkLabel.text = @"访客布局";
@@ -213,7 +213,7 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
             
             [self addSubview:fkContainerView];
 
-            curYlocation += fkContainerView.ott_height + 10;
+            curYlocation += fkContainerView.ott_bottom + 10;
         }else {
             // 会议模式只有一个设置
         }
@@ -223,7 +223,7 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         [RadioButton addObserverForGroupId:@"jkGround" observer:self];
 
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelBtn.frame = CGRectMake(offsetX, curYlocation + offsetX, (self.ott_width - 2*offsetX)/2.0, 40);
+        _cancelBtn.frame = CGRectMake(offsetX, curYlocation + offsetX, 120, 40);
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
         _cancelBtn.backgroundColor = [UIColor blueColor];
@@ -231,14 +231,14 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         [self addSubview:_cancelBtn];
         
         _doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _doneBtn.frame = CGRectMake(self.cancelBtn.ott_right + offsetX, self.cancelBtn.ott_top, self.cancelBtn.ott_width, self.cancelBtn.ott_height);
+        _doneBtn.frame = CGRectMake(self.cancelBtn.ott_right + 2*offsetX, self.cancelBtn.ott_top, self.cancelBtn.ott_width, self.cancelBtn.ott_height);
         [_doneBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_doneBtn addTarget:self action:@selector(doneClicked:) forControlEvents:UIControlEventTouchUpInside];
         _doneBtn.backgroundColor = [UIColor blueColor];
         _doneBtn.layer.cornerRadius = 10.0;
         [self addSubview:_doneBtn];
         
-        curYlocation += _cancelBtn.ott_height;
+        curYlocation += _cancelBtn.ott_bottom;
     }
     
     self.ott_height = curYlocation + 10;
@@ -251,6 +251,15 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    // 最后把自己放在背景界面中进行居中处理
+    UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
+    bgView.frame = [UIApplication sharedApplication].keyWindow.bounds;
+    
+    //    self.frame = CGRectMake(20, 60, MIN(bgView.ott_width, bgView.ott_height)-20*2, 130);
+//    self.frame = CGRectMake((MIN(bgView.ott_width, bgView.ott_height)-280)/2.0, 60, 280, 130);
+    
+    self.ott_width = 300;
+
     // 动态调整布局
     [self updateFrameAndReset];
 }
@@ -264,11 +273,9 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
 //    self.doneBtn.frame = CGRectMake(self.cancelBtn.ott_right + offsetX, self.cancelBtn.ott_top, self.cancelBtn.ott_width, self.cancelBtn.ott_height);
 //    self.ott_height = self.doneBtn.ott_bottom + offsetX;
     
-    // 最后把自己放在背景界面中进行居中处理
-    UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
-    bgView.frame = [UIApplication sharedApplication].keyWindow.bounds;
-    
 //    self.frame = CGRectMake(20, 60, MIN(bgView.ott_width, bgView.ott_height)-20*2, 130);
+    
+    UIView *bgView = [self.rd_userInfo objectForKey:@"bgView"];
     self.ott_left = (bgView.ott_width-self.ott_width) /2.0;
     
     if (bgView.ott_width > bgView.ott_height) {
@@ -276,11 +283,11 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         // 然后再把上面的几个container分别进行居中处理
         self.zimuContainerView.ott_centerX = self.ott_width/2.0;
         
-        CGFloat bothWidth = self.zcrContainerView.ott_width + self.fkContainerView.ott_width;
+        CGFloat bothWidth = self.zcrContainerView.ott_width + self.fkContainerView.ott_width + 30;
         self.zcrContainerView.ott_left = (self.ott_width-bothWidth)/2.0;
-        self.fkContainerView.ott_left = self.zcrContainerView.ott_right;
+        self.fkContainerView.ott_left = self.zcrContainerView.ott_right + 30;
         
-        self.zcrContainerView.ott_top = self.zimuContainerView.ott_bottom;
+        self.zcrContainerView.ott_top = self.zimuContainerView.ott_bottom + 10;
         self.fkContainerView.ott_top = self.zcrContainerView.ott_top;
         
     }else {
@@ -290,24 +297,24 @@ doneBlock withCancelBlock:(meetingLayoutCancelBlock)cancelBlock {
         self.zcrContainerView.ott_centerX = self.ott_width/2.0;
         self.fkContainerView.ott_centerX = self.ott_width/2.0;
         
-        self.zcrContainerView.ott_top = self.zimuContainerView.ott_bottom;
-        self.fkContainerView.ott_top = self.zcrContainerView.ott_bottom;
+        self.zcrContainerView.ott_top = self.zimuContainerView.ott_bottom + 10;
+        self.fkContainerView.ott_top = self.zcrContainerView.ott_bottom + 10;
     }
     
     if (self.curType == MeetingTypeLesson) {
         // 有讲师与访客
-        self.cancelBtn.ott_top = self.fkContainerView.ott_bottom;
+        self.cancelBtn.ott_top = self.fkContainerView.ott_bottom + 10;
     }else {
         // 只有讲师
-        self.cancelBtn.ott_top = self.zcrContainerView.ott_bottom;
+        self.cancelBtn.ott_top = self.zcrContainerView.ott_bottom + 10;
     }
     
-    self.cancelBtn.ott_left = (self.ott_width-2*self.cancelBtn.ott_width)/2.0;
+    self.cancelBtn.ott_left = (self.ott_width-2*self.cancelBtn.ott_width - 20)/2.0;
     
-    self.doneBtn.ott_left = self.cancelBtn.ott_right;
+    self.doneBtn.ott_left = self.cancelBtn.ott_right + 10;
     self.doneBtn.ott_top = self.cancelBtn.ott_top;
     
-    self.ott_height = self.doneBtn.ott_bottom;
+    self.ott_height = self.doneBtn.ott_bottom + 10;
 }
 
 - (void)clear {

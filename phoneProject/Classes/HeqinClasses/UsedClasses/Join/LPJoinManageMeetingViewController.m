@@ -423,6 +423,13 @@ static UICompositeViewDescription *compositeDescription = nil;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.meetingTable) {
+        self.floatView.hidden = YES;
+        [self.meetingField resignFirstResponder];
+    }
+}
+
 - (void)goIndexPath:(NSIndexPath *)indexPath {
     RDRJoinMeetingModel *curMeetingModel = nil;
     

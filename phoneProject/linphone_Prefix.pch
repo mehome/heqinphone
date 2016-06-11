@@ -26,8 +26,8 @@
 
 //#define kHeqinLinphoneServerAddress @"http://cs.zijingcloud.com"
 
-//#define kHeqinLinphoneServerAddress @"http://api.myvmr.cn"
-#define kHeqinLinphoneServerAddress @"http://120.132.87.184"
+#define kHeqinLinphoneServerAddress @"http://api.myvmr.cn"
+//#define kHeqinLinphoneServerAddress @"http://120.132.87.184"
 
 
 #define kNotLoginCheck (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ||[LPSystemUser sharedUser].hasLoginSuccess == NO)

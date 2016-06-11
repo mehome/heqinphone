@@ -77,8 +77,8 @@ static BOOL loginIsTheTopVC = NO;
 //        self.userNameField.text = @"client@zijingcloud.com";
 //        self.userPasswordField.text = @"test&temp";
 
-        self.userNameField.text = @"qin.he@zijingcloud.com";
-        self.userPasswordField.text = @"he@2015";
+//        self.userNameField.text = @"qin.he@zijingcloud.com";
+//        self.userPasswordField.text = @"he@2015";
         
     }else {
         // 当前已处于登录状态

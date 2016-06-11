@@ -240,7 +240,7 @@ static RootViewManager* rootViewManagerInstance = nil;
     NSString *nameStr = safeString(dic[@"name"]);
     NSString *urlStr = safeString(dic[@"url"]);
     // 测试使用视频url
-    urlStr = @"http://video.getarts.cn/20160201/yufang2.mp4.mp4";
+//    urlStr = @"http://video.getarts.cn/20160201/yufang2.mp4.mp4";
     
     [HQPlayerViewController playMovieWithTitle:nameStr mediaUrlStr:urlStr];
     
