@@ -124,10 +124,10 @@
     
     if ( kNotLoginCheck ) {
         // 未登录
-        self.btnTipLabel.hidden = NO;
+        self.btnTipLabel.text = @"未登录";
     }else {
         // 已登录
-        self.btnTipLabel.hidden = YES;
+        self.btnTipLabel.text = @"已登录";
     }
 }
 
@@ -192,20 +192,19 @@
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
                 self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-                self.btnTipLabel.hidden = YES;
-
+                self.btnTipLabel.text = @"已登录";
                 break;
             }
             case LinphoneRegistrationNone:
             case LinphoneRegistrationCleared:
                 message = @"未注册";
-                self.btnTipLabel.hidden = NO;
+                self.btnTipLabel.text = @"未登录";
                 [LPSystemUser sharedUser].hasLoginSuccess = NO;
                 NSLog(@"登出成功");
                 break;
             case LinphoneRegistrationFailed:
                 message = @"注册失败";
-                self.btnTipLabel.hidden = NO;
+                self.btnTipLabel.text = @"未登录";
                 [LPSystemUser sharedUser].hasLoginSuccess = NO;
 
                 break;

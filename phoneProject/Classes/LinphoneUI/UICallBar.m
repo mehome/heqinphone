@@ -507,12 +507,12 @@ extern NSString *const kLinphoneInCallCellData;
     UIButton *startRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     startRecordBtn.showsTouchWhenHighlighted = YES;
     [startRecordBtn addTarget:self action:@selector(startRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [startRecordBtn setTitle:@"开始录制" forState:UIControlStateNormal];
+    [startRecordBtn setTitle:@"录播" forState:UIControlStateNormal];
     
     UIButton *stopRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     stopRecordBtn.showsTouchWhenHighlighted = YES;
     [stopRecordBtn addTarget:self action:@selector(stopRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [stopRecordBtn setTitle:@"停止录制" forState:UIControlStateNormal];
+    [stopRecordBtn setTitle:@"停止录播" forState:UIControlStateNormal];
     
     UIButton *layoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     layoutBtn.showsTouchWhenHighlighted = YES;
@@ -939,7 +939,7 @@ extern NSString *const kLinphoneInCallCellData;
 - (void)meetingLayoutBtnClicked:(id)sender {
     [self hideAllBottomBgView];
 
-    [ShowMeetingLayoutView showLayoutType:0//self.curMeetingType
+    [ShowMeetingLayoutView showLayoutType:self.curMeetingType
                             withDoneBlock:^(NSDictionary *settingDic) {
         
         NSDictionary *usedDic = [NSDictionary dictionaryWithDictionary:settingDic];
