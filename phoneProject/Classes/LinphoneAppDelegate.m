@@ -95,7 +95,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     if(_updateAlertView == nil){
-        [self checkLatestVersion];
+//        [self checkLatestVersion];
     }
     
     Linphone_log(@"%@", NSStringFromSelector(_cmd));
