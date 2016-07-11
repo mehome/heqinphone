@@ -181,8 +181,9 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
                 [self setString: linphone_address_get_username(parsed) forKey:@"primary_username_preference"];
             }
             
+            linphone_address_destroy(parsed);
+
 		}
-		linphone_address_destroy(parsed);
 	}
 	{
 		{

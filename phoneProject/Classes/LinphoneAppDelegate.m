@@ -244,6 +244,9 @@
     // 先取当前系统的sip地址
     [self askForSystemConfig];
 
+    NSString *verStr = [NSString stringWithFormat:@"%@ Core %s", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], linphone_core_get_version()];
+    NSLog(@"verStr=%@", verStr);
+    
     return YES;
 }
 

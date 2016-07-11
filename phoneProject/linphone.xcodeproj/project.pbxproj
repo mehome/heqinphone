@@ -117,6 +117,14 @@
 		138951761BEDFBAD003DD7A0 /* LPMeetingRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 138951751BEDFBAD003DD7A0 /* LPMeetingRoom.m */; };
 		1389519D1BEE09CA003DD7A0 /* LPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1389519B1BEE09CA003DD7A0 /* LPLoginViewController.m */; };
 		1389519E1BEE09CA003DD7A0 /* LPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1389519C1BEE09CA003DD7A0 /* LPLoginViewController.xib */; };
+		13918B361D3396770032DFF3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B351D3396770032DFF3 /* libz.tbd */; };
+		13918B391D3396840032DFF3 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B371D3396840032DFF3 /* libc++.1.tbd */; };
+		13918B3A1D3396840032DFF3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B381D3396840032DFF3 /* libc++.tbd */; };
+		13918B3D1D3396960032DFF3 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B3B1D3396960032DFF3 /* libresolv.9.tbd */; };
+		13918B3E1D3396960032DFF3 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B3C1D3396960032DFF3 /* libresolv.tbd */; };
+		13918B401D33969F0032DFF3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B3F1D33969F0032DFF3 /* libsqlite3.tbd */; };
+		13918B431D3396AA0032DFF3 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B411D3396AA0032DFF3 /* libstdc++.6.tbd */; };
+		13918B441D3396AA0032DFF3 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13918B421D3396AA0032DFF3 /* libstdc++.tbd */; };
 		13A39FF51CEE0C0E009F665B /* LPVideoClickToPlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A39FF41CEE0C0E009F665B /* LPVideoClickToPlayCell.m */; };
 		13A39FF91CEE1214009F665B /* live@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A39FF61CEE1214009F665B /* live@2x.png */; };
 		13A39FFA1CEE1214009F665B /* movie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A39FF71CEE1214009F665B /* movie@2x.png */; };
@@ -231,7 +239,6 @@
 		22B5F03510CE6B2F00777D97 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B5F03410CE6B2F00777D97 /* AddressBook.framework */; };
 		22BB1A69132FF16A005CD7AA /* UIEraseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BB1A68132FF16A005CD7AA /* UIEraseButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		22C755601317E59C007BC101 /* UIBluetoothButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C7555F1317E59C007BC101 /* UIBluetoothButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		22D1B68112A3E0BE001AE361 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D1B68012A3E0BE001AE361 /* libresolv.dylib */; };
 		22E0A822111C44E100B04932 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E0A81C111C44E100B04932 /* AboutViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		22F2508E107141E100AC9B3F /* DialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F2508C107141E100AC9B3F /* DialerViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		22F254811073D99800AC9B3F /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F254801073D99800AC9B3F /* ringback.wav */; };
@@ -239,8 +246,6 @@
 		340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340751961506459A00B89C47 /* CoreTelephony.framework */; };
 		340751E7150F38FD00B89C47 /* UIVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 340751E6150F38FD00B89C47 /* UIVideoButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		344ABDF114850AE9007420B6 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 344ABDEF14850AE9007420B6 /* libc++.1.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
-		344ABDF214850AE9007420B6 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 344ABDF014850AE9007420B6 /* libstdc++.6.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		57B0E360173C010400A476B8 /* libpolarssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B0E35F173C010400A476B8 /* libpolarssl.a */; };
 		57F005C415EE2CCF00914747 /* linphonerc in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C315EE2CCF00914747 /* linphonerc */; };
 		57F005C815EE2D9200914747 /* linphonerc-factory in Resources */ = {isa = PBXBuildFile; fileRef = 57F005C615EE2D9200914747 /* linphonerc-factory */; };
@@ -316,7 +321,6 @@
 		D32648441588F6FC00930C67 /* UIToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D32648431588F6FB00930C67 /* UIToggleButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D32B6E2415A5B2020033019F /* chat_send_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = D32B6E2315A5B2020033019F /* chat_send_disabled.png */; };
 		D32B6E2915A5BC440033019F /* ChatRoomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D32B6E2815A5BC430033019F /* ChatRoomTableViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D32B6E2F15A5C0AC0033019F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D32B6E2E15A5C0AC0033019F /* libsqlite3.dylib */; };
 		D32B9DFC15A2F131000B6DEC /* FastAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DFB15A2F131000B6DEC /* FastAddressBook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D32D5AA715ADE5D9008593F3 /* button_alert_background_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D5AA515ADE5D9008593F3 /* button_alert_background_default.png */; };
 		D32D5AA915ADE5D9008593F3 /* button_alert_background_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D5AA615ADE5D9008593F3 /* button_alert_background_over.png */; };
@@ -926,7 +930,6 @@
 		F01A77EB18ED989B00E287CA /* shortring.caf in Resources */ = {isa = PBXBuildFile; fileRef = F01A77EA18ED989B00E287CA /* shortring.caf */; };
 		F03CA84318C72F1A0008889D /* UITextViewNoDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F04892FF180C3296002FED35 /* ImageOptim.sh in Resources */ = {isa = PBXBuildFile; fileRef = F04892FE180C3296002FED35 /* ImageOptim.sh */; };
-		F05BAA621A5D594E00411815 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F05BAA611A5D594E00411815 /* libz.dylib */; };
 		F0642EF119DAC891009DB336 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */; };
 		F066515517F9A02E0064280C /* UITransparentTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F066515417F9A02E0064280C /* UITransparentTVCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F070E6331A2622EC00E17AFD /* dialer_padding_left.png in Resources */ = {isa = PBXBuildFile; fileRef = F070E62D1A2622EC00E17AFD /* dialer_padding_left.png */; };
@@ -1201,6 +1204,14 @@
 		1389519A1BEE09CA003DD7A0 /* LPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLoginViewController.h; sourceTree = "<group>"; };
 		1389519B1BEE09CA003DD7A0 /* LPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLoginViewController.m; sourceTree = "<group>"; };
 		1389519C1BEE09CA003DD7A0 /* LPLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPLoginViewController.xib; sourceTree = "<group>"; };
+		13918B351D3396770032DFF3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		13918B371D3396840032DFF3 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		13918B381D3396840032DFF3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		13918B3B1D3396960032DFF3 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		13918B3C1D3396960032DFF3 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		13918B3F1D33969F0032DFF3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		13918B411D3396AA0032DFF3 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		13918B421D3396AA0032DFF3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		13A39FF31CEE0C0E009F665B /* LPVideoClickToPlayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVideoClickToPlayCell.h; sourceTree = "<group>"; };
 		13A39FF41CEE0C0E009F665B /* LPVideoClickToPlayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVideoClickToPlayCell.m; sourceTree = "<group>"; };
 		13A39FF61CEE1214009F665B /* live@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "live@2x.png"; path = "Resources/live@2x.png"; sourceTree = "<group>"; };
@@ -1284,7 +1295,6 @@
 		1D3623250D0F684500981E51 /* LinphoneAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LinphoneAppDelegate.m; path = Classes/LinphoneAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* linphoneDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = linphoneDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		1FE76362DA6217E7341ED1DF /* libPods-KifTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KifTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		220FAD2910765B400068D98F /* libgsm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsm.a; path = "liblinphone-sdk/apple-darwin/lib/libgsm.a"; sourceTree = "<group>"; };
 		220FAD2C10765B400068D98F /* libortp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libortp.a; path = "liblinphone-sdk/apple-darwin/lib/libortp.a"; sourceTree = "<group>"; };
 		220FAD2F10765B400068D98F /* libspeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeex.a; path = "liblinphone-sdk/apple-darwin/lib/libspeex.a"; sourceTree = "<group>"; };
@@ -1350,7 +1360,6 @@
 		22BB1A68132FF16A005CD7AA /* UIEraseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEraseButton.m; sourceTree = "<group>"; };
 		22C7555E1317E59C007BC101 /* UIBluetoothButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBluetoothButton.h; sourceTree = "<group>"; };
 		22C7555F1317E59C007BC101 /* UIBluetoothButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBluetoothButton.m; sourceTree = "<group>"; };
-		22D1B68012A3E0BE001AE361 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		22E0A81C111C44E100B04932 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		22E0A81D111C44E100B04932 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		22F2508B107141E100AC9B3F /* DialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialerViewController.h; sourceTree = "<group>"; };
@@ -1364,8 +1373,6 @@
 		340751E6150F38FD00B89C47 /* UIVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIVideoButton.m; sourceTree = "<group>"; };
 		34216F3E1547EBCD00EA9777 /* VideoZoomHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoZoomHandler.h; path = LinphoneUI/VideoZoomHandler.h; sourceTree = "<group>"; };
 		34216F3F1547EBCD00EA9777 /* VideoZoomHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoZoomHandler.m; path = LinphoneUI/VideoZoomHandler.m; sourceTree = "<group>"; };
-		344ABDEF14850AE9007420B6 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
-		344ABDF014850AE9007420B6 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		57B0E35F173C010400A476B8 /* libpolarssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpolarssl.a; path = "liblinphone-sdk/apple-darwin/lib/libpolarssl.a"; sourceTree = "<group>"; };
 		57F005C315EE2CCF00914747 /* linphonerc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = linphonerc; path = Resources/linphonerc; sourceTree = "<group>"; };
 		57F005C615EE2D9200914747 /* linphonerc-factory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "linphonerc-factory"; path = "Resources/linphonerc-factory"; sourceTree = "<group>"; };
@@ -1467,7 +1474,6 @@
 		D32B6E2315A5B2020033019F /* chat_send_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_send_disabled.png; path = Resources/chat_send_disabled.png; sourceTree = "<group>"; };
 		D32B6E2715A5BC430033019F /* ChatRoomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomTableViewController.h; sourceTree = "<group>"; };
 		D32B6E2815A5BC430033019F /* ChatRoomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomTableViewController.m; sourceTree = "<group>"; };
-		D32B6E2E15A5C0AC0033019F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D32B9DFA15A2F131000B6DEC /* FastAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FastAddressBook.h; path = Utils/FastAddressBook.h; sourceTree = "<group>"; };
 		D32B9DFB15A2F131000B6DEC /* FastAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FastAddressBook.m; path = Utils/FastAddressBook.m; sourceTree = "<group>"; };
 		D32D5AA515ADE5D9008593F3 /* button_alert_background_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_alert_background_default.png; path = Resources/button_alert_background_default.png; sourceTree = "<group>"; };
@@ -2214,16 +2220,11 @@
 		E1D0AC2B1C3C04AD0019DE87 /* m_barBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "m_barBg@2x.png"; path = "Resources/m_barBg@2x.png"; sourceTree = "<group>"; };
 		E1FCC3F11C1F14B3009A51CC /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		E1FCC3F21C1F14B3009A51CC /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		F01A77EA18ED989B00E287CA /* shortring.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = shortring.caf; path = Resources/shortring.caf; sourceTree = "<group>"; };
-		F03A9B3318C0CF7000C4D7FE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F03A9B7E18C0D9C900C4D7FE /* libcunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcunit.a; path = "liblinphone-sdk/apple-darwin/lib/libcunit.a"; sourceTree = "<group>"; };
-		F03A9B9418C0DAE100C4D7FE /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		F03A9B9718C0DB6F00C4D7FE /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F03CA84118C72F1A0008889D /* UITextViewNoDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewNoDefine.h; sourceTree = "<group>"; };
 		F03CA84218C72F1A0008889D /* UITextViewNoDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewNoDefine.m; sourceTree = "<group>"; };
 		F04892FE180C3296002FED35 /* ImageOptim.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ImageOptim.sh; sourceTree = "<group>"; };
-		F05BAA611A5D594E00411815 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F0642EF019DAC891009DB336 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F0642EF719DAF32E009DB336 /* DTWeakSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTWeakSupport.h; sourceTree = "<group>"; };
 		F066515317F9A02E0064280C /* UITransparentTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITransparentTVCell.h; sourceTree = "<group>"; };
@@ -2352,7 +2353,6 @@
 		F0BB8C0F193623F200974404 /* liblinphonetester.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblinphonetester.a; path = "liblinphone-sdk/apple-darwin/lib/liblinphonetester.a"; sourceTree = "<group>"; };
 		F0BB8C111936240300974404 /* libcunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcunit.a; path = "liblinphone-sdk/apple-darwin/lib/libcunit.a"; sourceTree = "<group>"; };
 		F0BB8C311936246600974404 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		F0BB8C34193624C800974404 /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = usr/lib/libresolv.9.dylib; sourceTree = SDKROOT; };
 		F0BB8C4A193631B300974404 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		F0C1F8EA1A277ADA009402C9 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		F0C1F9041A28781F009402C9 /* background-launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-launch.png"; sourceTree = "<group>"; };
@@ -2374,11 +2374,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13918B431D3396AA0032DFF3 /* libstdc++.6.tbd in Frameworks */,
+				13918B441D3396AA0032DFF3 /* libstdc++.tbd in Frameworks */,
+				13918B401D33969F0032DFF3 /* libsqlite3.tbd in Frameworks */,
+				13918B3D1D3396960032DFF3 /* libresolv.9.tbd in Frameworks */,
+				13918B3E1D3396960032DFF3 /* libresolv.tbd in Frameworks */,
+				13918B391D3396840032DFF3 /* libc++.1.tbd in Frameworks */,
+				13918B3A1D3396840032DFF3 /* libc++.tbd in Frameworks */,
+				13918B361D3396770032DFF3 /* libz.tbd in Frameworks */,
 				134D9C5E1C2188F900ADA720 /* Security.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */,
 				13854EAE1BECA22000727913 /* MapKit.framework in Frameworks */,
-				F05BAA621A5D594E00411815 /* libz.dylib in Frameworks */,
 				1560821F18EEF26100765332 /* libmsopenh264.a in Frameworks */,
 				22509042196BD902007863F6 /* libopenh264.a in Frameworks */,
 				15017E701773578400784ACB /* libxml2.a in Frameworks */,
@@ -2406,10 +2413,6 @@
 				70E542F313E147E3002BA2C0 /* OpenGLES.framework in Frameworks */,
 				70E542F513E147EB002BA2C0 /* QuartzCore.framework in Frameworks */,
 				2264B6D211200342002C2C53 /* SystemConfiguration.framework in Frameworks */,
-				344ABDF114850AE9007420B6 /* libc++.1.dylib in Frameworks */,
-				D32B6E2F15A5C0AC0033019F /* libsqlite3.dylib in Frameworks */,
-				344ABDF214850AE9007420B6 /* libstdc++.6.dylib in Frameworks */,
-				22D1B68112A3E0BE001AE361 /* libresolv.dylib in Frameworks */,
 				22276E8313C73D3100210156 /* libavcodec.a in Frameworks */,
 				22276E8413C73D3100210156 /* libavutil.a in Frameworks */,
 				220FAD3210765B400068D98F /* libgsm.a in Frameworks */,
@@ -3360,8 +3363,15 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				13918B411D3396AA0032DFF3 /* libstdc++.6.tbd */,
+				13918B421D3396AA0032DFF3 /* libstdc++.tbd */,
+				13918B3F1D33969F0032DFF3 /* libsqlite3.tbd */,
+				13918B3B1D3396960032DFF3 /* libresolv.9.tbd */,
+				13918B3C1D3396960032DFF3 /* libresolv.tbd */,
+				13918B371D3396840032DFF3 /* libc++.1.tbd */,
+				13918B381D3396840032DFF3 /* libc++.tbd */,
+				13918B351D3396770032DFF3 /* libz.tbd */,
 				13854EAD1BECA22000727913 /* MapKit.framework */,
-				F05BAA611A5D594E00411815 /* libz.dylib */,
 				22B5F03410CE6B2F00777D97 /* AddressBook.framework */,
 				22B5EFA210CE50BD00777D97 /* AddressBookUI.framework */,
 				22405EED1600B4E400B92522 /* AssetsLibrary.framework */,
@@ -3382,8 +3392,6 @@
 				22276E8113C73D3100210156 /* libavutil.a */,
 				223CA7E516D9255800EF1BEC /* libbellesip.a */,
 				045B5CB218D72E9A0088350C /* libbzrtp.a */,
-				344ABDEF14850AE9007420B6 /* libc++.1.dylib */,
-				F03A9B9718C0DB6F00C4D7FE /* libc++.dylib */,
 				F0BB8C111936240300974404 /* libcunit.a */,
 				220FAD2910765B400068D98F /* libgsm.a */,
 				223148E31178A08200637D6A /* libilbc.a */,
@@ -3402,17 +3410,11 @@
 				22509041196BD902007863F6 /* libopenh264.a */,
 				22AF73C11754C0D000BE8398 /* libopus.a */,
 				220FAD2C10765B400068D98F /* libortp.a */,
-				1FE76362DA6217E7341ED1DF /* libPods-KifTests.a */,
 				57B0E35F173C010400A476B8 /* libpolarssl.a */,
-				F0BB8C34193624C800974404 /* libresolv.9.dylib */,
-				22D1B68012A3E0BE001AE361 /* libresolv.dylib */,
 				226183AA1472527D0037138E /* libSKP_SILK_SDK.a */,
 				220FAD2F10765B400068D98F /* libspeex.a */,
 				220FAD3010765B400068D98F /* libspeexdsp.a */,
-				D32B6E2E15A5C0AC0033019F /* libsqlite3.dylib */,
 				226183AB1472527D0037138E /* libsrtp.a */,
-				344ABDF014850AE9007420B6 /* libstdc++.6.dylib */,
-				F03A9B9418C0DAE100C4D7FE /* libstdc++.dylib */,
 				22276E8213C73D3100210156 /* libswscale.a */,
 				D30BF33216A427BC00AF0026 /* libtunnel.a */,
 				7066FC0B13E830E400EFC6DC /* libvpx.a */,
@@ -3424,10 +3426,8 @@
 				70E542F213E147E3002BA2C0 /* OpenGLES.framework */,
 				70E542F413E147EB002BA2C0 /* QuartzCore.framework */,
 				22744043106F33FC006EC466 /* Security.framework */,
-				F0181B6B18BF7B1200A9A357 /* SenTestingKit.framework */,
 				2264B6D111200342002C2C53 /* SystemConfiguration.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				F03A9B3318C0CF7000C4D7FE /* XCTest.framework */,
 				F03A9B7E18C0D9C900C4D7FE /* libcunit.a */,
 			);
 			name = Frameworks;
