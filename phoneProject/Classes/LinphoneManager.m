@@ -74,12 +74,20 @@ NSString *const kLinphoneNotifyReceived = @"LinphoneNotifyReceived";
 
 const int kLinphoneAudioVbrCodecDefaultBitrate=36; /*you can override this from linphonerc or linphonerc-factory*/
 
-extern void libmsilbc_init(void);
-extern void libmsamr_init(void);
-extern void libmsx264_init(void);
-extern void libmsopenh264_init(void);
-extern void libmssilk_init(void);
-extern void libmsbcg729_init(void);
+//extern void libmsilbc_init(void);
+//extern void libmsamr_init(void);
+//extern void libmsx264_init(void);
+//extern void libmsopenh264_init(void);
+//extern void libmssilk_init(void);
+//extern void libmsbcg729_init(void);
+
+extern void libmsamr_init(MSFactory *factory);
+extern void libmsx264_init(MSFactory *factory);
+extern void libmsopenh264_init(MSFactory *factory);
+extern void libmssilk_init(MSFactory *factory);
+extern void libmsbcg729_init(MSFactory *factory);
+extern void libmswebrtc_init(MSFactory *factory);
+
 
 #define FRONT_CAM_NAME "AV Capture: com.apple.avfoundation.avcapturedevice.built-in_video:1" /*"AV Capture: Front Camera"*/
 #define BACK_CAM_NAME "AV Capture: com.apple.avfoundation.avcapturedevice.built-in_video:0" /*"AV Capture: Back Camera"*/
@@ -546,8 +554,8 @@ static void dump_section(const char* section, void* data){
 
 //generic log handler for debug version
 void linphone_iphone_log_handler(int lev, const char *fmt, va_list args){
-	NSString* format = [[NSString alloc] initWithUTF8String:fmt];
-	NSLogv(format, args);
+//	NSString* format = [[NSString alloc] initWithUTF8String:fmt];
+//	NSLogv(format, args);
 //	NSString* formatedString = [[NSString alloc] initWithFormat:format arguments:args];
 //
 //    dispatch_async(dispatch_get_main_queue(), ^{
@@ -562,7 +570,7 @@ void linphone_iphone_log_handler(int lev, const char *fmt, va_list args){
 //    });
 //
 //	[formatedString release];
-	[format release];
+//	[format release];
 }
 
 //Error/warning log handler
@@ -1493,23 +1501,25 @@ static BOOL libStarted = FALSE;
 
     ms_init(); // Need to initialize mediastreamer2 before loading the plugins
 
-    libmsilbc_init();
-#if defined (HAVE_SILK)
-    libmssilk_init();
-#endif
-#ifdef HAVE_AMR
-    libmsamr_init(); //load amr plugin if present from the liblinphone sdk
-#endif
-#ifdef HAVE_X264
-    libmsx264_init(); //load x264 plugin if present from the liblinphone sdk
-#endif
-#ifdef HAVE_OPENH264
-    libmsopenh264_init(); //load openh264 plugin if present from the liblinphone sdk
-#endif
-
-#if HAVE_G729
-    libmsbcg729_init(); // load g729 plugin
-#endif
+    // 因为新版本的已经没有这个方法， 所以这里把下面这个方法给屏掉
+//    libmsilbc_init();
+    
+//#if defined (HAVE_SILK)
+//    libmssilk_init();
+//#endif
+//#ifdef HAVE_AMR
+//    libmsamr_init(); //load amr plugin if present from the liblinphone sdk
+//#endif
+//#ifdef HAVE_X264
+//    libmsx264_init(); //load x264 plugin if present from the liblinphone sdk
+//#endif
+//#ifdef HAVE_OPENH264
+//    libmsopenh264_init(); //load openh264 plugin if present from the liblinphone sdk
+//#endif
+//
+//#if HAVE_G729
+//    libmsbcg729_init(); // load g729 plugin
+//#endif
 
 	linphone_core_set_log_collection_path([[LinphoneManager cacheDirectory] UTF8String]);
 	[self setLogsEnabled:[self lpConfigBoolForKey:@"debugenable_preference"]];
@@ -1520,6 +1530,17 @@ static BOOL libStarted = FALSE;
 										 ,self /* user_data */);
 
 
+    // Load plugins if available in the linphone SDK - otherwise these calls will do nothing
+    MSFactory *f = linphone_core_get_ms_factory(theLinphoneCore);
+    libmssilk_init(f);
+    libmsamr_init(f);
+    libmsx264_init(f);
+    libmsopenh264_init(f);
+    libmsbcg729_init(f);
+    libmswebrtc_init(f);
+    linphone_core_reload_ms_plugins(theLinphoneCore, NULL);
+
+    
 
 	/* set the CA file no matter what, since the remote provisioning could be hitting an HTTPS server */
 	const char* lRootCa = [[LinphoneManager bundleFile:@"rootca.pem"] cStringUsingEncoding:[NSString defaultCStringEncoding]];
@@ -1944,7 +1965,12 @@ static void audioRouteChangeListenerCallback (
 	LinphoneProxyConfig* proxyCfg;
 	//get default proxy
 	linphone_core_get_default_proxy(theLinphoneCore,&proxyCfg);
-	LinphoneCallParams* lcallParams = linphone_core_create_default_call_parameters(theLinphoneCore);
+//    LinphoneProxyConfig *proxyCfg = linphone_core_get_default_proxy_config(LC);
+
+    
+//	LinphoneCallParams* lcallParams = linphone_core_create_default_call_parameters(theLinphoneCore);
+    LinphoneCallParams *lcallParams = linphone_core_create_call_params(theLinphoneCore, NULL);
+
 	if([self lpConfigBoolForKey:@"edge_opt_preference"]) {
 		bool low_bandwidth = self.network == network_2g;
 		if(low_bandwidth) {
@@ -2146,7 +2172,7 @@ static void audioRouteChangeListenerCallback (
 	if (enabled) {
 		NSLog(@"Enabling debug logs");
 		linphone_core_enable_logs_with_cb((OrtpLogFunc)linphone_iphone_log_handler);
-		ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
+//		ortp_set_log_level_mask(ORTP_DEBUG|ORTP_MESSAGE|ORTP_WARNING|ORTP_ERROR|ORTP_FATAL);
 		linphone_core_enable_log_collection(enabled);
 	} else {
 		NSLog(@"Disabling debug logs");

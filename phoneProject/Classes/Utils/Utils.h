@@ -20,6 +20,11 @@
 #ifndef LINPHONE_UTILS_H
 #define LINPHONE_UTILS_H
 
+#define IPAD (LinphoneManager.runningOnIpad)
+#define ANIMATED ([LinphoneManager.instance lpConfigBoolForKey:@"animations_preference"])
+#define LC ([LinphoneManager getLc])
+
+
 #define DYNAMIC_CAST(x, cls)                        \
  ({                                                 \
     cls *inst_ = (cls *)(x);                        \

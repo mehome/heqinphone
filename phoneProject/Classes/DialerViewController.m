@@ -268,11 +268,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     if([LinphoneManager runningOnIpad]) {
         LinphoneCore* lc = [LinphoneManager getLc];
         if(linphone_core_video_enabled(lc) && linphone_core_video_preview_enabled(lc)) {
-            linphone_core_set_native_preview_window_id(lc, (unsigned long)videoPreview);
+            linphone_core_set_native_preview_window_id(lc, (__bridge void *)videoPreview);
             [backgroundView setHidden:FALSE];
             [videoCameraSwitch setHidden:FALSE];
         } else {
-            linphone_core_set_native_preview_window_id(lc, (unsigned long)NULL);
+            linphone_core_set_native_preview_window_id(lc, NULL);
             [backgroundView setHidden:TRUE];
             [videoCameraSwitch setHidden:TRUE];
         }
@@ -289,7 +289,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			[controller setToRecipients:recipients];
 
 			if( attachLogs ){
-				char * filepath = linphone_core_compress_log_collection([LinphoneManager getLc]);
+				char * filepath = linphone_core_compress_log_collection();
 				if (filepath == NULL) {
 					Linphone_err(@"Cannot sent logs: file is NULL");
 					return;

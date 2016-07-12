@@ -543,7 +543,9 @@
                 [self application:application didReceiveLocalNotification:notification];
             } else if( [identifier isEqualToString:@"mark_read"] ){
                 NSString* from = [notification.userInfo objectForKey:@"from_addr"];
-                LinphoneChatRoom* room = linphone_core_get_or_create_chat_room(lc, [from UTF8String]);
+//                LinphoneChatRoom* room = linphone_core_get_or_create_chat_room(lc, [from UTF8String]);
+                LinphoneChatRoom *room = linphone_core_get_chat_room_from_uri(LC, [from UTF8String]);
+
                 if( room ){
                     linphone_chat_room_mark_as_read(room);
                     [[PhoneMainView instance] updateApplicationBadgeNumber];

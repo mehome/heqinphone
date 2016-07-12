@@ -388,7 +388,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[PhoneMainView instance] changeCurrentView:[ChatViewController compositeViewDescription]];
     ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
     if(controller != nil) {
-        LinphoneChatRoom* room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], lAddress);
+//        LinphoneChatRoom* room = linphone_core_get_or_create_chat_room([LinphoneManager getLc], lAddress);
+                
+        LinphoneChatRoom *room = linphone_core_get_chat_room_from_uri(LC, lAddress);
+
         [controller setChatRoom:room];
     }
     ms_free(lAddress);
