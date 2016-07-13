@@ -4321,7 +4321,7 @@
 				LastUpgradeCheck = 0710;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = QZ5HTJ6XNT;
+						DevelopmentTeam = 9U5ZW6T67V;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -5790,7 +5790,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47032dcb-46ed-4c6d-9623-de16df6f2b76";
+				PROVISIONING_PROFILE = "6a252cbc-7e82-4054-9e0b-d2a66479d218";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				TARGET_NAME = linphoneDebug;

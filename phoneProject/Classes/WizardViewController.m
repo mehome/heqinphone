@@ -217,7 +217,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self resetTextFields];
 
     LinphoneProxyConfig* current_conf = NULL;
-    linphone_core_get_default_proxy([LinphoneManager getLc], &current_conf);
+    current_conf = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
+
     if( current_conf != NULL ){
         const char* proxy_addr = linphone_proxy_config_get_identity(current_conf);
         if( proxy_addr ){

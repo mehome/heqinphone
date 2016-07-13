@@ -1078,7 +1078,7 @@ extern NSString *const kLinphoneInCallCellData;
 + (bool)isInConference:(LinphoneCall*) call {
     if (!call)
         return false;
-    return linphone_call_is_in_conference(call);
+    return linphone_call_get_conference(call) != NULL;
 }
 
 
@@ -1087,15 +1087,15 @@ extern NSString *const kLinphoneInCallCellData;
     [self hideAllBottomBgView];
     
     // 然后执行不同的操作
-    if (linphone_core_is_mic_muted([LinphoneManager getLc]) == YES) {
+    if (linphone_core_mic_enabled([LinphoneManager getLc]) == YES) {
         // 当前静音，点击后，则取消静音
-        linphone_core_mute_mic([LinphoneManager getLc], false);
+        linphone_core_enable_mic([LinphoneManager getLc], false);
         
         [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
         [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
     }else {
         // 当前没有静音， 点击后，则进行静音
-        linphone_core_mute_mic([LinphoneManager getLc], true);
+        linphone_core_enable_mic([LinphoneManager getLc], true);
         
         [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
         [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
@@ -1198,7 +1198,10 @@ extern NSString *const kLinphoneInCallCellData;
     LinphoneCore* lc = [LinphoneManager getLc];
     
     if (!linphone_core_video_enabled(lc)) {
-        linphone_core_enable_video(lc, true, true);
+//        linphone_core_enable_video(lc, true, true);
+        
+        linphone_core_enable_video_capture(lc, true);
+        linphone_core_enable_video_display(lc, true);
     }
     
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
@@ -1257,13 +1260,13 @@ static BOOL systemOpenCamera = NO;
         // 设置当前的静音操作
         if ([LPSystemSetting sharedSetting].defaultSilence == YES) {
             // 要求静音
-            linphone_core_mute_mic([LinphoneManager getLc], true);
+            linphone_core_enable_mic([LinphoneManager getLc], true);
             
             [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
             [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
         }else {
             // 要求不静音
-            linphone_core_mute_mic([LinphoneManager getLc], false);
+            linphone_core_enable_mic([LinphoneManager getLc], false);
             
             [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
             [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];

@@ -90,7 +90,7 @@ enum TableSection {
 + (bool)isInConference:(LinphoneCall*) call {
     if (!call)
         return false;
-    return linphone_call_is_in_conference(call);
+    return linphone_call_get_conference(call) != NULL;
 }
 
 + (int)callCount:(LinphoneCore*) lc {

@@ -327,7 +327,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         linphone_chat_message_set_external_body_url(msg, [[externalUrl absoluteString] UTF8String]);
     }
 
-	linphone_chat_room_send_message2(chatRoom, msg, message_status, self);
+	linphone_chat_room_send_chat_message(chatRoom, msg);
 
     if ( internalUrl ) {
         // internal url is saved in the appdata for display and later save

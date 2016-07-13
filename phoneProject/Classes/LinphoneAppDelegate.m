@@ -234,7 +234,7 @@
     [[PhoneMainView instance] updateStatusBar:nil];
 
 
-	NSDictionary *remoteNotif =[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+	NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotif){
 		[LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification from launch received."];
 		[self processRemoteNotification:remoteNotif];

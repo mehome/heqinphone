@@ -87,7 +87,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	LinphoneCore *lc=[LinphoneManager getLc];
 	LinphoneProxyConfig *cfg=NULL;
 	LpConfig* conf = linphone_core_get_config(lc);
-	linphone_core_get_default_proxy(lc,&cfg);
+	cfg = linphone_core_get_default_proxy_config(lc);
 	if (cfg){
 		const char *identity=linphone_proxy_config_get_identity(cfg);
 		LinphoneAddress *addr=linphone_address_new(identity);
@@ -438,7 +438,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		route = isOutboundProxy? proxy : NULL;
 
 		//possible valid config detected, try to modify current proxy or create new one if none existing
-		linphone_core_get_default_proxy(lc, &proxyCfg);
+		proxyCfg = linphone_core_get_default_proxy_config(lc);
 		if( proxyCfg == NULL ){
 			proxyCfg = linphone_core_create_proxy_config(lc);
 		} else {
@@ -625,8 +625,10 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	lp_config_set_string(config, "app", "voice_mail_uri", [[self stringForKey:@"voice_mail_uri_preference"] UTF8String]);
 
 	bool enableVideo = [self boolForKey:@"enable_video_preference"];
-	linphone_core_enable_video(lc, enableVideo, enableVideo);
-
+//	linphone_core_enable_video(lc, enableVideo, enableVideo);
+    linphone_core_enable_video_capture(lc, enableVideo);
+    linphone_core_enable_video_display(lc, enableVideo);
+    
 	NSString *menc = [self stringForKey:@"media_encryption_preference"];
 	if (menc && [menc compare:@"SRTP"] == NSOrderedSame)
 		linphone_core_set_media_encryption(lc, LinphoneMediaEncryptionSRTP);

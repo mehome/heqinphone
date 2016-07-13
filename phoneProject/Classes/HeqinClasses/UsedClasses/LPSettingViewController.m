@@ -195,7 +195,9 @@
     LinphoneCore *lc=[LinphoneManager getLc];
     
     bool enableVideo = [LPSystemSetting sharedSetting].defaultNoVideo;
-    linphone_core_enable_video(lc, enableVideo, enableVideo);
+//    linphone_core_enable_video(lc, enableVideo, enableVideo);
+    linphone_core_enable_video_capture(lc, enableVideo);
+    linphone_core_enable_video_display(lc, enableVideo);
 
 }
 

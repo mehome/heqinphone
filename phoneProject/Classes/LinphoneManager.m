@@ -362,7 +362,7 @@ static int check_should_migrate_images(void* data ,int argc,char** argv,char** c
 	BOOL migrated = FALSE;
 	char* attach_stmt = NULL;
 
-	linphone_core_get_default_proxy(lc, &default_proxy);
+    default_proxy = linphone_core_get_default_proxy_config(lc);
 
 
 	if( sqlite3_open([newDbPath UTF8String], &newDb) != SQLITE_OK) {
@@ -1149,7 +1149,7 @@ void networkReachabilityCallBack(SCNetworkReachabilityRef target, SCNetworkReach
 
 	if (theLinphoneCore != nil) {
 		LinphoneProxyConfig* proxy;
-		linphone_core_get_default_proxy(theLinphoneCore, &proxy);
+        proxy = linphone_core_get_default_proxy_config(theLinphoneCore);
 
 		struct NetworkReachabilityContext* ctx = nilCtx ? ((struct NetworkReachabilityContext*)nilCtx) : 0;
 		if ((flags == 0) || (flags & networkDownFlags)) {
@@ -1428,7 +1428,10 @@ static LinphoneCoreVTable linphonec_vtable = {
 			linphone_core_enable_payload_type(theLinphoneCore,pt,FALSE);
 			[LinphoneLogger logc:LinphoneLoggerWarning format:"SILK/24000 and video disabled on old iPhone 3G"];
 		}
-		linphone_core_enable_video(theLinphoneCore, FALSE, FALSE);
+//		linphone_core_enable_video(theLinphoneCore, FALSE, FALSE);
+        linphone_core_enable_video_capture(theLinphoneCore, FALSE);
+        linphone_core_enable_video_display(theLinphoneCore, FALSE);
+
 	}
 
 	[LinphoneLogger logc:LinphoneLoggerWarning format:"Linphone [%s]  started on [%s]", linphone_core_get_version(), [[UIDevice currentDevice].model cStringUsingEncoding:[NSString defaultCStringEncoding]]];
@@ -1680,7 +1683,8 @@ static int comp_call_state_paused  (const LinphoneCall* call, const void* param)
 }
 - (BOOL)enterBackgroundMode {
 	LinphoneProxyConfig* proxyCfg;
-	linphone_core_get_default_proxy(theLinphoneCore, &proxyCfg);
+    proxyCfg = linphone_core_get_default_proxy_config(theLinphoneCore);
+
 	BOOL shouldEnterBgMode=FALSE;
 
 	//handle proxy config if any
@@ -1963,8 +1967,8 @@ static void audioRouteChangeListenerCallback (
 	[callCenter release];
 
 	LinphoneProxyConfig* proxyCfg;
-	//get default proxy
-	linphone_core_get_default_proxy(theLinphoneCore,&proxyCfg);
+    proxyCfg = linphone_core_get_default_proxy_config(theLinphoneCore);
+
 //    LinphoneProxyConfig *proxyCfg = linphone_core_get_default_proxy_config(LC);
 
     
@@ -2050,8 +2054,8 @@ static void audioRouteChangeListenerCallback (
     if(apushNotificationToken != nil) {
         pushNotificationToken = [apushNotificationToken retain];
     }
-    LinphoneProxyConfig *cfg=nil;
-    linphone_core_get_default_proxy(theLinphoneCore, &cfg);
+    LinphoneProxyConfig *cfg = linphone_core_get_default_proxy_config(theLinphoneCore);
+
     if (cfg ) {
         linphone_proxy_config_edit(cfg);
         [self configurePushTokenForProxyConfig: cfg];
@@ -2318,7 +2322,8 @@ static void audioRouteChangeListenerCallback (
 	NSString* filter=@"*";
 	if ( [self lpConfigBoolForKey:@"contact_filter_on_default_domain"]) {
 		LinphoneProxyConfig* proxy_cfg;
-		linphone_core_get_default_proxy(theLinphoneCore, &proxy_cfg);
+        proxy_cfg = linphone_core_get_default_proxy_config(theLinphoneCore);
+
 		if (proxy_cfg && linphone_proxy_config_get_addr(proxy_cfg)) {
 			return [NSString stringWithCString:linphone_proxy_config_get_domain(proxy_cfg)
 									  encoding:[NSString defaultCStringEncoding]];

@@ -155,7 +155,7 @@
 
 - (void)registrationUpdate: (NSNotification*) notif {
     LinphoneProxyConfig* config = NULL;
-    linphone_core_get_default_proxy([LinphoneManager getLc], &config);
+    config = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
     [self proxyConfigUpdate:config];
 }
 

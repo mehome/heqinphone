@@ -80,7 +80,7 @@
                 const char*  domain = linphone_address_get_domain(to);
                 char*   bis_address = NULL;
 
-                linphone_core_get_default_proxy([LinphoneManager getLc], &def_proxy);
+                def_proxy = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
 
                 // if the 'to' address is on the default proxy, only present the username
                 if( def_proxy ){

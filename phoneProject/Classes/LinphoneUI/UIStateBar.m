@@ -109,7 +109,8 @@ int messagesUnreadCount;
 
     // Update to default state
     LinphoneProxyConfig* config = NULL;
-    linphone_core_get_default_proxy([LinphoneManager getLc], &config);
+    config = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
+
     messagesUnreadCount = lp_config_get_int(linphone_core_get_config([LinphoneManager getLc]), "app", "voice_mail_messages_count", 0);
 
     [self proxyConfigUpdate: config];
@@ -149,7 +150,8 @@ int messagesUnreadCount;
 
 - (void)registrationUpdate: (NSNotification*) notif {
 	LinphoneProxyConfig* config = NULL;
-	linphone_core_get_default_proxy([LinphoneManager getLc], &config);
+    config = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
+
 	[self proxyConfigUpdate:config];
 }
 

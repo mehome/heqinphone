@@ -335,7 +335,9 @@ static RootViewManager* rootViewManagerInstance = nil;
     static BOOL already_shown = FALSE;
     if( state == LinphoneGlobalOn && !already_shown && [LinphoneManager instance].wasRemoteProvisioned ){
         LinphoneProxyConfig* conf = NULL;
-        linphone_core_get_default_proxy([LinphoneManager getLc], &conf);
+        conf = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
+
+        
         if( [[LinphoneManager instance] lpConfigBoolForKey:@"show_login_view" forSection:@"app"] && conf == NULL){
             already_shown = TRUE;
             WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
@@ -663,7 +665,8 @@ static RootViewManager* rootViewManagerInstance = nil;
     
     //get default proxy
     LinphoneProxyConfig* proxyCfg;	
-    linphone_core_get_default_proxy([LinphoneManager getLc],&proxyCfg);
+    proxyCfg = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
+
     if (proxyCfg == nil) {
         lMessage = NSLocalizedString(@"Please make sure your device is connected to the internet and double check your SIP account configuration in the settings.", nil);
     } else {
