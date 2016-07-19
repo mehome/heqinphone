@@ -73,7 +73,7 @@
 
 - (void)cancel {
     [connection cancel];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"File transfer interrupted by user"];
+    LOGI(@"File transfer interrupted by user");
     if(delegate) {
         [delegate imageSharingAborted:self];
     }
@@ -81,7 +81,7 @@
 
 
 - (void)downloadImageFrom:(NSURL*)url {
-	[LinphoneLogger log:LinphoneLoggerLog format:@"downloading [%@]", [url absoluteString]];
+	LOGI(@"downloading [%@]", [url absoluteString]);
     
 	NSURLRequest* request = [NSURLRequest requestWithURL:url
 											 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -92,7 +92,7 @@
 
 
 - (void)uploadImageTo:(NSURL*)url image:(UIImage*)image {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"downloading [%@]", [url absoluteString]];
+    LOGI(@"downloading [%@]", [url absoluteString]);
 	
 	// setting up the request object now
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
@@ -152,7 +152,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
 	statusCode = httpResponse.statusCode;
-	[LinphoneLogger log:LinphoneLoggerLog format:@"File transfer status code [%i]", statusCode];
+	LOGI(@"File transfer status code [%i]", statusCode);
     
     if (statusCode == 200 && !upload) {
         totalBytesExpectedToRead = (int)[response expectedContentLength];
@@ -169,14 +169,14 @@
     }
 	if (upload) {
         NSString* imageRemoteUrl = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        [LinphoneLogger log:LinphoneLoggerLog format:@"File can be downloaded from [%@]", imageRemoteUrl];
+        LOGI(@"File can be downloaded from [%@]", imageRemoteUrl);
         if(delegate) {
             [delegate imageSharingUploadDone:self url:[NSURL URLWithString:imageRemoteUrl]];
         }
         [imageRemoteUrl release];
 	} else {
 		UIImage* image = [UIImage imageWithData:data];
-        [LinphoneLogger log:LinphoneLoggerLog format:@"File downloaded"];
+        LOGI(@"File downloaded");
         if(delegate) {
             [delegate imageSharingDownloadDone:self image:image];
         }

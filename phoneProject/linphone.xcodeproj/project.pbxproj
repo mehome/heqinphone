@@ -14,6 +14,9 @@
 		131F32A51C5DBA8600D44F25 /* phoneNum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 131F32A41C5DBA8600D44F25 /* phoneNum@2x.png */; };
 		1343441F1C4E8E99006A6C9B /* joiner_guest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1343441D1C4E8E99006A6C9B /* joiner_guest@2x.png */; };
 		134344201C4E8E99006A6C9B /* joiner_host@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1343441E1C4E8E99006A6C9B /* joiner_host@2x.png */; };
+		134565C51D3CEDDF0046D580 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 134565C41D3CEDDF0046D580 /* Log.m */; };
+		134565C81D3CF2780046D580 /* UILabel+Boldify.m in Sources */ = {isa = PBXBuildFile; fileRef = 134565C71D3CF2780046D580 /* UILabel+Boldify.m */; };
+		134565CB1D3CF2D40046D580 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 134565CA1D3CF2D40046D580 /* Contact.m */; };
 		134D2D2D1C3E774800D6FB99 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D031C3E774800D6FB99 /* MJRefreshAutoFooter.m */; };
 		134D2D2E1C3E774800D6FB99 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D051C3E774800D6FB99 /* MJRefreshBackFooter.m */; };
 		134D2D2F1C3E774800D6FB99 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D2D071C3E774800D6FB99 /* MJRefreshComponent.m */; };
@@ -710,7 +713,7 @@
 		D3E84F3815B011AF00420DAC /* contact_cancel_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E84F3615B011AF00420DAC /* contact_cancel_default.png */; };
 		D3E84F3A15B011AF00420DAC /* contact_cancel_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E84F3715B011AF00420DAC /* contact_cancel_over.png */; };
 		D3E8F68615ADE05B0065A226 /* UIContactDetailsFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E8F68415ADE0580065A226 /* UIContactDetailsFooter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D3EA53FD159850E80037DC6B /* LinphoneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA53FC159850E80037DC6B /* LinphoneManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D3EA53FD159850E80037DC6B /* LinphoneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EA53FC159850E80037DC6B /* LinphoneManager.m */; };
 		D3EA5403159852080037DC6B /* chat_edit_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EA53FF159852080037DC6B /* chat_edit_default.png */; };
 		D3EA5405159852080037DC6B /* chat_edit_over.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EA5400159852080037DC6B /* chat_edit_over.png */; };
 		D3EA5407159852080037DC6B /* chat_add_default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EA5401159852080037DC6B /* chat_add_default.png */; };
@@ -1024,6 +1027,12 @@
 		131F32A41C5DBA8600D44F25 /* phoneNum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "phoneNum@2x.png"; path = "Resources/phoneNum@2x.png"; sourceTree = "<group>"; };
 		1343441D1C4E8E99006A6C9B /* joiner_guest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joiner_guest@2x.png"; path = "Resources/joiner_guest@2x.png"; sourceTree = "<group>"; };
 		1343441E1C4E8E99006A6C9B /* joiner_host@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joiner_host@2x.png"; path = "Resources/joiner_host@2x.png"; sourceTree = "<group>"; };
+		134565C31D3CEDDF0046D580 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Log.h; path = Utils/Log.h; sourceTree = "<group>"; };
+		134565C41D3CEDDF0046D580 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Log.m; path = Utils/Log.m; sourceTree = "<group>"; };
+		134565C61D3CF2780046D580 /* UILabel+Boldify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Boldify.h"; sourceTree = "<group>"; };
+		134565C71D3CF2780046D580 /* UILabel+Boldify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Boldify.m"; sourceTree = "<group>"; };
+		134565C91D3CF2D40046D580 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		134565CA1D3CF2D40046D580 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		134D2D021C3E774800D6FB99 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		134D2D031C3E774800D6FB99 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		134D2D041C3E774800D6FB99 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -3252,6 +3261,8 @@
 		2214EB7012F84668002A5394 /* LinphoneUI */ = {
 			isa = PBXGroup;
 			children = (
+				134565C61D3CF2780046D580 /* UILabel+Boldify.h */,
+				134565C71D3CF2780046D580 /* UILabel+Boldify.m */,
 				D35E757F159328EA0066B1C1 /* UIAddressTextField.h */,
 				D35E7580159328EB0066B1C1 /* UIAddressTextField.m */,
 				22C7555E1317E59C007BC101 /* UIBluetoothButton.h */,
@@ -3492,6 +3503,10 @@
 		D326483415887D4400930C67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				134565C91D3CF2D40046D580 /* Contact.h */,
+				134565CA1D3CF2D40046D580 /* Contact.m */,
+				134565C31D3CEDDF0046D580 /* Log.h */,
+				134565C41D3CEDDF0046D580 /* Log.m */,
 				D37E3ECA1619C27A0087659A /* CAAnimationBlocks */,
 				D380801215C299D0005BE9BC /* ColorSpaceUtilites.m */,
 				D380801115C29984005BE9BC /* ColorSpaceUtilities.h */,
@@ -5091,6 +5106,7 @@
 				34216F401547EBCD00EA9777 /* VideoZoomHandler.m in Sources */,
 				E140A6C51C10A448000E7DD0 /* RDRMyMeetingArrangeRoomResponseModel.m in Sources */,
 				13E33E311BF0CC9600AA3E64 /* MBProgressHUD.m in Sources */,
+				134565C51D3CEDDF0046D580 /* Log.m in Sources */,
 				13066CDF1BF9F6F000A193BF /* LPCellJoinManageTableViewCell.m in Sources */,
 				E140A6C21C10A3A9000E7DD0 /* RDRMyMeetingArrangeRoomsModel.m in Sources */,
 				138950821BECA38D003DD7A0 /* UIWebView+AFNetworking.m in Sources */,
@@ -5112,6 +5128,7 @@
 				D35498211587716B000081D8 /* UIStateBar.m in Sources */,
 				E1128AF21C25648E009DC298 /* RDRTerminalRequestModel.m in Sources */,
 				D3A55FBC15877E5E003FD403 /* UIContactCell.m in Sources */,
+				134565C81D3CF2780046D580 /* UILabel+Boldify.m in Sources */,
 				D326483815887D5200930C67 /* OrderedDictionary.m in Sources */,
 				E1488C691D072A31008249F7 /* RDRMeetingLayoutRequestModel.m in Sources */,
 				E10DE74A1BFA3229002D0FBB /* LPMyManageSingleViewController.m in Sources */,
@@ -5191,6 +5208,7 @@
 				E1488C661D07253F008249F7 /* RadioButton.m in Sources */,
 				D350F20E15A43BB100149E54 /* WizardViewController.m in Sources */,
 				D3F795D615A582810077328B /* ChatRoomViewController.m in Sources */,
+				134565CB1D3CF2D40046D580 /* Contact.m in Sources */,
 				138950F11BECA576003DD7A0 /* FMDatabaseQueue.m in Sources */,
 				138950FF1BECA576003DD7A0 /* NSError+MTLModelException.m in Sources */,
 				E10DE7401BFA2C5E002D0FBB /* LPInMeetingParticipatorViewController.m in Sources */,
@@ -5744,8 +5762,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				APP_BUNDLE_ID = com.heqin.testused;
-				APP_DISPLAY_NAME = "测试";
+				APP_BUNDLE_ID = com.heqin.testipv6;
+				APP_DISPLAY_NAME = "测试ipv6";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -5790,7 +5808,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a252cbc-7e82-4054-9e0b-d2a66479d218";
+				PROVISIONING_PROFILE = "47032dcb-46ed-4c6d-9623-de16df6f2b76";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				TARGET_NAME = linphoneDebug;

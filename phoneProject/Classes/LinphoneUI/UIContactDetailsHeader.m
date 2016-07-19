@@ -119,7 +119,7 @@
 
 - (void)update {
     if(contact == NULL) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update contact details header: null contact"];
+        LOGW(@"Cannot update contact details header: null contact");
         return;
     }
     
@@ -287,7 +287,7 @@
             [sheet addDestructiveButtonWithTitle:NSLocalizedString(@"Remove", nil) block:^(){
                 NSError* error = NULL;
                 if(!ABPersonRemoveImageData(contact, (CFErrorRef*)error)) {
-                    [LinphoneLogger log:LinphoneLoggerLog format:@"Can't remove entry: %@", [error localizedDescription]];
+                    LOGI(@"Can't remove entry: %@", [error localizedDescription]);
                 }
                 [self update];
             }];
@@ -316,7 +316,7 @@
 	FastAddressBook* fab = [LinphoneManager instance].fastAddressBook;
     NSError* error = NULL;
     if(!ABPersonRemoveImageData(contact, (CFErrorRef*)error)) {
-        [LinphoneLogger log:LinphoneLoggerLog format:@"Can't remove entry: %@", [error localizedDescription]];
+        LOGI(@"Can't remove entry: %@", [error localizedDescription]);
     }
     NSData *dataRef = UIImageJPEGRepresentation(image, 0.9f);
     CFDataRef cfdata = CFDataCreate(NULL,[dataRef bytes], [dataRef length]);
@@ -324,7 +324,7 @@
 	[fab saveAddressBook];
 
 	if(!ABPersonSetImageData(contact, cfdata, (CFErrorRef*)error)) {
-		[LinphoneLogger log:LinphoneLoggerLog format:@"Can't add entry: %@", [error localizedDescription]];
+		LOGI(@"Can't add entry: %@", [error localizedDescription]);
 	} else {
 		[fab saveAddressBook];
 	}
@@ -370,10 +370,10 @@
         NSError* error = NULL;
         ABRecordSetValue(contact, property, [textField text], (CFErrorRef*)&error);
         if (error != NULL) {
-            [LinphoneLogger log:LinphoneLoggerError format:@"Error when saving property %i in contact %p: Fail(%@)", property, contact, [error localizedDescription]];
+            LOGE(@"Error when saving property %i in contact %p: Fail(%@)", property, contact, [error localizedDescription]);
         } 
     } else {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Not valid UIEditableTableViewCell"];
+        LOGW(@"Not valid UIEditableTableViewCell");
     }
     if(contactDetailsDelegate != nil) {
 		//add a mini delay to have the text updated BEFORE notifying the selector

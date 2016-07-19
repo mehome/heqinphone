@@ -19,6 +19,7 @@
 
 #import "UICamSwitch.h"
 #include "LinphoneManager.h"
+#import "Utils.h"
 
 @implementation UICamSwitch
 @synthesize preview;
@@ -26,68 +27,35 @@
 
 #pragma mark - Lifecycle Functions
 
-- (id)initUICamSwitch {
-	[self addTarget:self action:@selector(touchUp:) forControlEvents:UIControlEventTouchUpInside];
-	return self;
-}
-
-- (id)init {
-    self = [super init];
-    if (self) {
-		[self initUICamSwitch];
-    }
+INIT_WITH_COMMON_CF {
+    [self addTarget:self action:@selector(touchUp:) forControlEvents:UIControlEventTouchUpInside];
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame {
+#pragma mark -
+
+- (void)touchUp:(id)sender {
+    const char *currentCamId = (char *)linphone_core_get_video_device(LC);
+    const char **cameras = linphone_core_get_video_devices(LC);
+    const char *newCamId = NULL;
+    int i;
     
-    self = [super initWithFrame:frame];
-    if (self) {
-		[self initUICamSwitch];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-    self = [super initWithCoder:decoder];
-    if (self) {
-		[self initUICamSwitch];
-	}
-    return self;
-}	
-
-
-- (void)dealloc {
-    [preview release];
-
-    [super dealloc];
-}
-
-
-#pragma mark - 
-
--(void) touchUp:(id) sender {
-	const char *currentCamId = (char*)linphone_core_get_video_device([LinphoneManager getLc]);
-	const char **cameras=linphone_core_get_video_devices([LinphoneManager getLc]);
-	const char *newCamId=NULL;
-	int i;
-	
-	for (i=0;cameras[i]!=NULL;++i){
-		if (strcmp(cameras[i],"StaticImage: Static picture")==0) continue;
-		if (strcmp(cameras[i],currentCamId)!=0){
-			newCamId=cameras[i];
-			break;
-		}
-	}
-	if (newCamId){
-		[LinphoneLogger logc:LinphoneLoggerLog format:"Switching from [%s] to [%s]", currentCamId, newCamId];
-		linphone_core_set_video_device([LinphoneManager getLc], newCamId);
-		LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
-        if(call != NULL) {
-            linphone_core_update_call([LinphoneManager getLc], call, NULL);
+    for (i = 0; cameras[i] != NULL; ++i) {
+        if (strcmp(cameras[i], "StaticImage: Static picture") == 0)
+            continue;
+        if (strcmp(cameras[i], currentCamId) != 0) {
+            newCamId = cameras[i];
+            break;
         }
-		
-	}
+    }
+    if (newCamId) {
+        LOGI(@"Switching from [%s] to [%s]", currentCamId, newCamId);
+        linphone_core_set_video_device(LC, newCamId);
+        LinphoneCall *call = linphone_core_get_current_call(LC);
+        if (call != NULL) {
+            linphone_core_update_call(LC, call, NULL);
+        }
+    }
 }
 
 @end

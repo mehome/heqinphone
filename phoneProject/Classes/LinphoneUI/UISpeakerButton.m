@@ -29,57 +29,29 @@
 
 #pragma mark - Static Functions
 
-static void audioRouteChangeListenerCallback (
-                                       void                   *inUserData,                                 // 1
-                                       AudioSessionPropertyID inPropertyID,                                // 2
-                                       UInt32                 inPropertyValueSize,                         // 3
-                                       const void             *inPropertyValue                             // 4
-                                       ) {
-    if (inPropertyID != kAudioSessionProperty_AudioRouteChange) return; // 5
-    UISpeakerButton* button = (UISpeakerButton*)inUserData;
-    [button update];
-}
-
-- (void)initUISpeakerButton {
-    AudioSessionInitialize(NULL, NULL, NULL, NULL);
-    OSStatus lStatus = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, self);
-    if (lStatus) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"cannot register route change handler [%ld]",lStatus];
-    }
-}
-
-- (id)init {
-    self = [super init];
-    if (self) {
-		[self initUISpeakerButton];
-    }
+INIT_WITH_COMMON_CF {
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(audioRouteChangeListenerCallback:)
+                                               name:AVAudioSessionRouteChangeNotification
+                                             object:nil];
     return self;
 }
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-		[self initUISpeakerButton];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-    self = [super initWithCoder:decoder];
-    if (self) {
-		[self initUISpeakerButton];
-	}
-    return self;
-}	
 
 - (void)dealloc {
-    OSStatus lStatus = AudioSessionRemovePropertyListenerWithUserData(kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, self);
-	if (lStatus) {
-		[LinphoneLogger logc:LinphoneLoggerError format:"cannot un register route change handler [%ld]", lStatus];
-	}
-	[super dealloc];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
+#pragma mark - UIToggleButtonDelegate Functions
+
+- (void)audioRouteChangeListenerCallback:(NSNotification *)notif {
+#pragma deploymate push "ignored-api-availability"
+    if (UIDevice.currentDevice.systemVersion.doubleValue < 7 ||
+        [[notif.userInfo valueForKey:AVAudioSessionRouteChangeReasonKey] integerValue] ==
+        AVAudioSessionRouteChangeReasonRouteConfigurationChange) {
+        [self update];
+    }
+#pragma deploymate pop
+}
 
 #pragma mark - UIToggleButtonDelegate Functions
 

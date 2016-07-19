@@ -20,6 +20,7 @@
 #import "UIDigitButtonLongVoiceMail.h"
 #import "Utils.h"
 #include "LinphoneManager.h"
+#import "LPSystemUser.h"
 
 @implementation UIDigitButtonLongVoiceMail
 
@@ -31,7 +32,18 @@
 - (void)onLongTouch {
 	if ([self voiceMailEnabled]) {
 		LinphoneManager *lm = [LinphoneManager instance];
-		[lm call:[lm lpConfigStringForKey:@"voice_mail_uri"] displayName:NSLocalizedString(@"Voice mail",nil) transfer:FALSE];
+//		[lm call:[lm lpConfigStringForKey:@"voice_mail_uri"] displayName:NSLocalizedString(@"Voice mail",nil) transfer:FALSE];
+
+        NSString *callStr = [lm lpConfigStringForKey:@"voice_mail_uri"];
+        
+        [LPSystemUser sharedUser].curMeetingAddr = callStr;
+
+        if (callStr.length > 0) {
+            LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:callStr];
+            [LinphoneManager.instance call:addr];
+            if (addr)
+                linphone_address_destroy(addr);
+        }
 	}
 }
 

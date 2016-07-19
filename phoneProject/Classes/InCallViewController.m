@@ -406,7 +406,7 @@ static void hideSpinner(LinphoneCall* call, void* user_data) {
     DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:title] autorelease];
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(dismissVideoActionSheet:) userInfo:sheet repeats:NO];
     [sheet addButtonWithTitle:NSLocalizedString(@"Accept", nil)  block:^() {
-        [LinphoneLogger logc:LinphoneLoggerLog format:"User accept video proposal"];
+        LOGI(@"User accept video proposal");
         LinphoneCallParams* paramsCopy = linphone_call_params_copy(linphone_call_get_current_params(call));
         linphone_call_params_enable_video(paramsCopy, TRUE);
         linphone_core_accept_call_update([LinphoneManager getLc], call, paramsCopy);
@@ -414,7 +414,7 @@ static void hideSpinner(LinphoneCall* call, void* user_data) {
         [timer invalidate];
     }];
     DTActionSheetBlock cancelBlock = ^() {
-        [LinphoneLogger logc:LinphoneLoggerLog format:"User declined video proposal"];
+        LOGI(@"User declined video proposal");
         LinphoneCallParams* paramsCopy = linphone_call_params_copy(linphone_call_get_current_params(call));
         linphone_core_accept_call_update([LinphoneManager getLc], call, paramsCopy);
         linphone_call_params_destroy(paramsCopy);

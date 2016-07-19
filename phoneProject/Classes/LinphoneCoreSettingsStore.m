@@ -20,10 +20,10 @@
 #import "LinphoneCoreSettingsStore.h"
 
 #include "linphone/lpconfig.h"
+#include "linphone/linphone_tunnel.h"
 #import "LPSystemUser.h"
 #import "LPSystemSetting.h"
-
-extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
+#import "Utils.h"
 
 @implementation LinphoneCoreSettingsStore
 
@@ -77,8 +77,8 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			bool_t value = linphone_core_payload_type_enabled(lc,pt);
 			[self setBool:value  forKey: pref];
 		}else{
-			[LinphoneLogger logc:LinphoneLoggerWarning format:"Codec %s/%i supported by core is not shown in iOS app config view.",
-					   pt->mime_type,pt->clock_rate];
+			LOGW(@"Codec %s/%i supported by core is not shown in iOS app config view.",
+					   pt->mime_type,pt->clock_rate);
 		}
 	}
 }
@@ -371,7 +371,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 
 	// will also update the sip_*_port section of the config
 	if (linphone_core_set_sip_transports(lc, &transportValue)) {
-		[LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
+		LOGE(@"cannot set transport");
 	}
 
 	port_preference = linphone_core_get_sip_port(lc);
@@ -381,7 +381,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 	BOOL enable_ipv6 = [self boolForKey:@"use_ipv6"];
 	lp_config_set_int(conf, "sip", "use_ipv6", enable_ipv6);
 	if( linphone_core_ipv6_enabled(lc) != enable_ipv6){
-		[LinphoneLogger logc:LinphoneLoggerDebug format:"%@ IPV6", enable_ipv6?@"ENABLING":@"DISABLING"];
+        LOGD(@"%@ IPV6", enable_ipv6?@"ENABLING":@"DISABLING");
 		linphone_core_enable_ipv6(lc, enable_ipv6);
 	}
 
@@ -748,9 +748,9 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 
 	BOOL debugmode = [self boolForKey:@"debugenable_preference"];
 	lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "debugenable_preference", debugmode);
-	[[LinphoneManager instance] setLogsEnabled:debugmode];
-	
-	BOOL animations = [self boolForKey:@"animations_preference"];
+//	[[LinphoneManager instance] setLogsEnabled:debugmode];
+
+    BOOL animations = [self boolForKey:@"animations_preference"];
 	lp_config_set_int(config, LINPHONERC_APPLICATION_KEY, "animations_preference", animations);
 
 	BOOL wifiOnly = [self boolForKey:@"wifi_only_preference"];
@@ -769,7 +769,7 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 		NSString* lTunnelPrefAddress = [self stringForKey:@"tunnel_address_preference"];
 		int lTunnelPrefPort = [self integerForKey:@"tunnel_port_preference"];
 		LinphoneTunnel *tunnel = linphone_core_get_tunnel([LinphoneManager getLc]);
-		TunnelMode mode = tunnel_off;
+		LinphoneTunnelMode mode = LinphoneTunnelModeDisable;
 		int lTunnelPort = 443;
 		if (lTunnelPrefPort) {
 			lTunnelPort = lTunnelPrefPort;
@@ -782,21 +782,20 @@ extern void linphone_iphone_log_handler(int lev, const char *fmt, va_list args);
 			linphone_tunnel_config_set_port(ltc, lTunnelPort);
 			linphone_tunnel_add_server(tunnel, ltc);
 
-			if ([lTunnelPrefMode isEqualToString:@"off"]) {
-				mode = tunnel_off;
-			} else if ([lTunnelPrefMode isEqualToString:@"on"]) {
-				mode = tunnel_on;
-			} else if ([lTunnelPrefMode isEqualToString:@"wwan"]) {
-				mode = tunnel_wwan;
-			} else if ([lTunnelPrefMode isEqualToString:@"auto"]) {
-				mode = tunnel_auto;
-			} else {
-				[LinphoneLogger logc:LinphoneLoggerError format:"Unexpected tunnel mode [%s]",[lTunnelPrefMode cStringUsingEncoding:[NSString defaultCStringEncoding]]];
-			}
+            if ([lTunnelPrefMode isEqualToString:@"off"]) {
+                mode = LinphoneTunnelModeDisable;
+            } else if ([lTunnelPrefMode isEqualToString:@"on"]) {
+                mode = LinphoneTunnelModeEnable;
+            } else if ([lTunnelPrefMode isEqualToString:@"auto"]) {
+                mode = LinphoneTunnelModeAuto;
+            } else {
+                LOGE(@"Unexpected tunnel mode [%s]", [lTunnelPrefMode UTF8String]);
+            }
 		}
+        
+        [[LinphoneManager instance] lpConfigSetString:lTunnelPrefMode forKey:@"tunnel_mode_preference"];
+        linphone_tunnel_set_mode(tunnel, mode);
 
-		lp_config_set_string(linphone_core_get_config(lc), LINPHONERC_APPLICATION_KEY, "tunnel_mode_preference", [lTunnelPrefMode UTF8String]);
-		[[LinphoneManager instance] setTunnelMode:mode];
 	}
 
 	[changedDict release];

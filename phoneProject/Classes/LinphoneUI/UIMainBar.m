@@ -20,6 +20,7 @@
 #import "UIMainBar.h"
 #import "PhoneMainView.h"
 #import "CAAnimation+Blocks.h"
+#import "LinphoneManager.h"
 
 @implementation UIMainBar
 

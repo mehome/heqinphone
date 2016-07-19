@@ -18,6 +18,8 @@
  */ 
 #import "UITransferButton.h"
 #import "LinphoneManager.h"
+#import "Utils.h"
+#import "LPSystemUser.h"
 
 #import <CoreTelephony/CTCallCenter.h>
 
@@ -65,7 +67,15 @@
 #pragma mark -
 
 - (void)touchUp:(id) sender {
-    [[LinphoneManager instance] call:[addressField text] displayName:nil transfer:TRUE];
+    NSString *address = [addressField text];
+    [LPSystemUser sharedUser].curMeetingAddr = address;
+    
+    if ([address length] > 0) {
+        LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:address];
+        [LinphoneManager.instance call:addr];
+        if (addr)
+            linphone_address_destroy(addr);
+    }
 }
 
 @end

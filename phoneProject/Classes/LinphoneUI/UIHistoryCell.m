@@ -108,7 +108,7 @@
 
 - (void)update {
     if(callLog == NULL) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update history cell: null callLog"];
+        LOGW(@"Cannot update history cell: null callLog");
         return;
     }
     

@@ -19,12 +19,14 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
+#include "Contact.h"
 
-@interface FastAddressBook :  NSObject {
-    NSMutableDictionary* addressBookMap;  
-    
+@interface FastAddressBook :  NSObject {    
     ABAddressBookRef addressBook;
 }
+
+@property(readonly, nonatomic) NSMutableDictionary *addressBookMap;
+
 
 + (BOOL)isSipURI:(NSString*)address;
 + (NSString*)getContactDisplayName:(ABRecordRef)contact;
@@ -36,5 +38,9 @@
 + (NSString*)appendCountryCodeIfPossible:(NSString*)number;
 + (NSString*)normalizePhoneNumber:(NSString*)number;
 + (NSString*)normalizeSipURI:(NSString*)address;
++ (NSString *)displayNameForAddress:(const LinphoneAddress *)addr;
++ (NSString *)localizedLabel:(NSString *)label;
++ (Contact *)getContactWithAddress:(const LinphoneAddress *)address;
++ (NSString *)displayNameForContact:(Contact *)contact;
 
 @end

@@ -20,6 +20,7 @@
 #import "UIDigitButton.h"
 #include "linphone/linphonecore.h"
 #import "LinphoneManager.h"
+#import "Utils.h"
 
 @implementation UIDigitButton
 

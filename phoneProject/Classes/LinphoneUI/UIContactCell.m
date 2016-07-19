@@ -76,7 +76,7 @@
 
 - (void)update {
     if(contact == NULL) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update contact cell: null contact"];
+        LOGW(@"Cannot update contact cell: null contact");
         return;
     }
     

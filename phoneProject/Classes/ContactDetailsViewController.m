@@ -65,7 +65,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         return;
     }
     
-    [LinphoneLogger logc:LinphoneLoggerLog format:"Reset data to contact %p", contact];
+    LOGI(@"Reset data to contact %p", contact);
     ABRecordID recordID = ABRecordGetRecordID(contact);
     ABAddressBookRevert(addressBook);
     contact = ABAddressBookGetPersonWithRecordID(addressBook, recordID);
@@ -94,9 +94,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         NSError* error = NULL;
         ABAddressBookRemoveRecord(addressBook, contact, (CFErrorRef*)&error);
         if (error != NULL) {
-            [LinphoneLogger log:LinphoneLoggerError format:@"Remove contact %p: Fail(%@)", contact, [error localizedDescription]];
+            LOGE(@"Remove contact %p: Fail(%@)", contact, [error localizedDescription]);
         } else {
-            [LinphoneLogger logc:LinphoneLoggerLog format:"Remove contact %p: Success!", contact];
+            LOGI(@"Remove contact %p: Success!", contact);
         }
         contact = NULL;
         
@@ -106,9 +106,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         ABAddressBookSave(addressBook, (CFErrorRef*)&error);
         inhibUpdate = FALSE;
         if (error != NULL) {
-            [LinphoneLogger log:LinphoneLoggerError format:@"Save AddressBook: Fail(%@)", [error localizedDescription]];
+            LOGE(@"Save AddressBook: Fail(%@)", [error localizedDescription]);
         } else {
-            [LinphoneLogger logc:LinphoneLoggerLog format:"Save AddressBook: Success!"];
+            LOGI(@"Save AddressBook: Success!");
         }
 		[[LinphoneManager instance].fastAddressBook reload];
     }
@@ -125,9 +125,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     if(ABRecordGetRecordID(contact) == kABRecordInvalidID) {
         ABAddressBookAddRecord(addressBook, contact, (CFErrorRef*)&error);
         if (error != NULL) {
-            [LinphoneLogger log:LinphoneLoggerError format:@"Add contact %p: Fail(%@)", contact, [error localizedDescription]];
+            LOGE(@"Add contact %p: Fail(%@)", contact, [error localizedDescription]);
         } else {
-            [LinphoneLogger logc:LinphoneLoggerLog format:"Add contact %p: Success!", contact];
+            LOGI(@"Add contact %p: Success!", contact);
         }
     }
     
@@ -137,9 +137,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     ABAddressBookSave(addressBook, (CFErrorRef*)&error);
     inhibUpdate = FALSE;
     if (error != NULL) {
-        [LinphoneLogger log:LinphoneLoggerError format:@"Save AddressBook: Fail(%@)", [error localizedDescription]];
+        LOGE(@"Save AddressBook: Fail(%@)", [error localizedDescription]);
     } else {
-        [LinphoneLogger logc:LinphoneLoggerLog format:"Save AddressBook: Success!"];
+        LOGI(@"Save AddressBook: Success!");
     }
     [[LinphoneManager instance].fastAddressBook reload];
 }

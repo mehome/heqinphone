@@ -82,7 +82,7 @@ static RootViewManager* rootViewManagerInstance = nil;
         UIInterfaceOrientation nextViewOrientation = newMainView.interfaceOrientation;
         UIInterfaceOrientation previousOrientation = currentViewController.interfaceOrientation;
 
-        Linphone_log(@"Changing rootViewController: %@ -> %@", currentViewController.name, newMainView.name);
+        LOGI(@"Changing rootViewController: %@ -> %@", currentViewController.name, newMainView.name);
         currentViewController = newMainView;
         LinphoneAppDelegate* delegate = (LinphoneAppDelegate*)[UIApplication sharedApplication].delegate;
 
@@ -338,7 +338,7 @@ static RootViewManager* rootViewManagerInstance = nil;
         conf = linphone_core_get_default_proxy_config([LinphoneManager getLc]);
 
         
-        if( [[LinphoneManager instance] lpConfigBoolForKey:@"show_login_view" forSection:@"app"] && conf == NULL){
+        if( [[LinphoneManager instance] lpConfigBoolForKey:@"show_login_view" inSection:@"app"] && conf == NULL){
             already_shown = TRUE;
             WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
             if(controller != nil) {
@@ -604,7 +604,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 }
 
 - (UIViewController*)_changeCurrentView:(UICompositeViewDescription*)view transition:(CATransition*)transition force:(BOOL)force {
-    [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Change current view to %@", [view name]];
+    LOGI(@"PhoneMainView: Change current view to %@", [view name]);
 
     PhoneMainView* vc = [[RootViewManager instance] setViewControllerForDescription:view];
 
@@ -647,7 +647,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 }
 
 - (UIViewController*)popCurrentView {
-    [LinphoneLogger logc:LinphoneLoggerLog format:"PhoneMainView: Pop view"];
+    LOGI(@"PhoneMainView: Pop view");
     NSMutableArray* viewStack = [RootViewManager instance].viewDescriptionStack;
    if([viewStack count] > 1) {
         [viewStack removeLastObject];
@@ -726,8 +726,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 
 		if (callIDFromPush && autoAnswer){
 			// accept call automatically
-			[lm acceptCall:call];
-
+            [lm acceptCall:call evenWithVideo:YES];
 		} else {
 
             IncomingCallViewController *controller = nil;
@@ -750,15 +749,14 @@ static RootViewManager* rootViewManagerInstance = nil;
 - (void)batteryLevelChanged:(NSNotification*)notif {
     float level = [UIDevice currentDevice].batteryLevel;
     UIDeviceBatteryState state = [UIDevice currentDevice].batteryState;
-    [LinphoneLogger log:LinphoneLoggerDebug format:@"Battery state:%d level:%.2f", state, level];
-    
+    LOGD(@"Battery state:%d level:%.2f", state, level);
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     if (call && linphone_call_params_video_enabled(linphone_call_get_current_params(call))) {
         LinphoneCallAppData* callData = (LinphoneCallAppData*) linphone_call_get_user_pointer(call);
         if(callData != nil) {
             if (state == UIDeviceBatteryStateUnplugged) {
                 if (level <= 0.2f && !callData->batteryWarningShown) {
-                    [LinphoneLogger log:LinphoneLoggerLog format:@"Battery warning"];
+                    LOGI(@"Battery warning");
                     DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:NSLocalizedString(@"Battery is running low. Stop video ?",nil)] autorelease];
                     [sheet addCancelButtonWithTitle:NSLocalizedString(@"Continue video", nil) block:nil];
                     [sheet addDestructiveButtonWithTitle:NSLocalizedString(@"Stop video", nil) block:^() {
@@ -785,7 +783,7 @@ static RootViewManager* rootViewManagerInstance = nil;
 }
 
 - (void)incomingCallAccepted:(LinphoneCall*)call {
-    [[LinphoneManager instance] acceptCall:call];
+    [LinphoneManager.instance acceptCall:call evenWithVideo:YES];
 }
 
 - (void)incomingCallDeclined:(LinphoneCall*)call {

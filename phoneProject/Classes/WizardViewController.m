@@ -227,7 +227,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                 const LinphoneAuthInfo *auth = linphone_core_find_auth_info(lc, NULL, linphone_address_get_username(addr), linphone_proxy_config_get_domain(current_conf));
                 linphone_address_destroy(addr);
                 if( auth ){
-                    [LinphoneLogger log:LinphoneLoggerLog format:@"A proxy config was set up with the remote provisioning, skip wizard"];
+                    LOGI(@"A proxy config was set up with the remote provisioning, skip wizard");
                     [self onCancelClick:nil];
                 }
             }
@@ -280,7 +280,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     LCSipTransports transportValue={80,80,-1,-1};
 
     if (linphone_core_set_sip_transports(lc, &transportValue)) {
-        [LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
+        LOGE(@"cannot set transport");
     }
     
     [[LinphoneManager instance] lpConfigSetString:@"" forKey:@"sharing_server_preference"];
@@ -542,7 +542,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     LinphoneAddress* linphoneAddress = linphone_address_new("sip:user@domain.com");
     linphone_proxy_config_normalize_number(NULL, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
     linphone_address_set_username(linphoneAddress, normalizedUserName);
-    linphone_address_set_domain(linphoneAddress, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] UTF8String]);
+    linphone_address_set_domain(linphoneAddress, [[[LinphoneManager instance] lpConfigStringForKey:@"domain" inSection:@"wizard"] UTF8String]);
     NSString* uri = [NSString stringWithUTF8String:linphone_address_as_string_uri_only(linphoneAddress)];
     NSString* scheme = [NSString stringWithUTF8String:linphone_address_get_scheme(linphoneAddress)];
     return [uri substringFromIndex:[scheme length] + 1];
@@ -551,9 +551,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - Linphone XMLRPC
 
 - (void)checkUserExist:(NSString*)username {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC check_account %@", username];
+    LOGI(@"XMLRPC check_account %@", username);
     
-    NSURL *URL = [NSURL URLWithString:[[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    NSURL *URL = [NSURL URLWithString:[[LinphoneManager instance] lpConfigStringForKey:@"service_url" inSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"check_account" withParameters:[NSArray arrayWithObjects:username, nil]];
     
@@ -566,9 +566,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)createAccount:(NSString*)identity password:(NSString*)password email:(NSString*)email {
     NSString *useragent = [LinphoneManager getUserAgent];
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC create_account_with_useragent %@ %@ %@ %@", identity, password, email, useragent];
+    LOGI(@"XMLRPC create_account_with_useragent %@ %@ %@ %@", identity, password, email, useragent);
     
-    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" inSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"create_account_with_useragent" withParameters:[NSArray arrayWithObjects:identity, password, email, useragent, nil]];
     
@@ -580,9 +580,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)checkAccountValidation:(NSString*)identity {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC check_account_validated %@", identity];
+    LOGI(@"XMLRPC check_account_validated %@", identity);
     
-    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" forSection:@"wizard"]];
+    NSURL *URL = [NSURL URLWithString: [[LinphoneManager instance] lpConfigStringForKey:@"service_url" inSection:@"wizard"]];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     [request setMethod: @"check_account_validated" withParameters:[NSArray arrayWithObjects:identity, nil]];
     
@@ -630,7 +630,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)loadWizardConfig:(NSString*)rcFilename {
     NSString* fullPath = [@"file://" stringByAppendingString:[LinphoneManager bundleFile:rcFilename]];
     linphone_core_set_provisioning_uri([LinphoneManager getLc], [fullPath cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-    [[LinphoneManager instance] lpConfigSetInt:1 forKey:@"transient_provisioning" forSection:@"misc"];
+    [[LinphoneManager instance] lpConfigSetInt:1 forKey:@"transient_provisioning" inSection:@"misc"];
     [[LinphoneManager instance] resetLinphoneCore];
 }
 
@@ -737,7 +737,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
     UITextField* prov_url = [remoteInput textFieldAtIndex:0];
     prov_url.keyboardType = UIKeyboardTypeURL;
-    prov_url.text = [[LinphoneManager instance] lpConfigStringForKey:@"config-uri" forSection:@"misc"];
+    prov_url.text = [[LinphoneManager instance] lpConfigStringForKey:@"config-uri" inSection:@"misc"];
     prov_url.placeholder  = @"URL";
 
     [remoteInput show];
@@ -815,8 +815,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *email = [WizardViewController findTextField:ViewElement_Email view:contentView].text;
     NSMutableString *errors = [NSMutableString string];
 
-    NSInteger username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" forSection:@"wizard"];
-    NSInteger password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" forSection:@"wizard"];
+    NSInteger username_length = [[LinphoneManager instance] lpConfigIntForKey:@"username_length" inSection:@"wizard"];
+    NSInteger password_length = [[LinphoneManager instance] lpConfigIntForKey:@"password_length" inSection:@"wizard"];
     
     if ([username length] < username_length) {
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"The username is too short (minimum %d characters).\n", nil), username_length]];
@@ -890,14 +890,14 @@ static UICompositeViewDescription *compositeDescription = nil;
             if( [url rangeOfString:@"://"].location == NSNotFound )
                 url = [NSString stringWithFormat:@"http://%@", url];
 
-            [LinphoneLogger log:LinphoneLoggerLog format:@"Should use remote provisioning URL %@", url];
+            LOGI(@"Should use remote provisioning URL %@", url);
             linphone_core_set_provisioning_uri([LinphoneManager getLc], [url UTF8String]);
 
             [waitView setHidden:false];
             [[LinphoneManager instance] resetLinphoneCore];
         }
     } else {
-        [LinphoneLogger log:LinphoneLoggerLog format:@"Canceled remote provisioning"];
+        LOGI(@"Canceled remote provisioning");
     }
 }
 
@@ -1005,7 +1005,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 #pragma mark - XMLRPCConnectionDelegate Functions
 
 - (void)request:(XMLRPCRequest *)request didReceiveResponse:(XMLRPCResponse *)response {
-    [LinphoneLogger log:LinphoneLoggerLog format:@"XMLRPC %@: %@", [request method], [response body]];
+    LOGI(@"XMLRPC %@: %@", [request method], [response body]);
     [waitView setHidden:true];
     if ([response isFault]) {
         NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"Communication issue (%@)", nil), [response faultString]];

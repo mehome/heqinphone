@@ -19,7 +19,8 @@
 
 #import "UICallButton.h"
 #import "LinphoneManager.h"
-
+#import "Utils.h"
+#import "LPSystemUser.h"
 #import <CoreTelephony/CTCallCenter.h>
 
 @implementation UICallButton
@@ -102,13 +103,14 @@
             logs = ms_list_next(logs);
         }
     }
+    
+    [LPSystemUser sharedUser].curMeetingAddr = address;
 
-    if( [address length] > 0){
-        ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-        if(contact) {
-            displayName = [FastAddressBook getContactDisplayName:contact];
-        }
-        [[LinphoneManager instance] call:address displayName:displayName transfer:FALSE];
+    if ([address length] > 0) {
+        LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:address];
+        [LinphoneManager.instance call:addr];
+        if (addr)
+            linphone_address_destroy(addr);
     }
 }
 

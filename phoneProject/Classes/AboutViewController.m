@@ -21,6 +21,7 @@
 #import "LinphoneManager.h"
 #include "linphone/lpconfig.h"
 #include "LinphoneIOSVersion.h"
+#import "Utils.h"
 
 @implementation AboutViewController
 

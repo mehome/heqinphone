@@ -119,7 +119,7 @@ static UIFont *CELL_FONT = nil;
 
 - (void)update {
     if(chat == nil) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update chat room cell: null chat"];
+        LOGW(@"Cannot update chat room cell: null chat");
         return;
     }
     const char*      url = linphone_chat_message_get_external_body_url(chat);
@@ -155,7 +155,7 @@ static UIFont *CELL_FONT = nil;
                 }
             });
         } failureBlock:^(NSError *error) {
-            [LinphoneLogger log:LinphoneLoggerError format:@"Can't read image"];
+            LOGE(@"Can't read image");
         }];
         
         [messageImageView setHidden:FALSE];

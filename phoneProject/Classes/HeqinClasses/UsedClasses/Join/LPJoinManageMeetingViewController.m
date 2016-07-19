@@ -512,7 +512,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 //        [controller call:callStr displayName:displayName];
 //    }
     
-    [LinphoneManager customCall:callStr displayName:displayName];
+    [LPSystemUser sharedUser].curMeetingAddr = callStr;
+    
+    if (callStr.length > 0) {
+        LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:callStr];
+        [LinphoneManager.instance call:addr];
+        if (addr)
+            linphone_address_destroy(addr);
+    }
 }
 
 #pragma mark UITextField delegate

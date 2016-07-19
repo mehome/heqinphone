@@ -19,6 +19,7 @@
 
 #import "FastAddressBook.h"
 #import "LinphoneManager.h"
+#import "Utils.h"
 
 @implementation FastAddressBook
 
@@ -77,7 +78,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
         }
 
 		if (retImage != nil && retImage.size.width != retImage.size.height) {
-			[LinphoneLogger log:LinphoneLoggerLog format:@"Image is not square : cropping it."];
+			LOGI(@"Image is not square : cropping it.");
 			return [self squareImageCrop:retImage];
 		}
     }
@@ -86,8 +87,8 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 }
 
 - (ABRecordRef)getContact:(NSString*)address {
-    @synchronized (addressBookMap){
-        return (ABRecordRef)[addressBookMap objectForKey:address];
+    @synchronized (_addressBookMap){
+        return (ABRecordRef)[_addressBookMap objectForKey:address];
     }
 }
 
@@ -154,18 +155,60 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
 
 - (FastAddressBook*)init {
     if ((self = [super init]) != nil) {
-        addressBookMap  = [[NSMutableDictionary alloc] init];
+        _addressBookMap  = [[NSMutableDictionary alloc] init];
         addressBook = nil;
         [self reload];
     }
     return self;
 }
 
++ (Contact *)getContact:(NSString *)address {
+    if (LinphoneManager.instance.fastAddressBook != nil) {
+        @synchronized(LinphoneManager.instance.fastAddressBook.addressBookMap) {
+            return [LinphoneManager.instance.fastAddressBook.addressBookMap objectForKey:address];
+        }
+    }
+    return nil;
+}
+
++ (Contact *)getContactWithAddress:(const LinphoneAddress *)address {
+    Contact *contact = nil;
+    if (address) {
+        char *uri = linphone_address_as_string_uri_only(address);
+        NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:uri]];
+        contact = [FastAddressBook getContact:normalizedSipAddress];
+        ms_free(uri);
+    }
+    return contact;
+}
+
++ (NSString *)displayNameForContact:(Contact *)contact {
+    return contact.displayName;
+}
+
++ (NSString *)displayNameForAddress:(const LinphoneAddress *)addr {
+    NSString *ret = NSLocalizedString(@"Unknown", nil);
+    Contact *contact = [FastAddressBook getContactWithAddress:addr];
+    if (contact) {
+        ret = [FastAddressBook displayNameForContact:contact];
+    } else {
+        const char *lDisplayName = linphone_address_get_display_name(addr);
+        const char *lUserName = linphone_address_get_username(addr);
+        if (lDisplayName) {
+            ret = [NSString stringWithUTF8String:lDisplayName];
+        } else if (lUserName) {
+            ret = [NSString stringWithUTF8String:lUserName];
+        }
+    }
+    return ret;
+}
+
+
 - (void)saveAddressBook {
 	if( addressBook != nil ){
 		NSError* err = nil;
 		if( !ABAddressBookSave(addressBook, (CFErrorRef*)err) ){
-			Linphone_warn(@"Couldn't save Address Book");
+			LOGW(@"Couldn't save Address Book");
 		}
 	}
 }
@@ -185,14 +228,14 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
             [self loadData];
         });
        } else {
-        [LinphoneLogger log:LinphoneLoggerError format:@"Create AddressBook: Fail(%@)", [error localizedDescription]];
+        LOGI(@"Create AddressBook: Fail(%@)", [error localizedDescription]);
     }
 }
 
 - (void)loadData {
     ABAddressBookRevert(addressBook);
-    @synchronized (addressBookMap) {
-        [addressBookMap removeAllObjects];
+    @synchronized (_addressBookMap) {
+        [_addressBookMap removeAllObjects];
 
         NSArray *lContacts = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
         for (id lPerson in lContacts) {
@@ -207,7 +250,7 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                         NSString* lNormalizedKey = [FastAddressBook normalizePhoneNumber:(NSString*)lValue];
                         NSString* lNormalizedSipKey = [FastAddressBook normalizeSipURI:lNormalizedKey];
                         if (lNormalizedSipKey != NULL) lNormalizedKey = lNormalizedSipKey;
-                        [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                        [_addressBookMap setObject:lPerson forKey:lNormalizedKey];
                         CFRelease(lValue);
                         if (lLabel) CFRelease(lLabel);
                         if (lLocalizedLabel) CFRelease(lLocalizedLabel);
@@ -234,9 +277,9 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
                             CFStringRef lValue = CFDictionaryGetValue(lDict, kABPersonInstantMessageUsernameKey);
                             NSString* lNormalizedKey = [FastAddressBook normalizeSipURI:(NSString*)lValue];
                             if(lNormalizedKey != NULL) {
-                                [addressBookMap setObject:lPerson forKey:lNormalizedKey];
+                                [_addressBookMap setObject:lPerson forKey:lNormalizedKey];
                             } else {
-                                [addressBookMap setObject:lPerson forKey:(NSString*)lValue];
+                                [_addressBookMap setObject:lPerson forKey:(NSString*)lValue];
                             }
                         }
                         CFRelease(lDict);
@@ -258,8 +301,15 @@ void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef info, void
 - (void)dealloc {
     ABAddressBookUnregisterExternalChangeCallback(addressBook, sync_address_book, self);
     CFRelease(addressBook);
-    [addressBookMap release];
+    [_addressBookMap release];
     [super dealloc];
+}
+
++ (NSString *)localizedLabel:(NSString *)label {
+    if (label != nil) {
+        return CFBridgingRelease(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(label)));
+    }
+    return @"";
 }
 
 @end

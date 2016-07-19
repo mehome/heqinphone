@@ -180,8 +180,8 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
     if(contact == NULL) 
         return;
     
-    [LinphoneLogger logc:LinphoneLoggerLog format:"Load data from contact %p", contact];
-    // Phone numbers 
+    LOGI(@"Load data from contact %p", contact);
+    // Phone numbers
     {
         ABMultiValueRef lMap = ABRecordCopyValue(contact, kABPersonPhoneProperty);
         NSMutableArray *subArray = [NSMutableArray array];
@@ -287,7 +287,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 	}
 
 	if (!ABRecordSetValue(contact, kABPersonInstantMessageProperty, lMap, (CFErrorRef*)&error)) {
-		[LinphoneLogger log:LinphoneLoggerLog format:@"Can't set contact with value [%@] cause [%@]", value,[error localizedDescription]];
+		LOGI(@"Can't set contact with value [%@] cause [%@]", value,[error localizedDescription]);
         CFRelease(lMap);
 	} else {
 		if (entry == nil) {
@@ -314,7 +314,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 CFDictionaryRef lDict2 = CFDictionaryCreate(NULL, (const void **)&keys, (const void **)&values, 2, NULL, NULL);
                 ABMultiValueReplaceValueAtIndex(lMap, lDict2, index);
                 if (!ABRecordSetValue(contact, kABPersonInstantMessageProperty, lMap, (CFErrorRef*)&error)) {
-                    [LinphoneLogger log:LinphoneLoggerLog format:@"Can't set contact with value [%@] cause [%@]", value,[error localizedDescription]];
+                    LOGI(@"Can't set contact with value [%@] cause [%@]", value,[error localizedDescription]);
                 }
                 CFRelease(lDict2);
                 linphone_address_destroy(address);
@@ -361,7 +361,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             [entry release];
         } else {
             added = false;
-            [LinphoneLogger log:LinphoneLoggerLog format:@"Can't add entry: %@", [error localizedDescription]];
+            LOGI(@"Can't add entry: %@", [error localizedDescription]);
         }
         CFRelease(lMap);
     } else if(contactSections[section] == ContactSections_Sip) {
@@ -371,7 +371,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 			added=true;
 		} else {
 			added=false;
-			[LinphoneLogger log:LinphoneLoggerError format:@"Can't add entry for value: %@", value];
+			LOGE(@"Can't add entry for value: %@", value);
 		}
     } else if(contactSections[section] == ContactSections_Email) {
         ABMultiValueIdentifier identifier;
@@ -394,7 +394,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
             [entry release];
         } else {
             added = false;
-            [LinphoneLogger log:LinphoneLoggerLog format:@"Can't add entry: %@", [error localizedDescription]];
+            LOGI(@"Can't add entry: %@", [error localizedDescription]);
         }
         CFRelease(lMap);
     }
@@ -636,7 +636,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
                 // Go to dialer view
                 DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
                 if(controller != nil) {
-                    [controller call:dest displayName:displayName];
+                    [controller call:dest];
                 }
             } else {
                 // Go to Chat room view
@@ -881,7 +881,7 @@ static const ContactSections_e contactSections[ContactSections_MAX] = {ContactSe
 
         [cell.detailTextLabel setText:value];
     } else {
-        [LinphoneLogger logc:LinphoneLoggerError format:"Not valid UIEditableTableViewCell"];
+        LOGE(@"Not valid UIEditableTableViewCell");
     }
     if(contactDetailsDelegate != nil) {
         [self performSelector:@selector(updateModification) withObject:nil afterDelay:0];

@@ -291,7 +291,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			if( attachLogs ){
 				char * filepath = linphone_core_compress_log_collection();
 				if (filepath == NULL) {
-					Linphone_err(@"Cannot sent logs: file is NULL");
+                    LOGE(@"Cannot sent logs: file is NULL");
 					return;
 				}
 				NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -302,7 +302,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 					mimeType = @"application/gzip";
 					filename = [appName stringByAppendingString:@".gz"];
 				} else {
-					Linphone_err(@"Unknown extension type: %@, cancelling email", filename);
+                    LOGE(@"Unknown extension type: %@, cancelling email", filename);
 					return;
 				}
 				[controller setMessageBody:NSLocalizedString(@"Application logs", nil) isHTML:NO];
@@ -351,7 +351,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 			// enable / disable
 			BOOL enableDebug = ![mgr lpConfigBoolForKey:@"debugenable_preference"];
 			[mgr lpConfigSetBool:enableDebug forKey:@"debugenable_preference"];
-			[mgr setLogsEnabled:enableDebug];
+//			[mgr setLogsEnabled:enableDebug];
 		}];
 
 		[alertView show];
@@ -398,19 +398,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)call:(NSString*)address {
-    NSString *displayName = nil;
-    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:address];
-    if(contact) {
-        displayName = [FastAddressBook getContactDisplayName:contact];
-    }
-    [self call:address displayName:displayName];
-}
-
-- (void)call:(NSString*)address displayName:(NSString *)displayName {
     // 存储下当前会议的address地址，以便后期进行收藏操作
     [LPSystemUser sharedUser].curMeetingAddr = address;
     
-    [[LinphoneManager instance] call:address displayName:displayName transfer:transferMode];
+    LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:address];
+    [LinphoneManager.instance call:addr];
+    if (addr) {
+        linphone_address_destroy(addr);
+    }
 }
 
 #pragma mark - UITextFieldDelegate Functions

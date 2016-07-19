@@ -192,7 +192,7 @@
         // Go to dialer view
         DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
         if(controller != nil) {
-            [controller call:address displayName:displayName];
+            [controller call:address];
         }
     }
 }

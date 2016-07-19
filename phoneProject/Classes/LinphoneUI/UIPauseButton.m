@@ -105,7 +105,7 @@
             if (call != nil) {
                 linphone_core_pause_call([LinphoneManager getLc], call);
             } else {
-                [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle pause buttton, because no current call"];
+                LOGW(@"Cannot toggle pause buttton, because no current call");
             }
             break;
         }
@@ -123,7 +123,7 @@
             if (currentCall != nil) {
                 linphone_core_pause_call([LinphoneManager getLc], currentCall);
             } else {
-                [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle pause buttton, because no current call"];
+                LOGW(@"Cannot toggle pause buttton, because no current call");
             }
             break;
         }
@@ -137,7 +137,7 @@
             if (call != nil) {
                 linphone_core_resume_call([LinphoneManager getLc], call);
             } else {
-                [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle pause buttton, because no current call"];
+                LOGW(@"Cannot toggle pause buttton, because no current call");
             }
             break;
         }
@@ -154,7 +154,7 @@
             if (currentCall != nil) {
                 linphone_core_resume_call([LinphoneManager getLc], currentCall);
             } else {
-                [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle pause buttton, because no current call"];
+                LOGW(@"Cannot toggle pause buttton, because no current call");
             }
             break;
         }

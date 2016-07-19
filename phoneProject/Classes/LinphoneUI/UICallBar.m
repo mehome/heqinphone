@@ -1158,7 +1158,7 @@ extern NSString *const kLinphoneInCallCellData;
         }
     }
     if (newCamId){
-        [LinphoneLogger logc:LinphoneLoggerLog format:"Switching from [%s] to [%s]", currentCamId, newCamId];
+        LOGI(@"Switching from [%s] to [%s]", currentCamId, newCamId);
         linphone_core_set_video_device([LinphoneManager getLc], newCamId);
         LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
         if(call != NULL) {
@@ -1188,7 +1188,7 @@ extern NSString *const kLinphoneInCallCellData;
         }];
 
     } else {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot close video button, because no current call"];
+        LOGW(@"Cannot close video button, because no current call");
     }
 }
 
@@ -1218,7 +1218,7 @@ extern NSString *const kLinphoneInCallCellData;
             self.loadingTipImgView.hidden = YES;
         }];
     } else {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot open video button, because no current call"];
+        LOGW(@"Cannot open video button, because no current call");
     }
 }
 

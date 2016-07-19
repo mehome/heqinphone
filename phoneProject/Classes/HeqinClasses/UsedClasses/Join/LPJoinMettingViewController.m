@@ -339,8 +339,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 //        NSLog(@"进入会议中, callStr=%@, displayName=%@", callStr, displayName);
 //        [controller call:callStr displayName:displayName];
 //    }
-    
-    [LinphoneManager customCall:callStr displayName:displayName];
+    [LPSystemUser sharedUser].curMeetingAddr = callStr;
+
+    if (callStr.length > 0) {
+        LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:callStr];
+        [LinphoneManager.instance call:addr];
+        if (addr)
+            linphone_address_destroy(addr);
+    }
 }
 
 #pragma mark UITabelView delegate & datasource

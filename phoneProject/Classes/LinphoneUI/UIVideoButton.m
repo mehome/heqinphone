@@ -26,54 +26,9 @@
 
 @synthesize waitView;
 
-- (void)initUIVideoButton {
+INIT_WITH_COMMON_CF {
     last_update_state = FALSE;
-}
-
-- (id)init{
-    self = [super init];
-    if (self) {
-		[self initUIVideoButton];
-    }
     return self;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-    self = [super initWithCoder:decoder];
-    if (self) {
-		[self initUIVideoButton];
-	}
-    return self;
-}	
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-		[self initUIVideoButton];
-    }
-    return self;
-}
-
-- (void)startVideoAfterBeActive {
-	LinphoneCore* lc = [LinphoneManager getLc];
-
-    if (!linphone_core_video_enabled(lc))
-        return;
-
-    [self setEnabled: FALSE];
-    [waitView startAnimating];
-
-    LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
-	if (call) {
-		LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
-		callAppData->videoRequested=TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
-        LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));
-        linphone_call_params_enable_video(call_params, TRUE);
-        linphone_core_update_call(lc, call, call_params);
-		linphone_call_params_destroy(call_params);
-    } else {
-		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
-	}
 }
 
 - (void)onOn {
@@ -94,7 +49,7 @@
 //        linphone_core_update_call(lc, call, call_params);
 //		linphone_call_params_destroy(call_params);
 //    } else {
-//		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+//		LOGW(@"Cannot toggle video button, because no current call"];
 //	}   
 }
 
@@ -114,25 +69,22 @@
 //        linphone_core_update_call(lc, call, call_params);
 //		linphone_call_params_destroy(call_params);
 //    } else {
-//		[LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot toggle video button, because no current call"];
+//		LOGW(@"Cannot toggle video button, because no current call"];
 //	}
 }
 
 - (bool)onUpdate {
     bool video_enabled = false;
-
-#ifdef VIDEO_ENABLED
-    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
-    if( linphone_core_video_enabled([LinphoneManager getLc])
-       && currentCall
-       && !linphone_call_media_in_progress(currentCall)
-       && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
-        video_enabled = TRUE;
+    LinphoneCall *currentCall = linphone_core_get_current_call(LC);
+    if (linphone_core_video_supported(LC)) {
+        if (linphone_core_video_display_enabled(LC) && currentCall && !linphone_core_sound_resources_locked(LC) &&
+            linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
+            video_enabled = TRUE;
+        }
     }
-#endif //VIDEO_ENABLED
-
+    
     [self setEnabled:video_enabled];
-    if( last_update_state != video_enabled ) {
+    if (last_update_state != video_enabled) {
         [waitView stopAnimating];
         
         if (video_enabled == YES) {
@@ -141,18 +93,12 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kVedioEnableNotification" object:nil];
         }
     }
-    
-    if( video_enabled ){
+    if (video_enabled) {
         video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
     }
     last_update_state = video_enabled;
-
+    
     return video_enabled;
-}
-
-- (void)dealloc {
-    [waitView release];
-    [super dealloc];
 }
 
 @end

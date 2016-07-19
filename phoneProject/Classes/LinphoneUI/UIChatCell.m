@@ -80,7 +80,7 @@
 	NSString *displayName = nil;
     UIImage *image = nil;
     if(chatRoom == nil) {
-        [LinphoneLogger logc:LinphoneLoggerWarning format:"Cannot update chat cell: null chat"];
+        LOGW(@"Cannot update chat cell: null chat");
         return;
     }
     const LinphoneAddress* linphoneAddress = linphone_chat_room_get_peer_address(chatRoom);

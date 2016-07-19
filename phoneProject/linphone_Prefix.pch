@@ -8,6 +8,11 @@
     #import "NSObject+RDRCommon.h"
     #import "UIView+Frame.h"
 
+
+#import "Log.h"
+#import "Utils.h"
+#import "Contact.h"
+
 // 在不添加NullSafe的情况下，执行下面这句会造成崩溃，添加后，则不会出现崩溃
 //[(NSString *)[NSNull null] stringByDeletingPathExtension];
 
@@ -91,7 +96,7 @@ _##PROPERTY = PROPERTY; \
 
 #define blueSubjectColor ([UIColor colorWithRed:194/255.0 green:239.0/255.0 blue:251/255.0 alpha:1.0])
 
-#define UseTheTCP80Port NSLog(@"use the tpc 80 port");
+#define UseTheTCP80Port NSLog(@"use the tcp 80 port");
 
 // 用于调试时使用，可以用来调试颜色背景值，也可以用来调试逻辑。打包时该值为0
 #define inDebugTest (0)

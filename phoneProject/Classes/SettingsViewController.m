@@ -494,7 +494,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		removeFromHiddenKeys = debugEnabled;
         [keys addObject:@"send_logs_button"];
 		[keys addObject:@"reset_logs_button"];
-		[[LinphoneManager instance] setLogsEnabled:debugEnabled];
+//		[[LinphoneManager instance] setLogsEnabled:debugEnabled];
     } else if( [@"advanced_account_preference" compare:notif.object] == NSOrderedSame) {
 		removeFromHiddenKeys = [[notif.userInfo objectForKey:@"advanced_account_preference"] boolValue];
 
@@ -701,7 +701,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if([key isEqual:@"release_button"]) {
         [UIApplication sharedApplication].keyWindow.rootViewController = nil;
         [[UIApplication sharedApplication].keyWindow setRootViewController:nil];
-        [[LinphoneManager instance]	destroyLibLinphone];
+        [[LinphoneManager instance]	destroyLinphoneCore];
         [LinphoneManager instanceRelease];
     } else  if([key isEqual:@"clear_cache_button"]) {
         [[PhoneMainView instance].mainViewController clearCache:[NSArray arrayWithObject:[[PhoneMainView  instance] currentView]]];
@@ -748,7 +748,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	} else if ([key isEqual:@"send_logs_button"]) {
 		char * filepath = linphone_core_compress_log_collection();
 		if (filepath == NULL) {
-			[LinphoneLogger log:LinphoneLoggerError format:@"Cannot sent logs: file is NULL"];
+			LOGE(@"Cannot sent logs: file is NULL");
 			return;
 		}
 
@@ -765,7 +765,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		} else if ([filename hasSuffix:@".gz"]) {
 			mimeType = @"application/gzip";
 		} else {
-			[LinphoneLogger log:LinphoneLoggerError format:@"Unknown extension type: %@, cancelling email", filename];
+			LOGE(@"Unknown extension type: %@, cancelling email", filename);
 			return;
 		}
 		[self emailAttachment:[NSData dataWithContentsOfFile:[NSString stringWithUTF8String:filepath]] mimeType:mimeType name:filename];
@@ -784,7 +784,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)emailAttachment: (NSData*)attachment mimeType:(NSString*)type name:(NSString*)attachmentName
 {
 	if (attachmentName == nil || type == nil || attachmentName == nil) {
-		[LinphoneLogger log:LinphoneLoggerError format:@"Trying to email attachment but mandatory field is missing"];
+		LOGE(@"Trying to email attachment but mandatory field is missing");
 		return;
 	}
 
@@ -823,9 +823,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
 	if (error != nil) {
-		[LinphoneLogger log:LinphoneLoggerWarning format:@"Error while sending mail: %@", error];
+        LOGW(@"Error while sending mail: %@", error);
 	} else {
-		[LinphoneLogger log:LinphoneLoggerLog format:@"Mail completed with status: %d", result];
+		LOGI(@"Mail completed with status: %d", result);
 	}
 	[self dismissViewControllerAnimated:true completion:nil];
 }

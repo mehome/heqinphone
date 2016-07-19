@@ -358,7 +358,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Go to dialer view
 	DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
 	if(controller != nil) {
-		[controller call:phoneNumber displayName:[(NSString*)ABRecordCopyCompositeName(person) autorelease]];
+		[controller call:phoneNumber];
 	}
 	[phoneNumber release];
 	CFRelease(multiValue);
