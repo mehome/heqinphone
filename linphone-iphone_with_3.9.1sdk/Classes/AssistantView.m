@@ -71,6 +71,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 														 isLeftFragment:NO
 														   fragmentWith:nil];
 
+
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;

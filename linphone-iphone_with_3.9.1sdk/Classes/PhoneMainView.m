@@ -416,6 +416,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 			// Change to default view
 			const MSList *list = linphone_core_get_proxy_config_list(LC);
 			if (list != NULL || ([lm lpConfigBoolForKey:@"hide_assistant_preference"] == true) || lm.isTesting) {
+                
+                // 这里应该进入到咱们自己的首页，上面的list有值，则意味着用户有数据，也意味着我们应该把用户的登录数据存储到那里面，下次就不用再弹出登录框，而且用户的相关数据，名称，密码也应该是存储在那里面
 				[self changeCurrentView:DialerView.compositeViewDescription];
 			} else {
 				AssistantView *view = VIEW(AssistantView);

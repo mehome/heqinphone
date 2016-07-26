@@ -370,6 +370,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+    
+    // 在这里存储设置到的值，并触发一些行为。
 	[_settingsController dismiss:self];
 	// Set observer
 	[NSNotificationCenter.defaultCenter removeObserver:self name:kIASKAppSettingChanged object:nil];
