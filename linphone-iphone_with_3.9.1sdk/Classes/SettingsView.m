@@ -372,7 +372,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillDisappear:animated];
     
     // 在这里存储设置到的值，并触发一些行为。
-	[_settingsController dismiss:self];
+	[_settingsController dismiss:self];                     // 这里将会触发存储settingsStore操作
 	// Set observer
 	[NSNotificationCenter.defaultCenter removeObserver:self name:kIASKAppSettingChanged object:nil];
 
@@ -385,7 +385,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillAppear:animated];
 
 	// Sync settings with linphone core settings
-	[settingsStore transformLinphoneCoreToKeys];
+	[settingsStore transformLinphoneCoreToKeys];    // 把数据从磁盘上同步到当前设备中。
 	[self recomputeAccountLabelsAndSync];
 
 	// Set observer

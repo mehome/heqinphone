@@ -30,7 +30,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
 		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
-															  statusBar:StatusBarView.class
+                                                              statusBar:StatusBarView.class
 																 tabBar:nil
 															   sideMenu:SideMenuView.class
 															 fullscreen:false
@@ -67,4 +67,5 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (IBAction)onDialerBackClick:(id)sender {
 	[PhoneMainView.instance popToView:DialerView.compositeViewDescription];
 }
+
 @end

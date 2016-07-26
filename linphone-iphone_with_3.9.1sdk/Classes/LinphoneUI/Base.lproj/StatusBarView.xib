@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatusBarView">
@@ -12,6 +12,7 @@
                 <outlet property="incallView" destination="0Vp-VF-wmX" id="mLI-RY-bfW"/>
                 <outlet property="outcallView" destination="lfO-I4-PXi" id="04e-SG-ViY"/>
                 <outlet property="registrationState" destination="Mhg-P6-RfU" id="xTR-Af-XBY"/>
+                <outlet property="topCoverBtn" destination="EPc-sn-GOK" id="K86-yb-RmH"/>
                 <outlet property="view" destination="4" id="11"/>
                 <outlet property="voicemailButton" destination="3Jg-EU-ajT" id="Yr3-N5-aTl"/>
             </connections>
@@ -99,6 +100,15 @@
                     </state>
                     <connections>
                         <action selector="onRegistrationStateClick:" destination="-1" eventType="touchUpInside" id="erb-GT-Zef"/>
+                    </connections>
+                </button>
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EPc-sn-GOK">
+                    <rect key="frame" x="0.0" y="0.0" width="360" height="42"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.76078431369999999" green="0.94117647059999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="顶部按钮覆盖事件"/>
+                    <connections>
+                        <action selector="topBtnCoveredClicked:" destination="-1" eventType="touchUpInside" id="tHD-AE-Lnt"/>
                     </connections>
                 </button>
             </subviews>

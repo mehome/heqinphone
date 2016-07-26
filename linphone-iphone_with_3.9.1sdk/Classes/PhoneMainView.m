@@ -408,7 +408,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 	@try {
 		LinphoneManager *lm = LinphoneManager.instance;
 		if (linphone_core_get_global_state(LC) != LinphoneGlobalOn) {
+            LinphoneGlobalState state = linphone_core_get_global_state([LinphoneManager getLc]);
+            NSLog(@"startUp state=%d", state);
+            // TODO 之前进入的拨号界面，现在按道理应该进入的是咱们的首页界面
 			[self changeCurrentView:DialerView.compositeViewDescription];
+            
 		} else if ([LinphoneManager.instance lpConfigBoolForKey:@"enable_first_login_view_preference"] == true) {
 			[PhoneMainView.instance changeCurrentView:FirstLoginView.compositeViewDescription];
 		} else {
@@ -419,7 +423,9 @@ static RootViewManager *rootViewManagerInstance = nil;
                 
                 // 这里应该进入到咱们自己的首页，上面的list有值，则意味着用户有数据，也意味着我们应该把用户的登录数据存储到那里面，下次就不用再弹出登录框，而且用户的相关数据，名称，密码也应该是存储在那里面
 				[self changeCurrentView:DialerView.compositeViewDescription];
+                
 			} else {
+                // 下面是表示没有存储进数据的情况下，按我们的需求，也应该进入到自己的首页中。
 				AssistantView *view = VIEW(AssistantView);
 				[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
 				[view reset];
@@ -490,6 +496,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		}
 	}
 
+    // TODO 这里指定界面是向左滑动，还是向右滑动
 	if (left) {
 		return [PhoneMainView getBackwardTransition];
 	} else {
