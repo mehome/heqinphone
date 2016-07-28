@@ -166,15 +166,24 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"RecordingAndPlay"
-                                                                content:@"LPRecordAndPlayViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"LPJoinBarViewController"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"RecordingAndPlay"
+//                                                                content:@"LPRecordAndPlayViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"LPJoinBarViewController"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:[LinphoneManager runningOnIpad]
+//                                                           portraitMode:true];
+        
+        compositeDescription = [[UICompositeViewDescription alloc] init:[self class]
+                                                              statusBar:nil
+                                                                 tabBar:LPJoinBarViewController.class
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
-                                                           portraitMode:true];
+                                                         isLeftFragment:YES
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:NO];
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;

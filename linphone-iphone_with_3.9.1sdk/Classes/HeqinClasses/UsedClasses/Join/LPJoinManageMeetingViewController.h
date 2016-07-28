@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UICompositeViewController.h"
+#import "UICompositeView.h"
 
 @interface LPJoinManageMeetingViewController : UIViewController <UICompositeViewDelegate>
 

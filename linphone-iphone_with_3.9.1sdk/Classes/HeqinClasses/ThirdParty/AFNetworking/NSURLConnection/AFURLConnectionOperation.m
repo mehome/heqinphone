@@ -169,6 +169,16 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
     }
 }
 
+- (instancetype)init NS_UNAVAILABLE {
+    return [self initWithRequest:nil];
+}
+
+//- (instancetype) init NS_DESIGNATED_INITIALIZER {
+//    self = [super init];
+//    return self;
+//    assert(0);
+//}
+
 + (NSThread *)networkRequestThread {
     static NSThread *_networkRequestThread = nil;
     static dispatch_once_t oncePredicate;
