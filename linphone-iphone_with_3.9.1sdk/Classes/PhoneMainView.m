@@ -20,6 +20,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
 
+#import "LPJoinMettingViewController.h"
+#import "InCallViewController.h"
+
 #import "LinphoneAppDelegate.h"
 #import "PhoneMainView.h"
 
@@ -226,7 +229,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (NSUInteger)supportedInterfaceOrientations
 #endif
 {
-	return UIInterfaceOrientationMaskAll;
+    if( [LinphoneManager runningOnIpad ] || [mainViewController currentViewSupportsLandscape] )
+        return UIInterfaceOrientationMaskAll;
+    else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -328,7 +335,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 		case LinphoneCallPausedByRemote:
 		case LinphoneCallConnected:
 		case LinphoneCallStreamsRunning: {
-			[self changeCurrentView:CallView.compositeViewDescription];
+//			[self changeCurrentView:CallView.compositeViewDescription];
+            [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			break;
 		}
 		case LinphoneCallUpdatedByRemote: {
@@ -336,7 +344,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 			const LinphoneCallParams *remote = linphone_call_get_remote_params(call);
 
 			if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
-				[self changeCurrentView:CallView.compositeViewDescription];
+//				[self changeCurrentView:CallView.compositeViewDescription];
+                [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			}
 			break;
 		}
@@ -349,11 +358,16 @@ static RootViewManager *rootViewManagerInstance = nil;
 				while ((currentView == CallView.compositeViewDescription) ||
 					   (currentView == CallIncomingView.compositeViewDescription) ||
 					   (currentView == CallOutgoingView.compositeViewDescription)) {
-					[self popCurrentView];
+//					[self popCurrentView];
+                    
+                    // 返回首页
+                    [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
 				}
 			} else {
 				linphone_core_resume_call(LC, (LinphoneCall *)calls->data);
-				[self changeCurrentView:CallView.compositeViewDescription];
+//				[self changeCurrentView:CallView.compositeViewDescription];
+                
+                [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			}
 			break;
 		}

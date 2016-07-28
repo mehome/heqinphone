@@ -49,7 +49,8 @@
 		  sideMenu:(Class)sideMenu
 		fullscreen:(BOOL)fullscreen
 	isLeftFragment:(BOOL)isLeftFragment
-	  fragmentWith:(Class)otherFragment;
+	  fragmentWith:(Class)otherFragment
+supportLandscapeMode:(BOOL)supportLandscape;
 
 @end
 

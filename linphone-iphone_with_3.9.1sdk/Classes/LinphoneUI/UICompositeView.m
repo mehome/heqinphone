@@ -48,28 +48,31 @@
 }
 
 - (id)init:(Class)content
-		 statusBar:(Class)statusBar
-			tabBar:(Class)tabBar
-		  sideMenu:(Class)sideMenu
-		fullscreen:(BOOL)fullscreen
-	isLeftFragment:(BOOL)isLeftFragment
-	  fragmentWith:(Class)otherFragment {
-	self.name = NSStringFromClass(content);
-	self.statusBar = NSStringFromClass(statusBar);
-	self.tabBar = NSStringFromClass(tabBar);
-	self.sideMenu = NSStringFromClass(sideMenu);
-	self.statusBarEnabled = YES;
-	self.tabBarEnabled = YES;
-	self.sideMenuEnabled = NO;
-	self.fullscreen = fullscreen;
-	self.landscapeMode = YES;
-	self.portraitMode = YES;
-	self.otherFragment = IPAD ? NSStringFromClass(otherFragment) : nil;
-	self.isLeftFragment = isLeftFragment || (self.otherFragment == nil);
-	self.darkBackground = true;
-
-	return self;
+ statusBar:(Class)statusBar
+    tabBar:(Class)tabBar
+  sideMenu:(Class)sideMenu
+fullscreen:(BOOL)fullscreen
+isLeftFragment:(BOOL)isLeftFragment
+fragmentWith:(Class)otherFragment
+supportLandscapeMode:(BOOL)supportLandscape
+{
+    self.name = NSStringFromClass(content);
+    self.statusBar = NSStringFromClass(statusBar);
+    self.tabBar = NSStringFromClass(tabBar);
+    self.sideMenu = NSStringFromClass(sideMenu);
+    self.statusBarEnabled = YES;
+    self.tabBarEnabled = YES;
+    self.sideMenuEnabled = NO;
+    self.fullscreen = fullscreen;
+    self.landscapeMode = supportLandscape;
+    self.portraitMode = YES;                            // 默认只支持竖屏
+    self.otherFragment = IPAD ? NSStringFromClass(otherFragment) : nil;
+    self.isLeftFragment = isLeftFragment || (self.otherFragment == nil);
+    self.darkBackground = true;
+    
+    return self;
 }
+
 
 @end
 @interface UICompositeView ()

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPMyMeetingArrangeViewController">
+            <connections>
+                <outlet property="confirmBtn" destination="ZgX-hS-7to" id="d8Z-Yy-XvB"/>
+                <outlet property="joinerField" destination="mzY-sj-rYi" id="Ff7-rs-aCF"/>
+                <outlet property="roomsField" destination="A9L-pe-WqK" id="yhF-ak-XG2"/>
+                <outlet property="timeField" destination="cEU-d8-HwC" id="Y2s-Lb-Xzv"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cEU-d8-HwC">
+                    <rect key="frame" x="10" y="49" width="220" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="zph-4F-Kfc"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mzY-sj-rYi">
+                    <rect key="frame" x="10" y="133" width="220" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="0Mw-aO-8Qu"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会议时间:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJC-NX-wbj">
+                    <rect key="frame" x="10" y="20" width="80" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="ZsH-kU-bXV"/>
+                        <constraint firstAttribute="height" constant="21" id="cKm-cS-ny1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="与会者：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zye-uP-XAK">
+                    <rect key="frame" x="10" y="104" width="80" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saN-4Y-4qq">
+                    <rect key="frame" x="250" y="133" width="60" height="30"/>
+                    <state key="normal" title="通讯录"/>
+                    <connections>
+                        <action selector="phoneBookClicked:" destination="-1" eventType="touchUpInside" id="kcr-Aj-AJf"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A9L-pe-WqK">
+                    <rect key="frame" x="10" y="217" width="220" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="JbA-kD-74s"/>
+                    </connections>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会议室：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2F8-MP-bsl">
+                    <rect key="frame" x="10" y="188" width="80" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-hS-7to">
+                    <rect key="frame" x="100" y="282" width="120" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="DJB-lb-J1V"/>
+                        <constraint firstAttribute="width" constant="120" id="lQt-Gz-qTb"/>
+                    </constraints>
+                    <state key="normal" title="确定"/>
+                    <connections>
+                        <action selector="confirmBtnClicked:" destination="-1" eventType="touchUpInside" id="UA3-s4-5WU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0FW-Rc-iEu">
+                    <rect key="frame" x="250" y="217" width="60" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="81h-qJ-L0x"/>
+                    </constraints>
+                    <state key="normal" title="我的收藏"/>
+                    <connections>
+                        <action selector="myRoomsClicked:" destination="-1" eventType="touchUpInside" id="ikV-5l-OjT"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="cEU-d8-HwC" firstAttribute="width" secondItem="mzY-sj-rYi" secondAttribute="width" id="7m0-LL-N7K"/>
+                <constraint firstItem="Zye-uP-XAK" firstAttribute="top" secondItem="cEU-d8-HwC" secondAttribute="bottom" constant="25" id="8BN-O3-aHR"/>
+                <constraint firstItem="2F8-MP-bsl" firstAttribute="width" secondItem="JJC-NX-wbj" secondAttribute="width" id="ELZ-VH-Lpb"/>
+                <constraint firstItem="ZgX-hS-7to" firstAttribute="top" secondItem="A9L-pe-WqK" secondAttribute="bottom" constant="35" id="FKv-c9-Yn3"/>
+                <constraint firstItem="2F8-MP-bsl" firstAttribute="leading" secondItem="JJC-NX-wbj" secondAttribute="leading" id="Gbr-YR-NRS"/>
+                <constraint firstItem="A9L-pe-WqK" firstAttribute="leading" secondItem="JJC-NX-wbj" secondAttribute="leading" id="HlO-qr-9lk"/>
+                <constraint firstItem="JJC-NX-wbj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="KNC-eb-b3c"/>
+                <constraint firstItem="0FW-Rc-iEu" firstAttribute="centerY" secondItem="A9L-pe-WqK" secondAttribute="centerY" id="NBZ-AU-Q5i"/>
+                <constraint firstItem="cEU-d8-HwC" firstAttribute="leading" secondItem="JJC-NX-wbj" secondAttribute="leading" id="OFV-vj-sMB"/>
+                <constraint firstItem="Zye-uP-XAK" firstAttribute="height" secondItem="JJC-NX-wbj" secondAttribute="height" id="PJU-J3-gIL"/>
+                <constraint firstItem="ZgX-hS-7to" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Pco-h8-EcF"/>
+                <constraint firstItem="A9L-pe-WqK" firstAttribute="top" secondItem="2F8-MP-bsl" secondAttribute="bottom" constant="8" id="SCH-9j-xiA"/>
+                <constraint firstItem="0FW-Rc-iEu" firstAttribute="leading" secondItem="A9L-pe-WqK" secondAttribute="trailing" constant="20" id="bIl-J8-v9z"/>
+                <constraint firstItem="Zye-uP-XAK" firstAttribute="leading" secondItem="JJC-NX-wbj" secondAttribute="leading" id="c2f-yM-GfN"/>
+                <constraint firstItem="mzY-sj-rYi" firstAttribute="top" secondItem="Zye-uP-XAK" secondAttribute="bottom" constant="8" id="dGu-bP-j6x"/>
+                <constraint firstItem="mzY-sj-rYi" firstAttribute="leading" secondItem="JJC-NX-wbj" secondAttribute="leading" id="e7l-aS-bKd"/>
+                <constraint firstAttribute="trailing" secondItem="0FW-Rc-iEu" secondAttribute="trailing" constant="10" id="eui-0A-Uxw"/>
+                <constraint firstItem="cEU-d8-HwC" firstAttribute="top" secondItem="JJC-NX-wbj" secondAttribute="bottom" constant="8" id="m2y-KI-UxM"/>
+                <constraint firstItem="0FW-Rc-iEu" firstAttribute="trailing" secondItem="saN-4Y-4qq" secondAttribute="trailing" id="mms-AB-ZCC"/>
+                <constraint firstItem="saN-4Y-4qq" firstAttribute="centerY" secondItem="mzY-sj-rYi" secondAttribute="centerY" id="s50-rp-TM0"/>
+                <constraint firstItem="mzY-sj-rYi" firstAttribute="width" secondItem="A9L-pe-WqK" secondAttribute="width" id="sQ1-Ve-whe"/>
+                <constraint firstItem="2F8-MP-bsl" firstAttribute="top" secondItem="mzY-sj-rYi" secondAttribute="bottom" constant="25" id="umM-fX-ntN"/>
+                <constraint firstItem="Zye-uP-XAK" firstAttribute="width" secondItem="JJC-NX-wbj" secondAttribute="width" id="y5y-uN-gJ3"/>
+                <constraint firstItem="saN-4Y-4qq" firstAttribute="width" secondItem="0FW-Rc-iEu" secondAttribute="width" id="ysN-Vv-0kN"/>
+                <constraint firstItem="JJC-NX-wbj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="zQD-9P-d1X"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="369" y="375"/>
+        </view>
+    </objects>
+</document>

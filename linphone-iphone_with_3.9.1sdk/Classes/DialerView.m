@@ -20,6 +20,10 @@
 #import <AVFoundation/AVAudioSession.h>
 #import <AudioToolbox/AudioToolbox.h>
 
+
+#import "LPJoinBarViewController.h"
+#import "InCallViewController.h"
+
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 
@@ -31,13 +35,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
-															  statusBar:StatusBarView.class
-																 tabBar:TabBarView.class
-															   sideMenu:SideMenuView.class
-															 fullscreen:false
-														 isLeftFragment:YES
-														   fragmentWith:nil];
+//		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+//															  statusBar:StatusBarView.class
+//																 tabBar:TabBarView.class
+//															   sideMenu:SideMenuView.class
+//															 fullscreen:false
+//														 isLeftFragment:YES
+//														   fragmentWith:nil supportLandscapeMode:NO];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:LPJoinBarViewController.class
+                                                               sideMenu:SideMenuView.class
+                                                             fullscreen:false
+                                                         isLeftFragment:YES
+                                                           fragmentWith:nil supportLandscapeMode:NO];
+
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
@@ -361,7 +373,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (IBAction)onBackClick:(id)event {
-	[PhoneMainView.instance popToView:CallView.compositeViewDescription];
+//	[PhoneMainView.instance popToView:CallView.compositeViewDescription];
+    [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
 }
 
 - (IBAction)onAddressChange:(id)sender {

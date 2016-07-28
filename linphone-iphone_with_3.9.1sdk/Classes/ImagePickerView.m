@@ -55,7 +55,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 															   sideMenu:SideMenuView.class
 															 fullscreen:false
 														 isLeftFragment:NO
-														   fragmentWith:nil];
+														   fragmentWith:nil supportLandscapeMode:YES];
 		compositeDescription.darkBackground = false;
 	}
 	return compositeDescription;
