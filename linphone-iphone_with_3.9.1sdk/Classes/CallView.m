@@ -25,7 +25,6 @@
 #import <OpenGLES/EAGLDrawable.h>
 
 #import "CallView.h"
-#import "CallSideMenuView.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 #import "Utils.h"
@@ -59,7 +58,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
 															  statusBar:StatusBarView.class
 																 tabBar:nil
-															   sideMenu:CallSideMenuView.class
+															   sideMenu:nil
 															 fullscreen:false
 														 isLeftFragment:YES
 														   fragmentWith:nil supportLandscapeMode:YES];

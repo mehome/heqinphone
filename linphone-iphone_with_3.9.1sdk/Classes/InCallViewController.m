@@ -25,11 +25,11 @@
 #import <OpenGLES/EAGLDrawable.h>
 
 #import "IncallViewController.h"
-#import "UICallCell.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
-#import "UILinphone.h"
 #import "DTActionSheet.h"
+
+#import "UICallBar.h"
 
 #include "linphone/linphonecore.h"
 
@@ -68,6 +68,10 @@
 
 static UICompositeViewDescription *compositeDescription = nil;
 
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
+
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
 //        compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall" 
@@ -80,15 +84,24 @@ static UICompositeViewDescription *compositeDescription = nil;
 //                                                          landscapeMode:true
 //                                                           portraitMode:true];
         
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall"
-                                                                content:@"InCallViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"UICallBar"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall"
+//                                                                content:@"InCallViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"UICallBar"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:true
+//                                                           portraitMode:true];
+        
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:[UICallBar class]
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:true
-                                                           portraitMode:true];        
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:YES];
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
@@ -135,8 +148,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self callUpdate:call state:state animated:FALSE];
 
     // Set windows (warn memory leaks)
-    linphone_core_set_native_video_window_id([LinphoneManager getLc], (unsigned long)videoView);
-    linphone_core_set_native_preview_window_id([LinphoneManager getLc], (unsigned long)videoPreview);
+    linphone_core_set_native_video_window_id(LC, (__bridge void *)(videoView));
+    linphone_core_set_native_preview_window_id(LC, (__bridge void *)(videoPreview));
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -155,8 +169,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     [videoZoomHandler setup:videoGroup];
     videoGroup.alpha = 0;
     
-    [[PhoneMainView instance] showTabBar:true];
-    [[PhoneMainView instance] showStateBar:true];
     [videoCameraSwitch setAlpha:1.0];
     
     [videoCameraSwitch setPreview:videoPreview];
@@ -200,11 +212,10 @@ static UICompositeViewDescription *compositeDescription = nil;
         {
 			//check video
 			if (linphone_call_params_video_enabled(linphone_call_get_current_params(call))) {
-				[self displayVideoCall:animated];
 			} else {
 				[self displayTableCall:animated];
                 const LinphoneCallParams* param = linphone_call_get_current_params(call);
-				const LinphoneCallAppData* callAppData = linphone_call_get_user_pointer(call);
+                const LinphoneCallAppData *callAppData = (__bridge const LinphoneCallAppData *)(linphone_call_get_user_pointer(call));
 				if(state == LinphoneCallStreamsRunning
 				   && callAppData->videoRequested
 				   && linphone_call_params_low_bandwidth_enabled(param)) {
@@ -215,7 +226,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 														  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
 														  otherButtonTitles:nil];
 					[alert show];
-					[alert release];
 					callAppData->videoRequested=FALSE; /*reset field*/
 				}
             }
@@ -271,57 +281,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 #endif
 
-- (void)enableVideoDisplay:(BOOL)animation {
-    if(videoShown && animation)
-        return;
-    
-    videoShown = true;
-    
-    [videoZoomHandler resetZoom];
-    
-    if(animation) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:1.0];
-    }
-    
-    [videoGroup setAlpha:1.0];
-
-    if(animation) {
-        [UIView commitAnimations];
-    }
-    
-    if(linphone_core_self_view_enabled([LinphoneManager getLc])) {
-        [videoPreview setHidden:FALSE];
-    } else {
-        [videoPreview setHidden:TRUE];
-    }
-    
-    if ([LinphoneManager instance].frontCamId != nil) {
-        // only show camera switch button if we have more than 1 camera
-        [videoCameraSwitch setHidden:FALSE];
-    }
-    [videoCameraSwitch setAlpha:0.0];
-    
-    [[PhoneMainView instance] fullScreen: false];
-    [[PhoneMainView instance] showTabBar: true];
-    [[PhoneMainView instance] showStateBar: false];
-    
-#ifdef TEST_VIDEO_VIEW_CHANGE
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(_debugChangeVideoView) userInfo:nil repeats:YES];
-#endif
-    // [self batteryLevelChanged:nil];
-    
-    [videoWaitingForFirstImage setHidden: NO];
-    [videoWaitingForFirstImage startAnimating];
-    [loadingImgView setHidden:NO];
-    
-    LinphoneCall *call = linphone_core_get_current_call([LinphoneManager getLc]);
-    //linphone_call_params_get_used_video_codec return 0 if no video stream enabled
-	if (call != NULL && linphone_call_params_get_used_video_codec(linphone_call_get_current_params(call))) {
-        linphone_call_set_next_video_frame_decoded_callback(call, hideSpinner, self);
-    }
-}
-
 - (void)disableVideoDisplay:(BOOL)animation {
     if(!videoShown && animation)
         return;
@@ -333,7 +292,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     [videoGroup setAlpha:0.0];
-    [[PhoneMainView instance] showTabBar: true];
 
     [videoCameraSwitch setHidden:TRUE];
     
@@ -342,10 +300,6 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     [[PhoneMainView instance] fullScreen:false];
-}
-
-- (void)displayVideoCall:(BOOL)animated { 
-    [self enableVideoDisplay:animated];
 }
 
 - (void)displayTableCall:(BOOL)animated {
@@ -361,7 +315,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 static void hideSpinner(LinphoneCall* call, void* user_data) {
-    InCallViewController* thiz = (InCallViewController*) user_data;
+    InCallViewController* thiz = (__bridge InCallViewController*) user_data;
     [thiz hideSpinnerIndicator:call];
 }
 
@@ -382,12 +336,12 @@ static void hideSpinner(LinphoneCall* call, void* user_data) {
         return;
     
     const char* lUserNameChars = linphone_address_get_username(linphone_call_get_remote_address(call));
-    NSString* lUserName = lUserNameChars?[[[NSString alloc] initWithUTF8String:lUserNameChars] autorelease]:NSLocalizedString(@"Unknown",nil);
+    NSString* lUserName = lUserNameChars?[[NSString alloc] initWithUTF8String:lUserNameChars]:NSLocalizedString(@"Unknown",nil);
     const char* lDisplayNameChars =  linphone_address_get_display_name(linphone_call_get_remote_address(call));        
-	NSString* lDisplayName = [lDisplayNameChars?[[NSString alloc] initWithUTF8String:lDisplayNameChars]:@"" autorelease];
+	NSString* lDisplayName = lDisplayNameChars?[[NSString alloc] initWithUTF8String:lDisplayNameChars]:@"";
     
     NSString* title = [NSString stringWithFormat : NSLocalizedString(@"'%@' would like to enable video",nil), ([lDisplayName length] > 0)?lDisplayName:lUserName];
-    DTActionSheet *sheet = [[[DTActionSheet alloc] initWithTitle:title] autorelease];
+    DTActionSheet *sheet = [[DTActionSheet alloc] initWithTitle:title];
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(dismissVideoActionSheet:) userInfo:sheet repeats:NO];
     [sheet addButtonWithTitle:NSLocalizedString(@"Accept", nil)  block:^() {
         LOGI(@"User accept video proposal");

@@ -911,7 +911,7 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 static void linphone_iphone_popup_password_request(LinphoneCore *lc, const char *realmC, const char *usernameC,
 												   const char *domainC) {
     // TODO 这里需要把下面的代码换成跳转到登录页面，如果不在首页和登录页的情况下
-    
+
 	// let the wizard handle its own errors
 	if ([PhoneMainView.instance currentView] != AssistantView.compositeViewDescription) {
 		static DTAlertView *alertView = nil;

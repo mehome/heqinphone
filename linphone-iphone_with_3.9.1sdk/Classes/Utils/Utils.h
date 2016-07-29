@@ -93,12 +93,6 @@ typedef enum {
 
 @end
 
-@interface UIImage (ForceDecode)
-
-+ (UIImage *)decodedImageWithImage:(UIImage *)image;
-
-@end
-
 /* Use that macro when you want to invoke a custom initialisation method on your class,
  whatever is using it (xib, source code, etc., tableview cell) */
 #define INIT_WITH_COMMON_C                                                                                             \

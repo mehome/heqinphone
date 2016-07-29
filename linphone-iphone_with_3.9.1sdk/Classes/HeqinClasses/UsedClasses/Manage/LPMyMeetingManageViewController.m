@@ -104,17 +104,30 @@
 
 static UICompositeViewDescription *compositeDescription = nil;
 
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
+
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"ManageMeeting"
-                                                                content:@"LPMyMeetingManageViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"LPJoinBarViewController"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"ManageMeeting"
+//                                                                content:@"LPMyMeetingManageViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"LPJoinBarViewController"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:[LinphoneManager runningOnIpad]
+//                                                           portraitMode:true];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:[LPJoinBarViewController class]
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
-                                                           portraitMode:true];
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:false];
+
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
@@ -214,7 +227,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     RDRJoinMeetingModel *curMeetingModel = [self.filterMyMeetings objectAtIndex:indexPath.row];
     
     // 进入到管理界面，可设置PIN码和GUEST码
-    LPMyManageSingleViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription]], LPMyManageSingleViewController);
+//    LPMyManageSingleViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[LPMyManageSingleViewController compositeViewDescription]], LPMyManageSingleViewController);
+    LPMyManageSingleViewController *controller = VIEW(LPMyManageSingleViewController);
+    
     if (controller != nil) {
         NSLog(@"进入会议管理中, idNum=%@, name=%@, addr=%@", curMeetingModel.idNum, curMeetingModel.name, curMeetingModel.addr);
         [controller updateWithModel:curMeetingModel];

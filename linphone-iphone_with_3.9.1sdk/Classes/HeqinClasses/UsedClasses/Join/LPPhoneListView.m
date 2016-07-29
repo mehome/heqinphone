@@ -307,128 +307,128 @@ typedef void(^requestFailBlock)();
 }
 
 - (void)requestCompanyPage:(NSInteger)page withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
-    RDRPhoneListCompanyRequestModel *reqModel = [RDRPhoneListCompanyRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-    reqModel.page = page;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    __unsafe_unretained LPPhoneListView *weakListView = self;
-    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  RDRPhoneCompanyResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"请求公司通讯录, success, model=%@", model);
-                      // 解析model数据
-                      weakListView.companyCurPage = model.page;
-                      weakListView.companyTotalPage = model.total;
-                      
-                      [weakListView.companyPhoneList addObjectsFromArray:model.contacts];
-                      
-                      if (weakListView.companyTotalPage <= weakListView.companyCurPage) {
-                          // 没有数据了
-                          weakListView.companyTableView.mj_footer = nil;
-                      }
-                      
-                      if (sucBlock) {
-                          sucBlock();
-                      }
-                  }else {
-                      NSLog(@"请求公司通讯录出错, model=%@, msg=%@", model, model.msg);
-                      if (failBlock) {
-                          failBlock();
-                      }
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  //请求出错
-                  NSLog(@"请求公司通讯录出错, %s, error=%@", __FUNCTION__, error);
-                  if (failBlock) {
-                      failBlock();
-                  }
-              }];
+//    RDRPhoneListCompanyRequestModel *reqModel = [RDRPhoneListCompanyRequestModel requestModel];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//    reqModel.page = page;
+//    
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    
+//    __unsafe_unretained LPPhoneListView *weakListView = self;
+//    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  RDRPhoneCompanyResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"请求公司通讯录, success, model=%@", model);
+//                      // 解析model数据
+//                      weakListView.companyCurPage = model.page;
+//                      weakListView.companyTotalPage = model.total;
+//                      
+//                      [weakListView.companyPhoneList addObjectsFromArray:model.contacts];
+//                      
+//                      if (weakListView.companyTotalPage <= weakListView.companyCurPage) {
+//                          // 没有数据了
+//                          weakListView.companyTableView.mj_footer = nil;
+//                      }
+//                      
+//                      if (sucBlock) {
+//                          sucBlock();
+//                      }
+//                  }else {
+//                      NSLog(@"请求公司通讯录出错, model=%@, msg=%@", model, model.msg);
+//                      if (failBlock) {
+//                          failBlock();
+//                      }
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  //请求出错
+//                  NSLog(@"请求公司通讯录出错, %s, error=%@", __FUNCTION__, error);
+//                  if (failBlock) {
+//                      failBlock();
+//                  }
+//              }];
 }
 
 - (void)requestPrivatePage:(NSInteger)page withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
-    RDRPhoneListPrivateRequestModel *reqModel = [RDRPhoneListPrivateRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-    reqModel.page = page;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    __unsafe_unretained LPPhoneListView *weakListView = self;
-    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  RDRPhoneCompanyResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"请求私人通讯录, success, model=%@", model);
-                      // 解析model数据
-                      weakListView.privateCurPage = model.page;
-                      weakListView.privateTotalPage = model.total;
-                      
-                      [weakListView.privatePhoneList addObjectsFromArray:model.contacts];
-                      
-                      if (weakListView.privateTotalPage <= weakListView.privateCurPage) {
-                          // 没有数据了
-                          weakListView.privateTableView.mj_footer = nil;
-                      }
-                      
-                      if (sucBlock) {
-                          sucBlock();
-                      }
-                  }else {
-                      NSLog(@"请求公司通讯录出错, model=%@, msg=%@", model, model.msg);
-                      if (failBlock) {
-                          failBlock();
-                      }
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  //请求出错
-                  NSLog(@"请求公司通讯录出错, %s, error=%@", __FUNCTION__, error);
-                  if (failBlock) {
-                      failBlock();
-                  }
-              }];
+//    RDRPhoneListPrivateRequestModel *reqModel = [RDRPhoneListPrivateRequestModel requestModel];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//    reqModel.page = page;
+//    
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    
+//    __unsafe_unretained LPPhoneListView *weakListView = self;
+//    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  RDRPhoneCompanyResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"请求私人通讯录, success, model=%@", model);
+//                      // 解析model数据
+//                      weakListView.privateCurPage = model.page;
+//                      weakListView.privateTotalPage = model.total;
+//                      
+//                      [weakListView.privatePhoneList addObjectsFromArray:model.contacts];
+//                      
+//                      if (weakListView.privateTotalPage <= weakListView.privateCurPage) {
+//                          // 没有数据了
+//                          weakListView.privateTableView.mj_footer = nil;
+//                      }
+//                      
+//                      if (sucBlock) {
+//                          sucBlock();
+//                      }
+//                  }else {
+//                      NSLog(@"请求公司通讯录出错, model=%@, msg=%@", model, model.msg);
+//                      if (failBlock) {
+//                          failBlock();
+//                      }
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  //请求出错
+//                  NSLog(@"请求公司通讯录出错, %s, error=%@", __FUNCTION__, error);
+//                  if (failBlock) {
+//                      failBlock();
+//                  }
+//              }];
 }
 
 - (void)requestSearchText:(NSString *)searchText withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
     [self.searchPhoneList removeAllObjects];
     
-    RDRPhoneListSearchRequestModel *reqModel = [RDRPhoneListSearchRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-    reqModel.name = searchText;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    __unsafe_unretained LPPhoneListView *weakListView = self;
-    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  RDRPhoneCompanyResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"搜索关键字通讯录, success, model=%@", model);
-                      // 解析model数据
-                      [weakListView.searchPhoneList addObjectsFromArray:model.contacts];
-                      if (sucBlock) {
-                          sucBlock();
-                      }
-                  }else {
-                      NSLog(@"搜索关键字出错, model=%@, msg=%@", model, model.msg);
-                      if (failBlock) {
-                          failBlock();
-                      }
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  //请求出错
-                  NSLog(@"搜索关键字通讯录出错, %s, error=%@", __FUNCTION__, error);
-                  if (failBlock) {
-                      failBlock();
-                  }
-              }];
+//    RDRPhoneListSearchRequestModel *reqModel = [RDRPhoneListSearchRequestModel requestModel];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//    reqModel.name = searchText;
+//    
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    
+//    __unsafe_unretained LPPhoneListView *weakListView = self;
+//    [RDRNetHelper GET:req responseModelClass:[RDRPhoneCompanyResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  RDRPhoneCompanyResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"搜索关键字通讯录, success, model=%@", model);
+//                      // 解析model数据
+//                      [weakListView.searchPhoneList addObjectsFromArray:model.contacts];
+//                      if (sucBlock) {
+//                          sucBlock();
+//                      }
+//                  }else {
+//                      NSLog(@"搜索关键字出错, model=%@, msg=%@", model, model.msg);
+//                      if (failBlock) {
+//                          failBlock();
+//                      }
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  //请求出错
+//                  NSLog(@"搜索关键字通讯录出错, %s, error=%@", __FUNCTION__, error);
+//                  if (failBlock) {
+//                      failBlock();
+//                  }
+//              }];
 }
 
 - (void)resetAllDatas {

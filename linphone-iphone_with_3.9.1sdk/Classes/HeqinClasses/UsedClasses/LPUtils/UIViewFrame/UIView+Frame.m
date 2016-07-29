@@ -52,7 +52,7 @@
     return CGSizeMake(self.ott_width, self.ott_height);
 }
 
-- (void)setSize:(CGSize)size{
+- (void)setOtt_size:(CGSize)size{
     self.ott_width = size.width;
     self.ott_height = size.height;
 }

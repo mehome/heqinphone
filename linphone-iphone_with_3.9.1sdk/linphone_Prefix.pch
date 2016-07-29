@@ -10,6 +10,13 @@
 #import "Utils.h"
 #import "Contact.h"
 
+#import "UIView+Frame.h"
+#import "NSObject+RDRCommon.h"
+#import "UIImage+ForceDecode.h"
+
+
+
+
 #import "UIToggleButton.h"
 #import "UISpeakerButton.h"
 #import "UIBluetoothButton.h"
@@ -17,6 +24,7 @@
 
 #import "UIChatBubbleTextCell.h"
 
+#import "LPJoinBarViewController.h"
 
 // 在不添加NullSafe的情况下，执行下面这句会造成崩溃，添加后，则不会出现崩溃
 //[(NSString *)[NSNull null] stringByDeletingPathExtension];

@@ -17,6 +17,8 @@
 
 #import "LPSystemUser.h"
 
+#import "LPJoinBarViewController.h"
+
 // 7天，和30天
 #import "RDRRecordPlayRequstModel.h"
 #import "RDRRecordAndPlayResponseModel.h"
@@ -163,6 +165,10 @@ typedef void(^requestFailedBlock)(NSError *theError);
 
 #pragma mark - UICompositeViewDelegate Functions
 static UICompositeViewDescription *compositeDescription = nil;
+
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
@@ -371,31 +377,31 @@ static UICompositeViewDescription *compositeDescription = nil;
     reqModel.page = page;
     reqModel.day = days;
     
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRRecordAndPlayResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  RDRRecordAndPlayResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"请求录制视频列表, success, model=%@", model);
-                      if (block) {
-                          block(model);
-                      }
-                  }else {
-                      NSLog(@"请求录制视频列表, model=%@, msg=%@", model, model.msg);
-                      if (failBlock) {
-                          failBlock([[NSError alloc] initWithDomain:@"录制视频列表为错误" code:1000 userInfo:@{@"reason":@"返回码不为200"}]);
-                      }
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  //请求出错
-                  NSLog(@"请求录制视频列表, %s, error=%@", __FUNCTION__, error);
-                  if (failBlock) {
-                      failBlock(error);
-                  }
-              }];
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    
+//    [RDRNetHelper GET:req responseModelClass:[RDRRecordAndPlayResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  RDRRecordAndPlayResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"请求录制视频列表, success, model=%@", model);
+//                      if (block) {
+//                          block(model);
+//                      }
+//                  }else {
+//                      NSLog(@"请求录制视频列表, model=%@, msg=%@", model, model.msg);
+//                      if (failBlock) {
+//                          failBlock([[NSError alloc] initWithDomain:@"录制视频列表为错误" code:1000 userInfo:@{@"reason":@"返回码不为200"}]);
+//                      }
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  //请求出错
+//                  NSLog(@"请求录制视频列表, %s, error=%@", __FUNCTION__, error);
+//                  if (failBlock) {
+//                      failBlock(error);
+//                  }
+//              }];
 }
 
 - (IBAction)searchBtnClicked:(id)sender {
@@ -519,34 +525,32 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self showToastWithMessage:@"解密中,请稍候..."];
     
     [self showLoadingView];
-    __weak LPRecordAndPlayViewController *weakSelf = self;
-
-    RDRAskSecRequestModel *reqModel = [RDRAskSecRequestModel requestModel];
-    reqModel.id = idStr;
-    reqModel.pwd = passwordStr;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRAskSecResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf hideHudAndIndicatorView];
-
-                  RDRAskSecResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"解密视频, success, model=%@", model);
-                      [weakSelf handleAskSecModel:model];
-                  }else {
-                      NSLog(@"解密视频, model=%@, msg=%@", model, model.msg);
-                      [weakSelf showToastWithMessage:[NSString stringWithFormat:@"解密失败，%@", model.msg]];
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  //请求出错
-                  [weakSelf hideHudAndIndicatorView];
-
-                  NSLog(@"解密视频, %s, error=%@", __FUNCTION__, error);
-                  [weakSelf showToastWithMessage:[NSString stringWithFormat:@"解密失败，%@", error]];
-              }];
+//    __weak LPRecordAndPlayViewController *weakSelf = self;
+//    RDRAskSecRequestModel *reqModel = [RDRAskSecRequestModel requestModel];
+//    reqModel.id = idStr;
+//    reqModel.pwd = passwordStr;
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    
+//    [RDRNetHelper GET:req responseModelClass:[RDRAskSecResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf hideHudAndIndicatorView];
+//
+//                  RDRAskSecResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"解密视频, success, model=%@", model);
+//                      [weakSelf handleAskSecModel:model];
+//                  }else {
+//                      NSLog(@"解密视频, model=%@, msg=%@", model, model.msg);
+//                      [weakSelf showToastWithMessage:[NSString stringWithFormat:@"解密失败，%@", model.msg]];
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  //请求出错
+//                  [weakSelf hideHudAndIndicatorView];
+//
+//                  NSLog(@"解密视频, %s, error=%@", __FUNCTION__, error);
+//                  [weakSelf showToastWithMessage:[NSString stringWithFormat:@"解密失败，%@", error]];
+//              }];
 }
 
 - (void)handleAskSecModel:(RDRAskSecResponseModel *)model {
@@ -607,31 +611,30 @@ static UICompositeViewDescription *compositeDescription = nil;
     reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
     reqModel.key = keywords;
     
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRRecordSearchResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  RDRRecordSearchResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"请求搜索视频列表, success, model=%@", model);
-                      if (block) {
-                          block(model);
-                      }
-                  }else {
-                      NSLog(@"请求搜索视频列表, model=%@, msg=%@", model, model.msg);
-                      if (failBlock) {
-                          failBlock([[NSError alloc] initWithDomain:@"搜索视频列表为错误" code:1000 userInfo:@{@"reason":@"返回码不为200"}]);
-                      }
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  //请求出错
-                  NSLog(@"请求搜索视频列表, %s, error=%@", __FUNCTION__, error);
-                  if (failBlock) {
-                      failBlock(error);
-                  }
-              }];
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];    
+//    [RDRNetHelper GET:req responseModelClass:[RDRRecordSearchResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  RDRRecordSearchResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"请求搜索视频列表, success, model=%@", model);
+//                      if (block) {
+//                          block(model);
+//                      }
+//                  }else {
+//                      NSLog(@"请求搜索视频列表, model=%@, msg=%@", model, model.msg);
+//                      if (failBlock) {
+//                          failBlock([[NSError alloc] initWithDomain:@"搜索视频列表为错误" code:1000 userInfo:@{@"reason":@"返回码不为200"}]);
+//                      }
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  //请求出错
+//                  NSLog(@"请求搜索视频列表, %s, error=%@", __FUNCTION__, error);
+//                  if (failBlock) {
+//                      failBlock(error);
+//                  }
+//              }];
 }
 
 

@@ -34,6 +34,20 @@
 	return self;
 }
 
+- (void)setTheBool:(BOOL)value forKey:(NSString*)key {
+    [self setBool:value forKey:key];
+}
+
+- (void)setString:(const char*)value forKey:(NSString*)key {
+    id obj=Nil;
+    if (value) obj=[[NSString alloc] initWithCString:value encoding:[NSString defaultCStringEncoding] ];
+    [self setObject:obj forKey:key];
+}
+
+- (void)setTheStr:(NSString *)str forKey:(NSString *)key {
+    [self setObject:str forKey:key];
+}
+
 - (void)setCString:(const char *)value forKey:(NSString *)key {
 	id obj = @"";
 	if (value)

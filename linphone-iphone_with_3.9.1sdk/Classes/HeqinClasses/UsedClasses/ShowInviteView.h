@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShowPinView.h"
 
 typedef void(^inviteConfirmBlock)(NSString *text);
 typedef void(^inviteCancelBlock)();
-typedef void(^noContentInput)();
 
 @interface ShowInviteView : UIView
 

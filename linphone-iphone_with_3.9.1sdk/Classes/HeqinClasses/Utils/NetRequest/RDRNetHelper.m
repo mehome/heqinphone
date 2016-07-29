@@ -7,14 +7,14 @@
 //
 
 #import "RDRNetHelper.h"
-#import "AFHTTPRequestOperationManager.h"
+//#import "AFHTTPRequestOperationManager.h"
 #import "XXCache.h"
 #import "RDRNetworkAPICache.h"
 #import "NSDictionary+XXQueryString.h"
 
 @interface RDRNetHelper ()
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *requestManager;
+//@property (nonatomic, strong) AFHTTPRequestOperationManager *requestManager;
 
 // http cache
 @property (nonatomic, strong) RDRNetworkAPICache *httpCache;
@@ -33,8 +33,8 @@
 - (id)initDefaultHelper
 {
     if (self = [super init]) {
-        self.requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHeqinLinphoneServerAddress]];
-        self.requestManager.requestSerializer=[AFJSONRequestSerializer serializer];
+//        self.requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHeqinLinphoneServerAddress]];
+//        self.requestManager.requestSerializer=[AFJSONRequestSerializer serializer];
         _commonParametersCache=[[NSMutableDictionary alloc] init];
     }
     
@@ -52,21 +52,21 @@
 }
 
 + (void)setToken:(NSString *)tokenStr andPassword:(NSString *)password {
-    if (tokenStr.length == 0 || password.length == 0) {
-        [[RDRNetHelper defaultHelper].requestManager.requestSerializer clearAuthorizationHeader];
-    }else {
-        [[RDRNetHelper defaultHelper].requestManager.requestSerializer setAuthorizationHeaderFieldWithUsername:tokenStr password:password];
-    }
+//    if (tokenStr.length == 0 || password.length == 0) {
+//        [[RDRNetHelper defaultHelper].requestManager.requestSerializer clearAuthorizationHeader];
+//    }else {
+//        [[RDRNetHelper defaultHelper].requestManager.requestSerializer setAuthorizationHeaderFieldWithUsername:tokenStr password:password];
+//    }
 }
-
+//
 + (void)clearCommonParametersCache {
-    [((RDRNetHelper *)[self defaultHelper]).commonParametersCache removeObjectForKey:@"usertoken"];
+//    [((RDRNetHelper *)[self defaultHelper]).commonParametersCache removeObjectForKey:@"usertoken"];
 }
-
+//
 + (void)addValueToCommonParametersCache:(NSString *)value key:(NSString *)key{
-    if (value && key) {
-        [((RDRNetHelper *)[self defaultHelper]).commonParametersCache setObject:value forKey:key];
-    }
+//    if (value && key) {
+//        [((RDRNetHelper *)[self defaultHelper]).commonParametersCache setObject:value forKey:key];
+//    }
 }
 
 
@@ -76,65 +76,65 @@
 //                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 
-+ (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
-             responseModelClass:(Class)responseModelClass
-                        success:(BlockRDRHTTPRequestSuccess)success
-                        failure:(BlockRDRHTTPRequestFailure)failure {
-    return [[RDRNetHelper defaultHelper] GET:aModel responseModelClass:responseModelClass success:success failure:failure];
-}
-
-- (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
-                 responseModelClass:(Class)responseModelClass
-                        success:(BlockRDRHTTPRequestSuccess)success
-                        failure:(BlockRDRHTTPRequestFailure)failure
-{
-    return [self request:aModel
-              httpMethod:@"GET"
-      responseModelClass:responseModelClass
-                 success:success
-                 failure:failure constructingBodyWithBlock:nil uploadProgressBlock:nil];
-}
-
-+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
-              responseModelClass:(Class)responseModelClass
-                         success:(BlockRDRHTTPRequestSuccess)success
-                         failure:(BlockRDRHTTPRequestFailure)failure
-{
-    return [[RDRNetHelper defaultHelper] POST:aModel
-   responseModelClass:responseModelClass
-              success:success
-              failure:failure];
-}
-
-
-+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock{
-    
-    return [[RDRNetHelper defaultHelper] request:aModel httpMethod:@"POST" responseModelClass:responseModelClass success:success failure:failure constructingBodyWithBlock:bodyBlock uploadProgressBlock:uploadBlock];
-    
-}
-
-
-+ (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress{
-
-    return [[RDRNetHelper defaultHelper] request:request responseModelClass:responseModelClass success:success failure:failure uploadProgressBlock:uploadBlock downloadProgressBlock:downloadProgress];
-    
-}
-
-
-
-
-
-- (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
-                  responseModelClass:(Class)responseModelClass
-                         success:(BlockRDRHTTPRequestSuccess)success
-                         failure:(BlockRDRHTTPRequestFailure)failure
-{
-    return [self request:aModel
-              httpMethod:@"POST"
-      responseModelClass:responseModelClass
-                 success:success
-                 failure:failure constructingBodyWithBlock:nil uploadProgressBlock:nil];
-}
+//+ (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
+//             responseModelClass:(Class)responseModelClass
+//                        success:(BlockRDRHTTPRequestSuccess)success
+//                        failure:(BlockRDRHTTPRequestFailure)failure {
+//    return [[RDRNetHelper defaultHelper] GET:aModel responseModelClass:responseModelClass success:success failure:failure];
+//}
+//
+//- (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
+//                 responseModelClass:(Class)responseModelClass
+//                        success:(BlockRDRHTTPRequestSuccess)success
+//                        failure:(BlockRDRHTTPRequestFailure)failure
+//{
+//    return [self request:aModel
+//              httpMethod:@"GET"
+//      responseModelClass:responseModelClass
+//                 success:success
+//                 failure:failure constructingBodyWithBlock:nil uploadProgressBlock:nil];
+//}
+//
+//+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
+//              responseModelClass:(Class)responseModelClass
+//                         success:(BlockRDRHTTPRequestSuccess)success
+//                         failure:(BlockRDRHTTPRequestFailure)failure
+//{
+//    return [[RDRNetHelper defaultHelper] POST:aModel
+//   responseModelClass:responseModelClass
+//              success:success
+//              failure:failure];
+//}
+//
+//
+//+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock{
+//    
+//    return [[RDRNetHelper defaultHelper] request:aModel httpMethod:@"POST" responseModelClass:responseModelClass success:success failure:failure constructingBodyWithBlock:bodyBlock uploadProgressBlock:uploadBlock];
+//    
+//}
+//
+//
+//+ (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress{
+//
+//    return [[RDRNetHelper defaultHelper] request:request responseModelClass:responseModelClass success:success failure:failure uploadProgressBlock:uploadBlock downloadProgressBlock:downloadProgress];
+//    
+//}
+//
+//
+//
+//
+//
+//- (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
+//                  responseModelClass:(Class)responseModelClass
+//                         success:(BlockRDRHTTPRequestSuccess)success
+//                         failure:(BlockRDRHTTPRequestFailure)failure
+//{
+//    return [self request:aModel
+//              httpMethod:@"POST"
+//      responseModelClass:responseModelClass
+//                 success:success
+//                 failure:failure constructingBodyWithBlock:nil uploadProgressBlock:nil];
+//}
 
 
 /**
@@ -149,38 +149,38 @@
  *
  *  @return 已发送的request 可以为nil
  */
-- (AFHTTPRequestOperation *)request:(RDRRequest *)requestModel
-                         httpMethod:(NSString *)httpMethod
-                 responseModelClass:(Class)responseModelClass
-                            success:(BlockRDRHTTPRequestSuccess)success
-                            failure:(BlockRDRHTTPRequestFailure)failure
-          constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock{
-    NSString *aURL = requestModel.urlPath;
-    
-    NSDictionary *dictionary = [self finalParametersFromRequestModel:requestModel];
-    
-    return [self requestWithURLStr:aURL
-                                               httpMethod:httpMethod
-                                           withParameters:dictionary
-                                       responseModelClass:responseModelClass
-                                                  success:success
-                                                  failure:failure constructingBodyWithBlock:bodyBlock uploadProgressBlock:uploadBlock];
-}
+//- (AFHTTPRequestOperation *)request:(RDRRequest *)requestModel
+//                         httpMethod:(NSString *)httpMethod
+//                 responseModelClass:(Class)responseModelClass
+//                            success:(BlockRDRHTTPRequestSuccess)success
+//                            failure:(BlockRDRHTTPRequestFailure)failure
+//          constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock{
+//    NSString *aURL = requestModel.urlPath;
+//    
+//    NSDictionary *dictionary = [self finalParametersFromRequestModel:requestModel];
+//    
+//    return [self requestWithURLStr:aURL
+//                                               httpMethod:httpMethod
+//                                           withParameters:dictionary
+//                                       responseModelClass:responseModelClass
+//                                                  success:success
+//                                                  failure:failure constructingBodyWithBlock:bodyBlock uploadProgressBlock:uploadBlock];
+//}
 
 #pragma mark -
 #pragma mark 封装公共参数
 // 下面这个方法只是留在这里说明这里的一个多线程崩溃的问题
 - (void)refreshCommonParametersCache
 {
-    NSString *netStatus = @"";
-    if([[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi) {
-        netStatus = @"wifi";
-    } else if ([[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWWAN) {
-        netStatus = @"3G";
-    }
-    [self.commonParametersCache setObject:netStatus forKey:@"net"];
-    
-    // 还可能刷新其它参数，如一些实时的参数，如用户的登陆状态，用户名等这些可能会随用户的登陆退出而变化的数据
+//    NSString *netStatus = @"";
+//    if([[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi) {
+//        netStatus = @"wifi";
+//    } else if ([[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWWAN) {
+//        netStatus = @"3G";
+//    }
+//    [self.commonParametersCache setObject:netStatus forKey:@"net"];
+//    
+//    // 还可能刷新其它参数，如一些实时的参数，如用户的登陆状态，用户名等这些可能会随用户的登陆退出而变化的数据
 }
 
 - (NSDictionary *)finalParametersFromRequestModel:(RDRRequest *)request {
@@ -253,235 +253,235 @@
 
 
 
-- (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress{
+//- (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress{
+//
+//    
+//    AFHTTPRequestOperation * operation = [self.requestManager  HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        
+//        
+//        //
+//        NSError *error = nil;
+//        NSData *dataResponse = (NSData *)responseObject;
+//        
+//        //
+//        if (responseModelClass != nil) {
+//            NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
+//            
+//            RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
+//                                                     fromJSONDictionary:dict
+//                                                                  error:&error];
+//            
+//            if (error == nil) {
+//                
+//                if (success != NULL) {
+//                    // 可以做一些公用的操作， 比如打印log
+//                    
+//                    //
+//                    success(operation, aModel);
+//                }
+//            }
+//            else
+//            {
+//                NSLog(@"%@",error);
+//                if (failure != NULL) {
+//                    failure(operation, error);
+//                }
+//            }
+//            
+//        }
+//        else
+//        {
+//            if (success != NULL) {
+//                success(operation, dataResponse);
+//            }
+//        }
+//        
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+//        failure ? failure(operation, error) : nil;
+//    }];
+//    
+//    if (downloadProgress) {
+//        [operation setDownloadProgressBlock:downloadProgress];
+//    }
+//    if (uploadBlock) {
+//        [operation setUploadProgressBlock:uploadBlock];
+//    }
+//    
+//    [operation start];
+//    
+//    return operation;
+//}
 
-    
-    AFHTTPRequestOperation * operation = [self.requestManager  HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        
-        
-        //
-        NSError *error = nil;
-        NSData *dataResponse = (NSData *)responseObject;
-        
-        //
-        if (responseModelClass != nil) {
-            NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
-            
-            RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
-                                                     fromJSONDictionary:dict
-                                                                  error:&error];
-            
-            if (error == nil) {
-                
-                if (success != NULL) {
-                    // 可以做一些公用的操作， 比如打印log
-                    
-                    //
-                    success(operation, aModel);
-                }
-            }
-            else
-            {
-                NSLog(@"%@",error);
-                if (failure != NULL) {
-                    failure(operation, error);
-                }
-            }
-            
-        }
-        else
-        {
-            if (success != NULL) {
-                success(operation, dataResponse);
-            }
-        }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        failure ? failure(operation, error) : nil;
-    }];
-    
-    if (downloadProgress) {
-        [operation setDownloadProgressBlock:downloadProgress];
-    }
-    if (uploadBlock) {
-        [operation setUploadProgressBlock:uploadBlock];
-    }
-    
-    [operation start];
-    
-    return operation;
-}
-
-- (AFHTTPRequestOperation *)requestWithURLStr:(NSString *)aURL
-                                   httpMethod:(NSString *)httpMethod
-                               withParameters:(NSDictionary *)parameters
-                           responseModelClass:(Class)responseModelClass
-                                      success:(BlockRDRHTTPRequestSuccess)success
-                                      failure:(BlockRDRHTTPRequestFailure)failure
-                    constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock
-{
- 
-    if (!([httpMethod isKindOfClass:[NSString class]] && httpMethod.length > 0)) {
-        NSLog(@"something wrong with httpMethod=%@", httpMethod);
-        return nil;
-    }
-    
-    NSLog(@"DEBUG post url=%@", aURL);
-    NSLog(@"DEBUG post parameters=%@", parameters);
-    
-    AFHTTPRequestOperation *requestOperation = nil;
-    if ([httpMethod isEqualToString:@"GET"]) {
-        
-        requestOperation = [self.requestManager GET:aURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //
-            NSError *error = nil;
-            NSData *dataResponse = (NSData *)responseObject;
-            
-            //
-            if (responseModelClass != nil) {
-                
-                NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
-                
-                RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
-                                                         fromJSONDictionary:dict
-                                                                      error:&error];
-                
-                if (error == nil) {
-                    
-                    if (success != NULL) {
-                        // 可以做一些公用的操作， 比如打印log
-                        
-                        //
-                        success(operation, aModel);
-                    }
-                }
-                else
-                {
-                    if (failure != NULL) {
-                        failure(operation, error);
-                    }
-                }
-            }
-            else
-            {
-                if (success != NULL) {
-                    success(operation, dataResponse);
-                }
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            failure ? failure(operation, error) : nil;
-        }];
-        
-    }else if ([httpMethod isEqualToString:@"POST"]) {
-        
-        if (bodyBlock) {
-            
-
-            requestOperation = [self.requestManager POST:aURL parameters:parameters constructingBodyWithBlock:bodyBlock success: ^(AFHTTPRequestOperation *operation, id responseObject){
-                
-                
-                //
-                NSError *error = nil;
-                NSData *dataResponse = (NSData *)responseObject;
-                
-                //
-                if (responseModelClass != nil) {
-                    NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
-                    
-                    RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
-                                                             fromJSONDictionary:dict
-                                                                          error:&error];
-                    
-                    if (error == nil) {
-                        
-                        if (success != NULL) {
-                            // 可以做一些公用的操作， 比如打印log
-                            
-                            //
-                            success(operation, aModel);
-                        }
-                    }
-                    else
-                    {
-                        NSLog(@"%@",error);
-                        if (failure != NULL) {
-                            failure(operation, error);
-                        }
-                    }
-                    
-                }
-                else
-                {
-                    if (success != NULL) {
-                        success(operation, dataResponse);
-                    }
-                }
-                
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                failure ? failure(operation, error) : nil;
-            }];
-        }else{
-
-            requestOperation = [self.requestManager POST:aURL parameters:parameters success: ^(AFHTTPRequestOperation *operation, id responseObject){
-                
-                
-                //
-                NSError *error = nil;
-                NSData *dataResponse = (NSData *)responseObject;
-                
-                //
-                if (responseModelClass != nil) {
-                    NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
-                    
-                    RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
-                                                             fromJSONDictionary:dict
-                                                                          error:&error];
-                    
-                    if (error == nil) {
-                        
-                        if (success != NULL) {
-                            // 可以做一些公用的操作， 比如打印log
-                            
-                            //
-                            success(operation, aModel);
-                        }
-                    }
-                    else
-                    {
-                        NSLog(@"%@",error);
-                        if (failure != NULL) {
-                            failure(operation, error);
-                        }
-                    }
-                    
-                }
-                else
-                {
-                    if (success != NULL) {
-                        success(operation, dataResponse);
-                    }
-                }
-                
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                failure ? failure(operation, error) : nil;
-            }];
-        }
-        
-        if (uploadBlock) {
-            [requestOperation setUploadProgressBlock:uploadBlock];
-        }
-        
-        
-    }else {
-    
-    }
-    
-    return requestOperation;
-}
+//- (AFHTTPRequestOperation *)requestWithURLStr:(NSString *)aURL
+//                                   httpMethod:(NSString *)httpMethod
+//                               withParameters:(NSDictionary *)parameters
+//                           responseModelClass:(Class)responseModelClass
+//                                      success:(BlockRDRHTTPRequestSuccess)success
+//                                      failure:(BlockRDRHTTPRequestFailure)failure
+//                    constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock
+//{
+// 
+//    if (!([httpMethod isKindOfClass:[NSString class]] && httpMethod.length > 0)) {
+//        NSLog(@"something wrong with httpMethod=%@", httpMethod);
+//        return nil;
+//    }
+//    
+//    NSLog(@"DEBUG post url=%@", aURL);
+//    NSLog(@"DEBUG post parameters=%@", parameters);
+//    
+//    AFHTTPRequestOperation *requestOperation = nil;
+//    if ([httpMethod isEqualToString:@"GET"]) {
+//        
+//        requestOperation = [self.requestManager GET:aURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            //
+//            NSError *error = nil;
+//            NSData *dataResponse = (NSData *)responseObject;
+//            
+//            //
+//            if (responseModelClass != nil) {
+//                
+//                NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
+//                
+//                RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
+//                                                         fromJSONDictionary:dict
+//                                                                      error:&error];
+//                
+//                if (error == nil) {
+//                    
+//                    if (success != NULL) {
+//                        // 可以做一些公用的操作， 比如打印log
+//                        
+//                        //
+//                        success(operation, aModel);
+//                    }
+//                }
+//                else
+//                {
+//                    if (failure != NULL) {
+//                        failure(operation, error);
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                if (success != NULL) {
+//                    success(operation, dataResponse);
+//                }
+//            }
+//            
+//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//            failure ? failure(operation, error) : nil;
+//        }];
+//        
+//    }else if ([httpMethod isEqualToString:@"POST"]) {
+//        
+//        if (bodyBlock) {
+//            
+//
+//            requestOperation = [self.requestManager POST:aURL parameters:parameters constructingBodyWithBlock:bodyBlock success: ^(AFHTTPRequestOperation *operation, id responseObject){
+//                
+//                
+//                //
+//                NSError *error = nil;
+//                NSData *dataResponse = (NSData *)responseObject;
+//                
+//                //
+//                if (responseModelClass != nil) {
+//                    NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
+//                    
+//                    RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
+//                                                             fromJSONDictionary:dict
+//                                                                          error:&error];
+//                    
+//                    if (error == nil) {
+//                        
+//                        if (success != NULL) {
+//                            // 可以做一些公用的操作， 比如打印log
+//                            
+//                            //
+//                            success(operation, aModel);
+//                        }
+//                    }
+//                    else
+//                    {
+//                        NSLog(@"%@",error);
+//                        if (failure != NULL) {
+//                            failure(operation, error);
+//                        }
+//                    }
+//                    
+//                }
+//                else
+//                {
+//                    if (success != NULL) {
+//                        success(operation, dataResponse);
+//                    }
+//                }
+//                
+//                
+//            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+//                failure ? failure(operation, error) : nil;
+//            }];
+//        }else{
+//
+//            requestOperation = [self.requestManager POST:aURL parameters:parameters success: ^(AFHTTPRequestOperation *operation, id responseObject){
+//                
+//                
+//                //
+//                NSError *error = nil;
+//                NSData *dataResponse = (NSData *)responseObject;
+//                
+//                //
+//                if (responseModelClass != nil) {
+//                    NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
+//                    
+//                    RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
+//                                                             fromJSONDictionary:dict
+//                                                                          error:&error];
+//                    
+//                    if (error == nil) {
+//                        
+//                        if (success != NULL) {
+//                            // 可以做一些公用的操作， 比如打印log
+//                            
+//                            //
+//                            success(operation, aModel);
+//                        }
+//                    }
+//                    else
+//                    {
+//                        NSLog(@"%@",error);
+//                        if (failure != NULL) {
+//                            failure(operation, error);
+//                        }
+//                    }
+//                    
+//                }
+//                else
+//                {
+//                    if (success != NULL) {
+//                        success(operation, dataResponse);
+//                    }
+//                }
+//                
+//                
+//            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+//                failure ? failure(operation, error) : nil;
+//            }];
+//        }
+//        
+//        if (uploadBlock) {
+//            [requestOperation setUploadProgressBlock:uploadBlock];
+//        }
+//        
+//        
+//    }else {
+//    
+//    }
+//    
+//    return requestOperation;
+//}
 
 
 #pragma mark -

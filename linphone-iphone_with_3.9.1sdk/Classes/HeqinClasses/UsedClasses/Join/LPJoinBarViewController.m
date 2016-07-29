@@ -189,7 +189,7 @@
     // 切换到首页的会议
     // 判断用户是否登录，未登录，则弹出登录界面
     if ( kNotLoginCheck ) {
-        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {
         // 进入到管理我的会议界面
         [[PhoneMainView instance] changeCurrentView:[LPMyMeetingManageViewController compositeViewDescription]];
@@ -201,7 +201,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeStateNotification object:sender];
 
     if ( kNotLoginCheck) {
-        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {
         // 进入到会议安排界面
         [[PhoneMainView instance] changeCurrentView:[LPMyMeetingArrangeViewController compositeViewDescription]];
@@ -213,7 +213,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeStateNotification object:sender];
     
     if ( kNotLoginCheck) {
-        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription] push:YES];
+        [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {
         // 进入到会议安排界面
         [[PhoneMainView instance] changeCurrentView:[LPRecordAndPlayViewController compositeViewDescription]];

@@ -31,7 +31,7 @@
 #import "LPPhoneListView.h"
 #import "RDRPhoneModel.h"
 
-#import "AFHTTPRequestOperationManager.h"
+//#import "AFHTTPRequestOperationManager.h"
 
 #import "NSString+XXURLEncoding.h"
 
@@ -131,98 +131,111 @@
 // 获取数据
 - (void)getDatas {
     // 判断如果未取到通信录，则进行获取
-    if ([LPSystemUser sharedUser].hasGetContacts == NO) {
-        // 调用接口进行获取
-        
-        [self showLoadingView];
-        
-        __weak LPMyMeetingArrangeViewController *weakSelf = self;
-        
-        RDRMyMeetingArrangeContactsModel *reqModel = [RDRMyMeetingArrangeContactsModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-        
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        
-        [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeContactsResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      [weakSelf hideHudAndIndicatorView];
-                      
-                      RDRMyMeetingArrangeContactsResponseModel *model = responseObject;
-                      
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"请求通讯录及终端设备列表success, model=%@", model);
-                          
-                          // 解析model数据
-                          [LPSystemUser sharedUser].hasGetContacts = YES;
-                          [LPSystemUser sharedUser].contactsList = [model.contacts mutableCopy];                          
-                          [LPSystemUser sharedUser].devicesList = [model.devices mutableCopy];
-                          
-                          [weakSelf getDatas];
-                      }else {
-                          NSLog(@"请求通讯录及终端设备列表 服务器请求出错, model=%@, msg=%@", model, model.msg);
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      [weakSelf hideHudAndIndicatorView];
-                      
-                      //请求出错
-                      NSLog(@"请求通讯录及终端设备列表, %s, error=%@", __FUNCTION__, error);
-                  }];
-        return;
-    }
-    
-    // 判断有无获取到收藏的会议室列表
-    if ([LPSystemUser sharedUser].hasGetFavMeetingRooms == NO) {
-        // 调用接口进行获取
-        [self showLoadingView];
-        
-        __weak LPMyMeetingArrangeViewController *weakSelf = self;
-        
-        RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-        
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        
-        [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeRoomResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      [weakSelf hideHudAndIndicatorView];
-                      
-                      RDRMyMeetingArrangeRoomResponseModel *model = responseObject;
-                      
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"请求收藏的会议室列表success, model=%@", model);
-                          
-                          // 解析model数据
-                          [LPSystemUser sharedUser].hasGetFavMeetingRooms = YES;
-                          [LPSystemUser sharedUser].favMeetingRoomsList = [model.fav mutableCopy];
-                          
-                          [self showToastWithMessage:@"请安排会议"];
-                          
-                      }else {
-                          NSLog(@"请求收藏的会议室列表服务器请求出错, model=%@, msg=%@", model, model.msg);
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      [weakSelf hideHudAndIndicatorView];
-                      
-                      //请求出错
-                      NSLog(@"请求收藏的会议室列表, %s, error=%@", __FUNCTION__, error);
-                  }];
-    }
+//    if ([LPSystemUser sharedUser].hasGetContacts == NO) {
+//        // 调用接口进行获取
+//        
+//        [self showLoadingView];
+//        
+//        __weak LPMyMeetingArrangeViewController *weakSelf = self;
+//        
+//        RDRMyMeetingArrangeContactsModel *reqModel = [RDRMyMeetingArrangeContactsModel requestModel];
+//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//        
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        
+//        [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeContactsResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      [weakSelf hideHudAndIndicatorView];
+//                      
+//                      RDRMyMeetingArrangeContactsResponseModel *model = responseObject;
+//                      
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"请求通讯录及终端设备列表success, model=%@", model);
+//                          
+//                          // 解析model数据
+//                          [LPSystemUser sharedUser].hasGetContacts = YES;
+//                          [LPSystemUser sharedUser].contactsList = [model.contacts mutableCopy];                          
+//                          [LPSystemUser sharedUser].devicesList = [model.devices mutableCopy];
+//                          
+//                          [weakSelf getDatas];
+//                      }else {
+//                          NSLog(@"请求通讯录及终端设备列表 服务器请求出错, model=%@, msg=%@", model, model.msg);
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      [weakSelf hideHudAndIndicatorView];
+//                      
+//                      //请求出错
+//                      NSLog(@"请求通讯录及终端设备列表, %s, error=%@", __FUNCTION__, error);
+//                  }];
+//        return;
+//    }
+//    
+//    // 判断有无获取到收藏的会议室列表
+//    if ([LPSystemUser sharedUser].hasGetFavMeetingRooms == NO) {
+//        // 调用接口进行获取
+//        [self showLoadingView];
+//        
+//        __weak LPMyMeetingArrangeViewController *weakSelf = self;
+//        
+//        RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
+//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//        
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        
+//        [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeRoomResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      [weakSelf hideHudAndIndicatorView];
+//                      
+//                      RDRMyMeetingArrangeRoomResponseModel *model = responseObject;
+//                      
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"请求收藏的会议室列表success, model=%@", model);
+//                          
+//                          // 解析model数据
+//                          [LPSystemUser sharedUser].hasGetFavMeetingRooms = YES;
+//                          [LPSystemUser sharedUser].favMeetingRoomsList = [model.fav mutableCopy];
+//                          
+//                          [self showToastWithMessage:@"请安排会议"];
+//                          
+//                      }else {
+//                          NSLog(@"请求收藏的会议室列表服务器请求出错, model=%@, msg=%@", model, model.msg);
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      [weakSelf hideHudAndIndicatorView];
+//                      
+//                      //请求出错
+//                      NSLog(@"请求收藏的会议室列表, %s, error=%@", __FUNCTION__, error);
+//                  }];
+//    }
 }
 
 #pragma mark - UICompositeViewDelegate Functions
 static UICompositeViewDescription *compositeDescription = nil;
 
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
+
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"MeetingArrange"
-                                                                content:@"LPMyMeetingArrangeViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"LPJoinBarViewController"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"MeetingArrange"
+//                                                                content:@"LPMyMeetingArrangeViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"LPJoinBarViewController"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:[LinphoneManager runningOnIpad]
+//                                                           portraitMode:true];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:[LPJoinBarViewController class]
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
-                                                           portraitMode:true];
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:false];
+
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
@@ -322,82 +335,48 @@ static UICompositeViewDescription *compositeDescription = nil;
     self.joinerField.text = str;
 }
 
-//- (IBAction)myTerminalsClicked:(id)sender {
-//    // 显示的我的收藏的终端
-//    if ([LPSystemUser sharedUser].devicesList.count == 0) {
-//        [self showToastWithMessage:@"收藏的终端列表为空"];
-//        return;
-//    }
-//    
-//    [RDRCellsSelectView showSelectViewWith:@"请选择终端列表" withArr:[LPSystemUser sharedUser].devicesList
-//                            hasSelectedArr:self.selectedDevices
-//                          withConfirmBlock:^(NSArray *selectedDatas) {
-//        NSLog(@"selected devie=%@", selectedDatas);
-//                              self.selectedDevices = [NSArray arrayWithArray:selectedDatas];
-//                              // 更新终端输入框
-//                              [self updateDeviceField];
-//    } withCancelBlcok:^{
-//        NSLog(@"取消终端选择");
-//    } singleChoose:NO];
-//}
-
-//- (void)updateDeviceField {
-//    NSMutableString *str = [NSMutableString stringWithString:@""];
-//    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
-//        RDRDeviceModel *deviceModel = [self.selectedDevices objectAtIndex:i];
-//        [str appendString:deviceModel.name];
-//        [str appendString:@","];
-//    }
-//    
-//    if (str.length > 0) {
-//        [str deleteCharactersInRange:NSMakeRange(str.length-1, 1)];
-//    }
-//    
-//    self.terminalField.text = str;
-//}
-
 - (IBAction)myRoomsClicked:(id)sender {
     // 判断有无获取到收藏的会议室列表
     // 调用接口进行获取
     [self showLoadingView];
     
-    __weak LPMyMeetingArrangeViewController *weakSelf = self;
-    
-    RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeRoomResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf hideHudAndIndicatorView];
-                  
-                  RDRMyMeetingArrangeRoomResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"请求收藏的会议室列表success, model=%@", model);
-                      
-                      // 解析model数据
-                      [LPSystemUser sharedUser].hasGetFavMeetingRooms = YES;
-                      [LPSystemUser sharedUser].favMeetingRoomsList = [model.fav mutableCopy];
-                      
-                      // 显示我的收藏的会议室
-                      if ([LPSystemUser sharedUser].favMeetingRoomsList.count == 0) {
-                          [self showToastWithMessage:@"收藏的会议室为空，快去收藏一些吧"];
-                          return;
-                      }else {
-                          [self askForSelectMeetingRoom];
-                      }
-                      
-                  }else {
-                      NSLog(@"请求收藏的会议室列表服务器请求出错, model=%@, msg=%@", model, model.msg);
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf hideHudAndIndicatorView];
-                  
-                  //请求出错
-                  NSLog(@"请求收藏的会议室列表, %s, error=%@", __FUNCTION__, error);
-              }];
+//    __weak LPMyMeetingArrangeViewController *weakSelf = self;
+//    
+//    RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//    
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    
+//    [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingArrangeRoomResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf hideHudAndIndicatorView];
+//                  
+//                  RDRMyMeetingArrangeRoomResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"请求收藏的会议室列表success, model=%@", model);
+//                      
+//                      // 解析model数据
+//                      [LPSystemUser sharedUser].hasGetFavMeetingRooms = YES;
+//                      [LPSystemUser sharedUser].favMeetingRoomsList = [model.fav mutableCopy];
+//                      
+//                      // 显示我的收藏的会议室
+//                      if ([LPSystemUser sharedUser].favMeetingRoomsList.count == 0) {
+//                          [self showToastWithMessage:@"收藏的会议室为空，快去收藏一些吧"];
+//                          return;
+//                      }else {
+//                          [self askForSelectMeetingRoom];
+//                      }
+//                      
+//                  }else {
+//                      NSLog(@"请求收藏的会议室列表服务器请求出错, model=%@, msg=%@", model, model.msg);
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf hideHudAndIndicatorView];
+//                  
+//                  //请求出错
+//                  NSLog(@"请求收藏的会议室列表, %s, error=%@", __FUNCTION__, error);
+//              }];
     
 }
 
@@ -446,15 +425,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         [parts addObject:cipant];
     }
     
-//    for (NSInteger i=0; i<self.selectedDevices.count; i++) {
-//        RDRDeviceModel *model = [self.selectedDevices objectAtIndex:i];
-//        
-//        RDRParticipant *cipant = [[RDRParticipant alloc] init];
-//        cipant.uid = model.uid;
-//        cipant.name = model.name;
-//        [parts addObject:cipant];
-//    }
-
     if (parts.count == 0) {
         [self showToastWithMessage:@"请选择参会人员"];
         return;
@@ -479,27 +449,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     NSDictionary *dicData = [MTLJSONAdapter JSONDictionaryFromModel:reqModel error:nil];
     NSLog(@"dicData=%@", dicData);
-//    NSDictionary *postDic = @{@"data":dicData};
-    
-//        __weak LPMyMeetingArrangeViewController *weakSelf = self;
-//    NSString *urlStr = [kHeqinLinphoneServerAddress stringByAppendingString:@"/api/arrange"];
-//    [[AFHTTPRequestOperationManager manager] POST:urlStr parameters:postDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"post done, operation=%@, respon=%@", operation, responseObject);
-//        [weakSelf hideHudAndIndicatorView];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"post fail, operation=%@, error=%@", operation, error);
-//        [weakSelf hideHudAndIndicatorView];
-//    }];
-    
-    
-    
-    
-    
-    
-    
-    // 第二种
+
     NSString *dicDataStr = [self DataTOjsonString:dicData];
-    
     
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     dicDataStr = [dicDataStr stringByTrimmingCharactersInSet:whitespace];
@@ -528,66 +479,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     }];
     return;
-    
-    
-    
-    
-    // 第一种
-//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-//    __weak LPMyMeetingArrangeViewController *weakSelf = self;
-//    [RDRNetHelper POST:req responseModelClass:[RDRMyMeetingArrangeResponseModel class] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [weakSelf hideHudAndIndicatorView];
-//        RDRMyMeetingArrangeResponseModel *model = responseObject;
-//
-//        if ([model codeCheckSuccess] == YES) {
-//            NSLog(@"安排会议室success, model=%@", model);
-//            [weakSelf showToastWithMessage:@"安排会议成功"];
-//        }else {
-//            NSString *tipStr = [NSString stringWithFormat:@"安排会议室请求出错, msg=%@", model.msg];
-//            [weakSelf showToastWithMessage:tipStr];
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [weakSelf hideHudAndIndicatorView];
-//            
-//        //请求出错
-//        NSLog(@"安排会议室出错, %s, error=%@", __FUNCTION__, error);
-//    }];
 }
-
-//- (NSString*)encodeURL:(NSString *)string
-//{
-//    NSString *newString = NSMakeCollectable([(NSString *)CFURLCreateStringByAddingPercentEscapes(
-//                                                                                                 kCFAllocatorDefault,
-//                                                                                                 (CFStringRef)string, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"),
-//                                                                                                 CFStringConvertNSStringEncodingToEncoding([self stringEncoding])) autorelease]);
-//    if (newString) {
-//        return newString;
-//    }
-//    return @"";
-//}
-
-
-//- (NSString *)hyb_URLEncode {
-//    
-//    NSString *newString =
-//    
-//    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-//                                                              
-//                                                              (CFStringRef)self,
-//                                                              
-//                                                              NULL,
-//                                                              
-//                                                              CFSTR(":/?#[]@!$ &'()*+,;="<>%{}|^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
-//                                                                    
-//                                                                    if (newString) {
-//                                                                        
-//                                                                        return newString;
-//                                                                        
-//                                                                    }
-//                                                                    
-//                                                                    return self;
-//                                                                    
-//                                                                    }
 
 
 -(NSString*)DataTOjsonString:(id)object
@@ -601,8 +493,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSLog(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-//        jsonString = [jsonString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         jsonString = [jsonString URLEncodedString];
     }
     return jsonString;
@@ -618,25 +508,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSString *msg;
         
         NSMutableString *bodyContent = [NSMutableString string];
-//        for(NSString *key in dicData.allKeys){
-//            id value = [dicData objectForKey:key];
-//            [bodyContent appendFormat:@"--%@\r\n",POST_BOUNDS];
-//            [bodyContent appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key];
-//            [bodyContent appendFormat:@"%@\r\n",value];
-//        }
-        
-//        for(NSString *key in dicData.allKeys){
-//            id value = [dicData objectForKey:key];
-//            [bodyContent appendFormat:@"--%@\r\n",POST_BOUNDS];
-//            [bodyContent appendFormat:@"Content-Disposition: form-data; nxxxame=\"%@\"\r\n\r\n",@"data"];
-//            [bodyContent appendFormat:@"%@\r\n",dicData];
 
-            [bodyContent appendFormat:@"data=%@",dicData];
-
-//        [bodyContent appendFormat:@"data=%@",@"{\"uid\":\"feng.wang@zijingcloud.com\",\"addr\":\"1066\",\"time\":\"2016-03-30 10:00\",\"pwd\":\"wang@2015\",\"participants\":[{\"uid\":\"t1@taijihuabao.com\"}]}"];
-//        }
-        
-//        [bodyContent appendFormat:@"--%@--\r\n",POST_BOUNDS];
+        [bodyContent appendFormat:@"data=%@",dicData];
         NSData *bodyData = [bodyContent dataUsingEncoding:NSUTF8StringEncoding];
         NSMutableURLRequest *request  = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:cmdStr] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
         
@@ -695,8 +568,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         }
     });
 }
-
-
 
 #pragma mark UITextField delegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {

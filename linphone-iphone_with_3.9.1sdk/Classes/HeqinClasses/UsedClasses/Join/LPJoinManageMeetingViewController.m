@@ -17,8 +17,6 @@
 #import "LPCellJoinManageTableViewCell.h"
 #import "LPSystemUser.h"
 #import "UIHistoryCell.h"
-#import "UACellBackgroundView.h"
-#import "UILinphone.h"
 //#import "DialerViewController.h"
 #import "PhoneMainView.h"
 #import "LPSystemSetting.h"
@@ -139,17 +137,30 @@
 
 static UICompositeViewDescription *compositeDescription = nil;
 
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
+
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"JoinManage"
-                                                                content:@"LPJoinManageMeetingViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"LPJoinBarViewController"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"JoinManage"
+//                                                                content:@"LPJoinManageMeetingViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"LPJoinBarViewController"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:[LinphoneManager runningOnIpad]
+//                                                           portraitMode:true];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:LPJoinBarViewController.class
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
-                                                           portraitMode:true];
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:false];
+
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
@@ -374,10 +385,9 @@ static UICompositeViewDescription *compositeDescription = nil;
                 // contact name
                 char* lAddress = linphone_address_as_string_uri_only(addr);
                 if(lAddress) {
-                    NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-                    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
-                    if(contact) {
-                        address = [FastAddressBook getContactDisplayName:contact];
+                    NSString *normalizedSipAddress = [FastAddressBook displayNameForAddress:addr];
+                    if(normalizedSipAddress.length > 0) {
+                        address = normalizedSipAddress;
                         useLinphoneAddress = false;
                     }
                     ms_free(lAddress);
@@ -460,12 +470,19 @@ static UICompositeViewDescription *compositeDescription = nil;
                 char* lAddress = linphone_address_as_string_uri_only(addr);
                 if(lAddress) {
                     address = [NSString stringWithUTF8String:lAddress];
+//                    NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
+//                    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+//                    if(contact) {
+//                        displayName = [FastAddressBook getContactDisplayName:contact];
+//                        useLinphoneAddress = false;
+//                    }
+                    
                     NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
-                    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
-                    if(contact) {
-                        displayName = [FastAddressBook getContactDisplayName:contact];
+                    if(normalizedSipAddress.length > 0) {
+                        displayName = normalizedSipAddress;
                         useLinphoneAddress = false;
                     }
+
                     ms_free(lAddress);
                 }
                 if(useLinphoneAddress) {

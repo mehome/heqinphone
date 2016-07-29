@@ -32,4 +32,9 @@
 - (void)transformAccountToKeys:(NSString *)username;
 - (void)removeAccount;
 
+// 专门打开一个窗口， 让外部方便进行赋值
+- (void)setTheBool:(BOOL)value forKey:(NSString*)key;
+- (void)setTheStr:(NSString *)str forKey:(NSString *)key;
+- (NSString*)stringForKey:(NSString*)key;       // 为了便于在外部通过这个值来获取用户名和id值。特意打开，实际上可能有更简单的方式
+
 @end

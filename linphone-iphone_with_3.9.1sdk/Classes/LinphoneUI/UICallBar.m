@@ -169,34 +169,32 @@ extern NSString *const kLinphoneInCallCellData;
     RDRMeetingTypeRequestModel *reqModel = [RDRMeetingTypeRequestModel requestModel];
     reqModel.addr = [self curMeetingAddr];
     
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  RDRMeetingTypeResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"会议室类型查询success, model=%@", model);
-//                      [self showToastWithMessage:@"收藏会议室成功"];
-                      
-                      if (model.type == 0) {
-                          self.curMeetingType = MeetingTypeLesson;
-                      }else {
-                          self.curMeetingType = MeetingTypeMeeting;
-                      }
-                  }else {
-                      NSLog(@"会议室类型查询失败, msg=%@", model.msg);
-                      NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，msg=%@", model.msg];
-                      [self showToastWithMessage:tipStr];
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  
-                  //请求出错
-                  NSLog(@"会议室类型查询失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，服务器错误"];
-                  [self showToastWithMessage:tipStr];
-              }];
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  RDRMeetingTypeResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"会议室类型查询success, model=%@", model);
+//                      
+//                      if (model.type == 0) {
+//                          self.curMeetingType = MeetingTypeLesson;
+//                      }else {
+//                          self.curMeetingType = MeetingTypeMeeting;
+//                      }
+//                  }else {
+//                      NSLog(@"会议室类型查询失败, msg=%@", model.msg);
+//                      NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，msg=%@", model.msg];
+//                      [self showToastWithMessage:tipStr];
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  
+//                  //请求出错
+//                  NSLog(@"会议室类型查询失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，服务器错误"];
+//                  [self showToastWithMessage:tipStr];
+//              }];
 }
 
 - (void)changeBtn:(UIButton *)btn {
@@ -261,8 +259,6 @@ extern NSString *const kLinphoneInCallCellData;
     [self closeCamera:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super dealloc];
 }
 
 - (UIView *)popControlView {
@@ -579,33 +575,31 @@ extern NSString *const kLinphoneInCallCellData;
 //        __weak UICallBar *weakSelf = self;
         [self showToastWithMessage:@"收藏会议室中..."];
 
-        RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
-        reqModel.addr = [self curMeetingAddr];
-        
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        
-        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      
-                      RDRAddFavResponseModel *model = responseObject;
-                      
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"收藏会议室success, model=%@", model);
-                          [self showToastWithMessage:@"收藏会议室成功"];
-                      }else {
-                          NSLog(@"请求收藏的会议室列表服务器请求出错, msg=%@", model.msg);
-                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，msg=%@", model.msg];
-                          [self showToastWithMessage:tipStr];
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      [self hideHudAndIndicatorView];
-                      
-                      //请求出错
-                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
-                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
-                      [self showToastWithMessage:tipStr];
-                  }];
+//        RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
+//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
+//        reqModel.addr = [self curMeetingAddr];
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      
+//                      RDRAddFavResponseModel *model = responseObject;
+//                      
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"收藏会议室success, model=%@", model);
+//                          [self showToastWithMessage:@"收藏会议室成功"];
+//                      }else {
+//                          NSLog(@"请求收藏的会议室列表服务器请求出错, msg=%@", model.msg);
+//                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，msg=%@", model.msg];
+//                          [self showToastWithMessage:tipStr];
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      [self hideHudAndIndicatorView];
+//                      
+//                      //请求出错
+//                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
+//                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
+//                      [self showToastWithMessage:tipStr];
+//                  }];
     }else {
         // 未登录
         [self showToastWithMessage:@"未登录，请先登录"];
@@ -718,57 +712,55 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)doRecordCommandWithPin:(NSString *)pinStr withCommandStr:(NSString *)commandStr withTipStr:(NSString *)tipStr commandType:(NSInteger)type {
-    __block UICallBar *weakSelf = self;
+//    __block UICallBar *weakSelf = self;
     
     [self showToastWithMessage:@"请稍等..."];
     
-    RDRReocrdRequestModel *reqModel = [RDRReocrdRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
-    reqModel.action = commandStr;
-    reqModel.pin = pinStr;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRRecordResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf retain];
-                  
-                  RDRRecordResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      [weakSelf showToastWithMessage:[NSString stringWithFormat:@"%@成功", tipStr]];
-                      
-                      switch (type) {
-                          case 0:
-                              weakSelf.meetingIsRecording = YES;
-                              break;
-                          case 1:
-                              weakSelf.meetingIsRecording = YES;
-                              break;
-                          case 2:
-                              weakSelf.meetingIsRecording = YES;
-                              break;
-                          case 3:
-                              weakSelf.meetingIsRecording = NO;
-                              break;
-                          default:
-                              break;
-                      }
-                  }else {
-                      NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，msg=%@", tipStr, model.msg];
-                      [weakSelf showToastWithMessage:tempTipStr];
-                  }
-                  [weakSelf release];
-                  
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf retain];
-                  
-                  //请求出错
-                  NSLog(@"失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，服务器错误", tipStr];
-                  [weakSelf showToastWithMessage:tempTipStr];
-                  [weakSelf release];
-              }];
+//    RDRReocrdRequestModel *reqModel = [RDRReocrdRequestModel requestModel];
+//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.action = commandStr;
+//    reqModel.pin = pinStr;
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDRRecordResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf retain];
+//                  
+//                  RDRRecordResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      [weakSelf showToastWithMessage:[NSString stringWithFormat:@"%@成功", tipStr]];
+//                      
+//                      switch (type) {
+//                          case 0:
+//                              weakSelf.meetingIsRecording = YES;
+//                              break;
+//                          case 1:
+//                              weakSelf.meetingIsRecording = YES;
+//                              break;
+//                          case 2:
+//                              weakSelf.meetingIsRecording = YES;
+//                              break;
+//                          case 3:
+//                              weakSelf.meetingIsRecording = NO;
+//                              break;
+//                          default:
+//                              break;
+//                      }
+//                  }else {
+//                      NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，msg=%@", tipStr, model.msg];
+//                      [weakSelf showToastWithMessage:tempTipStr];
+//                  }
+//                  [weakSelf release];
+//                  
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf retain];
+//                  
+//                  //请求出错
+//                  NSLog(@"失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，服务器错误", tipStr];
+//                  [weakSelf showToastWithMessage:tempTipStr];
+//                  [weakSelf release];
+//              }];
 }
 
 - (void)inviteMenBy:(InvityType)type {
@@ -783,42 +775,40 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)inviteByType:(InvityType)type withContent:(NSString *)content {
-    __block UICallBar *weakSelf = self;
+//    __block UICallBar *weakSelf = self;
     
     [self showToastWithMessage:@"邀请中..."];
     
-    RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
-    reqModel.addr = [self curMeetingAddr];
-    reqModel.type = @(type);
-    reqModel.to = content;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRInviteResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf retain];
-                  
-                  RDRInviteResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      [weakSelf showToastWithMessage:@"邀请成功"];
-                  }else {
-                      NSString *tipStr = [NSString stringWithFormat:@"邀请失败，msg=%@", model.msg];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }
-                  [weakSelf release];
-
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf retain];
-
-                  //请求出错
-                  NSLog(@"邀请失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tipStr = [NSString stringWithFormat:@"邀请失败，服务器错误"];
-                  [weakSelf showToastWithMessage:tipStr];
-                  [weakSelf release];
-
-              }];
+//    RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
+//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.type = @(type);
+//    reqModel.to = content;
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDRInviteResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf retain];
+//                  
+//                  RDRInviteResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      [weakSelf showToastWithMessage:@"邀请成功"];
+//                  }else {
+//                      NSString *tipStr = [NSString stringWithFormat:@"邀请失败，msg=%@", model.msg];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }
+//                  [weakSelf release];
+//
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf retain];
+//
+//                  //请求出错
+//                  NSLog(@"邀请失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tipStr = [NSString stringWithFormat:@"邀请失败，服务器错误"];
+//                  [weakSelf showToastWithMessage:tipStr];
+//                  [weakSelf release];
+//
+//              }];
 }
 
 // 复制地址
@@ -845,41 +835,39 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)doUnlockMeetingWithPin:(NSString *)pinStr {
-    __block UICallBar *weakSelf = self;
+//    __block UICallBar *weakSelf = self;
     
     [self showToastWithMessage:@"解锁中..."];
     
-    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
-    reqModel.lock = @(0);
-    reqModel.pin = pinStr;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf retain];
-
-                  RDRLockResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      [weakSelf showToastWithMessage:@"解锁成功"];
-                      weakSelf.meetingLockedStatus = NO;
-                  }else {
-                      NSString *tipStr = [NSString stringWithFormat:@"解锁失败，msg=%@", model.msg];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }
-                  [weakSelf release];
-
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf retain];
-
-                  //请求出错
-                  NSLog(@"解锁失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tipStr = [NSString stringWithFormat:@"解锁失败，服务器错误"];
-                  [weakSelf showToastWithMessage:tipStr];
-                  [weakSelf release];
-              }];
+//    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
+//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.lock = @(0);
+//    reqModel.pin = pinStr;
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf retain];
+//
+//                  RDRLockResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      [weakSelf showToastWithMessage:@"解锁成功"];
+//                      weakSelf.meetingLockedStatus = NO;
+//                  }else {
+//                      NSString *tipStr = [NSString stringWithFormat:@"解锁失败，msg=%@", model.msg];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }
+//                  [weakSelf release];
+//
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf retain];
+//
+//                  //请求出错
+//                  NSLog(@"解锁失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tipStr = [NSString stringWithFormat:@"解锁失败，服务器错误"];
+//                  [weakSelf showToastWithMessage:tipStr];
+//                  [weakSelf release];
+//              }];
 }
 
 // 锁定会议，或者解锁
@@ -899,40 +887,37 @@ extern NSString *const kLinphoneInCallCellData;
     
     [self showToastWithMessage:@"锁定中..."];
     
-    __block UICallBar *weakSelf = self;
-
-    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
-    reqModel.lock = @(1);
-    reqModel.pin = pinStr;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  [weakSelf retain];
-                  
-                  RDRLockResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      [weakSelf showToastWithMessage:@"锁定成功"];
-                      weakSelf.meetingLockedStatus = YES;
-                  }else {
-                      NSString *tipStr = [NSString stringWithFormat:@"锁定失败，msg=%@", model.msg];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }
-                  [weakSelf release];
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf retain];
-
-                  //请求出错
-                  NSLog(@"锁定失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tipStr = [NSString stringWithFormat:@"锁定失败，服务器错误"];
-                  [weakSelf showToastWithMessage:tipStr];
-                  
-                  [weakSelf release];
-              }];
+//    __block UICallBar *weakSelf = self;
+//    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
+//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.lock = @(1);
+//    reqModel.pin = pinStr;
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  
+//                  [weakSelf retain];
+//                  
+//                  RDRLockResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      [weakSelf showToastWithMessage:@"锁定成功"];
+//                      weakSelf.meetingLockedStatus = YES;
+//                  }else {
+//                      NSString *tipStr = [NSString stringWithFormat:@"锁定失败，msg=%@", model.msg];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }
+//                  [weakSelf release];
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf retain];
+//
+//                  //请求出错
+//                  NSLog(@"锁定失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tipStr = [NSString stringWithFormat:@"锁定失败，服务器错误"];
+//                  [weakSelf showToastWithMessage:tipStr];
+//                  
+//                  [weakSelf release];
+//              }];
 }
 
 // 会议布局
@@ -976,30 +961,30 @@ extern NSString *const kLinphoneInCallCellData;
                 req = [RDRRequest requestWithURLPath:nil model:subModel];
             }
             
-            [RDRNetHelper GET:req responseModelClass:[RDRMeetingLayoutResponseModel class]
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          [weakSelf retain];
-                          
-                          RDRMeetingLayoutResponseModel *model = responseObject;
-                          
-                          if ([model codeCheckSuccess] == YES) {
-                              [weakSelf showToastWithMessage:@"布局设置成功"];
-                          }else {
-                              NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，msg=%@", model.msg];
-                              [weakSelf showToastWithMessage:tipStr];
-                          }
-                          [weakSelf release];
-                          
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          [weakSelf retain];
-                          
-                          //请求出错
-                          NSLog(@"布局设置失败, %s, error=%@", __FUNCTION__, error);
-                          NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，服务器错误"];
-                          [weakSelf showToastWithMessage:tipStr];
-                          [weakSelf release];
-                          
-                      }];
+//            [RDRNetHelper GET:req responseModelClass:[RDRMeetingLayoutResponseModel class]
+//                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                          [weakSelf retain];
+//                          
+//                          RDRMeetingLayoutResponseModel *model = responseObject;
+//                          
+//                          if ([model codeCheckSuccess] == YES) {
+//                              [weakSelf showToastWithMessage:@"布局设置成功"];
+//                          }else {
+//                              NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，msg=%@", model.msg];
+//                              [weakSelf showToastWithMessage:tipStr];
+//                          }
+//                          [weakSelf release];
+//                          
+//                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                          [weakSelf retain];
+//                          
+//                          //请求出错
+//                          NSLog(@"布局设置失败, %s, error=%@", __FUNCTION__, error);
+//                          NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，服务器错误"];
+//                          [weakSelf showToastWithMessage:tipStr];
+//                          [weakSelf release];
+//                          
+//                      }];
             
         } withCancelBlock:^{
             // do nothing
@@ -1026,40 +1011,37 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)endMeetingByPin:(NSString *)pinStr {
-    __block UICallBar *weakSelf = self;
-    
+    __block UICallBar *weakSelf = self;    
     [weakSelf showToastWithMessage:@"结束会议中..."];
     
-    RDRTerminalRequestModel *reqModel = [RDRTerminalRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
-    reqModel.pin = pinStr;
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDRTerminalResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf retain];
-
-                  RDRTerminalResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      [weakSelf showToastWithMessage:@"结束会议成功"];
-                  }else {
-                      NSString *tipStr = [NSString stringWithFormat:@"结束会议失败，msg=%@", model.msg];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }
-                  [weakSelf release];
-
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf retain];
-
-                  //请求出错
-                  NSLog(@"结束会议失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tipStr = [NSString stringWithFormat:@"结束会议失败，服务器错误"];
-                  [weakSelf showToastWithMessage:tipStr];
-                  [weakSelf release];
-
-              }];
+//    RDRTerminalRequestModel *reqModel = [RDRTerminalRequestModel requestModel];
+//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.pin = pinStr;
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDRTerminalResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf retain];
+//
+//                  RDRTerminalResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      [weakSelf showToastWithMessage:@"结束会议成功"];
+//                  }else {
+//                      NSString *tipStr = [NSString stringWithFormat:@"结束会议失败，msg=%@", model.msg];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }
+//                  [weakSelf release];
+//
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf retain];
+//
+//                  //请求出错
+//                  NSLog(@"结束会议失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tipStr = [NSString stringWithFormat:@"结束会议失败，服务器错误"];
+//                  [weakSelf showToastWithMessage:tipStr];
+//                  [weakSelf release];
+//
+//              }];
 }
 
 + (int)callCount:(LinphoneCore*) lc {
@@ -1206,7 +1188,7 @@ extern NSString *const kLinphoneInCallCellData;
     
     LinphoneCall* call = linphone_core_get_current_call([LinphoneManager getLc]);
     if (call) {
-        LinphoneCallAppData* callAppData = (LinphoneCallAppData*)linphone_call_get_user_pointer(call);
+        LinphoneCallAppData* callAppData = (__bridge LinphoneCallAppData*)linphone_call_get_user_pointer(call);
         callAppData->videoRequested=TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
 
         LinphoneCallParams* call_params =  linphone_call_params_copy(linphone_call_get_current_params(call));

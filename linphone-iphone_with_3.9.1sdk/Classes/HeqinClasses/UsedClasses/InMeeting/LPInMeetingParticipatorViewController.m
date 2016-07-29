@@ -10,6 +10,7 @@
 #import "LPInMeetingParticipateTableViewCell.h"
 #import "PhoneMainView.h"
 #import "InCallViewController.h"
+#import "UICallBar.h"
 
 @interface LPInMeetingParticipatorViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -41,17 +42,31 @@
 
 static UICompositeViewDescription *compositeDescription = nil;
 
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
+
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall"
-                                                                content:@"LPInMeetingParticipatorViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"UICallBar"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"InCall"
+//                                                                content:@"LPInMeetingParticipatorViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"UICallBar"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:[LinphoneManager runningOnIpad]
+//                                                           portraitMode:true];
+        
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:UICallBar.class
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
-                                                           portraitMode:true];
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:false];
+
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;

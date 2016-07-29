@@ -156,17 +156,17 @@
         titleUsed = [eachModel performSelector:@selector(name)];
     }
     
-    if (titleUsed.length == 0) {
-        if ([eachModel respondsToSelector:@selector(addr)]) {
-            titleUsed = [eachModel performSelector:@selector(addr)];
-        }
-    }
-    
-    if (titleUsed.length == 0) {
-        if ([eachModel respondsToSelector:@selector(desc)]) {
-            titleUsed = [eachModel performSelector:@selector(desc)];
-        }
-    }
+//    if (titleUsed.length == 0) {
+//        if ([eachModel respondsToSelector:@selector(addr)]) {
+//            titleUsed = [eachModel performSelector:@selector(addr)];
+//        }
+//    }
+//    
+//    if (titleUsed.length == 0) {
+//        if ([eachModel respondsToSelector:@selector(desc)]) {
+//            titleUsed = [eachModel performSelector:@selector(desc)];
+//        }
+//    }
     
     tableCell.textLabel.text = titleUsed;
     

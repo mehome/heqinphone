@@ -23,7 +23,6 @@
 #import "UICamSwitch.h"
 
 #import "UICompositeView.h"
-#import "InCallTableViewController.h"
 
 @class VideoViewController;
 

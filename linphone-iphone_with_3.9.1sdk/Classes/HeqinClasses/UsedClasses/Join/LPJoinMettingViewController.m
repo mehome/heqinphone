@@ -14,8 +14,6 @@
 #import "LPSystemUser.h"
 #import "UIViewController+RDRTipAndAlert.h"
 #import "UIHistoryCell.h"
-#import "UACellBackgroundView.h"
-#import "UILinphone.h"
 //#import "DialerViewController.h"
 #import "NSObject+RDRCommon.h"
 #import "LPJoinManageMeetingViewController.h"
@@ -228,17 +226,30 @@
 
 static UICompositeViewDescription *compositeDescription = nil;
 
+- (UICompositeViewDescription *)compositeViewDescription {
+    return self.class.compositeViewDescription;
+}
+
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-        compositeDescription = [[UICompositeViewDescription alloc] init:@"Join"
-                                                                content:@"LPJoinMettingViewController"
-                                                               stateBar:nil
-                                                        stateBarEnabled:false
-                                                                 tabBar:@"LPJoinBarViewController"
-                                                          tabBarEnabled:true
+//        compositeDescription = [[UICompositeViewDescription alloc] init:@"Join"
+//                                                                content:@"LPJoinMettingViewController"
+//                                                               stateBar:nil
+//                                                        stateBarEnabled:false
+//                                                                 tabBar:@"LPJoinBarViewController"
+//                                                          tabBarEnabled:true
+//                                                             fullscreen:false
+//                                                          landscapeMode:[LinphoneManager runningOnIpad]
+//                                                           portraitMode:true];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:nil
+                                                                 tabBar:LPJoinBarViewController.class
+                                                               sideMenu:nil
                                                              fullscreen:false
-                                                          landscapeMode:[LinphoneManager runningOnIpad]
-                                                           portraitMode:true];
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:false];
+
         compositeDescription.darkBackground = true;
     }
     return compositeDescription;
@@ -255,11 +266,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (IBAction)revokeToOldVersionBtnClicked:(id)sender {
     [self resignKeyboard];
-
-    WizardViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[WizardViewController compositeViewDescription]], WizardViewController);
-    if(controller != nil) {
-        [controller reset];
-    }
 }
 
 - (IBAction)loginBtnClicked:(id)sender {
@@ -396,12 +402,18 @@ static UICompositeViewDescription *compositeDescription = nil;
         // contact name
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
-            NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
-            if(contact) {
-                address = [FastAddressBook getContactDisplayName:contact];
+            NSString *normalizedSipAddress = [FastAddressBook displayNameForAddress:addr];
+//            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+//            if(contact) {
+//                address = [FastAddressBook getContactDisplayName:contact];
+//                useLinphoneAddress = false;
+//            }
+            
+            if (normalizedSipAddress.length > 0) {
+                address = normalizedSipAddress;
                 useLinphoneAddress = false;
             }
+            
             ms_free(lAddress);
         }
         if(useLinphoneAddress) {
@@ -459,10 +471,9 @@ static UICompositeViewDescription *compositeDescription = nil;
         char* lAddress = linphone_address_as_string_uri_only(addr);
         if(lAddress) {
             address = [NSString stringWithUTF8String:lAddress];
-            NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:address];
-            ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
-            if(contact) {
-                displayName = [FastAddressBook getContactDisplayName:contact];
+            NSString *normalizedSipAddress = [FastAddressBook displayNameForAddress:addr];
+            if(normalizedSipAddress.length > 0) {
+                displayName = normalizedSipAddress;
                 useLinphoneAddress = false;
             }
             ms_free(lAddress);
@@ -491,9 +502,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         // 未登录
         [self showToastWithMessage:@"未登录，请先登录"];
     }else {
-        // 已登录
-//        [self showToastWithMessage:@"收藏"];
-        
+        // 已登录        
         __weak LPJoinMettingViewController *weakSelf = self;
         [weakSelf showToastWithMessage:@"收藏会议室中..."];
         
@@ -514,10 +523,9 @@ static UICompositeViewDescription *compositeDescription = nil;
             // contact name
             char* lAddress = linphone_address_as_string_uri_only(addr);
             if(lAddress) {
-                NSString *normalizedSipAddress = [FastAddressBook normalizeSipURI:[NSString stringWithUTF8String:lAddress]];
-                ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
-                if(contact) {
-                    address = [FastAddressBook getContactDisplayName:contact];
+                NSString *normalizedSipAddress = [FastAddressBook displayNameForAddress:addr];
+                if(normalizedSipAddress.length > 0) {
+                    address = normalizedSipAddress;
                     useLinphoneAddress = false;
                 }
                 ms_free(lAddress);
@@ -537,27 +545,27 @@ static UICompositeViewDescription *compositeDescription = nil;
         
         reqModel.addr = address;
         
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      RDRAddFavResponseModel *model = responseObject;
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"收藏会议室成功, model=%@", model);
-                          [weakSelf showToastWithMessage:@"收藏会议室成功"];
-                      }else {
-                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，%@(%ld)", model.msg, (long)model.code];
-                          NSLog(@"%@", tipStr);
-
-                          [weakSelf showToastWithMessage:tipStr];
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      [weakSelf hideHudAndIndicatorView];
-                      
-                      //请求出错
-                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
-                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }];
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      RDRAddFavResponseModel *model = responseObject;
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"收藏会议室成功, model=%@", model);
+//                          [weakSelf showToastWithMessage:@"收藏会议室成功"];
+//                      }else {
+//                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，%@(%ld)", model.msg, (long)model.code];
+//                          NSLog(@"%@", tipStr);
+//
+//                          [weakSelf showToastWithMessage:tipStr];
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      [weakSelf hideHudAndIndicatorView];
+//                      
+//                      //请求出错
+//                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
+//                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }];
     }
 }
 

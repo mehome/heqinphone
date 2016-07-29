@@ -7,7 +7,6 @@
  */
 
 #import "SDImageCache.h"
-#import "SDWebImageDecoder.h"
 #import "UIImage+MultiFormat.h"
 #import <CommonCrypto/CommonDigest.h>
 

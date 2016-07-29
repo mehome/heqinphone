@@ -329,7 +329,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 			break;
 		}
 		case LinphoneCallOutgoingInit: {
-			[self changeCurrentView:CallOutgoingView.compositeViewDescription];
+            [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			break;
 		}
 		case LinphoneCallPausedByRemote:

@@ -158,39 +158,37 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     [self.loadingView updateLoadingFrameAndReset];
     self.loadingView.hidden = NO;
     
-    __weak RDRAllJoinersView *weakSelf = self;
-    
-    // 发起请求
-    RDROperationGetJoinersRequestModel *reqModel = [RDROperationGetJoinersRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
-    
-    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-    
-    [RDRNetHelper GET:req responseModelClass:[RDROperationGetJoinersResponseModel class]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [weakSelf hideHudAndIndicatorView];
-                  
-                  RDROperationGetJoinersResponseModel *model = responseObject;
-                  
-                  if ([model codeCheckSuccess] == YES) {
-                      NSLog(@"获取参会人员成功, model=%@", model);
-                      [weakSelf showToastWithMessage:@"获取参会人员成功"];
-                      weakSelf.joiners = [NSArray arrayWithArray:model.data];
-                      
-                      [weakSelf reloadAllData];
-                  }else {
-                      NSLog(@"获取参会人员失败, msg=%@", model.msg);
-                      NSString *tipStr = [NSString stringWithFormat:@"获取参会人员失败, %@", model.msg];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  [weakSelf hideHudAndIndicatorView];
-                  
-                  //请求出错
-                  NSLog(@"获取参会人员失败, %s, error=%@", __FUNCTION__, error);
-                  NSString *tipStr = [NSString stringWithFormat:@"获取参会人员失败，服务器错误"];
-                  [weakSelf showToastWithMessage:tipStr];
-              }];
+//    __weak RDRAllJoinersView *weakSelf = self;
+//     发起请求
+//    RDROperationGetJoinersRequestModel *reqModel = [RDROperationGetJoinersRequestModel requestModel];
+//    reqModel.addr = [self curMeetingAddr];
+//    
+//    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//    [RDRNetHelper GET:req responseModelClass:[RDROperationGetJoinersResponseModel class]
+//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  [weakSelf hideHudAndIndicatorView];
+//                  
+//                  RDROperationGetJoinersResponseModel *model = responseObject;
+//                  
+//                  if ([model codeCheckSuccess] == YES) {
+//                      NSLog(@"获取参会人员成功, model=%@", model);
+//                      [weakSelf showToastWithMessage:@"获取参会人员成功"];
+//                      weakSelf.joiners = [NSArray arrayWithArray:model.data];
+//                      
+//                      [weakSelf reloadAllData];
+//                  }else {
+//                      NSLog(@"获取参会人员失败, msg=%@", model.msg);
+//                      NSString *tipStr = [NSString stringWithFormat:@"获取参会人员失败, %@", model.msg];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }
+//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  [weakSelf hideHudAndIndicatorView];
+//                  
+//                  //请求出错
+//                  NSLog(@"获取参会人员失败, %s, error=%@", __FUNCTION__, error);
+//                  NSString *tipStr = [NSString stringWithFormat:@"获取参会人员失败，服务器错误"];
+//                  [weakSelf showToastWithMessage:tipStr];
+//              }];
 }
 
 - (void)reloadAllData {
@@ -286,35 +284,33 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
         [self.loadingView updateLoadingFrameAndReset];
         self.loadingView.hidden = NO;
         
-        __weak RDRAllJoinersView *weakSelf = self;
-        
-        // 发起请求
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        
-        [RDRNetHelper GET:req responseModelClass:[RDROperationMuteResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      weakSelf.loadingView.hidden = YES;
-                      
-                      RDROperationMuteResponseModel *model = responseObject;
-                      
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"操作音频成功, model=%@", model);
-                          [weakSelf showToastWithMessage:@"操作成功"];
-                          
-                          [weakSelf updateModelAndReloadTableWithUid:uid withSilence:silenceOperation];
-                      }else {
-                          NSLog(@"操作音频失败, msg=%@", model.msg);
-                          NSString *tipStr = [NSString stringWithFormat:@"操作失败, %@", model.msg];
-                          [weakSelf showToastWithMessage:tipStr];
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      weakSelf.loadingView.hidden = YES;
-                      
-                      //请求出错
-                      NSLog(@"操作音频失败, %s, error=%@", __FUNCTION__, error);
-                      NSString *tipStr = [NSString stringWithFormat:@"操作失败，服务器错误"];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }];
+//        __weak RDRAllJoinersView *weakSelf = self;
+//         发起请求
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        [RDRNetHelper GET:req responseModelClass:[RDROperationMuteResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      weakSelf.loadingView.hidden = YES;
+//                      
+//                      RDROperationMuteResponseModel *model = responseObject;
+//                      
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"操作音频成功, model=%@", model);
+//                          [weakSelf showToastWithMessage:@"操作成功"];
+//                          
+//                          [weakSelf updateModelAndReloadTableWithUid:uid withSilence:silenceOperation];
+//                      }else {
+//                          NSLog(@"操作音频失败, msg=%@", model.msg);
+//                          NSString *tipStr = [NSString stringWithFormat:@"操作失败, %@", model.msg];
+//                          [weakSelf showToastWithMessage:tipStr];
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      weakSelf.loadingView.hidden = YES;
+//                      
+//                      //请求出错
+//                      NSLog(@"操作音频失败, %s, error=%@", __FUNCTION__, error);
+//                      NSString *tipStr = [NSString stringWithFormat:@"操作失败，服务器错误"];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }];
     }];
 }
 
@@ -447,35 +443,33 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
         [self.loadingView updateLoadingFrameAndReset];
         self.loadingView.hidden = NO;
         
-        __weak RDRAllJoinersView *weakSelf = self;
-        
-        // 发起请求
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        
-        [RDRNetHelper GET:req responseModelClass:[RDROperationMuteVideoResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      weakSelf.loadingView.hidden = YES;
-                      
-                      RDROperationMuteVideoResponseModel *model = responseObject;
-                      
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"操作画面成功, model=%@", model);
-                          [weakSelf showToastWithMessage:@"操作成功"];
-                          
-                          [weakSelf updateModelAndReloadTable:curJoiner];
-                      }else {
-                          NSLog(@"操作画面失败, msg=%@", model.msg);
-                          NSString *tipStr = [NSString stringWithFormat:@"操作失败, %@", model.msg];
-                          [weakSelf showToastWithMessage:tipStr];
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      weakSelf.loadingView.hidden = YES;
-                      
-                      //请求出错
-                      NSLog(@"操作画面失败, %s, error=%@", __FUNCTION__, error);
-                      NSString *tipStr = [NSString stringWithFormat:@"操作失败，服务器错误"];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }];
+//        __weak RDRAllJoinersView *weakSelf = self;        
+//         发起请求
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        [RDRNetHelper GET:req responseModelClass:[RDROperationMuteVideoResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      weakSelf.loadingView.hidden = YES;
+//                      
+//                      RDROperationMuteVideoResponseModel *model = responseObject;
+//                      
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"操作画面成功, model=%@", model);
+//                          [weakSelf showToastWithMessage:@"操作成功"];
+//                          
+//                          [weakSelf updateModelAndReloadTable:curJoiner];
+//                      }else {
+//                          NSLog(@"操作画面失败, msg=%@", model.msg);
+//                          NSString *tipStr = [NSString stringWithFormat:@"操作失败, %@", model.msg];
+//                          [weakSelf showToastWithMessage:tipStr];
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      weakSelf.loadingView.hidden = YES;
+//                      
+//                      //请求出错
+//                      NSLog(@"操作画面失败, %s, error=%@", __FUNCTION__, error);
+//                      NSString *tipStr = [NSString stringWithFormat:@"操作失败，服务器错误"];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }];
     }];
 }
 
@@ -505,35 +499,33 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
         [self.loadingView updateLoadingFrameAndReset];
         self.loadingView.hidden = NO;
         
-        __weak RDRAllJoinersView *weakSelf = self;
-        
-        // 发起请求
-        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-        
-        [RDRNetHelper GET:req responseModelClass:[RDROperationKickoutResponseModel class]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      weakSelf.loadingView.hidden = YES;
-                      
-                      RDROperationKickoutResponseModel *model = responseObject;
-                      
-                      if ([model codeCheckSuccess] == YES) {
-                          NSLog(@"踢出该会议者成功, model=%@", model);
-                          [weakSelf showToastWithMessage:@"踢出该会议者成功"];
-                          
-                          [weakSelf kickOutSuccessAndReloadTable:curJoiner];
-                      }else {
-                          NSLog(@"踢出该会议者失败, msg=%@", model.msg);
-                          NSString *tipStr = [NSString stringWithFormat:@"操作失败, %@", model.msg];
-                          [weakSelf showToastWithMessage:tipStr];
-                      }
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      weakSelf.loadingView.hidden = YES;
-                      
-                      //请求出错
-                      NSLog(@"踢出该会议者失败, %s, error=%@", __FUNCTION__, error);
-                      NSString *tipStr = [NSString stringWithFormat:@"操作失败，服务器错误"];
-                      [weakSelf showToastWithMessage:tipStr];
-                  }];
+//        __weak RDRAllJoinersView *weakSelf = self;        
+//         发起请求
+//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//        [RDRNetHelper GET:req responseModelClass:[RDROperationKickoutResponseModel class]
+//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      weakSelf.loadingView.hidden = YES;
+//                      
+//                      RDROperationKickoutResponseModel *model = responseObject;
+//                      
+//                      if ([model codeCheckSuccess] == YES) {
+//                          NSLog(@"踢出该会议者成功, model=%@", model);
+//                          [weakSelf showToastWithMessage:@"踢出该会议者成功"];
+//                          
+//                          [weakSelf kickOutSuccessAndReloadTable:curJoiner];
+//                      }else {
+//                          NSLog(@"踢出该会议者失败, msg=%@", model.msg);
+//                          NSString *tipStr = [NSString stringWithFormat:@"操作失败, %@", model.msg];
+//                          [weakSelf showToastWithMessage:tipStr];
+//                      }
+//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      weakSelf.loadingView.hidden = YES;
+//                      
+//                      //请求出错
+//                      NSLog(@"踢出该会议者失败, %s, error=%@", __FUNCTION__, error);
+//                      NSString *tipStr = [NSString stringWithFormat:@"操作失败，服务器错误"];
+//                      [weakSelf showToastWithMessage:tipStr];
+//                  }];
     }];
 }
 
