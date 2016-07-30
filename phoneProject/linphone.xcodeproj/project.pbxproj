@@ -856,6 +856,16 @@
 		E123FC0E1C3EA84C00F3A02E /* RDRPhoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E123FC0D1C3EA84C00F3A02E /* RDRPhoneModel.m */; };
 		E123FC111C3EA99500F3A02E /* RDRPhoneListPrivateRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E123FC101C3EA99500F3A02E /* RDRPhoneListPrivateRequestModel.m */; };
 		E123FC171C3EAA1C00F3A02E /* RDRPhoneListSearchRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E123FC161C3EAA1C00F3A02E /* RDRPhoneListSearchRequestModel.m */; };
+		E12BFEAE1D4CC15200FF06ED /* libmsilbc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEAC1D4CC15200FF06ED /* libmsilbc.a */; };
+		E12BFEAF1D4CC15200FF06ED /* libmsisac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEAD1D4CC15200FF06ED /* libmsisac.a */; };
+		E12BFEB81D4CC16900FF06ED /* libilbc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB01D4CC16900FF06ED /* libilbc.a */; };
+		E12BFEB91D4CC16900FF06ED /* liblpc2xml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB11D4CC16900FF06ED /* liblpc2xml.a */; };
+		E12BFEBA1D4CC16900FF06ED /* libSKP_SILK_SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB21D4CC16900FF06ED /* libSKP_SILK_SDK.a */; };
+		E12BFEBB1D4CC16900FF06ED /* libwels.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB31D4CC16900FF06ED /* libwels.a */; };
+		E12BFEBC1D4CC16900FF06ED /* libxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB41D4CC16900FF06ED /* libxml2.a */; };
+		E12BFEBD1D4CC16900FF06ED /* libxml2lpc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB51D4CC16900FF06ED /* libxml2lpc.a */; };
+		E12BFEBE1D4CC16900FF06ED /* libzrtpcpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB61D4CC16900FF06ED /* libzrtpcpp.a */; };
+		E12BFEBF1D4CC16900FF06ED /* libzrtpcppcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BFEB71D4CC16900FF06ED /* libzrtpcppcore.a */; };
 		E12D8BD91C24F3500011BFCA /* RDRParticipant.m in Sources */ = {isa = PBXBuildFile; fileRef = E12D8BD81C24F3500011BFCA /* RDRParticipant.m */; };
 		E12D8BDC1C2521BD0011BFCA /* ShowInviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12D8BDB1C2521BD0011BFCA /* ShowInviteView.m */; };
 		E135F8471C243EA3003BE802 /* RDRCellsSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E135F8461C243EA3003BE802 /* RDRCellsSelectView.m */; };
@@ -2121,6 +2131,16 @@
 		E123FC101C3EA99500F3A02E /* RDRPhoneListPrivateRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPhoneListPrivateRequestModel.m; sourceTree = "<group>"; };
 		E123FC151C3EAA1C00F3A02E /* RDRPhoneListSearchRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPhoneListSearchRequestModel.h; sourceTree = "<group>"; };
 		E123FC161C3EAA1C00F3A02E /* RDRPhoneListSearchRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPhoneListSearchRequestModel.m; sourceTree = "<group>"; };
+		E12BFEAC1D4CC15200FF06ED /* libmsilbc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmsilbc.a; path = "liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins/libmsilbc.a"; sourceTree = "<group>"; };
+		E12BFEAD1D4CC15200FF06ED /* libmsisac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmsisac.a; path = "liblinphone-sdk/apple-darwin/lib/mediastreamer/plugins/libmsisac.a"; sourceTree = "<group>"; };
+		E12BFEB01D4CC16900FF06ED /* libilbc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libilbc.a; path = "liblinphone-sdk/apple-darwin/lib/libilbc.a"; sourceTree = "<group>"; };
+		E12BFEB11D4CC16900FF06ED /* liblpc2xml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblpc2xml.a; path = "liblinphone-sdk/apple-darwin/lib/liblpc2xml.a"; sourceTree = "<group>"; };
+		E12BFEB21D4CC16900FF06ED /* libSKP_SILK_SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSKP_SILK_SDK.a; path = "liblinphone-sdk/apple-darwin/lib/libSKP_SILK_SDK.a"; sourceTree = "<group>"; };
+		E12BFEB31D4CC16900FF06ED /* libwels.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwels.a; path = "liblinphone-sdk/apple-darwin/lib/libwels.a"; sourceTree = "<group>"; };
+		E12BFEB41D4CC16900FF06ED /* libxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxml2.a; path = "liblinphone-sdk/apple-darwin/lib/libxml2.a"; sourceTree = "<group>"; };
+		E12BFEB51D4CC16900FF06ED /* libxml2lpc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxml2lpc.a; path = "liblinphone-sdk/apple-darwin/lib/libxml2lpc.a"; sourceTree = "<group>"; };
+		E12BFEB61D4CC16900FF06ED /* libzrtpcpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzrtpcpp.a; path = "liblinphone-sdk/apple-darwin/lib/libzrtpcpp.a"; sourceTree = "<group>"; };
+		E12BFEB71D4CC16900FF06ED /* libzrtpcppcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzrtpcppcore.a; path = "liblinphone-sdk/apple-darwin/lib/libzrtpcppcore.a"; sourceTree = "<group>"; };
 		E12D8BD71C24F3500011BFCA /* RDRParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRParticipant.h; sourceTree = "<group>"; };
 		E12D8BD81C24F3500011BFCA /* RDRParticipant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRParticipant.m; sourceTree = "<group>"; };
 		E12D8BDA1C2521BD0011BFCA /* ShowInviteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowInviteView.h; sourceTree = "<group>"; };
@@ -2416,6 +2436,7 @@
 				13918B431D3396AA0032DFF3 /* libstdc++.6.tbd in Frameworks */,
 				13918B541D33999C0032DFF3 /* libbctoolbox-tester.a in Frameworks */,
 				13918B441D3396AA0032DFF3 /* libstdc++.tbd in Frameworks */,
+				E12BFEBB1D4CC16900FF06ED /* libwels.a in Frameworks */,
 				13918B401D33969F0032DFF3 /* libsqlite3.tbd in Frameworks */,
 				13918B601D33999C0032DFF3 /* libvo-amrwbenc.a in Frameworks */,
 				13918B3D1D3396960032DFF3 /* libresolv.9.tbd in Frameworks */,
@@ -2428,7 +2449,9 @@
 				340751971506459A00B89C47 /* CoreTelephony.framework in Frameworks */,
 				13854EAE1BECA22000727913 /* MapKit.framework in Frameworks */,
 				1560821F18EEF26100765332 /* libmsopenh264.a in Frameworks */,
+				E12BFEBA1D4CC16900FF06ED /* libSKP_SILK_SDK.a in Frameworks */,
 				22509042196BD902007863F6 /* libopenh264.a in Frameworks */,
+				E12BFEAF1D4CC15200FF06ED /* libmsisac.a in Frameworks */,
 				22AF73C21754C0D100BE8398 /* libopus.a in Frameworks */,
 				57B0E360173C010400A476B8 /* libpolarssl.a in Frameworks */,
 				223CA7E616D9255800EF1BEC /* libantlr3c.a in Frameworks */,
@@ -2443,6 +2466,7 @@
 				224567C2107B968500F10948 /* AVFoundation.framework in Frameworks */,
 				228697C411AC29B800E9E0CA /* CFNetwork.framework in Frameworks */,
 				2274401A106F31BD006EC466 /* CoreAudio.framework in Frameworks */,
+				E12BFEBC1D4CC16900FF06ED /* libxml2.a in Frameworks */,
 				13918B531D33999C0032DFF3 /* libbcg729.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				13918B551D33999C0032DFF3 /* libbctoolbox.a in Frameworks */,
@@ -2460,8 +2484,11 @@
 				13918B6E1D33B5D20032DFF3 /* libtunnel.a in Frameworks */,
 				2264B6D211200342002C2C53 /* SystemConfiguration.framework in Frameworks */,
 				22276E8313C73D3100210156 /* libavcodec.a in Frameworks */,
+				E12BFEBF1D4CC16900FF06ED /* libzrtpcppcore.a in Frameworks */,
 				22276E8413C73D3100210156 /* libavutil.a in Frameworks */,
+				E12BFEB91D4CC16900FF06ED /* liblpc2xml.a in Frameworks */,
 				220FAD3210765B400068D98F /* libgsm.a in Frameworks */,
+				E12BFEBE1D4CC16900FF06ED /* libzrtpcpp.a in Frameworks */,
 				13918B5E1D33999C0032DFF3 /* libmbedx509.a in Frameworks */,
 				F476004B147AAF2800FFF19B /* liblinphone.a in Frameworks */,
 				D37EE10916032DA4003608A6 /* libmediastreamer_base.a in Frameworks */,
@@ -2481,7 +2508,10 @@
 				220FAD3810765B400068D98F /* libspeex.a in Frameworks */,
 				13918B5F1D33999C0032DFF3 /* libswresample.a in Frameworks */,
 				220FAD3910765B400068D98F /* libspeexdsp.a in Frameworks */,
+				E12BFEBD1D4CC16900FF06ED /* libxml2lpc.a in Frameworks */,
+				E12BFEAE1D4CC15200FF06ED /* libmsilbc.a in Frameworks */,
 				226183AE1472527D0037138E /* libsrtp.a in Frameworks */,
+				E12BFEB81D4CC16900FF06ED /* libilbc.a in Frameworks */,
 				13918B571D33999C0032DFF3 /* libbelr.a in Frameworks */,
 				22276E8513C73D3100210156 /* libswscale.a in Frameworks */,
 				7066FC0C13E830E400EFC6DC /* libvpx.a in Frameworks */,
@@ -3468,6 +3498,16 @@
 				2211DB911475562600DEE054 /* liblinphone.a */,
 				F0BB8C0F193623F200974404 /* liblinphonetester.a */,
 				22405EE916006F0700B92522 /* libmediastreamer_base.a */,
+				E12BFEAC1D4CC15200FF06ED /* libmsilbc.a */,
+				E12BFEB01D4CC16900FF06ED /* libilbc.a */,
+				E12BFEB11D4CC16900FF06ED /* liblpc2xml.a */,
+				E12BFEB21D4CC16900FF06ED /* libSKP_SILK_SDK.a */,
+				E12BFEB31D4CC16900FF06ED /* libwels.a */,
+				E12BFEB41D4CC16900FF06ED /* libxml2.a */,
+				E12BFEB51D4CC16900FF06ED /* libxml2lpc.a */,
+				E12BFEB61D4CC16900FF06ED /* libzrtpcpp.a */,
+				E12BFEB71D4CC16900FF06ED /* libzrtpcppcore.a */,
+				E12BFEAD1D4CC15200FF06ED /* libmsisac.a */,
 				22405EEA16006F0700B92522 /* libmediastreamer_voip.a */,
 				226F2ED51344B0EF00F6EF27 /* libmsamr.a */,
 				226CDADE14E2D0B800513B67 /* libmsbcg729.a */,
@@ -5808,7 +5848,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "47032dcb-46ed-4c6d-9623-de16df6f2b76";
+				PROVISIONING_PROFILE = "6a252cbc-7e82-4054-9e0b-d2a66479d218";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				TARGET_NAME = linphoneDebug;
