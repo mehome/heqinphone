@@ -142,8 +142,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 //    reqModel.addr = self.model.addr;
 //    
 //    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-//    reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"password_preference"];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+//    reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_password_preference"];
 //    
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    
@@ -204,8 +204,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 //    reqModel.addr = self.model.addr;
 //    
 //    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];    
-//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-//    reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"password_preference"];
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+//    reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_password_preference"];
     
     // 需要设置PIN码，看是以什么形式来输入这个PIN码
     //    reqModel.meetingPin = self.model.

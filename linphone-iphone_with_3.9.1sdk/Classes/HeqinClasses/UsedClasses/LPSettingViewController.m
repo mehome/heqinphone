@@ -81,8 +81,8 @@
     }else {
         // 当前已经登录
         [self.logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
-        self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
-        self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+        self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
         self.companyField.text = @"企业信息";
     }
 }

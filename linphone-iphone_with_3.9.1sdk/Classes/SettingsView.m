@@ -334,13 +334,22 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
-															  statusBar:StatusBarView.class
-																 tabBar:nil
-															   sideMenu:SideMenuView.class
-															 fullscreen:false
-														 isLeftFragment:YES
-														   fragmentWith:nil supportLandscapeMode:YES];
+//		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+//															  statusBar:StatusBarView.class
+//																 tabBar:nil
+//															   sideMenu:SideMenuView.class
+//															 fullscreen:false
+//														 isLeftFragment:YES
+//														   fragmentWith:nil];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:StatusBarView.class
+                                                                 tabBar:nil
+                                                               sideMenu:nil
+                                                             fullscreen:false
+                                                         isLeftFragment:false
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:NO];
+
 	}
 	return compositeDescription;
 }
@@ -370,9 +379,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-    
-    // 在这里存储设置到的值，并触发一些行为。
-	[_settingsController dismiss:self];                     // 这里将会触发存储settingsStore操作
+	[_settingsController dismiss:self];
 	// Set observer
 	[NSNotificationCenter.defaultCenter removeObserver:self name:kIASKAppSettingChanged object:nil];
 
@@ -385,7 +392,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[super viewWillAppear:animated];
 
 	// Sync settings with linphone core settings
-	[settingsStore transformLinphoneCoreToKeys];    // 把数据从磁盘上同步到当前设备中。
+	[settingsStore transformLinphoneCoreToKeys];
 	[self recomputeAccountLabelsAndSync];
 
 	// Set observer

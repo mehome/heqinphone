@@ -83,7 +83,7 @@ static BOOL loginIsTheTopVC = NO;
     }else {
         // 当前已处于登录状态
         [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-        self.userNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"username_preference"];
+        self.userNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_username_preference"];
         self.userPasswordField.text = @"xxxxxx";
     }
 }
@@ -332,13 +332,13 @@ static UICompositeViewDescription *compositeDescription = nil;
         if ([LinphoneManager instance].connectivity == none) {
             [self showAlertWithTitle:@"提示" andMessage:NSLocalizedString(@"No connectivity", nil)];
         } else {
-            [[LPSystemUser sharedUser].settingsStore setTheStr:username forKey:@"username_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:userIdStr forKey:@"userid_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"password_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"domain_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"transport_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]   forKey:@"proxy_preference"];
-            [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"outbound_proxy_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:username forKey:@"account_mandatory_username_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:userIdStr forKey:@"account_userid_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"account_mandatory_password_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"account_mandatory_domain_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"account_transport_preference"];
+            [[LPSystemUser sharedUser].settingsStore setTheStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]   forKey:@"account_proxy_preference"];
+            [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
 
             // 这里进行LinphoneCoreSettingsStore的存储以触发登录linphone的回调
             [[LPSystemUser sharedUser].settingsStore synchronize];

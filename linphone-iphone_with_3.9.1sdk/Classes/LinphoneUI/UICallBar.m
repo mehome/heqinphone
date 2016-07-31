@@ -576,7 +576,7 @@ extern NSString *const kLinphoneInCallCellData;
         [self showToastWithMessage:@"收藏会议室中..."];
 
 //        RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
-//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
+//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
 //        reqModel.addr = [self curMeetingAddr];
 //        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
@@ -780,7 +780,7 @@ extern NSString *const kLinphoneInCallCellData;
     [self showToastWithMessage:@"邀请中..."];
     
 //    RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
-//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
+//    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
 //    reqModel.addr = [self curMeetingAddr];
 //    reqModel.type = @(type);
 //    reqModel.to = content;

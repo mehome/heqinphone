@@ -20,9 +20,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
 
-#import "LPJoinMettingViewController.h"
-#import "InCallViewController.h"
-
 #import "LinphoneAppDelegate.h"
 #import "PhoneMainView.h"
 
@@ -229,11 +226,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (NSUInteger)supportedInterfaceOrientations
 #endif
 {
-    if( [LinphoneManager runningOnIpad ] || [mainViewController currentViewSupportsLandscape] )
-        return UIInterfaceOrientationMaskAll;
-    else {
-        return UIInterfaceOrientationMaskPortrait;
-    }
+	return UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -329,14 +322,13 @@ static RootViewManager *rootViewManagerInstance = nil;
 			break;
 		}
 		case LinphoneCallOutgoingInit: {
-            [self changeCurrentView:[InCallViewController compositeViewDescription]];
+			[self changeCurrentView:CallOutgoingView.compositeViewDescription];
 			break;
 		}
 		case LinphoneCallPausedByRemote:
 		case LinphoneCallConnected:
 		case LinphoneCallStreamsRunning: {
-//			[self changeCurrentView:CallView.compositeViewDescription];
-            [self changeCurrentView:[InCallViewController compositeViewDescription]];
+			[self changeCurrentView:CallView.compositeViewDescription];
 			break;
 		}
 		case LinphoneCallUpdatedByRemote: {
@@ -344,8 +336,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 			const LinphoneCallParams *remote = linphone_call_get_remote_params(call);
 
 			if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
-//				[self changeCurrentView:CallView.compositeViewDescription];
-                [self changeCurrentView:[InCallViewController compositeViewDescription]];
+				[self changeCurrentView:CallView.compositeViewDescription];
 			}
 			break;
 		}
@@ -358,16 +349,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 				while ((currentView == CallView.compositeViewDescription) ||
 					   (currentView == CallIncomingView.compositeViewDescription) ||
 					   (currentView == CallOutgoingView.compositeViewDescription)) {
-//					[self popCurrentView];
-                    
-                    // 返回首页
-                    [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+					[self popCurrentView];
 				}
 			} else {
 				linphone_core_resume_call(LC, (LinphoneCall *)calls->data);
-//				[self changeCurrentView:CallView.compositeViewDescription];
-                
-                [self changeCurrentView:[InCallViewController compositeViewDescription]];
+				[self changeCurrentView:CallView.compositeViewDescription];
 			}
 			break;
 		}
@@ -422,13 +408,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 	@try {
 		LinphoneManager *lm = LinphoneManager.instance;
 		if (linphone_core_get_global_state(LC) != LinphoneGlobalOn) {
-            LinphoneGlobalState state = linphone_core_get_global_state([LinphoneManager getLc]);
-            NSLog(@"startUp state=%d", state);
-            // TODO 之前进入的拨号界面，现在按道理应该进入的是咱们的首页界面
-//			[self changeCurrentView:DialerView.compositeViewDescription];
-            
-            [self changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
-            
+			[self changeCurrentView:DialerView.compositeViewDescription];
 		} else if ([LinphoneManager.instance lpConfigBoolForKey:@"enable_first_login_view_preference"] == true) {
 			[PhoneMainView.instance changeCurrentView:FirstLoginView.compositeViewDescription];
 		} else {
@@ -436,20 +416,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 			// Change to default view
 			const MSList *list = linphone_core_get_proxy_config_list(LC);
 			if (list != NULL || ([lm lpConfigBoolForKey:@"hide_assistant_preference"] == true) || lm.isTesting) {
-                
-                // 这里应该进入到咱们自己的首页，上面的list有值，则意味着用户有数据，也意味着我们应该把用户的登录数据存储到那里面，下次就不用再弹出登录框，而且用户的相关数据，名称，密码也应该是存储在那里面
-//				[self changeCurrentView:DialerView.compositeViewDescription];
-                
-                [self changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
-
+				[self changeCurrentView:DialerView.compositeViewDescription];
 			} else {
-                // 下面是表示没有存储进数据的情况下，按我们的需求，也应该进入到自己的首页中。
-                
-                [self changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
-
-//				AssistantView *view = VIEW(AssistantView);
-//				[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
-//				[view reset];
+				AssistantView *view = VIEW(AssistantView);
+				[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
+				[view reset];
 			}
 		}
 		[self updateApplicationBadgeNumber]; // Update Badge at startup
@@ -517,7 +488,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 		}
 	}
 
-    // TODO 这里指定界面是向左滑动，还是向右滑动
 	if (left) {
 		return [PhoneMainView getBackwardTransition];
 	} else {

@@ -144,7 +144,7 @@
 		[self setObject:@"" forKey:@"account_mandatory_domain_preference"];
 		[self setCString:"" forKey:@"account_display_name_preference"];
 		[self setObject:@"" forKey:@"account_proxy_preference"];
-		[self setObject:@"tcp" forKey:@"account_transport_preference"];
+		[self setObject:@"udp" forKey:@"account_transport_preference"];
 		[self setBool:NO forKey:@"account_outbound_proxy_preference"];
 		[self setBool:NO forKey:@"account_avpf_preference"];
 		[self setBool:YES forKey:@"account_is_default_preference"];
@@ -188,13 +188,13 @@
 						snprintf(tmp, sizeof(tmp) - 1, "%s", linphone_address_get_domain(proxy_addr));
 					[self setCString:tmp forKey:@"account_proxy_preference"];
 				}
-				const char *tname = "tcp";
+				const char *tname = "udp";
 				switch (linphone_address_get_transport(proxy_addr)) {
 					case LinphoneTransportTcp:
 						tname = "tcp";
 						break;
 					case LinphoneTransportTls:
-						tname = "tcp";
+						tname = "tls";
 						break;
 					default:
 						break;
@@ -449,7 +449,7 @@
 	NSString *displayName = [self stringForKey:@"account_display_name_preference"];
 	NSString *userID = [self stringForKey:@"account_userid_preference"];
 	NSString *domain = [self stringForKey:@"account_mandatory_domain_preference"];
-//	NSString *transport = [self stringForKey:@"account_transport_preference"];
+	NSString *transport = [self stringForKey:@"account_transport_preference"];
 	NSString *accountHa1 = [self stringForKey:@"ha1_preference"];
 	NSString *accountPassword = [self stringForKey:@"account_mandatory_password_preference"];
 	BOOL isOutboundProxy = [self boolForKey:@"account_outbound_proxy_preference"];
@@ -481,11 +481,11 @@
 		LinphoneAddress *proxy_addr = linphone_core_interpret_url(LC, proxy);
 
 		if (proxy_addr) {
-			LinphoneTransportType type = LinphoneTransportTcp;
-//			if ([transport isEqualToString:@"tcp"])
-//				type = LinphoneTransportTcp;
-//			else if ([transport isEqualToString:@"tls"])
-//				type = LinphoneTransportTls;
+			LinphoneTransportType type = LinphoneTransportUdp;
+			if ([transport isEqualToString:@"tcp"])
+				type = LinphoneTransportTcp;
+			else if ([transport isEqualToString:@"tls"])
+				type = LinphoneTransportTls;
 
 			linphone_address_set_transport(proxy_addr, type);
 			ms_free(proxy);
@@ -603,7 +603,6 @@
 	}
 }
 
-// 执行存储并设置操作，当退出时需要进行设置
 - (BOOL)synchronize {
 	@try {
 

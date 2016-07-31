@@ -373,7 +373,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)requestDays:(NSInteger)days andRecordPage:(NSInteger)page withSuccessBlock:(requestSuccessBlock)block withFailBlock:(requestFailedBlock)failBlock {
     RDRRecordPlayRequstModel *reqModel = [RDRRecordPlayRequstModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
     reqModel.page = page;
     reqModel.day = days;
     
@@ -608,7 +608,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)requestForKeywords:(NSString *)keywords withSuccessBlock:(requestKeywordsSuccessBlock)block withFailBlock:(requestFailedBlock)failBlock {
     RDRRecordSearchRequestModel *reqModel = [RDRRecordSearchRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
     reqModel.key = keywords;
     
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];    

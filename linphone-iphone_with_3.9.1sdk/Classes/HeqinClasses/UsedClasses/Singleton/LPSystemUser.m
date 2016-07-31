@@ -26,11 +26,11 @@
 
 + (void)resetToAnonimousLogin {
     // 在用户未登录时， 强制进行添加
-    [[LPSystemUser sharedUser].settingsStore setObject:@"yunphone.iphone@unknown-host"   forKey:@"username_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"domain_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"proxy_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"password_preference"];
-    [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"outbound_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:@"yunphone.iphone@unknown-host"   forKey:@"account_mandatory_username_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_mandatory_domain_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"account_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"account_mandatory_password_preference"];
+    [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
 
     [[LPSystemUser sharedUser].settingsStore synchronize];
 }
@@ -101,7 +101,7 @@
     }else {
 //        // 未取到数据， 进行请求
 //        RDRMyMeetingRequestModel *reqModel = [RDRMyMeetingRequestModel requestModel];
-//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
 //        
 //        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //        

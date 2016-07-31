@@ -910,8 +910,6 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 
 static void linphone_iphone_popup_password_request(LinphoneCore *lc, const char *realmC, const char *usernameC,
 												   const char *domainC) {
-    // TODO 这里需要把下面的代码换成跳转到登录页面，如果不在首页和登录页的情况下
-
 	// let the wizard handle its own errors
 	if ([PhoneMainView.instance currentView] != AssistantView.compositeViewDescription) {
 		static DTAlertView *alertView = nil;
@@ -1547,8 +1545,7 @@ static BOOL libStarted = FALSE;
 		[NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(iterate) userInfo:nil repeats:YES];
 }
 
-// destroy会执行退出操作，而createLinphoneCore会立马进行下一轮的监控
-- (void)destroyLinphoneCore {           // 这是原版中的执行clear 帐号的操作
+- (void)destroyLinphoneCore {
 	[mIterateTimer invalidate];
 	// just in case
 	[self removeCTCallCenterCb];
@@ -1580,7 +1577,6 @@ static BOOL libStarted = FALSE;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-// TODO 执行下面的reset后，会执行create立马触发监控注册情况，从而使得很会以很高频率来监控重设置的情况。
 - (void)resetLinphoneCore {
 	[self destroyLinphoneCore];
 	[self createLinphoneCore];
@@ -1728,10 +1724,6 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
 
 	if (!shouldEnterBgMode) {
-        if (proxyCfg == NULL) {
-            return NO;
-        }
-        
 		const char *refkey = linphone_proxy_config_get_ref_key(proxyCfg);
 		BOOL pushNotifEnabled = (refkey && strcmp(refkey, "push_notification") == 0);
 		if (pushNotifEnabled) {

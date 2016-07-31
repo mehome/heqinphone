@@ -21,12 +21,6 @@
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
 
-@interface StatusBarView ()
-
-@property (nonatomic, strong) IBOutlet UIButton *topCoverBtn;
-
-@end
-
 @implementation StatusBarView {
 
 	NSTimer *callQualityTimer;
@@ -349,13 +343,11 @@
 	}
 }
 
-// TODO 这个功能在我们开发的版本中，不具备，所以这里进行屏蔽操作， 其实后面可以在所有的description中StatusBar设置为nil， 以隐藏statusBar.
 - (IBAction)onSideMenuClick:(id)sender {
 	UICompositeView *cvc = PhoneMainView.instance.mainViewController;
 	[cvc hideSideMenu:(cvc.sideMenuView.frame.origin.x == 0)];
 }
 
-// TODO, 这里应该删除掉这个事件，因为咱们并没有设计成点击这个位置就进入到设置界面或者向导页界面
 - (IBAction)onRegistrationStateClick:(id)sender {
 	if (linphone_core_get_default_proxy_config(LC)) {
 		linphone_core_refresh_registers(LC);
@@ -364,12 +356,6 @@
 	} else {
 		[PhoneMainView.instance changeCurrentView:AssistantView.compositeViewDescription];
 	}
-}
-
-// 通过这种方式，直接让顶部的按钮事件不可点击，因为全被覆盖，顶部按钮界面仅用于用来显示会话事件状态
-- (IBAction)topBtnCoveredClicked:(id)sender {
-    self.topCoverBtn.hidden = YES;
-    NSLog(@"顶部按钮点击操作");
 }
 
 @end

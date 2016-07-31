@@ -874,8 +874,8 @@
         <image name="numpad_sharp_over.png" width="210" height="113"/>
         <image name="numpad_six_default.png" width="210" height="113"/>
         <image name="numpad_six_over.png" width="210" height="113"/>
-        <image name="numpad_star_default.png" width="210" height="113"/>
-        <image name="numpad_star_over.png" width="210" height="113"/>
+        <image name="numpad_star_default.png" width="52" height="50"/>
+        <image name="numpad_star_over.png" width="52" height="50"/>
         <image name="numpad_three_default.png" width="210" height="113"/>
         <image name="numpad_three_over.png" width="210" height="113"/>
         <image name="numpad_two_default.png" width="220" height="113"/>

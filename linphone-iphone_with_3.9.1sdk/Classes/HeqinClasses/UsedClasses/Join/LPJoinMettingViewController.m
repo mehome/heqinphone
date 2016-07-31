@@ -189,7 +189,7 @@
                 // 把值同步进去
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
-                self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];
+                self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
                 self.btnTipLabel.text = @"已登录";
                 break;
             }
@@ -507,7 +507,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         [weakSelf showToastWithMessage:@"收藏会议室中..."];
         
         RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"userid_preference"];;
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
         
         NSIndexPath *btnIndexPath = (NSIndexPath *)[favBtn.rd_userInfo objectForKey:@"indexPath"];
         LinphoneCallLog *callLog = [[self.callLogs objectAtIndex:[btnIndexPath row]] pointerValue];
