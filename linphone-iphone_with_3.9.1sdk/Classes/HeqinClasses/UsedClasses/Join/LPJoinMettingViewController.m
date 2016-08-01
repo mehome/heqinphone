@@ -328,30 +328,42 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)joinMeeting:(NSString *)address withDisplayName:(NSString *)displayName {
+//    if (address.length == 0) {
+//        [self showToastWithMessage:@"无效的地址，请重新输入"];
+//        return;
+//    }
+//    
+//    NSString *callStr = address;
+//    
+//    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy;
+//    if (![address hasSuffix:domainStr] && domainStr.length>0) {
+//        callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
+//    }
+//    
+//    [LPSystemUser sharedUser].curMeetingAddr = callStr;
+//    if (callStr.length > 0) {
+//        LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:callStr];
+//        [LinphoneManager.instance call:addr];
+//        if (addr)
+//            linphone_address_destroy(addr);
+//    }
+    
     if (address.length == 0) {
         [self showToastWithMessage:@"无效的地址，请重新输入"];
         return;
     }
-    
     NSString *callStr = address;
-    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy;
+    
+    NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr;
     if (![address hasSuffix:domainStr] && domainStr.length>0) {
         callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
     }
+    // 拼成1066@sip.myvmr.cn后
     
-    // 进入到会议中
-//    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-//    if (controller != nil) {
-//        NSLog(@"进入会议中, callStr=%@, displayName=%@", callStr, displayName);
-//        [controller call:callStr displayName:displayName];
-//    }
     [LPSystemUser sharedUser].curMeetingAddr = callStr;
-
     if (callStr.length > 0) {
         LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:callStr];
         [LinphoneManager.instance call:addr];
-        if (addr)
-            linphone_address_destroy(addr);
     }
 }
 

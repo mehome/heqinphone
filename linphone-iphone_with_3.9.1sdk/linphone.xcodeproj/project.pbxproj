@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1318856C1D4F8640004C7C1D /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1318856B1D4F8640004C7C1D /* IncomingCallViewController.m */; };
+		131885761D4F865D004C7C1D /* IncomingCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 131885741D4F865D004C7C1D /* IncomingCallViewController.xib */; };
 		136EBE061D4A3FBC007055E9 /* RDRAddFavRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136EBC3B1D4A3FBC007055E9 /* RDRAddFavRequestModel.m */; };
 		136EBE071D4A3FBC007055E9 /* RDRAskSecRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136EBC3D1D4A3FBC007055E9 /* RDRAskSecRequestModel.m */; };
 		136EBE081D4A3FBC007055E9 /* RDRBaseRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136EBC3F1D4A3FBC007055E9 /* RDRBaseRequestModel.m */; };
@@ -1001,6 +1003,9 @@
 
 /* Begin PBXFileReference section */
 		045B5CB218D72E9A0088350C /* libbzrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbzrtp.a; path = "liblinphone-sdk/apple-darwin/lib/libbzrtp.a"; sourceTree = "<group>"; };
+		1318856A1D4F8640004C7C1D /* IncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomingCallViewController.h; sourceTree = "<group>"; };
+		1318856B1D4F8640004C7C1D /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomingCallViewController.m; sourceTree = "<group>"; };
+		131885751D4F865D004C7C1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IncomingCallViewController.xib; sourceTree = "<group>"; };
 		136EBC3A1D4A3FBC007055E9 /* RDRAddFavRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRAddFavRequestModel.h; sourceTree = "<group>"; };
 		136EBC3B1D4A3FBC007055E9 /* RDRAddFavRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRAddFavRequestModel.m; sourceTree = "<group>"; };
 		136EBC3C1D4A3FBC007055E9 /* RDRAskSecRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRAskSecRequestModel.h; sourceTree = "<group>"; };
@@ -2436,6 +2441,9 @@
 				D3F26BEE15986B71005F9CAB /* CallIncomingView.h */,
 				D3F26BEF15986B71005F9CAB /* CallIncomingView.m */,
 				D38187DC15FE347700C3EDCA /* CallIncomingView.xib */,
+				1318856A1D4F8640004C7C1D /* IncomingCallViewController.h */,
+				1318856B1D4F8640004C7C1D /* IncomingCallViewController.m */,
+				131885741D4F865D004C7C1D /* IncomingCallViewController.xib */,
 				6346100D1B61409800548952 /* CallOutgoingView.h */,
 				6346100E1B61409800548952 /* CallOutgoingView.m */,
 				634610101B6140A500548952 /* CallOutgoingView.xib */,
@@ -4486,6 +4494,7 @@
 				6316A30A1C5F64350073BFA4 /* history_missed_default.png in Resources */,
 				6316A22D1C5F64350073BFA4 /* add_field_default@2x.png in Resources */,
 				6316A33A1C5F64350073BFA4 /* numpad_2_default.png in Resources */,
+				131885761D4F865D004C7C1D /* IncomingCallViewController.xib in Resources */,
 				639E9CB01C0DB83000019A75 /* SideMenuView.xib in Resources */,
 				136EBF181D4A45F3007055E9 /* b_joinMetting.png in Resources */,
 				6316A24B1C5F64350073BFA4 /* call_audio_start_default@2x.png in Resources */,
@@ -5255,6 +5264,7 @@
 				136EBE241D4A3FBC007055E9 /* RDRArrangeRoomModel.m in Sources */,
 				136EBE771D4A3FBC007055E9 /* MJRefreshBackGifFooter.m in Sources */,
 				136EBE2C1D4A3FBC007055E9 /* RDRManageCloseMeetingResponseModel.m in Sources */,
+				1318856C1D4F8640004C7C1D /* IncomingCallViewController.m in Sources */,
 				637157A11B283FE200C91677 /* FileTransferDelegate.m in Sources */,
 				136EBE211D4A3FBC007055E9 /* RDRTerminalRequestModel.m in Sources */,
 				D378AB2A15DCDB4A0098505D /* ImagePickerView.m in Sources */,
@@ -5286,6 +5296,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		131885741D4F865D004C7C1D /* IncomingCallViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				131885751D4F865D004C7C1D /* Base */,
+			);
+			name = IncomingCallViewController.xib;
+			sourceTree = "<group>";
+		};
 		63058A0F1B4E821E00EFAE36 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

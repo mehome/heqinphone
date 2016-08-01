@@ -23,6 +23,10 @@
 #import "LinphoneAppDelegate.h"
 #import "PhoneMainView.h"
 
+#import "LPJoinMettingViewController.h"
+#import "InCallViewController.h"
+#import "IncomingCallViewController.h"
+
 static RootViewManager *rootViewManagerInstance = nil;
 
 @implementation RootViewManager {
@@ -315,6 +319,11 @@ static RootViewManager *rootViewManagerInstance = nil;
 	LinphoneCallState state = [[notif.userInfo objectForKey:@"state"] intValue];
 	NSString *message = [notif.userInfo objectForKey:@"message"];
 
+    // Don't handle call state during incoming call view
+    if([[self currentView] equal:[IncomingCallViewController compositeViewDescription]] && state != LinphoneCallError && state != LinphoneCallEnd) {
+        return;
+    }
+    
 	switch (state) {
 		case LinphoneCallIncomingReceived:
 		case LinphoneCallIncomingEarlyMedia: {
@@ -322,13 +331,15 @@ static RootViewManager *rootViewManagerInstance = nil;
 			break;
 		}
 		case LinphoneCallOutgoingInit: {
-			[self changeCurrentView:CallOutgoingView.compositeViewDescription];
-			break;
+//			[self changeCurrentView:CallOutgoingView.compositeViewDescription];
+//			break;
 		}
 		case LinphoneCallPausedByRemote:
 		case LinphoneCallConnected:
 		case LinphoneCallStreamsRunning: {
-			[self changeCurrentView:CallView.compositeViewDescription];
+//			[self changeCurrentView:CallView.compositeViewDescription];
+            [self changeCurrentView:[InCallViewController compositeViewDescription]];
+
 			break;
 		}
 		case LinphoneCallUpdatedByRemote: {
@@ -336,7 +347,9 @@ static RootViewManager *rootViewManagerInstance = nil;
 			const LinphoneCallParams *remote = linphone_call_get_remote_params(call);
 
 			if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
-				[self changeCurrentView:CallView.compositeViewDescription];
+//				[self changeCurrentView:CallView.compositeViewDescription];
+                [self changeCurrentView:[InCallViewController compositeViewDescription]];
+
 			}
 			break;
 		}
@@ -346,14 +359,18 @@ static RootViewManager *rootViewManagerInstance = nil;
 		case LinphoneCallEnd: {
 			const MSList *calls = linphone_core_get_calls(LC);
 			if (calls == NULL) {
-				while ((currentView == CallView.compositeViewDescription) ||
-					   (currentView == CallIncomingView.compositeViewDescription) ||
-					   (currentView == CallOutgoingView.compositeViewDescription)) {
-					[self popCurrentView];
-				}
+//				while ((currentView == CallView.compositeViewDescription) ||
+//					   (currentView == CallIncomingView.compositeViewDescription) ||
+//					   (currentView == CallOutgoingView.compositeViewDescription)) {
+//					[self popCurrentView];
+//				}
+                
+                [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
+
 			} else {
 				linphone_core_resume_call(LC, (LinphoneCall *)calls->data);
-				[self changeCurrentView:CallView.compositeViewDescription];
+//				[self changeCurrentView:CallView.compositeViewDescription];
+                [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			}
 			break;
 		}
@@ -408,7 +425,9 @@ static RootViewManager *rootViewManagerInstance = nil;
 	@try {
 		LinphoneManager *lm = LinphoneManager.instance;
 		if (linphone_core_get_global_state(LC) != LinphoneGlobalOn) {
-			[self changeCurrentView:DialerView.compositeViewDescription];
+//			[self changeCurrentView:DialerView.compositeViewDescription];
+            [self changeCurrentView:LPJoinMettingViewController.compositeViewDescription];
+            
 		} else if ([LinphoneManager.instance lpConfigBoolForKey:@"enable_first_login_view_preference"] == true) {
 			[PhoneMainView.instance changeCurrentView:FirstLoginView.compositeViewDescription];
 		} else {
@@ -416,11 +435,18 @@ static RootViewManager *rootViewManagerInstance = nil;
 			// Change to default view
 			const MSList *list = linphone_core_get_proxy_config_list(LC);
 			if (list != NULL || ([lm lpConfigBoolForKey:@"hide_assistant_preference"] == true) || lm.isTesting) {
-				[self changeCurrentView:DialerView.compositeViewDescription];
+//				[self changeCurrentView:DialerView.compositeViewDescription];
+                
+                [self changeCurrentView:LPJoinMettingViewController.compositeViewDescription];
+
 			} else {
-				AssistantView *view = VIEW(AssistantView);
-				[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
-				[view reset];
+//                [self changeCurrentView:DialerView.compositeViewDescription];
+                
+                [self changeCurrentView:LPJoinMettingViewController.compositeViewDescription];
+                
+//				AssistantView *view = VIEW(AssistantView);
+//				[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
+//				[view reset];
 			}
 		}
 		[self updateApplicationBadgeNumber]; // Update Badge at startup
@@ -669,11 +695,27 @@ static RootViewManager *rootViewManagerInstance = nil;
 			// accept call automatically
 			[lm acceptCall:call evenWithVideo:YES];
 		} else {
-			AudioServicesPlaySystemSound(lm.sounds.vibrate);
-			CallIncomingView *view = VIEW(CallIncomingView);
-			[self changeCurrentView:view.compositeViewDescription];
-			[view setCall:call];
-			[view setDelegate:self];
+//			AudioServicesPlaySystemSound(lm.sounds.vibrate);
+//			CallIncomingView *view = VIEW(CallIncomingView);
+//			[self changeCurrentView:view.compositeViewDescription];
+//			[view setCall:call];
+//			[view setDelegate:self];
+            
+            AudioServicesPlaySystemSound(lm.sounds.vibrate);
+            IncomingCallViewController *controller = nil;
+            if( ![currentView.name isEqualToString:[IncomingCallViewController compositeViewDescription].name]){
+                controller = VIEW(IncomingCallViewController);
+                [PhoneMainView.instance changeCurrentView:controller.compositeViewDescription];
+            } else {
+                // controller is already presented, don't bother animating a transition
+                controller = VIEW(IncomingCallViewController);
+                [PhoneMainView.instance changeCurrentView:controller.compositeViewDescription];
+            }
+            if(controller != nil) {
+                [controller setCall:call];
+                [controller setDelegate:self];
+            }
+
 		}
 	}
 }

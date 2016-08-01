@@ -15,6 +15,8 @@
 #import "LPJoinManageMeetingViewController.h"
 
 @interface LPLoginViewController () <UITextFieldDelegate> {
+    LinphoneAccountCreator *account_creator;
+    LinphoneProxyConfig *new_config;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
@@ -194,23 +196,14 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
     if(compositeDescription == nil) {
-//        compositeDescription = [[UICompositeViewDescription alloc] init:@"Login"
-//                                                                content:@"LPLoginViewController"
-//                                                               stateBar:nil
-//                                                        stateBarEnabled:false
-//                                                                 tabBar:@"LPJoinBarViewController"
-//                                                          tabBarEnabled:true
-//                                                             fullscreen:false
-//                                                          landscapeMode:[LinphoneManager runningOnIpad]
-//                                                           portraitMode:true];
-        
         compositeDescription = [[UICompositeViewDescription alloc] init:self.class
                                                               statusBar:nil
                                                                  tabBar:[LPJoinBarViewController class]
                                                                sideMenu:nil
                                                              fullscreen:false
                                                          isLeftFragment:false
-                                                           fragmentWith:nil supportLandscapeMode:NO];
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:NO];
 
         compositeDescription.darkBackground = true;
     }
@@ -332,18 +325,25 @@ static UICompositeViewDescription *compositeDescription = nil;
         if ([LinphoneManager instance].connectivity == none) {
             [self showAlertWithTitle:@"提示" andMessage:NSLocalizedString(@"No connectivity", nil)];
         } else {
-            [[LPSystemUser sharedUser].settingsStore setTheStr:username forKey:@"account_mandatory_username_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:userIdStr forKey:@"account_userid_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"account_mandatory_password_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"account_mandatory_domain_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"account_transport_preference"];
-            [[LPSystemUser sharedUser].settingsStore setTheStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]   forKey:@"account_proxy_preference"];
-            [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
-
-            // 这里进行LinphoneCoreSettingsStore的存储以触发登录linphone的回调
-            [[LPSystemUser sharedUser].settingsStore synchronize];
+//            [[LPSystemUser sharedUser].settingsStore setTheStr:username forKey:@"account_mandatory_username_preference"];
+//            [[LPSystemUser sharedUser].settingsStore setTheStr:userIdStr forKey:@"account_userid_preference"];
+//            [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"account_mandatory_password_preference"];
+//            [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"account_mandatory_domain_preference"];
+//            [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"account_transport_preference"];
+//            [[LPSystemUser sharedUser].settingsStore setTheStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]   forKey:@"account_proxy_preference"];
+//            [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
+//
+//            // 这里进行LinphoneCoreSettingsStore的存储以触发登录linphone的回调
+//            [[LPSystemUser sharedUser].settingsStore synchronize];
             
+            
+            [self loadAssistantConfig:@"assistant_external_sip.rc"];
+            [self resetLiblinphone];
+            [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:domain];
+            [self configureProxyConfig];
+            [self loginWith:username withDisplayName:username withUserId:userIdStr withPassword:password withDomain:domain withProxy:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]];
             // 然后就等待登录成功或者失败的回调.
+            
             return;
             
 //            BOOL success = [self addProxyConfig:username password:password userIdStr:userIdStr domain:domain withTransport:transport];
@@ -449,5 +449,103 @@ static UICompositeViewDescription *compositeDescription = nil;
     linphone_core_clear_all_auth_info([LinphoneManager getLc]);
 }
 
+
+////////////////////////// 新版登录方式//////////////////////
+- (void)loadAssistantConfig:(NSString *)rcFilename {
+    NSString *fullPath = [@"file://" stringByAppendingString:[LinphoneManager bundleFile:rcFilename]];
+    linphone_core_set_provisioning_uri(LC, fullPath.UTF8String);
+    [LinphoneManager.instance lpConfigSetInt:1 forKey:@"transient_provisioning" inSection:@"misc"];
+}
+
+- (void)resetLiblinphone {
+    if (account_creator) {
+        linphone_account_creator_unref(account_creator);
+        account_creator = NULL;
+    }
+    [LinphoneManager.instance resetLinphoneCore];
+    account_creator = linphone_account_creator_new(
+                                                   LC, [LinphoneManager.instance lpConfigStringForKey:@"xmlrpc_url" inSection:@"assistant" withDefault:@""]
+                                                   .UTF8String);
+    linphone_account_creator_set_user_data(account_creator, (__bridge void *)(self));
+}
+
+- (void)fillAccountCreatorWith:(NSString *)userId withPassword:(NSString *)password withDomain:(NSString *)domain {
+    // 然后赋各个参数
+//    LinphoneAccountCreatorStatus s = linphone_account_creator_set_username(account_creator, @"qin.he@zijingcloud.com".UTF8String);
+    LinphoneAccountCreatorStatus s = linphone_account_creator_set_username(account_creator, userId.UTF8String);
+    NSLog(@"set userId=%d", s);
+//    s = linphone_account_creator_set_password(account_creator, @"he@2015".UTF8String);
+    s = linphone_account_creator_set_password(account_creator, password.UTF8String);
+    NSLog(@"set password=%d", s);
+//    s = linphone_account_creator_set_domain(account_creator, @"zijingcloud.com".UTF8String);
+    s = linphone_account_creator_set_domain(account_creator, domain.UTF8String);
+    NSLog(@"set domain=%d", s);
+}
+
+- (void)configureProxyConfig {
+    LinphoneManager *lm = LinphoneManager.instance;
+    
+    // remove previous proxy config, if any
+    if (new_config != NULL) {
+        const LinphoneAuthInfo *auth = linphone_proxy_config_find_auth_info(new_config);
+        linphone_core_remove_proxy_config(LC, new_config);
+        if (auth) {
+            linphone_core_remove_auth_info(LC, auth);
+        }
+        new_config = NULL;
+    }
+    
+    linphone_account_creator_set_transport(account_creator, linphone_transport_parse(@"tcp".UTF8String));
+    
+    LinphoneTransportType portType = linphone_account_creator_get_transport(account_creator);
+    NSLog(@"portType=%d", portType);
+    
+    const char *pssword = linphone_account_creator_get_username(account_creator);
+    NSLog(@"userName=%s", pssword);
+    
+    const char *paname = linphone_account_creator_get_password(account_creator);
+    NSLog(@"password=%s", paname);
+    
+    const char *padomain = linphone_account_creator_get_domain(account_creator);
+    NSLog(@"padomain=%s", padomain);
+    
+    new_config = linphone_account_creator_configure(account_creator);
+    
+    if (new_config) {
+        [lm configurePushTokenForProxyConfig:new_config];
+        linphone_core_set_default_proxy_config(LC, new_config);
+        // reload address book to prepend proxy config domain to contacts' phone number
+        // todo: STOP doing that!
+        //        [[LinphoneManager.instance fastAddressBook] reload];
+    } else {
+        UIAlertView *error = [[UIAlertView alloc]
+                              initWithTitle:NSLocalizedString(@"Assistant error", nil)
+                              message:NSLocalizedString(
+                                                        @"Could not configure your account, please check parameters or try again later", nil)
+                              delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                              otherButtonTitles:nil];
+        [error show];
+        return;
+    }
+}
+
+- (void)loginWith:(NSString *)userName withDisplayName:(NSString *)displayName withUserId:(NSString *)userId withPassword:(NSString *)password withDomain:(NSString *)domainStr withProxy:(NSString *)proxyStr {
+    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+    [[LPSystemUser sharedUser].settingsStore transformAccountToKeys:userName];
+    
+    // 用户名
+    [[LPSystemUser sharedUser].settingsStore setObject:userName forKey:@"account_mandatory_username_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:displayName forKey:@"account_display_name_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:userId forKey:@"account_userid_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:password forKey:@"account_mandatory_password_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:domainStr forKey:@"account_mandatory_domain_preference"];
+    
+//    [[LPSystemUser sharedUser].settingsStore setObject:@"sip.myvmr.cn:80" forKey:@"account_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:proxyStr forKey:@"account_proxy_preference"];
+    
+    [[LPSystemUser sharedUser].settingsStore synchronize];
+    // 登录完成，等通知吧
+}
 
 @end

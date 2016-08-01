@@ -63,13 +63,21 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
-		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
-															  statusBar:StatusBarView.class
-																 tabBar:nil
-															   sideMenu:SideMenuView.class
-															 fullscreen:false
-														 isLeftFragment:NO
-														   fragmentWith:nil supportLandscapeMode:YES];
+//		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+//															  statusBar:StatusBarView.class
+//																 tabBar:nil
+//															   sideMenu:SideMenuView.class
+//															 fullscreen:false
+//														 isLeftFragment:NO
+//														   fragmentWith:nil];
+        compositeDescription = [[UICompositeViewDescription alloc] init:self.class
+                                                              statusBar:StatusBarView.class
+                                                                 tabBar:nil
+                                                               sideMenu:SideMenuView.class
+                                                             fullscreen:false
+                                                         isLeftFragment:NO
+                                                           fragmentWith:nil
+                                                   supportLandscapeMode:NO];
 
 
 		compositeDescription.darkBackground = true;
