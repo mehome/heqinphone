@@ -77,8 +77,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	_routesEarpieceButton.enabled = !IPAD;
-
 // TODO: fixme! video preview frame is too big compared to openGL preview
 // frame, so until this is fixed, temporary disabled it.
 #if 0
@@ -91,8 +89,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[videoZoomHandler setup:_videoGroup];
 	_videoGroup.alpha = 0;
-
-	[_videoCameraSwitch setPreview:_videoPreview];
 
 	UIPanGestureRecognizer *dragndrop = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveVideoPreview:)];
 	dragndrop.minimumNumberOfTouches = 1;
@@ -136,11 +132,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 	LinphoneManager.instance.nextCallIsTransfer = NO;
 
 	// Update on show
-	[self hideRoutes:TRUE animated:FALSE];
-	[self hideOptions:TRUE animated:FALSE];
 	[self hidePad:TRUE animated:FALSE];
 	[self hideSpeaker:LinphoneManager.instance.bluetoothAvailable];
-	[self callDurationUpdate];
 	[self onCurrentCallChange];
 	// Set windows (warn memory leaks)
 	linphone_core_set_native_video_window_id(LC, (__bridge void *)(_videoView));
@@ -159,12 +152,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 										   selector:@selector(callUpdateEvent:)
 											   name:kLinphoneCallUpdate
 											 object:nil];
-
-	[NSTimer scheduledTimerWithTimeInterval:1
-									 target:self
-								   selector:@selector(callDurationUpdate)
-								   userInfo:nil
-									repeats:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -226,7 +213,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	[self previewTouchLift];
-	[self hideStatusBar:!videoHidden && (_nameLabel.alpha <= 0.f)];
+	[self hideStatusBar:!videoHidden];
 }
 
 #pragma mark - UI modification
@@ -243,22 +230,9 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 - (void)updateBottomBar:(LinphoneCall *)call state:(LinphoneCallState)state {
 	[_speakerButton update];
 	[_microButton update];
-	[_videoButton update];
-	[_hangupButton update];
 
 	_optionsButton.enabled = (!call || !linphone_core_sound_resources_locked(LC));
-	_optionsTransferButton.enabled = call && !linphone_core_sound_resources_locked(LC);
-	// enable conference button if 2 calls are presents and at least one is not in the conference
-	int confSize = linphone_core_get_conference_size(LC) - (linphone_core_is_in_conference(LC) ? 1 : 0);
-	_optionsConferenceButton.enabled =
-		((linphone_core_get_calls_nb(LC) > 1) && (linphone_core_get_calls_nb(LC) != confSize));
 
-	// Disable transfert in conference
-	if (linphone_core_get_current_call(LC) == NULL) {
-		[_optionsTransferButton setEnabled:FALSE];
-	} else {
-		[_optionsTransferButton setEnabled:TRUE];
-	}
 
 	switch (state) {
 		case LinphoneCallEnd:
@@ -266,8 +240,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		case LinphoneCallIncoming:
 		case LinphoneCallOutgoing:
 			[self hidePad:TRUE animated:TRUE];
-			[self hideOptions:TRUE animated:TRUE];
-			[self hideRoutes:TRUE animated:TRUE];
 		default:
 			break;
 	}
@@ -295,9 +267,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		// show controls
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.35];
-		_videoCameraSwitch.alpha = _routesView.alpha =
-			_optionsView.alpha = _numpadView.alpha = _bottomBar.alpha = (hidden ? 0 : 1);
-		_nameLabel.alpha = _durationLabel.alpha = (hidden ? 0 : .8f);
+		_numpadView.alpha = _bottomBar.alpha = (hidden ? 0 : 1);
 
 		[self hideStatusBar:hidden];
 
@@ -338,7 +308,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 
 	// only show camera switch button if we have more than 1 camera
-	_videoCameraSwitch.hidden = (disabled || !LinphoneManager.instance.frontCamId);
 	_videoPreview.hidden = (disabled || !linphone_core_self_view_enabled(LC));
 
 	if (hideControlsTimer != nil) {
@@ -385,30 +354,11 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	PhoneMainView.instance.mainViewController.statusBarView.hidden = hide;
 }
 
-- (void)callDurationUpdate {
-	int duration =
-		linphone_core_get_current_call(LC) ? linphone_call_get_duration(linphone_core_get_current_call(LC)) : 0;
-	_durationLabel.text = [LinphoneUtils durationToString:duration];
-}
-
 - (void)onCurrentCallChange {
 	LinphoneCall *call = linphone_core_get_current_call(LC);
 //    BOOL curIsHidden = (call || linphone_core_is_in_conference(LC));    // 用来判断当前是否在会议中
     
 	_callView.hidden = !call;
-	_conferenceView.hidden = !linphone_core_is_in_conference(LC);
-
-	if (!_callView.hidden) {
-		const LinphoneAddress *addr = linphone_call_get_remote_address(call);
-        
-        // 设置对方的名字
-		[ContactDisplay setDisplayNameLabel:_nameLabel forAddress:addr];
-        
-		char *uri = linphone_address_as_string_uri_only(addr);
-		ms_free(uri);
-        
-		[_avatarImage setImage:[FastAddressBook imageForAddress:addr thumbnail:NO] bordered:YES withRoundedRadius:YES];
-	}
 }
 
 - (void)hidePad:(BOOL)hidden animated:(BOOL)animated {
@@ -426,24 +376,8 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 }
 
-- (void)hideOptions:(BOOL)hidden animated:(BOOL)animated {
-	if (hidden) {
-		[_optionsButton setOff];
-	} else {
-		[_optionsButton setOn];
-	}
-	if (hidden != _optionsView.hidden) {
-		if (animated) {
-			[self hideAnimation:hidden forView:_optionsView completion:nil];
-		} else {
-			[_optionsView setHidden:hidden];
-		}
-	}
-}
-
 - (void)hideSpeaker:(BOOL)hidden {
 	_speakerButton.hidden = hidden;
-	_routesButton.hidden = !hidden;
 }
 
 #pragma mark - Event Functions
@@ -631,35 +565,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 }
 
-- (IBAction)onOptionsClick:(id)sender {
-	if ([_optionsView isHidden]) {
-		[self hideOptions:FALSE animated:ANIMATED];
-	} else {
-		[self hideOptions:TRUE animated:ANIMATED];
-	}
-}
-
-- (IBAction)onOptionsTransferClick:(id)sender {
-	[self hideOptions:TRUE animated:TRUE];
-	DialerView *view = VIEW(DialerView);
-	[view setAddress:@""];
-	LinphoneManager.instance.nextCallIsTransfer = YES;
-	[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
-}
-
-- (IBAction)onOptionsAddClick:(id)sender {
-	[self hideOptions:TRUE animated:TRUE];
-	DialerView *view = VIEW(DialerView);
-	[view setAddress:@""];
-	LinphoneManager.instance.nextCallIsTransfer = NO;
-	[PhoneMainView.instance changeCurrentView:view.compositeViewDescription];
-}
-
-- (IBAction)onOptionsConferenceClick:(id)sender {
-	[self hideOptions:TRUE animated:TRUE];
-	linphone_core_add_all_to_conference(LC);
-}
-
 #pragma mark - Animation
 
 - (void)hideAnimation:(BOOL)hidden forView:(UIView *)target completion:(void (^)(BOOL finished))completion {
@@ -701,6 +606,267 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 				  completion(finished);
 			}];
 	}
+}
+
+//////////////////////////////////////////////// 自已添加的新方法,
+// 挂断电话
+- (void)terminalCall {
+    LinphoneCall *currentcall = linphone_core_get_current_call(LC);
+    if (linphone_core_is_in_conference(LC) || (linphone_core_get_conference_size(LC) > 0) ) { // Only one conf
+        linphone_core_terminate_conference(LC);
+    } else if (currentcall != NULL) { // In a call
+        linphone_core_terminate_call(LC, currentcall);
+    } else {
+        const MSList *calls = linphone_core_get_calls(LC);
+        if (ms_list_size(calls) == 1) { // Only one call
+            linphone_core_terminate_call(LC, (LinphoneCall *)(calls->data));
+        }
+    }
+}
+
+- (void)hideAllBottomBgView {
+//    if (self.popControlView.hidden == NO) {
+//        // 隐藏它
+//        self.popControlView.alpha = 1.0;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            self.popControlView.alpha = 0.0;
+//        } completion:^(BOOL finished) {
+//            NSMutableArray *subs = [NSMutableArray array];
+//            for (UIView *subV in self.popControlView.subviews) {
+//                if (subV.tag != 1000) {
+//                    [subs addObject:subV];
+//                }
+//            }
+//            
+//            for (UIView *eachSub in subs) {
+//                [eachSub removeFromSuperview];
+//            }
+//            
+//            self.popControlView.hidden = YES;
+//        }];
+//    }
+}
+
+// 打开视频镜头
+- (void)openCamera:(UIButton *)sender {
+    [self hideAllBottomBgView];
+    
+    // 下面这行代码是从老的地方来的，不确定是否一定需要调用
+    if (!linphone_core_video_enabled(LC)) {
+        linphone_core_enable_video_capture(LC, true);
+        linphone_core_enable_video_display(LC, true);
+    }
+    
+    LinphoneCall *call = linphone_core_get_current_call(LC);
+    if (call) {
+        LinphoneCallAppData *callAppData = (__bridge LinphoneCallAppData *)linphone_call_get_user_pointer(call);
+        callAppData->videoRequested =
+        TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
+        LinphoneCallParams *call_params = linphone_call_params_copy(linphone_call_get_current_params(call));
+        linphone_call_params_enable_video(call_params, TRUE);
+        linphone_core_update_call(LC, call, call_params);
+        linphone_call_params_destroy(call_params);
+    } else {
+        LOGW(@"Cannot toggle video button, because no current call");
+    }
+    
+    // TODO 这里可以先让一个屏幕提示界面正在等待
+    // 然后可以执行一个定时器，0.3秒后，把正在等待界面隐藏掉
+}
+
+// 关闭摄像头
+- (void)closeCamera:(UIButton *)sender {
+    [self hideAllBottomBgView];
+    
+    if (!linphone_core_video_display_enabled(LC))
+        return;
+    
+    if (!linphone_core_video_enabled(LC))
+        return;
+    
+    LinphoneCall *call = linphone_core_get_current_call(LC);
+    if (call) {
+        LinphoneCallParams *call_params = linphone_call_params_copy(linphone_call_get_current_params(call));
+        linphone_call_params_enable_video(call_params, FALSE);
+        linphone_core_update_call(LC, call, call_params);
+        linphone_call_params_destroy(call_params);
+    } else {
+        LOGW(@"Cannot toggle video button, because no current call");
+    }
+}
+
+// 点击切换前后摄像头
+- (void)bmChangeFrontAndTail:(UIButton *)sender {
+    [self hideAllBottomBgView];
+    
+    const char *currentCamId = (char *)linphone_core_get_video_device(LC);
+    const char **cameras = linphone_core_get_video_devices(LC);
+    const char *newCamId = NULL;
+    int i;
+    
+    for (i = 0; cameras[i] != NULL; ++i) {
+        if (strcmp(cameras[i], "StaticImage: Static picture") == 0)
+            continue;
+        if (strcmp(cameras[i], currentCamId) != 0) {
+            newCamId = cameras[i];
+            break;
+        }
+    }
+    if (newCamId) {
+        LOGI(@"Switching from [%s] to [%s]", currentCamId, newCamId);
+        linphone_core_set_video_device(LC, newCamId);
+        LinphoneCall *call = linphone_core_get_current_call(LC);
+        if (call != NULL) {
+            linphone_core_update_call(LC, call, NULL);
+        }
+    }
+}
+
+// 麦克风按钮点击
+- (IBAction)bottomMicBtnClicked:(id)sender {
+//
+//    [self hideAllBottomBgView];
+//    
+//    // 然后执行不同的操作
+//    if (linphone_core_mic_enabled([LinphoneManager getLc]) == YES) {
+//        // 当前静音，点击后，则取消静音
+//        linphone_core_enable_mic([LinphoneManager getLc], false);
+//        
+//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+//    }else {
+//        // 当前没有静音， 点击后，则进行静音
+//        linphone_core_enable_mic([LinphoneManager getLc], true);
+//        
+//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
+//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
+//    }
+}
+
+// 底部视频按钮
+- (IBAction)bottomVedioBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+//    // 点击都弹出选择界面
+//    UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    frontTailBtn.showsTouchWhenHighlighted = YES;
+//    [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
+//    [frontTailBtn setTitle:@"前置/后置摄像头" forState:UIControlStateNormal];
+//    
+//    UIButton *closeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    closeCameraBtn.showsTouchWhenHighlighted = YES;
+//    [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
+//    [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
+//    
+//    UIButton *openCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    openCameraBtn.showsTouchWhenHighlighted = YES;
+//    [openCameraBtn addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
+//    [openCameraBtn setTitle:@"打开摄像头" forState:UIControlStateNormal];
+//    
+//    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
+//    bool video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
+//    
+//    //    if( linphone_core_video_enabled([LinphoneManager getLc])
+//    //       && currentCall
+//    //       && !linphone_call_media_in_progress(currentCall)
+//    //       && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
+//    //        video_enabled = TRUE;
+//    //    }
+//    
+//    if (video_enabled == YES) {
+//        // 当前在会议中
+//        [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
+//    }else {
+//        // 当前不在会议中
+//        [self popWithButtons:@[frontTailBtn, openCameraBtn]];
+//    }
+}
+
+
+// 底部邀请按钮
+- (IBAction)bottomInviteBtnClicked:(id)sender {
+//    UIButton *mailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    mailBtn.showsTouchWhenHighlighted = YES;
+//    [mailBtn addTarget:self action:@selector(sendMailBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [mailBtn setTitle:@"发邮件" forState:UIControlStateNormal];
+//    
+//    UIButton *smsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    smsBtn.showsTouchWhenHighlighted = YES;
+//    [smsBtn addTarget:self action:@selector(sendSMSBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [smsBtn setTitle:@"发短信" forState:UIControlStateNormal];
+//    
+//    UIButton *callPhoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    callPhoneBtn.showsTouchWhenHighlighted = YES;
+//    [callPhoneBtn addTarget:self action:@selector(callBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [callPhoneBtn setTitle:@"呼号" forState:UIControlStateNormal];
+//    
+//    UIButton *copyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    copyBtn.showsTouchWhenHighlighted = YES;
+//    [copyBtn addTarget:self action:@selector(copyAddressBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [copyBtn setTitle:@"复制地址" forState:UIControlStateNormal];
+//    
+//    [self popWithButtons:@[mailBtn, smsBtn, callPhoneBtn, copyBtn]];
+}
+
+// 底部参与人按钮
+- (IBAction)bottomJoinerBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+//    [RDRAllJoinersView showTableTitle:@"全部参与人员" withPostBlock:^(NSString *text) {
+//        [self showToastWithMessage:text];
+//    }];
+}
+
+// 底部更多按钮
+- (IBAction)bottomMoreBtnClicked:(id)sender {
+//    UIButton *lockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    lockBtn.showsTouchWhenHighlighted = YES;
+//    [lockBtn addTarget:self action:@selector(lockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [lockBtn setTitle:@"锁定会议室" forState:UIControlStateNormal];
+//    
+//    UIButton *unlockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    unlockBtn.showsTouchWhenHighlighted = YES;
+//    [unlockBtn addTarget:self action:@selector(unlockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [unlockBtn setTitle:@"解锁会议室" forState:UIControlStateNormal];
+//    
+//    UIButton *startRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    startRecordBtn.showsTouchWhenHighlighted = YES;
+//    [startRecordBtn addTarget:self action:@selector(startRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [startRecordBtn setTitle:@"录播" forState:UIControlStateNormal];
+//    
+//    UIButton *stopRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    stopRecordBtn.showsTouchWhenHighlighted = YES;
+//    [stopRecordBtn addTarget:self action:@selector(stopRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [stopRecordBtn setTitle:@"停止录播" forState:UIControlStateNormal];
+//    
+//    UIButton *layoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    layoutBtn.showsTouchWhenHighlighted = YES;
+//    [layoutBtn addTarget:self action:@selector(meetingLayoutBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [layoutBtn setTitle:@"布局设置" forState:UIControlStateNormal];
+//    
+//    UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    endBtn.showsTouchWhenHighlighted = YES;
+//    [endBtn addTarget:self action:@selector(endMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [endBtn setTitle:@"结束会议" forState:UIControlStateNormal];
+//    
+//    // 判断当前会议的状态， 是被锁定还是怎么的
+//    if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
+//        if (self.meetingIsRecording == YES) {       // 正在录制
+//            [self popWithButtons:@[layoutBtn, unlockBtn, stopRecordBtn, endBtn]];
+//        }else {                                     // 没有录制
+//            [self popWithButtons:@[layoutBtn, unlockBtn, startRecordBtn, endBtn]];
+//        }
+//    }else {
+//        if (self.meetingIsRecording == YES) {       // 正在录制
+//            [self popWithButtons:@[layoutBtn, lockBtn, stopRecordBtn, endBtn]];
+//        }else {                                     // 没有录制
+//            [self popWithButtons:@[layoutBtn, lockBtn, startRecordBtn, endBtn]];
+//        }
+//    }
+}
+
+- (IBAction)quitCallBtnClicked:(id)sender {
+
 }
 
 @end

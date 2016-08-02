@@ -180,12 +180,12 @@
     linphone_core_clear_all_auth_info([LinphoneManager getLc]);
 }
 
-// 静音
+// 默认静音
 - (IBAction)defaultVoiceSwitched:(id)sender {
     [LPSystemSetting sharedSetting].defaultSilence = ((UISwitch *)sender).on;
 }
 
-// 静画
+// 默认静画
 - (IBAction)defaultMovieSwitched:(id)sender {
     [LPSystemSetting sharedSetting].defaultNoVideo = ((UISwitch *)sender).on;
     

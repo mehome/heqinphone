@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,33 +7,29 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CallView">
             <connections>
-                <outlet property="avatarImage" destination="fZy-K5-yQp" id="hOl-IQ-c9B"/>
                 <outlet property="bottomBar" destination="mga-O5-mUn" id="ObF-wX-nBD"/>
+                <outlet property="bottomCallInviteBtn" destination="RHM-rf-FFp" id="Cli-d6-OkL"/>
+                <outlet property="bottomCallJoinerBtn" destination="ca6-f1-SUK" id="2st-3N-80l"/>
+                <outlet property="bottomCallMicroButton" destination="2iD-JP-8D2" id="YS8-FZ-bMO"/>
+                <outlet property="bottomCallMoreBtn" destination="ukn-Zu-uMw" id="X5B-4H-VsC"/>
+                <outlet property="bottomCallVideoButton" destination="u8z-FF-u9V" id="jUw-DE-wnq"/>
                 <outlet property="callView" destination="9" id="TKY-dp-lKv"/>
-                <outlet property="durationLabel" destination="Oy8-QO-Jwb" id="mUT-TX-gLp"/>
                 <outlet property="eightButton" destination="DRh-kc-UVM" id="BPp-sh-qBg"/>
                 <outlet property="fiveButton" destination="8Da-zK-V7e" id="URc-Ct-fu0"/>
                 <outlet property="fourButton" destination="653-Vb-YzA" id="x6R-Cq-7iJ"/>
-                <outlet property="hangupButton" destination="Xpw-A4-BZO" id="3hc-8p-CLb"/>
                 <outlet property="hashButton" destination="DqJ-35-h1Y" id="bVr-gn-5yW"/>
                 <outlet property="landscapeView" destination="mPH-MF-S0K" id="Qnt-pg-nbO"/>
-                <outlet property="microButton" destination="pRH-Ao-h65" id="F5a-sf-J7B"/>
-                <outlet property="nameLabel" destination="KPa-Rm-Qni" id="KiX-oL-MUd"/>
                 <outlet property="nineButton" destination="b8R-7P-jHK" id="LNS-eb-9bc"/>
                 <outlet property="numpadButton" destination="SRu-dB-r3e" id="Y2q-lE-f89"/>
                 <outlet property="numpadView" destination="ukG-i4-YMY" id="f2R-OM-ahP"/>
                 <outlet property="oneButton" destination="qZ8-m9-B0N" id="eOL-0X-pTJ"/>
-                <outlet property="optionsButton" destination="8Zx-MI-pUL" id="MVL-le-Ycm"/>
                 <outlet property="portraitView" destination="lzH-M1-NdV" id="duc-gP-Nq1"/>
-                <outlet property="routesButton" destination="nQp-5y-kTy" id="2u8-g5-6T1"/>
+                <outlet property="quitCallBtn" destination="ZH4-UE-drU" id="BBe-qI-A6A"/>
                 <outlet property="sevenButton" destination="alZ-Kz-AVL" id="8F0-KQ-qon"/>
                 <outlet property="sixButton" destination="0fB-uk-rXS" id="L9Y-dc-TBo"/>
-                <outlet property="speakerButton" destination="F5S-kV-7Kv" id="dqI-kU-8xY"/>
                 <outlet property="starButton" destination="prH-qj-h0v" id="2cm-sA-fTV"/>
                 <outlet property="threeButton" destination="R2h-PD-GN2" id="6DQ-Cw-Okc"/>
                 <outlet property="twoButton" destination="U6v-Cg-9b8" id="Re4-oW-yjl"/>
-                <outlet property="videoButton" destination="HDb-mD-sWV" id="EUO-MD-lae"/>
-                <outlet property="videoCameraSwitch" destination="160" id="161"/>
                 <outlet property="videoGroup" destination="126" id="129"/>
                 <outlet property="videoPreview" destination="127" id="130"/>
                 <outlet property="videoView" destination="132" id="133"/>
@@ -55,14 +51,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleAspectFit" image="avatar.png" id="fZy-K5-yQp" userLabel="avatarImage" customClass="UIRoundedImageView">
-                                    <rect key="frame" x="62" y="140" width="250" height="362"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="Contact avatar">
-                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                        <bool key="isElement" value="YES"/>
-                                    </accessibility>
-                                </imageView>
                                 <view alpha="0.0" tag="8" contentMode="scaleToFill" id="126" userLabel="video">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,48 +69,17 @@
                                             </accessibility>
                                         </view>
                                         <view tag="11" contentMode="scaleAspectFit" id="127" userLabel="preview">
-                                            <rect key="frame" x="267" y="407" width="108" height="156"/>
+                                            <rect key="frame" x="267" y="413" width="108" height="156"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <activityIndicatorView hidden="YES" opaque="NO" tag="12" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="144" userLabel="waitIndicator">
-                                            <rect key="frame" x="168" y="336" width="37" height="37"/>
+                                            <rect key="frame" x="168" y="316" width="37" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         </activityIndicatorView>
-                                        <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="160" userLabel="videoCameraSwitch" customClass="UICamSwitch">
-                                            <rect key="frame" x="65" y="122" width="52" height="52"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Switch camera"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" image="camera_switch_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="camera_switch_disabled.png"/>
-                                            <state key="selected" image="camera_switch_over.png"/>
-                                            <state key="highlighted" image="camera_switch_over.png"/>
-                                            <connections>
-                                                <outlet property="preview" destination="127" id="172"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" tag="14" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="Oy8-QO-Jwb" userLabel="durationLabel">
-                                    <rect key="frame" x="0.0" y="40" width="375" height="26"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" red="1" green="0.36862745099999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.79999999999999982" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" id="KPa-Rm-Qni" userLabel="nameLabel">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -255,6 +212,14 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <button opaque="NO" tag="107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZH4-UE-drU" userLabel="exitBtn">
+                            <rect key="frame" x="305" y="10" width="60" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="退出"/>
+                            <connections>
+                                <action selector="quitCallBtnClicked:" destination="-1" eventType="touchUpInside" id="U9y-D4-ghn"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" tag="57" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SRu-dB-r3e" userLabel="numpadButton" customClass="UIToggleButton">
                             <rect key="frame" x="10" y="510" width="94" height="63"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -270,116 +235,58 @@
                             </connections>
                         </button>
                         <view tag="47" contentMode="scaleToFill" id="mga-O5-mUn" userLabel="bottomBar">
-                            <rect key="frame" x="0.0" y="583" width="375" height="88"/>
+                            <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <view tag="48" contentMode="scaleToFill" id="OIH-ek-VgL" userLabel="higherBar">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="49" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_F.png" id="Zhw-AK-YsQ" userLabel="backgroundColor">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <button opaque="NO" tag="50" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HDb-mD-sWV" userLabel="videoButton" customClass="UIVideoButton">
-                                            <rect key="frame" x="0.0" y="0.0" width="94" height="44"/>
+                                        <button opaque="NO" tag="51" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2iD-JP-8D2" userLabel="micbtn">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Video"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="camera_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="camera_disabled.png"/>
-                                            <state key="selected" image="camera_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <outlet property="waitView" destination="HIj-5b-rGP" id="wfm-ep-9QC"/>
+                                                <action selector="bottomMicBtnClicked:" destination="-1" eventType="touchUpInside" id="VhX-Wc-gku"/>
                                             </connections>
                                         </button>
-                                        <activityIndicatorView hidden="YES" opaque="NO" tag="51" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="HIj-5b-rGP" userLabel="videoWaitView">
-                                            <rect key="frame" x="26" y="15" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </activityIndicatorView>
-                                        <button opaque="NO" tag="52" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pRH-Ao-h65" userLabel="microButton" customClass="UIMutedMicroButton">
-                                            <rect key="frame" x="94" y="0.0" width="94" height="44"/>
+                                        <button opaque="NO" tag="52" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="u8z-FF-u9V" userLabel="videobtn">
+                                            <rect key="frame" x="75" y="0.0" width="75" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Micro"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="micro_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="micro_disabled.png"/>
-                                            <state key="selected" image="micro_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
-                                        </button>
-                                        <button opaque="NO" tag="53" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="F5S-kV-7Kv" userLabel="speakerButton" customClass="UISpeakerButton">
-                                            <rect key="frame" x="188" y="0.0" width="94" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="speaker_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="speaker_disabled.png"/>
-                                            <state key="selected" image="speaker_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
-                                        </button>
-                                        <button hidden="YES" opaque="NO" tag="54" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nQp-5y-kTy" userLabel="routesButton" customClass="UIToggleButton">
-                                            <rect key="frame" x="188" y="0.0" width="94" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Route"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="routes_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="routes_disabled.png"/>
-                                            <state key="selected" image="routes_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <action selector="onRoutesClick:" destination="-1" eventType="touchUpInside" id="h2V-qf-kgC"/>
+                                                <action selector="bottomVedioBtnClicked:" destination="-1" eventType="touchUpInside" id="AUQ-yq-4jY"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="55" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Zx-MI-pUL" userLabel="optionsButton" customClass="UIToggleButton">
-                                            <rect key="frame" x="282" y="0.0" width="94" height="44"/>
+                                        <button opaque="NO" tag="53" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RHM-rf-FFp" userLabel="invitebtn">
+                                            <rect key="frame" x="150" y="0.0" width="75" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Options"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="options_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="options_disabled.png"/>
-                                            <state key="selected" image="options_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="KZw-2M-V7E"/>
+                                                <action selector="bottomInviteBtnClicked:" destination="-1" eventType="touchUpInside" id="H6n-0y-d0i"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="54" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ca6-f1-SUK" userLabel="joinerbtn">
+                                            <rect key="frame" x="225" y="0.0" width="75" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="bottomJoinerBtnClicked:" destination="-1" eventType="touchUpInside" id="iZ0-If-APw"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="55" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ukn-Zu-uMw" userLabel="morebtn">
+                                            <rect key="frame" x="300" y="0.0" width="75" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="bottomMoreBtnClicked:" destination="-1" eventType="touchUpInside" id="U2X-Jq-lo9"/>
                                             </connections>
                                         </button>
                                     </subviews>
-                                </view>
-                                <view tag="56" contentMode="scaleToFill" id="8q9-3P-Fz0" userLabel="lowerBar">
-                                    <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" tag="58" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xpw-A4-BZO" userLabel="hangupButton" customClass="UIHangUpButton">
-                                            <rect key="frame" x="94" y="0.0" width="187" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Hangup"/>
-                                            <state key="normal" image="call_hangup_default.png" backgroundImage="color_D.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted" backgroundImage="color_I.png"/>
-                                        </button>
-                                        <button opaque="NO" tag="59" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="t7u-65-OPV" userLabel="chatButton" customClass="UIIconButton">
-                                            <rect key="frame" x="281" y="0.0" width="94" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Hangup"/>
-                                            <state key="normal" image="footer_chat_default.png" backgroundImage="color_C.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted" backgroundImage="color_A.png"/>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                             </subviews>
                         </view>
@@ -403,14 +310,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleAspectFit" image="avatar.png" id="gyO-uH-sSi" userLabel="avatarImage" customClass="UIRoundedImageView">
-                                    <rect key="frame" x="253" y="80" width="161" height="203"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="Contact avatar">
-                                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                        <bool key="isElement" value="YES"/>
-                                    </accessibility>
-                                </imageView>
                                 <view alpha="0.0" tag="8" contentMode="scaleToFill" id="yHe-pI-2lf" userLabel="video">
                                     <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -437,40 +336,9 @@
                                             <rect key="frame" x="313" y="190" width="37" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         </activityIndicatorView>
-                                        <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="7Mv-7u-XVs" userLabel="videoCameraSwitch" customClass="UICamSwitch">
-                                            <rect key="frame" x="65" y="122" width="52" height="52"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Switch camera"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" image="camera_switch_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="camera_switch_disabled.png"/>
-                                            <state key="selected" image="camera_switch_over.png"/>
-                                            <state key="highlighted" image="camera_switch_over.png"/>
-                                            <connections>
-                                                <outlet property="preview" destination="FcF-4P-SjT" id="YvS-gF-tPz"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" tag="14" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="4Jl-GT-mfD" userLabel="durationLabel">
-                                    <rect key="frame" x="0.0" y="40" width="667" height="26"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" red="1" green="0.36862745099999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" id="2Zk-Vw-StV" userLabel="nameLabel">
-                                    <rect key="frame" x="0.0" y="0.0" width="667" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -603,6 +471,14 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <button opaque="NO" tag="107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y4l-GQ-GHh">
+                            <rect key="frame" x="597" y="10" width="60" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="退出"/>
+                            <connections>
+                                <action selector="quitCallBtnClicked:" destination="-1" eventType="touchUpInside" id="YRZ-0E-mcJ"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" tag="57" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fyf-if-w6d" userLabel="numpadButton" customClass="UIToggleButton">
                             <rect key="frame" x="10" y="224" width="83" height="63"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -618,115 +494,56 @@
                             </connections>
                         </button>
                         <view tag="47" contentMode="scaleToFill" id="C62-Qc-40Y" userLabel="bottomBar">
-                            <rect key="frame" x="0.0" y="312" width="667" height="63"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="0.0" y="331" width="667" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <view tag="48" contentMode="scaleToFill" id="GBW-Ly-Q5U" userLabel="higherBar">
-                                    <rect key="frame" x="334" y="0.0" width="333" height="63"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="667" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="49" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_F.png" id="et0-89-ccc" userLabel="backgroundColor">
-                                            <rect key="frame" x="0.0" y="0.0" width="333" height="66"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="667" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <button opaque="NO" tag="50" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Get-DX-JPD" userLabel="videoButton" customClass="UIVideoButton">
-                                            <rect key="frame" x="0.0" y="0.0" width="83" height="63"/>
+                                        <button opaque="NO" tag="51" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kB4-um-pye" userLabel="micB">
+                                            <rect key="frame" x="0.0" y="0.0" width="133" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Video"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="camera_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="camera_disabled.png"/>
-                                            <state key="selected" image="camera_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <outlet property="waitView" destination="PFh-Rq-z48" id="q07-6z-jsc"/>
+                                                <action selector="bottomMicBtnClicked:" destination="-1" eventType="touchUpInside" id="2ia-Bw-zzF"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="52" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pgq-7X-X64" userLabel="microButton" customClass="UIMutedMicroButton">
-                                            <rect key="frame" x="83" y="0.0" width="83" height="63"/>
+                                        <button opaque="NO" tag="52" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mXK-v7-Ofl" userLabel="videoB">
+                                            <rect key="frame" x="133" y="0.0" width="133" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Micro"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="micro_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="micro_disabled.png"/>
-                                            <state key="selected" image="micro_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
-                                        </button>
-                                        <button opaque="NO" tag="53" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fJP-TP-itu" userLabel="speakerButton" customClass="UISpeakerButton">
-                                            <rect key="frame" x="166" y="0.0" width="84" height="63"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Speaker"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="speaker_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="speaker_disabled.png"/>
-                                            <state key="selected" image="speaker_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
-                                        </button>
-                                        <button hidden="YES" opaque="NO" tag="54" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mxV-GD-O3N" userLabel="routesButton" customClass="UIToggleButton">
-                                            <rect key="frame" x="166" y="0.0" width="84" height="63"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Route">
-                                                <bool key="isElement" value="YES"/>
-                                            </accessibility>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="routes_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="routes_disabled.png"/>
-                                            <state key="selected" image="routes_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <action selector="onRoutesClick:" destination="-1" eventType="touchUpInside" id="Ut8-XX-R9o"/>
+                                                <action selector="bottomVedioBtnClicked:" destination="-1" eventType="touchUpInside" id="Ja5-cw-pYh"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="55" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="z1h-dd-9jn" userLabel="optionsButton" customClass="UIToggleButton">
-                                            <rect key="frame" x="250" y="0.0" width="84" height="63"/>
+                                        <button opaque="NO" tag="53" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Ji-Tc-CQj" userLabel="inviteB">
+                                            <rect key="frame" x="266" y="0.0" width="134" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Options"/>
-                                            <inset key="titleEdgeInsets" minX="0.0" minY="38" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" image="options_default.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="disabled" image="options_disabled.png"/>
-                                            <state key="selected" image="options_selected.png"/>
-                                            <state key="highlighted" backgroundImage="color_E.png"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
-                                                <action selector="onOptionsClick:" destination="-1" eventType="touchUpInside" id="4Kd-S1-s93"/>
+                                                <action selector="bottomInviteBtnClicked:" destination="-1" eventType="touchUpInside" id="Po5-aG-azx"/>
                                             </connections>
                                         </button>
-                                        <activityIndicatorView hidden="YES" opaque="NO" tag="51" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="PFh-Rq-z48" userLabel="videoWaitView">
-                                            <rect key="frame" x="23" y="13" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </activityIndicatorView>
-                                    </subviews>
-                                </view>
-                                <view tag="56" contentMode="scaleToFill" id="vRZ-Xg-uo9" userLabel="lowerBar">
-                                    <rect key="frame" x="0.0" y="0.0" width="334" height="63"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" tag="58" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QnR-fw-05z" userLabel="hangupButton" customClass="UIHangUpButton">
-                                            <rect key="frame" x="83" y="0.0" width="167" height="63"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Hangup"/>
-                                            <state key="normal" image="call_hangup_default.png" backgroundImage="color_D.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted" backgroundImage="color_I.png"/>
+                                        <button opaque="NO" tag="54" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="w8L-W1-RCg" userLabel="joinerB">
+                                            <rect key="frame" x="400" y="0.0" width="133" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="bottomJoinerBtnClicked:" destination="-1" eventType="touchUpInside" id="nFv-JL-bSY"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" tag="59" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Dh2-iA-2NB" userLabel="chatButton" customClass="UIIconButton">
-                                            <rect key="frame" x="250" y="0.0" width="84" height="63"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                            <accessibility key="accessibilityConfiguration" label="Hangup"/>
-                                            <state key="normal" image="footer_chat_default.png" backgroundImage="color_C.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted" backgroundImage="color_A.png"/>
+                                        <button opaque="NO" tag="55" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G0K-aB-awT" userLabel="moreB">
+                                            <rect key="frame" x="533" y="0.0" width="134" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="bottomMoreBtnClicked:" destination="-1" eventType="touchUpInside" id="GId-mj-3S7"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -743,27 +560,12 @@
         </view>
     </objects>
     <resources>
-        <image name="avatar.png" width="255" height="255"/>
-        <image name="call_hangup_default.png" width="41" height="36"/>
-        <image name="camera_default.png" width="32" height="19"/>
-        <image name="camera_disabled.png" width="32" height="19"/>
-        <image name="camera_selected.png" width="32" height="19"/>
-        <image name="camera_switch_default.png" width="51" height="50"/>
-        <image name="camera_switch_disabled.png" width="51" height="50"/>
-        <image name="camera_switch_over.png" width="51" height="50"/>
         <image name="color_A.png" width="2" height="2"/>
         <image name="color_C.png" width="2" height="2"/>
-        <image name="color_D.png" width="2" height="2"/>
-        <image name="color_E.png" width="2" height="2"/>
         <image name="color_F.png" width="2" height="2"/>
-        <image name="color_I.png" width="2" height="2"/>
         <image name="dialer_alt_back.png" width="26" height="26"/>
-        <image name="footer_chat_default.png" width="27" height="27"/>
         <image name="footer_dialer_default.png" width="27" height="27"/>
         <image name="footer_dialer_disabled.png" width="27" height="27"/>
-        <image name="micro_default.png" width="29" height="37"/>
-        <image name="micro_disabled.png" width="29" height="37"/>
-        <image name="micro_selected.png" width="29" height="37"/>
         <image name="numpad_0_default.png" width="52" height="48"/>
         <image name="numpad_0_over.png" width="52" height="48"/>
         <image name="numpad_1_default.png" width="52" height="48"/>
@@ -789,14 +591,5 @@
         <image name="numpad_over_background.png" width="2" height="2"/>
         <image name="numpad_star_default.png" width="52" height="50"/>
         <image name="numpad_star_over.png" width="52" height="50"/>
-        <image name="options_default.png" width="25" height="25"/>
-        <image name="options_disabled.png" width="25" height="25"/>
-        <image name="options_selected.png" width="25" height="25"/>
-        <image name="routes_default.png" width="37" height="25"/>
-        <image name="routes_disabled.png" width="37" height="25"/>
-        <image name="routes_selected.png" width="37" height="25"/>
-        <image name="speaker_default.png" width="27" height="25"/>
-        <image name="speaker_disabled.png" width="27" height="25"/>
-        <image name="speaker_selected.png" width="27" height="25"/>
     </resources>
 </document>

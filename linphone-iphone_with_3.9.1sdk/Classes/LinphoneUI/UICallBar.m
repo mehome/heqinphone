@@ -87,7 +87,6 @@ extern NSString *const kLinphoneInCallCellData;
 
 @property (nonatomic, retain) IBOutlet UIButton *bmMicroButton;
 @property (retain, nonatomic) IBOutlet UIButton *bmVideoButton;
-
 @property (retain, nonatomic) IBOutlet UIButton *bottomInviteBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomJoinerBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomMoreBtn;
@@ -428,9 +427,6 @@ extern NSString *const kLinphoneInCallCellData;
 
 // 底部邀请按钮
 - (IBAction)inviteBtnClicked:(id)sender {
-    [self openCamera:nil];
-    return;
-    
     UIButton *mailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     mailBtn.showsTouchWhenHighlighted = YES;
     [mailBtn addTarget:self action:@selector(sendMailBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -1040,9 +1036,6 @@ extern NSString *const kLinphoneInCallCellData;
 
 // 声音按钮点击
 - (IBAction)bmSoundClicked:(id)sender {
-    [self bmChangeFrontAndTail:nil];
-    return;
-    
     
     [self hideAllBottomBgView];
     
