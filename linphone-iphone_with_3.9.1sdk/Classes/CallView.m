@@ -56,12 +56,13 @@ static UICompositeViewDescription *compositeDescription = nil;
 + (UICompositeViewDescription *)compositeViewDescription {
 	if (compositeDescription == nil) {
 		compositeDescription = [[UICompositeViewDescription alloc] init:self.class
-															  statusBar:StatusBarView.class
+															  statusBar:nil
 																 tabBar:nil
 															   sideMenu:nil
 															 fullscreen:false
 														 isLeftFragment:YES
-														   fragmentWith:nil supportLandscapeMode:YES];
+														   fragmentWith:nil
+                                                   supportLandscapeMode:YES];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;
@@ -93,8 +94,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[_videoCameraSwitch setPreview:_videoPreview];
 
-	UIPanGestureRecognizer *dragndrop =
-		[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveVideoPreview:)];
+	UIPanGestureRecognizer *dragndrop = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveVideoPreview:)];
 	dragndrop.minimumNumberOfTouches = 1;
 	[_videoPreview addGestureRecognizer:dragndrop];
 
@@ -135,8 +135,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	LinphoneManager.instance.nextCallIsTransfer = NO;
 
-	[self updateUnreadMessage:FALSE];
-
 	// Update on show
 	[self hideRoutes:TRUE animated:FALSE];
 	[self hideOptions:TRUE animated:FALSE];
@@ -153,10 +151,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 	// Enable tap
 	[singleFingerTap setEnabled:TRUE];
 
-	[NSNotificationCenter.defaultCenter addObserver:self
-										   selector:@selector(messageReceived:)
-											   name:kLinphoneMessageReceived
-											 object:nil];
 	[NSNotificationCenter.defaultCenter addObserver:self
 										   selector:@selector(bluetoothAvailabilityUpdateEvent:)
 											   name:kLinphoneBluetoothAvailabilityUpdate
@@ -231,7 +225,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	[self updateUnreadMessage:NO];
 	[self previewTouchLift];
 	[self hideStatusBar:!videoHidden && (_nameLabel.alpha <= 0.f)];
 }
@@ -250,8 +243,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 - (void)updateBottomBar:(LinphoneCall *)call state:(LinphoneCallState)state {
 	[_speakerButton update];
 	[_microButton update];
-	[_callPauseButton update];
-	[_conferencePauseButton update];
 	[_videoButton update];
 	[_hangupButton update];
 
@@ -304,7 +295,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		// show controls
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.35];
-		_pausedCallsTable.tableView.alpha = _videoCameraSwitch.alpha = _callPauseButton.alpha = _routesView.alpha =
+		_videoCameraSwitch.alpha = _routesView.alpha =
 			_optionsView.alpha = _numpadView.alpha = _bottomBar.alpha = (hidden ? 0 : 1);
 		_nameLabel.alpha = _durationLabel.alpha = (hidden ? 0 : .8f);
 
@@ -398,27 +389,24 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	int duration =
 		linphone_core_get_current_call(LC) ? linphone_call_get_duration(linphone_core_get_current_call(LC)) : 0;
 	_durationLabel.text = [LinphoneUtils durationToString:duration];
-
-	[_pausedCallsTable update];
-	[_conferenceCallsTable update];
 }
 
 - (void)onCurrentCallChange {
 	LinphoneCall *call = linphone_core_get_current_call(LC);
-
-	_noActiveCallView.hidden = (call || linphone_core_is_in_conference(LC));
+//    BOOL curIsHidden = (call || linphone_core_is_in_conference(LC));    // 用来判断当前是否在会议中
+    
 	_callView.hidden = !call;
 	_conferenceView.hidden = !linphone_core_is_in_conference(LC);
-	_callPauseButton.hidden = !call && !linphone_core_is_in_conference(LC);
-
-	[_callPauseButton setType:UIPauseButtonType_CurrentCall call:call];
-	[_conferencePauseButton setType:UIPauseButtonType_Conference call:call];
 
 	if (!_callView.hidden) {
 		const LinphoneAddress *addr = linphone_call_get_remote_address(call);
+        
+        // 设置对方的名字
 		[ContactDisplay setDisplayNameLabel:_nameLabel forAddress:addr];
+        
 		char *uri = linphone_address_as_string_uri_only(addr);
 		ms_free(uri);
+        
 		[_avatarImage setImage:[FastAddressBook imageForAddress:addr thumbnail:NO] bordered:YES withRoundedRadius:YES];
 	}
 }
@@ -434,26 +422,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 			[self hideAnimation:hidden forView:_numpadView completion:nil];
 		} else {
 			[_numpadView setHidden:hidden];
-		}
-	}
-}
-
-- (void)hideRoutes:(BOOL)hidden animated:(BOOL)animated {
-	if (hidden) {
-		[_routesButton setOff];
-	} else {
-		[_routesButton setOn];
-	}
-
-	_routesBluetoothButton.selected = LinphoneManager.instance.bluetoothEnabled;
-	_routesSpeakerButton.selected = LinphoneManager.instance.speakerEnabled;
-	_routesEarpieceButton.selected = !_routesBluetoothButton.selected && !_routesSpeakerButton.selected;
-
-	if (hidden != _routesView.hidden) {
-		if (animated) {
-			[self hideAnimation:hidden forView:_routesView completion:nil];
-		} else {
-			[_routesView setHidden:hidden];
 		}
 	}
 }
@@ -498,10 +466,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		hiddenVolume = FALSE;
 	}
 
-	// Update tables
-	[_pausedCallsTable update];
-	[_conferenceCallsTable update];
-
 	static LinphoneCall *currentCall = NULL;
 	if (!currentCall || linphone_core_get_current_call(LC) != currentCall) {
 		currentCall = linphone_core_get_current_call(LC);
@@ -513,18 +477,13 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		return;
 	}
 
-	BOOL shouldDisableVideo =
-		(!currentCall || !linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall)));
+	BOOL shouldDisableVideo = (!currentCall || !linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall)));
 	if (videoHidden != shouldDisableVideo) {
 		if (!shouldDisableVideo) {
 			[self displayVideoCall:animated];
 		} else {
 			[self displayAudioCall:animated];
 		}
-	}
-
-	if (state != LinphoneCallPausedByRemote) {
-		_pausedByRemoteView.hidden = YES;
 	}
 
 	switch (state) {
@@ -575,9 +534,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 			break;
 		case LinphoneCallPausedByRemote:
 			[self displayAudioCall:animated];
-			if (call == linphone_core_get_current_call(LC)) {
-				_pausedByRemoteView.hidden = NO;
-			}
 			break;
 		case LinphoneCallEnd:
 		case LinphoneCallError:
@@ -675,34 +631,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 }
 
-- (IBAction)onChatClick:(id)sender {
-	[PhoneMainView.instance changeCurrentView:ChatsListView.compositeViewDescription];
-}
-
-- (IBAction)onRoutesBluetoothClick:(id)sender {
-	[self hideRoutes:TRUE animated:TRUE];
-	[LinphoneManager.instance setBluetoothEnabled:TRUE];
-}
-
-- (IBAction)onRoutesEarpieceClick:(id)sender {
-	[self hideRoutes:TRUE animated:TRUE];
-	[LinphoneManager.instance setSpeakerEnabled:FALSE];
-	[LinphoneManager.instance setBluetoothEnabled:FALSE];
-}
-
-- (IBAction)onRoutesSpeakerClick:(id)sender {
-	[self hideRoutes:TRUE animated:TRUE];
-	[LinphoneManager.instance setSpeakerEnabled:TRUE];
-}
-
-- (IBAction)onRoutesClick:(id)sender {
-	if ([_routesView isHidden]) {
-		[self hideRoutes:FALSE animated:ANIMATED];
-	} else {
-		[self hideRoutes:TRUE animated:ANIMATED];
-	}
-}
-
 - (IBAction)onOptionsClick:(id)sender {
 	if ([_optionsView isHidden]) {
 		[self hideOptions:FALSE animated:ANIMATED];
@@ -775,17 +703,4 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 }
 
-#pragma mark - Bounce
-- (void)messageReceived:(NSNotification *)notif {
-	[self updateUnreadMessage:TRUE];
-}
-- (void)updateUnreadMessage:(BOOL)appear {
-	int unreadMessage = [LinphoneManager unreadMessageCount];
-	if (unreadMessage > 0) {
-		_chatNotificationLabel.text = [NSString stringWithFormat:@"%i", unreadMessage];
-		[_chatNotificationView startAnimating:appear];
-	} else {
-		[_chatNotificationView stopAnimating:appear];
-	}
-}
 @end

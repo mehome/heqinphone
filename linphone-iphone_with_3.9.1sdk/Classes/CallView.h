@@ -45,8 +45,6 @@
 	VideoZoomHandler *videoZoomHandler;
 }
 
-@property(nonatomic, strong) IBOutlet CallPausedTableView *pausedCallsTable;
-
 @property(nonatomic, strong) IBOutlet UIView *videoGroup;
 @property(nonatomic, strong) IBOutlet UIView *videoView;
 @property(nonatomic, strong) IBOutlet UIView *videoPreview;
@@ -54,7 +52,6 @@
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *videoWaitingForFirstImage;
 @property(weak, nonatomic) IBOutlet UIView *callView;
 
-@property(nonatomic, strong) IBOutlet UIPauseButton *callPauseButton;
 @property(nonatomic, strong) IBOutlet UIButton *optionsConferenceButton;
 @property(nonatomic, strong) IBOutlet UIVideoButton *videoButton;
 @property(nonatomic, strong) IBOutlet UIMutedMicroButton *microButton;
@@ -63,17 +60,10 @@
 @property(nonatomic, strong) IBOutlet UIToggleButton *optionsButton;
 @property(nonatomic, strong) IBOutlet UIHangUpButton *hangupButton;
 @property(nonatomic, strong) IBOutlet UIView *numpadView;
-@property(nonatomic, strong) IBOutlet UIView *routesView;
 @property(nonatomic, strong) IBOutlet UIView *optionsView;
-@property(nonatomic, strong) IBOutlet UIButton *routesEarpieceButton;
-@property(nonatomic, strong) IBOutlet UIButton *routesSpeakerButton;
-@property(nonatomic, strong) IBOutlet UIButton *routesBluetoothButton;
 @property(nonatomic, strong) IBOutlet UIButton *optionsAddButton;
 @property(nonatomic, strong) IBOutlet UIButton *optionsTransferButton;
 @property(nonatomic, strong) IBOutlet UIToggleButton *numpadButton;
-@property(weak, nonatomic) IBOutlet UIPauseButton *conferencePauseButton;
-@property(weak, nonatomic) IBOutlet UIBouncingView *chatNotificationView;
-@property(weak, nonatomic) IBOutlet UILabel *chatNotificationLabel;
 
 @property(weak, nonatomic) IBOutlet UIView *bottomBar;
 @property(nonatomic, strong) IBOutlet UIDigitButton *oneButton;
@@ -91,10 +81,8 @@
 @property(weak, nonatomic) IBOutlet UIRoundedImageView *avatarImage;
 @property(weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property(weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property(weak, nonatomic) IBOutlet UIView *pausedByRemoteView;
 @property(weak, nonatomic) IBOutlet UIView *noActiveCallView;
 @property(weak, nonatomic) IBOutlet UIView *conferenceView;
-@property(strong, nonatomic) IBOutlet CallPausedTableView *conferenceCallsTable;
 
 - (IBAction)onRoutesClick:(id)sender;
 - (IBAction)onRoutesBluetoothClick:(id)sender;
@@ -105,6 +93,5 @@
 - (IBAction)onOptionsAddClick:(id)sender;
 - (IBAction)onOptionsConferenceClick:(id)sender;
 - (IBAction)onNumpadClick:(id)sender;
-- (IBAction)onChatClick:(id)sender;
 
 @end

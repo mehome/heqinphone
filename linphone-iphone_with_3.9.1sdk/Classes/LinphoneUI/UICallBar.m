@@ -113,10 +113,6 @@ extern NSString *const kLinphoneInCallCellData;
 @property (strong, nonatomic) IBOutlet UIDigitButtonLongPlus *zeroButton;
 @property (strong, nonatomic) IBOutlet UIDigitButton *sharpButton;
 
-@property (strong, nonatomic) IBOutlet UIView *callTipView;
-@property (strong, nonatomic) IBOutlet UILabel *callTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *callSubtitleLabel;
-
 @property (nonatomic, assign) BOOL meetingLockedStatus;     // 会议被锁定?，默认为No
 @property (nonatomic, assign) BOOL meetingIsRecording;      // 会议是否正在录制，默认NO
 
@@ -136,30 +132,6 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 - (void)dataFillToPreview {
-    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr ?:@""];
-    self.callSubtitleLabel.text = [[NSString stringWithString:addr] copy];
-
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
-    NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
-    
-    // 移掉后部
-    if ([addr replaceOccurrencesOfString:serverTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove server address done");
-    }else {
-        NSLog(@"remove server address failed");
-    }
-    
-    // 移掉前面的sip:
-    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove sip done");
-    }else {
-        NSLog(@"remove sip failed");
-    }
-    
-    self.callTitleLabel.text = [NSString stringWithString:addr];
-    
-    NSLog(@"test instance :%@", self.callTipView);
-    
     // 执行请求会议室类型的请求
     [self requestMeetingType];
 }
@@ -456,6 +428,9 @@ extern NSString *const kLinphoneInCallCellData;
 
 // 底部邀请按钮
 - (IBAction)inviteBtnClicked:(id)sender {
+    [self openCamera:nil];
+    return;
+    
     UIButton *mailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     mailBtn.showsTouchWhenHighlighted = YES;
     [mailBtn addTarget:self action:@selector(sendMailBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -616,7 +591,6 @@ extern NSString *const kLinphoneInCallCellData;
 - (void)quitMeeting {
     [self hideAllBottomBgView];
     
-    self.callTipView.hidden = NO;
     self.meetingLockedStatus = NO;
     self.meetingIsRecording = NO;
     
@@ -1066,6 +1040,10 @@ extern NSString *const kLinphoneInCallCellData;
 
 // 声音按钮点击
 - (IBAction)bmSoundClicked:(id)sender {
+    [self bmChangeFrontAndTail:nil];
+    return;
+    
+    
     [self hideAllBottomBgView];
     
     // 然后执行不同的操作
@@ -1237,7 +1215,6 @@ static BOOL systemOpenCamera = NO;
     
     if (state == LinphoneCallOutgoingRinging || state == LinphoneCallStreamsRunning) {
         // 连接建立好了，可以进入
-        self.callTipView.hidden = YES;
         
         // 设置当前的静音操作
         if ([LPSystemSetting sharedSetting].defaultSilence == YES) {

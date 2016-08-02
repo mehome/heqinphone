@@ -1724,6 +1724,10 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 	LOGI(@"Entering [%s] bg mode", shouldEnterBgMode ? "normal" : "lite");
 
 	if (!shouldEnterBgMode) {
+        if (proxyCfg == NULL) {
+            return NO;
+        }
+        
 		const char *refkey = linphone_proxy_config_get_ref_key(proxyCfg);
 		BOOL pushNotifEnabled = (refkey && strcmp(refkey, "push_notification") == 0);
 		if (pushNotifEnabled) {

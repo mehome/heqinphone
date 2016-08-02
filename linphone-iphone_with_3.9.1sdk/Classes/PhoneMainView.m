@@ -26,6 +26,7 @@
 #import "LPJoinMettingViewController.h"
 #import "InCallViewController.h"
 #import "IncomingCallViewController.h"
+#import "OutgoingCallViewController.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -331,14 +332,14 @@ static RootViewManager *rootViewManagerInstance = nil;
 			break;
 		}
 		case LinphoneCallOutgoingInit: {
-//			[self changeCurrentView:CallOutgoingView.compositeViewDescription];
-//			break;
+			[self changeCurrentView:OutgoingCallViewController.compositeViewDescription];
+			break;
 		}
 		case LinphoneCallPausedByRemote:
 		case LinphoneCallConnected:
 		case LinphoneCallStreamsRunning: {
-//			[self changeCurrentView:CallView.compositeViewDescription];
-            [self changeCurrentView:[InCallViewController compositeViewDescription]];
+			[self changeCurrentView:CallView.compositeViewDescription];
+//            [self changeCurrentView:[InCallViewController compositeViewDescription]];
 
 			break;
 		}
@@ -347,8 +348,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 			const LinphoneCallParams *remote = linphone_call_get_remote_params(call);
 
 			if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
-//				[self changeCurrentView:CallView.compositeViewDescription];
-                [self changeCurrentView:[InCallViewController compositeViewDescription]];
+				[self changeCurrentView:CallView.compositeViewDescription];
+//                [self changeCurrentView:[InCallViewController compositeViewDescription]];
 
 			}
 			break;
@@ -369,8 +370,8 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 			} else {
 				linphone_core_resume_call(LC, (LinphoneCall *)calls->data);
-//				[self changeCurrentView:CallView.compositeViewDescription];
-                [self changeCurrentView:[InCallViewController compositeViewDescription]];
+				[self changeCurrentView:CallView.compositeViewDescription];
+//                [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			}
 			break;
 		}
