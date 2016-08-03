@@ -31,10 +31,10 @@
 
 - (NSString *)urlPath{
     if (!_urlPath) {
-//        if ([self.requestModel respondsToSelector:@selector(requestModelURLPath)]) {
-//            NSString *url=[self.requestModel performSelector:@selector(requestModelURLPath)];
-//            _urlPath=[url copy];
-//        }
+        if ([self.requestModel respondsToSelector:@selector(requestModelURLPath)]) {
+            NSString *url=[self.requestModel performSelector:@selector(requestModelURLPath)];
+            _urlPath=[url copy];
+        }
     }
     return _urlPath;
 }

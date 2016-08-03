@@ -29,6 +29,9 @@
 #include "LinphoneManager.h"
 #include "linphone/linphonecore.h"
 
+#import "RDRSystemConfigRequestModel.h"
+#import "RDRSystemConfigResponseModel.h"
+
 @implementation LinphoneAppDelegate
 
 @synthesize configURL;
@@ -238,7 +241,48 @@
 	if (bgStartId != UIBackgroundTaskInvalid)
 		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];
 
+    // 先取当前系统的sip地址
+    [self askForSystemConfig];
+    NSString *verStr = [NSString stringWithFormat:@"%@ Core %s", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], linphone_core_get_version()];
+    NSLog(@"verStr=%@", verStr);
+    
 	return YES;
+}
+
+- (void)askForSystemConfig {
+    // 判断本地是否有存储
+    LPSystemSetting *systemSetting = [LPSystemSetting sharedSetting];
+    //    if (systemSetting.sipDomainStr.length == 0) {
+    // 从网络请求
+    NSLog(@"start ask for system config");
+    RDRSystemConfigRequestModel *reqModel = [RDRSystemConfigRequestModel requestModel];
+    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    
+    [RDRNetHelper POST:req responseModelClass:[RDRSystemConfigResponseModel class]
+               success:^(NSURLSessionDataTask *task, id responseObject) {
+                   
+                   RDRSystemConfigResponseModel *model = responseObject;
+                   
+                   //                       [self showWithDomainValue:model];
+                   
+                   if ([model codeCheckSuccess] == YES) {
+                       NSString *domainStr = model.domainStr;
+                       NSLog(@"请求sipDoamin returned system setting domainStr=%@", domainStr);
+                       
+                       // 进行存储
+                       systemSetting.sipDomainStr = domainStr;
+                       [systemSetting saveSystem];
+                   }else {
+                       NSLog(@"请求sipDoamin 服务器请求出错, model=%@", model);
+                   }
+               } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                   //请求出错
+                   NSLog(@"请求sipDoamin出错, %s, error=%@", __FUNCTION__, error);
+               }];
+    //    }else {
+    //        // 本地已经有了，不需重新请求
+    //        NSLog(@"local sip str = %@", systemSetting.sipDomainStr);
+    //    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

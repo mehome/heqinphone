@@ -310,7 +310,7 @@
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
         [RDRNetHelper POST:req responseModelClass:[RDRSystemConfigResponseModel class]
-                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   success:^(NSURLSessionDataTask *operation, id responseObject) {
                        
                        RDRSystemConfigResponseModel *model = responseObject;
                        
@@ -326,7 +326,7 @@
                        }else {
                            NSLog(@"请求sipDoamin 服务器请求出错, model=%@", model);
                        }
-                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   } failure:^(NSURLSessionDataTask *operation, NSError *error) {
                        //请求出错
                        NSLog(@"请求sipDoamin出错, %s, error=%@", __FUNCTION__, error);
                    }];

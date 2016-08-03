@@ -52,6 +52,9 @@
 
 @optional
 
+// 这里添加一个方法，以便编译通过
+- (NSString *)requestModelURLPath;
+
 /// Specifies how to convert a JSON value to the given property key. If
 /// reversible, the transformer will also be used to convert the property value
 /// back to JSON.

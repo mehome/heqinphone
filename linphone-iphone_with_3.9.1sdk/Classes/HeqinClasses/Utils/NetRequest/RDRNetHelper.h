@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "AFNetworking.h"
+#import "AFNetworking.h"
 #import "RDRRequest.h"
 #import "RDRBaseResponseModel.h"
 
@@ -30,14 +30,14 @@ typedef enum : NSUInteger {
 } RDRURLCachePolicy;
 
 
-//typedef void (^BlockRDRHTTPRequestCache)(AFHTTPRequestOperation *operation, id responseObject, RDRURLCachePolicy cachePolicy);
-//typedef void (^BlockRDRHTTPRequestSuccess)(AFHTTPRequestOperation *operation, id responseObject);
-//typedef void (^BlockRDRHTTPRequestFailure)(AFHTTPRequestOperation *operation, NSError *error);
-//
-//
-//typedef void (^BlockRDRHTTPRequestDownloadProgress)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
-//typedef void (^BlockRDRHTTPRequestUploadProgress)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
-//typedef void(^BlockRDRHTTPRequestConstructingBody)(id <AFMultipartFormData> formData);
+typedef void (^BlockRDRHTTPRequestCache)(NSURLSessionDataTask *task, id responseObject, RDRURLCachePolicy cachePolicy);
+typedef void (^BlockRDRHTTPRequestSuccess)(NSURLSessionDataTask *task, id responseObject);
+typedef void (^BlockRDRHTTPRequestFailure)(NSURLSessionDataTask *task, NSError *error);
+
+
+typedef void (^BlockRDRHTTPRequestDownloadProgress)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead);
+typedef void (^BlockRDRHTTPRequestUploadProgress)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
+typedef void(^BlockRDRHTTPRequestConstructingBody)(id <AFMultipartFormData> formData);
 
 
 @interface RDRNetHelper : NSObject
@@ -52,21 +52,14 @@ typedef enum : NSUInteger {
 + (void)clearCommonParametersCache;
 
 
-//+ (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
-//             responseModelClass:(Class)responseModelClass
-//                        success:(BlockRDRHTTPRequestSuccess)success
-//                        failure:(BlockRDRHTTPRequestFailure)failure;
-//
-//+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
-//              responseModelClass:(Class)responseModelClass
-//                         success:(BlockRDRHTTPRequestSuccess)success
-//                         failure:(BlockRDRHTTPRequestFailure)failure;
-//
-//
-//+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock;
-//
-//
-//
-//+ (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress;
++ (NSURLSessionDataTask *)GET:(RDRRequest *)aModel
+             responseModelClass:(Class)responseModelClass
+                        success:(BlockRDRHTTPRequestSuccess)success
+                        failure:(BlockRDRHTTPRequestFailure)failure;
+
++ (NSURLSessionDataTask *)POST:(RDRRequest *)aModel
+              responseModelClass:(Class)responseModelClass
+                         success:(BlockRDRHTTPRequestSuccess)success
+                         failure:(BlockRDRHTTPRequestFailure)failure;
 
 @end

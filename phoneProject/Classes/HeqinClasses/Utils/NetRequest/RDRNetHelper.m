@@ -7,14 +7,14 @@
 //
 
 #import "RDRNetHelper.h"
-#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 #import "XXCache.h"
 #import "RDRNetworkAPICache.h"
 #import "NSDictionary+XXQueryString.h"
 
 @interface RDRNetHelper ()
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *requestManager;
+@property (nonatomic, strong) AFHTTPSessionManager *requestManager;
 
 // http cache
 @property (nonatomic, strong) RDRNetworkAPICache *httpCache;
@@ -33,8 +33,9 @@
 - (id)initDefaultHelper
 {
     if (self = [super init]) {
-        self.requestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kHeqinLinphoneServerAddress]];
-        self.requestManager.requestSerializer=[AFJSONRequestSerializer serializer];
+        self.requestManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kHeqinLinphoneServerAddress]];
+
+        self.requestManager.requestSerializer = [AFJSONRequestSerializer serializer];
         _commonParametersCache=[[NSMutableDictionary alloc] init];
     }
     
@@ -70,20 +71,14 @@
 }
 
 
-//- (AFHTTPRequestOperation *)POST:(NSString *)URLString
-//                      parameters:(id)parameters
-//                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-//                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
-
-+ (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
++ (NSURLSessionDataTask *)GET:(RDRRequest *)aModel
              responseModelClass:(Class)responseModelClass
                         success:(BlockRDRHTTPRequestSuccess)success
                         failure:(BlockRDRHTTPRequestFailure)failure {
     return [[RDRNetHelper defaultHelper] GET:aModel responseModelClass:responseModelClass success:success failure:failure];
 }
 
-- (AFHTTPRequestOperation *)GET:(RDRRequest *)aModel
+- (NSURLSessionDataTask *)GET:(RDRRequest *)aModel
                  responseModelClass:(Class)responseModelClass
                         success:(BlockRDRHTTPRequestSuccess)success
                         failure:(BlockRDRHTTPRequestFailure)failure
@@ -92,10 +87,10 @@
               httpMethod:@"GET"
       responseModelClass:responseModelClass
                  success:success
-                 failure:failure constructingBodyWithBlock:nil uploadProgressBlock:nil];
+                 failure:failure constructingBodyWithBlock:nil];
 }
 
-+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
++ (NSURLSessionDataTask *)POST:(RDRRequest *)aModel
               responseModelClass:(Class)responseModelClass
                          success:(BlockRDRHTTPRequestSuccess)success
                          failure:(BlockRDRHTTPRequestFailure)failure
@@ -106,25 +101,7 @@
               failure:failure];
 }
 
-
-+ (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock{
-    
-    return [[RDRNetHelper defaultHelper] request:aModel httpMethod:@"POST" responseModelClass:responseModelClass success:success failure:failure constructingBodyWithBlock:bodyBlock uploadProgressBlock:uploadBlock];
-    
-}
-
-
-+ (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress{
-
-    return [[RDRNetHelper defaultHelper] request:request responseModelClass:responseModelClass success:success failure:failure uploadProgressBlock:uploadBlock downloadProgressBlock:downloadProgress];
-    
-}
-
-
-
-
-
-- (AFHTTPRequestOperation *)POST:(RDRRequest *)aModel
+- (NSURLSessionDataTask *)POST:(RDRRequest *)aModel
                   responseModelClass:(Class)responseModelClass
                          success:(BlockRDRHTTPRequestSuccess)success
                          failure:(BlockRDRHTTPRequestFailure)failure
@@ -133,7 +110,7 @@
               httpMethod:@"POST"
       responseModelClass:responseModelClass
                  success:success
-                 failure:failure constructingBodyWithBlock:nil uploadProgressBlock:nil];
+                 failure:failure constructingBodyWithBlock:nil];
 }
 
 
@@ -149,12 +126,12 @@
  *
  *  @return 已发送的request 可以为nil
  */
-- (AFHTTPRequestOperation *)request:(RDRRequest *)requestModel
+- (NSURLSessionDataTask *)request:(RDRRequest *)requestModel
                          httpMethod:(NSString *)httpMethod
                  responseModelClass:(Class)responseModelClass
                             success:(BlockRDRHTTPRequestSuccess)success
                             failure:(BlockRDRHTTPRequestFailure)failure
-          constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock{
+          constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock{
     NSString *aURL = requestModel.urlPath;
     
     NSDictionary *dictionary = [self finalParametersFromRequestModel:requestModel];
@@ -164,7 +141,7 @@
                                            withParameters:dictionary
                                        responseModelClass:responseModelClass
                                                   success:success
-                                                  failure:failure constructingBodyWithBlock:bodyBlock uploadProgressBlock:uploadBlock];
+                                                  failure:failure constructingBodyWithBlock:bodyBlock];
 }
 
 #pragma mark -
@@ -242,84 +219,13 @@
 
 #pragma mark -
 
-
-//- (AFHTTPRequestOperation *)requestWithURLStr:(NSString *)aURL
-//                                   httpMethod:(NSString *)httpMethod
-//                               withParameters:(NSDictionary *)parameters
-//                           responseModelClass:(Class)responseModelClass
-//                                      success:(BlockRDRHTTPRequestSuccess)success
-//                                      failure:(BlockRDRHTTPRequestFailure)failure
-//                    constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))bodyBlock uploadProgressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))uploadBlock
-
-
-
-- (AFHTTPRequestOperation *)request:(NSURLRequest *)request responseModelClass:(Class)responseModelClass success:(BlockRDRHTTPRequestSuccess)success failure:(BlockRDRHTTPRequestFailure)failure uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock downloadProgressBlock:(BlockRDRHTTPRequestDownloadProgress)downloadProgress{
-
-    
-    AFHTTPRequestOperation * operation = [self.requestManager  HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        
-        
-        //
-        NSError *error = nil;
-        NSData *dataResponse = (NSData *)responseObject;
-        
-        //
-        if (responseModelClass != nil) {
-            NSDictionary *dict = [RDRNetHelper dictionaryFromResponseData:dataResponse];
-            
-            RDRBaseResponseModel *aModel = [MTLJSONAdapter modelOfClass:responseModelClass
-                                                     fromJSONDictionary:dict
-                                                                  error:&error];
-            
-            if (error == nil) {
-                
-                if (success != NULL) {
-                    // 可以做一些公用的操作， 比如打印log
-                    
-                    //
-                    success(operation, aModel);
-                }
-            }
-            else
-            {
-                NSLog(@"%@",error);
-                if (failure != NULL) {
-                    failure(operation, error);
-                }
-            }
-            
-        }
-        else
-        {
-            if (success != NULL) {
-                success(operation, dataResponse);
-            }
-        }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        failure ? failure(operation, error) : nil;
-    }];
-    
-    if (downloadProgress) {
-        [operation setDownloadProgressBlock:downloadProgress];
-    }
-    if (uploadBlock) {
-        [operation setUploadProgressBlock:uploadBlock];
-    }
-    
-    [operation start];
-    
-    return operation;
-}
-
-- (AFHTTPRequestOperation *)requestWithURLStr:(NSString *)aURL
+- (NSURLSessionDataTask *)requestWithURLStr:(NSString *)aURL
                                    httpMethod:(NSString *)httpMethod
                                withParameters:(NSDictionary *)parameters
                            responseModelClass:(Class)responseModelClass
                                       success:(BlockRDRHTTPRequestSuccess)success
                                       failure:(BlockRDRHTTPRequestFailure)failure
-                    constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock uploadProgressBlock:(BlockRDRHTTPRequestUploadProgress)uploadBlock
+                    constructingBodyWithBlock:(BlockRDRHTTPRequestConstructingBody)bodyBlock
 {
  
     if (!([httpMethod isKindOfClass:[NSString class]] && httpMethod.length > 0)) {
@@ -330,10 +236,10 @@
     NSLog(@"DEBUG post url=%@", aURL);
     NSLog(@"DEBUG post parameters=%@", parameters);
     
-    AFHTTPRequestOperation *requestOperation = nil;
+    NSURLSessionDataTask *sessionTask = nil;
     if ([httpMethod isEqualToString:@"GET"]) {
         
-        requestOperation = [self.requestManager GET:aURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        sessionTask = [self.requestManager GET:aURL parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             //
             NSError *error = nil;
             NSData *dataResponse = (NSData *)responseObject;
@@ -353,25 +259,25 @@
                         // 可以做一些公用的操作， 比如打印log
                         
                         //
-                        success(operation, aModel);
+                        success(task, aModel);
                     }
                 }
                 else
                 {
                     if (failure != NULL) {
-                        failure(operation, error);
+                        failure(task, error);
                     }
                 }
             }
             else
             {
                 if (success != NULL) {
-                    success(operation, dataResponse);
+                    success(task, dataResponse);
                 }
             }
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            failure ? failure(operation, error) : nil;
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            failure ? failure(task, error) : nil;
         }];
         
     }else if ([httpMethod isEqualToString:@"POST"]) {
@@ -379,7 +285,7 @@
         if (bodyBlock) {
             
 
-            requestOperation = [self.requestManager POST:aURL parameters:parameters constructingBodyWithBlock:bodyBlock success: ^(AFHTTPRequestOperation *operation, id responseObject){
+            sessionTask = [self.requestManager POST:aURL parameters:parameters constructingBodyWithBlock:bodyBlock success: ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
                 
                 
                 //
@@ -400,14 +306,14 @@
                             // 可以做一些公用的操作， 比如打印log
                             
                             //
-                            success(operation, aModel);
+                            success(task, aModel);
                         }
                     }
                     else
                     {
                         NSLog(@"%@",error);
                         if (failure != NULL) {
-                            failure(operation, error);
+                            failure(task, error);
                         }
                     }
                     
@@ -415,17 +321,17 @@
                 else
                 {
                     if (success != NULL) {
-                        success(operation, dataResponse);
+                        success(task, dataResponse);
                     }
                 }
                 
                 
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                failure ? failure(operation, error) : nil;
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+                failure ? failure(task, error) : nil;
             }];
         }else{
 
-            requestOperation = [self.requestManager POST:aURL parameters:parameters success: ^(AFHTTPRequestOperation *operation, id responseObject){
+            sessionTask = [self.requestManager POST:aURL parameters:parameters success: ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
                 
                 
                 //
@@ -446,14 +352,14 @@
                             // 可以做一些公用的操作， 比如打印log
                             
                             //
-                            success(operation, aModel);
+                            success(task, aModel);
                         }
                     }
                     else
                     {
                         NSLog(@"%@",error);
                         if (failure != NULL) {
-                            failure(operation, error);
+                            failure(task, error);
                         }
                     }
                     
@@ -461,18 +367,14 @@
                 else
                 {
                     if (success != NULL) {
-                        success(operation, dataResponse);
+                        success(task, dataResponse);
                     }
                 }
                 
                 
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                failure ? failure(operation, error) : nil;
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
+                failure ? failure(task, error) : nil;
             }];
-        }
-        
-        if (uploadBlock) {
-            [requestOperation setUploadProgressBlock:uploadBlock];
         }
         
         
@@ -480,7 +382,7 @@
     
     }
     
-    return requestOperation;
+    return sessionTask;
 }
 
 
