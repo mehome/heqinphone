@@ -136,7 +136,7 @@ extern NSString *const kLinphoneInCallCellData;
     
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
-//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                  
 //                  RDRMeetingTypeResponseModel *model = responseObject;
 //                  
@@ -153,7 +153,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                      NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，msg=%@", model.msg];
 //                      [self showToastWithMessage:tipStr];
 //                  }
-//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                  
 //                  //请求出错
 //                  NSLog(@"会议室类型查询失败, %s, error=%@", __FUNCTION__, error);
@@ -545,7 +545,7 @@ extern NSString *const kLinphoneInCallCellData;
 //        reqModel.addr = [self curMeetingAddr];
 //        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
-//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                  success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                      
 //                      RDRAddFavResponseModel *model = responseObject;
 //                      
@@ -557,7 +557,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，msg=%@", model.msg];
 //                          [self showToastWithMessage:tipStr];
 //                      }
-//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                  } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                      [self hideHudAndIndicatorView];
 //                      
 //                      //请求出错
@@ -686,7 +686,7 @@ extern NSString *const kLinphoneInCallCellData;
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRRecordResponseModel class]
-//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                  [weakSelf retain];
 //                  
 //                  RDRRecordResponseModel *model = responseObject;
@@ -716,7 +716,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                  }
 //                  [weakSelf release];
 //                  
-//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                  [weakSelf retain];
 //                  
 //                  //请求出错
@@ -750,7 +750,7 @@ extern NSString *const kLinphoneInCallCellData;
 //    reqModel.to = content;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRInviteResponseModel class]
-//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                  [weakSelf retain];
 //                  
 //                  RDRInviteResponseModel *model = responseObject;
@@ -763,7 +763,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                  }
 //                  [weakSelf release];
 //
-//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                  [weakSelf retain];
 //
 //                  //请求出错
@@ -809,7 +809,7 @@ extern NSString *const kLinphoneInCallCellData;
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
-//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                  [weakSelf retain];
 //
 //                  RDRLockResponseModel *model = responseObject;
@@ -823,7 +823,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                  }
 //                  [weakSelf release];
 //
-//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                  [weakSelf retain];
 //
 //                  //请求出错
@@ -858,7 +858,7 @@ extern NSString *const kLinphoneInCallCellData;
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
-//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                  
 //                  [weakSelf retain];
 //                  
@@ -872,7 +872,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                      [weakSelf showToastWithMessage:tipStr];
 //                  }
 //                  [weakSelf release];
-//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                  [weakSelf retain];
 //
 //                  //请求出错
@@ -926,7 +926,7 @@ extern NSString *const kLinphoneInCallCellData;
             }
             
 //            [RDRNetHelper GET:req responseModelClass:[RDRMeetingLayoutResponseModel class]
-//                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                      success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                          [weakSelf retain];
 //                          
 //                          RDRMeetingLayoutResponseModel *model = responseObject;
@@ -939,7 +939,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                          }
 //                          [weakSelf release];
 //                          
-//                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                      } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                          [weakSelf retain];
 //                          
 //                          //请求出错
@@ -983,7 +983,7 @@ extern NSString *const kLinphoneInCallCellData;
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRTerminalResponseModel class]
-//              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              success:^(NSURLSessionDataTask *operation, id responseObject) {
 //                  [weakSelf retain];
 //
 //                  RDRTerminalResponseModel *model = responseObject;
@@ -996,7 +996,7 @@ extern NSString *const kLinphoneInCallCellData;
 //                  }
 //                  [weakSelf release];
 //
-//              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              } failure:^(NSURLSessionDataTask *operation, NSError *error) {
 //                  [weakSelf retain];
 //
 //                  //请求出错

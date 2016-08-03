@@ -32,6 +32,9 @@
 #import "RDRSystemConfigRequestModel.h"
 #import "RDRSystemConfigResponseModel.h"
 
+#import "HQPlayerViewController.h"
+#import "LPRecordAndPlayViewController.h"
+
 @implementation LinphoneAppDelegate
 
 @synthesize configURL;
@@ -241,12 +244,39 @@
 	if (bgStartId != UIBackgroundTaskInvalid)
 		[[UIApplication sharedApplication] endBackgroundTask:bgStartId];
 
+    [self registerCustomNotification];
+    
     // 先取当前系统的sip地址
     [self askForSystemConfig];
     NSString *verStr = [NSString stringWithFormat:@"%@ Core %s", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], linphone_core_get_version()];
     NSLog(@"verStr=%@", verStr);
     
 	return YES;
+}
+
+- (void)registerCustomNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tryPlayMovie:) name:kPlayVideoNotification object:nil];
+}
+
+- (void)tryPlayMovie:(NSNotification *)notif {
+    NSLog(@"try to play link:=%@", notif.object);
+    
+    NSDictionary *dic = (NSDictionary *)(notif.object);
+    if (dic == nil || ([dic isKindOfClass:[NSDictionary class]] == NO)) {
+        NSLog(@"play notifi error, notif=%@", notif);
+        return;
+    }
+    
+    NSString *nameStr = safeString(dic[@"name"]);
+    NSString *urlStr = safeString(dic[@"url"]);
+    // 测试使用视频url
+    //    urlStr = @"http://video.getarts.cn/20160201/yufang2.mp4.mp4";
+    
+    [HQPlayerViewController playMovieWithTitle:nameStr mediaUrlStr:urlStr];
+    
+    //    GAVideoPlayVC *playVC = [[GAVideoPlayVC alloc] init];
+    //    [playVC showTitle:nameStr andUrlStr:urlStr];
+    //    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:playVC] animated:YES completion:nil];
 }
 
 - (void)askForSystemConfig {

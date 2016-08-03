@@ -27,6 +27,8 @@
 #import "InCallViewController.h"
 #import "IncomingCallViewController.h"
 #import "OutgoingCallViewController.h"
+#import "HQPlayerViewController.h"
+#import "LPRecordAndPlayViewController.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 

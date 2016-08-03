@@ -557,27 +557,27 @@ static UICompositeViewDescription *compositeDescription = nil;
         
         reqModel.addr = address;
         
-//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-//        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
-//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                      RDRAddFavResponseModel *model = responseObject;
-//                      if ([model codeCheckSuccess] == YES) {
-//                          NSLog(@"收藏会议室成功, model=%@", model);
-//                          [weakSelf showToastWithMessage:@"收藏会议室成功"];
-//                      }else {
-//                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，%@(%ld)", model.msg, (long)model.code];
-//                          NSLog(@"%@", tipStr);
-//
-//                          [weakSelf showToastWithMessage:tipStr];
-//                      }
-//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                      [weakSelf hideHudAndIndicatorView];
-//                      
-//                      //请求出错
-//                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
-//                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
-//                      [weakSelf showToastWithMessage:tipStr];
-//                  }];
+        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
+                  success:^(NSURLSessionDataTask *operation, id responseObject) {
+                      RDRAddFavResponseModel *model = responseObject;
+                      if ([model codeCheckSuccess] == YES) {
+                          NSLog(@"收藏会议室成功, model=%@", model);
+                          [weakSelf showToastWithMessage:@"收藏会议室成功"];
+                      }else {
+                          NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，%@(%ld)", model.msg, (long)model.code];
+                          NSLog(@"%@", tipStr);
+
+                          [weakSelf showToastWithMessage:tipStr];
+                      }
+                  } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+                      [weakSelf hideHudAndIndicatorView];
+                      
+                      //请求出错
+                      NSLog(@"收藏会议室失败, %s, error=%@", __FUNCTION__, error);
+                      NSString *tipStr = [NSString stringWithFormat:@"收藏会议室失败，服务器错误"];
+                      [weakSelf showToastWithMessage:tipStr];
+                  }];
     }
 }
 

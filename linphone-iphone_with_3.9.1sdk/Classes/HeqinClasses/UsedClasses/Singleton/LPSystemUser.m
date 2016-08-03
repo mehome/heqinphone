@@ -99,36 +99,36 @@
         // 已经取到数据
         finishBlock(true, [LPSystemUser sharedUser].myScheduleMeetings, [LPSystemUser sharedUser].myMeetingsRooms, [LPSystemUser sharedUser].myFavMeetings, @"从本地获取成功");
     }else {
-//        // 未取到数据， 进行请求
-//        RDRMyMeetingRequestModel *reqModel = [RDRMyMeetingRequestModel requestModel];
-//        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
-//        
-//        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
-//        
-//        [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingResponseModel class]
-//                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                      
-//                      RDRMyMeetingResponseModel *model = responseObject;
-//                      
-//                      if ([model codeCheckSuccess] == YES) {
-//                          NSLog(@"请求Meeting Info, success, model=%@", model);
-//                          
-//                          // 解析model数据
-//                          [LPSystemUser sharedUser].hasGetMeetingData = YES;
-//                          [LPSystemUser sharedUser].myScheduleMeetings = [model.schedule mutableCopy];
-//                          [LPSystemUser sharedUser].myMeetingsRooms = [model.rooms mutableCopy];
-//                          [LPSystemUser sharedUser].myFavMeetings = [model.fav mutableCopy];
-//
-//                          finishBlock(true, [LPSystemUser sharedUser].myScheduleMeetings, [LPSystemUser sharedUser].myMeetingsRooms, [LPSystemUser sharedUser].myFavMeetings, @"网络请求成功");
-//                      }else {
-//                          NSLog(@"请求Meeting Info 服务器请求出错, model=%@, msg=%@", model, model.msg);
-//                          finishBlock(false, nil, nil, nil, model.msg);
-//                      }
-//                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                      //请求出错
-//                      NSLog(@"请求Meeting Info出错, %s, error=%@", __FUNCTION__, error);
-//                      finishBlock(false, nil, nil, nil, error.localizedFailureReason);
-//                  }];
+        // 未取到数据， 进行请求
+        RDRMyMeetingRequestModel *reqModel = [RDRMyMeetingRequestModel requestModel];
+        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        
+        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+        
+        [RDRNetHelper GET:req responseModelClass:[RDRMyMeetingResponseModel class]
+                  success:^(NSURLSessionDataTask *operation, id responseObject) {
+                      
+                      RDRMyMeetingResponseModel *model = responseObject;
+                      
+                      if ([model codeCheckSuccess] == YES) {
+                          NSLog(@"请求Meeting Info, success, model=%@", model);
+                          
+                          // 解析model数据
+                          [LPSystemUser sharedUser].hasGetMeetingData = YES;
+                          [LPSystemUser sharedUser].myScheduleMeetings = [model.schedule mutableCopy];
+                          [LPSystemUser sharedUser].myMeetingsRooms = [model.rooms mutableCopy];
+                          [LPSystemUser sharedUser].myFavMeetings = [model.fav mutableCopy];
+
+                          finishBlock(true, [LPSystemUser sharedUser].myScheduleMeetings, [LPSystemUser sharedUser].myMeetingsRooms, [LPSystemUser sharedUser].myFavMeetings, @"网络请求成功");
+                      }else {
+                          NSLog(@"请求Meeting Info 服务器请求出错, model=%@, msg=%@", model, model.msg);
+                          finishBlock(false, nil, nil, nil, model.msg);
+                      }
+                  } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+                      //请求出错
+                      NSLog(@"请求Meeting Info出错, %s, error=%@", __FUNCTION__, error);
+                      finishBlock(false, nil, nil, nil, error.localizedFailureReason);
+                  }];
     }
 }
 
