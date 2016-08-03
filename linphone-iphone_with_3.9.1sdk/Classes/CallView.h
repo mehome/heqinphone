@@ -50,12 +50,8 @@
 @property(nonatomic, strong) IBOutlet UIActivityIndicatorView *videoWaitingForFirstImage;
 @property(weak, nonatomic) IBOutlet UIView *callView;
 
-@property(nonatomic, strong) IBOutlet UIVideoButton *videoButton;
-@property(nonatomic, strong) IBOutlet UIMutedMicroButton *microButton;
-@property(nonatomic, strong) IBOutlet UISpeakerButton *speakerButton;
-@property(nonatomic, strong) IBOutlet UIToggleButton *optionsButton;
-@property(nonatomic, strong) IBOutlet UIView *numpadView;
-@property(nonatomic, strong) IBOutlet UIToggleButton *numpadButton;
+@property(nonatomic, strong) IBOutlet UIView *numpadView;                   // 键盘显示界面
+@property(nonatomic, strong) IBOutlet UIToggleButton *numpadButton;         // 键盘按钮
 
 @property(weak, nonatomic) IBOutlet UIView *bottomBar;
 @property(nonatomic, strong) IBOutlet UIDigitButton *oneButton;
@@ -77,8 +73,6 @@
 @property (retain, nonatomic) IBOutlet UIButton *bottomCallJoinerBtn;
 @property (retain, nonatomic) IBOutlet UIButton *bottomCallMoreBtn;
 
-@property (retain, nonatomic) IBOutlet UIButton *quitCallBtn;
-
-- (IBAction)onNumpadClick:(id)sender;
+@property (retain, nonatomic) IBOutlet UIButton *quitCallBtn;               // 退出按钮
 
 @end

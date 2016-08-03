@@ -73,12 +73,6 @@
 
 #import "ShowMeetingLayoutView.h"
 
-typedef NS_ENUM(NSInteger, InvityType) {
-    InvityTypeSMS,
-    InvityTypeEmail,
-    InvityTypePhoneCall
-};
-
 
 extern NSString *const kLinphoneInCallCellData;
 

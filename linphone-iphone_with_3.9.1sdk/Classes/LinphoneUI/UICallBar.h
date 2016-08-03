@@ -33,6 +33,13 @@ typedef NS_ENUM(NSInteger, MeetingType) {
     MeetingTypeMeeting
 };
 
+typedef NS_ENUM(NSInteger, InvityType) {
+    InvityTypeSMS,
+    InvityTypeEmail,
+    InvityTypePhoneCall
+};
+
+
 @interface UICallBar: TPMultiLayoutViewController {
 }
 

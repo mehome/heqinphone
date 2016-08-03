@@ -30,8 +30,27 @@
 #import "Utils.h"
 
 #include "linphone/linphonecore.h"
+#import "LPSystemUser.h"
+#import "LPSystemSetting.h"
 
-const NSInteger SECURE_BUTTON_TAG = 5;
+#import "UIViewController+RDRTipAndAlert.h"
+
+#import "UICallBar.h"
+#import "ShowInviteView.h"
+#import "RDRAllJoinersView.h"
+#import "ShowMeetingLayoutView.h"
+#import "RDRMeetingTypeRequestModel.h"
+
+@interface CallView ()
+
+@property (nonatomic, strong) UIView *popControlView;       // 弹出的按钮控件的背景
+
+@property (nonatomic, assign) BOOL meetingLockedStatus;     // 会议被锁定?，默认为No
+@property (nonatomic, assign) BOOL meetingIsRecording;      // 会议是否正在录制，默认NO
+
+@property (nonatomic, assign) MeetingType curMeetingType;
+
+@end
 
 @implementation CallView {
 	BOOL hiddenVolume;
@@ -126,6 +145,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
+- (void)dataFillToPreview {
+    // 执行请求会议室类型的请求
+    [self requestMeetingType];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
@@ -133,7 +157,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	// Update on show
 	[self hidePad:TRUE animated:FALSE];
-	[self hideSpeaker:LinphoneManager.instance.bluetoothAvailable];
 	[self onCurrentCallChange];
 	// Set windows (warn memory leaks)
 	linphone_core_set_native_video_window_id(LC, (__bridge void *)(_videoView));
@@ -141,13 +164,12 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[self previewTouchLift];
 
+    // 填充参数，并请求查询当前会议类型
+    [self dataFillToPreview];
+    
 	// Enable tap
 	[singleFingerTap setEnabled:TRUE];
 
-	[NSNotificationCenter.defaultCenter addObserver:self
-										   selector:@selector(bluetoothAvailabilityUpdateEvent:)
-											   name:kLinphoneBluetoothAvailabilityUpdate
-											 object:nil];
 	[NSNotificationCenter.defaultCenter addObserver:self
 										   selector:@selector(callUpdateEvent:)
 											   name:kLinphoneCallUpdate
@@ -184,12 +206,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 		hiddenVolume = FALSE;
 	}
 
-	if (videoDismissTimer) {
-		[self dismissVideoActionSheet:videoDismissTimer];
-		[videoDismissTimer invalidate];
-		videoDismissTimer = nil;
-	}
-
 	// Remove observer
 	[NSNotificationCenter.defaultCenter removeObserver:self];
 }
@@ -203,17 +219,61 @@ static UICompositeViewDescription *compositeDescription = nil;
 	[PhoneMainView.instance fullScreen:false];
 	// Disable tap
 	[singleFingerTap setEnabled:FALSE];
-
-	if (linphone_core_get_calls_nb(LC) == 0) {
-		// reseting speaker button because no more call
-		_speakerButton.selected = FALSE;
-	}
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	[self previewTouchLift];
 	[self hideStatusBar:!videoHidden];
+}
+
+- (UIView *)popControlView {
+    if (_popControlView == nil) {
+        _popControlView = [[UIView alloc] initWithFrame:CGRectZero];
+        _popControlView.backgroundColor = [UIColor clearColor];
+        
+        UIView *littleBgView = [[UIView alloc] initWithFrame:CGRectZero];
+        littleBgView.backgroundColor = [UIColor grayColor];
+        littleBgView.alpha = 0.3;
+        [_popControlView addSubview:littleBgView];
+        littleBgView.tag = 1000;
+        
+        [self.view addSubview:_popControlView];
+        _popControlView.hidden = YES;
+    }
+    
+    return _popControlView;
+}
+
+- (void)popWithButtons:(NSArray *)btns {
+    if (self.numpadView.hidden == NO) {
+        self.numpadView.hidden = YES;
+    }
+    
+    // 先重置位置
+    self.popControlView.frame = self.bottomBar.frame;
+    UIView *theBgView = [self.popControlView viewWithTag:1000];
+    theBgView.frame = self.popControlView.bounds;
+    
+    self.popControlView.ott_bottom = self.bottomBar.ott_top;
+    
+    self.popControlView.hidden = NO;
+    self.popControlView.alpha = 1.0;
+    
+    // 移除上面的按钮
+    for (UIView *subView in self.popControlView.subviews) {
+        if ([subView isKindOfClass:[UIButton class]]) {
+            [subView removeFromSuperview];
+        }
+    }
+    
+    // 添加按钮
+    for (NSInteger i=0; i<btns.count; i++) {
+        UIButton *btn = btns[i];
+        [self.popControlView addSubview:btn];
+        CGFloat eachBtnWidth = self.popControlView.ott_width/btns.count;
+        btn.frame = CGRectMake(i*eachBtnWidth, 0, eachBtnWidth, self.popControlView.ott_height);
+    }
 }
 
 #pragma mark - UI modification
@@ -228,12 +288,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 }
 
 - (void)updateBottomBar:(LinphoneCall *)call state:(LinphoneCallState)state {
-	[_speakerButton update];
-	[_microButton update];
-
-	_optionsButton.enabled = (!call || !linphone_core_sound_resources_locked(LC));
-
-
+    
 	switch (state) {
 		case LinphoneCallEnd:
 		case LinphoneCallError:
@@ -356,8 +411,6 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 
 - (void)onCurrentCallChange {
 	LinphoneCall *call = linphone_core_get_current_call(LC);
-//    BOOL curIsHidden = (call || linphone_core_is_in_conference(LC));    // 用来判断当前是否在会议中
-    
 	_callView.hidden = !call;
 }
 
@@ -376,15 +429,26 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	}
 }
 
-- (void)hideSpeaker:(BOOL)hidden {
-	_speakerButton.hidden = hidden;
-}
-
 #pragma mark - Event Functions
 
-- (void)bluetoothAvailabilityUpdateEvent:(NSNotification *)notif {
-	bool available = [[notif.userInfo objectForKey:@"available"] intValue];
-	[self hideSpeaker:available];
+static BOOL systemOpenCamera = NO;
+
+- (void)checkIsNeedToOpenCamera {
+    if (systemOpenCamera == NO) {
+        LinphoneCall* currentCall = linphone_core_get_current_call(LC);
+        
+        if( linphone_core_video_enabled(LC)
+           && currentCall
+           && !linphone_call_media_in_progress(currentCall)
+           && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
+            
+            systemOpenCamera = YES;
+            
+            // 打开摄像头
+            NSLog(@"____________________start camera");
+            [self openCamera:nil];
+        }
+    }
 }
 
 - (void)callUpdateEvent:(NSNotification *)notif {
@@ -395,6 +459,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 
 - (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state animated:(BOOL)animated {
 	[self updateBottomBar:call state:state];
+    
 	if (hiddenVolume) {
 		[PhoneMainView.instance setVolumeHidden:FALSE];
 		hiddenVolume = FALSE;
@@ -410,6 +475,8 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 	if (call == NULL) {
 		return;
 	}
+    
+    [self checkIsNeedToOpenCamera];
 
 	BOOL shouldDisableVideo = (!currentCall || !linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall)));
 	if (videoHidden != shouldDisableVideo) {
@@ -425,6 +492,8 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 		case LinphoneCallOutgoingInit:
 		case LinphoneCallConnected:
 		case LinphoneCallStreamsRunning: {
+            [self configTheSilenceOperation];
+            
 			// check video
 			if (!linphone_call_params_video_enabled(linphone_call_get_current_params(call))) {
 				const LinphoneCallParams *param = linphone_call_get_current_params(call);
@@ -456,7 +525,9 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 				linphone_call_params_video_enabled(remote) &&
 				!linphone_core_get_video_policy(LC)->automatically_accept) {
 				linphone_core_defer_call_update(LC, call);
-				[self displayAskToEnableVideoCall:call];
+                
+                // 直接打开视频， 这里最新的代码是弹出倒计时提示询问用户是否允许打开视频，下面为了简化，直接打开视频处理
+                [self openCamera:nil];
 			} else if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
 				[self displayAudioCall:animated];
 			}
@@ -471,54 +542,30 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 			break;
 		case LinphoneCallEnd:
 		case LinphoneCallError:
+            break;
+        case LinphoneCallOutgoingRinging:
+            [self configTheSilenceOperation];
+            break;
 		default:
 			break;
 	}
 }
 
-#pragma mark - ActionSheet Functions
-
-- (void)displayAskToEnableVideoCall:(LinphoneCall *)call {
-	if (linphone_core_get_video_policy(LC)->automatically_accept)
-		return;
-
-	NSString *username = [FastAddressBook displayNameForAddress:linphone_call_get_remote_address(call)];
-	NSString *title = [NSString stringWithFormat:NSLocalizedString(@"%@ would like to enable video", nil), username];
-	UIConfirmationDialog *sheet = [UIConfirmationDialog ShowWithMessage:title
-		cancelMessage:nil
-		confirmMessage:NSLocalizedString(@"ACCEPT", nil)
-		onCancelClick:^() {
-		  LOGI(@"User declined video proposal");
-		  if (call == linphone_core_get_current_call(LC)) {
-			  LinphoneCallParams *paramsCopy = linphone_call_params_copy(linphone_call_get_current_params(call));
-			  linphone_core_accept_call_update(LC, call, paramsCopy);
-			  linphone_call_params_destroy(paramsCopy);
-			  [videoDismissTimer invalidate];
-			  videoDismissTimer = nil;
-		  }
-		}
-		onConfirmationClick:^() {
-		  LOGI(@"User accept video proposal");
-		  if (call == linphone_core_get_current_call(LC)) {
-			  LinphoneCallParams *paramsCopy = linphone_call_params_copy(linphone_call_get_current_params(call));
-			  linphone_call_params_enable_video(paramsCopy, TRUE);
-			  linphone_core_accept_call_update(LC, call, paramsCopy);
-			  linphone_call_params_destroy(paramsCopy);
-			  [videoDismissTimer invalidate];
-			  videoDismissTimer = nil;
-		  }
-		}
-		inController:self];
-	videoDismissTimer = [NSTimer scheduledTimerWithTimeInterval:30
-														 target:self
-													   selector:@selector(dismissVideoActionSheet:)
-													   userInfo:sheet
-														repeats:NO];
-}
-
-- (void)dismissVideoActionSheet:(NSTimer *)timer {
-	UIConfirmationDialog *sheet = (UIConfirmationDialog *)timer.userInfo;
-	[sheet dismiss];
+- (void)configTheSilenceOperation {
+    // 设置当前的静音操作
+    if ([LPSystemSetting sharedSetting].defaultSilence == YES) {
+        // 要求静音
+        linphone_core_enable_mic([LinphoneManager getLc], true);
+        
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
+    }else {
+        // 要求不静音
+        linphone_core_enable_mic([LinphoneManager getLc], false);
+        
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+    }
 }
 
 #pragma mark VideoPreviewMoving
@@ -609,49 +656,36 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 }
 
 //////////////////////////////////////////////// 自已添加的新方法,
-// 挂断电话
-- (void)terminalCall {
-    LinphoneCall *currentcall = linphone_core_get_current_call(LC);
-    if (linphone_core_is_in_conference(LC) || (linphone_core_get_conference_size(LC) > 0) ) { // Only one conf
-        linphone_core_terminate_conference(LC);
-    } else if (currentcall != NULL) { // In a call
-        linphone_core_terminate_call(LC, currentcall);
-    } else {
-        const MSList *calls = linphone_core_get_calls(LC);
-        if (ms_list_size(calls) == 1) { // Only one call
-            linphone_core_terminate_call(LC, (LinphoneCall *)(calls->data));
-        }
-    }
-}
-
+// 隐藏底部弹出的菜单
 - (void)hideAllBottomBgView {
-//    if (self.popControlView.hidden == NO) {
-//        // 隐藏它
-//        self.popControlView.alpha = 1.0;
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.popControlView.alpha = 0.0;
-//        } completion:^(BOOL finished) {
-//            NSMutableArray *subs = [NSMutableArray array];
-//            for (UIView *subV in self.popControlView.subviews) {
-//                if (subV.tag != 1000) {
-//                    [subs addObject:subV];
-//                }
-//            }
-//            
-//            for (UIView *eachSub in subs) {
-//                [eachSub removeFromSuperview];
-//            }
-//            
-//            self.popControlView.hidden = YES;
-//        }];
-//    }
+    if (self.popControlView.hidden == NO) {
+        // 隐藏它
+        self.popControlView.alpha = 1.0;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.popControlView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            // 然后移除掉上面的按钮，除这个背景外的其它按钮
+            NSMutableArray *subs = [NSMutableArray array];
+            for (UIView *subV in self.popControlView.subviews) {
+                if (subV.tag != 1000) {
+                    [subs addObject:subV];
+                }
+            }
+            
+            for (UIView *eachSub in subs) {
+                [eachSub removeFromSuperview];
+            }
+            
+            self.popControlView.hidden = YES;
+        }];
+    }
 }
 
 // 打开视频镜头
 - (void)openCamera:(UIButton *)sender {
     [self hideAllBottomBgView];
     
-    // 下面这行代码是从老的地方来的，不确定是否一定需要调用
+    // 下面这行代码是从老的地方来的，不确定是否一定需要调用，不过感觉这里就算打开了，也没有什么影响，所以这里还是保留了这部分代码
     if (!linphone_core_video_enabled(LC)) {
         linphone_core_enable_video_capture(LC, true);
         linphone_core_enable_video_display(LC, true);
@@ -664,7 +698,7 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
         TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
         LinphoneCallParams *call_params = linphone_call_params_copy(linphone_call_get_current_params(call));
         linphone_call_params_enable_video(call_params, TRUE);
-        linphone_core_update_call(LC, call, call_params);
+        linphone_core_update_call(LC, call, call_params);      //  linphone_core_accept_call_update(LC, call, call_params);
         linphone_call_params_destroy(call_params);
     } else {
         LOGW(@"Cannot toggle video button, because no current call");
@@ -724,149 +758,628 @@ static void hideSpinner(LinphoneCall *call, void *user_data) {
 
 // 麦克风按钮点击
 - (IBAction)bottomMicBtnClicked:(id)sender {
-//
-//    [self hideAllBottomBgView];
-//    
-//    // 然后执行不同的操作
-//    if (linphone_core_mic_enabled([LinphoneManager getLc]) == YES) {
-//        // 当前静音，点击后，则取消静音
-//        linphone_core_enable_mic([LinphoneManager getLc], false);
-//        
-//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
-//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
-//    }else {
-//        // 当前没有静音， 点击后，则进行静音
-//        linphone_core_enable_mic([LinphoneManager getLc], true);
-//        
-//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
-//        [self.bmMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
-//    }
+
+    [self hideAllBottomBgView];
+    
+    // 然后执行不同的操作
+    if (linphone_core_mic_enabled([LinphoneManager getLc]) == YES) {
+        // 当前静音，点击后，则取消静音
+        linphone_core_enable_mic([LinphoneManager getLc], false);
+        
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateNormal];
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateDisabled];
+    }else {
+        // 当前没有静音， 点击后，则进行静音
+        linphone_core_enable_mic([LinphoneManager getLc], true);
+        
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_disable"] forState:UIControlStateNormal];
+        [self.bottomCallMicroButton setImage:[UIImage imageNamed:@"m_mic_enable"] forState:UIControlStateDisabled];
+    }
 }
 
 // 底部视频按钮
 - (IBAction)bottomVedioBtnClicked:(id)sender {
     [self hideAllBottomBgView];
     
-//    // 点击都弹出选择界面
-//    UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    frontTailBtn.showsTouchWhenHighlighted = YES;
-//    [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
-//    [frontTailBtn setTitle:@"前置/后置摄像头" forState:UIControlStateNormal];
-//    
-//    UIButton *closeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    closeCameraBtn.showsTouchWhenHighlighted = YES;
-//    [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
-//    [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
-//    
-//    UIButton *openCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    openCameraBtn.showsTouchWhenHighlighted = YES;
-//    [openCameraBtn addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
-//    [openCameraBtn setTitle:@"打开摄像头" forState:UIControlStateNormal];
-//    
-//    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
-//    bool video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
-//    
-//    //    if( linphone_core_video_enabled([LinphoneManager getLc])
-//    //       && currentCall
-//    //       && !linphone_call_media_in_progress(currentCall)
-//    //       && linphone_call_get_state(currentCall) == LinphoneCallStreamsRunning) {
-//    //        video_enabled = TRUE;
-//    //    }
-//    
-//    if (video_enabled == YES) {
-//        // 当前在会议中
-//        [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
-//    }else {
-//        // 当前不在会议中
-//        [self popWithButtons:@[frontTailBtn, openCameraBtn]];
-//    }
+    // 点击都弹出选择界面
+    UIButton *frontTailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    frontTailBtn.showsTouchWhenHighlighted = YES;
+    [frontTailBtn addTarget:self action:@selector(bmChangeFrontAndTail:) forControlEvents:UIControlEventTouchUpInside];
+    [frontTailBtn setTitle:@"前置/后置摄像头" forState:UIControlStateNormal];
+    
+    UIButton *closeCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeCameraBtn.showsTouchWhenHighlighted = YES;
+    [closeCameraBtn addTarget:self action:@selector(closeCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [closeCameraBtn setTitle:@"关闭摄像头" forState:UIControlStateNormal];
+    
+    UIButton *openCameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    openCameraBtn.showsTouchWhenHighlighted = YES;
+    [openCameraBtn addTarget:self action:@selector(openCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [openCameraBtn setTitle:@"打开摄像头" forState:UIControlStateNormal];
+    
+    LinphoneCall* currentCall = linphone_core_get_current_call([LinphoneManager getLc]);
+    bool video_enabled = linphone_call_params_video_enabled(linphone_call_get_current_params(currentCall));
+    
+    if (video_enabled == YES) {
+        // 当前在会议中
+        [self popWithButtons:@[frontTailBtn, closeCameraBtn]];
+    }else {
+        // 当前不在会议中
+        [self popWithButtons:@[frontTailBtn, openCameraBtn]];
+    }
 }
 
 
 // 底部邀请按钮
 - (IBAction)bottomInviteBtnClicked:(id)sender {
-//    UIButton *mailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    mailBtn.showsTouchWhenHighlighted = YES;
-//    [mailBtn addTarget:self action:@selector(sendMailBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [mailBtn setTitle:@"发邮件" forState:UIControlStateNormal];
-//    
-//    UIButton *smsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    smsBtn.showsTouchWhenHighlighted = YES;
-//    [smsBtn addTarget:self action:@selector(sendSMSBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [smsBtn setTitle:@"发短信" forState:UIControlStateNormal];
-//    
-//    UIButton *callPhoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    callPhoneBtn.showsTouchWhenHighlighted = YES;
-//    [callPhoneBtn addTarget:self action:@selector(callBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [callPhoneBtn setTitle:@"呼号" forState:UIControlStateNormal];
-//    
-//    UIButton *copyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    copyBtn.showsTouchWhenHighlighted = YES;
-//    [copyBtn addTarget:self action:@selector(copyAddressBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [copyBtn setTitle:@"复制地址" forState:UIControlStateNormal];
-//    
-//    [self popWithButtons:@[mailBtn, smsBtn, callPhoneBtn, copyBtn]];
+    UIButton *mailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    mailBtn.showsTouchWhenHighlighted = YES;
+    [mailBtn addTarget:self action:@selector(sendMailBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mailBtn setTitle:@"发邮件" forState:UIControlStateNormal];
+    
+    UIButton *smsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    smsBtn.showsTouchWhenHighlighted = YES;
+    [smsBtn addTarget:self action:@selector(sendSMSBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [smsBtn setTitle:@"发短信" forState:UIControlStateNormal];
+    
+    UIButton *callPhoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    callPhoneBtn.showsTouchWhenHighlighted = YES;
+    [callPhoneBtn addTarget:self action:@selector(sendCallBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [callPhoneBtn setTitle:@"呼号" forState:UIControlStateNormal];
+    
+    UIButton *copyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    copyBtn.showsTouchWhenHighlighted = YES;
+    [copyBtn addTarget:self action:@selector(sendCopyAddressBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [copyBtn setTitle:@"复制地址" forState:UIControlStateNormal];
+    
+    [self popWithButtons:@[mailBtn, smsBtn, callPhoneBtn, copyBtn]];
+}
+
+// 发邮件
+- (IBAction)sendMailBtnClicked:(id)sender {
+    [self inviteMenBy:InvityTypeEmail];
+    [self hideAllBottomBgView];
+}
+// 发短信
+- (IBAction)sendSMSBtnClicked:(id)sender {
+    [self inviteMenBy:InvityTypeSMS];
+    [self hideAllBottomBgView];
+}
+// 呼号
+- (IBAction)sendCallBtnClicked:(id)sender {
+    [self inviteMenBy:InvityTypePhoneCall];
+    [self hideAllBottomBgView];
+}
+
+// 复制地址
+- (IBAction)sendCopyAddressBtnClicked:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setString:[self curMeetingAddr]];
+    
+    [self hideAllBottomBgView];
+    
+    [self showToastWithMessage:@"复制地址成功"];
+}
+
+// 取纯111111, 不是sip:111111@120.138.....
+- (NSString *)curMeetingAddr {
+    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
+    
+    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
+    NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
+    
+    // 移掉后部
+    if ([addr replaceOccurrencesOfString:serverTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"remove server address done");
+    }else {
+        NSLog(@"remove server address failed");
+    }
+    
+    // 移掉前面的sip:
+    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"remove sip done");
+    }else {
+        NSLog(@"remove sip failed");
+    }
+    
+    if (addr.length == 0) {
+        [self showToastWithMessage:@"会议室号码错误，请检查"];
+        return @"";
+    }else {
+        return addr;
+    }
+}
+
+- (void)inviteMenBy:(InvityType)type {
+    // 弹出一个输入框
+    [ShowInviteView showWithType:type withDoneBlock:^(NSString *text) {
+        [self inviteByType:type withContent:text];
+    } withCancelBlock:^{
+        NSLog(@"cancel");
+    } withNoInput:^{
+        [self showToastWithMessage:@"数据为空"];
+    }];
+}
+
+// 邀请
+- (void)inviteByType:(InvityType)type withContent:(NSString *)content {
+    //    __block UICallBar *weakSelf = self;
+    
+    [self showToastWithMessage:@"邀请中..."];
+    
+    //    RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
+    //    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
+    //    reqModel.addr = [self curMeetingAddr];
+    //    reqModel.type = @(type);
+    //    reqModel.to = content;
+    //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    //    [RDRNetHelper GET:req responseModelClass:[RDRInviteResponseModel class]
+    //              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //                  [weakSelf retain];
+    //
+    //                  RDRInviteResponseModel *model = responseObject;
+    //
+    //                  if ([model codeCheckSuccess] == YES) {
+    //                      [weakSelf showToastWithMessage:@"邀请成功"];
+    //                  }else {
+    //                      NSString *tipStr = [NSString stringWithFormat:@"邀请失败，msg=%@", model.msg];
+    //                      [weakSelf showToastWithMessage:tipStr];
+    //                  }
+    //                  [weakSelf release];
+    //
+    //              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                  [weakSelf retain];
+    //
+    //                  //请求出错
+    //                  NSLog(@"邀请失败, %s, error=%@", __FUNCTION__, error);
+    //                  NSString *tipStr = [NSString stringWithFormat:@"邀请失败，服务器错误"];
+    //                  [weakSelf showToastWithMessage:tipStr];
+    //                  [weakSelf release];
+    //
+    //              }];
 }
 
 // 底部参与人按钮
 - (IBAction)bottomJoinerBtnClicked:(id)sender {
     [self hideAllBottomBgView];
     
-//    [RDRAllJoinersView showTableTitle:@"全部参与人员" withPostBlock:^(NSString *text) {
-//        [self showToastWithMessage:text];
-//    }];
+    [RDRAllJoinersView showTableTitle:@"全部参与人员" withPostBlock:^(NSString *text) {
+        [self showToastWithMessage:text];
+    }];
 }
 
 // 底部更多按钮
 - (IBAction)bottomMoreBtnClicked:(id)sender {
-//    UIButton *lockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    lockBtn.showsTouchWhenHighlighted = YES;
-//    [lockBtn addTarget:self action:@selector(lockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [lockBtn setTitle:@"锁定会议室" forState:UIControlStateNormal];
-//    
-//    UIButton *unlockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    unlockBtn.showsTouchWhenHighlighted = YES;
-//    [unlockBtn addTarget:self action:@selector(unlockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [unlockBtn setTitle:@"解锁会议室" forState:UIControlStateNormal];
-//    
-//    UIButton *startRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    startRecordBtn.showsTouchWhenHighlighted = YES;
-//    [startRecordBtn addTarget:self action:@selector(startRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [startRecordBtn setTitle:@"录播" forState:UIControlStateNormal];
-//    
-//    UIButton *stopRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    stopRecordBtn.showsTouchWhenHighlighted = YES;
-//    [stopRecordBtn addTarget:self action:@selector(stopRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [stopRecordBtn setTitle:@"停止录播" forState:UIControlStateNormal];
-//    
-//    UIButton *layoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    layoutBtn.showsTouchWhenHighlighted = YES;
-//    [layoutBtn addTarget:self action:@selector(meetingLayoutBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [layoutBtn setTitle:@"布局设置" forState:UIControlStateNormal];
-//    
-//    UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    endBtn.showsTouchWhenHighlighted = YES;
-//    [endBtn addTarget:self action:@selector(endMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [endBtn setTitle:@"结束会议" forState:UIControlStateNormal];
-//    
-//    // 判断当前会议的状态， 是被锁定还是怎么的
-//    if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
-//        if (self.meetingIsRecording == YES) {       // 正在录制
-//            [self popWithButtons:@[layoutBtn, unlockBtn, stopRecordBtn, endBtn]];
-//        }else {                                     // 没有录制
-//            [self popWithButtons:@[layoutBtn, unlockBtn, startRecordBtn, endBtn]];
-//        }
-//    }else {
-//        if (self.meetingIsRecording == YES) {       // 正在录制
-//            [self popWithButtons:@[layoutBtn, lockBtn, stopRecordBtn, endBtn]];
-//        }else {                                     // 没有录制
-//            [self popWithButtons:@[layoutBtn, lockBtn, startRecordBtn, endBtn]];
-//        }
-//    }
+    UIButton *lockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    lockBtn.showsTouchWhenHighlighted = YES;
+    [lockBtn addTarget:self action:@selector(moreLockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [lockBtn setTitle:@"锁定会议室" forState:UIControlStateNormal];
+    
+    UIButton *unlockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    unlockBtn.showsTouchWhenHighlighted = YES;
+    [unlockBtn addTarget:self action:@selector(moreUnlockMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [unlockBtn setTitle:@"解锁会议室" forState:UIControlStateNormal];
+    
+    UIButton *startRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    startRecordBtn.showsTouchWhenHighlighted = YES;
+    [startRecordBtn addTarget:self action:@selector(moreStartRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [startRecordBtn setTitle:@"录播" forState:UIControlStateNormal];
+    
+    UIButton *stopRecordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    stopRecordBtn.showsTouchWhenHighlighted = YES;
+    [stopRecordBtn addTarget:self action:@selector(moreStopRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [stopRecordBtn setTitle:@"停止录播" forState:UIControlStateNormal];
+    
+    UIButton *layoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    layoutBtn.showsTouchWhenHighlighted = YES;
+    [layoutBtn addTarget:self action:@selector(moreLayoutBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [layoutBtn setTitle:@"布局设置" forState:UIControlStateNormal];
+    
+    UIButton *endBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    endBtn.showsTouchWhenHighlighted = YES;
+    [endBtn addTarget:self action:@selector(moreEndMeetingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [endBtn setTitle:@"结束会议" forState:UIControlStateNormal];
+    
+    // 判断当前会议的状态， 是被锁定还是怎么的
+    if (self.meetingLockedStatus == YES) {     // 当前是锁定状态
+        if (self.meetingIsRecording == YES) {       // 正在录制
+            [self popWithButtons:@[layoutBtn, unlockBtn, stopRecordBtn, endBtn]];
+        }else {                                     // 没有录制
+            [self popWithButtons:@[layoutBtn, unlockBtn, startRecordBtn, endBtn]];
+        }
+    }else {
+        if (self.meetingIsRecording == YES) {       // 正在录制
+            [self popWithButtons:@[layoutBtn, lockBtn, stopRecordBtn, endBtn]];
+        }else {                                     // 没有录制
+            [self popWithButtons:@[layoutBtn, lockBtn, startRecordBtn, endBtn]];
+        }
+    }
 }
 
-- (IBAction)quitCallBtnClicked:(id)sender {
+// 锁定会议，或者解锁
+- (IBAction)moreUnlockMeetingBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+    [ShowPinView showTitle:@"请输入PIN码以解锁会议" withDoneBlock:^(NSString *text) {
+        [self doUnlockMeetingWithPin:text];
+    } withCancelBlock:^{
+        
+    } withNoInput:^{
+        [self showToastWithMessage:@"请输入PIN码"];
+    }];
+}
 
+- (void)doUnlockMeetingWithPin:(NSString *)pinStr {
+    //    __block UICallBar *weakSelf = self;
+    
+    [self showToastWithMessage:@"解锁中..."];
+    
+    //    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
+    //    reqModel.addr = [self curMeetingAddr];
+    //    reqModel.lock = @(0);
+    //    reqModel.pin = pinStr;
+    //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    //    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
+    //              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //                  [weakSelf retain];
+    //
+    //                  RDRLockResponseModel *model = responseObject;
+    //
+    //                  if ([model codeCheckSuccess] == YES) {
+    //                      [weakSelf showToastWithMessage:@"解锁成功"];
+    //                      weakSelf.meetingLockedStatus = NO;
+    //                  }else {
+    //                      NSString *tipStr = [NSString stringWithFormat:@"解锁失败，msg=%@", model.msg];
+    //                      [weakSelf showToastWithMessage:tipStr];
+    //                  }
+    //                  [weakSelf release];
+    //
+    //              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                  [weakSelf retain];
+    //
+    //                  //请求出错
+    //                  NSLog(@"解锁失败, %s, error=%@", __FUNCTION__, error);
+    //                  NSString *tipStr = [NSString stringWithFormat:@"解锁失败，服务器错误"];
+    //                  [weakSelf showToastWithMessage:tipStr];
+    //                  [weakSelf release];
+    //              }];
+}
+
+// 锁定会议，或者解锁
+- (IBAction)moreLockMeetingBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+    [ShowPinView showTitle:@"请输入PIN码以锁定会议" withDoneBlock:^(NSString *text) {
+        [self doLockMeetingWithPin:text];
+    } withCancelBlock:^{
+        
+    } withNoInput:^{
+        [self showToastWithMessage:@"请输入PIN码"];
+    }];
+}
+
+- (void)doLockMeetingWithPin:(NSString *)pinStr {
+    
+    [self showToastWithMessage:@"锁定中..."];
+    
+    //    __block UICallBar *weakSelf = self;
+    //    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
+    //    reqModel.addr = [self curMeetingAddr];
+    //    reqModel.lock = @(1);
+    //    reqModel.pin = pinStr;
+    //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    //    [RDRNetHelper GET:req responseModelClass:[RDRLockResponseModel class]
+    //              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //
+    //                  [weakSelf retain];
+    //
+    //                  RDRLockResponseModel *model = responseObject;
+    //
+    //                  if ([model codeCheckSuccess] == YES) {
+    //                      [weakSelf showToastWithMessage:@"锁定成功"];
+    //                      weakSelf.meetingLockedStatus = YES;
+    //                  }else {
+    //                      NSString *tipStr = [NSString stringWithFormat:@"锁定失败，msg=%@", model.msg];
+    //                      [weakSelf showToastWithMessage:tipStr];
+    //                  }
+    //                  [weakSelf release];
+    //              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                  [weakSelf retain];
+    //
+    //                  //请求出错
+    //                  NSLog(@"锁定失败, %s, error=%@", __FUNCTION__, error);
+    //                  NSString *tipStr = [NSString stringWithFormat:@"锁定失败，服务器错误"];
+    //                  [weakSelf showToastWithMessage:tipStr];
+    //                  
+    //                  [weakSelf release];
+    //              }];
+}
+
+- (void)moreStartRecordClicked:(id)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"录制" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self doRecordOperation:0];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"直播" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self doRecordOperation:1];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"录制+直播" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self doRecordOperation:2];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+    [self hideAllBottomBgView];
+}
+
+- (void)doRecordOperation:(NSInteger)type {
+    [ShowPinView showTitle:@"请输入PIN码" withDoneBlock:^(NSString *text) {
+        NSString *commandStr = nil;
+        NSString *tipStr = nil;
+        switch (type) {
+            case 0:
+                commandStr = @"record";
+                tipStr = @"启动录制";
+                break;
+            case 1:
+                commandStr = @"live";
+                tipStr = @"启动直播";
+                break;
+            case 2:
+                commandStr = @"both";
+                tipStr = @"启动录制和直播";
+                break;
+            case 3:
+                commandStr = @"stop";
+                tipStr = @"停止录制或直播";
+                break;
+            default:
+                break;
+        }
+        
+        [self doRecordCommandWithPin:text withCommandStr:commandStr withTipStr:tipStr commandType:type];
+    } withCancelBlock:^{
+        
+    } withNoInput:^{
+        [self showToastWithMessage:@"请输入PIN码"];
+    }];
+    
+}
+
+- (void)moreStopRecordClicked:(id)sender {
+    [self doRecordOperation:3];
+}
+
+- (void)doRecordCommandWithPin:(NSString *)pinStr withCommandStr:(NSString *)commandStr withTipStr:(NSString *)tipStr commandType:(NSInteger)type {
+    //    __block UICallBar *weakSelf = self;
+    
+    [self showToastWithMessage:@"请稍等..."];
+    
+    //    RDRReocrdRequestModel *reqModel = [RDRReocrdRequestModel requestModel];
+    //    reqModel.addr = [self curMeetingAddr];
+    //    reqModel.action = commandStr;
+    //    reqModel.pin = pinStr;
+    //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    //    [RDRNetHelper GET:req responseModelClass:[RDRRecordResponseModel class]
+    //              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //                  [weakSelf retain];
+    //
+    //                  RDRRecordResponseModel *model = responseObject;
+    //
+    //                  if ([model codeCheckSuccess] == YES) {
+    //                      [weakSelf showToastWithMessage:[NSString stringWithFormat:@"%@成功", tipStr]];
+    //
+    //                      switch (type) {
+    //                          case 0:
+    //                              weakSelf.meetingIsRecording = YES;
+    //                              break;
+    //                          case 1:
+    //                              weakSelf.meetingIsRecording = YES;
+    //                              break;
+    //                          case 2:
+    //                              weakSelf.meetingIsRecording = YES;
+    //                              break;
+    //                          case 3:
+    //                              weakSelf.meetingIsRecording = NO;
+    //                              break;
+    //                          default:
+    //                              break;
+    //                      }
+    //                  }else {
+    //                      NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，msg=%@", tipStr, model.msg];
+    //                      [weakSelf showToastWithMessage:tempTipStr];
+    //                  }
+    //                  [weakSelf release];
+    //
+    //              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                  [weakSelf retain];
+    //
+    //                  //请求出错
+    //                  NSLog(@"失败, %s, error=%@", __FUNCTION__, error);
+    //                  NSString *tempTipStr = [NSString stringWithFormat:@"%@失败，服务器错误", tipStr];
+    //                  [weakSelf showToastWithMessage:tempTipStr];
+    //                  [weakSelf release];
+    //              }];
+}
+
+// 会议布局
+- (void)moreLayoutBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+//    [ShowMeetingLayoutView showLayoutType:self.curMeetingType
+//                            withDoneBlock:^(NSDictionary *settingDic) {
+//                                
+//                                NSDictionary *usedDic = [NSDictionary dictionaryWithDictionary:settingDic];
+//                                NSLog(@"mutDic=%@ ,usedDic=%@", settingDic, usedDic);
+//                                
+//                                MeetingType usedType = self.curMeetingType;
+//                                
+//                                // 准备弹出pin界面进行输入密码
+//                                [ShowPinView showTitle:@"请输入PIN码修改布局" withDoneBlock:^(NSString *text) {
+//                                    // 根据这里的设置进行操作。
+//                                    NSLog(@"ping is %@, usedDIc=%@", text, usedDic);
+//                                    
+//                                    __block UICallBar *weakSelf = self;
+//                                    [weakSelf showToastWithMessage:@"设置布局中"];
+//                                    
+//                                    RDRRequest *req = nil;
+//                                    if (usedType == MeetingTypeLesson) {
+//                                        RDRMeetingLayoutRequestModel *reqModel = [RDRMeetingLayoutRequestModel requestModel];
+//                                        reqModel.addr = [self curMeetingAddr];
+//                                        reqModel.pin = text;
+//                                        reqModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
+//                                        reqModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
+//                                        reqModel.layout2 = ((NSNumber *)(usedDic[@"jkGround"])).integerValue;
+//                                        
+//                                        req = [RDRRequest requestWithURLPath:nil model:reqModel];
+//                                        
+//                                    }else {
+//                                        RDRMeetingLayoutSubRequestModel *subModel = [RDRMeetingLayoutSubRequestModel requestModel];
+//                                        subModel.addr = [self curMeetingAddr];
+//                                        subModel.pin = text;
+//                                        subModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
+//                                        subModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
+//                                        
+//                                        req = [RDRRequest requestWithURLPath:nil model:subModel];
+//                                    }
+//                                    
+//                                    //            [RDRNetHelper GET:req responseModelClass:[RDRMeetingLayoutResponseModel class]
+//                                    //                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                    //                          [weakSelf retain];
+//                                    //
+//                                    //                          RDRMeetingLayoutResponseModel *model = responseObject;
+//                                    //
+//                                    //                          if ([model codeCheckSuccess] == YES) {
+//                                    //                              [weakSelf showToastWithMessage:@"布局设置成功"];
+//                                    //                          }else {
+//                                    //                              NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，msg=%@", model.msg];
+//                                    //                              [weakSelf showToastWithMessage:tipStr];
+//                                    //                          }
+//                                    //                          [weakSelf release];
+//                                    //                          
+//                                    //                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                    //                          [weakSelf retain];
+//                                    //                          
+//                                    //                          //请求出错
+//                                    //                          NSLog(@"布局设置失败, %s, error=%@", __FUNCTION__, error);
+//                                    //                          NSString *tipStr = [NSString stringWithFormat:@"布局设置失败，服务器错误"];
+//                                    //                          [weakSelf showToastWithMessage:tipStr];
+//                                    //                          [weakSelf release];
+//                                    //                          
+//                                    //                      }];
+//                                    
+//                                } withCancelBlock:^{
+//                                    // do nothing
+//                                } withNoInput:^{
+//                                    [self showToastWithMessage:@"请输入PIN码"];
+//                                }];
+//                                
+//                            } withCancelBlock:^{
+//                                NSLog(@"界面被取消");
+//                            }];
+}
+
+// 请求当前会议的类型
+- (void)requestMeetingType {
+    
+    RDRMeetingTypeRequestModel *reqModel = [RDRMeetingTypeRequestModel requestModel];
+    reqModel.addr = [self curMeetingAddr];
+    
+    //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    //    [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
+    //              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //
+    //                  RDRMeetingTypeResponseModel *model = responseObject;
+    //
+    //                  if ([model codeCheckSuccess] == YES) {
+    //                      NSLog(@"会议室类型查询success, model=%@", model);
+    //
+    //                      if (model.type == 0) {
+    //                          self.curMeetingType = MeetingTypeLesson;
+    //                      }else {
+    //                          self.curMeetingType = MeetingTypeMeeting;
+    //                      }
+    //                  }else {
+    //                      NSLog(@"会议室类型查询失败, msg=%@", model.msg);
+    //                      NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，msg=%@", model.msg];
+    //                      [self showToastWithMessage:tipStr];
+    //                  }
+    //              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //
+    //                  //请求出错
+    //                  NSLog(@"会议室类型查询失败, %s, error=%@", __FUNCTION__, error);
+    //                  NSString *tipStr = [NSString stringWithFormat:@"会议室类型查询失败，服务器错误"];
+    //                  [self showToastWithMessage:tipStr];
+    //              }];
+}
+
+// 结束会议
+- (void)moreEndMeetingBtnClicked:(id)sender {
+    [self hideAllBottomBgView];
+    
+    [ShowPinView showTitle:@"请输入PIN码以结束会议" withDoneBlock:^(NSString *text) {
+        [self endMeetingByPin:text];
+    } withCancelBlock:^{
+        
+    } withNoInput:^{
+        [self showToastWithMessage:@"请输入PIN码"];
+    }];
+}
+
+- (void)endMeetingByPin:(NSString *)pinStr {
+    [self showToastWithMessage:@"结束会议中..."];
+    
+//    __block UICallBar *weakSelf = self;
+    //    RDRTerminalRequestModel *reqModel = [RDRTerminalRequestModel requestModel];
+    //    reqModel.addr = [self curMeetingAddr];
+    //    reqModel.pin = pinStr;
+    //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
+    //    [RDRNetHelper GET:req responseModelClass:[RDRTerminalResponseModel class]
+    //              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //                  [weakSelf retain];
+    //
+    //                  RDRTerminalResponseModel *model = responseObject;
+    //
+    //                  if ([model codeCheckSuccess] == YES) {
+    //                      [weakSelf showToastWithMessage:@"结束会议成功"];
+    //                  }else {
+    //                      NSString *tipStr = [NSString stringWithFormat:@"结束会议失败，msg=%@", model.msg];
+    //                      [weakSelf showToastWithMessage:tipStr];
+    //                  }
+    //                  [weakSelf release];
+    //
+    //              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                  [weakSelf retain];
+    //
+    //                  //请求出错
+    //                  NSLog(@"结束会议失败, %s, error=%@", __FUNCTION__, error);
+    //                  NSString *tipStr = [NSString stringWithFormat:@"结束会议失败，服务器错误"];
+    //                  [weakSelf showToastWithMessage:tipStr];
+    //                  [weakSelf release];
+    //
+    //              }];
+}
+
+// 退出会议
+- (IBAction)quitCallBtnClicked:(id)sender {
+    self.meetingLockedStatus = NO;
+    self.meetingIsRecording = NO;
+
+    systemOpenCamera = NO;
+
+    
+    LinphoneCall *currentcall = linphone_core_get_current_call(LC);
+    if (linphone_core_is_in_conference(LC) || (linphone_core_get_conference_size(LC) > 0) ) { // Only one conf
+        linphone_core_terminate_conference(LC);
+    } else if (currentcall != NULL) { // In a call
+        linphone_core_terminate_call(LC, currentcall);
+    } else {
+        const MSList *calls = linphone_core_get_calls(LC);
+        if (ms_list_size(calls) == 1) { // Only one call
+            linphone_core_terminate_call(LC, (LinphoneCall *)(calls->data));
+        }
+    }
 }
 
 @end
