@@ -345,8 +345,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                               statusBar:StatusBarView.class
                                                                  tabBar:nil
                                                                sideMenu:nil
-                                                             fullscreen:false
-                                                         isLeftFragment:false
+                                                             fullscreen:NO
+                                                         isLeftFragment:NO
                                                            fragmentWith:nil
                                                    supportLandscapeMode:NO];
 

@@ -28,7 +28,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                               statusBar:nil
                                                                  tabBar:nil
                                                                sideMenu:nil
-                                                             fullscreen:true
+                                                             fullscreen:YES
                                                          isLeftFragment:NO
                                                            fragmentWith:nil
                                                    supportLandscapeMode:NO];

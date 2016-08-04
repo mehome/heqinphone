@@ -231,10 +231,10 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                               statusBar:nil
                                                                  tabBar:[LPJoinBarViewController class]
                                                                sideMenu:nil
-                                                             fullscreen:false
-                                                         isLeftFragment:false
+                                                             fullscreen:NO
+                                                         isLeftFragment:NO
                                                            fragmentWith:nil
-                                                   supportLandscapeMode:false];
+                                                   supportLandscapeMode:NO];
 
         compositeDescription.darkBackground = true;
     }

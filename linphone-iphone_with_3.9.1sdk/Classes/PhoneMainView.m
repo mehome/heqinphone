@@ -593,6 +593,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 							  transition:(CATransition *)transition
 								animated:(BOOL)animated {
 	PhoneMainView *vc = [[RootViewManager instance] setViewControllerForDescription:view];
+    
 	if (![view equal:vc.currentView] || vc != self) {
 		LOGI(@"Change current view to %@", view.name);
 		NSMutableArray *viewStack = [RootViewManager instance].viewDescriptionStack;
@@ -604,8 +605,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 		[vc.mainViewController changeView:view];
 		vc->currentView = view;
 	}
-
-	//[[RootViewManager instance] setViewControllerForDescription:view];
 
 	NSDictionary *mdict = [NSMutableDictionary dictionaryWithObject:vc->currentView forKey:@"view"];
 	[NSNotificationCenter.defaultCenter postNotificationName:kLinphoneMainViewChange object:self userInfo:mdict];

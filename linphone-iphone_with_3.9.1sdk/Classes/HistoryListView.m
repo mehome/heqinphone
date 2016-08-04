@@ -37,7 +37,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 															   sideMenu:SideMenuView.class
 															 fullscreen:false
 														 isLeftFragment:YES
-														   fragmentWith:HistoryDetailsView.class supportLandscapeMode:YES];
+														   fragmentWith:HistoryDetailsView.class
+                                                   supportLandscapeMode:NO];
 	}
 	return compositeDescription;
 }

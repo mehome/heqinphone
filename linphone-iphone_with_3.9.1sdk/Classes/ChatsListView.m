@@ -59,7 +59,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 															   sideMenu:SideMenuView.class
 															 fullscreen:false
 														 isLeftFragment:YES
-														   fragmentWith:ChatConversationCreateView.class supportLandscapeMode:YES];
+														   fragmentWith:ChatConversationCreateView.class
+                                                   supportLandscapeMode:NO];
 	}
 	return compositeDescription;
 }

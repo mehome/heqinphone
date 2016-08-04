@@ -186,7 +186,7 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                               statusBar:nil
                                                                  tabBar:LPJoinBarViewController.class
                                                                sideMenu:nil
-                                                             fullscreen:false
+                                                             fullscreen:NO
                                                          isLeftFragment:YES
                                                            fragmentWith:nil
                                                    supportLandscapeMode:NO];

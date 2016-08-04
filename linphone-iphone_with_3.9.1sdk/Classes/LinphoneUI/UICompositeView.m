@@ -231,11 +231,11 @@ supportLandscapeMode:(BOOL)supportLandscape
 	[self.sideMenuViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	if (interfaceOrientation == currentOrientation)
-		return YES;
-	return NO;
-}
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+//	if (interfaceOrientation == currentOrientation)
+//		return YES;
+//	return NO;
+//}
 
 #pragma mark - Event Functions
 
