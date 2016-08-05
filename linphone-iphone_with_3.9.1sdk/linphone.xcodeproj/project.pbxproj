@@ -14,6 +14,7 @@
 		131137A21D50BA5A00EC541B /* splashBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1311379F1D50BA5A00EC541B /* splashBg@3x.png */; };
 		1318856C1D4F8640004C7C1D /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1318856B1D4F8640004C7C1D /* IncomingCallViewController.m */; };
 		131885761D4F865D004C7C1D /* IncomingCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 131885741D4F865D004C7C1D /* IncomingCallViewController.xib */; };
+		132C8F861D54BC0F00FA11FB /* nowebcamCIF_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 132C8F851D54BC0F00FA11FB /* nowebcamCIF_new.jpg */; };
 		136EBE061D4A3FBC007055E9 /* RDRAddFavRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136EBC3B1D4A3FBC007055E9 /* RDRAddFavRequestModel.m */; };
 		136EBE071D4A3FBC007055E9 /* RDRAskSecRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136EBC3D1D4A3FBC007055E9 /* RDRAskSecRequestModel.m */; };
 		136EBE081D4A3FBC007055E9 /* RDRBaseRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 136EBC3F1D4A3FBC007055E9 /* RDRBaseRequestModel.m */; };
@@ -1045,6 +1046,7 @@
 		1318856A1D4F8640004C7C1D /* IncomingCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomingCallViewController.h; sourceTree = "<group>"; };
 		1318856B1D4F8640004C7C1D /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomingCallViewController.m; sourceTree = "<group>"; };
 		131885751D4F865D004C7C1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IncomingCallViewController.xib; sourceTree = "<group>"; };
+		132C8F851D54BC0F00FA11FB /* nowebcamCIF_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nowebcamCIF_new.jpg; sourceTree = "<group>"; };
 		136EBC3A1D4A3FBC007055E9 /* RDRAddFavRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRAddFavRequestModel.h; sourceTree = "<group>"; };
 		136EBC3B1D4A3FBC007055E9 /* RDRAddFavRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRAddFavRequestModel.m; sourceTree = "<group>"; };
 		136EBC3C1D4A3FBC007055E9 /* RDRAskSecRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRAskSecRequestModel.h; sourceTree = "<group>"; };
@@ -3735,6 +3737,7 @@
 		6316A07A1C5F64330073BFA4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				132C8F851D54BC0F00FA11FB /* nowebcamCIF_new.jpg */,
 				E1C84D6B1D524A72004828A7 /* numpad_eight_default.png */,
 				E1C84D6C1D524A72004828A7 /* numpad_eight_over.png */,
 				E1C84D6D1D524A72004828A7 /* numpad_five_default.png */,
@@ -4982,6 +4985,7 @@
 				6316A2391C5F64350073BFA4 /* backspace_default@2x.png in Resources */,
 				6316A2861C5F64350073BFA4 /* camera_default.png in Resources */,
 				F0642EF119DAC891009DB336 /* MainStoryboard.storyboard in Resources */,
+				132C8F861D54BC0F00FA11FB /* nowebcamCIF_new.jpg in Resources */,
 				6316A39B1C5F64350073BFA4 /* options_transfer_call_disabled.png in Resources */,
 				6316A3891C5F64350073BFA4 /* numpad_star~ipad.png in Resources */,
 				6316A3761C5F64350073BFA4 /* numpad_9_over~ipad.png in Resources */,

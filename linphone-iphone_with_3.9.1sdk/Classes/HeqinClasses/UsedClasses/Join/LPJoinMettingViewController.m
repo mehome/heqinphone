@@ -328,25 +328,6 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)joinMeeting:(NSString *)address withDisplayName:(NSString *)displayName {
-//    if (address.length == 0) {
-//        [self showToastWithMessage:@"无效的地址，请重新输入"];
-//        return;
-//    }
-//    
-//    NSString *callStr = address;
-//    
-//    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy;
-//    if (![address hasSuffix:domainStr] && domainStr.length>0) {
-//        callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
-//    }
-//    
-//    [LPSystemUser sharedUser].curMeetingAddr = callStr;
-//    if (callStr.length > 0) {
-//        LinphoneAddress *addr = [LinphoneUtils normalizeSipOrPhoneAddress:callStr];
-//        [LinphoneManager.instance call:addr];
-//        if (addr)
-//            linphone_address_destroy(addr);
-//    }
     
     if (address.length == 0) {
         [self showToastWithMessage:@"无效的地址，请重新输入"];
@@ -355,10 +336,27 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSString *callStr = address;
     
     NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr;
-    if (![address hasSuffix:domainStr] && domainStr.length>0) {
+    NSString *tmpProxy = [LPSystemSetting sharedSetting].sipTmpProxy;
+
+    // 判断是否含@
+    if ([address containsString:@"@"]) {
+        // 含有@， 则判断是会议还是个人
+        if ([address hasSuffix:domainStr]) {
+            // 是会议，且已经拼好，直接使用即可
+        }else if ([address hasSuffix:tmpProxy]) {
+            // 说明是个人，且已拼好，直接使用即可
+        }else {
+            // 不明确的拼凑，应以出错处理
+            [self showToastWithMessage:@"错误的输入，请检查后再试"];
+            return;
+        }
+    }else {
+        // 不含有@，则必定是会议
         callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
     }
+    
     // 拼成1066@sip.myvmr.cn后
+    // 或者本身就是feng.wang@zijingcloud.com
     
     [LPSystemUser sharedUser].curMeetingAddr = callStr;
     if (callStr.length > 0) {

@@ -162,10 +162,10 @@ supportLandscapeMode:(BOOL)supportLandscape
 	[self.tabBarViewController viewWillAppear:animated];
 	[self.statusBarViewController viewWillAppear:animated];
 	[self.sideMenuViewController viewWillAppear:animated];
-	[NSNotificationCenter.defaultCenter addObserver:self
-										   selector:@selector(orientationDidChange:)
-											   name:UIDeviceOrientationDidChangeNotification
-											 object:nil];
+//	[NSNotificationCenter.defaultCenter addObserver:self
+//										   selector:@selector(orientationDidChange:)
+//											   name:UIDeviceOrientationDidChangeNotification
+//											 object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

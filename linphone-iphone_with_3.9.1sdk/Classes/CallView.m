@@ -958,7 +958,7 @@ static BOOL systemOpenCamera = NO;
 - (NSString *)curMeetingAddr {
     NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
     
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
+    NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
     NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
     
     // 移掉后部

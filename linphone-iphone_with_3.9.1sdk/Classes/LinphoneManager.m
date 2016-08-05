@@ -910,6 +910,9 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 
 static void linphone_iphone_popup_password_request(LinphoneCore *lc, const char *realmC, const char *usernameC,
 												   const char *domainC) {
+    NSLog(@"需要密码输入---------------------------");
+    return;
+    
 	// let the wizard handle its own errors
 	if ([PhoneMainView.instance currentView] != AssistantView.compositeViewDescription) {
 		static DTAlertView *alertView = nil;
@@ -1388,7 +1391,9 @@ static LinphoneCoreVTable linphonec_vtable = {
 
 	[self setupNetworkReachabilityCallback];
 
-	NSString *path = [LinphoneManager bundleFile:@"nowebcamCIF.jpg"];
+    NSString *path = [LinphoneManager bundleFile:@"nowebcamCIF_new.jpg"];
+
+    
 	if (path) {
 		const char *imagePath = [path UTF8String];
 		LOGI(@"Using '%s' as source image for no webcam", imagePath);

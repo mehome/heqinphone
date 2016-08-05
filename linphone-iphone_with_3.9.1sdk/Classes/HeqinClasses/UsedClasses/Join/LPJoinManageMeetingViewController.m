@@ -517,17 +517,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     NSString *callStr = address;
-    NSString *domainStr = [LPSystemSetting sharedSetting].sipTmpProxy ?: @"";
+    NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr ?: @"";
     if (![address hasSuffix:domainStr] && domainStr.length>0) {
         callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
     }
-    
-    // 进入到会议中
-//    DialerViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]], DialerViewController);
-//    if (controller != nil) {
-//        NSLog(@"进入会议中, callStr=%@, displayName=%@", callStr, displayName);
-//        [controller call:callStr displayName:displayName];
-//    }
     
     [LPSystemUser sharedUser].curMeetingAddr = callStr;
     

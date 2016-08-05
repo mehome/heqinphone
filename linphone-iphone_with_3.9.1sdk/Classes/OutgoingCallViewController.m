@@ -56,7 +56,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr ?:@""];
     self.callSubtitleLabel.text = [[NSString stringWithString:addr] copy];
     
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
+    NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
     NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
     
     // 移掉后部

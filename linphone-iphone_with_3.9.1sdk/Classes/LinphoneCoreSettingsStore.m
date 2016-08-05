@@ -321,7 +321,7 @@
 		[self setBool:linphone_core_get_firewall_policy(LC) == LinphonePolicyUseIce forKey:@"ice_preference"];
 		int random_port_preference = [lm lpConfigIntForKey:@"random_port_preference" withDefault:1];
 		[self setInteger:random_port_preference forKey:@"random_port_preference"];
-		int port = [lm lpConfigIntForKey:@"port_preference" withDefault:5060];
+		int port = [lm lpConfigIntForKey:@"port_preference" withDefault:80];
 		[self setInteger:port forKey:@"port_preference"];
 		{
 			int minPort, maxPort;

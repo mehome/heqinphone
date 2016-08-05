@@ -376,7 +376,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     // 这里感觉应该是使用userIdStr, he.qin@zijingcloud.com来代替
     const char* identity = linphone_proxy_config_get_identity(proxyCfg);
     if( !identity || !*identity ) {
-        identity = "sip:user@example.com";
+        identity = "sip:user@zijingcloud.com";
     }
     
     LinphoneAddress* linphoneAddress = linphone_address_new(identity);

@@ -26,7 +26,7 @@
 
 + (void)resetToAnonimousLogin {
     // 在用户未登录时， 强制进行添加
-    [[LPSystemUser sharedUser].settingsStore setObject:@"yunphone.iphone@unknown-host"   forKey:@"account_mandatory_username_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:@"zijing@unknown-host"   forKey:@"account_mandatory_username_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_mandatory_domain_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"account_proxy_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"account_mandatory_password_preference"];
