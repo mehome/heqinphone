@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "linphone.app"
+               BuildableName = "DebugLinphone.app"
                BlueprintName = "linphone"
                ReferencedContainer = "container:linphone.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "linphone.app"
+            BuildableName = "DebugLinphone.app"
             BlueprintName = "linphone"
             ReferencedContainer = "container:linphone.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "linphone.app"
+            BuildableName = "DebugLinphone.app"
             BlueprintName = "linphone"
             ReferencedContainer = "container:linphone.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "AdhocDistribution"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -104,7 +104,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "linphone.app"
+            BuildableName = "DebugLinphone.app"
             BlueprintName = "linphone"
             ReferencedContainer = "container:linphone.xcodeproj">
          </BuildableReference>
@@ -114,7 +114,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Distribution"
+      buildConfiguration = "AdhocDistribution"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

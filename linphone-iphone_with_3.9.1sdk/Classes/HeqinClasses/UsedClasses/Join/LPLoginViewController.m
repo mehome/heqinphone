@@ -388,7 +388,6 @@ static UICompositeViewDescription *compositeDescription = nil;
         if( transport != nil ){
             server_address = [NSString stringWithFormat:@"%@;transport=%@", server_address, [transport lowercaseString]];
             
-            // 这里或许是应该改一下，改成添加端口号
 //            server_address = [NSString stringWithFormat:@"%@:%@;transport=%@", server_address, @"端口号", [transport lowercaseString]];
         }
         // when the domain is specified (for external login), take it as the server address

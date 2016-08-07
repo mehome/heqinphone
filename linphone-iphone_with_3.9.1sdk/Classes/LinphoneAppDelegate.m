@@ -35,6 +35,12 @@
 #import "HQPlayerViewController.h"
 #import "LPRecordAndPlayViewController.h"
 
+@interface LinphoneAppDelegate () {
+    UIAlertView *updateAlertView;
+}
+
+@end
+
 @implementation LinphoneAppDelegate
 
 @synthesize configURL;
@@ -77,7 +83,60 @@
 	}
 }
 
+#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
+
+- (void)checkLatestVersion{
+    
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.fir.im/apps/latest/%@?api_token=%@",kFirAppID, kFirApiToken]]]
+                                       queue:[NSOperationQueue currentQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                               if (data) {
+                                   @try {
+                                       NSDictionary *result= [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                       
+                                       //对比版本
+                                       NSString * version=result[@"version"]; //对应 CFBundleVersion, 对应Xcode项目配置"General"中的 Build
+                                       NSString * versionShort=result[@"versionShort"]; //对应 CFBundleShortVersionString, 对应Xcode项目配置"General"中的 Version
+                                       
+                                       NSString * localVersion=[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+                                       NSString * localVersionShort=[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+                                       
+                                       NSString *url=result[@"update_url"]; //如果有更新 需要用Safari打开的地址
+                                       NSString *changelog=result[@"changelog"]; //如果有更新 需要用Safari打开的地址
+                                       
+                                       //这里放对比版本的逻辑  每个 app 对版本更新的理解都不同
+                                       //有的对比 version, 有的对比 build
+                                       NSComparisonResult verResult=[localVersionShort compare:versionShort options:NSNumericSearch];
+                                       NSComparisonResult buildResult=[localVersion compare:version options:NSNumericSearch];
+                                       
+                                       if ( buildResult == NSOrderedAscending || verResult == NSOrderedAscending) {
+                                           
+                                           NSString *tString=[NSString stringWithFormat:@"发现新版本 %@ ( %@ )",versionShort,version];
+                                           
+                                           if (updateAlertView != nil) {
+                                               [updateAlertView dismissWithClickedButtonIndex:updateAlertView.cancelButtonIndex animated:NO];
+                                           }
+                                           updateAlertView=[[UIAlertView alloc] initWithTitle:tString message:changelog delegate:self cancelButtonTitle:@"暂不更新" otherButtonTitles:@"去更新", nil];
+                                           updateAlertView.rd_userInfo = @{@"url":url};
+                                           [updateAlertView show];
+                                       }
+                                   }
+                                   @catch (NSException *exception) {
+                                       //返回格式错误 忽略掉
+                                       NSLog(@"version detect exception=%@", exception);
+                                   }
+                               }else {
+                                   NSLog(@"version detected error, data is nil");
+                               }
+                           }];
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    if(updateAlertView == nil){
+        [self checkLatestVersion];
+    }
+
 	LOGI(@"%@", NSStringFromSelector(_cmd));
 
 	if (startedInBackground) {

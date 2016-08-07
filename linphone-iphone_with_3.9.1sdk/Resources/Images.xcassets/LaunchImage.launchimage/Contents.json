@@ -3,7 +3,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "linphone-640x960.png",
+      "filename" : "splashscreen@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -12,7 +12,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "linphone-640x1136.png",
+      "filename" : "splashscreen-568h@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -20,7 +20,6 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "linphone-768x1024.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -28,7 +27,6 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "linphone-1024x768.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -36,7 +34,6 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "linphone-1536x2048.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -44,7 +41,6 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "linphone-2048x1536.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -52,21 +48,20 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "linphone-320x480.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "linphone-640x960.png",
+      "filename" : "splashscreen@2x-1.png",
       "extent" : "full-screen",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "linphone-640x1136.png",
+      "filename" : "splashscreen-568h@2x-1.png",
       "extent" : "full-screen",
       "subtype" : "retina4",
       "scale" : "2x"
@@ -74,28 +69,24 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "linphone-768x1004.png",
       "extent" : "to-status-bar",
       "scale" : "1x"
     },
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "linphone-1024x748.png",
       "extent" : "to-status-bar",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "linphone-1536x2008.png",
       "extent" : "to-status-bar",
       "scale" : "2x"
     },
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "linphone-2048x1496.png",
       "extent" : "to-status-bar",
       "scale" : "2x"
     }
