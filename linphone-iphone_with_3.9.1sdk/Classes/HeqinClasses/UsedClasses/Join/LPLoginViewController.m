@@ -379,12 +379,17 @@ static UICompositeViewDescription *compositeDescription = nil;
         identity = "sip:user@zijingcloud.com";
     }
     
+//    const char *identity = [@"sip:User name@IP:端口" cStringUsingEncoding:NSUTF8StringEncoding];   感觉这里应该弄成sip:qin.he@sip.myvmr.cn:80
+
     LinphoneAddress* linphoneAddress = linphone_address_new(identity);
     linphone_address_set_username(linphoneAddress, normalizedUserName);
     
     if( domain && [domain length] != 0) {
         if( transport != nil ){
             server_address = [NSString stringWithFormat:@"%@;transport=%@", server_address, [transport lowercaseString]];
+            
+            // 这里或许是应该改一下，改成添加端口号
+//            server_address = [NSString stringWithFormat:@"%@:%@;transport=%@", server_address, @"端口号", [transport lowercaseString]];
         }
         // when the domain is specified (for external login), take it as the server address
         linphone_proxy_config_set_server_addr(proxyCfg, [server_address UTF8String]);
