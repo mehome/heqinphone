@@ -64,9 +64,9 @@ supportLandscapeMode:(BOOL)supportLandscape;
 @interface UICompositeView : TPMultiLayoutViewController {
   @private
 	NSMutableDictionary *viewControllerCache;
-	UICompositeViewDescription *currentViewDescription;
 	UIInterfaceOrientation currentOrientation;
 }
+@property (nonatomic, strong) 	UICompositeViewDescription *currentViewDescription;
 
 @property(strong) CATransition *viewTransition;
 @property(nonatomic, strong) IBOutlet UIView *statusBarView;

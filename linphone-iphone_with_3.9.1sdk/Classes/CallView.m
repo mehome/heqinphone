@@ -97,7 +97,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 															 fullscreen:false
 														 isLeftFragment:YES
 														   fragmentWith:nil
-                                                   supportLandscapeMode:NO];
+                                                   supportLandscapeMode:YES];
 		compositeDescription.darkBackground = true;
 	}
 	return compositeDescription;

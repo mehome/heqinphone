@@ -233,8 +233,13 @@ static RootViewManager *rootViewManagerInstance = nil;
 - (NSUInteger)supportedInterfaceOrientations
 #endif
 {
+    if (mainViewController.currentViewDescription.landscapeMode == YES) {
+        return UIInterfaceOrientationMaskAll;
+    }else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    
 //	return UIInterfaceOrientationMaskAll;
-    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

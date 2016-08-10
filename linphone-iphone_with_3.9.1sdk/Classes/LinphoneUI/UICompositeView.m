@@ -23,6 +23,8 @@
 #import "Utils.h"
 #import "SideMenuView.h"
 
+
+
 @implementation UICompositeViewDescription
 
 - (id)copy {
@@ -162,10 +164,10 @@ supportLandscapeMode:(BOOL)supportLandscape
 	[self.tabBarViewController viewWillAppear:animated];
 	[self.statusBarViewController viewWillAppear:animated];
 	[self.sideMenuViewController viewWillAppear:animated];
-//	[NSNotificationCenter.defaultCenter addObserver:self
-//										   selector:@selector(orientationDidChange:)
-//											   name:UIDeviceOrientationDidChangeNotification
-//											 object:nil];
+	[NSNotificationCenter.defaultCenter addObserver:self
+										   selector:@selector(orientationDidChange:)
+											   name:UIDeviceOrientationDidChangeNotification
+											 object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -261,7 +263,8 @@ supportLandscapeMode:(BOOL)supportLandscape
  Will simulate a device rotation
  */
 + (void)setOrientation:(UIInterfaceOrientation)orientation animated:(BOOL)animated {
-	UIView *firstResponder = nil;
+    
+    UIView *firstResponder = nil;
 
 	UIViewController *controller = nil;
 
@@ -359,7 +362,7 @@ supportLandscapeMode:(BOOL)supportLandscape
 }
 
 - (UIInterfaceOrientation)getCorrectInterfaceOrientation:(UIDeviceOrientation)deviceOrientation {
-	if (currentViewDescription != nil) {
+	if (self.currentViewDescription != nil) {
 		// If unknown return status bar orientation
 		if (deviceOrientation == UIDeviceOrientationUnknown && currentOrientation == UIDeviceOrientationUnknown) {
 			return [UIApplication sharedApplication].statusBarOrientation;
@@ -373,14 +376,14 @@ supportLandscapeMode:(BOOL)supportLandscape
 			deviceOrientation = (UIDeviceOrientation)currentOrientation;
 		}
 		if (UIDeviceOrientationIsPortrait(deviceOrientation)) {
-			if ([currentViewDescription portraitMode]) {
+			if ([self.currentViewDescription portraitMode]) {
 				return (UIInterfaceOrientation)deviceOrientation;
 			} else {
 				return UIInterfaceOrientationLandscapeLeft;
 			}
 		}
 		if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
-			if ([currentViewDescription landscapeMode]) {
+			if ([self.currentViewDescription landscapeMode]) {
 				return (UIInterfaceOrientation)deviceOrientation;
 			} else {
 				return UIInterfaceOrientationPortrait;
@@ -407,8 +410,8 @@ supportLandscapeMode:(BOOL)supportLandscape
 	UICompositeViewDescription *oldViewDescription = nil;
 
 	if (description != nil) {
-		oldViewDescription = currentViewDescription;
-		currentViewDescription = [description copy];
+		oldViewDescription = self.currentViewDescription;
+		self.currentViewDescription = [description copy];
 
 		UIViewController *newMainViewController = description.isLeftFragment
 													  ? [self getCachedController:description.name]
@@ -436,21 +439,21 @@ supportLandscapeMode:(BOOL)supportLandscape
 			}
 
 			if (oldStatusBarViewController != newStatusBarViewController ||
-				oldViewDescription.statusBarEnabled != currentViewDescription.statusBarEnabled) {
+				oldViewDescription.statusBarEnabled != self.currentViewDescription.statusBarEnabled) {
 				[self.statusBarView.layer removeAnimationForKey:@"transition"];
 				[self.statusBarView.layer addAnimation:self.viewTransition forKey:@"transition"];
 			} else {
 				[self.statusBarView.layer removeAnimationForKey:@"transition"];
 			}
 			if (oldTabBarViewController != newTabBarViewController ||
-				oldViewDescription.tabBarEnabled != currentViewDescription.tabBarEnabled) {
+				oldViewDescription.tabBarEnabled != self.currentViewDescription.tabBarEnabled) {
 				[self.tabBarView.layer removeAnimationForKey:@"transition"];
 				[self.tabBarView.layer addAnimation:self.viewTransition forKey:@"transition"];
 			} else {
 				[self.tabBarView.layer removeAnimationForKey:@"transition"];
 			}
 			if (oldSideMenuViewController != newSideMenuViewController ||
-				oldViewDescription.sideMenuEnabled != currentViewDescription.sideMenuEnabled) {
+				oldViewDescription.sideMenuEnabled != self.currentViewDescription.sideMenuEnabled) {
 				[self.sideMenuView.layer removeAnimationForKey:@"transition"];
 				[self.sideMenuView.layer addAnimation:self.viewTransition forKey:@"transition"];
 			}
@@ -519,30 +522,30 @@ supportLandscapeMode:(BOOL)supportLandscape
 		}
 	}
 
-	if (currentViewDescription == nil) {
+	if (self.currentViewDescription == nil) {
 		return;
 	}
 
 	if (tabBar != nil) {
-		if (currentViewDescription.tabBarEnabled != [tabBar boolValue]) {
-			currentViewDescription.tabBarEnabled = [tabBar boolValue];
+		if (self.currentViewDescription.tabBarEnabled != [tabBar boolValue]) {
+			self.currentViewDescription.tabBarEnabled = [tabBar boolValue];
 		} else {
 			tabBar = nil; // No change = No Update
 		}
 	}
 
 	if (statusBar != nil) {
-		if (currentViewDescription.statusBarEnabled != [statusBar boolValue]) {
-			currentViewDescription.statusBarEnabled = [statusBar boolValue];
+		if (self.currentViewDescription.statusBarEnabled != [statusBar boolValue]) {
+			self.currentViewDescription.statusBarEnabled = [statusBar boolValue];
 		} else {
 			statusBar = nil; // No change = No Update
 		}
 	}
 
 	if (sideMenu != nil) {
-		if (currentViewDescription.sideMenuEnabled != [sideMenu boolValue]) {
-			currentViewDescription.sideMenuEnabled = [sideMenu boolValue];
-			if (currentViewDescription.sideMenuEnabled) {
+		if (self.currentViewDescription.sideMenuEnabled != [sideMenu boolValue]) {
+			self.currentViewDescription.sideMenuEnabled = [sideMenu boolValue];
+			if (self.currentViewDescription.sideMenuEnabled) {
 				[_sideMenuViewController viewWillAppear:YES];
 			} else {
 				[_sideMenuViewController viewWillDisappear:YES];
@@ -553,15 +556,15 @@ supportLandscapeMode:(BOOL)supportLandscape
 	}
 
 	if (fullscreen != nil) {
-		if (currentViewDescription.fullscreen != [fullscreen boolValue]) {
-			currentViewDescription.fullscreen = [fullscreen boolValue];
-			[[UIApplication sharedApplication] setStatusBarHidden:currentViewDescription.fullscreen
+		if (self.currentViewDescription.fullscreen != [fullscreen boolValue]) {
+			self.currentViewDescription.fullscreen = [fullscreen boolValue];
+			[[UIApplication sharedApplication] setStatusBarHidden:self.currentViewDescription.fullscreen
 													withAnimation:UIStatusBarAnimationSlide];
 		} else {
 			fullscreen = nil; // No change = No Update
 		}
 	} else {
-		[[UIApplication sharedApplication] setStatusBarHidden:currentViewDescription.fullscreen
+		[[UIApplication sharedApplication] setStatusBarHidden:self.currentViewDescription.fullscreen
 												withAnimation:UIStatusBarAnimationNone];
 	}
 
@@ -573,11 +576,11 @@ supportLandscapeMode:(BOOL)supportLandscape
 
 	// Compute frame for each elements
 	CGRect viewFrame = self.view.frame;
-	int origin = currentViewDescription.fullscreen ? 0 : IPHONE_STATUSBAR_HEIGHT;
+	int origin = self.currentViewDescription.fullscreen ? 0 : IPHONE_STATUSBAR_HEIGHT;
 
 	// 1. status bar - fixed size on top
 	CGRect statusBarFrame = self.statusBarView.frame;
-	if (self.statusBarViewController != nil && currentViewDescription.statusBarEnabled) {
+	if (self.statusBarViewController != nil && self.currentViewDescription.statusBarEnabled) {
 		statusBarFrame.origin.y = origin;
 		// move origin below status bar
 		origin += statusBarFrame.size.height;
@@ -587,9 +590,9 @@ supportLandscapeMode:(BOOL)supportLandscape
 
 	//	2. side menu - fixed size, always starting below status bar (hack: except in fullscreen)
 	CGRect sideMenuFrame = viewFrame;
-	sideMenuFrame.origin.y = origin - (currentViewDescription.fullscreen ? statusBarFrame.size.height : 0);
+	sideMenuFrame.origin.y = origin - (self.currentViewDescription.fullscreen ? statusBarFrame.size.height : 0);
 	sideMenuFrame.size.height -= sideMenuFrame.origin.y;
-	if (!currentViewDescription.sideMenuEnabled) {
+	if (!self.currentViewDescription.sideMenuEnabled) {
 		// hack bis: really hide; -width won't be enough since some animations may use this...
 		sideMenuFrame.origin.x = -3 * sideMenuFrame.size.width;
 	}
@@ -597,7 +600,7 @@ supportLandscapeMode:(BOOL)supportLandscape
 	//	3. tab bar - on portrait full width at bottom / on landscape on left, starting below status bar
 	// Resize TabBar
 	CGRect tabFrame = self.tabBarView.frame;
-	if (self.tabBarViewController != nil && currentViewDescription.tabBarEnabled) {
+	if (self.tabBarViewController != nil && self.currentViewDescription.tabBarEnabled) {
 		tabFrame.origin.x = 0;
 		if (UIInterfaceOrientationIsPortrait([self currentOrientation])) {
 			tabFrame.origin.y = viewFrame.size.height - tabFrame.size.height;
@@ -614,7 +617,7 @@ supportLandscapeMode:(BOOL)supportLandscape
 	CGRect mainFrame = viewFrame;
 	mainFrame.origin.y = origin;
 	mainFrame.size.height -= mainFrame.origin.y;
-	if (!currentViewDescription.fullscreen) {
+	if (!self.currentViewDescription.fullscreen) {
 		if (UIInterfaceOrientationIsPortrait([self currentOrientation])) {
 			mainFrame.size.height -= viewFrame.size.height - tabFrame.origin.y;
 		} else {
@@ -676,7 +679,7 @@ supportLandscapeMode:(BOOL)supportLandscape
 			[UICompositeView addSubView:self.sideMenuViewController view:self.sideMenuView];
 		}
 	}
-	if (currentViewDescription.sideMenuEnabled) {
+	if (self.currentViewDescription.sideMenuEnabled) {
 		[_sideMenuViewController viewDidAppear:YES];
 	} else {
 		[_sideMenuViewController viewDidDisappear:YES];
@@ -709,7 +712,7 @@ supportLandscapeMode:(BOOL)supportLandscape
 }
 
 - (BOOL)currentViewSupportsLandscape {
-	return currentViewDescription ? currentViewDescription.landscapeMode : FALSE;
+	return self.currentViewDescription ? self.currentViewDescription.landscapeMode : FALSE;
 }
 
 @end
