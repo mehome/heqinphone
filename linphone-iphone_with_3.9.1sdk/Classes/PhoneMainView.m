@@ -29,6 +29,7 @@
 #import "OutgoingCallViewController.h"
 #import "HQPlayerViewController.h"
 #import "LPRecordAndPlayViewController.h"
+#import "HQRotatingScreen.h"
 
 static RootViewManager *rootViewManagerInstance = nil;
 
@@ -373,6 +374,13 @@ static RootViewManager *rootViewManagerInstance = nil;
 //					   (currentView == CallOutgoingView.compositeViewDescription)) {
 //					[self popCurrentView];
 //				}
+                
+                // 这里将回到正常界面， 这里应该触发一次置竖屏的强制操作
+                // 先判断当前是否为竖屏， 如果是，则不用强制旋转
+                if ([HQRotatingScreen isOrientationLandscape] == YES) {
+                    // 则需要进行强制置为横屏
+                    [HQRotatingScreen forceOrientation:UIInterfaceOrientationPortrait];
+                }
                 
                 [[PhoneMainView instance] changeCurrentView:[LPJoinMettingViewController compositeViewDescription]];
 
