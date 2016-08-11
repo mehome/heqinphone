@@ -145,7 +145,7 @@
 		[self setCString:"" forKey:@"account_display_name_preference"];
 		[self setObject:@"" forKey:@"account_proxy_preference"];
 		[self setObject:@"udp" forKey:@"account_transport_preference"];
-		[self setBool:NO forKey:@"account_outbound_proxy_preference"];
+		[self setBool:YES forKey:@"account_outbound_proxy_preference"];
 		[self setBool:NO forKey:@"account_avpf_preference"];
 		[self setBool:YES forKey:@"account_is_default_preference"];
 		[self setBool:YES forKey:@"account_is_enabled_preference"];

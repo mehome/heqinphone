@@ -547,7 +547,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     
 //    [[LPSystemUser sharedUser].settingsStore setObject:@"sip.myvmr.cn:80" forKey:@"account_proxy_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:proxyStr forKey:@"account_proxy_preference"];
-    
+    [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
+
     [[LPSystemUser sharedUser].settingsStore synchronize];
     // 登录完成，等通知吧
 }
