@@ -168,7 +168,7 @@
 			<key>Title</key>
 			<string>Outbound proxy</string>
 			<key>DefaultValue</key>
-			<false/>
+			<true/>
 			<key>Key</key>
 			<string>account_outbound_proxy_preference</string>
 			<key>Type</key>
