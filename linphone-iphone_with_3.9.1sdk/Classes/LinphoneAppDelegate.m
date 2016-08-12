@@ -341,7 +341,7 @@
 - (void)askForSystemConfig {
     // 判断本地是否有存储
     LPSystemSetting *systemSetting = [LPSystemSetting sharedSetting];
-    //    if (systemSetting.sipDomainStr.length == 0) {
+
     // 从网络请求
     NSLog(@"start ask for system config");
     RDRSystemConfigRequestModel *reqModel = [RDRSystemConfigRequestModel requestModel];
@@ -359,6 +359,9 @@
                        NSLog(@"请求sipDoamin returned system setting domainStr=%@", domainStr);
                        
                        // 进行存储
+                       if ([domainStr hasSuffix:@":80"] == NO) {
+                           domainStr = [domainStr stringByAppendingString:@":80"];
+                       }
                        systemSetting.sipDomainStr = domainStr;
                        [systemSetting saveSystem];
                    }else {
@@ -368,10 +371,6 @@
                    //请求出错
                    NSLog(@"请求sipDoamin出错, %s, error=%@", __FUNCTION__, error);
                }];
-    //    }else {
-    //        // 本地已经有了，不需重新请求
-    //        NSLog(@"local sip str = %@", systemSetting.sipDomainStr);
-    //    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

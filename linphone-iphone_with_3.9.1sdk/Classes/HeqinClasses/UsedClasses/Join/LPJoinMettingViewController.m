@@ -335,28 +335,25 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     NSString *callStr = address;
     
-    NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr;
     NSString *tmpProxy = [LPSystemSetting sharedSetting].sipTmpProxy;
 
     // 判断是否含@
     if ([address containsString:@"@"]) {
         // 含有@， 则判断是会议还是个人
-        if ([address hasSuffix:domainStr]) {
-            // 是会议，且已经拼好，直接使用即可
-        }else if ([address hasSuffix:tmpProxy]) {
+        if ([address hasSuffix:tmpProxy]) {
             // 说明是个人，且已拼好，直接使用即可
         }else {
             // 不明确的拼凑，应以出错处理
-            [self showToastWithMessage:@"错误的输入，请检查后再试"];
+            [self showToastWithMessage:@"错误的地址，请检查后再试"];
             return;
         }
     }else {
         // 不含有@，则必定是会议
-        callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
+        callStr = [NSString stringWithFormat:@"%@@%@", callStr, tmpProxy];
     }
     
-    // 拼成1066@sip.myvmr.cn后
-    // 或者本身就是feng.wang@zijingcloud.com
+    // 输入1066，则拼成1066@zijingcloud.com
+    // 输入feng.wang，则拼成feng.wang@zijingcloud.com
     
     [LPSystemUser sharedUser].curMeetingAddr = callStr;
     if (callStr.length > 0) {

@@ -260,9 +260,9 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
-    NSString *domainName = @"";
+    NSString *proxyName = @"";
     
-    NSString *userId = [username copy];
+    NSString *userId = [username copy];   // 为wang.feng@zijingcloud.com
     
     if ([username containsString:@"@"] == YES) {
         NSArray *arr = [username componentsSeparatedByString:@"@"];
@@ -271,10 +271,10 @@ static UICompositeViewDescription *compositeDescription = nil;
             return;
         }else {
             username = arr[0];
-            domainName = arr[1];
+            proxyName = arr[1];
         }
         
-        if (username.length == 0 || domainName.length == 0) {
+        if (username.length == 0 || proxyName.length == 0) {
             [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
             return;
         }
@@ -284,31 +284,28 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     NSString *password = self.userPasswordField.text;
-    NSString *transport = @"UDP";
-    
-    UseTheTCP80Port
-    transport = @"TCP";
-    
-    [LPSystemSetting sharedSetting].sipTmpProxy = domainName;
+   
+    // 赋值存储
+    [LPSystemSetting sharedSetting].sipTmpProxy = proxyName;
     
 //    username = @"feng.wang";
 //    userId = @"feng.wang@zijingcloud.com";
 //    NSString *password = @"wang@2015";
-//    NSString *transport = @"UDP";
     
-    [self verificationSignInWithUsername:username userId:userId password:password domain:[LPSystemSetting sharedSetting].sipTmpProxy withTransport:transport];
+    [self verificationSignInWithUsername:username userId:userId password:password proxyName:proxyName];
 }
 
-- (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password domain:(NSString*)domain withTransport:(NSString*)transport {
-    NSLog(@"verificationSignInWithUsername username=%@, userIdStr=%@, password=%@, domain=%@, transport=%@",
-          username, userIdStr, password, domain, transport);
+- (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password proxyName:(NSString*)proxy {
+    NSLog(@"verificationSignInWithUsername username=%@, userIdStr=%@, password=%@, proxy=%@",
+          username, userIdStr, password, proxy);
+    
     NSMutableString *errors = [NSMutableString string];
     if ([username length] == 0) {
         [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid username.\n", nil)]];
     }
     
-    if (domain != nil && [domain length] == 0) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid domain.\n", nil)]];
+    if (proxy != nil && [proxy length] == 0) {
+        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid proxy.\n", nil)]];
     }
     
     if([errors length] > 0) {
@@ -337,110 +334,20 @@ static UICompositeViewDescription *compositeDescription = nil;
 //            [[LPSystemUser sharedUser].settingsStore synchronize];
             
             
+            NSString *usedDomainStr = [[LPSystemSetting sharedSetting].sipDomainStr hasSuffix:@":80"]?[LPSystemSetting sharedSetting].sipDomainStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"];
+            
             [self loadAssistantConfig:@"assistant_external_sip.rc"];
             [self resetLiblinphone];
-            [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:domain];
+            [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:usedDomainStr];
             [self configureProxyConfig];
-            [self loginWith:username withDisplayName:username withUserId:userIdStr withPassword:password withDomain:domain withProxy:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]];
+            [self loginWith:username withDisplayName:username withUserId:userIdStr withPassword:password withDomain:usedDomainStr withProxy:proxy];
             // 然后就等待登录成功或者失败的回调.
             
             return;
-            
-//            BOOL success = [self addProxyConfig:username password:password userIdStr:userIdStr domain:domain withTransport:transport];
-//            if (success == YES) {
-//                // 登录成功
-//                [self showToastWithMessage:@"登录成功"];
-//                
-//                // 把值同步进去
-//                [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
-//                
-//            }else {
-//                // 登录失败
-//                [self showToastWithMessage:@"登录失败"];
-//            }
-//            
-//            [self hideHudAndIndicatorView];
         }
     }
 }
 
-- (BOOL)addProxyConfig:(NSString*)username password:(NSString*)password userIdStr:(NSString *)userIdStr domain:(NSString*)domain withTransport:(NSString*)transport {
-    LinphoneCore* lc = [LinphoneManager getLc];
-    LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config(lc);
-    NSString* server_address = domain;
-    
-    char normalizedUserName[256];
-    linphone_proxy_config_normalize_number(proxyCfg, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
-    
-    // TODO
-    // 这里感觉应该是使用userIdStr, he.qin@zijingcloud.com来代替
-    const char* identity = linphone_proxy_config_get_identity(proxyCfg);
-    if( !identity || !*identity ) {
-        identity = "sip:user@zijingcloud.com";
-    }
-    
-//    const char *identity = [@"sip:User name@IP:端口" cStringUsingEncoding:NSUTF8StringEncoding];   感觉这里应该弄成sip:qin.he@sip.myvmr.cn:80
-
-    LinphoneAddress* linphoneAddress = linphone_address_new(identity);
-    linphone_address_set_username(linphoneAddress, normalizedUserName);
-    
-    if( domain && [domain length] != 0) {
-        if( transport != nil ){
-            server_address = [NSString stringWithFormat:@"%@;transport=%@", server_address, [transport lowercaseString]];
-            
-//            server_address = [NSString stringWithFormat:@"%@:%@;transport=%@", server_address, @"端口号", [transport lowercaseString]];
-        }
-        // when the domain is specified (for external login), take it as the server address
-        linphone_proxy_config_set_server_addr(proxyCfg, [server_address UTF8String]);
-        linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
-    }
-    
-    char* extractedAddres = linphone_address_as_string_uri_only(linphoneAddress);
-    
-    LinphoneAddress* parsedAddress = linphone_address_new(extractedAddres);
-    ms_free(extractedAddres);
-    
-    if( parsedAddress == NULL || !linphone_address_is_sip(parsedAddress) ){
-        if( parsedAddress ) linphone_address_destroy(parsedAddress);
-        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
-                                                            message:NSLocalizedString(@"Please enter a valid username", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
-                                                  otherButtonTitles:nil,nil];
-        [errorView show];
-        return FALSE;
-    }
-    
-    char *c_parsedAddress = linphone_address_as_string_uri_only(parsedAddress);
-    
-    linphone_proxy_config_set_identity(proxyCfg, c_parsedAddress);
-    
-    linphone_address_destroy(parsedAddress);
-    ms_free(c_parsedAddress);
-    
-//    // 把没有添加的userId给添加上。
-//    if ([userIdStr hasSuffix:@"zijingcloud.com"] == NO) {
-//        userIdStr = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
-//    }
-    
-    LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String],
-                                                    [userIdStr UTF8String],
-                                                    [password UTF8String]
-                                                    , NULL
-                                                    , NULL
-                                                    ,linphone_proxy_config_get_domain(proxyCfg));
-    
-    [self setDefaultSettings:proxyCfg];
-    
-    [self clearProxyConfig];
-    
-    linphone_proxy_config_enable_register(proxyCfg, true);
-    linphone_core_add_auth_info(lc, info);
-    linphone_core_add_proxy_config(lc, proxyCfg);
-    linphone_core_set_default_proxy_config(lc, proxyCfg);
-    
-    return TRUE;
-}
 
 - (void)setDefaultSettings:(LinphoneProxyConfig*)proxyCfg {
     LinphoneManager* lm = [LinphoneManager instance];
@@ -543,7 +450,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LPSystemUser sharedUser].settingsStore setObject:displayName forKey:@"account_display_name_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:userId forKey:@"account_userid_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:password forKey:@"account_mandatory_password_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:domainStr forKey:@"account_mandatory_domain_preference"];
+    
+    [[LPSystemUser sharedUser].settingsStore setObject:[domainStr hasSuffix:@":80"]?domainStr:[domainStr stringByAppendingString:@":80"] forKey:@"account_mandatory_domain_preference"];
     
 //    [[LPSystemUser sharedUser].settingsStore setObject:@"sip.myvmr.cn:80" forKey:@"account_proxy_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:proxyStr forKey:@"account_proxy_preference"];
@@ -552,5 +460,84 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LPSystemUser sharedUser].settingsStore synchronize];
     // 登录完成，等通知吧
 }
+
+- (BOOL)addProxyConfig:(NSString*)username password:(NSString*)password userIdStr:(NSString *)userIdStr domain:(NSString*)domain withTransport:(NSString*)transport {
+    LinphoneCore* lc = [LinphoneManager getLc];
+    LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config(lc);
+    NSString* server_address = domain;
+    
+    char normalizedUserName[256];
+    linphone_proxy_config_normalize_number(proxyCfg, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
+    
+    // TODO
+    // 这里感觉应该是使用userIdStr, he.qin@zijingcloud.com来代替
+    const char* identity = linphone_proxy_config_get_identity(proxyCfg);
+    if( !identity || !*identity ) {
+        identity = "sip:user@zijingcloud.com";
+    }
+    
+    //    const char *identity = [@"sip:User name@IP:端口" cStringUsingEncoding:NSUTF8StringEncoding];   感觉这里应该弄成sip:qin.he@sip.myvmr.cn:80
+    
+    LinphoneAddress* linphoneAddress = linphone_address_new(identity);
+    linphone_address_set_username(linphoneAddress, normalizedUserName);
+    
+    if( domain && [domain length] != 0) {
+        if( transport != nil ){
+            server_address = [NSString stringWithFormat:@"%@;transport=%@", server_address, [transport lowercaseString]];
+            
+            //            server_address = [NSString stringWithFormat:@"%@:%@;transport=%@", server_address, @"端口号", [transport lowercaseString]];
+        }
+        // when the domain is specified (for external login), take it as the server address
+        linphone_proxy_config_set_server_addr(proxyCfg, [server_address UTF8String]);
+        linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
+    }
+    
+    char* extractedAddres = linphone_address_as_string_uri_only(linphoneAddress);
+    
+    LinphoneAddress* parsedAddress = linphone_address_new(extractedAddres);
+    ms_free(extractedAddres);
+    
+    if( parsedAddress == NULL || !linphone_address_is_sip(parsedAddress) ){
+        if( parsedAddress ) linphone_address_destroy(parsedAddress);
+        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
+                                                            message:NSLocalizedString(@"Please enter a valid username", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+                                                  otherButtonTitles:nil,nil];
+        [errorView show];
+        return FALSE;
+    }
+    
+    char *c_parsedAddress = linphone_address_as_string_uri_only(parsedAddress);
+    
+    linphone_proxy_config_set_identity(proxyCfg, c_parsedAddress);
+    
+    linphone_address_destroy(parsedAddress);
+    ms_free(c_parsedAddress);
+    
+    //    // 把没有添加的userId给添加上。
+    //    if ([userIdStr hasSuffix:@"zijingcloud.com"] == NO) {
+    //        userIdStr = [NSString stringWithFormat:@"%@@zijingcloud.com", username];
+    //    }
+    
+    LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String],
+                                                    [userIdStr UTF8String],
+                                                    [password UTF8String]
+                                                    , NULL
+                                                    , NULL
+                                                    ,linphone_proxy_config_get_domain(proxyCfg));
+    
+    [self setDefaultSettings:proxyCfg];
+    
+    [self clearProxyConfig];
+    
+    linphone_proxy_config_enable_register(proxyCfg, true);
+    linphone_core_add_auth_info(lc, info);
+    linphone_core_add_proxy_config(lc, proxyCfg);
+    linphone_core_set_default_proxy_config(lc, proxyCfg);
+    
+    return TRUE;
+}
+
 
 @end

@@ -27,8 +27,8 @@
 + (void)resetToAnonimousLogin {
     // 在用户未登录时， 强制进行添加
     [[LPSystemUser sharedUser].settingsStore setObject:@"zijing@unknown-host"   forKey:@"account_mandatory_username_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_mandatory_domain_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"account_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr hasSuffix:@":80"]?[LPSystemSetting sharedSetting].sipDomainStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"account_mandatory_domain_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"account_mandatory_password_preference"];
     [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
 

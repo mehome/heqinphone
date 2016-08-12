@@ -1955,23 +1955,32 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 - (void)acceptCall:(LinphoneCall *)call evenWithVideo:(BOOL)video {
     
     /*** 下面这部分代码应该放在accept会议时，用来接听会议***/
-//    const LinphoneAddress *currentRemoteAddress = linphone_core_get_current_call_remote_address(LC);
-//    const LinphoneAddress *remoteAddress =  linphone_call_get_remote_address(call);
-//    
-//    char *remoteAddStr = linphone_call_get_remote_address_as_string(call);          // "qin.he" <sip:qin.he@zijingcloud.com>
-//    
-//    NSString *displayName0 = [FastAddressBook displayNameForAddress:currentRemoteAddress];      // qin.he
-//    char *caddr0 = linphone_address_as_string(currentRemoteAddress);                        // "qin.he" <sip:qin.he@zijingcloud.com>
-//    
-//    NSString *displayName1 = [FastAddressBook displayNameForAddress:remoteAddress];         // qin.he
-//    char *caddr1 = linphone_address_as_string(remoteAddress);                               // "qin.he" <sip:qin.he@zijingcloud.com>
-//    
-//    NSLog(@"remoteAddStr=%s, displayName0=%@, caddr0=%s, displayName1=%@, caddr1=%s",
-//          remoteAddStr, displayName0, caddr0, displayName1, caddr1);
-//    // 这里应该赋值当前的会议情况
-//    [LPSystemUser sharedUser].curMeetingAddr = callStr;         // 希望会是直接qin.he@zijingcloud.com
-    // 上面这部分代码用来存储信息，以便在会议中进行处理
+    char *remoteAddStr = linphone_call_get_remote_address_as_string(call);          // "qin.he" <sip:qin.he@zijingcloud.com>
+
+    // 这里应该赋值当前的会议情况
+    NSString *tempStr = @"";
+    if (remoteAddStr != NULL) {
+        tempStr = [NSString stringWithUTF8String:remoteAddStr];
+    }
     
+    NSArray *tempArr = [tempStr componentsSeparatedByString:@"sip:"];
+    if (tempArr.count != 2) {
+        NSLog(@"Something wrong with remoteAddStr=%s", remoteAddStr);
+        return;
+    }else {
+        tempStr = tempArr[1];
+        
+        if (tempStr.length == 0) {
+            NSLog(@"Something wrong with remoteAddStr=%s, tempSt is empty string", remoteAddStr);
+            return;
+        }
+    }
+    
+    
+    tempStr = [tempStr stringByReplacingCharactersInRange:NSMakeRange(tempStr.length-1, 1) withString:@""];     // 移除掉最后的>
+    NSLog(@"接受的会议是:%@", tempStr);
+    
+    [LPSystemUser sharedUser].curMeetingAddr = tempStr;         // 希望会是直接qin.he@zijingcloud.com
     
 	LinphoneCallParams *lcallParams = linphone_core_create_call_params(theLinphoneCore, call);
 	if (!lcallParams) {

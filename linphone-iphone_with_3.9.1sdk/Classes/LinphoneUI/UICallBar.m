@@ -501,18 +501,17 @@ extern NSString *const kLinphoneInCallCellData;
     }
 }
 
-// 纯111111, 不是sip:111111@120.138.....
+// 纯111111, 不是sip:111111@zijingcloud.com
 - (NSString *)curMeetingAddr {
     NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
     
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipTmpProxy;
-    NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
+    NSString *proxyTempStr = [NSString stringWithFormat:@"@%@", [LPSystemSetting sharedSetting].sipTmpProxy];     // 为@zijingcloud.com
     
     // 移掉后部
-    if ([addr replaceOccurrencesOfString:serverTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove server address done");
+    if ([addr replaceOccurrencesOfString:proxyTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"remove proxy address done");
     }else {
-        NSLog(@"remove server address failed");
+        NSLog(@"remove proxy address failed");
     }
     
     // 移掉前面的sip:

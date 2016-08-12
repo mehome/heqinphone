@@ -56,11 +56,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr ?:@""];
     self.callSubtitleLabel.text = [[NSString stringWithString:addr] copy];
     
-    NSString *serverAddr = [LPSystemSetting sharedSetting].sipDomainStr;
-    NSString *serverTempStr = [NSString stringWithFormat:@"@%@", serverAddr];
+    NSString *proxyTempStr = [NSString stringWithFormat:@"@%@", [LPSystemSetting sharedSetting].sipTmpProxy];
     
     // 移掉后部
-    if ([addr replaceOccurrencesOfString:serverTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+    if ([addr replaceOccurrencesOfString:proxyTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
         NSLog(@"remove server address done");
     }else {
         NSLog(@"remove server address failed");
