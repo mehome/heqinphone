@@ -1456,6 +1456,24 @@ static BOOL libStarted = FALSE;
 
 	linphone_core_migrate_to_multi_transport(theLinphoneCore);
 
+    // 开通H264
+    if ([LinphoneManager isCodecSupported:"h264"]) {
+        NSLog(@"support h264");
+        
+        //        BOOL h264Support  = (NULL != linphone_core_find_payload_type(LC, "h264", LINPHONE_FIND_PAYLOAD_IGNORE_RATE, LINPHONE_FIND_PAYLOAD_IGNORE_CHANNELS));
+        //        NSLog(@"support result = %d", h264Support);
+        
+        // 该方法应该可以用于打开H264功能
+        //        LINPHONE_PUBLIC	int linphone_core_enable_payload_type(LinphoneCore *lc, LinphonePayloadType *pt, bool_t enable);
+        
+        //        Video Codecs: H.264, H.263-1998 / H.263+, (VP8 coming soon…)
+        int h264result = linphone_core_enable_payload_type(LC, linphone_core_find_payload_type(LC, "H264", 90000, -1), TRUE);
+        NSLog(@"开通H264成功, 结果=%d", h264result);
+    }else {
+        NSLog(@"Not support h264");
+    }
+    
+    
 	// init audio session (just getting the instance will init)
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	BOOL bAudioInputAvailable = audioSession.inputAvailable;
