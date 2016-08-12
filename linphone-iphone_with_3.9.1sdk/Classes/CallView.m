@@ -947,7 +947,7 @@ static BOOL systemOpenCamera = NO;
 // 复制地址
 - (IBAction)sendCopyAddressBtnClicked:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    [pasteboard setString:[self curMeetingAddr]];
+    [pasteboard setString:[LPSystemUser sharedUser].curMeetingAddr];
     
     [self hideAllBottomBgView];
     
