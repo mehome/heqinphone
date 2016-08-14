@@ -427,6 +427,8 @@
 		port_preference = -1;
 	}
 
+    // 强制指定端口号为80
+    port_preference = 80;
 	LCSipTransports transportValue = {port_preference, port_preference, -1, -1};
 
 	// will also update the sip_*_port section of the config

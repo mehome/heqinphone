@@ -259,14 +259,26 @@ static UICompositeViewDescription *compositeDescription = nil;
     [LPSystemUser sharedUser].myFavMeetings = @[];
     
     // 进行SIP注册功能
-    NSString *username = self.userNameField.text;
+    NSString *userIdStr = self.userNameField.text;
     NSString *password = self.userPasswordField.text;
+    NSString *userName = [userIdStr copy];
+    
+    // 分割出userName， 去除后面的@域名
+    NSArray *componseArr = [userIdStr componentsSeparatedByString:@"@"];
+    if (componseArr.count > 1) {
+        userName = componseArr[0];
+    }else {
+        // 提示出错，并返回
+        [self showToastWithMessage:@"用户名输入错误，请重新输入"];
+        [self.userNameField becomeFirstResponder];
+        return;
+    }
     
 //    username = @"feng.wang";
 //    userId = @"feng.wang@zijingcloud.com";
 //    NSString *password = @"wang@2015";
     
-    [self verificationSignInWithUsername:username userId:username password:password];
+    [self verificationSignInWithUsername:userName userId:userIdStr password:password];
 }
 
 - (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password {
