@@ -132,7 +132,7 @@ extern NSString *const kLinphoneInCallCellData;
 - (void)requestMeetingType {
     
     RDRMeetingTypeRequestModel *reqModel = [RDRMeetingTypeRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self callInnerCurMeetingAddr];
     
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
@@ -502,31 +502,9 @@ extern NSString *const kLinphoneInCallCellData;
 }
 
 // 纯111111, 不是sip:111111@zijingcloud.com
-- (NSString *)curMeetingAddr {
-    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
-    
-    NSString *proxyTempStr = [NSString stringWithFormat:@"@%@", [LPSystemSetting sharedSetting].sipTmpProxy];     // 为@zijingcloud.com
-    
-    // 移掉后部
-    if ([addr replaceOccurrencesOfString:proxyTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove proxy address done");
-    }else {
-        NSLog(@"remove proxy address failed");
-    }
-    
-    // 移掉前面的sip:
-    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove sip done");
-    }else {
-        NSLog(@"remove sip failed");
-    }
-    
-    if (addr.length == 0) {
-        [self showToastWithMessage:@"会议室号码错误，请检查"];
-        return @"";
-    }else {
-        return addr;
-    }
+- (NSString *)callInnerCurMeetingAddr {
+    NSString *resultStr = [LPSystemUser takePureAddrFrom:[LPSystemUser sharedUser].curMeetingAddr];
+    return resultStr;
 }
 
 // 收藏按钮
@@ -541,7 +519,7 @@ extern NSString *const kLinphoneInCallCellData;
 
 //        RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
 //        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
-//        reqModel.addr = [self curMeetingAddr];
+//        reqModel.addr = [self callInnerCurMeetingAddr];
 //        RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //        [RDRNetHelper GET:req responseModelClass:[RDRAddFavResponseModel class]
 //                  success:^(NSURLSessionDataTask *operation, id responseObject) {
@@ -680,7 +658,7 @@ extern NSString *const kLinphoneInCallCellData;
     [self showToastWithMessage:@"请稍等..."];
     
 //    RDRReocrdRequestModel *reqModel = [RDRReocrdRequestModel requestModel];
-//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.addr = [self callInnerCurMeetingAddr];
 //    reqModel.action = commandStr;
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -744,7 +722,7 @@ extern NSString *const kLinphoneInCallCellData;
     
 //    RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
 //    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
-//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.addr = [self callInnerCurMeetingAddr];
 //    reqModel.type = @(type);
 //    reqModel.to = content;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -777,7 +755,7 @@ extern NSString *const kLinphoneInCallCellData;
 // 复制地址
 - (IBAction)copyAddressBtnClicked:(id)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    [pasteboard setString:[self curMeetingAddr]];
+    [pasteboard setString:[self callInnerCurMeetingAddr]];
 
     [self hideAllBottomBgView];
     
@@ -803,7 +781,7 @@ extern NSString *const kLinphoneInCallCellData;
     [self showToastWithMessage:@"解锁中..."];
     
 //    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
-//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.addr = [self callInnerCurMeetingAddr];
 //    reqModel.lock = @(0);
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -852,7 +830,7 @@ extern NSString *const kLinphoneInCallCellData;
     
 //    __block UICallBar *weakSelf = self;
 //    RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
-//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.addr = [self callInnerCurMeetingAddr];
 //    reqModel.lock = @(1);
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -906,7 +884,7 @@ extern NSString *const kLinphoneInCallCellData;
             RDRRequest *req = nil;
             if (usedType == MeetingTypeLesson) {
                 RDRMeetingLayoutRequestModel *reqModel = [RDRMeetingLayoutRequestModel requestModel];
-                reqModel.addr = [self curMeetingAddr];
+                reqModel.addr = [self callInnerCurMeetingAddr];
                 reqModel.pin = text;
                 reqModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
                 reqModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
@@ -916,7 +894,7 @@ extern NSString *const kLinphoneInCallCellData;
 
             }else {
                 RDRMeetingLayoutSubRequestModel *subModel = [RDRMeetingLayoutSubRequestModel requestModel];
-                subModel.addr = [self curMeetingAddr];
+                subModel.addr = [self callInnerCurMeetingAddr];
                 subModel.pin = text;
                 subModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
                 subModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
@@ -978,7 +956,7 @@ extern NSString *const kLinphoneInCallCellData;
     [weakSelf showToastWithMessage:@"结束会议中..."];
     
 //    RDRTerminalRequestModel *reqModel = [RDRTerminalRequestModel requestModel];
-//    reqModel.addr = [self curMeetingAddr];
+//    reqModel.addr = [self callInnerCurMeetingAddr];
 //    reqModel.pin = pinStr;
 //    RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
 //    [RDRNetHelper GET:req responseModelClass:[RDRTerminalResponseModel class]

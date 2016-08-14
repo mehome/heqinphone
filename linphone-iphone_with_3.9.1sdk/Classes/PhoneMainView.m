@@ -123,6 +123,12 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 @end
 
+@interface PhoneMainView () {
+    UIAlertController *loginErrorAlertVC;
+}
+
+@end
+
 @implementation PhoneMainView
 
 @synthesize mainViewController;
@@ -299,15 +305,37 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 - (void)registrationUpdate:(NSNotification *)notif {
 	LinphoneRegistrationState state = [[notif.userInfo objectForKey:@"state"] intValue];
-	if (state == LinphoneRegistrationFailed && ![currentView equal:AssistantView.compositeViewDescription] &&
+	if (state == LinphoneRegistrationFailed &&
+        ![currentView equal:AssistantView.compositeViewDescription] &&
 		[UIApplication sharedApplication].applicationState != UIApplicationStateBackground) {
-		UIAlertView *error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Registration failure", nil)
-														message:[notif.userInfo objectForKey:@"message"]
-													   delegate:nil
-											  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
-											  otherButtonTitles:nil, nil];
-		[error show];
+        
+        if (loginErrorAlertVC != nil) {
+            NSLog(@"当前已经有弹出的提示界面");
+            return;
+        }
+        
+        loginErrorAlertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Registration failure", nil)
+                                                                message:[notif.userInfo objectForKey:@"message"]
+                                                         preferredStyle:UIAlertControllerStyleAlert];
+        [loginErrorAlertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil)
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction * _Nonnull action) {
+                                                      [self removeAlertVCTip];
+                                                  }]];
+        [self presentViewController:loginErrorAlertVC animated:YES completion:nil];
+        
+        
+//		UIAlertView *error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Registration failure", nil)
+//														message:[notif.userInfo objectForKey:@"message"]
+//													   delegate:nil
+//											  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+//											  otherButtonTitles:nil, nil];
+//		[error show];
 	}
+}
+
+- (void)removeAlertVCTip {
+    loginErrorAlertVC = nil;
 }
 
 - (void)onGlobalStateChanged:(NSNotification *)notif {

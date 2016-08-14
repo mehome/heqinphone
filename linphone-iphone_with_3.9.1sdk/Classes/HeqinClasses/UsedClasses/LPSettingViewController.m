@@ -65,7 +65,7 @@
     self.companyField.enabled = NO;
     
     // 显示服务器地址
-    self.serverAddressLabel.text = [LPSystemSetting sharedSetting].sipDomainStr;
+    self.serverAddressLabel.text = [LPSystemSetting sharedSetting].sipTmpProxy;
     
     self.versionLabel.text = [NSString stringWithFormat:@"%@ (%@)",
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],

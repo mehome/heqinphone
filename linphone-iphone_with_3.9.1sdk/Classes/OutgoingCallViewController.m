@@ -53,26 +53,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)dataFillToPreview {
-    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr ?:@""];
-    self.callSubtitleLabel.text = [[NSString stringWithString:addr] copy];
+    NSString *addr = [LPSystemUser sharedUser].curMeetingAddr;
+    self.callSubtitleLabel.text = addr;
     
-    NSString *proxyTempStr = [NSString stringWithFormat:@"@%@", [LPSystemSetting sharedSetting].sipTmpProxy];
-    
-    // 移掉后部
-    if ([addr replaceOccurrencesOfString:proxyTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove server address done");
-    }else {
-        NSLog(@"remove server address failed");
-    }
-    
-    // 移掉前面的sip:
-    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove sip done");
-    }else {
-        NSLog(@"remove sip failed");
-    }
-    
-    self.callTitleLabel.text = [NSString stringWithString:addr];
+    NSString *pureAddrStr = [LPSystemUser takePureAddrFrom:addr];
+    self.callTitleLabel.text = pureAddrStr;
 }
 
 - (IBAction)endCallBtnClicked:(UIButton *)sender {

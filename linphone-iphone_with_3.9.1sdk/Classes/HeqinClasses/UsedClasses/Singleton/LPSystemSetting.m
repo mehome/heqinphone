@@ -32,6 +32,10 @@
     return instance;
 }
 
+- (NSString *)sipDomainStr {
+    return @"zijingcloud.com";
+}
+
 - (void)setSipTmpProxy:(NSString *)sipTmpProxyParam {
     innerTmpProxy = sipTmpProxyParam;
     
@@ -44,7 +48,7 @@
         
         innerTmpProxy = [[NSUserDefaults standardUserDefaults] objectForKey:@"keyTmpProxy"];
         if (![innerTmpProxy isKindOfClass:[NSString class]] || innerTmpProxy.length == 0) {
-            innerTmpProxy = @"zijingcloud.com";
+            innerTmpProxy = @"sip.myvmr.cn";
         }
     }
     return innerTmpProxy;
@@ -98,12 +102,12 @@
 
 - (void)readCacheSetting {
     // 从本地读取属性值
-    NSString *cachedSipStr = [[NSUserDefaults standardUserDefaults] stringForKey:@"sipDomain"];
-    if ([cachedSipStr isKindOfClass:[NSString class]] && cachedSipStr.length > 0) {
-        self.sipDomainStr = cachedSipStr;
+    NSString *cachedSipProxyStr = [[NSUserDefaults standardUserDefaults] stringForKey:@"sipProxy"];
+    if ([cachedSipProxyStr isKindOfClass:[NSString class]] && cachedSipProxyStr.length > 0) {
+        self.sipTmpProxy = cachedSipProxyStr;
     }else {
-        self.sipDomainStr = @"sip.myvmr.cn:80";//@"120.132.87.180";        如果本地没有读取到，则使用这个
-        NSLog(@"Use the default cache value, can't be here all the time");
+        self.sipTmpProxy = @"sip.myvmr.cn";//@"120.132.87.180";        如果本地没有读取到，则使用这个, 这里暂时没有写成sip.myvmr.cn:80
+        NSLog(@"使用设定的默认值，通常来说是不会运行到这时来的，只有第一次可能会到这里来");
     }
     
     self.joinerName = [[NSUserDefaults standardUserDefaults] stringForKey:@"joinerName"];
@@ -113,8 +117,8 @@
 }
 
 - (void)saveCacheSetting {
-    if (self.sipDomainStr.length > 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:self.sipDomainStr forKey:@"sipDomain"];
+    if (self.sipTmpProxy.length > 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.sipTmpProxy forKey:@"sipProxy"];
     }
     
     if (self.joinerName.length > 0) {

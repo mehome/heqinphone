@@ -1952,9 +1952,8 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
 
 #pragma mark - Call Functions
 
+// 接听呼号
 - (void)acceptCall:(LinphoneCall *)call evenWithVideo:(BOOL)video {
-    
-    /*** 下面这部分代码应该放在accept会议时，用来接听会议***/
     char *remoteAddStr = linphone_call_get_remote_address_as_string(call);          // "qin.he" <sip:qin.he@zijingcloud.com>
 
     // 这里应该赋值当前的会议情况
@@ -1968,7 +1967,7 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
         NSLog(@"Something wrong with remoteAddStr=%s", remoteAddStr);
         return;
     }else {
-        tempStr = tempArr[1];
+        tempStr = tempArr[1];           // qin.he@zijingcloud.com>
         
         if (tempStr.length == 0) {
             NSLog(@"Something wrong with remoteAddStr=%s, tempSt is empty string", remoteAddStr);

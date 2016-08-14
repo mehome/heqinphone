@@ -111,34 +111,9 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     return self;
 }
 
-// 纯111111, 不是sip:111111@120.138.....
-- (NSString *)curMeetingAddr {
-    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
-    
-    NSString *proxyTempStr = [NSString stringWithFormat:@"@%@", [LPSystemSetting sharedSetting].sipTmpProxy];     // 为@zijingcloud.com
-    
-    // 移掉后部
-    if ([addr replaceOccurrencesOfString:proxyTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove server address done");
-    }else {
-        NSLog(@"remove server address failed");
-    }
-    
-    // 移掉前面的sip:
-    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove sip done");
-    }else {
-        NSLog(@"remove sip failed");
-    }
-    
-    if (addr.length == 0) {
-        if (self.postBlock) {
-            self.postBlock(@"会议室号码错误，请检查");
-        }
-        return @"";
-    }else {
-        return addr;
-    }
+// 纯111111, 不是sip:111111@zijingcloud.com
+- (NSString *)joinerCurMeetingAddr {
+    return [LPSystemUser takePureAddrFrom:[LPSystemUser sharedUser].curMeetingAddr];
 }
 
 - (void)showToastWithMessage:(NSString *)msg {
@@ -160,7 +135,7 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     __weak RDRAllJoinersView *weakSelf = self;
 //     发起请求
     RDROperationGetJoinersRequestModel *reqModel = [RDROperationGetJoinersRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self joinerCurMeetingAddr];
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
     [RDRNetHelper GET:req responseModelClass:[RDROperationGetJoinersResponseModel class]
@@ -255,7 +230,7 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     
     [self showPinInput:^(NSString *pinStr) {
         RDROperationMuteRequestModel *reqModel = [RDROperationMuteRequestModel requestModel];
-        reqModel.addr = [self curMeetingAddr];
+        reqModel.addr = [self joinerCurMeetingAddr];
 
         if (silenceOperation == YES) {
             reqModel.mute = @(1);
@@ -425,7 +400,7 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
 
     [self showPinInput:^(NSString *pinStr) {
         RDROperationMuteVideoRequestModel *reqModel = [RDROperationMuteVideoRequestModel requestModel];
-        reqModel.addr = [self curMeetingAddr];
+        reqModel.addr = [self joinerCurMeetingAddr];
         
         if (curJoiner.video.integerValue == 0) {
             reqModel.mute = @(1);
@@ -487,7 +462,7 @@ typedef void(^doneAfterPinBlock)(NSString *pinStr);
     
     [self showPinInput:^(NSString *pinStr) {
         RDROperationKickoutRequestModel *reqModel = [RDROperationKickoutRequestModel requestModel];
-        reqModel.addr = [self curMeetingAddr];
+        reqModel.addr = [self joinerCurMeetingAddr];
         
         [self.loadingView resetTipStr:@"正在踢出该参会者，请稍候"];
         

@@ -517,10 +517,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
     
     NSString *callStr = address;
-    NSString *proxyStr = [LPSystemSetting sharedSetting].sipTmpProxy ?: @"";
+    NSString *domainStr = [LPSystemSetting sharedSetting].sipDomainStr;
     
-    if (![address hasSuffix:proxyStr] && proxyStr.length>0) {
-        callStr = [NSString stringWithFormat:@"%@@%@", callStr, proxyStr];
+    if ([address hasSuffix:domainStr] == NO) {
+        callStr = [NSString stringWithFormat:@"%@@%@", callStr, domainStr];
     }
     
     [LPSystemUser sharedUser].curMeetingAddr = callStr;

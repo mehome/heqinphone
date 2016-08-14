@@ -260,91 +260,35 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // 进行SIP注册功能
     NSString *username = self.userNameField.text;
-    NSString *proxyName = @"";
-    
-    NSString *userId = [username copy];   // 为wang.feng@zijingcloud.com
-    
-    if ([username containsString:@"@"] == YES) {
-        NSArray *arr = [username componentsSeparatedByString:@"@"];
-        if (arr.count != 2) {
-            [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
-            return;
-        }else {
-            username = arr[0];
-            proxyName = arr[1];
-        }
-        
-        if (username.length == 0 || proxyName.length == 0) {
-            [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
-            return;
-        }
-    }else {
-        [self showAlertWithTitle:nil andMessage:@"用户名输入错误"];
-        return;
-    }
-    
     NSString *password = self.userPasswordField.text;
-   
-    // 赋值存储
-    [LPSystemSetting sharedSetting].sipTmpProxy = proxyName;
     
 //    username = @"feng.wang";
 //    userId = @"feng.wang@zijingcloud.com";
 //    NSString *password = @"wang@2015";
     
-    [self verificationSignInWithUsername:username userId:userId password:password proxyName:proxyName];
+    [self verificationSignInWithUsername:username userId:username password:password];
 }
 
-- (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password proxyName:(NSString*)proxy {
-    NSLog(@"verificationSignInWithUsername username=%@, userIdStr=%@, password=%@, proxy=%@",
-          username, userIdStr, password, proxy);
+- (void) verificationSignInWithUsername:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password {
+    NSLog(@"verificationSignInWithUsername username=%@, userIdStr=%@, password=%@",
+          username, userIdStr, password);
     
-    NSMutableString *errors = [NSMutableString string];
-    if ([username length] == 0) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid username.\n", nil)]];
-    }
+    [self showLoadingView];
     
-    if (proxy != nil && [proxy length] == 0) {
-        [errors appendString:[NSString stringWithFormat:NSLocalizedString(@"Please enter a valid proxy.\n", nil)]];
-    }
-    
-    if([errors length] > 0) {
-        UIAlertView* errorView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Check error(s)",nil)
-                                                            message:[errors substringWithRange:NSMakeRange(0, [errors length] - 1)]
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
-                                                  otherButtonTitles:nil,nil];
-        [errorView show];
-        
+    if ([LinphoneManager instance].connectivity == none) {
+        [self showAlertWithTitle:@"提示" andMessage:NSLocalizedString(@"No connectivity", nil)];
     } else {
-        [self showLoadingView];
+        NSString *usedDomainStr = [LPSystemSetting sharedSetting].sipDomainStr;
+        NSString *usedProxyStr = [LPSystemSetting sharedSetting].sipTmpProxy;
         
-        if ([LinphoneManager instance].connectivity == none) {
-            [self showAlertWithTitle:@"提示" andMessage:NSLocalizedString(@"No connectivity", nil)];
-        } else {
-//            [[LPSystemUser sharedUser].settingsStore setTheStr:username forKey:@"account_mandatory_username_preference"];
-//            [[LPSystemUser sharedUser].settingsStore setTheStr:userIdStr forKey:@"account_userid_preference"];
-//            [[LPSystemUser sharedUser].settingsStore setTheStr:password forKey:@"account_mandatory_password_preference"];
-//            [[LPSystemUser sharedUser].settingsStore setTheStr:domain forKey:@"account_mandatory_domain_preference"];
-//            [[LPSystemUser sharedUser].settingsStore setTheStr:@"tcp" forKey:@"account_transport_preference"];
-//            [[LPSystemUser sharedUser].settingsStore setTheStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"]   forKey:@"account_proxy_preference"];
-//            [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
-//
-//            // 这里进行LinphoneCoreSettingsStore的存储以触发登录linphone的回调
-//            [[LPSystemUser sharedUser].settingsStore synchronize];
-            
-            
-            NSString *usedDomainStr = [[LPSystemSetting sharedSetting].sipDomainStr hasSuffix:@":80"]?[LPSystemSetting sharedSetting].sipDomainStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"];
-            
-            [self loadAssistantConfig:@"assistant_external_sip.rc"];
-            [self resetLiblinphone];
-            [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:usedDomainStr];
-            [self configureProxyConfig];
-            [self loginWith:username withDisplayName:username withUserId:userIdStr withPassword:password withDomain:usedDomainStr withProxy:proxy];
-            // 然后就等待登录成功或者失败的回调.
-            
-            return;
-        }
+        [self loadAssistantConfig:@"assistant_external_sip.rc"];
+        [self resetLiblinphone];
+        [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:usedDomainStr];
+        [self configureProxyConfig];
+        [self loginWith:username withDisplayName:username withUserId:userIdStr withPassword:password withDomain:usedDomainStr withProxy:usedProxyStr];
+        // 然后就等待登录成功或者失败的回调.
+        
+        return;
     }
 }
 
@@ -441,7 +385,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     }
 }
 
-- (void)loginWith:(NSString *)userName withDisplayName:(NSString *)displayName withUserId:(NSString *)userId withPassword:(NSString *)password withDomain:(NSString *)domainStr withProxy:(NSString *)proxyStr {
+- (void)loginWith:(NSString *)userName withDisplayName:(NSString *)displayName withUserId:(NSString *)userId withPassword:(NSString *)password withDomain:(NSString *)domainStr withProxy:(NSString *)proxyParamStr {
     [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
     [[LPSystemUser sharedUser].settingsStore transformAccountToKeys:userName];
     
@@ -451,11 +395,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     [[LPSystemUser sharedUser].settingsStore setObject:userId forKey:@"account_userid_preference"];
     [[LPSystemUser sharedUser].settingsStore setObject:password forKey:@"account_mandatory_password_preference"];
     
-    [[LPSystemUser sharedUser].settingsStore setObject:[domainStr hasSuffix:@":80"]?domainStr:[domainStr stringByAppendingString:@":80"] forKey:@"account_mandatory_domain_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:domainStr forKey:@"account_mandatory_domain_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:proxyParamStr forKey:@"account_proxy_preference"];
     
-//    [[LPSystemUser sharedUser].settingsStore setObject:@"sip.myvmr.cn:80" forKey:@"account_proxy_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:proxyStr forKey:@"account_proxy_preference"];
-    [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setBool:YES   forKey:@"account_outbound_proxy_preference"];
 
     [[LPSystemUser sharedUser].settingsStore synchronize];
     // 登录完成，等通知吧

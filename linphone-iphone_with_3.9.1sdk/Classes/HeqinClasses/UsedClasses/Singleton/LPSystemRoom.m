@@ -22,14 +22,6 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        // 用一些初始化的操作
-        // 从本地读取属性值
-        //        NSString *cachedSipStr = [[NSUserDefaults standardUserDefaults] stringForKey:@"sipDomain"];
-        //        if (cachedSipStr.length > 0) {
-        //            _sipDomainStr = cachedSipStr;
-        //        }else {
-        //            _sipDomainStr = @"";
-        //        }
     }
     
     return self;

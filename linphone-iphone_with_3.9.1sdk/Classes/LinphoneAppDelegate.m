@@ -339,8 +339,6 @@
 }
 
 - (void)askForSystemConfig {
-    // 判断本地是否有存储
-    LPSystemSetting *systemSetting = [LPSystemSetting sharedSetting];
 
     // 从网络请求
     NSLog(@"start ask for system config");
@@ -355,15 +353,18 @@
                    //                       [self showWithDomainValue:model];
                    
                    if ([model codeCheckSuccess] == YES) {
-                       NSString *domainStr = model.domainStr;
-                       NSLog(@"请求sipDoamin returned system setting domainStr=%@", domainStr);
+                       NSString *proxyStr = model.domainStr;
+                       NSLog(@"请求的domain值, 其实是proxy=%@", proxyStr);
                        
                        // 进行存储
-                       if ([domainStr hasSuffix:@":80"] == NO) {
-                           domainStr = [domainStr stringByAppendingString:@":80"];
+                       if ([proxyStr hasSuffix:@":80"] == NO) {
+                           proxyStr = [proxyStr stringByAppendingString:@":80"];
                        }
-                       systemSetting.sipDomainStr = domainStr;
-                       [systemSetting saveSystem];
+                       
+                       [LPSystemSetting sharedSetting].sipTmpProxy = proxyStr;
+                       
+                       
+                       [[LPSystemSetting sharedSetting] saveSystem];
                    }else {
                        NSLog(@"请求sipDoamin 服务器请求出错, model=%@", model);
                    }

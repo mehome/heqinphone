@@ -24,13 +24,51 @@
 
 @implementation LPSystemUser
 
++ (NSString *)takePureAddrFrom:(NSString *)address {
+    if (address.length == 0) {
+        NSLog(@"地址号码错误，输入有误, address=%@", address);
+        return @"";
+    }
+    
+    NSMutableString *addr = [NSMutableString stringWithString:address];
+    
+    NSString *domainTmpStr = [NSString stringWithFormat:@"@%@",
+                              [LPSystemSetting sharedSetting].sipDomainStr];     // 为@zijingcloud.com
+    
+    // 移掉后部
+    if ([addr replaceOccurrencesOfString:domainTmpStr
+                              withString:@""
+                                 options:NSCaseInsensitiveSearch
+                                   range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"地址中移除zijingcloud.com成功");
+    }else {
+        NSLog(@"地址中移除zijingcloud.com失败");
+    }
+    
+    // 移掉前面的sip:
+    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
+        NSLog(@"地址中移除sip:成功");
+    }else {
+        NSLog(@"地址中移除sip:失败");
+    }
+    
+    if (addr.length == 0) {
+        NSLog(@"地址号码错误，请检查，输入地址为:%@", address);
+        return @"";
+    }else {
+        return addr;
+    }
+}
+
 + (void)resetToAnonimousLogin {
     // 在用户未登录时， 强制进行添加
     [[LPSystemUser sharedUser].settingsStore setObject:@"zijing@unknown-host"   forKey:@"account_mandatory_username_preference"];
+    
     [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_proxy_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:[[LPSystemSetting sharedSetting].sipDomainStr hasSuffix:@":80"]?[LPSystemSetting sharedSetting].sipDomainStr:[[LPSystemSetting sharedSetting].sipDomainStr stringByAppendingString:@":80"] forKey:@"account_mandatory_domain_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipDomainStr forKey:@"account_mandatory_domain_preference"];
+    
     [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"account_mandatory_password_preference"];
-    [[LPSystemUser sharedUser].settingsStore setBool:TRUE   forKey:@"account_outbound_proxy_preference"];
+    [[LPSystemUser sharedUser].settingsStore setBool:YES   forKey:@"account_outbound_proxy_preference"];
 
     [[LPSystemUser sharedUser].settingsStore synchronize];
 }
@@ -61,15 +99,7 @@
         
         [_settingsStore setBool:!([LPSystemSetting sharedSetting].defaultNoVideo) forKey:@"enable_video_preference"];
                 
-        [self loadHistoryData];
-        
-        // 从本地读取属性值
-//        NSString *cachedSipStr = [[NSUserDefaults standardUserDefaults] stringForKey:@"sipDomain"];
-//        if (cachedSipStr.length > 0) {
-//            _sipDomainStr = cachedSipStr;
-//        }else {
-//            _sipDomainStr = @"";
-//        }
+        [self loadHistoryData];        
     }
     
     return self;

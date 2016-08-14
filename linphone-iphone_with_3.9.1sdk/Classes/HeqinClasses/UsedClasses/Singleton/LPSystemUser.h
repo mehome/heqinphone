@@ -42,4 +42,7 @@ typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NS
 
 + (void)resetToAnonimousLogin;      // 置成匿名登录
 
+// 抽离出纯的呼叫地址， 如地址为：feng.wang@zijingcloud.com， 抽出来后，为feng.wang
++ (NSString *)takePureAddrFrom:(NSString *)address;
+
 @end

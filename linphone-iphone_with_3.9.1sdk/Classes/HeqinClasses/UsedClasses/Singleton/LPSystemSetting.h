@@ -12,9 +12,9 @@
 
 @interface LPSystemSetting : NSObject
 
-@property (nonatomic, copy) NSString *sipDomainStr; // 记录上次使用的domain值，将会是sip.myvmr.com
+@property (nonatomic, copy, readonly) NSString *sipDomainStr; // 写死的zijingcloud.com
 
-@property (nonatomic, copy) NSString *sipTmpProxy;// 取自于用户的qin.he@zijing.com中的zijing.com
+@property (nonatomic, copy) NSString *sipTmpProxy;// 来自于服务器的返回值，应该为sip.myvmr.cn, 不一定会有80端口，可以看根据需要来添加80端口
 
 @property (nonatomic, copy) NSString *joinerName;               // 参会者名称，是用户可以直接进行设置的
 

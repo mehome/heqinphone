@@ -955,31 +955,8 @@ static BOOL systemOpenCamera = NO;
 }
 
 // 取纯111111, 不是sip:111111@120.138.....
-- (NSString *)curMeetingAddr {
-    NSMutableString *addr = [NSMutableString stringWithString:[LPSystemUser sharedUser].curMeetingAddr];
-    
-    NSString *proxyTempStr = [NSString stringWithFormat:@"@%@", [LPSystemSetting sharedSetting].sipTmpProxy];     // 为@zijingcloud.com
-    
-    // 移掉后部
-    if ([addr replaceOccurrencesOfString:proxyTempStr withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove server address done");
-    }else {
-        NSLog(@"remove server address failed");
-    }
-    
-    // 移掉前面的sip:
-    if ([addr replaceOccurrencesOfString:@"sip:" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [addr length])] != 0) {
-        NSLog(@"remove sip done");
-    }else {
-        NSLog(@"remove sip failed");
-    }
-    
-    if (addr.length == 0) {
-        [self showToastWithMessage:@"会议室号码错误，请检查"];
-        return @"";
-    }else {
-        return addr;
-    }
+- (NSString *)innerCurMeetingAddr {
+    return [LPSystemUser takePureAddrFrom:[LPSystemUser sharedUser].curMeetingAddr];
 }
 
 - (void)inviteMenBy:(InvityType)type {
@@ -1000,7 +977,7 @@ static BOOL systemOpenCamera = NO;
     
     RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
     reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self innerCurMeetingAddr];
     reqModel.type = @(type);
     reqModel.to = content;
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -1097,7 +1074,7 @@ static BOOL systemOpenCamera = NO;
     [self showToastWithMessage:@"解锁中..."];
     
     RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self innerCurMeetingAddr];
     reqModel.lock = @(0);
     reqModel.pin = pinStr;
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -1140,7 +1117,7 @@ static BOOL systemOpenCamera = NO;
     [self showToastWithMessage:@"锁定中..."];
     
     RDRLockReqeustModel *reqModel = [RDRLockReqeustModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self innerCurMeetingAddr];
     reqModel.lock = @(1);
     reqModel.pin = pinStr;
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -1225,7 +1202,7 @@ static BOOL systemOpenCamera = NO;
     [self showToastWithMessage:@"请稍等..."];
     
     RDRReocrdRequestModel *reqModel = [RDRReocrdRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self innerCurMeetingAddr];
     reqModel.action = commandStr;
     reqModel.pin = pinStr;
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -1290,7 +1267,7 @@ static BOOL systemOpenCamera = NO;
                                     RDRRequest *req = nil;
                                     if (usedType == MeetingTypeLesson) {
                                         RDRMeetingLayoutRequestModel *reqModel = [RDRMeetingLayoutRequestModel requestModel];
-                                        reqModel.addr = [self curMeetingAddr];
+                                        reqModel.addr = [self innerCurMeetingAddr];
                                         reqModel.pin = text;
                                         reqModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
                                         reqModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
@@ -1300,7 +1277,7 @@ static BOOL systemOpenCamera = NO;
                                         
                                     }else {
                                         RDRMeetingLayoutSubRequestModel *subModel = [RDRMeetingLayoutSubRequestModel requestModel];
-                                        subModel.addr = [self curMeetingAddr];
+                                        subModel.addr = [self innerCurMeetingAddr];
                                         subModel.pin = text;
                                         subModel.subtitle = ((NSNumber *)(usedDic[@"zimuGround"])).integerValue;
                                         subModel.layout = ((NSNumber *)(usedDic[@"zcrGround"])).integerValue;
@@ -1348,7 +1325,7 @@ static BOOL systemOpenCamera = NO;
 - (void)requestMeetingType {
     
     RDRMeetingTypeRequestModel *reqModel = [RDRMeetingTypeRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self innerCurMeetingAddr];
     
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         [RDRNetHelper GET:req responseModelClass:[RDRMeetingTypeResponseModel class]
@@ -1395,7 +1372,7 @@ static BOOL systemOpenCamera = NO;
     [self showToastWithMessage:@"结束会议中..."];
     
     RDRTerminalRequestModel *reqModel = [RDRTerminalRequestModel requestModel];
-    reqModel.addr = [self curMeetingAddr];
+    reqModel.addr = [self innerCurMeetingAddr];
     reqModel.pin = pinStr;
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
     [RDRNetHelper GET:req responseModelClass:[RDRTerminalResponseModel class]
