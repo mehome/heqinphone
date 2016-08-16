@@ -58,7 +58,7 @@ eq_active=0
 playback_dev_id=AU: Audio Unit Receiver
 
 [video]
-automatically_accept=0
+automatically_accept=1
 automatically_initiate=0
 capture=1
 display=1
