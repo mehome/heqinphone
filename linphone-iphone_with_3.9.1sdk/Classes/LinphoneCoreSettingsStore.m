@@ -280,7 +280,9 @@
 		const LinphoneVideoPolicy *pol;
 		pol = linphone_core_get_video_policy(LC);
 		[self setBool:(pol->automatically_initiate) forKey:@"start_video_preference"];
-		[self setBool:(pol->automatically_accept) forKey:@"accept_video_preference"];
+//		[self setBool:(pol->automatically_accept) forKey:@"accept_video_preference"];
+        [self setBool:TRUE forKey:@"accept_video_preference"];      // 强制置为自动接听
+
 		[self setBool:linphone_core_self_view_enabled(LC) forKey:@"self_video_preference"];
 		BOOL previewEnabled = [lm lpConfigBoolForKey:@"preview_preference" withDefault:YES];
 		[self setBool:IPAD && previewEnabled forKey:@"preview_preference"];
@@ -669,7 +671,10 @@
 
 			LinphoneVideoPolicy policy;
 			policy.automatically_initiate = [self boolForKey:@"start_video_preference"];
-			policy.automatically_accept = [self boolForKey:@"accept_video_preference"];
+//			policy.automatically_accept = [self boolForKey:@"accept_video_preference"];
+            // 强制置为自动接听
+            policy.automatically_accept = TRUE;
+            
 			linphone_core_set_video_policy(LC, &policy);
 			linphone_core_enable_self_view(LC, [self boolForKey:@"self_video_preference"]);
 			BOOL preview_preference = IPAD && [self boolForKey:@"preview_preference"];
