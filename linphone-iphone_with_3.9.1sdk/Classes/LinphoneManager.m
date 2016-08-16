@@ -1975,8 +1975,12 @@ static int comp_call_state_paused(const LinphoneCall *call, const void *param) {
         }
     }
     
-    
-    tempStr = [tempStr stringByReplacingCharactersInRange:NSMakeRange(tempStr.length-1, 1) withString:@""];     // 移除掉最后的>
+    if (tempStr.length > 0) {
+        NSString *str = [tempStr substringFromIndex:tempStr.length-1];
+        if ([str isEqualToString:@">"]) {
+            tempStr = [tempStr stringByReplacingCharactersInRange:NSMakeRange(tempStr.length-1, 1) withString:@""];     // 移除掉最后的>
+        }
+    }
     NSLog(@"接受的会议是:%@", tempStr);
     
     [LPSystemUser sharedUser].curMeetingAddr = tempStr;         // 希望会是直接qin.he@zijingcloud.com

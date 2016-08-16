@@ -381,7 +381,9 @@ static RootViewManager *rootViewManagerInstance = nil;
 		case LinphoneCallUpdatedByRemote: {
 			const LinphoneCallParams *current = linphone_call_get_current_params(call);
 			const LinphoneCallParams *remote = linphone_call_get_remote_params(call);
-
+            
+            NSLog(@"我收到远程的通知啦");
+            
 			if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
 				[self changeCurrentView:CallView.compositeViewDescription];
 			}
@@ -731,7 +733,7 @@ static RootViewManager *rootViewManagerInstance = nil;
 		BOOL autoAnswer = [lm lpConfigBoolForKey:@"autoanswer_notif_preference"];
 
 		if (callIDFromPush && autoAnswer) {
-			// accept call automatically
+			// accept call automatically， 自动接听呼叫，就是不会弹出让用户选择是否接听
 			[lm acceptCall:call evenWithVideo:YES];
 		} else {
 //			AudioServicesPlaySystemSound(lm.sounds.vibrate);

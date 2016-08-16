@@ -202,7 +202,9 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 	[PhoneMainView.instance setVolumeHidden:TRUE];
 	hiddenVolume = TRUE;
-
+    
+    hasOpend = NO;
+    
 	// we must wait didAppear to reset fullscreen mode because we cannot change it in viewwillappear
 	LinphoneCall *call = linphone_core_get_current_call(LC);
 	LinphoneCallState state = (call != NULL) ? linphone_call_get_state(call) : 0;
@@ -496,6 +498,8 @@ static BOOL systemOpenCamera = NO;
 	[self callUpdate:call state:state animated:TRUE];
 }
 
+static BOOL hasOpend = NO;
+
 - (void)callUpdate:(LinphoneCall *)call state:(LinphoneCallState)state animated:(BOOL)animated {
 	[self updateBottomBar:call state:state];
     
@@ -559,17 +563,33 @@ static BOOL systemOpenCamera = NO;
 			const LinphoneCallParams *current = linphone_call_get_current_params(call);
 			const LinphoneCallParams *remote = linphone_call_get_remote_params(call);
 
+            BOOL displayEnable = linphone_core_video_display_enabled(LC);
+            BOOL currentParamEnable = linphone_call_params_video_enabled(current);
+            BOOL videoParamEnable = linphone_call_params_video_enabled(remote);
+            BOOL autoAccept = linphone_core_get_video_policy(LC)->automatically_accept;
+            
+            NSLog(@"displayEnable=%d, currentParamEnable=%d, videoParamEnable=%d, autoAccept=%d", displayEnable, currentParamEnable, videoParamEnable, autoAccept);
+            
 			/* remote wants to add video */
-			if (linphone_core_video_display_enabled(LC) && !linphone_call_params_video_enabled(current) &&
+			if (linphone_core_video_display_enabled(LC) &&
+                !linphone_call_params_video_enabled(current) &&
 				linphone_call_params_video_enabled(remote) &&
 				!linphone_core_get_video_policy(LC)->automatically_accept) {
-				linphone_core_defer_call_update(LC, call);
+//				linphone_core_defer_call_update(LC, call);
                 
                 // 直接打开视频， 这里最新的代码是弹出倒计时提示询问用户是否允许打开视频，下面为了简化，直接打开视频处理
                 [self openCamera:nil];
+                
 			} else if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
 				[self displayAudioCall:animated];
 			}
+            
+            if (hasOpend == NO) {
+                hasOpend = YES;
+                // 直接打开视频， 这里最新的代码是弹出倒计时提示询问用户是否允许打开视频，下面为了简化，直接打开视频处理
+                [self openCamera:nil];
+            }
+
 			break;
 		}
 		case LinphoneCallPausing:
@@ -581,6 +601,7 @@ static BOOL systemOpenCamera = NO;
 			break;
 		case LinphoneCallEnd:
 		case LinphoneCallError:
+            hasOpend = NO;
             break;
         case LinphoneCallOutgoingRinging:
             [self configTheSilenceOperation];
@@ -788,8 +809,7 @@ static BOOL systemOpenCamera = NO;
     LinphoneCall *call = linphone_core_get_current_call(LC);
     if (call) {
         LinphoneCallAppData *callAppData = (__bridge LinphoneCallAppData *)linphone_call_get_user_pointer(call);
-        callAppData->videoRequested =
-        TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
+        callAppData->videoRequested = TRUE; /* will be used later to notify user if video was not activated because of the linphone core*/
         LinphoneCallParams *call_params = linphone_call_params_copy(linphone_call_get_current_params(call));
         linphone_call_params_enable_video(call_params, TRUE);
         linphone_core_update_call(LC, call, call_params);      //  linphone_core_accept_call_update(LC, call, call_params);
@@ -1397,6 +1417,8 @@ static BOOL systemOpenCamera = NO;
 
 // 退出会议
 - (IBAction)quitCallBtnClicked:(id)sender {
+    hasOpend = NO;
+    
     self.meetingLockedStatus = NO;
     self.meetingIsRecording = NO;
 
