@@ -376,8 +376,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 		case LinphoneCallConnected:
 		case LinphoneCallStreamsRunning: {
 			[self changeCurrentView:CallView.compositeViewDescription];
-//            [self changeCurrentView:[InCallViewController compositeViewDescription]];
-
 			break;
 		}
 		case LinphoneCallUpdatedByRemote: {
@@ -386,8 +384,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 
 			if (linphone_call_params_video_enabled(current) && !linphone_call_params_video_enabled(remote)) {
 				[self changeCurrentView:CallView.compositeViewDescription];
-//                [self changeCurrentView:[InCallViewController compositeViewDescription]];
-
 			}
 			break;
 		}
@@ -415,7 +411,6 @@ static RootViewManager *rootViewManagerInstance = nil;
 			} else {
 				linphone_core_resume_call(LC, (LinphoneCall *)calls->data);
 				[self changeCurrentView:CallView.compositeViewDescription];
-//                [self changeCurrentView:[InCallViewController compositeViewDescription]];
 			}
 			break;
 		}
