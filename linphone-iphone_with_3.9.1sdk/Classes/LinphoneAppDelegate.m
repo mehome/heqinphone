@@ -83,6 +83,12 @@
 	}
 }
 
+// 王锋fir.im帐号
+//#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+//#define kFirApiToken"64cf65b0ce3e7db98a72307d69d98a65"
+
+
+// 290480306@qq.com
 #define kFirAppID @"575c2bd3e75e2d3c4e000009"
 #define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
