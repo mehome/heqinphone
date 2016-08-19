@@ -114,7 +114,7 @@
     [self.firstBtn setTitle:@"加入会议" forState:UIControlStateNormal];
     [self.secondBtn setTitle:@"会议管理" forState:UIControlStateNormal];
     [self.thirdBtn setTitle:@"安排会议" forState:UIControlStateNormal];
-    [self.recordBtn setTitle:@"录像" forState:UIControlStateNormal];
+    [self.recordBtn setTitle:@"录播" forState:UIControlStateNormal];
     [self.forthBtn setTitle:@"设置" forState:UIControlStateNormal];
     
     [self.firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

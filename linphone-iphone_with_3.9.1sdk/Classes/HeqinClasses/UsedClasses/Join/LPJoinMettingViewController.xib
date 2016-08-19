@@ -33,7 +33,7 @@
                         <constraint firstAttribute="height" constant="42" id="4AE-Am-DNe"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="PQX-NJ-xT7"/>
                     </connections>
@@ -66,7 +66,7 @@
                         <constraint firstAttribute="width" constant="80" id="Bgd-jB-pxA"/>
                         <constraint firstAttribute="height" constant="30" id="nqG-KT-cI4"/>
                     </constraints>
-                    <state key="normal" title="更改"/>
+                    <state key="normal" title="保存"/>
                     <connections>
                         <action selector="changeNameBtnClicked:" destination="-1" eventType="touchUpInside" id="RQp-BF-iIb"/>
                     </connections>

@@ -28,6 +28,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
+@property (strong, nonatomic) IBOutlet UIButton *videoSizeBtn;
+@property (strong, nonatomic) IBOutlet UIButton *videoFrameBtn;
+
 @end
 
 #define kLogoutAlertTag 90902
@@ -54,6 +57,8 @@
     
     // 初始化各个界面信息
     [self initDynamicInfos];
+    
+    [self refrshVideoSettings];
 }
 
 - (void)initDynamicInfos {
@@ -87,6 +92,38 @@
     }
 }
 
+- (void)refrshVideoSettings {
+    NSInteger videoFrameInt = [LPSystemSetting sharedSetting].videoFrameType;
+    if (videoFrameInt == 0) {
+        [self.videoFrameBtn setTitle:@"none" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 1) {
+        [self.videoFrameBtn setTitle:@"5" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 2) {
+        [self.videoFrameBtn setTitle:@"10" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 3) {
+        [self.videoFrameBtn setTitle:@"15" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 4) {
+        [self.videoFrameBtn setTitle:@"20" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 5) {
+        [self.videoFrameBtn setTitle:@"25" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 6) {
+        [self.videoFrameBtn setTitle:@"30" forState:UIControlStateNormal];
+    }
+    
+    NSInteger vidoeSizeInt  = [LPSystemSetting sharedSetting].videoSizeType;
+    if (vidoeSizeInt == 0) {
+        [self.videoSizeBtn setTitle:@"720P >" forState:UIControlStateNormal];
+    }else if (vidoeSizeInt == 1) {
+        [self.videoSizeBtn setTitle:@"VGA >" forState:UIControlStateNormal];
+    }else if (vidoeSizeInt == 2) {
+        [self.videoSizeBtn setTitle:@"CIF >" forState:UIControlStateNormal];
+    }else if (vidoeSizeInt == 3) {
+        [self.videoSizeBtn setTitle:@"QVGA >" forState:UIControlStateNormal];
+    }else {
+        [self.videoSizeBtn setTitle:@"QCIF >" forState:UIControlStateNormal];
+    }
+}
+
 - (void)bgTap:(UITapGestureRecognizer *)tapGesture {
     [self.nameField resignFirstResponder];
     [self.accountField resignFirstResponder];
@@ -108,6 +145,93 @@
             break;
         default: break;
     }
+}
+
+- (IBAction)videoSizeClicked:(id)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"视频尺寸" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"720P" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoSize:0];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"VGA" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoSize:1];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"CIF" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoSize:2];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"QVGA" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoSize:3];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"QCIF" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoSize:4];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (IBAction)videoFrameClicked:(id)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"视频帧率" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"none" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:0];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"5" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:1];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"10" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:2];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"15" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:3];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"20" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:4];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"25" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:5];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"30" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self setupVideoFrame:6];
+    }]];
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)setupVideoSize:(NSInteger)sizeInt {
+    MSVideoSize vsize;
+    if (sizeInt == 0) {
+        MS_VIDEO_SIZE_ASSIGN(vsize, 720P);
+   }else if (sizeInt == 1) {
+       MS_VIDEO_SIZE_ASSIGN(vsize, VGA);
+    }else if (sizeInt == 2){
+        MS_VIDEO_SIZE_ASSIGN(vsize, CIF);
+    }else if (sizeInt == 3){
+        MS_VIDEO_SIZE_ASSIGN(vsize, QVGA);
+    }else {
+        MS_VIDEO_SIZE_ASSIGN(vsize, QCIF);
+    }
+
+    linphone_core_set_preferred_video_size(LC, vsize);
+
+    [LPSystemSetting sharedSetting].videoSizeType = sizeInt;
+    [[LPSystemSetting sharedSetting] saveCacheSetting];
+    
+    [self refrshVideoSettings];
+}
+
+- (void)setupVideoFrame:(NSInteger)frameType {
+    linphone_core_set_preferred_framerate(LC, frameType);
+
+    [LPSystemSetting sharedSetting].videoFrameType = frameType;
+    [[LPSystemSetting sharedSetting] saveCacheSetting];
+    
+    [self refrshVideoSettings];
 }
 
 // 注销按钮

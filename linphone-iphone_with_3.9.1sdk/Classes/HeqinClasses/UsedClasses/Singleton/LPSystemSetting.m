@@ -74,6 +74,9 @@
         
         _defaultSilence = [[NSUserDefaults standardUserDefaults] boolForKey:@"meetingDefaultSilent"];
         _defaultNoVideo = [[NSUserDefaults standardUserDefaults] boolForKey:@"meetingDefaultNoVide"];
+        
+        _videoSizeType = [[NSUserDefaults standardUserDefaults] integerForKey:@"settingVideoSizeType"];
+        _videoFrameType = [[NSUserDefaults standardUserDefaults] integerForKey:@"settingVideoFrameType"];
     }
     
     return self;
@@ -124,6 +127,9 @@
     if (self.joinerName.length > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:self.joinerName forKey:@"joinerName"];
     }
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.videoSizeType forKey:@"settingVideoSizeType"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.videoFrameType forKey:@"settingVideoFrameType"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

@@ -99,7 +99,7 @@
                                              selector:@selector(globalStateUpdate:)
                                                  name:kLinphoneGlobalStateUpdate
                                                object:nil];
-    
+
     [self.callLogs removeAllObjects];
     
     const MSList * logs = linphone_core_get_call_logs([LinphoneManager getLc]);
@@ -217,8 +217,20 @@
     self.loginTipLabel.text = message;
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    
+    if (textField == self.joinNameField) {
+        if (textField.text.length > 0) {
+            // 执行存储操作
+            [self changeNameBtnClicked:nil];
+        }
+    }
+    
     return YES;
 }
 
@@ -308,7 +320,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     linphone_address_destroy(parsed);
     
-    [self showToastWithMessage:@"更改成功"];
+    
+    [[LPSystemSetting sharedSetting] saveCacheSetting];
+    
+    [self showToastWithMessage:@"保存成功"];
 }
 
 - (IBAction)joinBtnClicked:(id)sender {
