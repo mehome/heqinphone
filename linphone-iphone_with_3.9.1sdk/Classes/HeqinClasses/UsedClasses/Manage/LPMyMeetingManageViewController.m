@@ -231,7 +231,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     LPMyManageSingleViewController *controller = VIEW(LPMyManageSingleViewController);
     
     if (controller != nil) {
-        NSLog(@"进入会议管理中, idNum=%@, name=%@, addr=%@", curMeetingModel.idNum, curMeetingModel.name, curMeetingModel.addr);
+        NSLog(@"进入会议室管理中, idNum=%@, name=%@, addr=%@", curMeetingModel.idNum, curMeetingModel.name, curMeetingModel.addr);
         [controller updateWithModel:curMeetingModel];
     }
     
