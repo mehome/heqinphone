@@ -25,8 +25,8 @@
 @property (nonatomic, assign) BOOL defaultSilence;          // 缺省静音
 @property (nonatomic, assign) BOOL defaultNoVideo;          // 缺省静画
 
-@property (nonatomic, assign) NSInteger videoFrameType;     // 默认为none
-@property (nonatomic, assign) NSInteger videoSizeType;      // 默认为720P
+@property (nonatomic, assign) NSInteger videoFrameType;     // 默认为20
+@property (nonatomic, assign) NSInteger videoSizeType;      // 默认为CIF
 
 + (instancetype)sharedSetting;
 - (void)saveCacheSetting;               // 存储设置
