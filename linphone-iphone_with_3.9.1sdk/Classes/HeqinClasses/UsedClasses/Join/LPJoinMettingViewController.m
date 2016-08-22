@@ -124,8 +124,8 @@
         // 未登录
         self.btnTipLabel.text = @"未登录";
     }else {
-        // 已登录
-        self.btnTipLabel.text = @"已登录";
+        // 通讯录
+        self.btnTipLabel.text = @"通讯录";
     }
 }
 
@@ -190,7 +190,7 @@
                 [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
                 
                 self.joinNameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
-                self.btnTipLabel.text = @"已登录";
+                self.btnTipLabel.text = @"通讯录";
                 break;
             }
             case LinphoneRegistrationNone:
@@ -288,7 +288,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         // 未登录
         [[PhoneMainView instance] changeCurrentView:[LPLoginViewController compositeViewDescription]];
     }else {
-        // 已登录
+        // 通讯录
         [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
     }
 }
@@ -515,7 +515,7 @@ static UICompositeViewDescription *compositeDescription = nil;
         // 未登录
         [self showToastWithMessage:@"未登录，请先登录"];
     }else {
-        // 已登录        
+        // 通讯录        
         __weak LPJoinMettingViewController *weakSelf = self;
         [weakSelf showToastWithMessage:@"收藏会议室中..."];
         
