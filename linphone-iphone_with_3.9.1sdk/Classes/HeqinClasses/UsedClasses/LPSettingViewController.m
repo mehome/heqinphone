@@ -95,32 +95,26 @@
 - (void)refrshVideoSettings {
     NSInteger videoFrameInt = [LPSystemSetting sharedSetting].videoFrameType;
     if (videoFrameInt == 0) {
-        [self.videoFrameBtn setTitle:@"none" forState:UIControlStateNormal];
-    }else if (videoFrameInt == 1) {
-        [self.videoFrameBtn setTitle:@"5" forState:UIControlStateNormal];
-    }else if (videoFrameInt == 2) {
-        [self.videoFrameBtn setTitle:@"10" forState:UIControlStateNormal];
-    }else if (videoFrameInt == 3) {
-        [self.videoFrameBtn setTitle:@"15" forState:UIControlStateNormal];
-    }else if (videoFrameInt == 4) {
         [self.videoFrameBtn setTitle:@"20" forState:UIControlStateNormal];
-    }else if (videoFrameInt == 5) {
-        [self.videoFrameBtn setTitle:@"25" forState:UIControlStateNormal];
-    }else if (videoFrameInt == 6) {
+    }else if (videoFrameInt == 15) {
+        [self.videoFrameBtn setTitle:@"15" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 20) {
+        [self.videoFrameBtn setTitle:@"20" forState:UIControlStateNormal];
+    }else if (videoFrameInt == 30) {
         [self.videoFrameBtn setTitle:@"30" forState:UIControlStateNormal];
+    }else {
+        [self.videoFrameBtn setTitle:@"20" forState:UIControlStateNormal];
     }
     
     NSInteger vidoeSizeInt  = [LPSystemSetting sharedSetting].videoSizeType;
     if (vidoeSizeInt == 0) {
-        [self.videoSizeBtn setTitle:@"720P >" forState:UIControlStateNormal];
+        [self.videoSizeBtn setTitle:@"标清(CIF) >" forState:UIControlStateNormal];
     }else if (vidoeSizeInt == 1) {
-        [self.videoSizeBtn setTitle:@"VGA >" forState:UIControlStateNormal];
+        [self.videoSizeBtn setTitle:@"高清(720P) >" forState:UIControlStateNormal];
     }else if (vidoeSizeInt == 2) {
-        [self.videoSizeBtn setTitle:@"CIF >" forState:UIControlStateNormal];
-    }else if (vidoeSizeInt == 3) {
-        [self.videoSizeBtn setTitle:@"QVGA >" forState:UIControlStateNormal];
+        [self.videoSizeBtn setTitle:@"超高清(1020P) >" forState:UIControlStateNormal];
     }else {
-        [self.videoSizeBtn setTitle:@"QCIF >" forState:UIControlStateNormal];
+        [self.videoSizeBtn setTitle:@"标清(CIF) >" forState:UIControlStateNormal];
     }
 }
 
@@ -148,22 +142,16 @@
 }
 
 - (IBAction)videoSizeClicked:(id)sender {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"视频尺寸" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"视频清晰度" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"720P" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"标清(CIF)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self setupVideoSize:0];
     }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"VGA" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"高清(720P)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self setupVideoSize:1];
     }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"CIF" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertVC addAction:[UIAlertAction actionWithTitle:@"超高清(1020P)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self setupVideoSize:2];
-    }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"QVGA" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoSize:3];
-    }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"QCIF" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoSize:4];
     }]];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
@@ -175,26 +163,14 @@
 - (IBAction)videoFrameClicked:(id)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"视频帧率" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"none" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:0];
-    }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"5" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:1];
-    }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"10" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:2];
-    }]];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"15" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:3];
+        [self setupVideoFrame:15];
     }]];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"20" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:4];
-    }]];
-    [alertVC addAction:[UIAlertAction actionWithTitle:@"25" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:5];
+        [self setupVideoFrame:20];
     }]];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"30" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setupVideoFrame:6];
+        [self setupVideoFrame:30];
     }]];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
@@ -206,15 +182,13 @@
 - (void)setupVideoSize:(NSInteger)sizeInt {
     MSVideoSize vsize;
     if (sizeInt == 0) {
-        MS_VIDEO_SIZE_ASSIGN(vsize, 720P);
-   }else if (sizeInt == 1) {
-       MS_VIDEO_SIZE_ASSIGN(vsize, VGA);
-    }else if (sizeInt == 2){
         MS_VIDEO_SIZE_ASSIGN(vsize, CIF);
-    }else if (sizeInt == 3){
-        MS_VIDEO_SIZE_ASSIGN(vsize, QVGA);
+   }else if (sizeInt == 1) {
+       MS_VIDEO_SIZE_ASSIGN(vsize, 720P);
+    }else if (sizeInt == 2){
+        MS_VIDEO_SIZE_ASSIGN(vsize, 1024);
     }else {
-        MS_VIDEO_SIZE_ASSIGN(vsize, QCIF);
+        MS_VIDEO_SIZE_ASSIGN(vsize, CIF);
     }
 
     linphone_core_set_preferred_video_size(LC, vsize);
