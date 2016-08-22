@@ -17,9 +17,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *logoutBtn;
 
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UITextField *accountField;
-@property (weak, nonatomic) IBOutlet UITextField *companyField;
+@property (weak, nonatomic) IBOutlet UILabel *nameField;
+@property (weak, nonatomic) IBOutlet UILabel *accountField;
+@property (weak, nonatomic) IBOutlet UILabel *companyField;
 
 @property (weak, nonatomic) IBOutlet UILabel *serverAddressLabel;
 
@@ -64,10 +64,6 @@
 - (void)initDynamicInfos {
     self.defaultSilentVoiceSwitch.on = [LPSystemSetting sharedSetting].defaultSilence;
     self.defaultSilentMovieSwitch.on = [LPSystemSetting sharedSetting].defaultNoVideo;
-    
-    self.nameField.enabled = NO;
-    self.accountField.enabled = NO;
-    self.companyField.enabled = NO;
     
     // 显示服务器地址
     self.serverAddressLabel.text = [LPSystemSetting sharedSetting].sipTmpProxy;
@@ -125,9 +121,6 @@
 }
 
 - (void)bgTap:(UITapGestureRecognizer *)tapGesture {
-    [self.nameField resignFirstResponder];
-    [self.accountField resignFirstResponder];
-    [self.companyField resignFirstResponder];
 }
 
 - (void)allLifetimeSettingRegistrationUpdateEvent:(NSNotification *)notif {
