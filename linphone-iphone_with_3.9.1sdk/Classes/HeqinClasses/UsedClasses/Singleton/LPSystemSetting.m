@@ -130,7 +130,7 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:self.videoSizeType forKey:@"settingVideoSizeType"];
     [[NSUserDefaults standardUserDefaults] setInteger:self.videoFrameType forKey:@"settingVideoFrameType"];
-    
+
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

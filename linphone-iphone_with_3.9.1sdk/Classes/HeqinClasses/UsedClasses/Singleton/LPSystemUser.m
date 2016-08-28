@@ -65,19 +65,6 @@
     }
 }
 
-+ (void)resetToAnonimousLogin {
-    // 在用户未登录时， 强制进行添加
-    [[LPSystemUser sharedUser].settingsStore setObject:@"zijing@unknown-host"   forKey:@"account_mandatory_username_preference"];
-    
-    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_proxy_preference"];
-    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipDomainStr forKey:@"account_mandatory_domain_preference"];
-    
-    [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"account_mandatory_password_preference"];
-    [[LPSystemUser sharedUser].settingsStore setBool:YES   forKey:@"account_outbound_proxy_preference"];
-
-    [[LPSystemUser sharedUser].settingsStore synchronize];
-}
-
 + (instancetype)sharedUser {
     static LPSystemUser *instance;
     static dispatch_once_t once;
@@ -95,6 +82,8 @@
         _myMeetingsRooms = @[];
         _myFavMeetings = @[];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+        
         _hasGetMeetingData = NO;
         
         _missedFilter = NO;         // 用来做为是否只显示错过的电话，这里直接设置为ＮＯ， 表示显示全部电话
@@ -103,11 +92,18 @@
         _settingsStore = [[LinphoneCoreSettingsStore alloc] init];
         
         [_settingsStore setBool:!([LPSystemSetting sharedSetting].defaultNoVideo) forKey:@"enable_video_preference"];
-                
+        
+        _hasLoginSuccess = [[NSUserDefaults standardUserDefaults] boolForKey:@"systemLoginStatus"];
+        
         [self loadHistoryData];        
     }
     
     return self;
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    [[NSUserDefaults standardUserDefaults] setBool:self.hasLoginSuccess forKey:@"systemLoginStatus"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 // 可以做为外部调用，做为刷新操作
@@ -170,6 +166,29 @@
     }
 }
 
++ (void)resetToAnonimousLogin {
+    // 在用户未登录时， 强制进行添加
+//    [[LPSystemUser sharedUser].settingsStore setObject:@"zijing@unknown-host"   forKey:@"account_mandatory_username_preference"];
+//    
+//    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipTmpProxy forKey:@"account_proxy_preference"];
+//    [[LPSystemUser sharedUser].settingsStore setObject:[LPSystemSetting sharedSetting].sipDomainStr forKey:@"account_mandatory_domain_preference"];
+//    
+//    [[LPSystemUser sharedUser].settingsStore setObject:@""   forKey:@"account_mandatory_password_preference"];
+//    [[LPSystemUser sharedUser].settingsStore setBool:YES   forKey:@"account_outbound_proxy_preference"];
+//    
+//    [[LPSystemUser sharedUser].settingsStore synchronize];
+    
+    NSString *anolymousName = @"anolymous";
+    NSString *anolymousUserId = @"anolymous";
+    NSString *anolymousPassword = @"";
+    NSString *anolymousDisplayName = [LPSystemSetting sharedSetting].joinerName;
+    NSString *anolymousDomain = [LPSystemSetting sharedSetting].sipDomainStr;
+    
+    NSDictionary *loginResult = [[LPSystemUser sharedUser] tryToLoginWithUserName:anolymousName userId:anolymousUserId password:anolymousPassword displayName:anolymousDisplayName domain:anolymousDomain];
+    NSLog(@"loginResult=%@", loginResult);
+}
+
+
 // 传参为:userName=qin.he, userId=qin.he, password=he@2015, domain=zijingcloud.com
 // 或者外部把输入的用户名为:test@jingkong.hk.com, 则拆分为userName=test, userId=test, passowrd="", domain=jingkong.hk.com
 // displayName为特定字段，可随意指定
@@ -177,10 +196,11 @@
     NSLog(@"verificationSignInWithUsername username=%@, userIdStr=%@, password=%@, domain=%@",
           username, userIdStr, password, domainStr);
     
-    if ([LinphoneManager instance].connectivity == none) {
-        return @{@"success":@NO, @"reason":NSLocalizedString(@"No connectivity", nil)};
-    } else {
-        
+    // 发现在程序刚启动时，使用下面的这个判断，居然会判断为无网，不知何故，所以这里把它们进行屏掉. 2016.8.28
+//    if ([LinphoneManager instance].connectivity == none) {
+//        return @{@"success":@NO, @"reason":NSLocalizedString(@"No connectivity", nil)};
+//    } else {
+    
         [self loadAssistantConfig:@"assistant_external_sip.rc"];
         [self resetLiblinphone];
         [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:domainStr];
@@ -195,7 +215,7 @@
         // 然后就等待登录成功或者失败的回调.
         
         return @{@"success":@YES};
-    }
+//    }
 }
 
 ////////////////////////// 新版登录方式//////////////////////

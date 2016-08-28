@@ -309,19 +309,28 @@ static RootViewManager *rootViewManagerInstance = nil;
         ![currentView equal:AssistantView.compositeViewDescription] &&
 		[UIApplication sharedApplication].applicationState != UIApplicationStateBackground) {
         
+        NSLog(@"notif.userInf=%@\nmessage=%@", notif.userInfo, notif.userInfo[@"message"]);
+
         if (loginErrorAlertVC != nil) {
             NSLog(@"当前已经有弹出的提示界面");
             return;
         }
         
+        if (((NSNumber *)(notif.userInfo[@"state"])).integerValue == 4) {         // 即注册失败，这里多半是因为什么证书丢失的奇怪错误，暂时禁掉这个错误
+            NSLog(@"当前的错误类型为证书丢失错误，暂时屏掉");
+            return;
+        }
+        
+        __weak PhoneMainView *weakSelf = self;
         loginErrorAlertVC = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Registration failure", nil)
                                                                 message:[notif.userInfo objectForKey:@"message"]
                                                          preferredStyle:UIAlertControllerStyleAlert];
         [loginErrorAlertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil)
                                                     style:UIAlertActionStyleDefault
                                                   handler:^(UIAlertAction * _Nonnull action) {
-                                                      [self removeAlertVCTip];
+                                                      [weakSelf removeAlertVCTip];
                                                   }]];
+        
         [self presentViewController:loginErrorAlertVC animated:YES completion:nil];
         
         

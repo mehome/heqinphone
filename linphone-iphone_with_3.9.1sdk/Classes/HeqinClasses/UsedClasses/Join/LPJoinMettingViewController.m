@@ -84,6 +84,15 @@
     self.joinBtn.clipsToBounds = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getphoneNotification:) name:kSearchNumbersDatasForJoineMeeting object:nil];
+    
+    if ([LPSystemUser sharedUser].hasLoginSuccess == NO) {
+        // 进行默认登录操作
+        LinphoneCore* lc = [LinphoneManager getLc];
+        linphone_core_clear_proxy_config(lc);
+        linphone_core_clear_all_auth_info(lc);
+        
+        [LPSystemUser resetToAnonimousLogin];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -56,12 +56,12 @@
     [super viewWillAppear:animated];
     
     // 初始化各个界面信息
-    [self initDynamicInfos];
+    [self updateSettingInfos];
     
     [self refrshVideoSettings];
 }
 
-- (void)initDynamicInfos {
+- (void)updateSettingInfos {
     self.defaultSilentVoiceSwitch.on = [LPSystemSetting sharedSetting].defaultSilence;
     self.defaultSilentMovieSwitch.on = [LPSystemSetting sharedSetting].defaultNoVideo;
     
@@ -124,7 +124,7 @@
         case LinphoneRegistrationNone:
         case LinphoneRegistrationCleared:
         case LinphoneRegistrationFailed:
-            [self initDynamicInfos];
+            [self updateSettingInfos];
             // 注册失败
             break;
         case LinphoneRegistrationProgress:
@@ -219,7 +219,7 @@
             [self clearAccountFromSetting];
             
             // 刷新当前界面顶部的用户信息即可
-            [self initDynamicInfos];
+            [self updateSettingInfos];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"kCurUserLoginOutNotification" object:nil];
         }
@@ -228,11 +228,27 @@
 
 // 从之前代码中拉出来的，点击Clear Account后的操作
 - (void)clearAccountFromSetting {
+    // 修改时之前的代码如下： 2016.8.28
+//    LinphoneCore* lc = [LinphoneManager getLc];
+//    linphone_core_clear_proxy_config(lc);
+//    linphone_core_clear_all_auth_info(lc);
+//    
+//    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+//    
+//    [LPSystemUser sharedUser].hasLoginSuccess = NO;
+//    
+//    [LPSystemUser sharedUser].hasGetMeetingData = NO;
+//    [LPSystemUser sharedUser].myScheduleMeetings = @[];
+//    [LPSystemUser sharedUser].myMeetingsRooms = @[];
+//    [LPSystemUser sharedUser].myFavMeetings = @[];
+    
+    
+    // 修改成如下代码2016.8.28
     LinphoneCore* lc = [LinphoneManager getLc];
     linphone_core_clear_proxy_config(lc);
     linphone_core_clear_all_auth_info(lc);
-    
-    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+
+    [LPSystemUser resetToAnonimousLogin];
     
     [LPSystemUser sharedUser].hasLoginSuccess = NO;
     
@@ -240,6 +256,7 @@
     [LPSystemUser sharedUser].myScheduleMeetings = @[];
     [LPSystemUser sharedUser].myMeetingsRooms = @[];
     [LPSystemUser sharedUser].myFavMeetings = @[];
+
 }
 
 // 重置帐号信息，相当于是退出操作
