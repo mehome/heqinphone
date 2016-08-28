@@ -308,7 +308,11 @@ typedef void(^requestFailBlock)();
 
 - (void)requestCompanyPage:(NSInteger)page withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
     RDRPhoneListCompanyRequestModel *reqModel = [RDRPhoneListCompanyRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    
+    NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
+
     reqModel.page = page;
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -352,7 +356,11 @@ typedef void(^requestFailBlock)();
 
 - (void)requestPrivatePage:(NSInteger)page withSuccessBlock:(requestSucceBlock)sucBlock withFailBlock:(requestFailBlock)failBlock {
     RDRPhoneListPrivateRequestModel *reqModel = [RDRPhoneListPrivateRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    
+    NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
+
     reqModel.page = page;
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
@@ -398,7 +406,11 @@ typedef void(^requestFailBlock)();
     [self.searchPhoneList removeAllObjects];
     
     RDRPhoneListSearchRequestModel *reqModel = [RDRPhoneListSearchRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    
+    NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
+
     reqModel.name = searchText;
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];

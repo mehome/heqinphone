@@ -48,7 +48,7 @@
         
         innerTmpProxy = [[NSUserDefaults standardUserDefaults] objectForKey:@"keyTmpProxy"];
         if (![innerTmpProxy isKindOfClass:[NSString class]] || innerTmpProxy.length == 0) {
-            innerTmpProxy = @"sip.myvmr.cn";
+            innerTmpProxy = @"sip.myvmr.cn:80";
         }
     }
     return innerTmpProxy;

@@ -996,7 +996,11 @@ static BOOL hasOpend = NO;
     [self showToastWithMessage:@"邀请中..."];
     
     RDRInviteRequestModel *reqModel = [RDRInviteRequestModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
+    
+    NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
+    
     reqModel.addr = [self innerCurMeetingAddr];
     reqModel.type = @(type);
     reqModel.to = content;

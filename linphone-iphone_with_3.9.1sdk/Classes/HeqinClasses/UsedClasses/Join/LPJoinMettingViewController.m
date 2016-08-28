@@ -520,7 +520,11 @@ static UICompositeViewDescription *compositeDescription = nil;
         [weakSelf showToastWithMessage:@"收藏会议室中..."];
         
         RDRAddFavRequestModel *reqModel = [RDRAddFavRequestModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];;
+        
+        NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+        NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
+
         
         NSIndexPath *btnIndexPath = (NSIndexPath *)[favBtn.rd_userInfo objectForKey:@"indexPath"];
         LinphoneCallLog *callLog = [[self.callLogs objectAtIndex:[btnIndexPath row]] pointerValue];

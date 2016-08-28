@@ -139,7 +139,10 @@
         __weak LPMyMeetingArrangeViewController *weakSelf = self;
         
         RDRMyMeetingArrangeContactsModel *reqModel = [RDRMyMeetingArrangeContactsModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        
+        NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+        NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -178,7 +181,10 @@
         __weak LPMyMeetingArrangeViewController *weakSelf = self;
         
         RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        
+        NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+        NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -343,7 +349,10 @@ static UICompositeViewDescription *compositeDescription = nil;
     __weak LPMyMeetingArrangeViewController *weakSelf = self;
     
     RDRMyMeetingArrangeRoomsModel *reqModel = [RDRMyMeetingArrangeRoomsModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    
+    NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
     
     RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
     
@@ -438,7 +447,12 @@ static UICompositeViewDescription *compositeDescription = nil;
     
     // 判断有没有安排会议室，无会议室，是没法安排的
     RDRMyMeetingArrangeModel *reqModel = [RDRMyMeetingArrangeModel requestModel];
-    reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+
+    NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
+
+    
     reqModel.pwd = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_password_preference"];
     reqModel.time = self.timeField.text;
     reqModel.participants = [NSArray arrayWithArray:parts];     // 添加与会者名单

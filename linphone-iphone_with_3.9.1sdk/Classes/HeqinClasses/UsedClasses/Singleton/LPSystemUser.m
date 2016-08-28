@@ -16,7 +16,12 @@
 #import "RDRNetHelper.h"
 #import "LPSystemSetting.h"
 
-@interface LPSystemUser ()
+@interface LPSystemUser () {
+    
+    LinphoneAccountCreator *account_creator;
+    LinphoneProxyConfig *new_config;
+
+}
 
 @property (nonatomic, assign) BOOL missedFilter;        // 为了保留原始的Linphone代码而兼容，原代码中有选择是显示全部还是显示未接电话
 
@@ -131,7 +136,10 @@
     }else {
         // 未取到数据， 进行请求
         RDRMyMeetingRequestModel *reqModel = [RDRMyMeetingRequestModel requestModel];
-        reqModel.uid = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        
+        NSString *curUsedDomain = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+        NSString *curUsedUserIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        reqModel.uid = [curUsedUserIdStr stringByAppendingFormat:@"@%@", curUsedDomain];
         
         RDRRequest *req = [RDRRequest requestWithURLPath:nil model:reqModel];
         
@@ -161,5 +169,129 @@
                   }];
     }
 }
+
+// 传参为:userName=qin.he, userId=qin.he, password=he@2015, domain=zijingcloud.com
+// 或者外部把输入的用户名为:test@jingkong.hk.com, 则拆分为userName=test, userId=test, passowrd="", domain=jingkong.hk.com
+// displayName为特定字段，可随意指定
+- (NSDictionary *) tryToLoginWithUserName:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password displayName:(NSString *)displayName domain:(NSString *)domainStr {
+    NSLog(@"verificationSignInWithUsername username=%@, userIdStr=%@, password=%@, domain=%@",
+          username, userIdStr, password, domainStr);
+    
+    if ([LinphoneManager instance].connectivity == none) {
+        return @{@"success":@NO, @"reason":NSLocalizedString(@"No connectivity", nil)};
+    } else {
+        
+        [self loadAssistantConfig:@"assistant_external_sip.rc"];
+        [self resetLiblinphone];
+        [self fillAccountCreatorWith:userIdStr withPassword:password withDomain:domainStr];
+        
+        NSDictionary *configResult = [self configureProxyConfig];
+        if (((NSNumber *)(configResult[@"success"])).boolValue == NO) {
+            return configResult;
+        }
+        
+        NSString *usedProxyStr = [LPSystemSetting sharedSetting].sipTmpProxy;
+        [self loginWith:username withDisplayName:displayName withUserId:userIdStr withPassword:password withDomain:domainStr withProxy:usedProxyStr];
+        // 然后就等待登录成功或者失败的回调.
+        
+        return @{@"success":@YES};
+    }
+}
+
+////////////////////////// 新版登录方式//////////////////////
+- (void)loadAssistantConfig:(NSString *)rcFilename {
+    NSString *fullPath = [@"file://" stringByAppendingString:[LinphoneManager bundleFile:rcFilename]];
+    linphone_core_set_provisioning_uri(LC, fullPath.UTF8String);
+    [LinphoneManager.instance lpConfigSetInt:1 forKey:@"transient_provisioning" inSection:@"misc"];
+}
+
+- (void)resetLiblinphone {
+    if (account_creator) {
+        linphone_account_creator_unref(account_creator);
+        account_creator = NULL;
+    }
+    [LinphoneManager.instance resetLinphoneCore];
+    account_creator = linphone_account_creator_new(
+                                                   LC, [LinphoneManager.instance lpConfigStringForKey:@"xmlrpc_url" inSection:@"assistant" withDefault:@""]
+                                                   .UTF8String);
+    linphone_account_creator_set_user_data(account_creator, (__bridge void *)(self));
+}
+
+- (void)fillAccountCreatorWith:(NSString *)userId withPassword:(NSString *)password withDomain:(NSString *)domain {
+    // 然后赋各个参数
+    //    LinphoneAccountCreatorStatus s = linphone_account_creator_set_username(account_creator, @"qin.he@zijingcloud.com".UTF8String);
+    LinphoneAccountCreatorStatus s = linphone_account_creator_set_username(account_creator, userId.UTF8String);
+    NSLog(@"set userId=%d", s);
+    //    s = linphone_account_creator_set_password(account_creator, @"he@2015".UTF8String);
+    s = linphone_account_creator_set_password(account_creator, password.UTF8String);
+    NSLog(@"set password=%d", s);
+    //    s = linphone_account_creator_set_domain(account_creator, @"zijingcloud.com".UTF8String);
+    s = linphone_account_creator_set_domain(account_creator, domain.UTF8String);
+    NSLog(@"set domain=%d", s);
+    
+    s = linphone_account_creator_set_transport(account_creator, LinphoneTransportTcp);//linphone_transport_parse(@"tcp".UTF8String));
+    NSLog(@"set transport=%d", s);
+}
+
+- (NSDictionary *)configureProxyConfig {
+    LinphoneManager *lm = LinphoneManager.instance;
+    
+    // remove previous proxy config, if any
+    if (new_config != NULL) {
+        const LinphoneAuthInfo *auth = linphone_proxy_config_find_auth_info(new_config);
+        linphone_core_remove_proxy_config(LC, new_config);
+        if (auth) {
+            linphone_core_remove_auth_info(LC, auth);
+        }
+        new_config = NULL;
+    }
+    
+    const char *pssword = linphone_account_creator_get_username(account_creator);
+    NSLog(@"userName=%s", pssword);
+    
+    const char *paname = linphone_account_creator_get_password(account_creator);
+    NSLog(@"password=%s", paname);
+    
+    const char *padomain = linphone_account_creator_get_domain(account_creator);
+    NSLog(@"padomain=%s", padomain);
+    
+    LinphoneTransportType portType = linphone_account_creator_get_transport(account_creator);
+    NSLog(@"portType=%d", portType);
+    
+    const char *paRoute = linphone_account_creator_get_route(account_creator);
+    NSLog(@"paRoute=%s", paRoute);
+
+    new_config = linphone_account_creator_configure(account_creator);
+    
+    if (new_config) {
+        [lm configurePushTokenForProxyConfig:new_config];
+        linphone_core_set_default_proxy_config(LC, new_config);
+        return @{@"success":@YES};
+    } else {
+        return @{@"success":@NO, @"reason":NSLocalizedString(@"Could not configure your account, please check parameters or try again later", nil)};
+    }
+}
+
+- (void)loginWith:(NSString *)userName withDisplayName:(NSString *)displayName withUserId:(NSString *)userId withPassword:(NSString *)password withDomain:(NSString *)domainStr withProxy:(NSString *)proxyParamStr {
+    
+    [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
+    [[LPSystemUser sharedUser].settingsStore transformAccountToKeys:userName];
+    
+    // 用户名
+    [[LPSystemUser sharedUser].settingsStore setObject:userName forKey:@"account_mandatory_username_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:displayName forKey:@"account_display_name_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:userId forKey:@"account_userid_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:password forKey:@"account_mandatory_password_preference"];
+    
+    [[LPSystemUser sharedUser].settingsStore setObject:domainStr forKey:@"account_mandatory_domain_preference"];
+    [[LPSystemUser sharedUser].settingsStore setObject:proxyParamStr forKey:@"account_proxy_preference"];
+    
+    [[LPSystemUser sharedUser].settingsStore setBool:YES   forKey:@"account_outbound_proxy_preference"];
+    
+    [[LPSystemUser sharedUser].settingsStore synchronize];
+    // 登录完成，等通知吧
+}
+
+
 
 @end

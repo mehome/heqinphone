@@ -45,4 +45,6 @@ typedef void(^BlockRequestFavMeetings)(BOOL success,NSArray *sheduleMeetings, NS
 // 抽离出纯的呼叫地址， 如地址为：feng.wang@zijingcloud.com， 抽出来后，为feng.wang
 + (NSString *)takePureAddrFrom:(NSString *)address;
 
+- (NSDictionary *) tryToLoginWithUserName:(NSString*)username userId:(NSString *)userIdStr password:(NSString*)password displayName:(NSString *)displayName domain:(NSString *)domainStr;
+
 @end
