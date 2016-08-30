@@ -75,17 +75,20 @@
     if (kNotLoginCheck ) {
         // 当前已经注销
         [self.logoutBtn setTitle:@"登录" forState:UIControlStateNormal];
-        self.nameField.text = @"";
+//        self.nameField.text = @"";
         self.accountField.text = @"";
         self.companyField.text = @"";
 
     }else {
         // 当前已经登录
         [self.logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
-        self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+//        self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
         self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
         self.companyField.text = @"企业信息";
     }
+    
+    // 显示名
+    self.nameField.text = [LPSystemSetting sharedSetting].joinerName;
 }
 
 - (void)refrshVideoSettings {
