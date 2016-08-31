@@ -75,19 +75,23 @@
     if (kNotLoginCheck ) {
         // 当前已经注销
         [self.logoutBtn setTitle:@"登录" forState:UIControlStateNormal];
-//        self.nameField.text = @"";
         self.accountField.text = @"";
         self.companyField.text = @"";
 
     }else {
         // 当前已经登录
         [self.logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
-//        self.nameField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
-        self.accountField.text = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+        NSString *domainStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+        NSString *userIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    
+        NSLog(@"domainStr=%@", domainStr);
+
+        self.accountField.text = [userIdStr stringByAppendingFormat:@"@%@", domainStr];
+
         self.companyField.text = @"企业信息";
     }
     
-    // 显示名
+    // 显示用户设置的登入名称
     self.nameField.text = [LPSystemSetting sharedSetting].joinerName;
 }
 
