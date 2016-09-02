@@ -180,6 +180,19 @@ static UICompositeViewDescription *compositeDescription = nil;
 	linphone_core_set_native_video_window_id(LC, (__bridge void *)(_videoView));
 	linphone_core_set_native_preview_window_id(LC, (__bridge void *)(_videoPreview));
 
+    // TODO
+    // 下面这个问题是用来解决右下角视频，自拍视频黑屏的问题。 可以尝试一下。
+    /**Actually it is not related to the camera access. The bug can be replicated
+     while there are two video calls. The second video call's self video will be
+     under the first video call's self video, which is frozen because the first
+     video call is on hold.
+     
+     I do find out a work around. It need to create a new UIView and set the
+     preview to that newly created UIView in the viewWillAppear. With this work
+     around, the bug becomes not very important. Anyway, maybe it is helpful.
+*/
+    
+    
 	[self previewTouchLift];
 
     // 填充参数，并请求查询当前会议类型
