@@ -60,13 +60,26 @@
  *  这里放置其它宏
  */
 
-// 这个channel可以定义在一个plist文件中， 然后通过一个.sh来进行编译，编译的过程中动态取该值。以便一次可以打包出多个渠道的ipa文件
-#define XX_APP_CHANNEL @"91助手"
-
+// 紫荆云视
 // 定义OEM公司名称
+//#define OEM_Company @""
+//#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
+
+// 三步云视
 #define OEM_Company @"3bucloud"
+#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
 
+// 南电
+#define OEM_Company @"3bucloud"
+#define OEM_Sip_Server_Address @"sip.nstyun.com:80"
 
+// 神码
+#define OEM_Company @"3bucloud"
+#define OEM_Sip_Server_Address @"sip.huishicloud.com:80"
+
+// 天地祥云
+#define OEM_Company @"3bucloud"
+#define OEM_Sip_Server_Address @"sip.cloudvsp.com:80"
 
 // 取当前应用的版本号，该版本号可以用来做基础网络参数给服务器，如:5.1.0， 同时该版本号也用于取补丁的版本号
 #define BDN_APP_VERSION ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])

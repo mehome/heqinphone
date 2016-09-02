@@ -48,7 +48,7 @@
         
         innerTmpProxy = [[NSUserDefaults standardUserDefaults] objectForKey:@"keyTmpProxy"];
         if (![innerTmpProxy isKindOfClass:[NSString class]] || innerTmpProxy.length == 0) {
-            innerTmpProxy = @"sip.myvmr.cn:80";
+            innerTmpProxy = OEM_Sip_Server_Address;
         }
     }
     return innerTmpProxy;
@@ -109,7 +109,7 @@
     if ([cachedSipProxyStr isKindOfClass:[NSString class]] && cachedSipProxyStr.length > 0) {
         self.sipTmpProxy = cachedSipProxyStr;
     }else {
-        self.sipTmpProxy = @"sip.myvmr.cn";//@"120.132.87.180";        如果本地没有读取到，则使用这个, 这里暂时没有写成sip.myvmr.cn:80
+        self.sipTmpProxy = OEM_Sip_Server_Address;//@"120.132.87.180";        如果本地没有读取到，则使用这个, 这里暂时没有写成sip.myvmr.cn:80
         NSLog(@"使用设定的默认值，通常来说是不会运行到这时来的，只有第一次可能会到这里来");
     }
     

@@ -83,14 +83,21 @@
 	}
 }
 
-// 王锋fir.im帐号
+// 王锋fir.im帐号， 放置三步云视帐号
 //#define kFirAppID @"575c2bd3e75e2d3c4e000009"
 //#define kFirApiToken"64cf65b0ce3e7db98a72307d69d98a65"
 
-
 // 290480306@qq.com
+// 紫荆云视
 #define kFirAppID @"575c2bd3e75e2d3c4e000009"
 #define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
+
+
+// 南电
+
+// 数码
+
+// 天地祥云
 
 - (void)checkLatestVersion{
     
