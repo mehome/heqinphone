@@ -60,14 +60,14 @@
  *  这里放置其它宏
  */
 
-// 紫荆云视
 // 定义OEM公司名称
-//#define OEM_Company @""
-//#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
+// 紫荆云视
+#define OEM_Company @""
+#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
 
 // 三步云视
 #define OEM_Company @"3bucloud"
-#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
+#define OEM_Sip_Server_Address @"sip.3bucloud.com:80"
 
 // 南电
 #define OEM_Company @"3bucloud"
