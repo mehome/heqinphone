@@ -50,7 +50,6 @@
 #define kHeqinLinphoneServerAddress @"http://api.myvmr.cn"
 //#define kHeqinLinphoneServerAddress @"http://120.132.87.184"
 
-
 #define kNotLoginCheck (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ||[LPSystemUser sharedUser].hasLoginSuccess == NO)
 
 // 取安全串，非nil或其它类型
@@ -61,25 +60,37 @@
  */
 
 // 定义OEM公司名称
-// 紫荆云视
+// 紫荆云视,  290480306@qq.com, hello11@@
 #define OEM_Company @""
 #define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
+#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 三步云视
-#define OEM_Company @"3bucloud"
-#define OEM_Sip_Server_Address @"sip.3bucloud.com:80"
+// 三步云视，  王锋fir.im帐号  9716917@qq.com, 123456
+//#define OEM_Company @"3bucloud"
+//#define OEM_Sip_Server_Address @"sip.3bucloud.com:80"
+//#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+//#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 南电
-#define OEM_Company @"3bucloud"
-#define OEM_Sip_Server_Address @"sip.nstyun.com:80"
+// 南电     chris-lj@163.com,  lj@2016
+//#define OEM_Company @"3bucloud"
+//#define OEM_Sip_Server_Address @"sip.nstyun.com:80"
+//#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+//#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 神码
-#define OEM_Company @"3bucloud"
-#define OEM_Sip_Server_Address @"sip.huishicloud.com:80"
+// 神码    donghusoft@163.com,  qazwsx123
+//#define OEM_Company @"3bucloud"
+//#define OEM_Sip_Server_Address @"sip.huishicloud.com:80"
+//#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+//#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 天地祥云
-#define OEM_Company @"3bucloud"
-#define OEM_Sip_Server_Address @"sip.cloudvsp.com:80"
+// 天地祥云    landongyuan@sina.cn,   qwedsazxc
+//#define OEM_Company @"3bucloud"
+//#define OEM_Sip_Server_Address @"sip.cloudvsp.com:80"
+//#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+//#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
+
+//fir.im帐号备用  73905327@qq.com, zijing.dlh
 
 // 取当前应用的版本号，该版本号可以用来做基础网络参数给服务器，如:5.1.0， 同时该版本号也用于取补丁的版本号
 #define BDN_APP_VERSION ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
