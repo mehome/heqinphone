@@ -337,7 +337,7 @@
         <image name="numpad_hash_default.png" width="52" height="48"/>
         <image name="numpad_hash_over.png" width="52" height="48"/>
         <image name="numpad_over_background.png" width="2" height="2"/>
-        <image name="numpad_star_default.png" width="52" height="50"/>
-        <image name="numpad_star_over.png" width="52" height="50"/>
+        <image name="numpad_star_default.png" width="210" height="113"/>
+        <image name="numpad_star_over.png" width="210" height="113"/>
     </resources>
 </document>

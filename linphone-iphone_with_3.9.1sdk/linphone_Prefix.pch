@@ -61,30 +61,30 @@
 
 // 定义OEM公司名称
 // 紫荆云视,  290480306@qq.com, hello11@@
-#define OEM_Company @""
-#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
-#define kFirAppID @"575c2bd3e75e2d3c4e000009"
-#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
-
-// 三步云视，  王锋fir.im帐号  9716917@qq.com, 123456
-//#define OEM_Company @"3bucloud"
-//#define OEM_Sip_Server_Address @"sip.3bucloud.com:80"
+//#define OEM_Company @""
+//#define OEM_Sip_Server_Address @"sip.myvmr.cn:80"
 //#define kFirAppID @"575c2bd3e75e2d3c4e000009"
 //#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 南电     chris-lj@163.com,  lj@2016
-//#define OEM_Company @"3bucloud"
+// 三步云视，  王锋fir.im帐号  9716917@qq.com, 123456
+#define OEM_Company @"1"
+#define OEM_Sip_Server_Address @"sip.3bucloud.com:80"
+#define kFirAppID @"575c2bd3e75e2d3c4e000009"
+#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
+
+// 南电   fir.im帐号  chris-lj@163.com,  lj@2016
+//#define OEM_Company @"7"
 //#define OEM_Sip_Server_Address @"sip.nstyun.com:80"
 //#define kFirAppID @"575c2bd3e75e2d3c4e000009"
 //#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 神码    donghusoft@163.com,  qazwsx123
-//#define OEM_Company @"3bucloud"
+// 神码   fir.im帐号  donghusoft@163.com,  qazwsx123
+//#define OEM_Company @"3"
 //#define OEM_Sip_Server_Address @"sip.huishicloud.com:80"
 //#define kFirAppID @"575c2bd3e75e2d3c4e000009"
 //#define kFirApiToken @"64cf65b0ce3e7db98a72307d69d98a65"
 
-// 天地祥云    landongyuan@sina.cn,   qwedsazxc
+// 天地祥云  fir.im帐号  landongyuan@sina.cn,   qwedsazxc
 //#define OEM_Company @"3bucloud"
 //#define OEM_Sip_Server_Address @"sip.cloudvsp.com:80"
 //#define kFirAppID @"575c2bd3e75e2d3c4e000009"

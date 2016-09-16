@@ -9,7 +9,6 @@
 #import "LPInMeetingParticipatorViewController.h"
 #import "LPInMeetingParticipateTableViewCell.h"
 #import "PhoneMainView.h"
-#import "InCallViewController.h"
 #import "UICallBar.h"
 
 @interface LPInMeetingParticipatorViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -29,8 +28,6 @@
 // 返回按钮
 - (IBAction)cancelBtnClicked:(id)sender {
     [[PhoneMainView instance] popCurrentView];
-    
-//    [[PhoneMainView instance] changeCurrentView:[InCallViewController compositeViewDescription]];
 }
 
 // 全体静音

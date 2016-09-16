@@ -24,7 +24,6 @@
 #import "PhoneMainView.h"
 
 #import "LPJoinMettingViewController.h"
-#import "InCallViewController.h"
 #import "IncomingCallViewController.h"
 #import "OutgoingCallViewController.h"
 #import "HQPlayerViewController.h"

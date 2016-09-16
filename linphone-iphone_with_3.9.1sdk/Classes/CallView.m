@@ -1,5 +1,4 @@
-/* InCallViewController.h
- *
+/* 
  * Copyright (C) 2009  Belledonne Comunications, Grenoble, France
  *
  *  This program is free software; you can redistribute it and/or modify

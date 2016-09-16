@@ -112,7 +112,7 @@ static BOOL loginIsTheTopVC = NO;
     switch (state) {
         case LinphoneRegistrationOk: {
             
-            // 把值同步进去
+            // 把值同步进去，进行存储
 //            [[LPSystemUser sharedUser].settingsStore transformLinphoneCoreToKeys];
 
             [[LinphoneManager instance] lpConfigSetBool:FALSE forKey:@"enable_first_login_view_preference"];
