@@ -91,7 +91,7 @@
         linphone_core_clear_proxy_config(lc);
         linphone_core_clear_all_auth_info(lc);
         
-        [LPSystemUser resetToAnonimousLogin];
+//        [LPSystemUser resetToAnonimousLogin];
     }
 }
 

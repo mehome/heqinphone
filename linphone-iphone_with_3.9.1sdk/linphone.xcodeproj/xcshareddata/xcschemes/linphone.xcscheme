@@ -114,7 +114,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "AppStoreDistribution"
+      buildConfiguration = "zijingyunshiCompnayDistrib"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

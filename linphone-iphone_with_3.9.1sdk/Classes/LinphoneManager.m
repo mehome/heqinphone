@@ -908,9 +908,28 @@ static void linphone_iphone_registration_state(LinphoneCore *lc, LinphoneProxyCo
 
 #pragma mark - Auth info Function
 
-static void linphone_iphone_popup_password_request(LinphoneCore *lc, const char *realmC, const char *usernameC,
-												   const char *domainC) {
-    NSLog(@"需要密码输入---------------------------");
+static void linphone_iphone_popup_password_request(LinphoneCore *lc, const char *realmC, const char *usernameC, const char *domainC) {
+    
+    NSString *domainStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *userIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    NSString *passwordStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_password_preference"];
+
+    NSString *realmcStr = [NSString stringWithUTF8String:realmC];
+    
+    if (userIdStr.length > 0 && passwordStr.length > 0 && (![userIdStr isEqualToString:@"anolymous"])) {
+        // 可以设置用户名和密码继续进行操作
+        NSLog(@"可以尝试设置用户名和密码去登录操作");
+    }else {
+        NSLog(@"有数据为空");
+    }
+    NSLog(@"需要密码输入---------------------------，用户名为：%@, 密码：%@, realmc=%@, domainC=%@ \ndomainSt=%@, usernameC=%@",
+          userIdStr,
+          passwordStr,
+          realmcStr,
+          [NSString stringWithUTF8String:domainC],
+          domainStr,
+          [NSString stringWithUTF8String:usernameC]);
+
     return;
     
 	// let the wizard handle its own errors

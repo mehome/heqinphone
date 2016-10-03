@@ -128,7 +128,11 @@ static BOOL loginIsTheTopVC = NO;
             if (loginIsTheTopVC == YES) {
                 [[PhoneMainView instance] changeCurrentView:[LPJoinManageMeetingViewController compositeViewDescription]];
             }else {
-                NSLog(@"在后台， 什么都不做");
+                NSString *domainStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+                NSString *userIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+                NSString *passwordStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_password_preference"];
+
+                NSLog(@"在后台， 什么都不做, domain=%@, userID=%@, password=%@", domainStr, userIdStr, passwordStr);
             }
             break;
         }

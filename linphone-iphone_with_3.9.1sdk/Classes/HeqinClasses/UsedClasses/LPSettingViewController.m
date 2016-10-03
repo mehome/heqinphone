@@ -72,19 +72,20 @@
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
     
-    if (kNotLoginCheck ) {
+    NSString *domainStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
+    NSString *userIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
+    NSLog(@"domainStr=%@, userIdStr=%@, store=%@， defaultproxy是%@, hasLogin=%@", domainStr, userIdStr, [LPSystemUser sharedUser].settingsStore,
+          linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ? @"为空":@"不为空", [LPSystemUser sharedUser].hasLoginSuccess?@"登录状态":@"退出状态");
+
+    if (linphone_core_get_default_proxy_config([LinphoneManager getLc]) == NULL ||[LPSystemUser sharedUser].hasLoginSuccess == NO) {
         // 当前已经注销
         [self.logoutBtn setTitle:@"登录" forState:UIControlStateNormal];
         self.accountField.text = @"";
         self.companyField.text = @"";
-
     }else {
         // 当前已经登录
         [self.logoutBtn setTitle:@"注销" forState:UIControlStateNormal];
-        NSString *domainStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_mandatory_domain_preference"];
-        NSString *userIdStr = [[LPSystemUser sharedUser].settingsStore stringForKey:@"account_userid_preference"];
     
-        NSLog(@"domainStr=%@", domainStr);
 
         self.accountField.text = [userIdStr stringByAppendingFormat:@"@%@", domainStr];
 
